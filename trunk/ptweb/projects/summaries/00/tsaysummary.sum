@@ -39,4 +39,8 @@ refine existing techniques for translation of Java into C, and second
 to customize the translation process to take advantage of the particular
 structure of SDF models. This approach permits libraries of components
 that are written in Java to be used in the deployed embedded systems,
-after conversion to C.
+after conversion to C. This exploits the component oriented view of Ptolemy II
+with efficient implementations of SDF models in embedded systems, 
+while all programming and translations are done using high level programming
+languages.
+
