@@ -39,7 +39,7 @@ checking. It supports polymorphic typing of system components, and
 allows automatic lossless type conversion at run-time. To achieve this,
 we use a lattice to model the subtyping relation among types, and use
 inequalities defined over the type lattice to specify type constraints
-in components and across components. The system of inequalities can be
+within components and between components. The system of inequalities can be
 solved efficiently, with existence and uniqueness of a solution
 guaranteed by fixed-point theorems. This type system supports both the
 base types, such as int, double, and strings, and structured types such
