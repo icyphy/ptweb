@@ -1,0 +1,5869 @@
+diff -u -r --new-file ssh-1.2.14-clean/REAMDE.NT ssh-1.2.14.win32/REAMDE.NT
+--- ssh-1.2.14-clean/REAMDE.NT	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/REAMDE.NT	Mon Jul 21 04:19:41 1997
+@@ -0,0 +1,4 @@
++To build on NT with Visual C++, edit makefile.vc, zlib095\makefile.vc, and
++gmp-1.3.2\makefile.vc to set the compiler directory.  Then, run
++
++  nmake -f makefile.vc
+diff -u -r --new-file ssh-1.2.14-clean/authfd.c ssh-1.2.14.win32/authfd.c
+--- ssh-1.2.14-clean/authfd.c	Thu Jun 06 04:39:33 1996
++++ ssh-1.2.14.win32/authfd.c	Tue Jul 15 02:43:01 1997
+@@ -1,3 +1,4 @@
++#ifndef WIN32
+ /*
+ 
+ authfd.c
+@@ -694,3 +695,5 @@
+   /* Free the connection data structure. */
+   xfree(auth);
+ }
++
++#endif
+diff -u -r --new-file ssh-1.2.14-clean/authfile.c ssh-1.2.14.win32/authfile.c
+--- ssh-1.2.14-clean/authfile.c	Thu Jun 06 04:39:33 1996
++++ ssh-1.2.14.win32/authfile.c	Tue Jul 15 05:51:45 1997
+@@ -130,7 +130,7 @@
+   buffer_free(&buffer);
+ 
+   /* Write to a file. */
+-  uf = userfile_open(uid, filename, O_WRONLY|O_CREAT|O_TRUNC, 0600);
++  uf = userfile_open(uid, filename, O_WRONLY|O_CREAT|O_TRUNC|O_BINARY, 0600);
+   if (uf == NULL)
+     return 0;
+ 
+@@ -164,7 +164,7 @@
+   char *cp;
+ 
+   /* Read data from the file into the buffer. */
+-  uf = userfile_open(uid, filename, O_RDONLY, 0);
++  uf = userfile_open(uid, filename, O_RDONLY|O_BINARY, 0);
+   if (uf == NULL)
+     return 0;
+ 
+@@ -244,7 +244,7 @@
+   CipherContext cipher;
+ 
+   /* Read the file into the buffer. */
+-  uf = userfile_open(uid, filename, O_RDONLY, 0);
++  uf = userfile_open(uid, filename, O_RDONLY|O_BINARY, 0);
+   if (uf == NULL)
+     return 0;
+ 
+diff -u -r --new-file ssh-1.2.14-clean/clientloop.c ssh-1.2.14.win32/clientloop.c
+--- ssh-1.2.14-clean/clientloop.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/clientloop.c	Fri Jul 18 01:38:21 1997
+@@ -38,6 +38,11 @@
+ #include "buffer.h"
+ #include "authfd.h"
+ 
++#ifdef WIN32
++extern int CreateSocketPair(SOCKET *pair);
++SOCKET sock_stdin;
++#endif
++
+ /* Flag indicating whether quiet mode is on. */
+ extern int quiet_flag;
+ 
+@@ -88,6 +93,8 @@
+ static int quit_pending; /* Set to non-zero to quit the client loop. */
+ static int escape_char; /* Escape character. */
+ 
++#ifndef WIN32
++
+ /* Returns the user\'s terminal to normal mode if it had been put in raw 
+    mode. */
+ 
+@@ -183,15 +190,19 @@
+ }
+ #endif /* SIGWINCH */
+ 
++#endif /* !WIN32 */
++
+ /* Signal handler for signals that cause the program to terminate.  These
+    signals must be trapped to restore terminal modes. */
+ 
+ RETSIGTYPE signal_handler(int sig)
+ {
++#ifndef WIN32
+   if (in_raw_mode)
+     leave_raw_mode();
+   if (in_non_blocking_mode)
+     leave_non_blocking();
++#endif
+   channel_stop_listening();
+   packet_close();
+   fatal("Killed by signal %d.", sig);
+@@ -236,6 +247,7 @@
+     }
+   else
+     {
++#ifndef WIN32
+       /* Enter non-blocking mode for stdin. */
+       enter_non_blocking();
+ 
+@@ -265,6 +277,7 @@
+       
+       /* Leave non-blocking mode. */
+       leave_non_blocking();
++#endif /* !WIN32 */
+     }
+ }
+ 
+@@ -320,7 +333,11 @@
+ 	  break;
+ 
+ 	case SSH_SMSG_AGENT_OPEN:
++#ifdef WIN32
++	  fprintf(stderr, "SSH_SMSG_AGENT_OPEN not implemented on Windows NT\n");
++#else
+ 	  auth_input_open_request();
++#endif
+ 	  break;
+ 
+ 	case SSH_MSG_CHANNEL_OPEN_CONFIRMATION:
+@@ -423,6 +440,7 @@
+ #endif /* SIGWINCH */
+ }
+ 
++
+ /* Waits until the client can do something (some data becomes available on
+    one of the file descriptors). */
+ 
+@@ -437,10 +455,15 @@
+       channel_not_very_much_buffered_data())
+     FD_SET(connection_in, readset);
+ 
++#ifndef WIN32
+   /* Read from stdin, unless we have seen EOF or have very much buffered
+      data to send to the server. */
+   if (!stdin_eof && packet_not_very_much_data_to_write())
+     FD_SET(fileno(stdin), readset);
++#else
++  if (!stdin_eof && packet_not_very_much_data_to_write())
++    FD_SET(sock_stdin, readset);
++#endif
+   
+   FD_ZERO(writeset);
+   
+@@ -453,11 +476,23 @@
+ 
+   /* Select stdout if have data in buffer. */
+   if (buffer_len(&stdout_buffer) > 0)
+-    FD_SET(fileno(stdout), writeset);
++    {
++#ifdef WIN32
++      return;
++#else
++      FD_SET(fileno(stdout), writeset);
++#endif
++    }
+ 
+   /* Select stderr if have data in buffer. */
+   if (buffer_len(&stderr_buffer) > 0)
+-    FD_SET(fileno(stderr), writeset);
++    {
++#ifdef WIN32
++      return;
++#else
++      FD_SET(fileno(stderr), writeset);
++#endif
++    }
+ 
+   /* Update maximum file descriptor number, if appropriate. */
+   if (channel_max_fd() > max_fd)
+@@ -478,13 +513,15 @@
+       if (errno == EINTR)
+ 	return;
+       /* Note: we might still have data in the buffers. */
+-      sprintf(buf, "select: %.100s\r\n", strerror(errno));
++      sprintf(buf, "select: %.100s\r\n", sock_strerror(sock_lasterror()));
+       buffer_append(&stderr_buffer, buf, strlen(buf));
+       stderr_bytes += strlen(buf);
+       quit_pending = 1;
+     }
+ }
+ 
++#ifndef WIN32
++
+ void client_suspend_self()
+ {
+ #ifdef SIGWINCH
+@@ -538,17 +575,21 @@
+   enter_raw_mode();
+ }
+ 
++#endif /* !WIN32 */
++
+ void client_process_input(fd_set *readset)
+ {
+   int len, pid;
+   char buf[8192], *s;
++  int fd;
+ 
+   /* Read input from the server, and add any such data to the buffer of the
+      packet subsystem. */
+   if (FD_ISSET(connection_in, readset))
+     {
+       /* Read as much as possible. */
+-      len = read(connection_in, buf, sizeof(buf));
++      /* XXX: Replace this with recv */
++      len = recv(connection_in, buf, sizeof(buf), 0);
+       if (len == 0)
+ 	{ 
+ 	  /* Received EOF.  The remote host has closed the connection. */
+@@ -562,7 +603,8 @@
+ 
+       /* There is a kernel bug on Solaris that causes select to sometimes
+ 	 wake up even though there is no data available. */
+-      if (len < 0 && errno == EAGAIN)
++      if (len < 0 &&
++	  ((sock_lasterror() == EAGAIN) || (sock_lasterror() == WSAEWOULDBLOCK)))
+ 	len = 0;
+ 
+       if (len < 0)
+@@ -570,7 +612,7 @@
+ 	  /* An error has encountered.  Perhaps there is a network
+ 	     problem. */
+ 	  sprintf(buf, "Read from remote host %.300s: %.100s\r\n", 
+-		  host, strerror(errno));
++		  host, sock_strerror(sock_lasterror()));
+ 	  buffer_append(&stderr_buffer, buf, strlen(buf));
+ 	  stderr_bytes += strlen(buf);
+ 	  quit_pending = 1;
+@@ -580,10 +622,15 @@
+     }
+ 
+   /* Read input from stdin. */
+-  if (FD_ISSET(fileno(stdin), readset))
++#ifdef WIN32
++  fd = sock_stdin;
++#else
++  fd = fileno(stdin);
++#endif
++  if (FD_ISSET(fd, readset))
+     {
+       /* Read as much as possible. */
+-      len = read(fileno(stdin), buf, sizeof(buf));
++      len = recv(fd, buf, sizeof(buf), 0);
+       if (len <= 0)
+ 	{
+ 	  /* Received EOF or error.  They are treated similarly,
+@@ -591,7 +638,7 @@
+ 	     an error condition. */
+ 	  if (len < 0)
+ 	    {
+-	      sprintf(buf, "read: %.100s\r\n", strerror(errno));
++	      sprintf(buf, "read: %.100s\r\n", sock_strerror(sock_lasterror()));
+ 	      buffer_append(&stderr_buffer, buf, strlen(buf));
+ 	      stderr_bytes += strlen(buf);
+ 	    }
+@@ -644,6 +691,7 @@
+ 			return;
+ 
+ 		      case 'Z' - 64:
++#ifndef WIN32
+ 			  /* Suspend the program. */
+ 			  /* Print a message to that effect to the user. */
+ 			  sprintf(buf, "%c^Z\r\n", escape_char);
+@@ -652,11 +700,14 @@
+ 
+ 			  /* Restore terminal modes and suspend. */
+ 			  client_suspend_self();
+-
++#endif
+ 			  /* We have been continued. */
+ 			  continue;
+ 			
+ 		      case '&':
++#ifdef WIN32
++			continue;
++#else
+ 			/* Detach the program (continue to serve connections,
+ 			   but put in background and no more new 
+ 			   connections). */
+@@ -699,6 +750,7 @@
+ 
+ 			/* The child continues serving connections. */
+ 			continue;
++#endif
+ 
+ 		      case '?':
+ 			sprintf(buf, "%c?\r\n\
+@@ -770,8 +822,12 @@
+   int len;
+   char buf[100];
+ 
++#ifdef WIN32
++  if (buffer_len(&stdout_buffer) > 0)
++#else
+   /* Write buffered output to stdout. */
+   if (FD_ISSET(fileno(stdout), writeset))
++#endif
+     {
+       /* Write as much data as possible. */
+       len = write(fileno(stdout), buffer_ptr(&stdout_buffer),
+@@ -796,7 +852,11 @@
+     }
+ 
+   /* Write buffered output to stderr. */
++#ifdef WIN32
++  if (buffer_len(&stderr_buffer) > 0)
++#else
+   if (FD_ISSET(fileno(stderr), writeset))
++#endif
+     {
+       /* Write as much data as possible. */
+       len = write(fileno(stderr), buffer_ptr(&stderr_buffer),
+@@ -855,20 +915,34 @@
+ 
+   /* Set signal handlers to restore non-blocking mode.  */
+   signal(SIGINT, signal_handler);
+-  signal(SIGQUIT, signal_handler);
+   signal(SIGTERM, signal_handler);
++#ifndef WIN32
++  signal(SIGQUIT, signal_handler);
+   signal(SIGPIPE, SIG_IGN);
++#endif
+ #ifdef SIGWINCH
+   if (have_pty)
+     signal(SIGWINCH, window_change_handler);
+ #endif /* SIGWINCH */
+ 
++#ifdef WIN32
++  {
++    extern int CreateSocketPair(SOCKET *pair);
++    extern void CreateTerminal(SOCKET outSock);
++    SOCKET SockPair[2];
++
++    CreateSocketPair(SockPair);
++    CreateTerminal(SockPair[1]);
++    sock_stdin = SockPair[0];
++  }
++#else
+   /* Enter raw mode if have a pseudo terminal. */
+   if (have_pty)
+     enter_raw_mode();
+ 
+-  /* Check if we should immediately send of on stdin. */
++  /* Check if we should immediately send eof on stdin. */
+   client_check_initial_eof_on_stdin();
++#endif
+ 
+   /* Main loop of the client for the interactive session mode. */
+   while (!quit_pending)
+@@ -894,6 +968,13 @@
+       if (quit_pending)
+ 	break;
+ 
++#ifdef WIN32
++      /* Process output to stdout and stderr.   Output to the connection
++         is processed elsewhere (above). */
++      if ((buffer_len(&stdout_buffer) > 0) || (buffer_len(&stderr_buffer) > 0))
++	client_process_output(&writeset);
++#endif
++
+       /* Wait until we have something to do (something becomes available
+ 	 on one of the descriptors). */
+       client_wait_until_can_do_something(&readset, &writeset);
+@@ -910,7 +991,8 @@
+ 
+       /* Process output to stdout and stderr.   Output to the connection
+          is processed elsewhere (above). */
+-      client_process_output(&writeset);
++      if ((buffer_len(&stdout_buffer) > 0) || (buffer_len(&stderr_buffer) > 0))
++	client_process_output(&writeset);
+ 
+       /* Send as much buffered packet data as possible to the sender. */
+       if (FD_ISSET(connection_out, &writeset))
+@@ -963,9 +1045,11 @@
+       buffer_consume(&stderr_buffer, len);
+     }
+ 
++#ifndef WIN32
+   /* Leave raw mode. */
+   if (have_pty)
+     leave_raw_mode();
++#endif
+ 
+   /* Clear and free any buffers. */
+   memset(buf, 0, sizeof(buf));
+diff -u -r --new-file ssh-1.2.14-clean/config.h ssh-1.2.14.win32/config.h
+--- ssh-1.2.14-clean/config.h	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/config.h	Thu Jul 17 02:12:03 1997
+@@ -0,0 +1,509 @@
++/* config.h.in.  Generated automatically from configure.in by autoheader.  */
++/*
++
++acconfig.h - template used by autoheader to create config.h.in
++config.h.in - used by autoconf to create config.h
++config.h - created by autoconf; contains defines generated by autoconf
++
++Copyright (c) 1995 Tatu Ylonen <ylo@cs.hut.fi>
++
++*/
++
++/*
++ * $Log: config.h.in,v $
++ * Revision 1.5  1996/06/03 19:26:26  ylo
++ * *** empty log message ***
++ *
++ * Revision 1.3  1996/04/26 00:37:21  ylo
++ * 	Added HPSUX7_KLUDGES.
++ * 	Removed SOCKS defines for socket functions.
++ *
++ * Revision 1.2  1996/02/18 21:54:02  ylo
++ * 	Added HAVE_ULTRIX_SHADOW_PASSWORDS.
++ *
++ * Revision 1.1.1.1  1996/02/18 21:38:11  ylo
++ * 	Imported ssh-1.2.13.
++ *
++ * Revision 1.16  1995/10/02  01:18:13  ylo
++ * 	Added NEED_SYS_SYSLOG_H (Ultrix).
++ * 	Added HAVE_SCO_ETC_SHADOW and SCO.
++ *
++ * Revision 1.15  1995/09/27  02:47:19  ylo
++ * 	Added SOCKS stuff.
++ *
++ * Revision 1.14  1995/09/27  02:09:52  ylo
++ * 	Added ETCDIR.
++ * 	Added SPEED_T_IN_STDTYPES_H.
++ *
++ * Revision 1.13  1995/09/21  17:06:23  ylo
++ * 	Added USE_STRLEN_FOR_AF_UNIX.
++ * 	Added USE_PIPES.
++ *
++ * Revision 1.12  1995/09/13  12:05:51  ylo
++ * 	Removed HPSUX_BROKEN_PTYS.
++ *
++ * Revision 1.11  1995/09/11  17:34:54  ylo
++ * 	Added LIBWRAP.
++ *
++ * Revision 1.10  1995/09/10  22:44:21  ylo
++ * 	Added HAVE_OSF1_C2_SECURITY.
++ *
++ * Revision 1.9  1995/09/09  21:26:37  ylo
++ * /m/shadows/u2/users/ylo/ssh/README
++ *
++ * Revision 1.8  1995/09/06  15:57:37  ylo
++ * 	Added BROKEN_INET_ADDR
++ *
++ * Revision 1.7  1995/08/29  22:17:54  ylo
++ * 	Removed AGENT_USES_SOCKET
++ * 	Added HPSUX_BROKEN_PTYS
++ *
++ * Revision 1.6  1995/08/21  23:20:17  ylo
++ * 	Removed NO_RHOSTS_AUTHENTICATION.
++ * 	Fixed a typo.
++ *
++ * Revision 1.5  1995/08/18  23:42:14  ylo
++ * 	Added HAVE_SECURID.
++ *
++ * Revision 1.4  1995/08/18  22:41:46  ylo
++ * 	Added O_NONBLOCK_BROKEN, WITHOUT_IDEA, crypt, __FreeBSD__, TTY_GROUP.
++ *
++ * Revision 1.3  1995/07/27  00:36:32  ylo
++ * 	Added SSH_UTMP, SSH_WTMP, SSH_LASTLOG, DEFAUL_PATH.
++ *
++ * Revision 1.2  1995/07/13  01:08:48  ylo
++ * 	Added cvs log.
++ *
++ * $Endlog$
++ */
++
++
++/* Define to empty if the keyword does not work.  */
++/* #undef const */
++
++/* Define to `int' if <sys/types.h> doesn't define.  */
++typedef int gid_t;
++
++/* Define if your struct stat has st_blksize.  */
++#undef HAVE_ST_BLKSIZE
++
++/* Define if you have <sys/wait.h> that is POSIX.1 compatible.  */
++#undef HAVE_SYS_WAIT_H
++
++/* Define as __inline if that's what the C compiler calls it.  */
++#define inline __inline
++
++/* Define to `int' if <sys/types.h> doesn't define.  */
++typedef int mode_t;
++
++/* Define to `long' if <sys/types.h> doesn't define.  */
++typedef long off_t;
++
++/* Define if you need to in order for stat and other things to work.  */
++#undef _POSIX_SOURCE
++
++/* Define as the return type of signal handlers (int or void).  */
++typedef void RETSIGTYPE;
++
++/* Define to `unsigned' if <sys/types.h> doesn't define.  */
++typedef unsigned int size_t;
++
++/* Define if the `S_IS*' macros in <sys/stat.h> do not work properly.  */
++#define STAT_MACROS_BROKEN
++
++/* Define if you have the ANSI C header files.  */
++#define STDC_HEADERS
++
++/* Define if you can safely include both <sys/time.h> and <time.h>.  */
++#undef TIME_WITH_SYS_TIME
++
++/* Define to `int' if <sys/types.h> doesn't define.  */
++typedef int uid_t;
++
++/* Define if your processor stores words with the most significant
++   byte first (like Motorola and SPARC, unlike Intel and VAX).  */
++#undef WORDS_BIGENDIAN
++
++/*
++ * $Log: config.h.in,v $
++ * Revision 1.5  1996/06/03 19:26:26  ylo
++ * *** empty log message ***
++ *
++ * Revision 1.3  1996/04/26 00:37:21  ylo
++ * 	Added HPSUX7_KLUDGES.
++ * 	Removed SOCKS defines for socket functions.
++ *
++ * Revision 1.2  1996/02/18 21:54:02  ylo
++ * 	Added HAVE_ULTRIX_SHADOW_PASSWORDS.
++ *
++ * Revision 1.1.1.1  1996/02/18 21:38:11  ylo
++ * 	Imported ssh-1.2.13.
++ *
++ * Revision 1.16  1995/10/02  01:18:13  ylo
++ * 	Added NEED_SYS_SYSLOG_H (Ultrix).
++ * 	Added HAVE_SCO_ETC_SHADOW and SCO.
++ *
++ * Revision 1.15  1995/09/27  02:47:19  ylo
++ * 	Added SOCKS stuff.
++ *
++ * Revision 1.14  1995/09/27  02:09:52  ylo
++ * 	Added ETCDIR.
++ * 	Added SPEED_T_IN_STDTYPES_H.
++ *
++ * Revision 1.13  1995/09/21  17:06:23  ylo
++ * 	Added USE_STRLEN_FOR_AF_UNIX.
++ * 	Added USE_PIPES.
++ *
++ * Revision 1.12  1995/09/13  12:05:51  ylo
++ * 	Removed HPSUX_BROKEN_PTYS.
++ *
++ * Revision 1.11  1995/09/11  17:34:54  ylo
++ * 	Added LIBWRAP.
++ *
++ * Revision 1.10  1995/09/10  22:44:21  ylo
++ * 	Added HAVE_OSF1_C2_SECURITY.
++ *
++ * Revision 1.9  1995/09/09  21:26:37  ylo
++ * /m/shadows/u2/users/ylo/ssh/README
++ *
++ * Revision 1.8  1995/09/06  15:57:37  ylo
++ * 	Added BROKEN_INET_ADDR
++ *
++ * Revision 1.7  1995/08/29  22:17:54  ylo
++ * 	Removed AGENT_USES_SOCKET
++ * 	Added HPSUX_BROKEN_PTYS
++ *
++ * Revision 1.6  1995/08/21  23:20:17  ylo
++ * 	Removed NO_RHOSTS_AUTHENTICATION.
++ * 	Fixed a typo.
++ *
++ * Revision 1.5  1995/08/18  23:42:14  ylo
++ * 	Added HAVE_SECURID.
++ *
++ * Revision 1.4  1995/08/18  22:41:46  ylo
++ * 	Added O_NONBLOCK_BROKEN, WITHOUT_IDEA, crypt, __FreeBSD__, TTY_GROUP.
++ *
++ * Revision 1.3  1995/07/27  00:36:32  ylo
++ * 	Added SSH_UTMP, SSH_WTMP, SSH_LASTLOG, DEFAUL_PATH.
++ *
++ * Revision 1.2  1995/07/13  01:08:48  ylo
++ * 	Added cvs log.
++ *
++ * $Endlog$
++ */
++
++/* Define this to the canonical name of your host type (e.g., 
++   "sparc-sun-sunos4.0.3"). */
++#define HOSTTYPE "winnt-4.0-x86"
++
++/* Define if you have SYSV-style /dev/ptmx and /dev/pts/. */
++#undef HAVE_DEV_PTMX
++
++/* Define if you have /dev/pts and /dev/ptc devices (as in AIX). */
++#undef HAVE_DEV_PTS_AND_PTC
++
++/* Define if you have shadow passwords in /etc/security/passwd (AIX style). */
++#undef HAVE_ETC_SECURITY_PASSWD
++
++/* Define if you have shadow passwords in /etc/security/passwd.adjunct
++   (SunOS style). */
++#undef HAVE_ETC_SECURITY_PASSWD_ADJUNCT
++
++  
++/* Define if you have OSF1 C2 security installed on the system */
++#undef HAVE_OSF1_C2_SECURITY
++
++/* Define if you have shadow passwords in /etc/shadow (Solaris style). */
++#undef HAVE_ETC_SHADOW
++
++/* Define if you have system login defaults in /etc/default/login. */
++#undef HAVE_ETC_DEFAULT_LOGIN
++
++/* Define if utmp structure has host field. */
++#undef HAVE_HOST_IN_UTMP
++
++/* Define if utmp structure has addr field. */
++#undef HAVE_ADDR_IN_UTMP
++
++/* Define if utmp structure has id field. */
++#undef HAVE_ID_IN_UTMP
++
++/* Define if utmp structure has name field. */
++#undef HAVE_NAME_IN_UTMP
++
++/* Define if utmp structure has pid field. */
++#undef HAVE_PID_IN_UTMP
++
++/* Define if /var/adm/lastlog or whatever it is called is a directory
++   (e.g. SGI IRIX). */
++#undef LASTLOG_IS_DIR
++
++/* Define to use RSAREF. */
++#undef RSAREF
++
++/* Define this to be the path of the rsh program to support executing rsh. */
++#undef RSH_PATH
++
++/* Define this to be the path of the xauth program. */
++#undef XAUTH_PATH
++
++/* Default path for utmp.  Determined by configure. */
++#undef SSH_UTMP
++
++/* Default path for wtmp.  Determined by configure. */
++#undef SSH_WTMP
++
++/* Default path for lastlog.  Determined by configure. */
++#undef SSH_LASTLOG
++
++/* This is defined if we found a lastlog file.  The presence of lastlog.h
++   alone is not a sufficient indicator (at least newer BSD systems have
++   lastlog but no lastlog.h. */
++#undef HAVE_LASTLOG
++
++/* Define this if libutil.a contains BSD 4.4 compatible login(), logout(),
++   and logwtmp() calls. */
++#undef HAVE_LIBUTIL_LOGIN
++
++/* Location of system mail spool directory. */
++#undef MAIL_SPOOL_DIRECTORY
++
++/* Name of user's mail spool file if stored in user's home directory. */
++#undef MAIL_SPOOL_FILE
++
++/* Define this to be the default user path if you don't like the default. 
++   See the --with-path=<path> configure option. */
++#undef DEFAULT_PATH
++
++/* Define this if O_NONBLOCK does not work on your system (e.g., Ultrix). */
++#undef O_NONBLOCK_BROKEN
++
++/* Define this if sys/syslog.h needs to be included in addition to syslog.h.
++   This is the case on some Ultrix versions. */
++#undef NEED_SYS_SYSLOG_H
++
++/* Define this to leave out IDEA encryption. */
++#undef WITHOUT_IDEA
++
++/* Define this to include libwrap (tcp_wrappers) support. */
++#undef LIBWRAP
++
++/* This is defined to pw_encrypt on Linux when using John Faugh's shadow 
++   password implementation. */
++#undef crypt
++
++/* This is defined on 386BSD to preted we are on FreeBSD. */
++#undef __FreeBSD__
++
++/* If defines, this overrides "tty" as the terminal group. */
++#undef TTY_GROUP
++
++/* Define this if you want to support Security Dynammics SecurID
++   cards. */
++#undef HAVE_SECURID
++
++/* Define this if you are using HPSUX.  HPUX uses non-standard shared
++   memory communication for X, which seems to be enabled by the display name
++   matching that of the local host.  This circumvents it by using the IP
++   address instead of the host name in DISPLAY. */
++#undef HPSUX_NONSTANDARD_X11_KLUDGE
++
++/* Define this is compiling on HPSUX 7.x.  This will avoid including
++   arpa/inet.h, and will define struct linger in includes.h. */
++#undef HPSUX7_KLUDGES
++
++/* Define this if inet_network should be used instead of inet_addr.  This is
++   the case on DGUX 5.4. */
++#undef BROKEN_INET_ADDR
++
++/* Define this if your system does not like sizeof(struct sockaddr_un) as the
++   size argument in bind and connect calls for unix domain sockets. */
++#undef USE_STRLEN_FOR_AF_UNIX
++
++/* Define this to use pipes instead of socketpairs for communicating with the
++   client program.  Socketpairs do not seem to work on all systems. */
++#undef USE_PIPES
++
++/* Define this if speed_t is defined in stdtypes.h or otherwise gets included
++   into ttymodes.c from system headers. */
++#undef SPEED_T_IN_STDTYPES_H
++
++/* Define this if compiling on Ultrix.  Defining this does not actually require
++   shadow passwords to be present; this just includes support for them. */
++#undef HAVE_ULTRIX_SHADOW_PASSWORDS
++
++/* Define this if compiling with SOCKS (the firewall traversal library). */
++#undef SOCKS
++
++/* Define these if on SCO Unix. */
++#undef HAVE_SCO_ETC_SHADOW
++#undef SCO
++
++/* The number of bytes in a int.  */
++#define SIZEOF_INT 4
++
++/* The number of bytes in a long.  */
++#define SIZEOF_LONG 4
++
++/* The number of bytes in a short.  */
++#define SIZEOF_SHORT 2
++
++/* Define if you have the _getpty function.  */
++#undef HAVE__GETPTY
++
++/* Define if you have the clock function.  */
++#define HAVE_CLOCK
++
++/* Define if you have the fchmod function.  */
++#undef HAVE_FCHMOD
++
++/* Define if you have the ftruncate function.  */
++#undef HAVE_FTRUNCATE
++
++/* Define if you have the getdtablesize function.  */
++#undef HAVE_GETDTABLESIZE
++
++/* Define if you have the gethostname function.  */
++#define HAVE_GETHOSTNAME
++
++/* Define if you have the getrusage function.  */
++#undef HAVE_GETRUSAGE
++
++/* Define if you have the gettimeofday function.  */
++#undef HAVE_GETTIMEOFDAY
++
++/* Define if you have the initgroups function.  */
++#undef HAVE_INITGROUPS
++
++/* Define if you have the innetgr function.  */
++#undef HAVE_INNETGR
++
++/* Define if you have the makeutx function.  */
++#undef HAVE_MAKEUTX
++
++/* Define if you have the memcpy function.  */
++#define HAVE_MEMCPY
++
++/* Define if you have the openpty function.  */
++#undef HAVE_OPENPTY
++
++/* Define if you have the revoke function.  */
++#undef HAVE_REVOKE
++
++/* Define if you have the setlogin function.  */
++#undef HAVE_SETLOGIN
++
++/* Define if you have the setluid function.  */
++#undef HAVE_SETLUID
++
++/* Define if you have the setsid function.  */
++#undef HAVE_SETSID
++
++/* Define if you have the strchr function.  */
++#define HAVE_STRCHR
++
++/* Define if you have the times function.  */
++#undef HAVE_TIMES
++
++/* Define if you have the ulimit function.  */
++#undef HAVE_ULIMIT
++
++/* Define if you have the umask function.  */
++#undef HAVE_UMASK
++
++/* Define if you have the vhangup function.  */
++#undef HAVE_VHANGUP
++
++/* Define if you have the <dirent.h> header file.  */
++#undef HAVE_DIRENT_H
++
++/* Define if you have the <lastlog.h> header file.  */
++#undef HAVE_LASTLOG_H
++
++/* Define if you have the <ndir.h> header file.  */
++#undef HAVE_NDIR_H
++
++/* Define if you have the <netinet/in_systm.h> header file.  */
++#undef HAVE_NETINET_IN_SYSTM_H
++
++/* Define if you have the <paths.h> header file.  */
++#undef HAVE_PATHS_H
++
++/* Define if you have the <rusage.h> header file.  */
++#undef HAVE_RUSAGE_H
++
++/* Define if you have the <sgtty.h> header file.  */
++#undef HAVE_SGTTY_H
++
++/* Define if you have the <sys/dir.h> header file.  */
++#undef HAVE_SYS_DIR_H
++
++/* Define if you have the <sys/ioctl.h> header file.  */
++#undef HAVE_SYS_IOCTL_H
++
++/* Define if you have the <sys/ndir.h> header file.  */
++#undef HAVE_SYS_NDIR_H
++
++/* Define if you have the <sys/select.h> header file.  */
++#undef HAVE_SYS_SELECT_H
++
++/* Define if you have the <sys/time.h> header file.  */
++#undef HAVE_SYS_TIME_H
++
++/* Define if you have the <termios.h> header file.  */
++#undef HAVE_TERMIOS_H
++
++/* Define if you have the <ulimit.h> header file.  */
++#undef HAVE_ULIMIT_H
++
++/* Define if you have the <unistd.h> header file.  */
++#undef HAVE_UNISTD_H
++
++/* Define if you have the <usersec.h> header file.  */
++#undef HAVE_USERSEC_H
++
++/* Define if you have the <utime.h> header file.  */
++#undef HAVE_UTIME_H
++
++/* Define if you have the <utmp.h> header file.  */
++#undef HAVE_UTMP_H
++
++/* Define if you have the <utmpx.h> header file.  */
++#undef HAVE_UTMPX_H
++
++/* Define if you have the auth library (-lauth).  */
++#undef HAVE_LIBAUTH
++
++/* Define if you have the crypt library (-lcrypt).  */
++#undef HAVE_LIBCRYPT
++
++/* Define if you have the gen library (-lgen).  */
++#undef HAVE_LIBGEN
++
++/* Define if you have the inet library (-linet).  */
++#undef HAVE_LIBINET
++
++/* Define if you have the nsl library (-lnsl).  */
++#undef HAVE_LIBNSL
++
++/* Define if you have the s library (-ls).  */
++#undef HAVE_LIBS
++
++/* Define if you have the security library (-lsecurity).  */
++#undef HAVE_LIBSECURITY
++
++/* Define if you have the shadow library (-lshadow).  */
++#undef HAVE_LIBSHADOW
++
++/* Define if you have the socket library (-lsocket).  */
++#undef HAVE_LIBSOCKET
++
++/* Define if you have the sun library (-lsun).  */
++#undef HAVE_LIBSUN
++
++#ifdef WIN32
++#define HOST_CONFIG_FILE "c:\\ssh\\etc\\ssh_config"
++#define HOST_KEY_FILE    "c:\\ssh\\etc\\ssh_host_key"
++#define ETCDIR           "c:\\ssh\\etc"
++#define SSH_PROGRAM      "ssh.exe"
++#endif
+diff -u -r --new-file ssh-1.2.14-clean/dirent.h ssh-1.2.14.win32/dirent.h
+--- ssh-1.2.14-clean/dirent.h	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/dirent.h	Thu Jul 17 02:39:11 1997
+@@ -0,0 +1,56 @@
++/* 
++ * @(#) dirent.h 2.0 17 Jun 91   Public Domain. 
++ * 
++ *  A public domain implementation of BSD directory routines for 
++ *  MS-DOS.  Written by Michael Rendell ({uunet,utai}michael@garfield), 
++ *  August 1987 
++ * 
++ *  Enhanced and ported to OS/2 by Kai Uwe Rommel; added scandir() prototype 
++ *  December 1989, February 1990 
++ *  Change of MAXPATHLEN for HPFS, October 1990 
++ *   
++ *  Unenhanced and ported to Windows NT by Bill Gallagher 
++ *  17 Jun 91 
++ *  changed d_name to char * instead of array, removed non-std extensions 
++ *  
++ *  Cleanup, other hackery, Summer '92, Brian Moran , brianmo@microsoft.com 
++ */ 
++
++#ifndef _DIRENT
++#define _DIRENT
++
++#include <direct.h>
++
++struct dirent 
++{ 
++    ino_t    d_ino;                   /* a bit of a farce */ 
++    short    d_reclen;                /* more farce */ 
++    short    d_namlen;                /* length of d_name */ 
++    char    *d_name;
++}; 
++ 
++struct _dircontents 
++{ 
++    char *_d_entry; 
++    struct _dircontents *_d_next; 
++}; 
++ 
++typedef struct _dirdesc 
++{ 
++    int  dd_id;			   /* uniquely identify each open directory*/ 
++    long dd_loc;			/* where we are in directory entry */ 
++    struct _dircontents *dd_contents;	/* pointer to contents of dir */ 
++    struct _dircontents *dd_cp;		/* pointer to current position */ 
++} 
++DIR; 
++ 
++extern DIR *opendir(char *); 
++extern struct dirent *readdir(DIR *); 
++extern void seekdir(DIR *, long); 
++extern long telldir(DIR *); 
++extern void closedir(DIR *); 
++#define rewinddir(dirp) seekdir(dirp, 0L) 
++
++#endif /* _DIRENT */
++
++/* end of dirent.h */ 
+diff -u -r --new-file ssh-1.2.14-clean/dstring.c ssh-1.2.14.win32/dstring.c
+--- ssh-1.2.14-clean/dstring.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/dstring.c	Thu Jul 17 02:53:01 1997
+@@ -0,0 +1,147 @@
++/* 
++ * dstring.c --
++ *
++ *	This file contains utility procedures that are used by many Tcl
++ *	commands.
++ *
++ * Copyright (c) 1987-1993 The Regents of the University of California.
++ * Copyright (c) 1994-1997 Sun Microsystems, Inc.
++ *
++ * See the file "license.terms" for information on usage and redistribution
++ * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
++ *
++ * SCCS: @(#) tclUtil.c 1.129 97/01/21 14:06:35
++ */
++
++#include <stdlib.h>
++#include <string.h>
++#include "dstring.h"
++
++/*
++ *----------------------------------------------------------------------
++ *
++ * Tcl_DStringInit --
++ *
++ *	Initializes a dynamic string, discarding any previous contents
++ *	of the string (Tcl_DStringFree should have been called already
++ *	if the dynamic string was previously in use).
++ *
++ * Results:
++ *	None.
++ *
++ * Side effects:
++ *	The dynamic string is initialized to be empty.
++ *
++ *----------------------------------------------------------------------
++ */
++
++void
++Tcl_DStringInit(dsPtr)
++    register Tcl_DString *dsPtr;	/* Pointer to structure for
++					 * dynamic string. */
++{
++    dsPtr->string = dsPtr->staticSpace;
++    dsPtr->length = 0;
++    dsPtr->spaceAvl = TCL_DSTRING_STATIC_SIZE;
++    dsPtr->staticSpace[0] = 0;
++}
++
++/*
++ *----------------------------------------------------------------------
++ *
++ * Tcl_DStringAppend --
++ *
++ *	Append more characters to the current value of a dynamic string.
++ *
++ * Results:
++ *	The return value is a pointer to the dynamic string's new value.
++ *
++ * Side effects:
++ *	Length bytes from string (or all of string if length is less
++ *	than zero) are added to the current value of the string. Memory
++ *	gets reallocated if needed to accomodate the string's new size.
++ *
++ *----------------------------------------------------------------------
++ */
++
++char *
++Tcl_DStringAppend(dsPtr, string, length)
++    register Tcl_DString *dsPtr;	/* Structure describing dynamic
++					 * string. */
++    char *string;			/* String to append.  If length is
++					 * -1 then this must be
++					 * null-terminated. */
++    int length;				/* Number of characters from string
++					 * to append.  If < 0, then append all
++					 * of string, up to null at end. */
++{
++    int newSize;
++    char *newString, *dst, *end;
++
++    if (length < 0) {
++	length = strlen(string);
++    }
++    newSize = length + dsPtr->length;
++
++    /*
++     * Allocate a larger buffer for the string if the current one isn't
++     * large enough. Allocate extra space in the new buffer so that there
++     * will be room to grow before we have to allocate again.
++     */
++
++    if (newSize >= dsPtr->spaceAvl) {
++	dsPtr->spaceAvl = newSize*2;
++	newString = (char *) malloc((unsigned) dsPtr->spaceAvl);
++	memcpy((void *) newString, (void *) dsPtr->string,
++		(size_t) dsPtr->length);
++	if (dsPtr->string != dsPtr->staticSpace) {
++	    free(dsPtr->string);
++	}
++	dsPtr->string = newString;
++    }
++
++    /*
++     * Copy the new string into the buffer at the end of the old
++     * one.
++     */
++
++    for (dst = dsPtr->string + dsPtr->length, end = string+length;
++	    string < end; string++, dst++) {
++	*dst = *string;
++    }
++    *dst = 0;
++    dsPtr->length += length;
++    return dsPtr->string;
++}
++
++/*
++ *----------------------------------------------------------------------
++ *
++ * Tcl_DStringFree --
++ *
++ *	Frees up any memory allocated for the dynamic string and
++ *	reinitializes the string to an empty state.
++ *
++ * Results:
++ *	None.
++ *
++ * Side effects:
++ *	The previous contents of the dynamic string are lost, and
++ *	the new value is an empty string.
++ *
++ *----------------------------------------------------------------------
++ */
++
++void
++Tcl_DStringFree(dsPtr)
++    register Tcl_DString *dsPtr;	/* Structure describing dynamic
++					 * string. */
++{
++    if (dsPtr->string != dsPtr->staticSpace) {
++	free(dsPtr->string);
++    }
++    dsPtr->string = dsPtr->staticSpace;
++    dsPtr->length = 0;
++    dsPtr->spaceAvl = TCL_DSTRING_STATIC_SIZE;
++    dsPtr->staticSpace[0] = 0;
++}
+diff -u -r --new-file ssh-1.2.14-clean/dstring.h ssh-1.2.14.win32/dstring.h
+--- ssh-1.2.14-clean/dstring.h	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/dstring.h	Thu Jul 17 02:48:03 1997
+@@ -0,0 +1,38 @@
++/*
++ * dstring.h --
++ *
++ *	This header file describes the externally-visible facilities
++ *	of the Tcl interpreter.
++ *
++ * Copyright (c) 1987-1994 The Regents of the University of California.
++ * Copyright (c) 1994-1996 Sun Microsystems, Inc.
++ *
++ * See the file "license.terms" for information on usage and redistribution
++ * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
++ *
++ * SCCS: @(#) tcl.h 1.302 97/01/22 08:47:54
++ */
++
++#define TCL_DSTRING_STATIC_SIZE 200
++typedef struct Tcl_DString {
++    char *string;		/* Points to beginning of string:  either
++				 * staticSpace below or a malloc'ed array. */
++    int length;			/* Number of non-NULL characters in the
++				 * string. */
++    int spaceAvl;		/* Total number of bytes available for the
++				 * string and its terminating NULL char. */
++    char staticSpace[TCL_DSTRING_STATIC_SIZE];
++				/* Space to use in common case where string
++				 * is small. */
++} Tcl_DString;
++
++#define Tcl_DStringLength(dsPtr) ((dsPtr)->length)
++#define Tcl_DStringValue(dsPtr) ((dsPtr)->string)
++#define Tcl_DStringTrunc Tcl_DStringSetLength
++
++extern char *		Tcl_DStringAppend (Tcl_DString *dsPtr,
++			    char *string, int length);
++extern void		Tcl_DStringFree (Tcl_DString *dsPtr);
++extern void		Tcl_DStringInit (Tcl_DString *dsPtr);
++extern void		Tcl_DStringSetLength (Tcl_DString *dsPtr,
++			    int length);
+diff -u -r --new-file ssh-1.2.14-clean/getopt.c ssh-1.2.14.win32/getopt.c
+--- ssh-1.2.14-clean/getopt.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/getopt.c	Thu Jul 17 02:34:37 1997
+@@ -0,0 +1,52 @@
++/* got this off net.sources */
++#include <stdio.h>
++#include <string.h>
++#include "getopt.h"
++
++/*
++ * get option letter from argument vector
++ */
++int	opterr = 1,		/* useless, never set or used */
++	optind = 1,		/* index into parent argv vector */
++	optopt;			/* character checked for validity */
++char	*optarg;		/* argument associated with option */
++
++#define BADCH	(int)'?'
++#define EMSG	""
++#define errmsg(s) fputs(*argv,stderr);fputs(s,stderr); \
++		fputc(optopt,stderr);fputc('\n',stderr);return(BADCH);
++
++int
++getopt(int argc,char **argv,char *ostr)
++{
++	static char	*place = EMSG;	/* option letter processing */
++	register char	*oli;		/* option letter list index */
++	char	*index();
++
++	if(!*place) {			/* update scanning pointer */
++		if(optind >= argc || *(place = argv[optind]) != '-' || !*++place) return(EOF);
++		if (*place == '-') {	/* found "--" */
++			++optind;
++			return(EOF);
++		}
++	}				/* option letter okay? */
++	if ((optopt = (int)*place++) == (int)':' || !(oli = strchr(ostr,optopt))) {
++		if(!*place) ++optind;
++		errmsg(": illegal option -- ");
++	}
++	if (*++oli != ':') {		/* don't need argument */
++		optarg = NULL;
++		if (!*place) ++optind;
++	}
++	else {				/* need an argument */
++		if (*place) optarg = place;	/* no white space */
++		else if (argc <= ++optind) {	/* no arg */
++			place = EMSG;
++			errmsg(": option requires an argument -- ");
++		}
++	 	else optarg = argv[optind];	/* white space */
++		place = EMSG;
++		++optind;
++	}
++	return(optopt);			/* dump back option letter */
++}
+diff -u -r --new-file ssh-1.2.14-clean/getopt.h ssh-1.2.14.win32/getopt.h
+--- ssh-1.2.14-clean/getopt.h	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/getopt.h	Thu Jul 17 02:34:51 1997
+@@ -0,0 +1,3 @@
++extern int optind;
++extern char *optarg;
++extern int getopt	(int argc,char **nargv, char *ostr);
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/gmp-mparam.h ssh-1.2.14.win32/gmp-1.3.2/gmp-mparam.h
+--- ssh-1.2.14-clean/gmp-1.3.2/gmp-mparam.h	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/gmp-1.3.2/gmp-mparam.h	Sun Mar 01 00:46:50 1998
+@@ -0,0 +1,29 @@
++/* gmp-mparam.h -- Compiler/machine parameter header file.
++
++   ***** THIS FILE WAS CREATED BY A PROGRAM.  DON'T EDIT IT! *****
++
++Copyright (C) 1991 Free Software Foundation, Inc.
++
++This file is part of the GNU MP Library.
++
++The GNU MP Library is free software; you can redistribute it and/or
++modify it under the terms of the GNU General Public License as
++published by the Free Software Foundation; either version 2, or
++(at your option) any later version.
++
++The GNU MP Library is distributed in the hope that it will be
++useful, but WITHOUT ANY WARRANTY; without even the implied warranty
++of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++You should have received a copy of the GNU General Public License
++along with the GNU MP Library; see the file COPYING.  If not, write
++to the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139,
++USA.  */
++
++#define BITS_PER_MP_LIMB 32
++#define BYTES_PER_MP_LIMB 4
++#define BITS_PER_LONGINT 32
++#define BITS_PER_INT 32
++#define BITS_PER_SHORTINT 16
++#define BITS_PER_CHAR 8
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/gmp.def ssh-1.2.14.win32/gmp-1.3.2/gmp.def
+--- ssh-1.2.14-clean/gmp-1.3.2/gmp.def	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/gmp-1.3.2/gmp.def	Sun Mar 01 00:47:40 1998
+@@ -0,0 +1,101 @@
++LIBRARY    gmp.dll
++EXETYPE WINDOWS
++CODE PRELOAD MOVEABLE DISCARDABLE
++DATA PRELOAD MOVEABLE MULTIPLE
++
++EXPORTS
++	mpz_init
++	mpz_set
++	mpz_set_ui
++	mpz_set_si
++	mpz_set_str
++	mpz_init_set
++	mpz_init_set_ui
++	mpz_init_set_si
++	mpz_init_set_str
++	mpz_clear
++	mpz_get_ui
++	mpz_get_si
++	mpz_get_str
++	mpz_size
++	mpz_sizeinbase
++	mpz_add
++	mpz_add_ui
++	mpz_sub
++	mpz_sub_ui
++	mpz_mul
++	mpz_mul_ui
++	mpz_div
++	mpz_div_ui
++	mpz_mod
++	mpz_mod_ui
++	mpz_divmod
++	mpz_divmod_ui
++	mpz_mdiv
++	mpz_mmod
++	mpz_mdivmod
++	mpz_mdiv_ui
++	mpz_mmod_ui
++	mpz_mdivmod_ui
++	mpz_gcd
++	mpz_gcdext
++	mpz_sqrt
++	mpz_sqrtrem
++	mpz_powm
++	mpz_powm_ui
++	mpz_cmp
++	mpz_cmp_ui
++	mpz_cmp_si
++	mpz_mul_2exp
++	mpz_div_2exp
++	mpz_mod_2exp
++	mpz_abs
++	mpz_neg
++	mpz_com
++	mpz_and
++	mpz_ior
++	mpz_inp_raw
++	mpz_inp_str
++	mpz_out_raw
++	mpz_out_str
++	mpz_perfect_square_p
++	mpz_random
++	mpz_random2
++	mpz_pow_ui
++	mpz_clrbit
++	mpz_fac_ui
++	mpz_probab_prime_p
++	mpq_init
++	mpq_set
++	mpq_set_ui
++	mpq_set_si
++	mpq_set_num
++	mpq_set_den
++	mpq_get_num
++	mpq_get_den
++	mpq_add
++	mpq_sub
++	mpq_mul
++	mpq_div
++	mpq_clear
++	mpq_cmp
++	mpq_inv
++	mpq_neg
++	mpn_add
++	mpn_sub
++	mpn_cmp
++	mpn_mul
++	mpn_div
++	mpn_divmod_1
++	mpn_mod_1
++	mpn_lshift
++	mpn_rshift
++	mpn_rshiftci
++	mpn_sqrt
++	_mp_default_allocate
++	_mp_default_reallocate
++	_mp_default_free
++	mp_set_memory_functions
++	_mpz_set_str
++	_mpz_get_str
++	_mpz_realloc
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/gmp.dsp ssh-1.2.14.win32/gmp-1.3.2/gmp.dsp
+--- ssh-1.2.14-clean/gmp-1.3.2/gmp.dsp	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/gmp-1.3.2/gmp.dsp	Tue Jul 15 02:07:01 1997
+@@ -0,0 +1,88 @@
++# Microsoft Developer Studio Project File - Name="gmp" - Package Owner=<4>
++# Microsoft Developer Studio Generated Build File, Format Version 5.00
++# ** DO NOT EDIT **
++
++# TARGTYPE "Win32 (x86) Dynamic-Link Library" 0x0102
++
++CFG=gmp - Win32 Debug
++!MESSAGE This is not a valid makefile. To build this project using NMAKE,
++!MESSAGE use the Export Makefile command and run
++!MESSAGE 
++!MESSAGE NMAKE /f "gmp.mak".
++!MESSAGE 
++!MESSAGE You can specify a configuration when running NMAKE
++!MESSAGE by defining the macro CFG on the command line. For example:
++!MESSAGE 
++!MESSAGE NMAKE /f "gmp.mak" CFG="gmp - Win32 Debug"
++!MESSAGE 
++!MESSAGE Possible choices for configuration are:
++!MESSAGE 
++!MESSAGE "gmp - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
++!MESSAGE "gmp - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
++!MESSAGE 
++
++# Begin Project
++# PROP Scc_ProjName ""
++# PROP Scc_LocalPath ""
++CPP=cl.exe
++MTL=midl.exe
++RSC=rc.exe
++
++!IF  "$(CFG)" == "gmp - Win32 Release"
++
++# PROP BASE Use_MFC 0
++# PROP BASE Use_Debug_Libraries 0
++# PROP BASE Output_Dir "Release"
++# PROP BASE Intermediate_Dir "Release"
++# PROP BASE Target_Dir ""
++# PROP Use_MFC 0
++# PROP Use_Debug_Libraries 0
++# PROP Output_Dir "Release"
++# PROP Intermediate_Dir "Release"
++# PROP Target_Dir ""
++# ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
++# ADD CPP /nologo /MT /W3 /GX /O2 /I "." /I "gmp-1.3.2" /I "zlib095" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
++# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o NUL /win32
++# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o NUL /win32
++# ADD BASE RSC /l 0x409 /d "NDEBUG"
++# ADD RSC /l 0x409 /d "NDEBUG"
++BSC32=bscmake.exe
++# ADD BASE BSC32 /nologo
++# ADD BSC32 /nologo
++LINK32=link.exe
++# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /machine:I386
++# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /machine:I386
++
++!ELSEIF  "$(CFG)" == "gmp - Win32 Debug"
++
++# PROP BASE Use_MFC 0
++# PROP BASE Use_Debug_Libraries 1
++# PROP BASE Output_Dir "Debug"
++# PROP BASE Intermediate_Dir "Debug"
++# PROP BASE Target_Dir ""
++# PROP Use_MFC 0
++# PROP Use_Debug_Libraries 1
++# PROP Output_Dir "Debug"
++# PROP Intermediate_Dir "Debug"
++# PROP Target_Dir ""
++# ADD BASE CPP /nologo /MTd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /YX /FD /c
++# ADD CPP /nologo /MTd /W3 /Gm /GX /Zi /Od /I "." /I ".\gmp-1.3.2" /I ".\zlib095" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /YX /FD /c
++# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o NUL /win32
++# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o NUL /win32
++# ADD BASE RSC /l 0x409 /d "_DEBUG"
++# ADD RSC /l 0x409 /d "_DEBUG"
++BSC32=bscmake.exe
++# ADD BASE BSC32 /nologo
++# ADD BSC32 /nologo
++LINK32=link.exe
++# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /debug /machine:I386 /pdbtype:sept
++# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /debug /machine:I386 /pdbtype:sept
++
++!ENDIF 
++
++# Begin Target
++
++# Name "gmp - Win32 Release"
++# Name "gmp - Win32 Debug"
++# End Target
++# End Project
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/gmp.h ssh-1.2.14.win32/gmp-1.3.2/gmp.h
+--- ssh-1.2.14-clean/gmp-1.3.2/gmp.h	Sun Feb 18 13:38:13 1996
++++ ssh-1.2.14.win32/gmp-1.3.2/gmp.h	Tue Jul 15 05:17:01 1997
+@@ -88,6 +88,10 @@
+ #endif
+ } MP_RAT;
+ 
++#ifdef WIN32
++#include <malloc.h>
++#endif
++
+ #ifdef __STDC__
+ void mp_set_memory_functions (void *(*) (size_t),
+ 			      void *(*) (void *, size_t, size_t),
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/makefile.vc ssh-1.2.14.win32/gmp-1.3.2/makefile.vc
+--- ssh-1.2.14-clean/gmp-1.3.2/makefile.vc	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/gmp-1.3.2/makefile.vc	Sun Mar 01 00:46:42 1998
+@@ -0,0 +1,213 @@
++# Visual C++ 2.x, 4.x, and 5.x makefile
++
++# Does not depend on the presence of any environment variables in
++# order to compile tcl; all needed information is derived from 
++# location of the compiler directories.
++
++# Project directories
++#
++# TOOLS32 = location of VC++ 32-bit development tools. Note that the
++#	    VC++ 2.0 header files are broken, so you need to use the
++#	    ones that come with the developer network CD's, or later
++#	    versions of VC++.
++#
++
++!IFNDEF TOOLS32
++TOOLS32		= c:\msdev
++!ENDIF
++
++# Set this to the appropriate value of /MACHINE: for your platform
++MACHINE	= IX86
++
++# Comment the following line to compile with symbols
++NODEBUG=1
++
++######################################################################
++# Do not modify below this line
++######################################################################
++
++GMP_LIB		= gmp.lib
++GMP_DLL		= gmp.dll
++DUMPEXTS	= dumpexts.exe
++CREMPARAM	= cre-mparam.exe
++CRECONVTAB	= cre-conv-tab.exe
++
++GMP_OBJS = $(MPZ_OBJS) $(MPQ_OBJS) $(MPN_OBJS) $(IMPL_OBJS) mp_bases.obj
++
++IMPL_OBJS = memory.obj mp_set_fns.obj _mpz_set_str.obj _mpz_get_str.obj \
++  mpz_realloc.obj mp_clz_tab.obj
++#  mpz_realloc.obj mp_clz_tab.obj alloca.obj
++
++MPZ_OBJS = mpz_init.obj mpz_set.obj mpz_set_ui.obj mpz_set_si.obj mpz_set_str.obj \
++  mpz_iset.obj mpz_iset_ui.obj mpz_iset_si.obj mpz_iset_str.obj mpz_clear.obj \
++  mpz_get_ui.obj mpz_get_si.obj mpz_get_str.obj mpz_size.obj mpz_sizeinb.obj \
++  mpz_add.obj mpz_add_ui.obj mpz_sub.obj mpz_sub_ui.obj mpz_mul.obj mpz_mul_ui.obj \
++  mpz_div.obj mpz_div_ui.obj mpz_mod.obj mpz_mod_ui.obj mpz_dm.obj mpz_dm_ui.obj \
++  mpz_mdiv.obj mpz_mmod.obj mpz_mdm.obj mpz_mdiv_ui.obj mpz_mmod_ui.obj mpz_mdm_ui.obj \
++  mpz_gcd.obj mpz_gcdext.obj mpz_sqrt.obj mpz_sqrtrem.obj mpz_powm.obj mpz_powm_ui.obj \
++  mpz_cmp.obj mpz_cmp_ui.obj mpz_cmp_si.obj mpz_mul_2exp.obj mpz_div_2exp.obj \
++  mpz_mod_2exp.obj mpz_abs.obj mpz_neg.obj mpz_com.obj mpz_and.obj mpz_ior.obj \
++  mpz_inp_raw.obj mpz_inp_str.obj mpz_out_raw.obj mpz_out_str.obj \
++  mpz_perfsqr.obj mpz_random.obj mpz_random2.obj mpz_pow_ui.obj \
++  mpz_clrbit.obj mpz_fac_ui.obj mpz_pprime_p.obj
++
++MPQ_OBJS = mpq_init.obj mpq_set.obj mpq_set_ui.obj mpq_set_si.obj \
++  mpq_set_num.obj mpq_set_den.obj mpq_get_num.obj mpq_get_den.obj \
++  mpq_add.obj mpq_sub.obj mpq_mul.obj mpq_div.obj \
++  mpq_clear.obj mpq_cmp.obj mpq_inv.obj mpq_neg.obj
++
++MPN_OBJS = mpn_add.obj mpn_sub.obj mpn_cmp.obj mpn_mul.obj mpn_div.obj mpn_dm_1.obj \
++  mpn_mod_1.obj mpn_lshift.obj mpn_rshift.obj mpn_rshiftci.obj mpn_sqrt.obj
++
++
++
++cc32		= $(TOOLS32)\bin\cl.exe
++link32		= $(TOOLS32)\bin\link.exe
++rc32		= $(TOOLS32)\bin\rc.exe
++nmake		= $(TOOLS32)\bin\nmake.exe
++include32	= -I$(TOOLS32)\include
++
++DEFINES	= -D__WIN32__ -DWIN32 $(DEBUGDEFINES)
++
++CFLAGS	= $(cdebug) $(cflags) $(cvarsdll) $(include32) \
++			$(INCLUDES) $(DEFINES)
++CON_CFLAGS	= $(cdebug) $(cflags) $(cvars) $(include32) -DCONSOLE
++DOS_CFLAGS	= $(cdebug) $(cflags) $(include16) -AL 
++DLL16_CFLAGS	= $(cdebug) $(cflags) $(include16) -ALw
++
++######################################################################
++# Link flags
++######################################################################
++
++!IFDEF NODEBUG
++ldebug = /RELEASE
++!ELSE
++ldebug = -debug:full -debugtype:cv
++!ENDIF
++
++# declarations common to all linker options
++lcommon = /NODEFAULTLIB /RELEASE /NOLOGO
++
++# declarations for use on Intel i386, i486, and Pentium systems
++!IF "$(MACHINE)" == "IX86"
++DLLENTRY = @12
++lflags   = $(lcommon) -align:0x1000 /MACHINE:$(MACHINE)
++!ELSE
++lflags   = $(lcommon) /MACHINE:$(MACHINE)
++!ENDIF
++
++conlflags = $(lflags) -subsystem:console -entry:mainCRTStartup
++guilflags = $(lflags) -subsystem:windows -entry:WinMainCRTStartup
++dlllflags = $(lflags) -entry:_DllMainCRTStartup$(DLLENTRY) -dll
++
++!IF "$(MACHINE)" == "PPC"
++libc = libc.lib
++libcdll = crtdll.lib
++!ELSE
++libc = libc.lib oldnames.lib
++libcdll = msvcrt.lib oldnames.lib
++!ENDIF
++
++baselibs   = kernel32.lib $(optlibs) advapi32.lib
++winlibs    = $(baselibs) user32.lib gdi32.lib comdlg32.lib winspool.lib
++
++guilibs	   = $(libc) $(winlibs)
++conlibs	   = $(libc) $(baselibs)
++guilibsdll = $(libcdll) $(winlibs)
++conlibsdll = $(libcdll) $(baselibs)
++
++######################################################################
++# Compile flags
++######################################################################
++
++!IFDEF NODEBUG
++cdebug = -Ox
++!ELSE
++cdebug = -Z7 -Od
++!ENDIF
++
++# declarations common to all compiler options
++ccommon = -c -W3 -nologo -YX -Dtry=__try -Dexcept=__except
++
++!IF "$(MACHINE)" == "IX86"
++cflags = $(ccommon) -D_X86_=1
++!ELSE
++!IF "$(MACHINE)" == "MIPS"
++cflags = $(ccommon) -D_MIPS_=1
++!ELSE
++!IF "$(MACHINE)" == "PPC"
++cflags = $(ccommon) -D_PPC_=1
++!ELSE
++!IF "$(MACHINE)" == "ALPHA"
++cflags = $(ccommon) -D_ALPHA_=1
++!ENDIF
++!ENDIF
++!ENDIF
++!ENDIF
++
++cvars      = -DWIN32 -D_WIN32
++cvarsmt    = $(cvars) -D_MT
++cvarsdll   = $(cvarsmt) -D_DLL
++
++######################################################################
++# Project specific targets
++######################################################################
++
++release:    $(GMP_DLL) $(GMP_LIB) $(DUMPEXTS)
++all:	    $(GMP_DLL) $(GMP_LIB) $(DUMPEXTS)
++
++$(DUMPEXTS): winDumpExts.c
++	$(cc32) $(CON_CFLAGS) -Fo$(TMPDIR)\ $?
++	set LIB=$(TOOLS32)\lib
++	$(link32) $(ldebug) $(conlflags) $(guilibs) -out:$@ \
++		$(TMPDIR)\winDumpExts.obj 
++
++$(CREMPARAM): cre-mparam.c
++	$(cc32) $(CON_CFLAGS)  $?
++	set LIB=$(TOOLS32)\lib
++	$(link32) $(ldebug) $(conlflags) $(guilibs) -out:$@ cre-mparam.obj 
++
++gmp-mparam.h: $(CREMPARAM)
++	$(CREMPARAM) > $@
++
++$(CRECONVTAB): cre-conv-tab.c
++	$(cc32) $(CON_CFLAGS)  $?
++	set LIB=$(TOOLS32)\lib
++	$(link32) $(ldebug) $(conlflags) $(guilibs) -out:$@ cre-conv-tab.obj 
++
++mp_bases.c: $(CRECONVTAB)
++	$(CRECONVTAB) > $@
++
++$(GMP_DLL): gmp-mparam.h $(GMP_OBJS) gmp.def
++	set LIB=$(TOOLS32)\lib
++	$(link32) $(ldebug) $(dlllflags) -def:gmp.def \
++		-out:$@ $(guilibsdll) @<<
++$(GMP_OBJS)
++<<
++
++$(GMP_LIB): $(GMP_DLL)
++
++gmp.def: $(DUMPEXTS) $(GMP_OBJS)
++	$(DUMPEXTS) -o $@ $(GMP_DLL) @<<
++$(GMP_OBJS)
++<<
++
++#
++# Implicit rules
++#
++
++.c.obj:
++    $(cc32) $(CFLAGS) $<
++
++clean:
++	-@del *~
++	-@del *.ncb
++        -@del *.exp 
++	-@del *.lib 
++	-@del *.dll 
++	-@del *.exe
++        -@del *.obj
++        -@del *.res
++	-@del *.pch
++	-@del *.plg
++#        -@del *.def
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/mp_bases.c ssh-1.2.14.win32/gmp-1.3.2/mp_bases.c
+--- ssh-1.2.14-clean/gmp-1.3.2/mp_bases.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/gmp-1.3.2/mp_bases.c	Sun Mar 01 00:47:31 1998
+@@ -0,0 +1,68 @@
++/* __mp_bases -- Structure for conversion between internal binary
++   format and strings in base 2..36.  The fields are explained in
++   gmp-impl.h.
++
++   ***** THIS FILE WAS CREATED BY A PROGRAM.  DON'T EDIT IT! *****
++
++Copyright (C) 1991 Free Software Foundation, Inc.
++
++This file is part of the GNU MP Library.
++
++The GNU MP Library is free software; you can redistribute it and/or
++modify it under the terms of the GNU General Public License as
++published by the Free Software Foundation; either version 2, or
++(at your option) any later version.
++
++The GNU MP Library is distributed in the hope that it will be
++useful, but WITHOUT ANY WARRANTY; without even the implied warranty
++of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++You should have received a copy of the GNU General Public License
++along with the GNU MP Library; see the file COPYING.  If not, write
++to the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139,
++USA.  */
++
++#include "gmp.h"
++#include "gmp-impl.h"
++
++const struct bases __mp_bases[37] =
++{
++  /*  0 */ {0, 0, 0, 0.0},
++  /*  1 */ {0, 0, 0, 0.0},
++  /*  2 */ {32, 0x1, 0x0, 1.00000000},
++  /*  3 */ {20, 0xCFD41B91, 0x3B563C24, 0.63092975},
++  /*  4 */ {16, 0x2, 0x0, 0.50000000},
++  /*  5 */ {13, 0x48C27395, 0xC25C2684, 0.43067656},
++  /*  6 */ {12, 0x81BF1000, 0xF91BD1B6, 0.38685281},
++  /*  7 */ {11, 0x75DB9C97, 0x1607A2CB, 0.35620719},
++  /*  8 */ {10, 0x3, 0x0, 0.33333333},
++  /*  9 */ {10, 0xCFD41B91, 0x3B563C24, 0.31546488},
++  /* 10 */ {9, 0x3B9ACA00, 0x12E0BE82, 0.30103000},
++  /* 11 */ {9, 0x8C8B6D2B, 0xD24CDE04, 0.28906483},
++  /* 12 */ {8, 0x19A10000, 0x3FA39AB5, 0.27894295},
++  /* 13 */ {8, 0x309F1021, 0x50F8AC5F, 0.27023815},
++  /* 14 */ {8, 0x57F6C100, 0x74843B1E, 0.26264954},
++  /* 15 */ {8, 0x98C29B81, 0xAD0326C2, 0.25595802},
++  /* 16 */ {8, 0x4, 0x0, 0.25000000},
++  /* 17 */ {7, 0x18754571, 0x4EF0B6BD, 0.24465054},
++  /* 18 */ {7, 0x247DBC80, 0xC0FC48A1, 0.23981247},
++  /* 19 */ {7, 0x3547667B, 0x33838942, 0.23540891},
++  /* 20 */ {7, 0x4C4B4000, 0xAD7F29AB, 0.23137821},
++  /* 21 */ {7, 0x6B5A6E1D, 0x313C3D15, 0.22767025},
++  /* 22 */ {7, 0x94ACE180, 0xB8CCA9E0, 0.22424382},
++  /* 23 */ {7, 0xCAF18367, 0x42ED6DE9, 0.22106473},
++  /* 24 */ {6, 0xB640000, 0x67980E0B, 0.21810429},
++  /* 25 */ {6, 0xE8D4A51, 0x19799812, 0.21533828},
++  /* 26 */ {6, 0x1269AE40, 0xBCE85396, 0.21274605},
++  /* 27 */ {6, 0x17179149, 0x62C103A9, 0.21030992},
++  /* 28 */ {6, 0x1CB91000, 0x1D353D43, 0.20801460},
++  /* 29 */ {6, 0x23744899, 0xCE1DECEA, 0.20584683},
++  /* 30 */ {6, 0x2B73A840, 0x790FC511, 0.20379505},
++  /* 31 */ {6, 0x34E63B41, 0x35B865A0, 0.20184909},
++  /* 32 */ {6, 0x5, 0x0, 0.20000000},
++  /* 33 */ {6, 0x4CFA3CC1, 0xA9AED1B3, 0.19823986},
++  /* 34 */ {6, 0x5C13D840, 0x63DFC229, 0.19656163},
++  /* 35 */ {6, 0x6D91B519, 0x2B0FEE30, 0.19495902},
++  /* 36 */ {6, 0x81BF1000, 0xF91BD1B6, 0.19342640},
++};
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/mpz_random.c ssh-1.2.14.win32/gmp-1.3.2/mpz_random.c
+--- ssh-1.2.14-clean/gmp-1.3.2/mpz_random.c	Sun Feb 18 13:38:17 1996
++++ ssh-1.2.14.win32/gmp-1.3.2/mpz_random.c	Tue Jul 15 04:29:33 1997
+@@ -28,6 +28,12 @@
+ {
+   return mrand48 ();
+ }
++#elif defined(WIN32)
++static inline long
++urandom()
++{
++  return rand() ^ (rand() << 1);
++}
+ #else
+ long random ();
+ 
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/mpz_random2.c ssh-1.2.14.win32/gmp-1.3.2/mpz_random2.c
+--- ssh-1.2.14-clean/gmp-1.3.2/mpz_random2.c	Sun Feb 18 13:38:17 1996
++++ ssh-1.2.14.win32/gmp-1.3.2/mpz_random2.c	Tue Jul 15 04:31:01 1997
+@@ -30,6 +30,12 @@
+ {
+   return mrand48 ();
+ }
++#elif defined(WIN32)
++static inline long
++random()
++{
++  return rand();
++}
+ #else
+ long random ();
+ #endif
+diff -u -r --new-file ssh-1.2.14-clean/gmp-1.3.2/winDumpExts.c ssh-1.2.14.win32/gmp-1.3.2/winDumpExts.c
+--- ssh-1.2.14-clean/gmp-1.3.2/winDumpExts.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/gmp-1.3.2/winDumpExts.c	Tue Jul 15 04:24:55 1997
+@@ -0,0 +1,503 @@
++/* 
++ * winDumpExts.c --
++ * Author:   Gordon Chaffee, Scott Stanton
++ *
++ * History:  The real functionality of this file was written by
++ *           Matt Pietrek in 1993 in his pedump utility.  I've
++ *           modified it to dump the externals in a bunch of object
++ *           files to create a .def file.
++ *
++ * 10/12/95  Modified by Scott Stanton to support Relocatable Object Module
++ *	     Format files for Borland C++ 4.5.
++ *
++ * Notes:    Visual C++ puts an underscore before each exported symbol.
++ *           This file removes them.  I don't know if this is a problem
++ *           this other compilers.  If _MSC_VER is defined,
++ *           the underscore is removed.  If not, it isn't.  To get a
++ *           full dump of an object file, use the -f option.  This can
++ *           help determine the something that may be different with a
++ *           compiler other than Visual C++.
++ *----------------------------------------------------------------------
++ *
++ * SCCS: @(#) winDumpExts.c 1.11 96/09/18 15:25:11
++ */
++
++#include <windows.h>
++#include <stdio.h>
++#include <string.h>
++#include <process.h>
++
++#ifdef _ALPHA_
++#define e_magic_number IMAGE_FILE_MACHINE_ALPHA
++#else
++#define e_magic_number IMAGE_FILE_MACHINE_I386
++#endif
++
++/*
++ *----------------------------------------------------------------------
++ * GetArgcArgv --
++ * 
++ *	Break up a line into argc argv
++ *----------------------------------------------------------------------
++ */
++int
++GetArgcArgv(char *s, char **argv)
++{
++    int quote = 0;
++    int argc = 0;
++    char *bp;
++
++    bp = s;
++    while (1) {
++	while (isspace(*bp)) {
++	    bp++;
++	}
++	if (*bp == '\n' || *bp == '\0') {
++	    *bp = '\0';
++	    return argc;
++	}
++	if (*bp == '\"') {
++	    quote = 1;
++	    bp++;
++	}
++	argv[argc++] = bp;
++
++	while (*bp != '\0') {
++	    if (quote) {
++		if (*bp == '\"') {
++		    quote = 0;
++		    *bp = '\0';
++		    bp++;
++		    break;
++		}
++		bp++;
++		continue;
++	    }
++	    if (isspace(*bp)) {
++		*bp = '\0';
++		bp++;
++		break;
++	    }
++	    bp++;
++	}
++    }
++}
++
++/*
++ *  The names of the first group of possible symbol table storage classes
++ */
++char * SzStorageClass1[] = {
++    "NULL","AUTOMATIC","EXTERNAL","STATIC","REGISTER","EXTERNAL_DEF","LABEL",
++    "UNDEFINED_LABEL","MEMBER_OF_STRUCT","ARGUMENT","STRUCT_TAG",
++    "MEMBER_OF_UNION","UNION_TAG","TYPE_DEFINITION","UNDEFINED_STATIC",
++    "ENUM_TAG","MEMBER_OF_ENUM","REGISTER_PARAM","BIT_FIELD"
++};
++
++/*
++ * The names of the second group of possible symbol table storage classes
++ */
++char * SzStorageClass2[] = {
++    "BLOCK","FUNCTION","END_OF_STRUCT","FILE","SECTION","WEAK_EXTERNAL"
++};
++
++/*
++ *----------------------------------------------------------------------
++ * GetSZStorageClass --
++ *
++ *	Given a symbol storage class value, return a descriptive
++ *	ASCII string
++ *----------------------------------------------------------------------
++ */
++PSTR
++GetSZStorageClass(BYTE storageClass)
++{
++	if ( storageClass <= IMAGE_SYM_CLASS_BIT_FIELD )
++		return SzStorageClass1[storageClass];
++	else if ( (storageClass >= IMAGE_SYM_CLASS_BLOCK)
++		      && (storageClass <= IMAGE_SYM_CLASS_WEAK_EXTERNAL) )
++		return SzStorageClass2[storageClass-IMAGE_SYM_CLASS_BLOCK];
++	else
++		return "???";
++}
++
++/*
++ *----------------------------------------------------------------------
++ * GetSectionName --
++ *
++ *	Used by DumpSymbolTable, it gives meaningful names to
++ *	the non-normal section number.
++ *
++ * Results:
++ *	A name is returned in buffer
++ *----------------------------------------------------------------------
++ */
++void
++GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer)
++{
++    char tempbuffer[10];
++	
++    switch ( (SHORT)section )
++    {
++      case IMAGE_SYM_UNDEFINED: strcpy(tempbuffer, "UNDEF"); break;
++      case IMAGE_SYM_ABSOLUTE:  strcpy(tempbuffer, "ABS  "); break;
++      case IMAGE_SYM_DEBUG:	  strcpy(tempbuffer, "DEBUG"); break;
++      default: wsprintf(tempbuffer, "%-5X", section);
++    }
++	
++    strncpy(buffer, tempbuffer, cbBuffer-1);
++}
++
++/*
++ *----------------------------------------------------------------------
++ * DumpSymbolTable --
++ *
++ *	Dumps a COFF symbol table from an EXE or OBJ.  We only use
++ *	it to dump tables from OBJs.
++ *----------------------------------------------------------------------
++ */
++void
++DumpSymbolTable(PIMAGE_SYMBOL pSymbolTable, FILE *fout, unsigned cSymbols)
++{
++    unsigned i;
++    PSTR stringTable;
++    char sectionName[10];
++	
++    fprintf(fout, "Symbol Table - %X entries  (* = auxillary symbol)\n",
++	    cSymbols);
++
++    fprintf(fout, 
++     "Indx Name                 Value    Section    cAux  Type    Storage\n"
++     "---- -------------------- -------- ---------- ----- ------- --------\n");
++
++    /*
++     * The string table apparently starts right after the symbol table
++     */
++    stringTable = (PSTR)&pSymbolTable[cSymbols]; 
++		
++    for ( i=0; i < cSymbols; i++ ) {
++	fprintf(fout, "%04X ", i);
++	if ( pSymbolTable->N.Name.Short != 0 )
++	    fprintf(fout, "%-20.8s", pSymbolTable->N.ShortName);
++	else
++	    fprintf(fout, "%-20s", stringTable + pSymbolTable->N.Name.Long);
++
++	fprintf(fout, " %08X", pSymbolTable->Value);
++
++	GetSectionName(pSymbolTable->SectionNumber, sectionName,
++		       sizeof(sectionName));
++	fprintf(fout, " sect:%s aux:%X type:%02X st:%s\n",
++	       sectionName,
++	       pSymbolTable->NumberOfAuxSymbols,
++	       pSymbolTable->Type,
++	       GetSZStorageClass(pSymbolTable->StorageClass) );
++#if 0
++	if ( pSymbolTable->NumberOfAuxSymbols )
++	    DumpAuxSymbols(pSymbolTable);
++#endif
++
++	/*
++	 * Take into account any aux symbols
++	 */
++	i += pSymbolTable->NumberOfAuxSymbols;
++	pSymbolTable += pSymbolTable->NumberOfAuxSymbols;
++	pSymbolTable++;
++    }
++}
++
++/*
++ *----------------------------------------------------------------------
++ * DumpExternals --
++ *
++ *	Dumps a COFF symbol table from an EXE or OBJ.  We only use
++ *	it to dump tables from OBJs.
++ *----------------------------------------------------------------------
++ */
++void
++DumpExternals(PIMAGE_SYMBOL pSymbolTable, FILE *fout, unsigned cSymbols)
++{
++    unsigned i;
++    PSTR stringTable;
++    char *s, *f;
++    char symbol[1024];
++	
++    /*
++     * The string table apparently starts right after the symbol table
++     */
++    stringTable = (PSTR)&pSymbolTable[cSymbols]; 
++		
++    for ( i=0; i < cSymbols; i++ ) {
++	if (pSymbolTable->SectionNumber > 0 && pSymbolTable->Type == 0x20) {
++	    if (pSymbolTable->StorageClass == IMAGE_SYM_CLASS_EXTERNAL) {
++		if (pSymbolTable->N.Name.Short != 0) {
++		    strncpy(symbol, pSymbolTable->N.ShortName, 8);
++		    symbol[8] = 0;
++		} else {
++		    s = stringTable + pSymbolTable->N.Name.Long;
++		    strcpy(symbol, s);
++		}
++		s = symbol;
++		f = strchr(s, '@');
++		if (f) {
++		    *f = 0;
++		}
++#if defined(_MSC_VER) && defined(_X86_)
++		if (symbol[0] == '_') {
++		    s = &symbol[1];
++		}
++#endif
++		if ((stricmp(s, "DllEntryPoint") != 0) 
++			&& (stricmp(s, "DllMain") != 0)) {
++		    fprintf(fout, "\t%s\n", s);
++		}
++	    }
++	}
++
++	/*
++	 * Take into account any aux symbols
++	 */
++	i += pSymbolTable->NumberOfAuxSymbols;
++	pSymbolTable += pSymbolTable->NumberOfAuxSymbols;
++	pSymbolTable++;
++    }
++}
++
++/*
++ *----------------------------------------------------------------------
++ * DumpObjFile --
++ *
++ *	Dump an object file--either a full listing or just the exported
++ *	symbols.
++ *----------------------------------------------------------------------
++ */
++void
++DumpObjFile(PIMAGE_FILE_HEADER pImageFileHeader, FILE *fout, int full)
++{
++    PIMAGE_SYMBOL PCOFFSymbolTable;
++    DWORD COFFSymbolCount;
++    
++    PCOFFSymbolTable = (PIMAGE_SYMBOL)
++	((DWORD)pImageFileHeader + pImageFileHeader->PointerToSymbolTable);
++    COFFSymbolCount = pImageFileHeader->NumberOfSymbols;
++
++    if (full) {
++	DumpSymbolTable(PCOFFSymbolTable, fout, COFFSymbolCount);
++    } else {
++	DumpExternals(PCOFFSymbolTable, fout, COFFSymbolCount);
++    }
++}
++
++/*
++ *----------------------------------------------------------------------
++ * SkipToNextRecord --
++ *
++ *	Skip over the current ROMF record and return the type of the
++ *	next record.
++ *----------------------------------------------------------------------
++ */
++
++BYTE
++SkipToNextRecord(BYTE **ppBuffer)
++{
++    int length;
++    (*ppBuffer)++;		/* Skip over the type.*/
++    length = *((WORD*)(*ppBuffer))++; /* Retrieve the length. */
++    *ppBuffer += length;	/* Skip over the rest. */
++    return **ppBuffer;		/* Return the type. */
++}
++
++/*
++ *----------------------------------------------------------------------
++ * DumpROMFObjFile --
++ *
++ *	Dump a Relocatable Object Module Format file, displaying only
++ *	the exported symbols.
++ *----------------------------------------------------------------------
++ */
++void
++DumpROMFObjFile(LPVOID pBuffer, FILE *fout)
++{
++    BYTE type, length;
++    char symbol[1024], *s;
++
++    while (1) {
++	type = SkipToNextRecord(&(BYTE*)pBuffer);
++	if (type == 0x90) {	/* PUBDEF */
++	    if (((BYTE*)pBuffer)[4] != 0) {
++		length = ((BYTE*)pBuffer)[5];
++		strncpy(symbol, ((char*)pBuffer) + 6, length);
++		symbol[length] = '\0';
++		s = symbol;
++		if ((stricmp(s, "DllEntryPoint") != 0) 
++			&& (stricmp(s, "DllMain") != 0)) {
++		    if (s[0] == '_') {
++			s++;
++			fprintf(fout, "\t_%s\n\t%s=_%s\n", s, s, s);
++		    } else {
++			fprintf(fout, "\t%s\n", s);
++		    }
++		}
++	    }
++	} else if (type == 0x8B || type == 0x8A) { /* MODEND */
++	    break;
++	}
++    }
++}
++
++/*
++ *----------------------------------------------------------------------
++ * DumpFile --
++ *
++ *	Open up a file, memory map it, and call the appropriate
++ *	dumping routine
++ *----------------------------------------------------------------------
++ */
++void
++DumpFile(LPSTR filename, FILE *fout, int full)
++{
++    HANDLE hFile;
++    HANDLE hFileMapping;
++    LPVOID lpFileBase;
++    PIMAGE_DOS_HEADER dosHeader;
++	
++    hFile = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ, NULL,
++		       OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
++					
++    if (hFile == INVALID_HANDLE_VALUE) {
++	fprintf(stderr, "Couldn't open file with CreateFile()\n");
++	return;
++    }
++
++    hFileMapping = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0, 0, NULL);
++    if (hFileMapping == 0) {
++	CloseHandle(hFile);
++	fprintf(stderr, "Couldn't open file mapping with CreateFileMapping()\n");
++	return;
++    }
++
++    lpFileBase = MapViewOfFile(hFileMapping, FILE_MAP_READ, 0, 0, 0);
++    if (lpFileBase == 0) {
++	CloseHandle(hFileMapping);
++	CloseHandle(hFile);
++	fprintf(stderr, "Couldn't map view of file with MapViewOfFile()\n");
++	return;
++    }
++
++    dosHeader = (PIMAGE_DOS_HEADER)lpFileBase;
++    if (dosHeader->e_magic == IMAGE_DOS_SIGNATURE) {
++#if 0
++	DumpExeFile( dosHeader );
++#else
++	fprintf(stderr, "File is an executable.  I don't dump those.\n");
++	return;
++#endif
++    }
++    /* Does it look like a i386 COFF OBJ file??? */
++    else if ((dosHeader->e_magic == e_magic_number)
++	    && (dosHeader->e_sp == 0)) {
++	/*
++	 * The two tests above aren't what they look like.  They're
++	 * really checking for IMAGE_FILE_HEADER.Machine == i386 (0x14C)
++	 * and IMAGE_FILE_HEADER.SizeOfOptionalHeader == 0;
++	 */
++	DumpObjFile((PIMAGE_FILE_HEADER) lpFileBase, fout, full);
++    } else if (*((BYTE *)lpFileBase) == 0x80) {
++	/*
++	 * This file looks like it might be a ROMF file.
++	 */
++	DumpROMFObjFile(lpFileBase, fout);
++    } else {
++	printf("unrecognized file format\n");
++    }
++    UnmapViewOfFile(lpFileBase);
++    CloseHandle(hFileMapping);
++    CloseHandle(hFile);
++}
++
++void
++main(int argc, char **argv)
++{
++    char *fargv[1000];
++    char cmdline[10000];
++    int i, arg;
++    FILE *fout;
++    int pos;
++    int full = 0;
++    char *outfile = NULL;
++
++    if (argc < 3) {
++      Usage:
++	fprintf(stderr, "Usage: %s ?-o outfile? ?-f(ull)? <dllname> <object filenames> ..\n", argv[0]);
++	exit(1);
++    }
++
++    arg = 1;
++    while (argv[arg][0] == '-') {
++	if (strcmp(argv[arg], "--") == 0) {
++	    arg++;
++	    break;
++	} else if (strcmp(argv[arg], "-f") == 0) {
++	    full = 1;
++	} else if (strcmp(argv[arg], "-o") == 0) {
++	    arg++;
++	    if (arg == argc) {
++		goto Usage;
++	    }
++	    outfile = argv[arg];
++	}
++	arg++;
++    }
++    if (arg == argc) {
++	goto Usage;
++    }
++
++    if (outfile) {
++	fout = fopen(outfile, "w+");
++	if (fout == NULL) {
++	    fprintf(stderr, "Unable to open \'%s\' for writing:\n",
++		    argv[arg]);
++	    perror("");
++	    exit(1);
++	}
++    } else {
++	fout = stdout;
++    }
++    
++    if (! full) {
++	char *dllname = argv[arg];
++	arg++;
++	if (arg == argc) {
++	    goto Usage;
++	}
++	fprintf(fout, "LIBRARY    %s\n", dllname);
++	fprintf(fout, "EXETYPE WINDOWS\n");
++	fprintf(fout, "CODE PRELOAD MOVEABLE DISCARDABLE\n");
++	fprintf(fout, "DATA PRELOAD MOVEABLE MULTIPLE\n\n");
++	fprintf(fout, "EXPORTS\n");
++    }
++
++    for (; arg < argc; arg++) {
++	if (argv[arg][0] == '@') {
++	    FILE *fargs = fopen(&argv[arg][1], "r");
++	    if (fargs == NULL) {
++		fprintf(stderr, "Unable to open \'%s\' for reading:\n",
++			argv[arg]);
++		perror("");
++		exit(1);
++	    }
++	    pos = 0;
++	    for (i = 0; i < arg; i++) {
++		strcpy(&cmdline[pos], argv[i]);
++		pos += strlen(&cmdline[pos]) + 1;
++		fargv[i] = argv[i];
++	    }
++	    fgets(&cmdline[pos], sizeof(cmdline), fargs);
++	    fprintf(stderr, "%s\n", &cmdline[pos]);
++	    fclose(fargs);
++	    i += GetArgcArgv(&cmdline[pos], &fargv[i]);
++	    argc = i;
++	    argv = fargv;
++	}
++	DumpFile(argv[arg], fout, full);
++    }
++    exit(0);
++}
+diff -u -r --new-file ssh-1.2.14-clean/includes.h ssh-1.2.14.win32/includes.h
+--- ssh-1.2.14-clean/includes.h	Thu Jun 06 04:39:27 1996
++++ ssh-1.2.14.win32/includes.h	Thu Jul 17 02:50:59 1997
+@@ -75,7 +75,7 @@
+ #define INCLUDES_H
+ 
+ /* Note: autoconf documentation tells to use the <...> syntax and have -I. */
+-#include <config.h>
++#include "config.h"
+ 
+ #include "version.h"
+ 
+@@ -143,7 +143,7 @@
+ #define USING_SGTTY
+ #endif
+ 
+-#if !defined(USING_SGTTY) && !defined(USING_TERMIOS)
++#if !defined(USING_SGTTY) && !defined(USING_TERMIOS) && !defined(WIN32)
+   ERROR_NO_TERMIOS_OR_SGTTY
+ #endif
+ 
+@@ -151,6 +151,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <stdarg.h>
++
+ #else /* STDC_HEADERS */
+ /* stdarg.h is present almost everywhere, and comes with gcc; I am too lazy
+    to make things work with both it and varargs. */
+@@ -168,6 +169,73 @@
+ #endif
+ #endif /* STDC_HEADERS */
+ 
++#ifdef WIN32
++#include <windows.h>
++#include <winsock.h>
++#include <sys/timeb.h>
++#include <io.h>
++#include <fcntl.h>
++#include "dirent.h"
++#include <process.h>
++#include <time.h>
++#define getuid() 0
++#define geteuid() 0
++/* #define dirent direct */
++#define NAMLEN(dirent) (dirent)->d_namlen
++
++#define sock_lasterror() WSAGetLastError()
++#define sock_strerror(x) wsa_strerror(x)
++#define sleep(x)         Sleep(1000*x)
++#define pipe(x)		 _pipe(x, 8192, O_NOINHERIT)
++#define mkdir(x,y)	 mkdir(x)
++extern char *wsa_strerror(int error);
++
++#else
++
++#define SOCKET_ERROR -1
++#define SOCKET int
++#define closesocket(x) close(x)
++#define sock_strerror(x) strerror(x)
++#define sock_lasterror() errno
++
++#define WSAEWOULDBLOCK          EWOULDBLOCK
++#define WSAEINPROGRESS          EINPROGRESS
++#define WSAEALREADY             EALREADY
++#define WSAENOTSOCK             ENOTSOCK
++#define WSAEDESTADDRREQ         EDESTADDRREQ
++#define WSAEMSGSIZE             EMSGSIZE
++#define WSAEPROTOTYPE           EPROTOTYPE
++#define WSAENOPROTOOPT          ENOPROTOOPT
++#define WSAEPROTONOSUPPORT      EPROTONOSUPPORT
++#define WSAESOCKTNOSUPPORT      ESOCKTNOSUPPORT
++#define WSAEOPNOTSUPP           EOPNOTSUPP
++#define WSAEPFNOSUPPORT         EPFNOSUPPORT
++#define WSAEAFNOSUPPORT         EAFNOSUPPORT
++#define WSAEADDRINUSE           EADDRINUSE
++#define WSAEADDRNOTAVAIL        EADDRNOTAVAIL
++#define WSAENETDOWN             ENETDOWN
++#define WSAENETUNREACH          ENETUNREACH
++#define WSAENETRESET            ENETRESET
++#define WSAECONNABORTED         ECONNABORTED
++#define WSAECONNRESET           ECONNRESET
++#define WSAENOBUFS              ENOBUFS
++#define WSAEISCONN              EISCONN
++#define WSAENOTCONN             ENOTCONN
++#define WSAESHUTDOWN            ESHUTDOWN
++#define WSAETOOMANYREFS         ETOOMANYREFS
++#define WSAETIMEDOUT            ETIMEDOUT
++#define WSAECONNREFUSED         ECONNREFUSED
++#define WSAELOOP                ELOOP
++#define WSAENAMETOOLONG         ENAMETOOLONG
++#define WSAEHOSTDOWN            EHOSTDOWN
++#define WSAEHOSTUNREACH         EHOSTUNREACH
++#define WSAENOTEMPTY            ENOTEMPTY
++#define WSAEPROCLIM             EPROCLIM
++#define WSAEUSERS               EUSERS
++#define WSAEDQUOT               EDQUOT
++#define WSAESTALE               ESTALE
++#define WSAEREMOTE              EREMOTE
++
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+ #ifdef HAVE_NETINET_IN_SYSTM_H
+@@ -271,6 +339,8 @@
+ #include <ndir.h>
+ #endif
+ #endif
++
++#endif /* WIN32 */
+ 
+ /* These POSIX macros are not defined in every system. */
+ 
+diff -u -r --new-file ssh-1.2.14-clean/makefile.vc ssh-1.2.14.win32/makefile.vc
+--- ssh-1.2.14-clean/makefile.vc	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/makefile.vc	Mon Jul 21 04:09:47 1997
+@@ -0,0 +1,209 @@
++# Visual C++ 2.x, 4.x, and 5.x makefile
++
++# Does not depend on the presence of any environment variables in
++# order to compile tcl; all needed information is derived from 
++# location of the compiler directories.
++
++# Project directories
++#
++# TOOLS32 = location of VC++ 32-bit development tools. Note that the
++#	    VC++ 2.0 header files are broken, so you need to use the
++#	    ones that come with the developer network CD's, or later
++#	    versions of VC++.
++#
++
++MF = $(MAKEFLAGS)
++
++!IFNDEF TOOLS32
++TOOLS32		= c:\msdev
++!ENDIF
++
++# Set this to the appropriate value of /MACHINE: for your platform
++MACHINE	= IX86
++
++# Comment the following line to compile with symbols
++NODEBUG=1
++
++# Uncomment the following if you don't want to use IDEA
++#NOIDEA=1
++
++######################################################################
++# Do not modify below this line
++######################################################################
++
++SSH		= ssh.exe
++SCP		= scp.exe
++KEYGEN		= ssh-keygen.exe
++ZLIB_LIB	= zlib095\zlib.lib
++GMP_LIB		= gmp-1.3.2\gmp.lib
++
++!IF "$NOIDEA" == "1"
++CONFOBJS =
++!ELSE
++CONFOBJS = idea.obj
++!ENDIF
++
++SSH_OBJS = arcfour.obj authfd.obj authfile.obj bufaux.obj \
++	buffer.obj canohost.obj cipher.obj clientloop.obj \
++	compress.obj crc32.obj des.obj emulate.obj hostfile.obj \
++	log-client.obj match.obj md5.obj minfd.obj \
++	mpaux.obj newchannels.obj packet.obj randoms.obj \
++	readconf.obj readpass.obj rsa.obj rsaglue.obj signals.obj \
++	ssh.obj sshconnect.obj tildexpand.obj tss.obj ttymodes.obj \
++	userfile.obj winsockutil.obj xmalloc.obj $(CONFOBJS)
++
++SCP_OBJS = dstring.obj getopt.obj ntdirent.obj ntforkexec.obj scp.obj \
++	xmalloc.obj
++
++KEYGEN_OBJS = ssh-keygen.obj log-client.obj readpass.obj rsa.obj \
++	randoms.obj md5.obj buffer.obj xmalloc.obj authfile.obj \
++	tss.obj cipher.obj des.obj arcfour.obj mpaux.obj \
++	bufaux.obj userfile.obj signals.obj getopt.obj $(CONFOBJS)
++
++cc32		= $(TOOLS32)\bin\cl.exe
++link32		= $(TOOLS32)\bin\link.exe
++rc32		= $(TOOLS32)\bin\rc.exe
++nmake		= $(TOOLS32)\bin\nmake.exe
++include32	= -I$(TOOLS32)\include
++
++DEFINES	= -D__WIN32__ -DWIN32 $(DEBUGDEFINES)
++INCLUDES = -Igmp-1.3.2 -Izlib095
++
++CFLAGS	= $(cdebug) $(cflags) $(cvarsdll) $(include32) \
++			$(INCLUDES) $(DEFINES)
++CON_CFLAGS	= $(cdebug) $(cflags) $(cvars) $(include32) -DCONSOLE
++DOS_CFLAGS	= $(cdebug) $(cflags) $(include16) -AL 
++DLL16_CFLAGS	= $(cdebug) $(cflags) $(include16) -ALw
++
++######################################################################
++# Link flags
++######################################################################
++
++!IFDEF NODEBUG
++ldebug = /RELEASE
++!ELSE
++ldebug = -debug:full -debugtype:cv
++!ENDIF
++
++# declarations common to all linker options
++lcommon = /NODEFAULTLIB /RELEASE /NOLOGO
++
++# declarations for use on Intel i386, i486, and Pentium systems
++!IF "$(MACHINE)" == "IX86"
++DLLENTRY = @12
++lflags   = $(lcommon) -align:0x1000 /MACHINE:$(MACHINE)
++!ELSE
++lflags   = $(lcommon) /MACHINE:$(MACHINE)
++!ENDIF
++
++conlflags = $(lflags) -subsystem:console -entry:mainCRTStartup
++guilflags = $(lflags) -subsystem:windows -entry:WinMainCRTStartup
++dlllflags = $(lflags) -entry:_DllMainCRTStartup$(DLLENTRY) -dll
++
++!IF "$(MACHINE)" == "PPC"
++libc = libc.lib
++libcdll = crtdll.lib
++!ELSE
++libc = libc.lib oldnames.lib
++libcdll = msvcrt.lib oldnames.lib
++!ENDIF
++
++baselibs   = kernel32.lib $(optlibs) advapi32.lib wsock32.lib
++winlibs    = $(baselibs) user32.lib gdi32.lib comdlg32.lib winspool.lib
++
++guilibs	   = $(libc) $(winlibs)
++conlibs	   = $(libc) $(baselibs)
++guilibsdll = $(libcdll) $(winlibs)
++conlibsdll = $(libcdll) $(baselibs)
++
++######################################################################
++# Compile flags
++######################################################################
++
++!IFDEF NODEBUG
++cdebug = -Ox
++!ELSE
++cdebug = -Z7 -Od
++!ENDIF
++
++# declarations common to all compiler options
++ccommon = -c -W3 -nologo -YX -Dtry=__try -Dexcept=__except
++
++!IF "$(MACHINE)" == "IX86"
++cflags = $(ccommon) -D_X86_=1
++!ELSE
++!IF "$(MACHINE)" == "MIPS"
++cflags = $(ccommon) -D_MIPS_=1
++!ELSE
++!IF "$(MACHINE)" == "PPC"
++cflags = $(ccommon) -D_PPC_=1
++!ELSE
++!IF "$(MACHINE)" == "ALPHA"
++cflags = $(ccommon) -D_ALPHA_=1
++!ENDIF
++!ENDIF
++!ENDIF
++!ENDIF
++
++cvars      = -DWIN32 -D_WIN32
++cvarsmt    = $(cvars) -D_MT
++cvarsdll   = $(cvarsmt) -D_DLL
++
++######################################################################
++# Project specific targets
++######################################################################
++
++release:    $(ZLIB_LIB) $(GMP_LIB) $(SSH) $(SCP) $(KEYGEN)
++all:	    $(ZLIB_LIB) $(GMP_LIB) $(SSH) $(SCP) $(KEYGEN)
++
++$(ZLIB_LIB):
++	@echo building in zlib095 ...
++	cd zlib095
++	$(nmake) -f makefile.vc $(MF)
++	cd ..
++
++$(GMP_LIB):
++	@echo building in gmp-1.3.2 ...
++	cd gmp-1.3.2
++	$(nmake) -f makefile.vc $(MF)
++	cd ..
++
++$(SSH): $(SSH_OBJS)
++	$(link32) $(ldebug) $(conlflags) $(conlibsdll) \
++		$(ZLIB_LIB) $(GMP_LIB) -out:$@ $(SSH_OBJS)
++
++$(SCP): $(SCP_OBJS)
++	$(link32) $(ldebug) $(conlflags) $(conlibsdll) \
++		-out:$@ $(SCP_OBJS)
++
++$(KEYGEN): $(KEYGEN_OBJS)
++	$(link32) $(ldebug) $(conlflags) $(conlibsdll) \
++		$(ZLIB_LIB) $(GMP_LIB) -out:$@ $(KEYGEN_OBJS)
++
++#
++# Implicit rules
++#
++
++.c.obj:
++    $(cc32) $(CFLAGS) $<
++
++clean:
++	@echo cleaning in zlib095 ...
++	cd zlib095
++	$(nmake) -f makefile.vc clean
++	cd ..
++	@echo cleaning in gmp-1.3.2 ...
++	cd gmp-1.3.2
++	$(nmake) -f makefile.vc clean
++	cd ..
++	-@del *~
++	-@del *.ncb
++        -@del *.exp 
++	-@del *.lib 
++	-@del *.dll 
++	-@del *.exe
++        -@del *.obj
++        -@del *.res
++	-@del *.pch
++	-@del *.plg
++#        -@del *.def
+diff -u -r --new-file ssh-1.2.14-clean/minfd.c ssh-1.2.14.win32/minfd.c
+--- ssh-1.2.14-clean/minfd.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/minfd.c	Tue Jul 15 02:52:33 1997
+@@ -1,3 +1,4 @@
++#ifndef WIN32
+ /*
+ 
+ minfd.c
+@@ -113,3 +114,5 @@
+     fd = -1;
+   return fd;
+ }
++
++#endif /* !WIN32 */
+diff -u -r --new-file ssh-1.2.14-clean/newchannels.c ssh-1.2.14.win32/newchannels.c
+--- ssh-1.2.14-clean/newchannels.c	Thu Jun 06 04:39:33 1996
++++ ssh-1.2.14.win32/newchannels.c	Fri Jul 18 01:33:47 1997
+@@ -214,7 +214,7 @@
+ /* Allocate a new channel object and set its type and socket. 
+    This will cause remote_name to be freed. */
+ 
+-int channel_allocate(int type, int sock, char *remote_name)
++int channel_allocate(int type, SOCKET sock, char *remote_name)
+ {
+   int i;
+ 
+@@ -751,7 +751,7 @@
+ 	      len = sizeof(buf);
+ 	      if (len > packet_max_size() / 4)
+ 		len = packet_max_size() / 4;
+-	      len = read(ch->sock, buf, len);
++	      len = recv(ch->sock, buf, len, 0);
+ 	      if (len <= 0)
+ 		{
+ 		  channel_close_input(ch);
+@@ -763,7 +763,7 @@
+ 	  if (FD_ISSET(ch->sock, writeset) &&
+ 	      (temp = buffer_len(&ch->output)) > 0)
+ 	    {
+-	      len = write(ch->sock, buffer_ptr(&ch->output), temp);
++	      len = send(ch->sock, buffer_ptr(&ch->output), temp, 0);
+ 	      if (len <= 0)
+ 		{
+ 		  channel_close_output(ch);
+@@ -1246,18 +1246,18 @@
+ 
+   /* Create the socket. */
+   sock = socket(sin.sin_family, SOCK_STREAM, 0);
+-  if (sock < 0)
++  if (sock == SOCKET_ERROR)
+     {
+-      error("socket: %.100s", strerror(errno));
++      error("socket: %.100s", sock_strerror(sock_lasterror()));
+       goto fail;
+     }
+ 
+   /* Connect to the host/port. */
+-  if (connect(sock, (struct sockaddr *)&sin, sizeof(sin)) < 0)
++  if (connect(sock, (struct sockaddr *)&sin, sizeof(sin)) == SOCKET_ERROR)
+     {
+       error("connect %.100s:%d: %.100s", host, host_port,
+-	    strerror(errno));
+-      close(sock);
++	    sock_strerror(sock_lasterror()));
++      closesocket(sock);
+       goto fail;
+     }
+ 
+@@ -1312,17 +1312,17 @@
+       sin.sin_port = htons(port);
+       
+       sock = socket(AF_INET, SOCK_STREAM, 0);
+-      if (sock < 0)
++      if (sock == SOCKET_ERROR)
+ 	{
+-	  error("socket: %.100s", strerror(errno));
++	  error("socket: %.100s", sock_strerror(sock_lasterror()));
+ 	  return NULL;
+ 	}
+       
+-      if (bind(sock, (struct sockaddr *)&sin, sizeof(sin)) < 0)
++      if (bind(sock, (struct sockaddr *)&sin, sizeof(sin)) == SOCKET_ERROR)
+ 	{
+-	  debug("bind port %d: %.100s", port, strerror(errno));
++	  debug("bind port %d: %.100s", port, sock_strerror(sock_lasterror()));
+ 	  shutdown(sock, 2);
+-	  close(sock);
++	  closesocket(sock);
+ 	  continue;
+ 	}
+       break;
+@@ -1334,11 +1334,11 @@
+     }
+ 
+   /* Start listening for connections on the socket. */
+-  if (listen(sock, 5) < 0)
++  if (listen(sock, 5) == SOCKET_ERROR)
+     {
+-      error("listen: %.100s", strerror(errno));
++      error("listen: %.100s", sock_strerror(sock_lasterror()));
+       shutdown(sock, 2);
+-      close(sock);
++      closesocket(sock);
+       return NULL;
+     }
+ 
+@@ -1360,7 +1360,7 @@
+ 	packet_send_debug("Could not get server IP address for %.200d.", 
+ 			  hostname);
+ 	shutdown(sock, 2);
+-	close(sock);
++	closesocket(sock);
+ 	return NULL;
+       }
+     memcpy(&addr, hp->h_addr_list[0], sizeof(addr));
+@@ -1387,6 +1387,7 @@
+   return xstrdup(buf);
+ }
+ 
++#if 1 /* ndef WIN32 */
+ /* This is called when SSH_SMSG_X11_OPEN is received.  The packet contains
+    the remote channel number.  We should do whatever we want, and respond
+    with either SSH_MSG_OPEN_CONFIRMATION or SSH_MSG_OPEN_FAILURE. */
+@@ -1395,7 +1396,9 @@
+ {
+   int remote_channel, display_number, sock, newch;
+   const char *display;
++#ifndef WIN32
+   struct sockaddr_un ssun;
++#endif
+   struct sockaddr_in sin;
+   char buf[1024], *cp, *remote_host;
+   struct hostent *hp;
+@@ -1422,6 +1425,7 @@
+   /* Now we decode the value of the DISPLAY variable and make a connection
+      to the real X server. */
+ 
++#ifndef WIN32
+   /* Check if it is a unix domain socket.  Unix domain displays are in one
+      of the following formats: unix:d[.s], :d[.s], ::d[.s] */
+   if (strncmp(display, "unix:", 5) == 0 ||
+@@ -1438,7 +1442,7 @@
+       sock = socket(AF_UNIX, SOCK_STREAM, 0);
+       if (sock < 0)
+ 	{
+-	  error("socket: %.100s", strerror(errno));
++	  error("socket: %.100s", sock_strerror(sock_lasterror()));
+ 	  goto fail;
+ 	}
+       /* Connect it to the display socket. */
+@@ -1458,14 +1462,15 @@
+ #endif /* HPSUX_NONSTANDARD_X11_KLUDGE */
+       if (connect(sock, (struct sockaddr *)&ssun, AF_UNIX_SIZE(ssun)) < 0)
+ 	{
+-	  error("connect %.100s: %.100s", ssun.sun_path, strerror(errno));
+-	  close(sock);
++	  error("connect %.100s: %.100s", ssun.sun_path, sock_strerror(sock_lasterror()));
++	  closesocket(sock);
+ 	  goto fail;
+ 	}
+ 
+       /* OK, we now have a connection to the display. */
+       goto success;
+     }
++#endif /* !WIN32 */
+   
+   /* Connect to an inet socket.  The DISPLAY value is supposedly
+       hostname:d[.s], where hostname may also be numeric IP address. */
+@@ -1524,15 +1529,15 @@
+   sock = socket(sin.sin_family, SOCK_STREAM, 0);
+   if (sock < 0)
+     {
+-      error("socket: %.100s", strerror(errno));
++      error("socket: %.100s", sock_strerror(sock_lasterror()));
+       goto fail;
+     }
+   /* Connect it to the display. */
+   if (connect(sock, (struct sockaddr *)&sin, sizeof(sin)) < 0)
+     {
+       error("connect %.100s:%d: %.100s", buf, 6000 + display_number, 
+-	    strerror(errno));
+-      close(sock);
++	    sock_strerror(sock_lasterror()));
++      closesocket(sock);
+       goto fail;
+     }
+ 
+@@ -1563,6 +1568,7 @@
+   packet_put_int(remote_channel);
+   packet_send();
+ }
++#endif /* !WIN32 */
+ 
+ /* Requests forwarding of X11 connections, generates fake authentication
+    data, and enables authentication spoofing. */
+@@ -1618,6 +1624,7 @@
+   xfree(new_data);
+ }
+ 
++#ifndef WIN32
+ /* Sends a message to the server to request authentication fd forwarding. */
+ 
+ void auth_request_forwarding()
+@@ -1667,8 +1674,8 @@
+     
+       /* Create the socket. */
+       sock = socket(AF_UNIX, SOCK_STREAM, 0);
+-      if (sock < 0)
+-	packet_disconnect("socket: %.100s", strerror(errno));
++      if (sock == SOCKET_ERROR)
++	packet_disconnect("socket: %.100s", sock_strerror(sock_lasterror()));
+ 
+       /* Bind it to the name. */
+       memset(&sunaddr, 0, sizeof(sunaddr));
+@@ -1676,12 +1683,12 @@
+       strncpy(sunaddr.sun_path, channel_forwarded_auth_socket_name, 
+ 	      sizeof(sunaddr.sun_path));
+ 
+-      if (bind(sock, (struct sockaddr *)&sunaddr, AF_UNIX_SIZE(sunaddr)) < 0)
+-	packet_disconnect("bind: %.100s", strerror(errno));
++      if (bind(sock, (struct sockaddr *)&sunaddr, AF_UNIX_SIZE(sunaddr)) == SOCKET_ERROR)
++	packet_disconnect("bind: %.100s", sock_strerror(sock_lasterror()));
+ 
+       /* Start listening on the socket. */
+-      if (listen(sock, 5) < 0)
+-	packet_disconnect("listen: %.100s", strerror(errno));
++      if (listen(sock, 5) == SOCKET_ERROR)
++	packet_disconnect("listen: %.100s", sock_strerror(sock_lasterror()));
+ 
+       /* Allocate a channel for the authentication agent socket. */
+       newch = channel_allocate(SSH_CHANNEL_AUTH_SOCKET, sock,
+@@ -1697,8 +1704,8 @@
+ 	fatal("Protocol error: authentication forwarding requested twice.");
+ 
+       /* Create a socket pair. */
+-      if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockets) < 0)
+-	packet_disconnect("socketpair: %.100s", strerror(errno));
++      if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockets) == SOCKET_ERROR)
++	packet_disconnect("socketpair: %.100s", sock_strerror(sock_lasterror()));
+     
+       /* Dup some descriptors to get the authentication fd to pfd,
+ 	 because some shells arbitrarily close descriptors below that.
+@@ -1717,7 +1724,7 @@
+       newfd = dup(sockets[1]);
+       if (newfd != pfd)
+ 	fatal ("auth_input_request_forwarding: dup didn't return %d.", pfd);
+-      close(sockets[1]);
++      closesocket(sockets[1]);
+       sockets[1] = newfd;
+       /* Close duped descriptors. */
+       for (i = 0; i < cnt; i++)
+@@ -1737,7 +1744,8 @@
+ 
+ void auth_input_open_request()
+ {
+-  int port, sock, newch;
++  SOCKET sock;
++  int port, newch;
+   char *dummyname;
+ 
+   /* Read the port number from the message. */
+@@ -1751,7 +1759,7 @@
+      client to timeout and fail.  This should never happen unless the agent
+      dies, because authentication forwarding is only enabled if we have an
+      agent. */
+-  if (sock < 0)
++  if (sock == SOCKET_ERROR)
+     return;
+ 
+   debug("Forwarding authentication connection.");
+@@ -1773,3 +1781,4 @@
+     packet_put_string(dummyname, strlen(dummyname));
+   packet_send();
+ }
++#endif /* !WIN32 */
+diff -u -r --new-file ssh-1.2.14-clean/ntdirent.c ssh-1.2.14.win32/ntdirent.c
+--- ssh-1.2.14-clean/ntdirent.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/ntdirent.c	Thu Jul 17 02:46:39 1997
+@@ -0,0 +1,288 @@
++/* 
++   dir.c for MS-DOS by Samuel Lam <skl@van-bc.UUCP>, June/87 
++*/ 
++ 
++/* #ifdef WIN32 */
++/* 
++ * @(#)dir.c 1.4 87/11/06 Public Domain. 
++ * 
++ *  A public domain implementation of BSD directory routines for 
++ *  MS-DOS.  Written by Michael Rendell ({uunet,utai}michael@garfield), 
++ *  August 1897 
++ *  Ported to OS/2 by Kai Uwe Rommel 
++ *  December 1989, February 1990 
++ *  Ported to Windows NT 22 May 91 
++ *    other mods Summer '92 brianmo@microsoft.com 
++ *  opendirx() was horribly written, very inefficient, and did not take care
++ *    of all cases.  It is still not too clean, but it is far more efficient.
++ *    Changes made by Gordon Chaffee (chaffee@bugs-bunny.cs.berkeley.edu)
++ */ 
++ 
++ 
++/*Includes: 
++ *	crt 
++ */ 
++#include <windows.h>
++#include <stdlib.h> 
++#include <string.h> 
++#include <sys\types.h> 
++#include <sys\stat.h> 
++#include "dirent.h" 
++
++#define stat _stat
++
++/* 
++ *	NT specific 
++ */ 
++#include <stdio.h> 
++ 
++/* 
++ *	random typedefs 
++ */ 
++#define HDIR        HANDLE 
++#define HFILE       HANDLE 
++#define PHFILE      PHANDLE 
++ 
++/* 
++ *	local functions 
++ */ 
++static char *getdirent(char *); 
++static void free_dircontents(struct _dircontents *); 
++ 
++static HDIR				FindHandle; 
++static WIN32_FIND_DATA	FileFindData; 
++ 
++static struct dirent dp; 
++ 
++DIR *opendirx(char *name, char *pattern) 
++{ 
++    struct stat statb; 
++    DIR *dirp; 
++    char c; 
++    char *s; 
++    struct _dircontents *dp; 
++    int len;
++    int unc;
++    char path[ OFS_MAXPATHNAME ]; 
++    register char *ip, *op;
++
++    for (ip = name, op = path; ; op++, ip++) {
++	*op = *ip;
++	if (*ip == '\0') {
++	    break;
++	}
++    }
++    len = ip - name;
++    if (len > 0) {
++	unc = ((path[0] == '\\' || path[0] == '/') &&
++	       (path[1] == '\\' || path[1] == '/'));
++	c = path[len - 1];
++	if (unc) {
++	    if (c != '\\' && c != '/') {
++		path[len] = '/';
++		len++;
++		path[len] ='\0';
++	    }
++	} else {
++	    if ((c == '\\' || c == '/') && (len > 1)) {
++		len--;
++		path[len] = '\0';
++ 
++		if (path[len - 1] == ':' ) {
++		    path[len] = '/'; len++;
++		    path[len] = '.'; len++;
++		    path[len] = '\0';
++		}
++	    } else if (c == ':' ) {
++		path[len] = '.';
++		len++;
++		path[len] ='\0';
++	    }
++	}
++    } else {
++	unc = 0;
++	path[0] = '.';
++	path[1] = '\0';
++	len = 1;
++    }
++ 
++    if (stat(path, &statb) < 0 || (statb.st_mode & S_IFMT) != S_IFDIR) {
++	return NULL; 
++    }
++
++    dirp = malloc(sizeof(DIR));
++    if (dirp == NULL) {
++	return dirp;
++    }
++ 
++    c = path[len - 1];
++    if (c == '.' ) {
++	if (len == 1) {
++	    len--;
++	} else {
++	    c = path[len - 2];
++	    if (c == '\\' || c == ':') {
++		len--;
++	    } else {
++		path[len] = '/';
++		len++;
++	    }
++	}
++    } else if (!unc && ((len != 1) || (c != '\\' && c != '/'))) {
++	path[len] = '/';
++	len++;
++    }
++    strcpy(path + len, pattern);
++ 
++    dirp -> dd_loc = 0; 
++    dirp -> dd_contents = dirp -> dd_cp = NULL; 
++ 
++    if ((s = getdirent(path)) == NULL) {
++	return dirp;
++    }
++ 
++    do 
++    { 
++	if (((dp = malloc(sizeof(struct _dircontents))) == NULL) || 
++	    ((dp -> _d_entry = malloc(strlen(s) + 1)) == NULL)      ) 
++	{ 
++	    if (dp) 
++		free(dp); 
++	    free_dircontents(dirp -> dd_contents); 
++ 
++	    return NULL; 
++	} 
++ 
++	if (dirp -> dd_contents) 
++	    dirp -> dd_cp = dirp -> dd_cp -> _d_next = dp; 
++	else 
++	    dirp -> dd_contents = dirp -> dd_cp = dp; 
++ 
++	strcpy(dp -> _d_entry, s); 
++	dp -> _d_next = NULL; 
++ 
++    } 
++    while ((s = getdirent(NULL)) != NULL); 
++ 
++    dirp -> dd_cp = dirp -> dd_contents; 
++    return dirp; 
++} 
++ 
++DIR *opendir(char *name)
++{
++  return opendirx(name, "*");
++} 
++
++void closedir(DIR * dirp) 
++{ 
++  free_dircontents(dirp -> dd_contents); 
++  free(dirp); 
++} 
++ 
++struct dirent *readdir(DIR * dirp) 
++{ 
++  /* static struct dirent dp; */ 
++  if (dirp -> dd_cp == NULL) 
++    return NULL; 
++ 
++  /*strcpy(dp.d_name,dirp->dd_cp->_d_entry); */ 
++ 
++  dp.d_name = dirp->dd_cp->_d_entry; 
++ 
++  dp.d_namlen = dp.d_reclen = 
++    strlen(dp.d_name); 
++ 
++  dp.d_ino = dirp->dd_loc+1; /* fake the inode */ 
++ 
++  dirp -> dd_cp = dirp -> dd_cp -> _d_next; 
++  dirp -> dd_loc++; 
++ 
++ 
++  return &dp; 
++} 
++ 
++void seekdir(DIR * dirp, long off) 
++{ 
++  long i = off; 
++  struct _dircontents *dp; 
++ 
++  if (off >= 0) 
++  { 
++    for (dp = dirp -> dd_contents; --i >= 0 && dp; dp = dp -> _d_next); 
++ 
++    dirp -> dd_loc = off - (i + 1); 
++    dirp -> dd_cp = dp; 
++  } 
++} 
++ 
++ 
++long telldir(DIR * dirp) 
++{ 
++  return dirp -> dd_loc; 
++} 
++ 
++static void free_dircontents(struct _dircontents * dp) 
++{ 
++  struct _dircontents *odp; 
++ 
++  while (dp) 
++  { 
++    if (dp -> _d_entry) 
++      free(dp -> _d_entry); 
++ 
++    dp = (odp = dp) -> _d_next; 
++    free(odp); 
++  } 
++} 
++/* end of "free_dircontents" */ 
++ 
++static char *getdirent(char *dir) 
++{ 
++    int got_dirent; 
++
++    if (dir != NULL) 
++    {				       /* get first entry */ 
++	if ((FindHandle = FindFirstFile( dir, &FileFindData )) 
++	    == (HDIR)0xffffffff) 
++	{ 
++	    return NULL; 
++	} 
++	got_dirent = 1;
++    } 
++    else				       /* get next entry */ 
++	got_dirent = FindNextFile( FindHandle, &FileFindData ); 
++ 
++    if (got_dirent) 
++	return FileFindData.cFileName; 
++    else 
++    { 
++	FindClose(FindHandle); 
++	return NULL; 
++    } 
++} 
++/* end of getdirent() */ 
++
++struct passwd * _cdecl
++getpwnam(char *name)
++{
++    return NULL;
++}
++
++struct passwd * _cdecl
++getpwuid(int uid)
++{
++    return NULL;
++}
++
++int
++getuid()
++{
++    return 0;
++}
++
++void _cdecl
++endpwent(void)
++{
++}
++
++/* #endif */
+diff -u -r --new-file ssh-1.2.14-clean/ntforkexec.c ssh-1.2.14.win32/ntforkexec.c
+--- ssh-1.2.14-clean/ntforkexec.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/ntforkexec.c	Thu Jul 17 23:20:41 1997
+@@ -0,0 +1,522 @@
++#include <windows.h>
++#include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
++#include <io.h>
++#include <fcntl.h>
++#include <process.h>
++#include <math.h>
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <errno.h>
++#include "dstring.h"
++
++static char *FindExec(char *);
++static int Directory(char *);
++
++static char *argv0_dir;
++
++static int WindowsNT = -1;
++
++/*
++ *----------------------------------------------------------------------
++ * FindExec --
++ *
++ *	Find <command> by going through the directories in the 'PATH' or
++ *	'Path' environment variable
++ *
++ * Results:
++ *	A fully qualified path to the executable.
++ *----------------------------------------------------------------------
++ */
++static char *
++FindExec(char *command)
++{
++    char *path = NULL;
++    char *newpath, *bp, *start, *dir;
++    char save;
++    int len, need, cmdlen, dirlen;
++    static int have = 0;
++    static char *exec = NULL;
++
++    /*
++     * Check for the case where the command name has some path. In
++     * this case we just check for possible extensions.
++     */
++    len = strlen(command);
++    if (len > 2) {
++	if (command[1] == ':' ||
++	    strchr(command, '/') != NULL || strchr(command, '\\') != NULL) {
++	    cmdlen = strlen(command);
++	    need = cmdlen + 5;
++	    if (need > have) {
++		if (exec) {
++		    free(exec);
++		}
++		exec = (char *) malloc(need);
++		if (exec == NULL) {
++		    return command;
++		}
++		have = need;
++	    }
++	    strcpy(exec, command);
++	    if (access(exec, 0) == 0) {
++		if (! Directory(exec)) {
++		    goto fixSlashes;
++		}
++	    }
++	    strcpy(&exec[cmdlen], ".exe");
++	    if (access(exec, 0) == 0) {
++		if (! Directory(exec)) {
++		    goto fixSlashes;
++		}
++	    }
++	    strcpy(&exec[cmdlen], ".bat");
++	    if (access(exec, 0) == 0) {
++		if (! Directory(exec)) {
++		    goto fixSlashes;
++		}
++	    }
++	    if (WindowsNT == 1) {
++		strcpy(&exec[cmdlen], ".cmd");
++		if (access(exec, 0) == 0) {
++		    if (! Directory(exec)) {
++			goto fixSlashes;
++		    }
++		}
++	    }
++	    strcpy(&exec[cmdlen], ".com");
++	    if (access(exec, 0) == 0) {
++		if (! Directory(exec)) {
++		    goto fixSlashes;
++		}
++	    }
++	    strcpy(&exec[cmdlen], ".tcl");
++	    if (access(exec, 0) == 0) {
++		if (! Directory(exec)) {
++		    goto fixSlashes;
++		}
++	    }
++	    return command;
++	}
++    }
++
++    path = getenv("PATH");
++    if (path == NULL) {
++	path = getenv("Path");
++	if (path == NULL) {
++	    return command;
++	}
++    }
++
++    len = (argv0_dir) ? strlen(argv0_dir) : 0;
++    newpath = malloc(len + strlen(path) + 2);
++    if (newpath == NULL) {
++	free(path);
++	return command;
++    }
++
++    if (len > 0) {
++	strcpy(newpath, argv0_dir);
++	newpath[len-1] = ';';
++    }
++    strcpy(&newpath[len], path);
++    path = newpath;
++    
++    /*
++     * the command has no path part so go looking through all the paths
++     * in the "Path" or "PATH" environment variable.
++     */
++    for (start = path, bp = start; *start != '\0'; start = bp) {
++	while(*bp != '\0' && *bp != ';') {
++	    bp++;
++	}
++	save = *bp;
++	*bp = '\0';
++	dirlen = strlen(start);
++	if (dirlen == 0) {
++	    dir = "./";
++	    dirlen = 2;
++	} else {
++	    dir = start;
++	}
++	cmdlen = strlen(command);
++	need = cmdlen + dirlen + 6;
++	if (need > have) {
++	    if (exec) {
++		free(exec);
++	    }
++	    exec = (char *) malloc(need);
++	    if (exec == NULL) {
++		free(path);
++		return command;
++	    }
++	    have = need;
++	}
++	strcpy(exec, dir);
++	if (dir[dirlen-1] != '/' && dir[dirlen-1] != '\\') {
++	    exec[dirlen] = '\\';
++	    dirlen++;
++	}
++	strcpy(&exec[dirlen], command);
++	if (access(exec, 0) == 0) {
++	    if (! Directory(exec)) {
++		goto fixSlashes;
++	    }
++	}
++	len = dirlen + cmdlen;
++	strcpy(&exec[len], ".exe");
++	if (access(exec, 0) == 0) {
++	    if (! Directory(exec)) {
++		goto fixSlashes;
++	    }
++	}
++	strcpy(&exec[len], ".bat");
++	if (access(exec, 0) == 0) {
++	    if (! Directory(exec)) {
++		goto fixSlashes;
++	    }
++	}
++	if (WindowsNT == 1) {
++	    strcpy(&exec[len], ".cmd");
++	    if (access(exec, 0) == 0) {
++		if (! Directory(exec)) {
++		    goto fixSlashes;
++		}
++	    }
++	}
++	strcpy(&exec[len], ".com");
++	if (access(exec, 0) == 0) {
++	    if (! Directory(exec)) {
++		goto fixSlashes;
++	    }
++	}
++	strcpy(&exec[len], ".tcl");
++	if (access(exec, 0) == 0) {
++	    if (! Directory(exec)) {
++		goto fixSlashes;
++	    }
++	}
++	*bp = save;
++	if (*bp) {
++	    bp++;
++	}
++    }
++    free(path);
++    return command;
++
++  fixSlashes:
++    if (path) {
++	free(path);
++    }
++    for (bp = exec; *bp != '\0' && *bp != ' '; bp++) {
++	if (*bp == '/') {
++	    *bp = '\\';
++	}
++    }
++    return exec;
++}
++
++/*    
++ *----------------------------------------------------------------------
++ *
++ * BuildCommandLine --
++ *
++ *	The command line arguments are stored in linePtr separated
++ *	by spaces, in a form that CreateProcess() understands.  Special 
++ *	characters in individual arguments from argv[] must be quoted 
++ *	when being stored in cmdLine.
++ *
++ * Results:
++ *	None.
++ *
++ * Side effects:
++ *	None.
++ *
++ *----------------------------------------------------------------------
++ */
++
++static void
++BuildCommandLine(argc, argv, linePtr)
++    int argc;			/* Number of arguments. */
++    char **argv;		/* Argument strings. */
++    Tcl_DString *linePtr;	/* Initialized Tcl_DString that receives the
++				 * command line. */
++{
++    char *start, *special;
++    int quote, i;
++
++    for (i = 0; i < argc; i++) {
++	if (i > 0) {
++	    Tcl_DStringAppend(linePtr, " ", 1);	
++	}
++
++	quote = 0;
++	for (start = argv[i]; *start != '\0'; start++) {
++	    if (isspace(*start)) {
++		quote = 1;
++		Tcl_DStringAppend(linePtr, "\"", 1);
++    		break;
++	    }
++	}
++
++	start = argv[i];	    
++	for (special = argv[i]; ; ) {
++	    if ((*special == '\\') && 
++		    (special[1] == '\\' || special[1] == '"')) {
++		Tcl_DStringAppend(linePtr, start, special - start);
++		start = special;
++		while (1) {
++		    special++;
++		    if (*special == '"') {
++			/* 
++			 * N backslashes followed a quote -> insert 
++			 * N * 2 + 1 backslashes then a quote.
++			 */
++
++			Tcl_DStringAppend(linePtr, start, special - start);
++			break;
++		    }
++		    if (*special != '\\') {
++			break;
++		    }
++		}
++		Tcl_DStringAppend(linePtr, start, special - start);
++		start = special;
++	    }
++	    if (*special == '"') {
++		Tcl_DStringAppend(linePtr, start, special - start);
++		Tcl_DStringAppend(linePtr, "\\\"", 2);
++		start = special + 1;
++	    }
++	    if (*special == '\0') {
++		break;
++	    }
++	    special++;
++	}
++	Tcl_DStringAppend(linePtr, start, special - start);
++	if (quote) {
++	    Tcl_DStringAppend(linePtr, "\"", 1);
++	}
++    }
++}
++
++/*
++ *----------------------------------------------------------------------
++ * forkexec --
++ * 
++ *	Execute a program. The program name is <execName> and the
++ *	arguments are in <argv>.   <fdstdin>, <fdstdout>, and <fdstderr>
++ *	are the file ids of the files to use for stdin,  stdout, and
++ *	stderr. <joinThisError> is 1 if stderr should be piped through
++ *	<fdstdout>.
++ *
++ *	This better process handling code came from the ts package by
++ *	Grant Munsey <grant@cognicon.com>
++ *	
++ *----------------------------------------------------------------------
++ */
++int
++forkexec(char *execName, int argc, char **argv,
++	 int fdstdin, int fdstdout, int fdstderr,
++	 int joinThisError)
++{
++    PROCESS_INFORMATION pi;
++    STARTUPINFO si;
++    DWORD err;
++    char *argstr;
++    int rslt = -1;
++    HANDLE hin = INVALID_HANDLE_VALUE;
++    HANDLE hout = INVALID_HANDLE_VALUE;
++    HANDLE herr = INVALID_HANDLE_VALUE;
++    HANDLE savestdout, savestdin, savestderr;
++    int newfdstdin = -1, newfdstdout = -1, newfdstderr = -1;
++    extern int errno;
++    char *ep, *sp;
++    int hasconsole;
++    Tcl_DString dString;
++    char **s;
++    
++    hasconsole = 1;
++    
++    if (WindowsNT == -1) {
++	OSVERSIONINFO version;
++	version.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
++	if (GetVersionEx(&version)) {
++	    WindowsNT = (version.dwPlatformId == VER_PLATFORM_WIN32_NT) ? 1 : 0;
++	} else {
++	    WindowsNT = 0;
++	}
++    }
++
++    /*
++     * use DuplicateHandle to get inheritable handles for each of the files
++     * that is not already ok
++     */
++    if (fdstdin != -1) {
++	if (fdstdin > 2) {
++	    newfdstdin = dup(fdstdin);
++	} else {
++	    newfdstdin = fdstdin;
++	}
++	hin = (HANDLE)_get_osfhandle(newfdstdin);
++	savestdin = GetStdHandle(STD_INPUT_HANDLE);
++	SetStdHandle(STD_INPUT_HANDLE, hin);
++    }
++
++    if (fdstdout != -1) {
++	if (fdstdout > 2) {
++	    newfdstdout = dup(fdstdout);
++	} else {
++	    newfdstdout = fdstdout;
++	}
++	hout = (HANDLE)_get_osfhandle(newfdstdout);
++	savestdout = GetStdHandle(STD_OUTPUT_HANDLE);
++	SetStdHandle(STD_OUTPUT_HANDLE, hout);
++    }
++    
++    if (joinThisError) {
++	herr = (HANDLE)_get_osfhandle(newfdstdout);
++	savestderr = GetStdHandle(STD_ERROR_HANDLE);
++	SetStdHandle(STD_ERROR_HANDLE, herr);
++    }
++    
++    if (!joinThisError && fdstderr != -1) {
++	if (fdstderr > 2) {
++	    newfdstderr = dup(fdstderr);
++	} else {
++	    newfdstderr = fdstderr;
++	}
++	herr = (HANDLE)_get_osfhandle(newfdstderr);
++	savestderr = GetStdHandle(STD_ERROR_HANDLE);
++	SetStdHandle(STD_ERROR_HANDLE, herr);
++    }
++    
++    memset((void *) &si, 0, sizeof(STARTUPINFO));
++    si.cb = sizeof(STARTUPINFO);
++    si.dwFlags = STARTF_USESTDHANDLES;
++    si.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
++    si.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
++    si.hStdError = GetStdHandle(STD_ERROR_HANDLE);
++    
++    /*
++     * get the actual fully qualified path name to the executable
++     */
++    ep = FindExec(execName);
++
++    /*
++     * If the executable is '.bat' or '.cmd' file then we must make sure
++     * the path seperator character in the passed argument string for the
++     * first parameter is '\'
++     */
++
++    Tcl_DStringInit(&dString);
++    Tcl_DStringAppend(&dString, execName, -1);
++    argstr = Tcl_DStringValue(&dString);
++    /*
++     * Change all occurrences of '/' to '\\' in program file name
++     * and command name since there seem to be some programs that
++     * aren't happy any other way.
++     */
++    for (sp = argstr; *sp != '\0'; sp++) {
++	if (*sp == '/') {
++	    *sp = '\\';
++	}
++    }
++
++    if (argc > 1) {
++	Tcl_DStringAppend(&dString, " ", 1);
++	BuildCommandLine(argc-1, &argv[1], &dString);
++    }
++
++    argstr = Tcl_DStringValue(&dString);
++
++    errno = 0;
++    if (!CreateProcess(ep, argstr, NULL, NULL, TRUE /* bInheritHandles */,
++		       (hasconsole ? CREATE_NEW_PROCESS_GROUP:
++			DETACHED_PROCESS),
++		       NULL, NULL, &si, &pi))
++    {
++	err = GetLastError();
++	if (err == ERROR_ACCESS_DENIED) {
++	    errno = EACCES;
++	} else if (err == ERROR_BAD_EXE_FORMAT) {
++	    errno = ENOEXEC;
++	} else {
++	    errno = ENOENT;
++	}
++	Tcl_DStringFree(&dString);
++	Tcl_DStringInit(&dString);
++	if (WindowsNT) {
++	    Tcl_DStringAppend(&dString, "cmd.exe /c ", 10);
++	} else {
++	    Tcl_DStringAppend(&dString, "command.com /c ", 14);
++	}
++	Tcl_DStringAppend(&dString, " ", 1);
++	Tcl_DStringAppend(&dString, ep, -1);
++
++	for (s = &argv[1]; *s != NULL; s++) {
++	    Tcl_DStringAppend(&dString, " ", 1);
++	    Tcl_DStringAppend(&dString, *s, -1);
++	}
++	if (WindowsNT) {
++	    ep = FindExec("cmd.exe");
++	} else {
++	    ep = FindExec("command.com");
++	}
++	if (CreateProcess(ep, argstr, NULL, NULL, TRUE /* bInheritHandles */,
++			  (hasconsole ? CREATE_NEW_PROCESS_GROUP:
++			   DETACHED_PROCESS),
++			  NULL, NULL, &si, &pi))
++	{
++	    errno = 0;
++	}
++    }
++    if (errno == 0) {
++	rslt = (int)pi.dwProcessId;
++	CloseHandle(pi.hProcess);
++	CloseHandle(pi.hThread);
++    }
++    Tcl_DStringFree(&dString);
++
++    if (hin != INVALID_HANDLE_VALUE) {
++	SetStdHandle(STD_INPUT_HANDLE, savestdin);
++	if (newfdstdin != fdstdin) {
++	    close(newfdstdin);
++	}
++    }
++    if (hout != INVALID_HANDLE_VALUE) {
++	SetStdHandle(STD_OUTPUT_HANDLE, savestdout);
++	if (newfdstdout != fdstdout) {
++	    close(newfdstdout);
++	}
++    }
++    if (herr != INVALID_HANDLE_VALUE) {
++	SetStdHandle(STD_ERROR_HANDLE, savestderr);
++	if (newfdstderr != fdstderr) {
++	    close(newfdstderr);
++	}
++    }
++	
++    return rslt;
++}
++
++void
++forkexec_setargv0_dir(char *largv0_dir)
++{
++    argv0_dir = largv0_dir;
++}
++
++static int
++Directory(char *path)
++{
++    struct stat statBuf;
++
++    if (stat(path, &statBuf) == -1) {
++	return 0;
++    }
++    if (_S_IFDIR & statBuf.st_mode) {
++	return 1;
++    }
++    return 0;
++}
+diff -u -r --new-file ssh-1.2.14-clean/ntpipe.c ssh-1.2.14.win32/ntpipe.c
+--- ssh-1.2.14-clean/ntpipe.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/ntpipe.c	Thu Jul 17 02:15:23 1997
+@@ -0,0 +1,8 @@
++#include <io.h>
++#include <fcntl.h>
++
++int
++pipe(int *phandles)
++{
++    return _pipe(phandles, 8192, O_NOINHERIT);
++}
+diff -u -r --new-file ssh-1.2.14-clean/opt ssh-1.2.14.win32/opt
+--- ssh-1.2.14-clean/opt	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/opt	Thu Jul 17 02:57:33 1997
+@@ -0,0 +1 @@
++ÐÏà¡±
+\ No newline at end of file
+diff -u -r --new-file ssh-1.2.14-clean/packet.c ssh-1.2.14.win32/packet.c
+--- ssh-1.2.14-clean/packet.c	Thu Jun 06 04:39:33 1996
++++ ssh-1.2.14.win32/packet.c	Tue Jul 15 07:50:21 1997
+@@ -59,8 +59,8 @@
+    the other side.  connection_in is used for reading; connection_out
+    for writing.  These can be the same descriptor, in which case it is
+    assumed to be a socket. */
+-static int connection_in = -1;
+-static int connection_out = -1;
++static SOCKET connection_in = SOCKET_ERROR;
++static SOCKET connection_out = SOCKET_ERROR;
+ 
+ /* Cipher type.  This value is only used to determine whether to pad the
+    packets with zeroes or random data. */
+@@ -138,22 +138,36 @@
+ void packet_set_nonblocking()
+ {
+   /* Set the socket into non-blocking mode. */
+-#if defined(O_NONBLOCK) && !defined(O_NONBLOCK_BROKEN)
++#if defined(WIN32)
++  {
++    int val = 1;
++    if (ioctlsocket(connection_in, FIONBIO, &val) == SOCKET_ERROR) {
++      error("ioctlsocket FIONBIO: %d\n", GetLastError());
++    }
++  }
++#elif defined(O_NONBLOCK) && !defined(O_NONBLOCK_BROKEN)
+   if (fcntl(connection_in, F_SETFL, O_NONBLOCK) < 0)
+-    error("fcntl O_NONBLOCK: %.100s", strerror(errno));
++    error("fcntl O_NONBLOCK: %.100s", sock_strerror(sock_lasterror()));
+ #else /* O_NONBLOCK && !O_NONBLOCK_BROKEN */
+   if (fcntl(connection_in, F_SETFL, O_NDELAY) < 0)
+-    error("fcntl O_NDELAY: %.100s", strerror(errno));
++    error("fcntl O_NDELAY: %.100s", sock_strerror(sock_lasterror()));
+ #endif /* O_NONBLOCK && !O_NONBLOCK_BROKEN */
+ 
+   if (connection_out != connection_in)
+     {
+-#if defined(O_NONBLOCK) && !defined(O_NONBLOCK_BROKEN)
++#if defined(WIN32)
++  {
++    int val = 1;
++    if (ioctlsocket(connection_out, FIONBIO, &val) == SOCKET_ERROR) {
++      error("ioctlsocket FIONBIO: %d\n", GetLastError());
++    }
++  }
++#elif defined(O_NONBLOCK) && !defined(O_NONBLOCK_BROKEN)
+       if (fcntl(connection_out, F_SETFL, O_NONBLOCK) < 0)
+-	error("fcntl O_NONBLOCK: %.100s", strerror(errno));
++	error("fcntl O_NONBLOCK: %.100s", sock_strerror(sock_lasterror()));
+ #else /* O_NONBLOCK && !O_NONBLOCK_BROKEN */  
+       if (fcntl(connection_out, F_SETFL, O_NDELAY) < 0)
+-	error("fcntl O_NDELAY: %.100s", strerror(errno));
++	error("fcntl O_NDELAY: %.100s", sock_strerror(sock_lasterror()));
+ #endif /* O_NONBLOCK && !O_NONBLOCK_BROKEN */
+     }
+ }
+@@ -414,16 +428,16 @@
+       /* Wait for some data to arrive. */
+       select(connection_in + 1, &set, NULL, NULL, NULL);
+       /* Read data from the socket. */
+-      len = read(connection_in, buf, sizeof(buf));
++      len = recv(connection_in, buf, sizeof(buf), 0);
+       if (len == 0)
+ 	fatal_severity(SYSLOG_SEVERITY_INFO,
+ 		       "Connection closed by remote host.");
+       if (len < 0)
+ 	{
+-	  if (errno == EAGAIN)
++	  if (sock_lasterror() == EAGAIN)
+ 	    continue;
+ 	  fatal_severity(SYSLOG_SEVERITY_INFO,
+-			 "Read from socket failed: %.100s", strerror(errno));
++			 "Read from socket failed: %.100s", sock_strerror(sock_lasterror()));
+ 	}
+       /* Append it to the buffer. */
+       packet_process_incoming(buf, len);
+@@ -647,13 +661,13 @@
+   int len = buffer_len(&output);
+   if (len > 0)
+     {
+-      len = write(connection_out, buffer_ptr(&output), len);
++      len = send(connection_out, buffer_ptr(&output), len, 0);
+       if (len <= 0)
+-	if (errno == EAGAIN)
++	if (sock_lasterror() == EAGAIN || sock_lasterror() == WSAEWOULDBLOCK)
+ 	  return;
+         else
+ 	  fatal_severity(SYSLOG_SEVERITY_INFO,
+-			 "Write failed: %.100s", strerror(errno));
++			 "Write failed: %.100s", sock_strerror(sock_lasterror()));
+       buffer_consume(&output, len);
+     }
+ }
+@@ -710,7 +724,8 @@
+       /* Set keepalives if requested. */
+       if (setsockopt(connection_in, SOL_SOCKET, SO_KEEPALIVE, (void *)&on, 
+ 		     sizeof(on)) < 0)
+-	error("setsockopt SO_KEEPALIVE: %.100s", strerror(errno));
++	error("setsockopt SO_KEEPALIVE: %.100s",
++	      sock_strerror(sock_lasterror()));
+     }
+ 
+   if (interactive)
+@@ -721,11 +736,11 @@
+       int lowdelay = IPTOS_LOWDELAY;
+       if (setsockopt(connection_in, IPPROTO_IP, IP_TOS, (void *)&lowdelay, 
+ 		     sizeof(lowdelay)) < 0)
+-	error("setsockopt IPTOS_LOWDELAY: %.100s", strerror(errno));
++	error("setsockopt IPTOS_LOWDELAY: %.100s", sock_strerror(sock_lasterror()));
+ #endif /* IPTOS_LOWDELAY */
+       if (setsockopt(connection_in, IPPROTO_TCP, TCP_NODELAY, (void *)&on, 
+ 		     sizeof(on)) < 0)
+-	error("setsockopt TCP_NODELAY: %.100s", strerror(errno));
++	error("setsockopt TCP_NODELAY: %.100s", sock_strerror(sock_lasterror()));
+     }
+   else
+     {
+@@ -735,11 +750,11 @@
+       int throughput = IPTOS_THROUGHPUT;
+       if (setsockopt(connection_in, IPPROTO_IP, IP_TOS, (void *)&throughput, 
+ 		     sizeof(throughput)) < 0)
+-	error("setsockopt IPTOS_THROUGHPUT: %.100s", strerror(errno));
++	error("setsockopt IPTOS_THROUGHPUT: %.100s", sock_strerror(sock_lasterror()));
+ #endif /* IPTOS_THROUGHPUT */
+       if (setsockopt(connection_in, IPPROTO_TCP, TCP_NODELAY, (void *)&off, 
+ 		     sizeof(off)) < 0)
+-	error("setsockopt TCP_NODELAY: %.100s", strerror(errno));
++	error("setsockopt TCP_NODELAY: %.100s", sock_strerror(sock_lasterror()));
+     }
+ }
+ 
+diff -u -r --new-file ssh-1.2.14-clean/randoms.c ssh-1.2.14.win32/randoms.c
+--- ssh-1.2.14-clean/randoms.c	Thu Jun 06 04:39:33 1996
++++ ssh-1.2.14.win32/randoms.c	Tue Jul 15 04:52:21 1997
+@@ -121,6 +121,7 @@
+   /* Record the start time. */
+   start_time = time(NULL);
+ 
++#ifndef WIN32
+   /* Run these first so that other statistics accumulate from these.  We stop
+      collecting more noise when we have spent 30 seconds real time; on a large
+      system a single executed command is probably enough, whereas on small
+@@ -138,6 +139,7 @@
+     random_get_noise_from_command(state, uid, "netstat -an 2>/dev/null");
+   if (time(NULL) - start_time < 30)
+     random_get_noise_from_command(state, uid, "netstat -in 2>/dev/null");
++#endif
+ 
+   /* Get other easily available noise. */
+   random_acquire_light_environmental_noise(state);
+@@ -155,6 +157,7 @@
+      them not revealed to callers). */ 
+   random_stir(state);
+ 
++#ifndef WIN32
+   /* About every five minutes, mix in some noise from /dev/random. */
+   if (time(NULL) - state->last_dev_random_usage > 5 * 60)
+     {
+@@ -177,6 +180,7 @@
+ 	    random_add_noise(state, buf, len);
+ 	}
+     }
++#endif /* !WIN32 */
+ 
+   /* Get miscellaneous noise from various system parameters and statistics. */
+   random_xor_noise(state,
+@@ -230,9 +234,11 @@
+   }
+ #endif /* HAVE_GETRUSAGE */
+   random_xor_noise(state, 11, (word32)getpid());
++#ifndef WIN32
+   random_xor_noise(state, 12, (word32)getppid());
+   random_xor_noise(state, 10, (word32)getuid());
+   random_xor_noise(state, 10, (word32)(getgid() << 16));
++#endif
+ #ifdef _POSIX_CHILD_MAX
+   random_xor_noise(state, 13, (word32)(_POSIX_CHILD_MAX << 16));
+ #endif /* _POSIX_CHILD_MAX */
+@@ -243,6 +249,7 @@
+   random_stir(state);
+ }
+ 
++#ifndef WIN32
+ /* Executes the given command, and processes its output as noise.  The 
+    command will be run via userfile with the given uid. */
+ 
+@@ -260,6 +267,7 @@
+   userfile_pclose(uf);
+   memset(line, 0, sizeof(line));
+ }
++#endif /* !WIN32 */
+ 
+ /* Adds the contents of the buffer as noise. */
+ 
+diff -u -r --new-file ssh-1.2.14-clean/readpass.c ssh-1.2.14.win32/readpass.c
+--- ssh-1.2.14-clean/readpass.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/readpass.c	Tue Jul 15 08:23:05 1997
+@@ -53,10 +53,12 @@
+ #ifdef USING_SGTTY
+   ioctl(fileno(stdin), TIOCSETP, &saved_tio);
+ #endif
++#ifndef WIN32
+   /* Restore the old signal handler. */
+   signal(sig, old_handler);
+   /* Resend the signal, with the old handler. */
+   kill(getpid(), sig);
++#endif
+ }
+ 
+ /* Reads a passphrase from /dev/tty with echo turned off.  Returns the 
+@@ -66,6 +68,54 @@
+ 
+ char *read_passphrase(uid_t uid, const char *prompt, int from_stdin)
+ {
++#ifdef WIN32
++  char buf[1024], *cp;
++  HANDLE hIn;
++  DWORD dwMode;
++  LONG err;
++  DWORD n, dwCount;
++
++  fputs(prompt, stderr);
++  fflush(stderr);
++
++  hIn = CreateFile("CONIN$", GENERIC_READ|GENERIC_WRITE, FILE_SHARE_READ,
++		   NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
++  if (hIn == INVALID_HANDLE_VALUE) {
++    CloseHandle(hIn);
++    return NULL;
++  }
++  if (! GetConsoleMode(hIn, &dwMode)) {
++    err = GetLastError();
++    return NULL;
++  }
++  if (! SetConsoleMode(hIn, dwMode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT))) {
++    err = GetLastError();
++    return NULL;
++  }
++
++  n = 0;
++  while (1) { 
++    if (! ReadFile(hIn, &buf[n], 1, &dwCount, NULL)) 
++      break; 
++    if (buf[n] == '\r' || buf[n] == '\n') {
++      buf[n] = 0;
++      break;
++    }
++    n++;
++  } 
++
++  SetConsoleMode(hIn, dwMode);
++
++  /* Allocate a copy of the passphrase. */
++  cp = xstrdup(buf);
++  /* Clear the buffer so we don\'t leave copies of the passphrase laying
++     around. */
++  memset(buf, 0, sizeof(buf));
++  /* Print a newline since the prompt probably didn\'t have one. */
++  fprintf(stderr, "\n");
++
++  return cp;
++#else
+   char buf[1024], *cp;
+ #ifdef USING_TERMIOS
+   struct termios tio;
+@@ -187,4 +237,5 @@
+   if (f != stdin)
+     fclose(f);
+   return cp;
++#endif
+ }
+diff -u -r --new-file ssh-1.2.14-clean/scp.c ssh-1.2.14.win32/scp.c
+--- ssh-1.2.14-clean/scp.c	Thu Jun 06 04:39:29 1996
++++ ssh-1.2.14.win32/scp.c	Fri Jul 18 00:56:15 1997
+@@ -87,6 +87,11 @@
+ #include "includes.h"
+ #include "ssh.h"
+ #include "xmalloc.h"
++#ifdef WIN32
++#include "getopt.h"
++extern int forkexec(char *execName, int argc, char **argv, int fdstdin,
++		    int fdstdout, int fdstderr, int joinThisError);
++#endif
+ #ifdef HAVE_UTIME_H
+ #include <utime.h>
+ #ifdef _NEXT_SOURCE
+@@ -162,19 +167,13 @@
+   close(reserved[1]);
+ 
+   /* For a child to execute the command on the remote host using ssh. */
++#ifndef WIN32
+   if (fork() == 0) 
++#endif
+     {
+       char *args[100];
+       unsigned int i;
+ 
+-      /* Child. */
+-      close(pin[1]);
+-      close(pout[0]);
+-      dup2(pin[0], 0);
+-      dup2(pout[1], 1);
+-      close(pin[0]);
+-      close(pout[1]);
+-
+       i = 0;
+       args[i++] = SSH_PROGRAM;
+       args[i++] = "-x";
+@@ -210,9 +209,25 @@
+       args[i++] = cmd;
+       args[i++] = NULL;
+ 
++#ifdef WIN32
++      if (forkexec(SSH_PROGRAM, i-1, args, pin[0], pout[1], -1, 0) == -1) {
++	perror(SSH_PROGRAM);
++      }
++      setmode(pin[1], O_BINARY);
++      setmode(pout[0], O_BINARY);
++#else
++      /* Child. */
++      close(pin[1]);
++      close(pout[0]);
++      dup2(pin[0], 0);
++      dup2(pout[1], 1);
++      close(pin[0]);
++      close(pout[1]);
++
+       execvp(SSH_PROGRAM, args);
+       perror(SSH_PROGRAM);
+       exit(1);
++#endif
+     }
+   /* Parent.  Close the other side, and return the local side. */
+   close(pin[0]);
+@@ -253,7 +268,7 @@
+ 
+ /* Stuff from BSD rcp.c continues. */
+ 
+-struct passwd *pwd;
++char *pw_name;
+ uid_t	userid;
+ int errs, remin, remout;
+ int pflag, iamremote, iamrecursive, targetshouldbedirectory;
+@@ -269,6 +284,73 @@
+ void	 toremote(char *, int, char *[]);
+ void	 usage(void);
+ 
++#ifdef WIN32
++#ifndef MAXPATHLEN
++#   ifdef PATH_MAX
++#       define MAXPATHLEN PATH_MAX
++#   else
++#       define MAXPATHLEN 2048
++#   endif
++#endif
++
++void
++save_command_dir(argc, argv)
++     int argc;
++     char *argv[];
++{
++    int i, j, len;
++    char c, save;
++    char currdir[MAXPATHLEN+1];
++    static char argv0_dir[MAXPATHLEN+1];
++    extern void forkexec_setargv0_dir(char *);
++
++    /* Extract the directory from argv[0] */
++    len = strlen(argv[0]);
++    for (i = len; i >= 0; i--) {
++	c = argv[0][i];
++	if (c == '/') {
++	    break;
++	}
++    }
++    i++;
++    if (i == 0) {
++	if (len >= 3 && argv[0][1] == ':') {
++	    i = 2;
++	}
++    }
++
++    if (i > 0) {
++	save = argv[0][i];
++	argv[0][i] = '\0';
++
++	if (getcwd(currdir, MAXPATHLEN+1) == NULL) {
++	    fprintf(stderr, "Unable to get working directory.");
++	    exit(1);
++	}
++	if (chdir(argv[0]) == -1) {
++	    fprintf(stderr, "Unable to cd to %s\n", argv[0]);
++	    exit(1);
++	}
++	if (getcwd(argv0_dir, MAXPATHLEN+1) == NULL) {
++	    fprintf(stderr, "Unable to get working directory.");
++	    exit(1);
++	}
++	if (chdir(currdir) == -1) {
++	    fprintf(stderr, "Unable to cd to %s\n", currdir);
++	    exit(1);
++	}
++	argv[0][i] = save;
++	len = strlen(argv0_dir);
++	argv0_dir[len] = '/';
++	argv0_dir[len+1] = '\0';
++    } else {
++	argv0_dir[0] = '\0';
++    }
++
++    forkexec_setargv0_dir(argv0_dir);
++}
++#endif /* WIN32 */
++
+ int
+ main(argc, argv)
+ 	int argc;
+@@ -279,6 +361,10 @@
+ 	extern char *optarg;
+ 	extern int optind;
+ 
++#ifdef WIN32
++	save_command_dir(argc, argv);
++#endif
++
+ 	fflag = tflag = 0;
+ 	while ((ch = getopt(argc, argv, "dfprtvBCc:i:P:")) != EOF)
+ 		switch(ch) {			/* User-visible flags. */
+@@ -325,8 +411,22 @@
+ 	argc -= optind;
+ 	argv += optind;
+ 
+-	if ((pwd = getpwuid(userid = getuid())) == NULL)
+-		fatal("unknown user %d", (int)userid);
++#ifdef WIN32
++	{
++		char buf[1024];
++		DWORD size;
++		size = sizeof(buf);
++		GetUserName(buf, &size);
++		pw_name = xstrdup(buf);
++	}
++#else
++	{
++		struct passwd *pwd;
++		if ((pwd = getpwuid(userid = getuid())) == NULL)
++			fatal("unknown user %d", (int)userid);
++		pw_name = pwd->pw_name;
++	}
++#endif
+ 
+ 	remin = STDIN_FILENO;
+ 	remout = STDOUT_FILENO;
+@@ -353,7 +453,9 @@
+ 	    iamrecursive ? " -r" : "", pflag ? " -p" : "",
+ 	    targetshouldbedirectory ? " -d" : "");
+ 
++#ifdef SIGPIPE
+ 	(void)signal(SIGPIPE, lostconn);
++#endif
+ 
+ 	if ((targ = colon(argv[argc - 1])))	/* Dest is remote host. */
+ 		toremote(targ, argc, argv);
+@@ -362,7 +464,7 @@
+ 		if (targetshouldbedirectory)
+ 			verifydir(argv[argc - 1]);
+ 	}
+-	exit(errs != 0);
++	return(errs != 0);
+ }
+ 
+ void
+@@ -405,7 +507,7 @@
+ 				*host++ = 0;
+ 				suser = argv[i];
+ 				if (*suser == '\0')
+-					suser = pwd->pw_name;
++					suser = pw_name;
+ 				else if (!okname(suser))
+ 					continue;
+ 				(void)sprintf(bp, 
+@@ -476,7 +578,7 @@
+ 			*host++ = 0;
+ 			suser = argv[i];
+ 			if (*suser == '\0')
+-				suser = pwd->pw_name;
++				suser = pw_name;
+ 			else if (!okname(suser))
+ 				continue;
+ 		}
+@@ -506,10 +608,11 @@
+ 	off_t i;
+ 	int amt, fd, haderr, indx, result;
+ 	char *last, *name, buf[2048];
++	int len;
+ 
+ 	for (indx = 0; indx < argc; ++indx) {
+                 name = argv[indx];
+-		if ((fd = open(name, O_RDONLY, 0)) < 0)
++		if ((fd = open(name, O_RDONLY|O_BINARY, 0)) < 0)
+ 			goto syserr;
+ 		if (fstat(fd, &stb) < 0) {
+ syserr:			run_err("%s: %s", name, strerror(errno));
+@@ -537,24 +640,30 @@
+ 			 * Make it compatible with possible future
+ 			 * versions expecting microseconds.
+ 			 */
+-			(void)sprintf(buf, "T%lu 0 %lu 0\n",
++			(void)sprintf(buf, "T%lu 0 %lu 0",
+ 				      (unsigned long)stb.st_mtime, 
+ 				      (unsigned long)stb.st_atime);
+-			(void)write(remout, buf, strlen(buf));
++			len = strlen(buf);
++			buf[len++] = '\n';
++			buf[len] = 0;
++			(void)write(remout, buf, len);
+ 			if (response() < 0)
+ 				goto next;
+ 		}
+ #define	FILEMODEMASK	(S_ISUID|S_ISGID|S_IRWXU|S_IRWXG|S_IRWXO)
+-		(void)sprintf(buf, "C%04o %lu %s\n",
++		(void)sprintf(buf, "C%04o %lu %s",
+ 			      (unsigned int)(stb.st_mode & FILEMODEMASK), 
+ 			      (unsigned long)stb.st_size, 
+ 			      last);
++		len = strlen(buf);
++		buf[len++] = '\n';
++		buf[len] = 0;
+ 	        if (verbose)
+ 		  {
+ 		    fprintf(stderr, "Sending file modes: %s", buf);
+ 		    fflush(stderr);
+ 		  }
+-		(void)write(remout, buf, strlen(buf));
++		(void)write(remout, buf, len);
+ 		if (response() < 0)
+ 			goto next;
+ 		if ((bp = allocbuf(&buffer, fd, 2048)) == NULL) {
+@@ -598,6 +707,7 @@
+ 	DIR *dirp;
+ 	struct dirent *dp;
+ 	char *last, *vect[1], path[1100];
++	int len;
+ 
+ 	if (!(dirp = opendir(name))) {
+ 		run_err("%s: %s", name, strerror(errno));
+@@ -609,18 +719,24 @@
+ 	else
+ 		last++;
+ 	if (pflag) {
+-		(void)sprintf(path, "T%lu 0 %lu 0\n",
++		(void)sprintf(path, "T%lu 0 %lu 0",
+ 			      (unsigned long)statp->st_mtime, 
+ 			      (unsigned long)statp->st_atime);
+-		(void)write(remout, path, strlen(path));
++		len = strlen(path);
++		path[len++] = '\n';
++		path[len] = 0;
++		(void)write(remout, path, len);
+ 		if (response() < 0) {
+ 			closedir(dirp);
+ 			return;
+ 		}
+ 	}
+ 	(void)sprintf(path, 
+-	    "D%04o %d %.1024s\n", (unsigned int)(statp->st_mode & FILEMODEMASK),
++	    "D%04o %d %.1024s", (unsigned int)(statp->st_mode & FILEMODEMASK),
+ 		      0, last);
++	len = strlen(path);
++	path[len++] = '\n';
++	path[len] = 0;
+   	if (verbose)
+ 	  fprintf(stderr, "Entering directory: %s", path);
+ 	(void)write(remout, path, strlen(path));
+@@ -803,9 +919,9 @@
+ #ifdef HAVE_FTRUNCATE
+ 	        /* Don't use O_TRUNC so the file doesn't get corrupted if
+ 		   copying on itself. */
+-		ofd = open(np, O_WRONLY|O_CREAT, mode);
++		ofd = open(np, O_WRONLY|O_CREAT|O_BINARY, mode);
+ #else /* HAVE_FTRUNCATE */
+-		ofd = open(np, O_WRONLY|O_CREAT|O_TRUNC, mode);
++		ofd = open(np, O_WRONLY|O_CREAT|O_TRUNC|O_BINARY, mode);
+ #endif /* HAVE_FTRUNCATE */
+ 		if (ofd < 0) {
+ bad:			run_err("%s: %s", np, strerror(errno));
+@@ -951,12 +1067,12 @@
+ 	va_start(ap, fmt);
+ 
+ 	++errs;
+-	if (fp == NULL && !(fp = fdopen(remout, "w")))
++	if (fp == NULL && !(fp = fdopen(remout, "wb")))
+ 		return;
+ 	(void)fprintf(fp, "%c", 0x01);
+ 	(void)fprintf(fp, "scp: ");
+ 	(void)vfprintf(fp, fmt, ap);
+-	(void)fprintf(fp, "\n");
++	(void)fputc('\n', fp);
+ 	(void)fflush(fp);
+ 
+ 	if (!iamremote)
+diff -u -r --new-file ssh-1.2.14-clean/signals.c ssh-1.2.14.win32/signals.c
+--- ssh-1.2.14-clean/signals.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/signals.c	Tue Jul 15 03:09:35 1997
+@@ -54,6 +54,7 @@
+   for (sig = 1; sig <= NSIG; sig++)
+     switch (sig)
+       {
++#ifndef WIN32
+       case SIGSTOP:
+       case SIGTSTP:
+       case SIGCONT:
+@@ -72,6 +73,7 @@
+ #endif
+ 	signal(sig, SIG_DFL);
+ 	break;
++#endif
+       default:
+ 	signal(sig, signal_handler);
+ 	break;
+diff -u -r --new-file ssh-1.2.14-clean/ssh-keygen.c ssh-1.2.14.win32/ssh-keygen.c
+--- ssh-1.2.14-clean/ssh-keygen.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/ssh-keygen.c	Mon Jul 21 03:37:59 1997
+@@ -83,7 +83,7 @@
+ /* Perform changing a passphrase.  The argument is the passwd structure
+    for the current user. */
+ 
+-void do_change_passphrase(struct passwd *pw)
++void do_change_passphrase(char *pw_dir)
+ {
+   char buf[1024], *comment;
+   RSAPrivateKey private_key;
+@@ -106,7 +106,7 @@
+       if (strchr(buf, '\n'))
+ 	*strchr(buf, '\n') = 0;
+       if (strcmp(buf, "") == 0)
+-	sprintf(buf, "%s/%s", pw->pw_dir, SSH_CLIENT_IDENTITY);
++	sprintf(buf, "%s/%s", pw_dir, SSH_CLIENT_IDENTITY);
+     }
+ 
+   /* Check if the file exists. */
+@@ -203,7 +203,7 @@
+ 
+ /* Change the comment of a private key file. */
+ 
+-void do_change_comment(struct passwd *pw)
++void do_change_comment(char *pw_dir)
+ {
+   char buf[1024], new_comment[1024], *comment;
+   RSAPrivateKey private_key;
+@@ -227,7 +227,7 @@
+       if (strchr(buf, '\n'))
+ 	*strchr(buf, '\n') = 0;
+       if (strcmp(buf, "") == 0)
+-	sprintf(buf, "%s/%s", pw->pw_dir, SSH_CLIENT_IDENTITY);
++	sprintf(buf, "%s/%s", pw_dir, SSH_CLIENT_IDENTITY);
+     }
+ 
+   /* Check if the file exists. */
+@@ -336,7 +336,7 @@
+ int main(int ac, char **av)
+ {
+   char buf[16384], buf2[1024], *passphrase1, *passphrase2;
+-  struct passwd *pw;
++  char *pw_dir, *pw_name;
+   int opt;
+   struct stat st;
+   FILE *f;
+@@ -348,16 +348,32 @@
+   extern int optind;
+   extern char *optarg;
+ 
++#ifdef WIN32
++  {
++    char buf[1024];
++    DWORD size;
++    size = sizeof(buf);
++    GetUserName(buf, &size);
++    pw_dir = getenv("HOME");
++    pw_name = xstrdup(buf);
++  }
++#else
+   /* Get user\'s passwd structure.  We need this for the home directory. */
+-  pw = getpwuid(getuid());
+-  if (!pw)
+-    {
+-      printf("You don't exist, go away!\n");
+-      exit(1);
+-    }
++  {
++    struct passwd *pw;
++    pw = getpwuid(getuid());
++    if (!pw)
++      {
++	printf("You don't exist, go away!\n");
++	exit(1);
++      }
++    pw_dir = pw->pw_dir;
++    pw_name = pw->pw_name;
++  }
++#endif
+ 
+   /* Create ~/.ssh directory if it doesn\'t already exist. */
+-  sprintf(buf, "%s/%s", pw->pw_dir, SSH_USER_DIR);
++  sprintf(buf, "%s/%s", pw_dir, SSH_USER_DIR);
+   if (stat(buf, &st) < 0)
+     if (mkdir(buf, 0755) < 0)
+       error("Could not create directory '%s'.", buf);
+@@ -421,17 +437,17 @@
+   /* If the user requested to change the passphrase, do it now.  This
+      function never returns. */
+   if (change_passphrase)
+-    do_change_passphrase(pw);
++    do_change_passphrase(pw_dir);
+ 
+   /* If the user requested to change the comment, do it now.  This function
+      never returns. */
+   if (change_comment)
+-    do_change_comment(pw);
++    do_change_comment(pw_dir);
+ 
+   /* Initialize random number generator.  This may take a while if the
+      user has no seed file, so display a message to the user. */
+   printf("Initializing random number generator...\n");
+-  sprintf(buf, "%s/%s", pw->pw_dir, SSH_CLIENT_SEEDFILE);
++  sprintf(buf, "%s/%s", pw_dir, SSH_CLIENT_SEEDFILE);
+   random_initialize(&state, geteuid(), buf);
+ 
+   /* Save random seed so we don't need to do all that time-consuming
+@@ -464,7 +480,7 @@
+       if (strchr(buf, '\n'))
+ 	*strchr(buf, '\n') = 0;
+       if (strcmp(buf, "") == 0)
+-	sprintf(buf, "%s/%s", pw->pw_dir, SSH_CLIENT_IDENTITY);
++	sprintf(buf, "%s/%s", pw_dir, SSH_CLIENT_IDENTITY);
+     }
+ 
+   /* If the file aready exists, ask the user to confirm. */
+@@ -523,14 +539,14 @@
+ 	  perror("gethostname");
+ 	  exit(1);
+ 	}
+-      sprintf(buf2, "%s@%s", pw->pw_name, hostname);
++      sprintf(buf2, "%s@%s", pw_name, hostname);
+ #else
+       if (uname(&uts) < 0)
+ 	{
+ 	  perror("uname");
+ 	  exit(1);
+ 	}
+-      sprintf(buf2, "%s@%s", pw->pw_name, uts.nodename);
++      sprintf(buf2, "%s@%s", pw_name, uts.nodename);
+ #endif
+     }
+ 
+diff -u -r --new-file ssh-1.2.14-clean/ssh.c ssh-1.2.14.win32/ssh.c
+--- ssh-1.2.14-clean/ssh.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/ssh.c	Sun Mar 01 01:05:44 1998
+@@ -254,10 +254,15 @@
+   char *optarg, *cp, buf[256];
+   Buffer command;
+   struct stat st;
++#ifdef WIN32
++  WSADATA wsaData;
++#else
+   struct passwd *pw, pwcopy;
++#endif
+   int interactive = 0, dummy;
+   uid_t original_real_uid;
+   uid_t original_effective_uid;
++  char *pw_dir, *pw_name;
+ #ifdef SIGWINCH
+   struct winsize ws;
+ #endif /* SIGWINCH */
+@@ -267,6 +272,9 @@
+   original_real_uid = getuid();
+   original_effective_uid = geteuid();
+ 
++#ifdef WIN32
++  WSAStartup(MAKEWORD(1,1), &wsaData);
++#else
+   /* Set signals and core limits so that we cannot dump core.  */
+   signals_prevent_core();
+ 
+@@ -283,6 +291,7 @@
+ 	}
+       userfile_init(pw->pw_name, pw->pw_uid, pw->pw_gid, NULL, NULL);
+     }
++#endif
+ 
+ #ifdef HAVE_UMASK
+   /* Set our umask to something reasonable, as some files are created with 
+@@ -314,10 +323,14 @@
+     cp = strrchr(av0, '/') + 1;
+   else
+     cp = av0;
+-  if (strcmp(cp, "rsh") != 0 && strcmp(cp, "ssh") != 0 &&
+-      strcmp(cp, "rlogin") != 0 && strcmp(cp, "slogin") != 0)
++  if (strstr(cp, "rsh") == 0 && strstr(cp, "ssh") == 0 &&
++      strstr(cp, "rlogin") == 0 && strstr(cp, "slogin") != 0)
+     host = cp;
+-  
++
++  if (strstr(cp, "sshc")) {
++    options.compression = 1;
++  }
++
+   for (optind = 1; optind < ac; optind++)
+     {
+       if (av[optind][0] != '-')
+@@ -519,6 +532,7 @@
+   if (buffer_len(&command) == 0)
+     tty_flag = 1;
+ 
++#if 0
+   /* Do not allocate a tty if stdin is not a tty. */
+   if (!isatty(fileno(stdin)))
+     {
+@@ -526,7 +540,18 @@
+ 	fprintf(stderr, "Pseudo-terminal will not be allocated because stdin is not a terminal.\n");
+       tty_flag = 0;
+     }
++#endif
+ 
++#ifdef WIN32
++  {
++    char buf[1024];
++    DWORD size;
++    size = sizeof(buf);
++    GetUserName(buf, &size);
++    pw_dir = getenv("HOME");
++    pw_name = xstrdup(buf);
++  }
++#else
+   /* Get user data. */
+   pw = getpwuid(original_real_uid);
+   if (!pw)
+@@ -544,13 +569,17 @@
+   pwcopy.pw_dir = xstrdup(pw->pw_dir);
+   pwcopy.pw_shell = xstrdup(pw->pw_shell);
+   pw = &pwcopy;
++  pw_dir = pwcopy.pw_dir;
++  pw_name = pwcopy.pw_name;
++
++#endif
+ 
+   /* Initialize "log" output.  Since we are the client all output actually
+      goes to the terminal. */
+   log_init(av[0], 1, debug_flag, quiet_flag, SYSLOG_FACILITY_USER);
+ 
+   /* Read per-user configuration file. */
+-  sprintf(buf, "%.100s/%s", pw->pw_dir, SSH_USER_CONFFILE);
++  sprintf(buf, "%.100s/%s", pw_dir, SSH_USER_CONFFILE);
+   read_config_file(original_real_uid, buf, host, &options);
+ 
+   /* Read systemwide configuration file. */
+@@ -559,7 +588,7 @@
+   /* Fill configuration defaults. */
+   fill_default_options(&options);
+   if (options.user == NULL)
+-    options.user = xstrdup(pw->pw_name);
++    options.user = xstrdup(pw_name);
+ 
+   if (options.hostname != NULL)
+     host = options.hostname;
+@@ -571,6 +600,7 @@
+       options.rhosts_rsa_authentication = 0;
+     }
+ 
++#ifndef WIN32
+   /* If using rsh has been selected, exec it now (without trying anything
+      else).  Note that we must release privileges first. */
+   if (options.use_rsh)
+@@ -580,6 +610,7 @@
+       rsh_connect(host, options.user, &command);
+       fatal("rsh_connect returned");
+     }
++#endif
+ 
+   /* Open a connection to the remote host.  This needs root privileges if
+      rhosts_authentication is true.  Note that the random_state is not
+@@ -593,6 +624,7 @@
+   /* Check if the connection failed, and try "rsh" if appropriate. */
+   if (!ok)
+     {
++#ifndef WIN32
+       userfile_uninit();
+       if (options.port != 0)
+ 	log("Secure connection to %.100s on port %d refused%s.", 
+@@ -607,6 +639,7 @@
+ 	  rsh_connect(host, options.user, &command);
+ 	  fatal("rsh_connect returned");
+ 	}
++#endif
+       exit(1);
+       /*NOTREACHED*/
+     }
+@@ -625,7 +658,7 @@
+ 
+   /* Now that we are back to our own permissions, create ~/.ssh directory
+      if it doesn\'t already exist. */
+-  sprintf(buf, "%.100s/%s", pw->pw_dir, SSH_USER_DIR);
++  sprintf(buf, "%.100s/%s", pw_dir, SSH_USER_DIR);
+   if (userfile_stat(original_real_uid, buf, &st) < 0)
+     if (userfile_mkdir(original_real_uid, buf, 0755) < 0)
+       error("Could not create directory '%.200s'.", buf);
+@@ -765,6 +798,9 @@
+   /* Tell the packet module whether this is an interactive session. */
+   packet_set_interactive(interactive, options.keepalives);
+ 
++#ifdef WIN32
++  options.forward_agent = 0;
++#else
+   /* Clear agent forwarding if we don\'t have an agent. */
+   authfd = ssh_get_authentication_fd();
+   if (authfd < 0)
+@@ -783,6 +819,7 @@
+       if (type != SSH_SMSG_SUCCESS)
+ 	log("Warning: Remote host denied authentication agent forwarding.");
+     }
++#endif
+ 
+   /* Initiate local TCP/IP port forwardings. */
+   for (i = 0; i < options.num_local_forwards; i++)
+@@ -806,13 +843,19 @@
+ 					options.remote_forwards[i].host_port);
+     }
+ 
++#ifndef WIN32
+   /* We will no longer need the forked process that reads files on the
+      user's uid. */
+   userfile_uninit();
++#endif
+ 
+   /* If requested, fork and let ssh continue in the background. */
+   if (fork_after_authentication_flag)
+     {
++#ifdef WIN32
++      fprintf(stderr, "fork after authentication not implemented on Windows NT\n");
++      exit(1);
++#else
+       int ret = fork();
+       if (ret == -1)
+ 	fatal("fork failed: %.100s", strerror(errno));
+@@ -821,6 +864,7 @@
+ #ifdef HAVE_SETSID
+       setsid();
+ #endif /* HAVE_SETSID */
++#endif
+     }
+ 
+   /* If a command was specified on the command line, execute the command now.
+@@ -851,5 +895,5 @@
+   packet_close();
+   
+   /* Exit with the status returned by the program on the remote side. */
+-  exit(exit_status);
++  return(exit_status);
+ }
+diff -u -r --new-file ssh-1.2.14-clean/ssh.h ssh-1.2.14.win32/ssh.h
+--- ssh-1.2.14-clean/ssh.h	Thu Jun 06 04:39:27 1996
++++ ssh-1.2.14.win32/ssh.h	Mon Jul 21 02:56:47 1997
+@@ -80,7 +80,7 @@
+ #ifndef SSH_H
+ #define SSH_H
+ 
+-#include <gmp.h>
++#include "gmp.h"
+ #include "rsa.h"
+ #include "randoms.h"
+ #include "cipher.h"
+@@ -464,6 +464,13 @@
+ /* Outputs a message to syslog or stderr, depending on the implementation. 
+    The format must guarantee that the final message does not exceed 1024 
+    characters.  The message should not contain newline. */
++
++#ifdef WIN32
++/* This is required because of a bug in Visual C++ 4.x and 5.0.
++   When compiling with -O2 optimization, it claims log is being
++   redefined even if it has never been seen before. */
++#define log ssh_log
++#endif
+ void log(const char *fmt, ...);
+ 
+ /* Outputs a message to syslog or stderr, depending on the implementation. 
+diff -u -r --new-file ssh-1.2.14-clean/sshconnect.c ssh-1.2.14.win32/sshconnect.c
+--- ssh-1.2.14-clean/sshconnect.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/sshconnect.c	Tue Jul 15 07:53:31 1997
+@@ -116,6 +116,8 @@
+ /* Session id for the current session. */
+ unsigned char session_id[16];
+ 
++#ifndef WIN32
++
+ /* Connect to the given ssh server using a proxy command. */
+ 
+ int ssh_proxy_connect(const char *host, int port, uid_t original_real_uid,
+@@ -223,11 +225,17 @@
+   return 1;
+ }
+ 
++#endif /* !WIN32 */
++
+ /* Creates a (possibly privileged) socket for use as the ssh connection. */
+ 
+ int ssh_create_socket(uid_t original_real_uid, int privileged)
+ {
+-  int sock;
++  SOCKET sock;
++
++#ifdef WIN32
++  privileged = 0;
++#endif
+ 
+   /* If we are running as root and want to connect to a privileged port,
+      bind our own socket to a privileged port. */
+@@ -238,8 +246,8 @@
+       for (p = 1023; p > 512; p--)
+ 	{
+ 	  sock = socket(AF_INET, SOCK_STREAM, 0);
+-	  if (sock < 0)
+-	    fatal("socket: %.100s", strerror(errno));
++	  if (sock == SOCKET_ERROR)
++	    fatal("socket: %.100s", sock_strerror(sock_lasterror()));
+ 	  
+ 	  /* Initialize the desired sockaddr_in structure. */
+ 	  memset(&sin, 0, sizeof(sin));
+@@ -255,12 +263,12 @@
+ 	  if (bind(sock, (struct sockaddr *)&sin, sizeof(sin)) >= 0)
+ 	    break; /* Success. */
+ #endif /* SOCKS */
+-	  if (errno == EADDRINUSE)
++	  if (sock_lasterror() == WSAEADDRINUSE)
+ 	    {
+ 	      close(sock);
+ 	      continue;
+ 	    }
+-	  fatal("bind: %.100s", strerror(errno));
++	  fatal("bind: %.100s", sock_strerror(sock_lasterror()));
+ 	}
+       debug("Allocated local port %d.", p);
+     }
+@@ -269,7 +277,7 @@
+       /* Just create an ordinary socket on arbitrary port.  */
+       sock = socket(AF_INET, SOCK_STREAM, 0);
+       if (sock < 0)
+-	fatal("socket: %.100s", strerror(errno));
++	fatal("socket: %.100s", sock_strerror(sock_lasterror()));
+     }
+   return sock;
+ }
+@@ -287,7 +295,8 @@
+ 		int anonymous, uid_t original_real_uid, 
+ 		const char *proxy_command, RandomState *random_state)
+ {
+-  int sock = -1, attempt, i;
++  SOCKET sock = SOCKET_ERROR;
++  int attempt, i;
+   int on = 1;
+   struct servent *sp;
+   struct hostent *hp;
+@@ -309,11 +318,12 @@
+ 	port = SSH_DEFAULT_PORT;
+     }
+ 
++#ifndef WIN32
+   /* If a proxy command is given, connect using it. */
+   if (proxy_command != NULL)
+     return ssh_proxy_connect(host, port, original_real_uid, proxy_command,
+ 			     random_state);
+-
++#endif /* !WIN32 */
+   /* No proxy command. */
+ 
+   /* No host lookup made yet. */
+@@ -357,7 +367,7 @@
+ 	      /* Successful connect. */
+ 	      break;
+ 	    }
+-	  debug("connect: %.100s", strerror(errno));
++	  debug("connect: %.100s", sock_strerror(sock_lasterror()));
+ 
+ 	  /* Destroy the failed socket. */
+ 	  shutdown(sock, 2);
+@@ -426,13 +436,13 @@
+ 		  /* Successful connection. */
+ 		  break;
+ 		}
+-	      debug("connect: %.100s", strerror(errno));
++	      debug("connect: %.100s", sock_strerror(sock_lasterror()));
+ 
+ 	      /* Close the failed socket; there appear to be some problems 
+ 		 when reusing a socket for which connect() has already 
+ 		 returned an error. */
+ 	      shutdown(sock, 2);
+-	      close(sock);
++	      closesocket(sock);
+ 	    }
+ 	  if (hp->h_addr_list[i])
+ 	    break; /* Successful connection. */
+@@ -458,7 +468,7 @@
+ 
+   /* Set socket options.  We would like the socket to disappear as soon as
+      it has been closed for whatever reason. */
+-  /* setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (void *)&on, sizeof(on)); */
++  setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (void *)&on, sizeof(on));
+ #ifdef TCP_NODELAY
+   setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (void *)&on, sizeof(on));
+ #endif /* TCP_NODELAY */
+@@ -474,6 +484,7 @@
+   return 1;
+ }
+ 
++#ifndef WIN32
+ /* Checks if the user has an authentication agent, and if so, tries to
+    authenticate using the agent. */
+ 
+@@ -575,6 +586,7 @@
+   debug("RSA authentication using agent refused.");
+   return 0;
+ }
++#endif /* WIN32 */
+ 
+ /* Computes the proper response to a RSA challenge, and sends the response to
+    the server. */
+@@ -613,7 +625,7 @@
+ /* Checks if the user has authentication file, and if so, tries to authenticate
+    the user using it. */
+ 
+-int try_rsa_authentication(struct passwd *pw, const char *authfile,
++int try_rsa_authentication(uid_t uid, const char *authfile,
+ 			   int may_ask_passphrase)
+ {
+   MP_INT challenge;
+@@ -623,7 +635,7 @@
+   int type, i;
+ 
+   /* Try to load identification for the authentication key. */
+-  if (!load_public_key(pw->pw_uid, authfile, &public_key, &comment))
++  if (!load_public_key(uid, authfile, &public_key, &comment))
+     return 0; /* Could not load it.  Fail. */
+ 
+   debug("Trying RSA authentication with key '%.100s'", comment);
+@@ -661,7 +673,7 @@
+ 
+   /* Load the private key.  Try first with empty passphrase; if it fails, 
+      ask for a passphrase. */
+-  if (!load_private_key(pw->pw_uid, authfile, "", &private_key, NULL))
++  if (!load_private_key(uid, authfile, "", &private_key, NULL))
+     {
+       char buf[300];
+       /* Request passphrase from the user.  We read from /dev/tty to make
+@@ -670,7 +682,7 @@
+ 	 return. */
+       sprintf(buf, "Enter passphrase for RSA key '%.100s': ", comment);
+       if (may_ask_passphrase)
+-	passphrase = read_passphrase(pw->pw_uid, buf, 0);
++	passphrase = read_passphrase(uid, buf, 0);
+       else
+ 	{
+ 	  debug("Will not query passphrase for %.100s in batch mode.", 
+@@ -679,7 +691,7 @@
+ 	}
+       
+       /* Load the authentication file using the pasphrase. */
+-      if (!load_private_key(pw->pw_uid, authfile, passphrase, &private_key, 
++      if (!load_private_key(uid, authfile, passphrase, &private_key, 
+ 			    NULL))
+ 	{
+ 	  memset(passphrase, 0, strlen(passphrase));
+@@ -803,8 +815,8 @@
+   /* Read other side\'s version identification. */
+   for (i = 0; i < sizeof(buf) - 1; i++)
+     {
+-      if (read(connection_in, &buf[i], 1) != 1)
+-	fatal("read: %.100s", strerror(errno));
++      if (recv(connection_in, &buf[i], 1, 0) != 1)
++	fatal("read: %.100s", sock_strerror(sock_lasterror()));
+       if (buf[i] == '\r')
+ 	{
+ 	  buf[i] = '\n';
+@@ -834,8 +846,8 @@
+   
+   sprintf(buf, "SSH-%d.%d-%.100s\n", 
+ 	  my_major, my_minor, SSH_VERSION);
+-  if (write(connection_out, buf, strlen(buf)) != strlen(buf))
+-    fatal("write: %.100s", strerror(errno));
++  if (send(connection_out, buf, strlen(buf), 0) != strlen(buf))
++    fatal("write: %.100s", sock_strerror(sock_lasterror()));
+ }
+ 
+ /* Starts a dialog with the server, and authenticates the current user on the
+@@ -865,6 +877,8 @@
+   unsigned char check_bytes[8];
+   unsigned int supported_ciphers, supported_authentications, protocol_flags;
+   HostStatus host_status;
++  char *pw_dir;
++  uid_t pw_uid;
+ 
+   /* Convert the user-supplied hostname into all lowercase. */
+   host = xstrdup(orighost);
+@@ -880,10 +894,24 @@
+ 
+   /* Get local user name.  Use it as server user if no user name
+      was given. */
++#ifndef WIN32
+   pw = getpwuid(original_real_uid);
+   if (!pw)
+     fatal("User id %d not found from user database.", original_real_uid);
+   local_user = xstrdup(pw->pw_name);
++  pw_dir = pw->pw_dir;
++  pw_uid = pw->pw_uid;
++#else
++  {
++    char buf[1024];
++    DWORD size;
++    size = sizeof(buf);
++    GetUserName(buf, &size);
++    local_user = xstrdup(buf);
++    pw_dir = getenv("HOME");
++    pw_uid = 0;
++  }
++#endif
+   server_user = options->user ? options->user : local_user;
+ 
+   debug("Waiting for server public key.");
+@@ -1006,13 +1034,13 @@
+   /* Generate a session key. */
+   
+   /* Initialize the random number generator. */
+-  sprintf(buf, "%.500s/%.200s", pw->pw_dir, SSH_CLIENT_SEEDFILE);
+-  if (userfile_stat(pw->pw_uid, buf, &st) < 0)
++  sprintf(buf, "%.500s/%.200s", pw_dir, SSH_CLIENT_SEEDFILE);
++  if (userfile_stat(pw_uid, buf, &st) < 0)
+     log("Creating random seed file ~/%.200s.  This may take a while.", 
+ 	SSH_CLIENT_SEEDFILE);
+   else
+     debug("Initializing random; seed file %.900s", buf);
+-  random_initialize(state, pw->pw_uid, buf);
++  random_initialize(state, pw_uid, buf);
+ 
+   /* Read also some random data from the systemwide random seed file to
+      avoid the user being able to guess his own session key when running
+@@ -1036,7 +1064,7 @@
+     session_key[i] = random_get_byte(state);
+ 
+   /* Save the new random state. */
+-  random_save(state, pw->pw_uid, buf);
++  random_save(state, pw_uid, buf);
+ 
+   /* According to the protocol spec, the first byte of the session key is
+      the highest byte of the integer.  The session key is xored with the
+@@ -1175,15 +1203,17 @@
+   if ((supported_authentications & (1 << SSH_AUTH_RSA)) &&
+       options->rsa_authentication)
+     {
++#ifndef WIN32
+       /* Try RSA authentication using the authentication agent.  The agent
+          is tried first because no passphrase is needed for it, whereas
+ 	 identity files may require passphrases. */
+       if (try_agent_authentication())
+ 	return; /* Successful connection. */
++#endif
+ 
+       /* Try RSA authentication for each identity. */
+       for (i = 0; i < options->num_identity_files; i++)
+-	if (try_rsa_authentication(pw, options->identity_files[i],
++	if (try_rsa_authentication(pw_uid, options->identity_files[i],
+ 				   !options->batch_mode))
+ 	  return; /* Successful connection. */
+     }
+@@ -1195,7 +1225,7 @@
+       debug("Doing password authentication.");
+       if (options->cipher == SSH_CIPHER_NONE)
+ 	log("WARNING: Encryption is disabled! Password will be transmitted in clear text.");
+-      password = read_passphrase(pw->pw_uid, "Password: ", 0);
++      password = read_passphrase(pw_uid, "Password: ", 0);
+       packet_start(SSH_CMSG_AUTH_PASSWORD);
+       packet_put_string(password, strlen(password));
+       memset(password, 0, strlen(password));
+diff -u -r --new-file ssh-1.2.14-clean/tildexpand.c ssh-1.2.14.win32/tildexpand.c
+--- ssh-1.2.14-clean/tildexpand.c	Thu Jun 06 04:39:33 1996
++++ ssh-1.2.14.win32/tildexpand.c	Tue Jul 15 03:42:45 1997
+@@ -36,9 +36,11 @@
+   const char *cp;
+   unsigned int userlen;
+   char *expanded;
++#ifndef WIN32
+   struct passwd *pw;
++#endif
+   char user[100];
+-  const char *homedir;
++  const char *homedir = NULL;
+ 
+   /* Return immediately if no tilde. */
+   if (filename[0] != '~')
+@@ -55,23 +57,33 @@
+   else
+     userlen = strlen(filename); /* Nothign after username. */
+   if (userlen == 0)
+-    pw = getpwuid(my_uid);  /* Own home directory. */
++    {
++#ifndef WIN32
++      pw = getpwuid(my_uid);  /* Own home directory. */
++      homedir = pw->pw_dir;
++#else
++      homedir = getenv("HOME");
++#endif
++    }
+   else
+     {
++#ifndef WIN32
+       /* Tilde refers to someone elses home directory. */
+       if (userlen > sizeof(user) - 1)
+ 	fatal("User name after tilde too long.");
+       memcpy(user, filename, userlen);
+       user[userlen] = 0;
+       pw = getpwnam(user);
++      homedir = pw->pw_dir;
++#else
++      return xstrdup(filename);
++#endif
+     }
+   
+   /* Check that we found the user. */
+-  if (!pw)
++  if (!homedir)
+     fatal("Unknown user %100s.", user);
+   
+-  homedir = pw->pw_dir;
+-
+   /* If referring to someones home directory, return it now. */
+   if (!cp)
+     { /* Only home directory specified */
+diff -u -r --new-file ssh-1.2.14-clean/ttymodes.c ssh-1.2.14.win32/ttymodes.c
+--- ssh-1.2.14-clean/ttymodes.c	Thu Jun 06 04:39:33 1996
++++ ssh-1.2.14.win32/ttymodes.c	Thu Jul 17 00:03:43 1997
+@@ -63,6 +63,7 @@
+ #endif
+ #endif
+ 
++#ifndef WIN32
+ /* Converts POSIX speed_t to a baud rate.  The values of the constants
+    for speed_t are not themselves portable. */
+ 
+@@ -239,9 +240,17 @@
+       return B9600;
+     }
+ }
++#endif /* !WIN32 */
+ 
+ /* Encodes terminal modes for the terminal referenced by fd in a portable
+    manner, and appends the modes to a packet being constructed. */
++#ifdef WIN32
++void tty_make_modes(int fd)
++{
++  packet_put_char(TTY_OP_END);
++}
++
++#else
+ 
+ void tty_make_modes(int fd)
+ {
+@@ -344,7 +353,9 @@
+   /* Mark end of mode data. */
+   packet_put_char(TTY_OP_END);
+ }
++#endif /* WIN32 */
+ 
++#ifndef WIN32
+ /* Decodes terminal modes for the terminal referenced by fd in a portable
+    manner from a packet being read. */
+ 
+@@ -498,3 +509,4 @@
+     log("Setting tty modes failed: %.100s", strerror(errno));
+ #endif /* USING_SGTTY */
+ }
++#endif /* !WIN32 */
+diff -u -r --new-file ssh-1.2.14-clean/userfile.c ssh-1.2.14.win32/userfile.c
+--- ssh-1.2.14-clean/userfile.c	Thu Jun 06 04:39:31 1996
++++ ssh-1.2.14.win32/userfile.c	Fri Jul 18 00:41:01 1997
+@@ -258,6 +258,7 @@
+ 	  type, expected_type);
+ }
+ 
++#ifndef WIN32
+ /* Forks and execs the given command.  Returns a file descriptor for
+    communicating with the program, or -1 on error.  The program will
+    be run with empty environment to avoid LD_LIBRARY_PATH and similar
+@@ -338,6 +339,7 @@
+       return fds[1];
+     }
+ }
++#endif /*!WIN32*/
+ 
+ /* This function is the main loop of the child.  This never returns. */
+ 
+@@ -376,7 +378,7 @@
+ 
+ 	  if (max_bytes >= sizeof(buf))
+ 	    max_bytes = sizeof(buf);
+-	  ret = read(handle, buf, max_bytes);
++	  ret = recv(handle, buf, max_bytes, 0);
+ 	  if (ret < 0)
+ 	    ret = 0;
+ 
+@@ -428,7 +430,6 @@
+ 	  mode = buffer_get_int(&packet);
+ 
+ 	  ret = mkdir(path, mode);
+-
+ 	  userfile_packet_start(USERFILE_MKDIR_REPLY);
+ 	  buffer_put_int(&packet, ret);
+ 	  userfile_packet_send();
+@@ -462,6 +463,9 @@
+ 	  break;
+ 
+ 	case USERFILE_POPEN:
++#ifdef WIN32
++	  fprintf(stderr, "USERFILE_POPEN not supported on Windows NT\n");
++#else
+ 	  command = buffer_get_string(&packet, NULL);
+ 	  cp = buffer_get_string(&packet, NULL);
+ 
+@@ -473,9 +477,13 @@
+ 
+ 	  xfree(command);
+ 	  xfree(cp);
++#endif
+ 	  break;
+ 
+ 	case USERFILE_PCLOSE:
++#ifdef WIN32
++	  fprintf(stderr, "USERFILE_PCLOSE not supported on Windows NT\n");
++#else
+ 	  handle = buffer_get_int(&packet);
+ 
+ 	  ret = close(handle);
+@@ -486,7 +494,7 @@
+ 	  userfile_packet_start(USERFILE_PCLOSE_REPLY);
+ 	  buffer_put_int(&packet, ret);
+ 	  userfile_packet_send();
+-
++#endif
+ 	  break;
+ 
+ 	default:
+@@ -495,6 +503,7 @@
+     }
+ }
+ 
++#ifndef WIN32
+ /* Initializes reading as a user.  Before calling this, I/O may only be
+    performed as the user that is running the current program (current
+    effective uid).  SIGPIPE should be set to ignored before this call.
+@@ -567,6 +576,7 @@
+   /* Enter the server main loop. */
+   userfile_child_server();
+ }
++#endif /* !WIN32 */
+ 
+ /* Closes any open pipes held by userfile.  This should be called
+    after a fork while the userfile is open. */
+@@ -580,6 +590,7 @@
+   close(userfile_tochild);
+ }
+ 
++#ifndef WIN32
+ /* Stops reading files as an ordinary user.  It is not an error to call
+    this even if the system is not initialized. */
+ 
+@@ -594,6 +605,7 @@
+ 
+   wait(&status);
+ }
++#endif /* !WIN32 */
+ 
+ /* Data structure for UserFiles. */
+ 
+@@ -882,8 +894,9 @@
+ int userfile_mkdir(uid_t uid, const char *path, mode_t mode)
+ {
+   /* Perform directly if with current effective uid. */
+-  if (uid == geteuid())
++  if (uid == geteuid()) {
+     return mkdir(path, mode);
++  }
+ 
+   if (!userfile_initialized)
+     fatal("userfile_mkdir with uid %d", (int)uid);
+@@ -949,6 +962,7 @@
+   return buffer_get_int(&packet);
+ }
+ 
++#ifndef WIN32
+ /* Performs popen() on the given uid; returns a file from where the output
+    of the command can be read (type == "r") or to where data can be written
+    (type == "w"). */
+@@ -985,9 +999,11 @@
+ 
+   return userfile_make_handle(USERFILE_REMOTE, handle);
+ }
++#endif /* !WIN32 */
+ 
+ /* Performs pclose() on the given uid.  Returns <0 if an error occurs. */
+ 
++#ifndef WIN32
+ int userfile_pclose(UserFile uf)
+ {
+   int ret, ret2;
+@@ -1019,3 +1035,4 @@
+       return -1;
+     }
+ }
++#endif
+diff -u -r --new-file ssh-1.2.14-clean/winsockutil.c ssh-1.2.14.win32/winsockutil.c
+--- ssh-1.2.14-clean/winsockutil.c	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/winsockutil.c	Sun Mar 01 01:21:53 1998
+@@ -0,0 +1,400 @@
++/* 
++ * sockutil.c --
++ *
++ *	This module implements utilities for sockets.
++ *
++ * Copyright (c) 1990-1994 The Regents of the University of California.
++ * All rights reserved.
++ *
++ * Permission is hereby granted, without written agreement and without
++ * license or royalty fees, to use, copy, modify, and distribute this
++ * software and its documentation for any purpose, provided that the
++ * above copyright notice and the following two paragraphs appear in
++ * all copies of this software.
++ * 
++ * IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR
++ * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
++ * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE UNIVERSITY OF
++ * CALIFORNIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ * THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,
++ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
++ * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
++ * ON AN "AS IS" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATION TO
++ * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
++ */
++
++#include <windows.h>
++#include <winsock.h>
++#include <stdio.h>
++#include <io.h>
++#include <fcntl.h>
++
++char *wsa_strerror(int error);
++
++/*
++ *--------------------------------------------------------------
++ *
++ * CreateSocketPair --
++ *
++ *	This procedure creates a connected socket pair
++ *
++ * Results:
++ *	0 if OK, the error if not OK.
++ *
++ * Side effects:
++ *	None
++ *
++ *--------------------------------------------------------------
++ */
++int
++CreateSocketPair(SOCKET *pair)
++{
++    SOCKET servsock;
++    int val;
++    struct sockaddr_in serv_addr, cli_addr;
++
++    servsock = socket(PF_INET, SOCK_STREAM, 0);
++    if (servsock == INVALID_SOCKET) {
++	return WSAGetLastError();
++    }
++
++    memset(&serv_addr, 0, sizeof(serv_addr));
++    serv_addr.sin_family = AF_INET;
++    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
++    serv_addr.sin_port = htons(0);
++    
++    val = sizeof(serv_addr);
++    if (bind(servsock, (struct sockaddr *) &serv_addr, val) < 0) {
++	closesocket(servsock);
++	return WSAGetLastError();
++    }
++
++    listen(servsock, 1);
++
++    if (getsockname (servsock, (struct sockaddr *) &serv_addr, &val) < 0) {
++	closesocket(servsock);
++	return WSAGetLastError();
++    }
++
++    pair[0] = socket(PF_INET, SOCK_STREAM, 0);
++    if (pair[0] == INVALID_SOCKET) {
++	closesocket(servsock);
++	return WSAGetLastError();
++    }
++
++    memset(&cli_addr, 0, sizeof(cli_addr));
++    cli_addr.sin_family = AF_INET;
++    cli_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
++    cli_addr.sin_port = serv_addr.sin_port;
++
++    if (connect(pair[0], (struct sockaddr *) &cli_addr, sizeof(cli_addr)) < 0) {
++	closesocket(pair[0]);
++	closesocket(servsock);
++	return WSAGetLastError();
++    }
++
++    pair[1] = accept(servsock, (struct sockaddr *) &serv_addr, &val);
++    if (pair[1] == INVALID_SOCKET) {
++	closesocket(pair[0]);
++	closesocket(servsock);
++	return WSAGetLastError();
++    }
++    
++    closesocket(servsock);
++
++    return 0;
++}
++
++static HANDLE stdinThread;
++
++/*
++ *----------------------------------------------------------------------
++ *
++ * TerminalThread --
++ *
++ *	This routine reads stdin, and then it does one of two things:
++ *	If the system is using sockets, it writes whatever it reads
++ *	to one end of a socket.  The other end of the socket is checked
++ *	by the event loop for activity.  If the system is not using
++ *	sockets, a message is posted to let the system know something
++ *	can be read.
++ *
++ * Results:
++ *	Shouldn't return, unless somthing went wrong.
++ *
++ * Side Effects:
++ *      If sockets are not used, data is written into a global buffer.
++ *	This buffer should not be changed until the data has been copied.
++ *
++ *----------------------------------------------------------------------
++ */
++DWORD WINAPI
++TerminalThread(LPVOID arg)
++{
++    SOCKET sock = (SOCKET) arg;	/* Socket to write input to */
++    char buf[4096];
++    int count;
++    int n, total;
++    HANDLE hIn;
++    int nread, nbytes;
++    DWORD max;
++    DWORD fileType;
++    DWORD mode, oldMode;
++
++    _setmode(fileno(stdout), O_BINARY);
++    hIn = GetStdHandle(STD_INPUT_HANDLE);
++
++    fileType = GetFileType(hIn);
++    if (fileType != FILE_TYPE_PIPE) {
++	_setmode(fileno(stdin), O_TEXT);
++	if (! GetConsoleMode(hIn, &oldMode)) {
++	    fprintf(stderr, "unable to get console input mode\n");
++	    exit(1);
++	}
++	mode = oldMode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT | ENABLE_PROCESSED_INPUT); 
++	if (! SetConsoleMode(hIn, mode)) {
++	    fprintf(stderr, "unable to set console input mode\n");
++	    exit(1);
++	}
++    } else {
++	_setmode(fileno(stdin), O_BINARY);
++    }
++
++    while (1) {
++	n = 0;
++	if (fileType == FILE_TYPE_PIPE) {
++	    PeekNamedPipe(hIn, NULL, 0, NULL, &nread, NULL);
++	    if (nread == 0) {
++		nread = 1;
++	    }
++	    do {
++		max = sizeof(buf) - 1 - n;
++		nread = min(nread, max);
++		count = read(fileno(stdin), &buf[n], nread);
++		if (count > 0) {
++		    n += count;
++		    if (n - 1 >= sizeof(buf)) {
++			break;
++		    }
++		} else {
++		    break;
++		}
++		PeekNamedPipe(hIn, NULL, 0, NULL, &nread, NULL);
++		/*
++		 * Allow subprocess to do something if we get all the
++		 * processing time
++		 */
++		if (count == 1 && nread == 0) {
++		    Sleep(40);
++		    PeekNamedPipe(hIn, NULL, 0, NULL, &nread, NULL);
++		}
++	    } while (nread > 0);
++	} else {
++	    nread = 1;
++	    n = read(fileno(stdin), buf, nread);
++	}
++#ifdef DEBUG
++	fprintf(dbg, "out of inner loop\n");
++	fflush(dbg);
++#endif
++  
++	if (n > 0) {
++	    total = 0;
++	    while (total < n) {
++		nbytes = send(sock, &buf[total], n-total, 0);
++		if (nbytes == SOCKET_ERROR) {
++		    fprintf(stderr, "send error: %s\n", wsa_strerror(GetLastError()));
++		    goto done;
++		}
++		total += nbytes;
++	    }
++	}
++	if (count <= 0 && n <= 0) {
++	    break;
++	}
++    }
++
++done:
++    if (fileType != FILE_TYPE_PIPE) {
++	SetConsoleMode(hIn, mode);
++    }
++    closesocket(sock);
++    return 0;
++}
++
++/*
++ *----------------------------------------------------------------------
++ *
++ * CreateTclTerminal --
++ *
++ *	This routine creates a thread that reads the standard input.
++ *	The thread will post messages to a window or write to a socket.
++ *
++ * Results:
++ *	None.
++ *
++ * Side effects:
++ *	The thread reading stdin cannot be disabled right now.  This
++ *	causes problems for other programs that are started from this
++ *	one that need to read stdin.  We should have a way to disable
++ *	the thread when a process is being executed.
++ *
++ *----------------------------------------------------------------------
++ */
++void
++CreateTerminal(SOCKET outSock)
++{
++    DWORD threadId;
++    stdinThread = CreateThread(NULL, 0, TerminalThread, (LPVOID) outSock, 0, 
++	&threadId);
++    return;
++}
++
++char *
++wsa_strerror(int error)
++{
++    switch (error) {
++    /*
++     * Windows Sockets definitions of regular Microsoft C error constants
++     */
++    case WSAEINTR:
++	return "Winsock call interrupted.";
++    case WSAEBADF:
++	return "Bad file in call to Winsock.";
++    case WSAEACCES:
++	return "Bad access in call to Winsock.";
++    case WSAEFAULT:
++	return "Bad argument in call to Winsock.";
++    case WSAEINVAL:
++	return "Invalid call to Winsock.";
++    case WSAEMFILE:
++	return "Out of file descriptors in call to Winsock.";
++
++    /*
++     * Windows Sockets definitions of regular Berkeley error constants
++     */
++    case WSAEWOULDBLOCK:
++	return "Winsock call would block.";
++    case WSAEINPROGRESS:
++	return "Blocking call to Winsock in progress.";
++    case WSAEALREADY:
++	return "Winsock call already?";
++    case WSAENOTSOCK:
++	return "Descriptor is not a socket.";
++    case WSAEDESTADDRREQ:
++	return "Need destination address in call to Winsock.";
++    case WSAEMSGSIZE:
++	return "Bad message size in call to Winsock.";
++    case WSAEPROTOTYPE:
++	return "Bad protocol in call to Winsock.";
++    case WSAENOPROTOOPT:
++	return "Protocol option is unsupported in call to Winsock.";
++    case WSAEPROTONOSUPPORT:
++	return "Protocol is unsupported in call to Winsock.";
++    case WSAESOCKTNOSUPPORT:
++	return "Socket is unsupported by Winsock.";
++    case WSAEOPNOTSUPP:
++	return "Operation not supported in call to Winsock.";
++    case WSAEPFNOSUPPORT:
++	return "Address family not supported this protocol in Winsock.";
++    case WSAEADDRINUSE:
++	return "Address already in use in call to Winsock.";
++    case WSAEADDRNOTAVAIL:
++        return "Address not available in call to Winsock.";
++    case WSAENETDOWN:
++	return "Network subsystem has failed in call to Winsock.";
++    case WSAENETUNREACH:
++	return "Network is unreachable in call to Winsock.";
++    case WSAENETRESET:
++	return "Network has been reset in call to Winsock.";
++    case WSAECONNABORTED:
++	return "Connection was apported in call to Winsock.";
++    case WSAECONNRESET:
++	return "Connection was reset in call to Winsock.";
++    case WSAENOBUFS:
++	return "No buffer space is available in call to Winsock.";
++    case WSAEISCONN:
++	return "Socket is already connected in call to Winsock.";
++    case WSAENOTCONN:
++	return "Socket is not connected in call to Winsock.";
++    case WSAESHUTDOWN:
++	return "Socket has been shut down in call to Winsock.";
++    case WSAETOOMANYREFS:
++	return "Too many references in call to Winsock.";
++    case WSAETIMEDOUT:
++	return "Timed out in call to Winsock.";
++    case WSAECONNREFUSED:
++	return "Connection refused";
++    case WSAELOOP:
++	return "Loop in call to Winsock.";
++    case WSAENAMETOOLONG:
++	return "Name too long in call to Winsock.";
++    case WSAEHOSTDOWN:
++	return "Host is down in call to Winsock.";
++    case WSAEHOSTUNREACH:
++	return "Host is unreachable in call to Winsock.";
++    case WSAENOTEMPTY:
++	return "Not empty in call to Winsock.";
++    case WSAEPROCLIM:
++	return "Proclim? in call to Winsock.";
++    case WSAEUSERS:
++	return "Users? in call to Winsock.";
++    case WSAEDQUOT:
++	return "Bad quote? in call to Winsock.";
++    case WSAESTALE:
++	return "Something is stale in call to Winsock.";
++    case WSAEREMOTE:
++	return "Remote error in call to Winsock.";
++    case WSAEDISCON:
++	return "Disconnected in call to Winsock.";
++	
++    /*
++     * Extended Windows Sockets error constant definitions
++     */
++    case WSASYSNOTREADY:
++	return "Winsock library is not yet ready for use.";
++    case WSAVERNOTSUPPORTED:
++	return "Winsock version not supported.";
++    case WSANOTINITIALISED:
++	return "Winsock library has not been initalized before use.";
++
++    /*
++     * Error return codes from gethostbyname() and gethostbyaddr()
++     * (when using the resolver). Note that these errors are
++     * retrieved via WSAGetLastError() and must therefore follow
++     * the rules for avoiding clashes with error numbers from
++     * specific implementations or language run-time systems.
++     * For this reason the codes are based at WSABASEERR+1001.
++     * Note also that [WSA]NO_ADDRESS is defined only for
++     * compatibility purposes.
++     */
++
++    /* Authoritative Answer: Host not found */
++    case WSAHOST_NOT_FOUND:
++	return "Host not found.";
++
++    /* Non-Authoritative: Host not found, or SERVERFAIL */
++    case WSATRY_AGAIN:
++	return "Host not found, try again.";
++
++    /* Non recoverable errors, FORMERR, REFUSED, NOTIMP */
++    case WSANO_RECOVERY:
++	return "Unrecoverable error in call to nameserver.";
++
++    /* Valid name, no data record of requested type */
++    case WSANO_DATA:
++	return "No data record of requested type.";
++
++    default:
++	return strerror(error);
++    }
++}
++
++void wsa_perror(char *s)
++{
++    if (s) {
++	fprintf(stderr, "%s: ", s);
++    }
++    fputs(wsa_strerror(WSAGetLastError()), stderr);
++}
+diff -u -r --new-file ssh-1.2.14-clean/zlib.def ssh-1.2.14.win32/zlib.def
+--- ssh-1.2.14-clean/zlib.def	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/zlib.def	Tue Jul 15 03:56:35 1997
+@@ -0,0 +1,6 @@
++LIBRARY    zlib.dll
++EXETYPE WINDOWS
++CODE PRELOAD MOVEABLE DISCARDABLE
++DATA PRELOAD MOVEABLE MULTIPLE
++
++EXPORTS
+diff -u -r --new-file ssh-1.2.14-clean/zlib095/makefile.vc ssh-1.2.14.win32/zlib095/makefile.vc
+--- ssh-1.2.14-clean/zlib095/makefile.vc	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/zlib095/makefile.vc	Sun Mar 01 00:45:52 1998
+@@ -0,0 +1,159 @@
++# Visual C++ 2.x, 4.x, and 5.x makefile
++
++# Does not depend on the presence of any environment variables in
++# order to compile tcl; all needed information is derived from 
++# location of the compiler directories.
++
++# Project directories
++#
++# TOOLS32 = location of VC++ 32-bit development tools. Note that the
++#	    VC++ 2.0 header files are broken, so you need to use the
++#	    ones that come with the developer network CD's, or later
++#	    versions of VC++.
++#
++
++!IFNDEF TOOLS32
++TOOLS32		= c:\msdev
++!ENDIF
++
++# Set this to the appropriate value of /MACHINE: for your platform
++MACHINE	= IX86
++
++# Comment the following line to compile with symbols
++NODEBUG=1
++
++######################################################################
++# Do not modify below this line
++######################################################################
++
++ZLIB_LIB	= zlib.lib
++ZLIB_DLL	= zlib.dll
++
++ZLIB_OBJS = \
++	adler32.obj compress.obj crc32.obj deflate.obj \
++	infblock.obj infcodes.obj inffast.obj inflate.obj \
++	inftrees.obj infutil.obj trees.obj uncompr.obj zutil.obj
++
++cc32		= $(TOOLS32)\bin\cl.exe
++link32		= $(TOOLS32)\bin\link.exe
++rc32		= $(TOOLS32)\bin\rc.exe
++nmake		= $(TOOLS32)\bin\nmake.exe
++include32	= -I$(TOOLS32)\include
++
++DEFINES	= -D__WIN32__ -DWIN32 $(DEBUGDEFINES)
++
++CFLAGS	= $(cdebug) $(cflags) $(cvarsdll) $(include32) \
++			$(INCLUDES) $(DEFINES)
++CON_CFLAGS	= $(cdebug) $(cflags) $(cvars) $(include32) -DCONSOLE
++DOS_CFLAGS	= $(cdebug) $(cflags) $(include16) -AL 
++DLL16_CFLAGS	= $(cdebug) $(cflags) $(include16) -ALw
++
++######################################################################
++# Link flags
++######################################################################
++
++!IFDEF NODEBUG
++ldebug = /RELEASE
++!ELSE
++ldebug = -debug:full -debugtype:cv
++!ENDIF
++
++# declarations common to all linker options
++lcommon = /NODEFAULTLIB /RELEASE /NOLOGO
++
++# declarations for use on Intel i386, i486, and Pentium systems
++!IF "$(MACHINE)" == "IX86"
++DLLENTRY = @12
++lflags   = $(lcommon) -align:0x1000 /MACHINE:$(MACHINE)
++!ELSE
++lflags   = $(lcommon) /MACHINE:$(MACHINE)
++!ENDIF
++
++conlflags = $(lflags) -subsystem:console -entry:mainCRTStartup
++guilflags = $(lflags) -subsystem:windows -entry:WinMainCRTStartup
++dlllflags = $(lflags) -entry:_DllMainCRTStartup$(DLLENTRY) -dll
++
++!IF "$(MACHINE)" == "PPC"
++libc = libc.lib
++libcdll = crtdll.lib
++!ELSE
++libc = libc.lib oldnames.lib
++libcdll = msvcrt.lib oldnames.lib
++!ENDIF
++
++baselibs   = kernel32.lib $(optlibs) advapi32.lib
++winlibs    = $(baselibs) user32.lib gdi32.lib comdlg32.lib winspool.lib
++
++guilibs	   = $(libc) $(winlibs)
++conlibs	   = $(libc) $(baselibs)
++guilibsdll = $(libcdll) $(winlibs)
++conlibsdll = $(libcdll) $(baselibs)
++
++######################################################################
++# Compile flags
++######################################################################
++
++!IFDEF NODEBUG
++cdebug = -Ox
++!ELSE
++cdebug = -Z7 -Od
++!ENDIF
++
++# declarations common to all compiler options
++ccommon = -c -W3 -nologo -YX -Dtry=__try -Dexcept=__except
++
++!IF "$(MACHINE)" == "IX86"
++cflags = $(ccommon) -D_X86_=1
++!ELSE
++!IF "$(MACHINE)" == "MIPS"
++cflags = $(ccommon) -D_MIPS_=1
++!ELSE
++!IF "$(MACHINE)" == "PPC"
++cflags = $(ccommon) -D_PPC_=1
++!ELSE
++!IF "$(MACHINE)" == "ALPHA"
++cflags = $(ccommon) -D_ALPHA_=1
++!ENDIF
++!ENDIF
++!ENDIF
++!ENDIF
++
++cvars      = -DWIN32 -D_WIN32
++cvarsmt    = $(cvars) -D_MT
++cvarsdll   = $(cvarsmt) -D_DLL
++
++######################################################################
++# Project specific targets
++######################################################################
++
++release:    $(ZLIB_DLL) $(ZLIB_LIB)
++all:	    $(ZLIB_DLL) $(ZLIB_LIB)
++
++$(ZLIB_DLL): $(ZLIB_OBJS) zlib.def
++	set LIB=$(TOOLS32)\lib
++	$(link32) $(ldebug) $(dlllflags) -def:zlib.def \
++		-out:$@ $(guilibsdll) @<<
++$(ZLIB_OBJS)
++<<
++
++$(ZLIB_LIB): $(ZLIB_DLL)
++
++#
++# Implicit rules
++#
++
++.c.obj:
++    $(cc32) $(CFLAGS) $<
++
++clean:
++	-@del *~
++	-@del *.ncb
++        -@del *.exp 
++	-@del *.lib 
++	-@del *.dll 
++	-@del *.exe
++        -@del *.obj
++        -@del *.res
++	-@del *.pch
++	-@del *.plg
++#        -@del *.def
+diff -u -r --new-file ssh-1.2.14-clean/zlib095/zlib.def ssh-1.2.14.win32/zlib095/zlib.def
+--- ssh-1.2.14-clean/zlib095/zlib.def	Wed Dec 31 16:00:00 1969
++++ ssh-1.2.14.win32/zlib095/zlib.def	Tue Jul 15 03:56:49 1997
+@@ -0,0 +1,45 @@
++LIBRARY    zlib.dll
++EXETYPE WINDOWS
++CODE PRELOAD MOVEABLE DISCARDABLE
++DATA PRELOAD MOVEABLE MULTIPLE
++
++EXPORTS
++	adler32
++	compress
++	crc32
++	deflateInit
++	deflateInit2
++	deflateReset
++	deflate
++	deflateEnd
++	deflateCopy
++	inflate_blocks_reset
++	inflate_blocks_new
++	inflate_blocks
++	inflate_blocks_free
++	inflate_codes_new
++	inflate_codes
++	inflate_codes_free
++	inflate_fast
++	inflateReset
++	inflateEnd
++	inflateInit2
++	inflateInit
++	inflate
++	inflateSync
++	inflate_trees_bits
++	inflate_trees_dynamic
++	inflate_trees_fixed
++	inflate_trees_free
++	inflate_flush
++	ct_init
++	ct_stored_block
++	ct_align
++	ct_flush_block
++	ct_tally
++	uncompress
++	z_error
++	zmemcpy
++	zmemzero
++	zcalloc
++	zcfree
