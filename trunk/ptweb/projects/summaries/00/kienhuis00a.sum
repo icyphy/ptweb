@@ -1,0 +1,51 @@
+NAMES
+Bart Kienhuis
+
+EMAIL
+kienhuis@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~kienhuis
+
+PHONE
+510 643 7612
+
+TITLE
+Compilation of Nested Loop Programs into Process Networks.
+
+CHAPTER
+02.cad
+
+Novel high-performance, domain specific, embedded architectures are
+more and more composed of a microprocessor, some memory, and a number
+of dedicated coprocessors. Onto these embedded architectures,
+real-time applications will be executed that belong to the domain of
+multi-media processing, mobile communication, and adaptive array
+processing. These applications are in general are written in the C or
+Matlab language and have a specific structure, referred to as Nested
+Loop Program.
+
+<p>
+
+The C and Matlab language have an imperative model of
+computation. Although this model of computation is well accepted to
+specify applications, it does not reveal parallelism due to its
+inherent sequential nature, even though many applications contain a
+lot of parallelism. Compilers exist that are able to extract
+instruction level parallelism from the original specifications at a
+very fine level of granularity. They are, however, unable to exploit
+coarse-grained parallelism offered by the coprocessors of the
+architectures. Instead, a better specification format would be to use
+an inherent parallel model of computation like Process Networks.
+
+<P>
+
+This research focuses on the automatic transformation of Nested Loop
+Programs into Process Network specifications. This work makes
+extensive use of work done (lately) in the domain of integer linear
+algebra. To make the resulting Process Networks more accessible, we
+want to construct the Process Networks in the PN-domain of the
+PtolemyII system. This allows us to combine the derived process
+network description with other domains, enabling the description and
+simulation of more complex systems.
+
