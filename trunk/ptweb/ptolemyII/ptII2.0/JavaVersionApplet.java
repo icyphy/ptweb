@@ -59,7 +59,7 @@ public class JavaVersionApplet extends JApplet {
         super.init();
 
         JFrame _frame = new JFrame();
-        _jTextArea = new JTextArea(6,40);
+        _jTextArea = new JTextArea(7,50);
         _jTextArea.setEditable(false);
         //_scrollPane = new JScrollPane(_jTextArea);
         //getContentPane().add(_scrollPane);
