@@ -27,7 +27,8 @@ CVS allows multiple developers to concurrently modify source code packages.
 
 <li> <a href="http://www.loria.fr/~molli/cvs-index.html" target="_top">CVS-Index at <CODE>www.loria.fr</CODE></a>
 
-<li> <a href="http://www.wincvs.org/">WinCVS</a> - Windows CVS GUI
+<li> <a href="http://www.wincvs.org/" target="_top">WinCVS</a> -
+     Windows CVS GUI
 
 <li> <a href="http://www.cyclic.com/tkcvs/index.html" target="_top">tkCVS</a> - Tk Interface to CVS
 
@@ -55,9 +56,10 @@ Local Links
 
 <li> <a href="windows.htm">CVS and SSH binaries</a> for Windows
 
-<li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">JohnR's docs</a>, including information about setting up under windows.
+<li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html" target="_top">John Reekie's CVS notes</a>,
+including information about setting up under windows.
 
-<li> <a href="http://ptolemy.eecs.berkeley.edu/~ptII/cvsdoc">CVS Resources for the Ptolemy Group Only</a>
+<li> <a href="http://ptolemy.eecs.berkeley.edu/~ptII/cvsdoc" target="_top">CVS Resources for the Ptolemy Group Only</a>
 
 <li> <a name="documentation">Documentation</a>
   <menu>
@@ -68,7 +70,7 @@ Local Links
   WinCVS.  The two Windows Help format files are available as
   <a href="cvshlp.zip"><CODE>cvshlp.zip</CODE></a>
 
-  <li> <a href="http://www.cs.utah.edu/csinfo/texinfo/cvs/cvs_toc.html">CVS HTML Documentation (Dated 5/1/96)</a>
+  <li> <a href="http://www.cs.utah.edu/csinfo/texinfo/cvs/cvs_toc.html" target="_top">CVS HTML Documentation (Dated 5/1/96)</a>
 
   <li> Man pages:
   <A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs"><CODE>cvs(1)</CODE></A> -
@@ -147,82 +149,6 @@ users, date etc.
  <hr>
 <h2><a name="cvstasks">Common CVS tasks</a></h2>
 
-
-<h3>Checking out the Ptolemy II tree under Unix</h3>
-CVS uses the <CODE>CVSROOT</CODE> environment variable to
-find the location of the repository.
- <p><CODE>/usr/cluster/bin/setpath</CODE> sets
-<CODE>CVSROOT</CODE> to <CODE>/users/cvs/Repository</CODE>
- <p>You can also override <CODE>CVSROOT</CODE> with
-the <CODE>-d</CODE> option to cvs, see the 
-<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs"><CODE>cvs(1)</CODE></A> man page for details
-
- <p>Assuming that <CODE>CVSROOT</CODE> is set to <CODE>/users/cvs/Repository
-</CODE>, follow the steps below to get a copy of the tree
-<ol>
-<li> A good place for the Ptolemy II tree is ~/ptII
-<pre>
-cd
-</pre>
-
-<li> Checkout the ptII tree
-<pre>
-cvs checkout ptII
-</pre>
-
-<li> Make the ptII release
-<pre>
-cd ptII
-make
-</pre>
-
-</ol>
-
-
-<h3>Checking out the Ptolemy II tree under NT</h3>
-The Ptolemy II tree will only build if you have the Cygwin toolkit
-installed.
-<ol>
-<li> Be sure that you have CVS and SSH installed.  Note that
-CVS uses a different version of SSH than the F-Secure verion.
-To install, download <a href="http://ptolemy.eecs.berkeley.edu/~cxh/sa/nt/dists/cvs/cvsssh.exe"><CODE>cvsssh.exe</CODE></a>
-
- <br><a href="http://bmrc.berkeley.edu/people/chaffee/winntutil.html#sshnt">Gordon Chaffee's SSH and SCP for Windows page</a> says:
-<BLOCKQUOTE>
-
- If you make a copy of ssh.exe to sshc.exe, it will automatically run
- with compression on. I find this useful when running with cvs.
-
-</BLOCKQUOTE>
-
-You can also use the <CODE>-z <I>compression-level</I></CODE> command
-line option to <CODE>cvs</CODE>.  <CODE>-z3</CODE> seems to be a good
-level of compression.
-
-<li> Note that if you install your ptII tree under NT 
-with the same pathname as your Unix ptII tree, then your life
-will be easier.  For example, my ptII tree is
-at <CODE>/users/cxh/ptII</CODE> under both NT and Unix, even though
-these are different file systems.
-
-<li> Checkout the tree
-<pre>
-cvs -d :ext:carson.eecs.berkeley.edu:/users/cvs/Repository co pt
-</pre>
-
-<li> You should set your PTII environment variable to point to
-the ptII directory.  Also, you should be sure that the java 
-<CODE>bin</CODE> directory (i.e. <CODE>/jdk1.2.1/bin</CODE>)
-and the current directory (i.e. <CODE>.</CODE>) are in your PATH. 
-
-<li> Build it:
-<pre>
-cd ptII
-make
-</pre>
-
-
-</ol>
 
 <h3>Checking out just one directory</h3>
 The old symbolic links method we used with SCCS probably won't work
