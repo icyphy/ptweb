@@ -1,0 +1,43 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>HyVisual: A Hybrid System Visual Modeler</title>
+</head>
+<body>
+<center>
+<h1> HyVisual: A Hybrid System Visual Modeler</h1>
+</center>
+<center>
+Adam Cataldo, Christopher Hylands, Edward A. Lee, Jiu Liu, Xiaojun Liu, Steve Neuendorffer, Haiyang Zheng 
+</center>
+<br>
+<center>
+
+<i>Technical Memorandum UCB/ERL M03/31</i>, University of California, Berkeley, CA 94720, July 17, 2003.
+
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<CENTER>
+<a href="hyvisual2.pdf" target="_top"><i>this version (7/17/03)</i></A><br>
+<a href="../hyvisual/hyvisual.pdf"><i>earlier version (1/28/03)</i></a>
+</CENTER>
+
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+
+The Hybrid System Visual Modeler (HyVisual) is a block-diagram editor and simulator for continuous-time dynamical systems and hybrid systems. Hybrid systems mix continuous-time dynamics, discrete events, and  discrete mode  changes. This visual modeler supports  construction  of hierarchical hybrid systems. It  uses a  block-diagram representation of  ordinary differential  equations (ODEs)  to
+define continuous dynamics, and allows mixing of continuous-time signals with events that are discrete in time. It uses a bubble-and-arc diagram representation of finite state machines to define discrete behavior driven by mode transitions.
+<p>
+In this document, we describe how to graphically construct models and how to interpret the resulting models.  HyVisual  provides a sophisticated numerical solver that simulates the continuous-time dynamics, and effective use of the system requires at least a rudimentary understanding of the properties of the solver. This document provides a tutorial that will enable the reader to construct elaborate models and to have confidence in the results of a simulation of those models. We begin by explaining how to describe continuous-time models of classical dynamical systems, and then progress to the construction of mixed signal and hybrid systems.
+<p>
+The intended audience for this document is an engineer with at least a rudimentary understanding of the theory of continuous-time dynamical systems (ordinary differential equations and Laplace transform representations), who wishes to build models of such systems, and who wishes to learn about hybrid systems and build models of hybrid systems.
+<p>
+HyVisual is built on top of Ptolemy II, a framework supporting the construction of such domain-specific tools. See <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/index.htm" target="_top">Ptolemy II</a> for information.
+</body>
+</html>
+
