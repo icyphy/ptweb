@@ -10,7 +10,7 @@ summary.
 To do this,
 1. Check out a copy of the website
    cvs -d :ext:cooley.eecs.berkeley.edu:/users/cvs/Repository co ptweb
-2. go to ptweb/projects/summaries/03
+2. go to ptweb/projects/summaries/04
 
 3. If your .sum file exists, updatit
    if it does not exist, copy an existing one, add it it to the
@@ -58,12 +58,12 @@ To do this,
    Once you are set up, use ssh to log on to a Unix machine such
    as cooley, then do
    ssh -l ptII messier
-   cd ~ptII/ptweb/projects/summaries/03
+   cd ~ptII/ptweb/projects/summaries/04
    cvs update
    make
 	
 9.  Verify your changes
-http://ptolemy.eecs.berkeley.edu/projects/summaries/03/index.html   
+http://ptolemy.eecs.berkeley.edu/projects/summaries/04/index.html   
 
 
 --------
