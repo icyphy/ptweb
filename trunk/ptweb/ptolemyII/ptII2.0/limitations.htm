@@ -47,6 +47,11 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 	<li> <a href="#Java Version">Java Version</a>
 	</menu>
 
+<li> <a href="#build">Build Limitations</a>
+	<menu>
+	<li> <a href="#Jini">Jini Version</a>
+	</menu>
+
 <li> <a href="#actor">Actor Limitations</a>
 	<menu>
 	<li> <a href="#AudioReader">AudioReader</a>
@@ -108,6 +113,62 @@ href="http://ptolemy.eecs.berkeley.edu/ptolemyII/hyvisual2.2"
 target="_top">HyVisual 2.2</a> release does not have this problem, the
 HyVisual 2.2 installer includes a dialog that allows the user to
 choose which version of Java to use.
+
+
+<h3><a name="build">Build Limitations</a></h3>
+
+<h4><a name="Jini Version">Jini Version</a></h4>
+The Jini actors in <CODE>$PTII/ptolemy/actor/lib/jspaces</CODE> and
+the demos in <CODE>$PTII/ptolemy/domains/ct/demo/jspaces</CODE>
+require Jini 1.0.1.
+
+ <p>Unfortunately, Jini 1.0.1 is no longer available from Sun.
+Jini is only required for the actors and demos above, Ptolemy II
+will compile and run without Jini. 
+
+ <p>The workaround is to not compile the jini code in 
+$PTII/ptolemy/actor/lib/jspaces
+
+ <p>The $PTII/configure script looks for a directory called
+$PTII/vendors/sun/jini1_0_1 and if it is present then the
+PTJSPACES makefile variable is set to 'jspaces'
+and $PTII/ptolemy/actor/lib/makefile uses the value of PTJSPACES
+to decide whether to go into the jspaces subdirectory.
+
+ <p>There is a fairly complete description of the process of how external
+packages are handled in in <CODE>$PTII/doc/coding/develsetup.htm</CODE>
+which can be found at
+
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/ptII2.0.1/doc/coding/develsetup.htm#ExternalPackages"><CODE>http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/ptII2.0.1/doc/coding/develsetup.htm#ExternalPackages</CODE></a>
+
+ <p>One trick is to search the web for the <CODE>jini1_0_1.zip</CODE>
+file and use that
+
+ <p>Jim Kleckner discovered this bug, and he included the following
+part of the Jini release notes:
+
+<BLOCKQUOTE>
+Changes since the 1.1 release
+ <p>RMI registry-related classes and interfaces have been removed
+In previous releases of the Jini Technology Starter Kit, Outrigger and 
+Mahalo provided direct support for binding into an RMI registry. This 
+functionality was deprecated in the 1.1 release and has now been 
+removed. Because we no longer support binding of and lookups for 
+Outrigger and Mahalo servers in RMI registries, we have removed a 
+number of related classes and interfaces that were used to find 
+services in RMI registries, or used to manage a service's registration 
+with an RMI registry:
+
+ <br>com.sun.jini.outrigger.RegistryFinder
+ <br>com.sun.jini.mahout.RegistryAdmin
+ <br>com.sun.jini.mahout.RegistryLocator
+ <br>com.sun.jini.mahout.binder.RefHolder
+ <p>If you were finding Outrigger or Mahalo services in RMI registries, 
+you should remove this functionality from your code, and use Jini 
+lookup services instead.
+    
+
+</BLOCKQUOTE>
 
 
 <h3><a name="actor">Actor Limitations</a></h3>
