@@ -17,7 +17,8 @@ CHAPTER
 
 ABSTRACT 
 
-Ptplot is a set of two dimensional signal plotters components
+<img src="ptplot.gif" alt="Ptplot Screen Shot">
+<p>Ptplot is a set of two dimensional signal plotters components
 written in Java with the following properties:
 <ul>
 <li> Embeddable in applets or applications.
