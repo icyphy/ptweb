@@ -1,0 +1,98 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Tycho Tools</title>
+</head>
+<body>
+<h1>Tycho Tools</h1>
+This page contains auxiliary binaries and standalone packages that are used by Tycho. 
+<h2>Packages</h2>
+<dl>
+<dt> <code>tydoc</code> - Itcl HTML documentation generator
+
+<dd> <code>tydoc</code> is a standalone package that generates html
+documentation from Itcl files.  For more information, see the 
+<a href="../../../tycho0.2.1/tycho0.2.1/util/tydoc/doc/index.html"><code>tydoc</code> documentation</a>
+ <br><a href="../../../tycho0.2.1/tydoc2.0.src.tar.gz"><code>tydoc2.0.src.tar.gz</code></a>
+</dl>
+
+<h2>Windows</h2>
+<DL>
+<DT> <code>ispell</code>
+<DD> <code>ispell</code> is used under windows for the Spelling checker.
+This version of Ispell requires
+<a href="http://www.cygnus.com/misc/gnu-win32" target="_top">Cygwin32 b20.1</A> 
+<ol>
+
+ <li> In a bash shell, run
+ <pre>
+ mkdir -p /usr/local/bin /usr/local/lib/ispell
+ </pre>
+
+ <li>Download the <a href="windows/ispell.exe.zip">zipped <code>ispell.exe</code> Windows binary</A>, unzip it and place it in <CODE>/usr/local/bin</CODE> 
+ <li>Download the <a href="windows/ispell.dict.zip">zipped <code>ispell.dict</code></A>, uncompress it and place it in <CODE>/usr/local/lib/ispell</CODE>
+ <li>Download the <a href="windows/ispell.words.zip">zipped <code>ispell.words</code></A>, uncompress it and place it in <CODE>/usr/local/lib/ispell</CODE>
+
+<li> The ispell binary requires that your Path under NT have two directories
+in it:
+   <menu>
+
+   <li> Be sure that the Cygwin bin directory that contains 
+   <code>cygwin1.dll</code> is in your path.  Usually
+   this will be something like
+   <code>D:\cygnus\cygwin-b20\H-i586-cygwin32\bin</code>
+
+   <li> Add <code>/usr/local/bin</code> to your NT Path.  Note that if
+   your Cygwin installation is actually on the <code>d:</code> drive, then
+   you would add
+   <code>D:\usr\local\bin</code> to your Path.
+
+</menu>
+Under NT 4.0, to adjust your path, go to the 
+<code>Start</code> menu, select <CODE>Settings</CODE>, then
+<code>Control Panels</code>, then <CODE>System</CODE>, then select the
+<code>Environment</code> tab
+
+</ol>
+
+Below are the Ispell4.0 sources and the README.cyg file
+<menu>
+ <li><a href="windows/ispell40cyg.zip">Ispell4.0 Windows binaries and sources</A>
+ <li><a href="windows/ispell40_README.txt"><code>ispell40cyg/README.cyg</code></A>
+ ftom the zip file.
+
+</menu>
+
+
+<DT> <code>glimpse</code>
+<DD> 
+The Tycho Glimpse browser uses the <code>glimpse</code> program to search
+the sources for patterns.  
+
+ <li> Glimpse homepage: 
+<a href="http://glimpse.cs.arizona.edu" target="_top"><code>http://glimpse.cs.arizona.edu</code></A>.
+ <li> The Glimpse windows
+<a href="windows/glimpse/glimpse-4.0a.cybin.zip">binaries</A>
+require <a href="http://www.cygnus.com/misc/gnu-win32" target="_top">Cygwin b18</A> to
+run.  
+
+ <li> <a href="windows/glimpse/README.cyg"><code>README.cyg</code></A>
+file that describes the port to Cygwin b17
+ <li> The <a href="windows/glimpse/glimpse-4.0a.src.zip">sources</A>
+used to create the binaries are also available.
+
+
+<DT> <code>pxgraph</code>
+<DD> <code>pxgraph</code> is an extension to the Unix <CODE>xgraph</CODE> 
+utility.  <code>pxgraph</code> is not used by Tycho, but it is used
+by Ptolemy, so if you are running Ptolemy under NT, you will need
+<code>pxgraph</code>.  A Java implementation of pxgraph can be found
+at
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptplot" target="_top"><code>http://ptolemy.eecs.berkeley.edu/java/ptplot</code></A>.
+
+</DL>
+
+</body>
+</html>
