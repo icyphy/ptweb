@@ -24,7 +24,7 @@ user.
 
 <p> A block diagram view, using icons, is often an intuitive way to visualize 
 a system.  Within 
-<a href="http://ptolemy.eecs.berkeley.edu/java/vergil/body.htm>Vergil</a>, 
+<a href="http://ptolemy.eecs.berkeley.edu/java/vergil/body.htm">Vergil</a>, 
 the Ptolemy II user interface, components of the model are displayed as 
 icons.  Dynamic icons are a natural way of expressing information regarding 
 the characteristics and status of particular components.  Icons are also a 
