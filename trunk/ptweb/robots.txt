@@ -66,7 +66,7 @@ Disallow: /java/old
 Disallow: /oldwww/
 Disallow: /opt/
 Disallow: /papers/publications.html/tycho.latest
-Disallow: /private/
+#Disallow: /private/
 Disallow: /ptolemy0.6/contrib
 Disallow: /ptolemy0.6/gnu
 Disallow: /ptolemy0.7/contrib
