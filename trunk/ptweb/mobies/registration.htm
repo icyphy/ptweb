@@ -1,0 +1,74 @@
+<!--@(#)registration.html	1.4 10/27/98 
+This page is based on the page by Bob Miller at:
+http://http.cs.berkeley.edu/~bmiller/BRASS.rsvp.html
+
+The mailform.pl program can be found at
+http://www.colorado.edu/webworks/resources/mailform/
+-->
+<html>
+<head>
+<title>MoBIES Miniconference: Thursday 9/30 - Friday 10/1</title>
+</head>
+<body bgcolor="#faf0e6">
+<H1>MoBIES Miniconference: Thursday 9/30 - Friday 10/1</h2>
+<HR>
+<p>The MoBIES Miniconference will be held Thursday 9/30 and Friday 10/1
+
+<p>Please complete the form and then click on the <STRONG>OK</STRONG> button at the end of the form.
+<BR>
+
+<P>
+<STRONG>Please note:</STRONG><i> All provided information will be for
+the MoBIES Conference use only.</i>
+
+<hr>
+
+<FORM METHOD="POST" ACTION="/cgi-bin/mailform.pl">
+
+<!- Address of the person who will receive the email >
+<input type="hidden" name="sendTo" value="ptconf99@ptolemy.eecs.berkeley.edu">
+
+<!- Subject of the email >
+<input type="hidden" name="subject" value="Miniconference Registration">
+
+<!- URL to go to when we are done >
+<input type="hidden" name="url" value="http://ptolemy.eecs.berkeley.edu/ptconf99/index.html">
+
+<P><STRONG><H3>Name: </STRONG></H3><inPUT TYPE="TEXT" NAME="01Name" SIZE="40"></P>  
+<P><STRONG><H3>Organization and Address: </STRONG></H3>
+<TEXTAREA NAME="02Organization" ROWS="6" COLS="40"></TEXTAREA>
+</P> 
+<P>
+<STRONG><H3>Phone: </STRONG></H3><inPUT TYPE="TEXT" NAME="03Phone" SIZE="20">
+<tt> </tt>
+<STRONG><H3>FAX: </STRONG></H3><inPUT TYPE="TEXT" NAME="04FAX" SIZE="20"><BR>
+<tt> </tt>
+<STRONG><H3>Email: </STRONG></H3><inPUT TYPE="TEXT" NAME="05Email" SIZE="50"></p>
+ <hr>
+
+<H3><STRONG>Meal Preferences</H3></STRONG> 
+<P>If you require vegetarian meals, please check the following:</P> 
+<H3>
+<INPUT TYPE="CHECKBOX" name="12Vegetarian" value="Vegetarian">Vegetarian
+</H3>
+
+
+ <hr>
+<P><STRONG><H3>Comments related to any of the information given above:</P></STRONG></H3>
+<P><TEXTAREA NAME="13Comments" ROWS=6 COLS=40></TEXTAREA></P>
+
+ <hr>
+<P>
+<STRONG><H3>To submit, please click the "OK" button. Thank you.</Strong> </P></H3>
+
+<inPUT TYPE="SUBMIT" VALUE="OK">
+<inPUT TYPE="RESET" VALUE="Clear Form">
+</FORM>
+
+<p>
+<hr>
+
+</body>
+</html>
+
+
