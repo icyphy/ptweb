@@ -1,0 +1,39 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>An Extensible Type System for Component-Based Design</title>
+</head>
+<body>
+<center>
+<h1>An Extensible Type System for Component-Based Design</h1>
+</center>
+<center>
+Yuhong Xiong
+</center>
+<br>
+<center>
+Ph.D. thesis, Technical Memorandum UCB/ERL M02/13<br>
+Electronics Research Laboratory, University of California, Berkeley, May 1, 2002.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="thesis.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+Component-based design has been established as an important approach to designing complex embedded systems, which often have many concurrent computational activities and mix widely differing operations. A good type system is particularly important for component-based design. A type system can improve the safety and flexibility of the design environment, promote component reuse, and help simplify component development and optimization. Although type systems have been studied extensively in the programming language community, its research in component-based design is not enough.
+<p>
+In this thesis, we present an extensible type system for component-based design. Fundamentally, a type system detects incompatibilities at component interfaces. Incompatibility may happen at two different levels: data types and dynamic behavior. Accordingly, the type system presented in this thesis also has two parts. For data types, our system combines static typing with run-time type checking. It supports polymorphic typing of components, and allows automatic lossless type conversion at run-time. To achieve this, we use a lattice to model the subtyping relation among types, and use inequalities defined over the type lattice to specify type constraints in components and across components. By requiring the types to form a lattice, we can use a very efficient algorithm to solve the inequality type constraints, with existence and uniqueness of a solution guaranteed by fixed-point theorems. This type system can be extended in two ways: by adding more types to the lattice, or by using different lattices to model different system properties.
+<p>
+Our type system supports both the primitive types and structured types, such as arrays and records. The addition of structured types makes the type lattice infinite, and requires an extension on the format of the inequality constraints. We present an analysis on the issue of convergence on an infinite lattice, and add an unification step in the constraint solving algorithm to handle the new inequality format. Our extension allows structured types to be arbitrarily nested, and supports type constraints that involve the elements of structured types.
+<p>
+The data-level type system has been implemented in Ptolemy II, which is a component-based design environment. Our implementation is modular. In particular, the CPO and lattice support, including the algorithm for solving inequality constraints, are implemented as a generic infrastructure that is not bound to one particular type lattice. Type definition and type checking are implemented in separate packages and have been fully integrated with Ptolemy II.
+<p>
+To describe the dynamic behavior of components and perform compatibility check, we extend the concepts of conventional type system to behavioral level and capture the dynamic interaction between components, such as the communication protocols the components use to pass messages. In our system, the interaction types and the dynamic behavior of components are defined using a light-weight formalism, interface automata. Type checking, which checks the compatibility of a component with a certain interaction type, is conducted through automata composition. Our system is polymorphic in that a component may be compatible with more than one interaction types. We show that a subtyping relation exists among various interaction types and this relation can be described using a partial order. This behavioral type order provides significant insight into the relation among the interaction types. It can be used to facilitate the design of polymorphic components and simplify type checking. In addition to static type checking, we also propose to extend the use of interface automata to the on-line reflection of component states and to run-time type checking. We illustrate our framework using the Ptolemy II environment, and discuss the trade-offs in the design of behavioral type system.
+
+</body>
+</html>
+
