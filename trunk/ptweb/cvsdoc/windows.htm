@@ -10,9 +10,9 @@
 
 <menu>
 
-<li> cvsssh1.10.5-1.2.14.1 - CVS-1.10.5 and SSH-1.2.14.1 binaries
+<li> cvsssh1.10.5-1.2.26.1 - CVS-1.10.5 and SSH-1.2.26.1 binaries
 for Windows NT
-<a href="dist/cvsssh1_10_5-1_2_14_1.exe">(For use on .eecs.berkeley.edu machines only)</a>
+<a href="dist/cvsssh1_10_5-1_2_26_1.exe">(For use on .eecs.berkeley.edu machines only)</a>
 
 
 <li> The cvsssh distribution includes the following pieces:
@@ -33,13 +33,13 @@ for Windows NT
   The help files are available as:
   <a href="cvshlp.zip"><CODE>cvshlp.zip</CODE></a>
 
-  <li> ssh-1.2.14.1-win32 is based on information found on 
+  <li> ssh-1.2.26.1 is based on information found on 
   <a href="http://bmrc.berkeley.edu/people/chaffee/winntutil.html#sshnt" target="_top">Gordon Chaffee's SSH webpage</a>.
 
    <br>His web page includes a <a href="patch-ssh-1.2.14">patch</a> against
    <a href="ftp://ftp.cs.hut.fi/pub/ssh/ssh-1.2.14.tar.gz">ssh-1.2.14</a>
    and links to the
-   <a href="ftp://ftp.cs.hut.fi/pub/ssh/ssh-1.2.14-win32.zip">ssh-1.2.14.1-win32 Windows binaries from ftp.cs.hut.fi</a>.
+   <a href="ftp://ftp.cs.hut.fi/pub/ssh/ssh-1.2.14-win32.zip">ssh-1.2.26.1-win32 Windows binaries from ftp.cs.hut.fi</a>.
   </menu>
 </menu>
 
@@ -49,10 +49,10 @@ to people outside of the EECS.Berkeley.EDU and CS.Berkeley.EDU domains.
 
  <p>However, we can include instructions on how we built the binaries.
 
-If you can't download ssh-1.2.14.1, you might try the 
+If you can't download ssh-1.2.26.1, you might try the 
 <a href="ftp://ftp.cs.hut.fi/pub/ssh/contrib/ssh-1.2.14-win32bin.zip"><CODE>ssh-1.2.14-win32.bin.zip</CODE></a> binary from ftp.cs.hut.fi
 
-<h3>Changes between ssh-1.2.14-win32 and ssh-1.2.14.1-win32</h3>
+<h3>Changes between ssh-1.2.14-win32 and ssh-1.2.26.1-win32</h3>
 <menu>
 
 <li> Shipped as part of an Installshield installer that includes CVS 1.10.5
@@ -69,10 +69,10 @@ The binaries were built with VC++6.0 via a Cygwin bash shell.
 
 <ol>
 <li> Currently, our tree is checked in to the repository as
-<CODE>ssh-1.2.14.1-win</CODE>, so if you already have
+<CODE>ssh</CODE>, so if you already have
 CVS and you have a mho cluster account, you can do
 <pre>
-cvs co ssh-1.2.14.1-win
+cvs co ssh
 </pre>
 
 
@@ -93,26 +93,11 @@ cvs co ssh-1.2.14.1-win
 
 <li> Under Cygwin bash, build ssh with:
 <pre>
-cd ssh-1.2.14.1
+cd ssh
 nmake -f makefile.vc TOOLS32=d:\\PROGRA~1\MICROS~2\VC98
 </pre>
 
 </ol>
-
-<h2>CVSSSH To Do List</h2>
-<ul>
-<li> Check in the various redistributable pieces, such as the help
-files and the InstallShield script and setup file.
-
-<li> Look into path length problems.  Windows apparently has
-a hard time with variables over 128 characters.
-
-<li> Upgrade from ssh-1.2.14 to ssh-1.2.26
-
-<li> Ship the <CODE>README.txt</CODE> file as an HTML file instead
-This will require setting up InstallShield to start up a browser.
-
-</ul>
 
 
 </body>
