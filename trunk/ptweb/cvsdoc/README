@@ -1,0 +1,5 @@
+$Id$
+
+This directory is called cvsdoc because if was called cvs, then when
+we checked out the tree under NT with CVS, we would have problems
+because of the case sensitivity problems.
