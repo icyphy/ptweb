@@ -1,13 +1,28 @@
+NAMES
+Stephen Neuendorffer and Yang Zhao
+
+EMAIL
+neuendor@eecs.berkeley.edu, ellen_zh@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~neuendor
+
+PHONE
+510-642-6817
+510-642-5457
+
+TITLE
 A Framework for Component Management in Large Scale Distributed Systems
 
-Author: Stephen Neuendorffer, Yang Zhao
-Advisor: Edward Lee 
+CHAPTER
+02.cad
 
+ABSTRACT 
 Today we are viewing a rapid growth in the scale and complexity of distributed systems.  
 Mechanisms for flexibly and automatically configuring, deploying and managing these 
 systems can address this complexity. In this project, we take a modeling perspective 
 and develop a framework for the design and analysis of such mechanisms.
-
+<p>
 In this framework, we consider each subsystem as a component with a lifecycle. We build 
 models that specify not only the communication and interaction between existing components, 
 but also reactions to significant events in the lifecycle of components.  In response to 
