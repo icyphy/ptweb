@@ -1,0 +1,50 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Heterogeneous Concurrent Modeling and Design in Java</title>
+</head>
+<body>
+<center>
+<h1>Heterogeneous Concurrent Modeling and Design in Java</h1>
+</center>
+<center>
+Shuvra S. Bhattacharyya, Elaine Cheong, John Davis II, Mudit Goel,
+Christopher Hylands, Bart Kienhuis, Edward A. Lee, Jie Liu, Xiaojun
+Liu, Lukito Muliadi, Steve Neuendorffer, John Reekie, Neil Smyth, Jeff
+Tsay, Brian Vogel, Winthrop Williams, Yuhong Xiong, Haiyang Zheng
+<p>
+Memorandum UCB/ERL M02/<I>TBA</I>,<br> EECS, University of California, Berkeley, CA  USA 94720
+<BR>
+August 5, 2002
+</CENTER>
+<p>
+<CENTER>
+<a href="design.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+This document describes the design and implementation of Ptolemy II
+2.0.1. Ptolemy II is a set of Java packages supporting heterogeneous,
+concurrent modeling and design. The focus is on assembly of concurrent
+components. The key underlying principle in the Ptolemy II is the use
+of well-defined <i>models of computation</i> that govern the
+interaction between components. A major problem area that is addressed
+is the use of heterogeneous mixtures of models of computation.
+
+The kernel package in Ptolemy II supports clustered hierarchical
+graphs, which are collections of entities and relations between those
+entities. Its actor package extends the kernel so that entities have
+functionality and can communicate via the relations. Its domains extend
+the actor package by imposing models of computation on the interaction
+between entities. Examples of models of computation include
+discrete-event systems, dataflow, process networks, continuous-time
+models, synchronous/reactive systems, and communicating sequential
+processes. Ptolemy II includes a number of support packages, providing
+for example graph-theoretic manipulations, matrix and vector math and
+signal processing functions, visual display of data, a sophisticated
+type system, data encapsulation and an expression language and parser.
+</body>
+</html>
+
