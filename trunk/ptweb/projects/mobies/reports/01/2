@@ -52,37 +52,273 @@ result that we believe forms the first building blocks of a true
 systems theory for actor-oriented design.
 
 
-Architectural models and Application models. 
-============================================
+Code Generation
+===============
 
-On the trip to Tahoe on Friday, I came up with a really cool way to mix
-these two types of models.  The short summary is that
-the director of the application model contains the architectural model.
-I'll give you the details tomorrow, if you have a chance to talk.
+We have gone through an extensive evaluation of our alternatives, and
+have decided to rearchitect the code generation framework in Ptolemy II
+using Soot, from McGill.  Part of the discussion follows:
+
+From Prof. Shuvra S. Bhattacharyya, of the University of Maryland, now
+under subcontract:
+
+  "I have been reading up on some of the alternative intermediate
+  formats, such as Soot and that provided by BECL. These offer
+  interesting possibilities for doing extensive, lower-level
+  optimizations, but it is not clear to me how these are essential to
+  our near-term concern of getting a robust, extensible code generation
+  infrastructure in place.
+
+  I think we might want to stick instead with the standard Java AST
+  representation we already have, but with a better implementation. The
+  current representation is suitable for all of the important
+  transformations that we need at this point (type specialization,
+  method devirtualization, certain forms of dead code elimination,
+  etc.). It is also very intuitive to work with due to its close match
+  to the Java language. This is an important consideration to
+  facilitate development of different back-ends. If we decide later
+  that we want a different representation to do more extensive analysis
+  and optimization, it should be easy to plug it in by transforming
+  from/to the existing representation.
+
+  We still have to work with bytecode when working with referenced
+  classes. But Christopher's ASTRefect already does a nice job of
+  extracting the essential information without dealing explicitly with
+  the bytecode representation. It should be straightforward to port
+  ASTReflect to an alternative implementation of the existing AST
+  representation. Porting the semantic analysis code will require more
+  work.
+
+  SableCC (http://www.sable.mcgill.ca/publications/#tools98) seems to
+  offer the key features that we want in the front end, ... and that
+  looks like a promising way to generate the AST implementation, along
+  with the lexical analyzer, parser, and AST walkers. JavaCC is an
+  alternative, but it suffers from some of the drawbacks of our
+  existing implementation (e.g., numbered references to a node's
+  children).
+
+
+Hybrid Systems and Modal Models
+===============================
+
+Jie Liu has identified a key flaw in the semantics of our finite
+state machine (FSM) hierarchical composition with other models to achieve
+hybrid systems and modal models.  His description:
+
+   "In FSM, there is no way to specify that if a guard is true, then
+   run a model (say a composite actor). ... Nonpreemptive transitions
+   will not work, since I don't want to generate the challenge if the
+   input packet is not a request. A preemptive transition, as it is
+   implemented now, takes one iteration by itself, without firing
+   either the refinement of the source state or the refinement of the
+   destination state. So, putting the generating challenge subsystem
+   inside the destination state won't do the job either."
+
+Jie and Xiaojun Liu proposed two possible solution:
+
+   "One is to extend the expression language, say with
+   execute(actorName), which fires the actor when the transition is
+   taken. The second is to modify the concept of preemptive transitions,
+   so that after the transition is taken, the refinement of the new
+   state is fired."
+
+A third possibility is to introduce a third type of transition that
+fires the destination state refinement. A fourth possibility is to
+introduce a new kind of state, called a "transient state," whose
+refinement fired immediately and whose outgoing transitions are taken
+immediately (if enabled). We have not yet decided which of these
+options to implement.
+
+
+Type System
+===========
+
+Jie Liu has also identified a flaw in the type system:
+
+   "TypeAttribute only takes BaseType as its value. I am using a
+   IntArray to represent a network packet. And a FSM actor will produce
+   IntArrays as its output. But it cannot pass type resolution, since
+   in general FSM actors need to specify their output types manually.
+   But I cannot specify an array type by adding a TypeAttribute."
+
+We have decided that the fix here is to modify TypeAttribute so that it
+takes a "prototype" as a type specification. A prototype is any
+expression that evaluates to the desired type. Any (concrete) type can
+be specified this way, since any (concrete) type can be represented by
+some expression in the expression language.
+
+We have begun to implement this. Yuhong Xiong changed the string
+representation for array and record types so that the new syntax for
+array types is {int} for int array, {double} for double array, etc. The
+old syntax was (int)array, (double)array). The new syntax for record
+types is {item=string, val=double}. The old syntax used : instead of =.
+This change is the first step to make TypeAttribute support structured
+types. Xiaojun Liu then added constants "int" and "double" to the
+expression language to give representative values for the base types.
+The only remaining step is to modify TypeAttribute to use prototypes.
+
+Yuhong Xiong has refined the mechanism for casting record types to more
+primitive record types. This change was suggested by Zoltan Kemenczy
+and Sean Simmons of Research in Motion, a Canadian company that is
+using Ptolemy II for modeling wireless communication systems. Yuhong
+has changed RecordToken.convert() to not chop off the extra fields in a
+lower record token when it is converted to a higher record. Related to
+this, he has also changed RecordToken.add() to pass through all the
+fields in the tokens to be added. For example, when adding a token with
+field "id" and another one with fields "id" and "val", the resulting
+token will have both the "id" and "val" fields. This change does not
+affect the result of any type resolution. For example, in the
+AddSubtract actor, the resolved output type is still the highest types
+of the ports connected to its input (or the least upper bound of those
+port types if they are incomparable). However, the token send out by
+AddSubtract may be a lower record type of the resolved type.
+
+Yuhong Xiong also demonstrated the power of our type system by showing
+how to construct an actor that multiplies both scalars and arrays and
+expresses its type constraints using a monotonic function f(inType,
+paramType) => outType, where inType and outType are the input and
+output types, respectively, and paramType is the type of the factor
+parameter. The value of the function is the least upper bound of inType
+and paramType if inType is a BaseType, or a new array type whose
+element type is f(elementTypeOfInType, paramType) if inType is an array
+type. Note that the function f() is recursive so the input can be an
+array of array, for example. The use of monotonic functions in the type
+system is extremely expressive, allowing very complicated type
+constaints to be expressed in a robust manner.
+
 
 Code Generation
 ===============
 
+Christopher Hylands and Steve Neuendorffer began using Soot as a basis
+for code generation. Soot is a "Java Optimization Framework" from McGill
+that is written in Java and available from
+
+   http://www.sable.mcgill.ca/soot/
+
+Soot handles byte code, so we will not have to do class resolution from
+short names to fully qualified names. This should speed up code
+generation quite a bit, and result in a smaller memory footprint for the
+code generator.  Nonetheless, we have had many internal discussions about
+the relative merits of using Soot vs. our current framework, and despite
+considerable obstacles, have decided to invest primarily in a Soot-based
+framework. Two key advantages of basing the generators on Soot are:
+
+ - Code generation will work on any actor you can run, regardless
+   of whether source code is provided.  This could become key
+   when we implement networked sharing, and a networked community
+   starts building components.
+
+ - Byte code is considerably more stable than Java source code.
+   The Java language evolves more rapidly than the byte code definition.
+
+It remains to be seen, however, how easy it will be to do the
+transformations that Jeff did.  Steve has successfully gotten "shallow"
+code generation working using Soot (where the simulation classes are
+used for execution), and has made progress on "deep" code generation
+(where the classes are transformed based on their context).
+
+Soot is released under the GNU Library General Public License, so we
+can redistribute it with certain (benign) restrictions. Christopher and
+Steve have set up CVS repository to make it easy to use Soot within
+our software development framework.
+
+We have established a two-year subcontract with the University of Maryland,
+under the direction of Prof. Shuvra Bhattacharyya.  Shuvra has begun work
+using the Soot framework to do C code generation.
+
+Prior to the initiation of this subcontract, using the original code
+generation framework (written by Jeff Tsay), Prof. Shuvra S.
+Bhattacharyya of the University of Maryland implemented a technique he
+calls "shallow AST loading" that minimizes the number of abstract
+syntax trees (ASTs) that we need. One of the weaknesses with Jeff's
+implementation is the proliferation of a very large number of ASTs. In
+Jeff's code, the vast majority of ASTs are being loaded recursively
+through a forced loading of Object, which is needed because every class
+inherits from Object. He realized a significant improvement by loading
+an AST for a class only if a) it is really required (like Object, and a
+small number of other classes), or b) a field/method of the class is
+accessed by an AST that we have already loaded. Shuvra tested this
+technique with all passes of static resolution, and the rudimentary
+Java-to-C conversion functionality that he had built.
+
+Suppose, for example, we try to do type resolution on Object. We will
+have to deal with 'String' because it is referenced in the declaration
+of Object.toString(). However, at this point, it seems we really only
+need to create a single AST node to represent String. We do not need to
+reflect String to build a more detailed AST. Presently, we are loading
+the field/method declarations for String, and then recursively loading
+all classes that are encountered in doing so. And, before you know it,
+we have constructed 196 ASTs. Method bodies are excluded from these
+ASTs, so the memory consumption might not be that large ... but the
+run-time overhead of going through all those class files is quite high.
+
+Also, Christopher Hylands got arrays working with Jeff's deep code
+generation.  The difficulty of doing this was part of the impetus
+driving us towards using Soot.
+
+Finally, Christopher Hylands built into the code generation framework
+the synthesis of makefiles to go with the generated code.
 
 
-Christopher Hylands 
+Modeling Strategies
+===================
 
-Steve Neuendorffer
-Ok, so I was a little confused apparently, SableCC and soot/jimple are
-released under the Library GPL, which is OK...  you only have to distribute
-source for the library.
+Xiaojun Liu experimented with an interesting blend of object-oriented
+and actor-oriented design by implementing a ClassWrapper actor. The
+actor contains an instance of a specified Java class. Input ports of
+the actor correspond to methods of the class. Input tokens are treated
+as method parameters. Return values of methods are wrapped in tokens
+that are sent to output ports.
+
+This actor allows us to decouple the following: prepare parameters,
+communicate the parameters, execute a method, communicate the return
+value, and process the return value. In a Java program, these are more
+tightly bound.  It also permits legacy class definitions to be wrapped
+and used in a Ptolemy II model.
+
+Brian Vogel has implemented an elaborate pitch/time scaling audio
+application using the HDF (heterochronous dataflow) domain, which
+hierarchically combines finite-state machines and synchronous dataflow.
+This example shows that HDF can be used effectively for nontrivial
+applications, at least by a designer with deep understanding of the HDF
+semantics. Some example sound files can be found at:
+
+   http://ptolemy.eecs.berkeley.edu/~vogel/sounds/pitchshift/
 
 
-Other Software Improvements
-===========================
+Performance
+===========
+
+We have added a simple mechanism for measuring real-time performance of
+Ptolemy II models executing as simulations (vs. code generation), and
+the initial results show that there is a great deal of improvement
+needed in performance. The mechanism is a plotter that plots its input
+as a function of the real elapsed time in seconds. We have also added a
+WallClockTime actor to the sources palette. This one outputs the
+current wall clock time elapsed since the initiation of the model.
+Preliminary results using this are fairly discouraging. All domains
+seem to operate at a rate of around 1000-1300 iterations per second,
+which is quite slow. Surprisingly, there is little difference between
+domains. SDF is slightly faster than DE, PN, and Giotto, but not much.
+Interesting, Giotto seems to be the slowest. This suggests that the
+slowness is due to artifacts in the Ptolemy kernel, and not to the
+properties of the domains. Also, there are often gaps of about 1/3
+second, presumably due to Java garbage collection.
 
 
-
-Actor Libraries
-===============
-
-Example models
+TTTech Cluster
 ==============
+
+Win Williams, a staff researcher, spent considerable time trying to get
+the TTTech cluster that the Mobies project purchased operational. He
+ran into so many problems that we have decided that we will not work
+further with this hardware and software. It is not, in our opinion,
+ready for use without extensive participation from TTTech technicians.
+Several of the problems were packaging problems, including defective
+cables, incompatible software, and expired software licenses shipped
+with the product.  Each problem took considerable effort to diagnose
+and resolve.
 
 
 Design and Code Reviews
@@ -90,11 +326,24 @@ Design and Code Reviews
 
 We performed the following design reviews:
 
+* SR (synchronous/reactive) domain kernel
+* Type package
+* ClassWrapper class
+
 We performed the following code reviews:
+
+* Tue SDF Kernel
+* Type package
+* Conversion actors
 
 
 Personnel
 =========
+
+* Yang Zhao has joined our group as a graduate student.
+
+* Sonia Sachs has returned to LBL, but remains an (unpaid) visiting
+  researcher.
 
 
 Study Group
@@ -102,6 +351,10 @@ Study Group
 
 Our sort-of weekly study group examined the following topics:
 
+* Vanderbilt GME.
+* Classic Leslie Lamport paper on time and clocks.
+* Functional reactive programming, from Yale.
+* Protocol synthesis.
 
 
 2.  Interactions, Meetings, and Technology Transfer
@@ -109,7 +362,22 @@ Our sort-of weekly study group examined the following topics:
 Presentations
 =============
 
--- 
+-- "Synthesis of Embedded Software from Concurrent Component Models ---
+    The Ptolemy Approach," Edward A. Lee, Porgramming Systems Seminar,
+    UC Berkeley, April 16, 2001.
+
+-- Steve Neuendorffer gave three talks at Vanderbilt, April 2-6:
+   1) "Vergil: A component-based design environment."
+   2) "Ptolemy II: Heterogeneous Modeling and Design in Java."
+   3) "Publishing Research Software: Software Engineering in the
+       Ptolemy Project."
+
+-- Steve Neuendorffer gave a talk at Trimedia in Sunnyvale on April 30
+   entitled "Mescal and Ptolemy: Ideas on integrating hierarchical,
+   component-based models of embedded systems."
+
+-- Steve Neuendorffer attended the Design Automation Conference (DAC),
+   and demonstrated Ptolemy II in the University Booth.
 
 
 Other Interactions
@@ -118,8 +386,93 @@ Other Interactions
 *  Weekly meetings with Mobies Phase II project at Berkeley,
    Mondays, 9-10am.
 
+*  Numerous telecons with the Mobies Phase II project on various topics.
+
+*  Steve Neuendorffer visited Vanderbilt April 2-6, and gave three talks,
+   on Vergil, Ptolemy II, and our software practice. He learned to use GME,
+   the Vanderbilt metamodeling tool, and about the use of Bond graphs
+   in modeling.
+
+*  Edward A. Lee participated in the SRC summer study in Colorado
+   Springs June 25-26. This meeting is conducted every other year and
+   members of the Executive Technical Advisory Board (ETAB) of SRC
+   discuss, among other things, research topics needing increased
+   emphasis in the future. One of the topics for this summer was
+   "software," which the SRC has defined more tightly as software which
+   is developed in SRC member companies specific to and included as
+   part of our members' products -- embedded software, RTOS,
+   specialized, hardware-targeted compilers, etc. Lee made a
+   presentation on embedded software, and as a result of the meeting,
+   the ETAB has recommended to the SRC that one of two new focus
+   centers should concentrate on embedded software.
+
+*  Ken Henry of General Motors approached us to explore using Giotto
+   synchronous semantics to express their control models (and perhaps
+   our plant models). They are setting up a small lab here at R&D for
+   internal outreach (a heterogeneous, multiple processor network with
+   CAN at a minimum), and are interested in realizing some form of
+   time-triggered model on it.
+
+*  Prof. Michael J. Wirthlin of Brigham Young University visited our
+   group May 29 - June 1 to work on building a configurable hardware
+   synthesis tool based on our new Soot-based code generation framework.
+   We worked closely with him and made considerable progress during his
+   visit.  He has carried on the work on his own and in interaction with
+   Shuvra Bhattacharyya of the University of Maryland.  The principal
+   target hardware is FPGA cards in a PCM/CIA card form factor.  He gave
+   the group a tutorial on JHDL, his Java-based hardware description
+   language.
+
+*  Dr. F. Arbab of CWI, the developer of the Manifold coordination
+   language, visited us Wednesday June 20. Manifold realizes a model of
+   computation similar to process networks, but with nondeterministic
+   merge. It has a clever mechanism supporting mutating models, whereby
+   a channel has two connections, one to the source and one to the
+   destination. You can break one of the connections without breaking
+   the other. This is key to how determinism is preserved in the face
+   of mutations. By default, a channel is a "BK" channel: break on the
+   source side and keep on the destination side, which means that any
+   tokens that have already been produced on the channel will be
+   processed by the destination actor. "States" are topologies. The
+   manager changes state by rewiring the graph.
+
+*  Seoul National University has released a GUI 'Hae' for the PeaCE
+   environment (see http://peace.snu.ac.kr/research/peace), where PeaCE
+   stands for Ptolemy extension as Codesign Environment. PeaCE is a
+   codesign environment for rapid development of heterogeneous digital
+   systems on system-on-chip (SOC) design to distributed heterogeneous
+   system design. Key features of PeaCE are:
+
+   1. Open source research tool written in C++ (kernel) and Java (GUI).
+   2. Separation of Java user interface (Hae) from kernel for platform-
+      independent GUI.
+   3. Object-oriented C++ kernel for high performance.
+   4. Multilingual system design with formal models of computations.
+   5. Automatic hardware and software synthesis from dataflow and FSM
+      specifications.
+
+   Even though the Hae is designed for PeaCE, it is possible to use it
+   in Ptolemy Classic instead of vem.
+
+*  We have had extensive discussions with Prof. Michael Wirthlin of
+   Brigham Young University about software engineering and code
+   publication.  Michael is working on synthesis of configurable
+   hardware using the Ptolemy II code generation mechanism, and
+   is looking for an effective way to distribute his results.
+
+*  We have established an interaction with Trimedia of Sunnyvale, a
+   company that specializes in processors and software for real-time
+   embedded media processing. One of Trimedia's key researchers, Kees
+   Vissers, is spending one day per week at Berkeley, with the charter
+   to work on component-based models (such as Kahn Process Networks) as
+   a way to describe the functional properties of embedded systems. He
+   has arranged a donation of Trimedia hardware and software to us,
+   including an experimental Java environment for the system.
+
 
 3.  Publications
+
+FIXME
 
 
 4. Financial Data
