@@ -1,0 +1,257 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 May 30, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        3/15/99 - 4/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Ptolemy II continues to mature, with a growing number of applets,
+domains, and actors. The major innovations continue to be in the areas
+of type systems and domain semantics.  Our external interactions and
+technology transfer continue at a high rate.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+
+Domain Polymorphic Actor Library
+--------------------------------
+
+The design of our domain and data polymorphic actor library progresses.
+It has triggered some changes in the type system (see below).
+
+
+Type System
+-----------
+
+Yuhong Xiong generalized the interface to the type system with two
+objectives:
+
+1) Type constraints in actors, which used to specified by overriding a
+   default method in a fairly complicated way, can now be specified
+   declaratively.
+
+2) Both ports and parameters in actors can have interlinked type
+   constraints.
+
+This new design is much more expressive, and much easier to use in
+building actor libraries.
+
+
+Expression Language
+-------------------
+
+Ptolemy II includes a simple extensible expression language, originally
+implemented last year by Neil Smyth, in which strings are parsed and
+evaluated dynamically. Xiaojun Liu created a Variable class that
+underlies parameters and can be used to define dynamically evaluated
+expressions anywhere in a Ptolemy II model. The first use of this is to
+create an Expression actor, which takes as a parameter an expression
+that can refer to the input values to compute the output values.
+
+We have modified the semantics of the expression to use lazy evaluation.
+Expressions are evaluated only when their values are demanded.  This
+solved a number of problems with dependencies between expressions.
+
+
+Software Engineering
+--------------------
+
+Design Reviews:
+  - sdf/kernel
+  - dde/kernel
+  - math package
+  - actor/lib
+
+Code Reviews:
+  - graph package
+  - csp/kernel
+  - pn/kernel
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+The DDE (distributed discrete-event) domain, created by John Davis, is
+maturing. Formerly called ODF (ordered dataflow), the semantics of this
+domain can be viewed as either a loosely synchronized version of
+discrete events or a timed version of dataflow. One of the main
+applications for this domain is to support distributed time-based
+modeling, where component models reside in the network. The motivation
+might be either speedup or protection of intellectual property.
+
+John has created a realization where each connection between components
+maintains a locally monotonic notion of time. Reading of input channels
+is blocking, as with dataflow, in order to preserve determinacy and to
+ensure that time progresses monotonically in each actor. But there is
+no global notion of time, and no global system state.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Hybrid Systems
+--------------
+
+Jie Liu and Xiaojun Liu presented Ptolemy II at the second HSCC
+workshop Hybrid System: Computation and Control. They focused on the
+ability to model hybrid systems. They were able to make systematic
+comparisons of the hybrid systems modeling capabilities of Ptolemy II
+and other systems, and found that its capabilities exceed those of most
+alternatives, with the exception that it does not solve algebraic
+equations.  Its particularly unusual strengths include its systematic
+handling of Dirac delta functions, a critical part of the interface
+between the discrete and continuous worlds.
+ 
+
+2.  Equipment/Infrastructure Status:
+
+Christopher Hylands used Satan to do a security scan of Cory Hall
+machines, including ours, exposing a number of vulnerabilities. He also
+created a new cvs repository called tcl which contains the Jacl source
+code. He also modified the ptII user to build with JDK1.2 and Jacl. We
+are now using Jacl, a pure-Java implementation of Tcl, for the Ptolemy
+II test suite.
+
+
+3.  Interactions and Technology Transfer
+
+-----
+John Reekie and Christopher Hylands presented an all day seminar on
+Software Practice to the newly formed GSRC (gigascale silicon research
+center). We believe that the Ptolemy project has developed the first
+systematic software practice that is applicable in an academic context,
+and we hope that GSRC will adopt the practice as part of its culture.
+
+-----
+Mark E. Dunham, of Los Alamos National Labs, visited our group on March
+29. He is working on Reconfigurable Computing, as described at
+http://www.lanl.gov/rcc, under DOE, DOD, and DARPA funding.
+
+-----
+BNeD and Virtual Photonics, who have used Ptolemy Classic for modeling
+optical fiber communication systems, were awarded the 1998 Sprint
+Values Excellence Award, for their contribution to the characterization
+of a commercial, 40 channel WDM system at Sprint's Advanced Technology
+Lab in Burlingame, California. This characterization was based on
+Ptolemy software.
+
+-----
+Two senior undergraduates in Prof. Kris Pister's group, Allen and
+Johnny Chang, have developed a simulation tool from ptolemy for
+distributed sensor networks.
+
+-----
+Dr. Steven Levitan writes:
+
+ "I would also like to inform you of what we are doing here at the
+  University of Pittsburgh. As you know, we have built our free-space
+  opto-electro-mechanical tool, Chatoyant, on top of Ptolemy. We are
+  trying to distribute free demos of our tool to some outside
+  researchers. To do this, we are packaging a copy of Ptolemy (NT) and
+  Chatoyant on a CD-ROM in hopes that this is the easiest way
+  distribute our work. To do this, we are placing the Ptolemy tree and
+  a copy of a Chatoyant pigiRpc containing our statically linked stars
+  on the disc. We will, of course, include all the Ptolemy copyright
+  material in this CD-ROM. I wanted to alert you to this before we went
+  any further, and would appreciate any feedback/comments that you
+  have."
+
+-----
+Jens Voigt, of TU Dresden, in Germany, made the first externally
+created Ptolemy II applet.  It can be viewed at:
+
+     http://entmuc.et.tu-dresden.de:4660/ptII/ptolemy/domains/de/demo/WirelessSystem.html
+
+Here is his description of the applet:
+
+ "The above applet uses the Ptolemy II Discrete Event (DE) domain to
+  simulate the activation and deactivation of some mobile network
+  elements. A traffic source following the Erlang traffic model
+  (exponentially distributed inter-arrival as well as service times and
+  an infinite user pool) drives the simulation. Since the DE-domain of
+  the PtolemyII 0.2 release does not support mutations in the topology
+  so far, five network elements are hardwired into the topology. The
+  simulation's topology is shown at the bottom of that page. A
+  configuration manager receives the on/off messages from the traffic
+  source and activates or deactivates the network elements. The points
+  in time when a network element is activated as well as the service
+  times are depicted in the timeplot. 
+
+  Once a network element is activated, it asks the base station for a
+  resource. This communication is done through the channel. As long as
+  the base station still has resources available, it gives one to the
+  quering network element. The number of resources as well as the
+  parameter of the traffic model can be set. 
+
+  If the service time of the network element is over, it returns the
+  resource to the base station by sending messages through the channel.
+  Then, the network element is deactivated. 
+
+...
+
+  Play with the parameters. If you especially vary the number of
+  resources vs. the traffic load, you 'll see more or less network
+  elements getting resources or not. The higher the traffic load (the
+  lower the mean arrival time and/or the higher the mean service time)
+  the more resources are needed in a telephone network in order to
+  avoid rejections of service requests. If the number of resources is
+  set to zero, no network element will get a resource." 
+
+----- 
+Jens Tingleff, starting with Wolfgang Reimer's Linux port of
+Ptolemy Classic, added a new architecture "linux-ppc."
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+[1] J. Reekie, S. Neuendorffer, C. Hylands and E. A. Lee ``Software
+    Practice in the Ptolemy Project,''Technical Report Series,
+    GSRC-TR-1999-01, Gigascale Semiconductor Research Center, University of
+    California, Berkeley, CA 94720, April 1999.
+
+[2] Jie Liu, Xiaojun Liu, T. John Koo, Bruno Sinopoli, Shankar Sastry,
+    and Edward A. Lee, "Hybrid System Simulation in Ptolemy II," Hybrid
+    System: Computation and Control (HSCC) workshop, FIXME.
+
+[3] Jie Liu, Bicheng Wu, Xiaojun Liu, and Edward A. Lee,
+    "Interoperation of Heterogeneous CAD tools in Ptolemy II," Symposium on
+    Design Test and Microfabrication of MEMS/MOEMS, Paris, March 30 - April
+    1, 1999
+
+
+6.  Difficulties/Problems
+
+Two students in the group, Jie Liu and Xiaojun Liu, have been delayed
+in returning from a Hybrid Systems conference in Paris with Visa
+problems.
+
+
+7.  Next Quarter Plans
+
+The type system still needs more work. In particular, we need to
+enhance the expression language in Ptolemy II to express type
+constraints across operators. This will permit, for example, the type
+constraints between the inputs and the outputs of an Expression actor
+to be determined automatically.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
