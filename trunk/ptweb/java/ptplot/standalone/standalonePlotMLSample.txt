@@ -1,5 +1,5 @@
 <?xml version="1.0" standalone="no"?>
-<!DOCTYPE plot SYSTEM "http://ptolemy.eecs.berkeley.edu/xml/dtd/plotml.dtd">
+<!DOCTYPE plot SYSTEM "./plotml.dtd">
 <!-- Ptolemy plot, version 3.1, PlotML format. -->
 
 <plot>
