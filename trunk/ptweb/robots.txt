@@ -89,6 +89,7 @@ Disallow: /ptolemy0.6/contrib
 Disallow: /ptolemy0.6/gnu
 Disallow: /ptolemy0.7/contrib
 Disallow: /ptolemy0.7/gnu
+Disallow: /ptolemyclassic/ptolemy
 Disallow: /tycho/tycho0.1
 Disallow: /tycho/tycho0.1.1
 Disallow: /tycho/tycho0.2beta
