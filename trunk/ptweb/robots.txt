@@ -13,6 +13,7 @@ Disallow: /~cxh/tmp
 Disallow: /~johnr/norobots
 Disallow: /~johnr/local/nt/bulk/ibm/OLD
 Disallow: /~nsmyth/Ptolemy/public_html
+Disallow: /~marys/private
 Disallow: /~ptdesign/Ptolemy
 Disallow: /~ptdesign/java/JavaScope
 Disallow: /~ptdesign/java/JavaClassLibExamples
