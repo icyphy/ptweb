@@ -18,6 +18,7 @@ SOURCES = ptolemyII.sum \
 	  cont_and_disc.sum \
 	  e_Ptolemy.sum \
 	  nest.sum \
+	  vogel01.sum \
 	  celaine.sum
 
 index.html : $(SOURCES) sum2html
