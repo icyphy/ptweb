@@ -19,6 +19,8 @@ To do this,
 
 4. In your summary, consider adding the following
    
+   * GIF screenshots are nice.
+
    * If there is a website that talks about your research, then
    consider adding a link to the bottom (before the references) that
    looks something like:
