@@ -16,8 +16,18 @@
 <B>or</B>
 <menu>
 <li> 
-<a href="InstData/Windows/NoVM/ptIIinst.exe">Download the Ptolemy II 17.4 Mb Windows executable file</a>
+<a href="InstData/Windows/VM/ptIIinst.exe">Download the Ptolemy II 17.4 Mb Windows executable file that includes a private copy of the Java Runtime Environment </a>
 </menu>
+<B>or</B>
+<menu>
+
+<li> <a href="#installJava">Install Java</a>
+<li> 
+<a href="InstData/Windows/NoVM/ptIIinst.exe">Download the Ptolemy II 17.4 Mb Windows executable file that does not include Java</a>
+</menu>
+
+
+
 <h4>Documentation</h4>
 <menu>
 <li> The 
@@ -31,21 +41,23 @@ instructions.
 
 <h2>Installation Instructions</h2>
 
-<h3>1. Install Java, if necessary</h3>
+<h3><a name="installJava">1. Install Java, if necessary</a>
+</h3>
 
 <p>
-Ptolemy II requires Java 1.2 or later.
+Ptolemy II requires Java 1.4 or later.
 Java 1.4.1_02 is preferred.
+
+ <p>Under Windows, you may either download an installer that 
+includes the appropriate version of Java, or you may install Java
+by hand and then download an installer that does not include
+Java.
 
  <p> Note that under Java 1.4.1_02, viewing local applets that have
 spaces in the path name may fail if the applet tries to download a
 data file.  The workaround is to place the Ptplot distribution in a
 directory that does not have space in the pathname.  For details, see
 the <a href="ptII3.0/doc/troubleshooting.htm#spaces">Troubleshooting Guide</a>.
-
- <p> Note further that the code generator will not work under
-JDK1.4.0 or later because of limitations in Soot.
- <br> For details, see the <a href="ptII3.0/doc/codegen.htm">Code Generations</a> documentation.
 
 <p>
 One way to determine what version of Java (if any) is installed 
@@ -118,11 +130,16 @@ click on the 'Grant' button.
 
 </menu>
 
- <B>or</B>
+<B>or</B>
 <menu>
-<li> Download a 
-<a href="InstData/Windows/NoVM/ptIIinst.exe">24.5 Mb Windows executable</a>, and execute it.
+<li> 
+<a href="InstData/Windows/VM/ptIIinst.exe">Download the Ptolemy II 17.4 Mb Windows executable file that includes a private copy of the Java Runtime Environment </a>
+</menu>
+<B>or</B>
+<menu>
 
+<li> 
+<a href="InstData/Windows/NoVM/ptIIinst.exe">Download the Ptolemy II 17.4 Mb Windows executable file that does not include Java</a>
 </menu>
 
 
