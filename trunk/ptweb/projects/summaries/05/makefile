@@ -9,7 +9,6 @@ SUM_SOURCES =  \
         fsmExtension.sum \
         softDevel05.sum \
 	tinygals.sum \
-	vergil05.sum \
 	ptplot05.sum \
 	softwalls.sum \
         ePtolemy05.sum \
