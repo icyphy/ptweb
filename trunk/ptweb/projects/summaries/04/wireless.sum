@@ -28,3 +28,4 @@ Currently we are implementing HDF in Ptolemy II. The scheduling of HDF involve a
 [1] A. Girault, B. Lee, and E. A. Lee, "Hierarchical Finite State Machines with Multiple Concurrency Models", IEEE Transactions on Computer-aided Design of Integrated Circuits and Systems, Vol. 18, No. 6, June 1999.
 <P>
 [2] E. A. Lee and D. G. Messerschmitt, "Synchronous Data Flow", Proceedings of the IEEE, Vol. 75, No. 9, pp. 1235-1245, September, 1987.
+<P>
