@@ -1,0 +1,52 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Dynamic Dataflow Modeling in Ptolemy II</title>
+</head>
+<body>
+<center>
+<h1>Dynamic Dataflow Modeling in Ptolemy II</h1>
+</center>
+<center>
+Gang Zhou
+</center>
+<br>
+<center>
+<i>Technical Memorandum UCB/ERL M05/2</i>,
+University of California, Berkeley, CA 94720, December 21, 2004.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="GangMS.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A><br>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+
+Dataflow process networks are a special case of Kahn process networks (PN). 
+In dataflow process networks, each process consists of repeated firings of 
+a dataflow actor, which defines a quantum of computation. Using this quantum 
+avoids the complexities and context switching overhead of process suspension 
+and resumption incurred in most implementations of Kahn process networks. 
+Instead of context switching, dataflow process networks are executed by 
+scheduling the actor firings. This scheduling can be done at compile time 
+for synchronous dataflow (SDF) which is a particularly restricted case with 
+the extremely useful property that deadlock and boundedness are decidable. 
+However, for the most general dataflow, the scheduling has to be done at run 
+time and questions about deadlock and boundedness cannot be statically answered. 
+This report describes and implements a dynamic dataflow (DDF) scheduling 
+algorithm under Ptolemy II framework based on original work in Ptolemy Classic. 
+The design of the algorithm is guided by several criteria that have implications 
+in practical implementation. We compared the performance of SDF, DDF and PN. 
+We also discussed composing DDF with other models of computation (MoC). Due to 
+Turing-completeness of DDF, it is not easy to define a meaningful iteration for 
+a DDF submodel when it is embedded inside another MoC. We provide a suite of 
+mechanisms that will facilitate this process. We give several application examples 
+to show how conditionals, data-dependent iterations, recursion and other dynamic 
+constructs can be modeled in the DDF domain. 
+
+<p>
+</body> </html>
+
