@@ -54,6 +54,7 @@ Disallow: /ptolemyII/ptII3.0/ptII
 Disallow: /ptolemyII/ptII3.0/ptII3.0
 Disallow: /ptolemyII/ptII3.0/ptII3.0-beta
 Disallow: /ptolemyII/ptII3.0/ptII3.0.1
+Disallow: /ptolemyII/ptII3.0/ptII3.0.2
 Disallow: /ptolemyII/ptII4.0/ptII
 Disallow: /ptolemyII/ptII4.0/ptII4.0-alpha
 Disallow: /ptolemyII/ptII4.0/ptII4.0
