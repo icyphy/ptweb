@@ -41,7 +41,7 @@ and used at the Intel Research Lab in Berkeley.
 
 <P>
 
-I would like to reimplement TinyGALS to be compatible with the latest
+I propose reimplementing TinyGALS to be compatible with the latest
 version of TinyOS (version 1.x), which uses the nesC programming
 language. The nesC programming constructs provide many features that
 allow for better code generation and static analysis of programs. This
@@ -56,26 +56,26 @@ application.
 
 <P>
 
-I would also like to use Ptolemy II to experiment with TinyGALS at a
-higher, more abstract level. Ptolemy II [3] is a software system for
-modeling, design, and simulation of heterogeneous, concurrent,
-real-time, embedded systems. Developers of Ptolemy II models may
-choose different execution semantics (called a domain), depending on
-the particular type of application domain. By writing a TinyGALS
-domain within Ptolemy II, we can discover how TinyGALS semantics
-interact with models of computation commonly used in applications such
-as signal processing, control systems, network processors, and/or
-real-time operating systems.
+We can also use Ptolemy II to experiment with TinyGALS at a higher,
+more abstract level. Ptolemy II [3] is a software system for modeling,
+design, and simulation of heterogeneous, concurrent, real-time,
+embedded systems. Developers of Ptolemy II models may choose different
+execution semantics (called a domain), depending on the particular
+type of application domain. By writing a TinyGALS domain within
+Ptolemy II, we can discover how TinyGALS semantics interact with
+models of computation commonly used in applications such as signal
+processing, control systems, network processors, and/or real-time
+operating systems.
 
 <P>
 
-I would also research how to generate C code from Ptolemy II models. A
-good target platform for the code generator is the Mote, which has the
-memory and power constraints typical of many embedded platforms. A
-TinyGALS domain could use this C code generator to generate code
-directly for the Motes, or it could take advantage of a
+I would also like to research how to generate C code from Ptolemy II
+models. A good target platform for the code generator is the Mote,
+which has the memory and power constraints typical of many embedded
+platforms. A TinyGALS domain could use this C code generator to
+generate code directly for the Motes, or it could take advantage of a
 nesC-compatible version of TinyGALS. The wireless networking
-capabilities of the Motes presents a unique challenge, however.  We
+capabilities of the Motes, however, present a unique challenge.  We
 can investigate how to partition a software application in order to
 achieve distributed multitasking among unreliable nodes.
 
