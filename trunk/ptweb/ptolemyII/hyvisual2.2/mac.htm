@@ -61,21 +61,34 @@ or try the generic Java installer.
 <h2>Mac OS X UI bugs</h2>
 <dl>
 <dt> Drag and Drop does not work
-<dd> Dragging an actor from the actor library pane on the left results in
+<dd> Under MacOSX with Web Start, to set up the Web Start console window, do: 
+	Applications -&gt; Utilities -&gt; Java -&gt; Web Start
+When I drag an actor, I see the following in the Web Start Console window:
+
 <pre>
-java.lang.ClassCastException
+	
+	java.lang.ClassCastException 
         at sun.awt.datatransfer.DataTransferer.translateTransferable(DataTransferer.java:1197)
-        at apple.awt.CDataTransferer.translateTransferable(CDataTransferer.java:128)
-        at sun.awt.datatransfer.DataTransferer$6.run(DataTransferer.java:1937)
-        at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:178)
+        at apple.awt.CDataTransferer.translateTransferable(CDataTransferer.java
+:128)
+        at sun.awt.datatransfer.DataTransferer$6.run(DataTransferer.java:1937) 
+        at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:178)  
         at java.awt.EventQueue.dispatchEvent(EventQueue.java:448)
-        at java.awt.EventDispatchThread.pumpOneEventForHierarchy(EventDispatchThread.java:230)
-        at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:183)
+        at java.awt.EventDispatchThread.pumpOneEventForHierarchy(EventDispatchThread.java:230)                                                                
+        at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:183)                                                                  
         at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:177)
         at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:169)
         at java.awt.EventDispatchThread.run(EventDispatchThread.java:99)
-
 </pre>
+
+Joe Porter reports
+<blockquote>
+Interestingly, I downloaded the source and 
+built Ptolemy from scratch under OSX.  This time
+I saw the exception mentioned on the console, but it
+generally worked well otherwise.  Under Web Start on
+OSX I can't do anything at all.
+</blockquote>
 The version of Java that is being run is a beta version of 1.4
  <p>The following Sun Java Topic might be of use
 <a href="http://forum.java.sun.com/thread.jsp?thread=184916&forum=5&message=654598"><CODE>http://forum.java.sun.com/thread.jsp?thread=184916&amp;forum=5&amp;message=654598</CODE></a>
