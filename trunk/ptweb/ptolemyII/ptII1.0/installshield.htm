@@ -42,6 +42,25 @@ from the Start menu has the JVM that was found at install time hardwired
 into it.  Sadly, the launcher will not try to find another JVM
 if the installtime JVM is not found.
 
+Alisson Brito" <alisson@dsc.ufpb.br> wrote the following about
+how to tell the installed version to use a different version of the JVM.
+<blockquote>
+I've unmounted the installer file with the
+command:
+<pre>
+        ptolemyII1.0.1.exe :is extract
+</pre>
+After that I've created a file called
+<code>sun_win32_140.jvm</code>
+<br>Then I 've made the product,xml to know that my
+ .jvm file exist and that
+<br>I have a jdk1.4.0 installed in a determinated path.
+<br>  And finally I run:
+<pre>
+           java run (that execute run.class)
+</pre>
+</blockquote>
+
 <li> Installshield Multiplatform Edition 4.0 can't update environment
 variables, so the user's path is not updated to include the directory
 where <CODE>vergil.exe</CODE> is located.  This might be fixed in
