@@ -1,0 +1,63 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>MUSIC and Ptolemy Classic</title>
+</head>
+<body>
+
+<h1>MUSIC and Ptolemy Classic</h1>
+
+"MUSIC detects frequencies in a signal by performing an eigen
+decomposition on the covariance matrix of a data vector y of M samples
+obtained from the samples of the received signal."
+
+<h2>Local Places to go</h2>
+<menu>
+<li> <a href="http://ptolemy.eecs.berkeley.edu/papers/96/dtmf_ict/www/node5.html#SECTION00050000000000000000">MUSIC Algorithm</a>
+from
+ <br>G. Arslan, B. L. Evans, F. A. Sakarya, and J. L. Pino, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/96/dtmf_ict" target="main">Performance Evaluation and Real-Time Implementation of Subspace, Adaptive, and DFT Algorithms for Multi-Tone Detection</A>," <I>Proc. Int. Conf. on Telecommunications</I>, Istanbul, Turkey, April 15-17, 1996. 
+
+<li> <a href="SDFMUSIC_M.txt">Ptlang description of the SDF MUSIC actor</a>
+</menu>
+
+ <hr>
+<h2>Ptolemy Demos</h2>
+<h3>Ptolemy 0.7.1</h3>
+
+<a href="pt0.7.1/body.htm" target="body">Ptolemy 0.7.1</a>
+ contains two SDF MUSIC demos in the matrix palette
+<dl>
+<dt> <CODE>SVD_MUSIC_1</CODE>
+
+<dd> Images: <a href="SVD_MUSIC_1.pdf">PDF</a> -
+<a href="SVD_MUSIC_1.png">PNG</a>
+ <br><a href="SVD_MUSIC_1.txt">Textual Description</a> 
+	(The textual description is in ptcl, see question
+	4.2 of the <a href="ptolemy.faq">Ptolemy Classic FAQ</a>)
+
+
+<dt> <CODE>SVD_MUSIC_2</CODE>
+
+<dd> Images: <a href="SVD_MUSIC_2.pdf">PDF</a> -
+<a href="SVD_MUSIC_2.png">PNG</a>
+ <br><a href="SVD_MUSIC_2.txt">Textual Description</a> 
+	(The textual description is in ptcl, see question
+	4.2 of the <a href="ptolemy.faq">Ptolemy Classic FAQ</a>)
+</dl>
+
+
+ <p> The images of the models were generated with
+<pre>
+cd $PTOLEMY/src/domains/sdf/demo
+$PTOLEMY/bin/prfacet -TOFILE /tmp/lossySpeech.ps -N -n -p -x lossySpeech
+pstoimg /tmp/lossySpeech.ps
+distill /tmp/lossySpeech.ps
+</pre>
+Note that the original models are in color, but due to software aging,
+when we generated the images in color, the background of each actor
+was black.
+
+</body>
+</html>

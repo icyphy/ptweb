@@ -1,0 +1,81 @@
+
+proc trysetstate {star state value} {
+    if [catch {statevalue $star $state initial} err] then {
+	    puts stdout "Warning: $err"
+    } else {
+	    setstate $star $state $value
+    }
+}
+proc trytargetparam {param value} {
+    if [catch {targetparam $param $value} err] then {
+        puts stdout "Warning: $err"
+    } else {
+        targetparam $param $value
+    }
+}
+
+
+reset
+newuniverse SVD_MUSIC_2
+    domain SDF
+	newstate rows int 30
+	newstate cols int 30
+	newstate resolution int 1024
+    star singen1 singen
+	trysetstate singen1 sample_rate 2*PI
+	trysetstate singen1 frequency PI/5
+    star singen2 singen
+	trysetstate singen2 sample_rate 2*PI
+	trysetstate singen2 frequency PI/11
+    star singen3 singen
+	trysetstate singen3 sample_rate 2*PI
+	trysetstate singen3 frequency PI/17
+    star Add1 Add
+    star IIDGaussian1 IIDGaussian
+	trysetstate IIDGaussian1 mean 0.0
+	trysetstate IIDGaussian1 variance .05
+    star BlackHole1 BlackHole
+    star MUSIC_M1 MUSIC_M
+	trysetstate MUSIC_M1 numRows rows
+	trysetstate MUSIC_M1 numCols cols
+	trysetstate MUSIC_M1 numSignals 3
+	trysetstate MUSIC_M1 resolution resolution
+    star Xgraph1 Xgraph
+	trysetstate Xgraph1 title {SVD_MUSIC_2 S(w) - Eigenspectrum}
+	trysetstate Xgraph1 saveFile {}
+	trysetstate Xgraph1 options {-0 'S(w)' =550x500+0+0}
+	trysetstate Xgraph1 ignore 0
+	trysetstate Xgraph1 xUnits 2*PI/resolution
+	trysetstate Xgraph1 xInit -PI
+    star Xgraph2 Xgraph
+	trysetstate Xgraph2 title {SVD_MUSIC_2 Singular Values}
+	trysetstate Xgraph2 saveFile {}
+	trysetstate Xgraph2 options {-nl -P -0 'singular values' =550x500+560+0}
+	trysetstate Xgraph2 ignore 0
+	trysetstate Xgraph2 xUnits 1.0
+	trysetstate Xgraph2 xInit 0.0
+    star SVD_M1 SVD_M
+	trysetstate SVD_M1 rows rows
+	trysetstate SVD_M1 cols cols
+	trysetstate SVD_M1 threshold 0.000000000001
+	trysetstate SVD_M1 max_iterations 30
+	trysetstate SVD_M1 generate_left NO
+	trysetstate SVD_M1 generate_right YES
+    star UnPk_M1 UnPk_M
+	trysetstate UnPk_M1 numRows rows
+	trysetstate UnPk_M1 numCols 1
+    star Toeplitz_M1 Toeplitz_M
+	trysetstate Toeplitz_M1 numRows rows
+	trysetstate Toeplitz_M1 numCols cols
+    connect singen3 out Add1 input
+	connect singen2 out Add1 input
+	connect singen1 out Add1 input
+	connect IIDGaussian1 output Add1 input
+    connect Add1 output Toeplitz_M1 input
+    connect MUSIC_M1 output Xgraph1 input
+    connect UnPk_M1 output Xgraph2 input
+    connect SVD_M1 svals UnPk_M1 input
+    connect SVD_M1 lsvec BlackHole1 input
+    connect SVD_M1 rsvec MUSIC_M1 rsvec
+    connect Toeplitz_M1 output SVD_M1 input
+
