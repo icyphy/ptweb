@@ -373,11 +373,13 @@ function setArchiveFile()
 	{		
 		if (plat!="mac")
 		{
-			document.writeln("<applet codebase=\"InstData\" archive=\"WebInst.jar\" code=\"com.zerog.ia.download.WebInstallerApplet\" width=\"525\" height=\"85\" background=\"#faf0e6\"\>")
+			document.writeln("<applet codebase=\"InstData\" archive=\"WebInst.jar\" code=\"com.zerog.ia.download.WebInstallerApplet\" width=\"525\" height=\"85\">")
+			document.writeln("  background=\"#faf0e6\"\>")
 		}
 		if (plat=="mac")
 		{
-			document.writeln("<applet codebase=\"InstData\" archive=\"WebInstMac.jar\" code=\"com.zerog.ia.download.WebInstallerApplet\" width=\"525\" height=\"85\"  background=\"#faf0e6\"\>")
+			document.writeln("<applet codebase=\"InstData\" archive=\"WebInstMac.jar\" code=\"com.zerog.ia.download.WebInstallerApplet\" width=\"525\" height=\"85\">")
+			document.writeln("  background=\"#faf0e6\"\>")
 		}
 	}
 }
