@@ -31,7 +31,7 @@ tar -zxf downloads/pt0.7.2devel.other.src.tar.gz
 </pre>
 
 
-<li> Edit <CODE>/root/.bashrc</CODE> and add the following
+<li> Create <CODE>$PTOLEMY/.bashrc</CODE> and add the following
 <pre>
 PTOLEMY=/root/ptolemy
 export PTOLEMY
@@ -39,10 +39,14 @@ export PTOLEMY
 PTARCH=linux
 export PTARCH
 
-PATH=$PATH:$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin
+PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
 </pre>
 
-<li> Exit your shell and restart a shell
+<li> 
+<pre>
+source /root/ptolemy/.bashrc
+</pre>
+
 
 <li> Start the compile:
 <pre>
@@ -64,6 +68,7 @@ ln -s  ../../../../src/gnu/src/make/i18n/* .
 </pre>
 and restart:
 <pre>
+cd $PTOLEMY
 make bootstrap &gt;&amp; boot2.out &amp;
 </pre>
 
@@ -110,6 +115,19 @@ make install_octtools &gt;&amp; oct.out &amp;
 </pre>
 
 
+<li> Proceed with the build
+<pre>
+make install &gt;&amp; install.out &amp;
+</pre>
+
+
+<li> CGTarget fails to compile
+<pre>
+../../../../src/domains/cg/kernel/CGTarget.cc:703: implicit declaration of func
+tion `int cuserid(...)'
+</pre>
+      //msg   &lt;&lt; "User:      " &lt;&lt; cuserid(NULL) &lt;&lt; "\n"
+      msg     &lt;&lt; "User:      " &lt;&lt; getlogin() &lt;&lt; "\n"
 </ol>
 
 </body>
