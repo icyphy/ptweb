@@ -8,7 +8,9 @@ SUM_SOURCES =  \
 	tinygals.sum \
 	starcharts.sum \
 	vergil03.sum \
-	ptplot03.sum
+	ptplot03.sum \
+	ePtolemy03.sum \
+	cal03.sum
 
 # other sources that are not .sum files 
 OTHER_SRCS =
@@ -17,7 +19,7 @@ OTHER_SRCS =
 
 index.html : $(SUM_SOURCES) sum2html
 	-chmod a+x sum2html
-	${PTII}/bin/ptjacl sum2html $(SUM_SOURCES)
+	c:/hyzheng/ptII/bin/ptjacl sum2html $(SUM_SOURCES)
 	-chgrp ptolemy *.html
 	-chmod g+w *.html
 
