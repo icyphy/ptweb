@@ -1,0 +1,37 @@
+NAMES
+Brian K. Vogel
+
+EMAIL
+vogel@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~vogel
+
+PHONE
+510-642-8884
+
+TITLE
+Real-time Audio Signal Processing in Java and Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+This project focuses on the implementation of a real-time audio signal processing algorithm [2,3] under various domains in Ptolemy II and as a stand-alone Java application. The current algorithm under study performs formant-corrected pitch shifting of human vocal sounds. This algorithm requires a significant amount of control flow and data flow in order to achieve real-time performance.
+<p>
+There are a number of motivations for implementing algorithms such as the one mentioned above where real-time performance is desirable: Firstly, implementing such an algorithm in Java provides means of exploring the suitability of Java to real-time audio processing tasks. Implementing the same algorithm under various domains in Ptolemy II and conducting a performance analysis provides a way to obtain quantitative measurements which can be used to compare the overhead involved in implementing a model under a specific domain vs. as a stand-alone Java application. Secondly, since real-time performance is desirable, there is now the motivation to perform optimizations to Ptolemy II in order to improve its performance by reducing the overhead of executing the model under a given domain. The stand-alone Java implementation can be used as a reference for the zero-overhead case. Since Ptolemy II does not currently perform code generation, it is important to  minimize the overhead of executing a model under a Ptolemy II domain. Finally, since the pitch-shifting algorithm is fairly complex and requires both control flow and data flow, it is a good candidate for exploring some of the more experimental models of computation, such as heterochronous dataflow (HDF) [1]. HDF is more expressive than Static Dataflow (SDF), yet HDF retains desirable properties such as decidability (bounded memory, deadlock) and static schedules. The main potential drawback to HDF is that it may be difficult (nonintuitive) to use. The process of implementing the pitch shifting algorithm in HDF may provide insight as to the intuitiveness of constructing models using this model of computation, and may also influence design decisions such as when to construct static vs. dynamic schedules.
+<DL COMPACT>
+<DT> [1]
+<DD> A. Girault, B. Lee, and E. A. Lee, "Hierarchical Finite State Machines
+     with Multiple Concurrency Models," IEEE Transactions on Computer-Aided
+     Design of Integrated Circuits and Systems, Vol. 18, No. 6, pp.742-760,
+     1999.
+<DT> [2]
+<DD> K. Lent, "An Efficient Method for Pitch Shifting Digitally Sampled Sounds," 
+     Computer Music J., vol. 13, pp. 65-71 (1989 Winter).
+<DT> [3]
+<DD> R. Bristow-Johnson, "A Detailed Analysis of a Time-Domain Formant-Corrected
+     Pitch-Shifting Algorithm," J. Audio Eng. Soc., vol. 43, no. 5, pp. 340-352
+     (1995 May).
+</DL>
