@@ -17,6 +17,12 @@ CHAPTER
 
 ABSTRACT 
 
+<table>
+<tr>
+ <td>
+  <img src="PtolemyIISmall.gif" alt="Mr. Ptolemy">
+ </td>
+ <td>
 <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII">Ptolemy II</a> is
 a set of Java packages supporting heterogeneous, concurrent modeling,
 simulation, and design of component-based systems. The emphasis is on a
@@ -27,7 +33,11 @@ manipulation of clustered hierarchical graphs, which are collections of
 package extends the kernel so that entities have functionality and can
 communicate via the relations. The <I>domains</I> extend the actor
 package by imposing <I>models of computation</I> on the interaction
-between entities. Domains that have been created include:
+between entities.
+ </td>
+</tr>
+</table>
+ Domains that have been created include:
 
 <ul>
 <li><i>CSP</i>: modeling of communicating sequential processes, where
