@@ -1,0 +1,133 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II 2.2-alpha Web Edition Download</title>
+<SCRIPT LANGUAGE="Javascript"> 
+	var javawsInstalled = 0; 
+	isIE = "false"; 
+
+        if (navigator.mimeTypes && navigator.mimeTypes.length) { 
+        	x = navigator.mimeTypes['application/x-java-jnlp-file']; 
+                if (x) javawsInstalled = 1; 
+        } else { 
+                isIE = "true"; 
+        } 
+
+        function insertLink(url, name) { 
+        	if (javawsInstalled) { 
+                	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
+                	document.write("<li> <a href="\"http://java.sun.com/cgi-bin/javawebstart-platform.sh?\"" target=_top>Install Web Start from Sun (720KB - 8.6Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
+  
+              } 
+        } 
+ </SCRIPT> 
+<SCRIPT LANGUAGE="VBScript"> 
+          on error resume next 
+          If isIE = "true" Then 
+            If Not(IsObject(CreateObject("JavaWebStart.IsInstalled"))) Then 
+                  javawsInstalled = 0 
+            Else 
+                  javawsInstalled = 1 
+            End If 
+          End If 
+      </SCRIPT>
+
+</head>
+<body>
+<h1>Ptolemy II 2.2-alpha Web Edition Download</h1>
+
+<table>
+<tr>
+  <td>
+  <img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
+  </td>
+
+ </tr>
+</table>
+
+        <p>This download of Ptolemy II uses an experimental web launching tool
+       called Web Start that makes installation and updates particularly
+       simple.  
+
+ <h2>Quick Start</h2>
+   <ol>  <SCRIPT LANGUAGE="Javascript"> 
+
+             <!-- 
+             insertLink("jnlp/vergil.jnlp", 
+                        "Ptolemy II 2.2-alpha Web Edition (~15.9Mb)"); 
+             // --> 
+     </SCRIPT> 
+   </ol> 
+
+<h2>Installation Details</h2>
+
+<a href="http://java.sun.com/products/javawebstart/" target="_top">Web Start</a>
+is a product from Sun that is used to download the Ptolemy II 2.2-alpha Web Edition.
+
+<ol>
+<li> This web page attempts to detect whether Web Start
+is already installed.  If the Quick Start list above contains
+
+<BLOCKQUOTE>
+<a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?" target="_top">Install Web Start from Sun (720KB - 8.6Mb)</a>
+</BLOCKQUOTE>
+
+then download and install Web Start by following the
+<a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?" target="_top">Install Web Start from Sun (720Mb - 8.6Mb)</a>
+link.
+
+ <p>If you already have the Java Runtime Environment version 1.4 (JRE
+1.4) or higher installed, you only need the Java Web Start Update,
+which is 720Mb.
+
+ <p>If you do not have the Java Runtime Environment installed, or you
+are not sure, then you would need to download the Full Java Web Start
+package (5.7Mb), which inclues a JRE.
+
+ <br>If the above step is not present, then Web Start is
+already installed and you can proceed with clicking on the 
+<BLOCKQUOTE>
+<a href="jnlp/vergil.jnlp">Ptolemy II 2.2-alpha Web Edition (~15.9Mb)</a>
+</BLOCKQUOTE>
+link
+
+and continue with step 4 below.
+
+<li> After installing Web Start,
+restart your browser and return to this page.
+
+<li> Hopefully, the Web Start detection will work and the
+<CODE>Install Web Start from Sun (720KB - 8.6Mb)</CODE> step will not be present.
+
+ <br><B>Even if the Install Web Start step is present</B>, try
+downloading and/or opening the
+<a href="jnlp/vergil.jnlp">Ptolemy II 2.2-alpha Web Edition (~15.9Mb)</a>,
+
+it could be that the Web Start detection has failed even though
+Web Start is properly installed.
+
+ <br>For example, under Opera 6.01 under Windows 2000, click on the
+<a href="jnlp/vergil.jnlp">Ptolemy II 2.2-alpha Web Edition (~15.9Mb)</a>
+link and select <CODE>open</CODE>.  If Java Web Start has been installed, 
+then it should start up automatically.
+
+
+<li> The download is roughly 15.9Mb, 
+roughly half the size of the application download is consumed
+by the HTML documentation of the Ptolemy II Java classes.
+
+<li> After the download completes, you will be prompted with a window
+that states that the certificate from <CODE>University of California
+Berkeley</CODE> is valid.  You should hit the <CODE>Start</CODE> button
+to proceed with start up.
+
+</ol>
+
+
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+</body>
+</html>
+
