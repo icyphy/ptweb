@@ -10,7 +10,9 @@ SUM_SOURCES =  \
 	vergil03.sum \
 	ptplot03.sum \
 	ePtolemy03.sum \
-	cal03.sum
+	cal03.sum \
+	softwalls.sum \
+	wireless.sum
 
 # other sources that are not .sum files 
 OTHER_SRCS =
