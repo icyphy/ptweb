@@ -7,6 +7,44 @@
 </head>
 <body>
 <h1>Administrivia</h1>
-This page is for Web site administration details
+<h2>How to update web pages</h2>
+There are separate <a href="pubs.htm">instructions for adding publications</a>, these instructions are for the website in general.
+
+<ol>
+
+<li> The Ptolemy Website is under CVS.  To check out a copy
+of the Ptolemy website 
+<pre>
+setenv /users/cvs/Repository
+cvs checkout ptweb
+</pre>
+
+
+<li> Modify your copy of the website to suit your needs.
+Be sure to consult the <a href="style.htm">Style guide</a>.
+
+<li> To update the publically visible website, become the ptII user on messier.
+To become the ptII user, you will need to have a kerberos principle,
+and have your name added to <CODE>~ptII/.klogin</CODE>.  If your
+name is not in <CODE>~ptII/.klogin</CODE>, then send mail to
+<a href="mailto:root@mho.eecs.berkeley.edu"><CODE>root@mho.eecs.berkeley.edu</CODE></a>. 
+ <br> To become the ptII user, get a Kerberos principle, then
+use <CODE>rlogin</CODE>:
+<pre>
+kinit
+rlogin -8x messier ptII
+</pre>
+
+
+<li> As <CODE>ptII</CODE>, cd to the location of the website:
+<pre>
+cd /vol/ptolemy/pt0/ptweb
+</pre>
+
+<li> As <CODE>ptII</CODE>, run <CODE>cvs update</CODE>
+
+<li> Verify that your changes are correct.
+</ol>
+
 </body>
 </html>
