@@ -1,26 +1,16 @@
 # $Id$
-OLDSOURCES = ptolemyII.sum \
-		moml.sum \
-		neuendor00.sum \
-		neuendor00b.sum \
-		tsaysummary.sum \
-		corba00.sum \
-		liuj00.sum \
-		bilungNliuxj00.sum \
-		yuhong00.sum \
-		kienhuis00a.sum \
-		kienhuis00b.sum \
-		vogel00.sum \
-		vissers00.sum \
-		softpract00.sum
 
 SOURCES = ptolemyII.sum \
+	  celaine.sum \
+	  chf.sum \
 	  cont_and_disc.sum \
 	  e_Ptolemy.sum \
 	  nest.sum \
-	  celaine.sum \
 	  pwhitake.sum \
-	  vogel01.sum 
+	  startcharts.sum \
+	  vergil01.sum \
+	  vogel01.sum \
+	  yuhong01.sum
 
 
 index.html : $(SOURCES) sum2html

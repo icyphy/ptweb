@@ -18,13 +18,12 @@ CHAPTER
 
 ABSTRACT 
 
-<p> This work is oriented around creating a modular and extensible 
-user interface for Ptolemy II that is rich and powerful, 
-yet also intuitive and relatively simple to
-learn.  
+<p> This work is focused on the design of a modular and extensible 
+user interface toolkit for Ptolemy II that is rich and powerful, 
+yet also intuitive and relatively simple to learn.  
 <a href="http://ptolemy.eecs.berkeley.edu/java/vergil/body.htm>Vergil</a> 
-is oriented around an editable, interactive
-block diagram that represents the Ptolemy II model.  The block diagram
+uses an interactively editable block diagram to represent a Ptolemy II model.
+The block diagram
 editor can be used to construct and configure the model prior to execution
 and to directly manipulate a model while it is being executed.  The basic
 block diagram editor directly represents the components, ports, relations, 
@@ -37,6 +36,9 @@ using the Ptolemy II kernel.  This architecture allows it to be easily
 configured and extended by manipulating these components.  MoML is used
 here as well to specify the component configuration of Vergil, such as 
 component libraries, graphical icons, and strategies for opening new files.
+The basic toolkit components can be augmented with user written components
+to provide extended support for a wide range of file types and interaction 
+styles.
 <p>
 Vergil is built entirely using Java, Swing and the Java2D graphics package.  
 The block diagram editor makes use of the
@@ -47,3 +49,6 @@ manipulating figures.
 intended to be sufficiently general to be applicable to other design
 tools, and to enable further research into visualization and
 design of component-based models.
+
+
+
