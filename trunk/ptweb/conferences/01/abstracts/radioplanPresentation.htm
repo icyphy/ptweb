@@ -6,39 +6,80 @@
 <title>Abstract</title>
 </head>
 <body>
-<b>Abstract of A wireless network simulator for 3rd generation cellular networks based on Ptolemy II Presentation</b>
- <br><I>Wolfgang Rave, Jens Voigt, Thomas Koehler, and Gerhard Fettweis</I>,
-Dresden University of Technology/Radioplan GmbH, Dresden, Germany
-<br>Jens.Voigt@radioplan.com
+<b>A novel hierarchical and parallel model for wireless network simulations and
+>its design using PtolemyII infrastructure</b>
+ <br><I>Jens Voigt</I>, Dresden University of Technology, Dresden, Germany
+<br>voigtje@ifn.et.tu-dresden.de
 <p>
-A dynamic simulator for the radio network level of radio access networks will
-be presented.
 
- <p>This simulator is able to assess capacity limits of 3rd generation
-WCDMA radio access networks by an evaluation of the radio resource
-management algorithms' influence on the interference situation. In
-contrast to conventional planning tools, this software is able to
-include time-dependent algorithms that model dynamic aspects of a
-living radio network. So, it will help to tackle optimization problems
-in the operation of 3rd generation mobile information networks and
-behind.
+In this presentation, the course of interactions in network level
+simulations of radio access networks is investigated.
 
- <p>This software is based on PtolemyII. An object-oriented class
-library for radio access networks in general and for the WCDMA-UMTS
-radio system was added.  Furthermore, in order to shorten simulation
-time, a novel tailored simulation engine was added and can be used
-alternatively to sequential discrete event simulations.
+ <p>An object oriented model of a radio access network is investigated for
+interactions that occur between objects during the runtime of a
+simulation.  Analyzed ordering relationships give reasons for the
+application of different, even concurrent models of computation.
 
- <p>A standalone animation software, which is also implemented in Java, optionally
-demonstrates the simulator's behavior during investigations. Both processes
-communicate via IPC.
+ <p>A radio access network could be shown to be decomposable into a
+hierarchical model.  Interactions within a lower level of the
+hierarchy occur on the outside as atomic.
 
- <p>The open and thoroughly object-oriented architecture of PtolemyII
-is a perfect base for an extension.
+ <p>In the highest level of the hierarchy, interactions between
+objects of network elements and an object of the transmission channel
+as well as interactions for instantiation of network elements are
+dealt with.  An overall cyclic repetition of these interactions
+emerged during the analysis.  Here, in general more than one network
+element interacts with the transmission channel at point in the cycle
+of interactions.  This is an implicit sign of concurrency in the
+model.
 
- <p>The use of PtolemyII software and infrastructure helped to decrease
-development time and allowed us to concentrate ourselves on the
-modeling, implementation, and application of our engineering problems.
+ <p>By means of the interaction cycle, the interaction alphabets of
+the objects in the highest level of the hierarchy as well as the
+ordering relationships between their interactions is well known before
+the simulation is started.  Hence, there is no run-time scheduling
+necessary.  This allows for parallel simulations of the radio access
+network without the necessity of pessimistic or optimistic run-time
+synchronization algorithms of parallel discrete-event simulations.
+
+ <p>Instead, the a-priori known course of interactions within the
+interaction cycle itself can be used to maintain a causal simulation
+time in parallel working active objects on the highest level in the
+hierarchy.  Here, the known interactions alphabets of the objects
+allow the use of rendezvous interactions, which are based on the idea
+of formal process calculi.
+
+ <p>Objects that model different instances of network elements of one
+type are composed into one partition of the parallel software.  Using
+this network element type partitioning strategy, the partitions of the
+network elements are loosely coupled via the partition of the
+transmission channel and only use naturally occurring interactions
+themselves to ynchronize parallel working parts of the software
+without any additional effort.  Furthermore, limitations of classic
+partitioning strategies like division into geographical parts or
+groups of physical radio resources can be circumvented.  This is
+especially important for radio network level simulations of third
+generation CDMA networks.
+
+ <p>The interactions of objects inside one partition of single network
+elements are controlled within the second level of the hierarchy by
+means of discrete events.  This is due to the randomness of occurrence
+of these mostly traffic model based network element internal
+interactions.
+
+ <p>Only some of the internal interactions in a network element are to
+be synchronized with interactions of other network elements and the
+transmission channel in order to guarantee an overall causal
+simulation run.  Thus, a global ordering relationship between all
+interactions in an object oriented model of a radio access network
+does not exist.  This is a further sign of concurrency in the model.
+
+ <p>The entire model is implemented on top of UC Berkeley's PtolemyII software
+infrastructure.
+
+ <p>A performance gain of the simulations depending on the
+number of used processors, the number of software partitions, and
+the traffic load of the simulations could be proven.
+
 
 </body>
 </html>
