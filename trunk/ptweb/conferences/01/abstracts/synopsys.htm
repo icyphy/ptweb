@@ -3,11 +3,39 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <link href="../../../lib/default.css" rel="stylesheet" type="text/css">
-<title>Abstract</title>
+<title>Scheduling and Code Generation
+in Cocentric System Studio</title>
 </head>
 <body>
 <b>Scheduling and Code Generation in Cocentric System Studio</b>
 <br><i>Joseph Buck</i>, Synopsys, Inc.
 <br>jbuck@synopsys.com
+<p>
+Cocentric (TM) System Studio (aka El Greco [1]) is a platform for rapid
+system-level functional verification, supporting a variety of
+models of computation (static and dynamic dataflow, hierarchical
+finite state machines, and synchronous-reactive modeling, with links
+to discrete-event simulators such as for hardware description
+languages).  The heterogenous modeling style is heavily influenced
+by Ptolemy.  Because high-speed simulation is a key requirement,
+we do as much static scheduling and compile-time optimization as
+possible for both dataflow and control. For dataflow, we extend
+techniques developed in the Ptolemy group [2] to work with mixed
+cyclostatic and dynamic dataflow, even when some data rates are
+symbols rather than constants.  For control, we use Esterel-based
+approaches.  Transparent modeling (meaning that the tool "understands"
+the semantics of the models) allows optimization across model boundaries;
+we can also do some optimizations across domain boundaries to fold
+"control" into "dataflow".  The talk will provide a survey of the
+techniques used.
+<p>
+[1] J. T. Buck and R. Vaidyanathan, "Heterogeneous Modeling and Simulation of
+    Embedded Systems in El Greco", Proc. CODES 2000, San Diego, CA, May 2000.
+<p>
+[2] S. S. Bhattacharyya, P. K. Murthy, and E. A. Lee, "Software Synthesis
+    from Dataflow Graphs", Kluwer Academic Press, 1996.
+<p>
+
+
 </body>
 </html>
