@@ -1,0 +1,153 @@
+
+proc trysetstate {star state value} {
+    if [catch {statevalue $star $state initial} err] then {
+	    puts stdout "Warning: $err"
+    } else {
+	    setstate $star $state $value
+    }
+}
+proc trytargetparam {param value} {
+    if [catch {targetparam $param $value} err] then {
+        puts stdout "Warning: $err"
+    } else {
+        targetparam $param $value
+    }
+}
+
+
+reset
+newuniverse SVD_MUSIC_1
+    domain SDF
+	newstate rows int 4
+	newstate cols int 4
+	newstate resolution int 1024
+    star XMgraph.input=21 XMgraph
+	numports XMgraph.input=21 input 2
+	trysetstate XMgraph.input=21 title {SVD_MUSIC_1 Singular Values}
+	trysetstate XMgraph.input=21 saveFile {}
+	trysetstate XMgraph.input=21 options {-0 'SNR 20dB' -1 'SNR 30dB' -nl -P =350x200+405+300}
+	trysetstate XMgraph.input=21 ignore 0
+	trysetstate XMgraph.input=21 xUnits 1.0
+	trysetstate XMgraph.input=21 xInit 0.0
+    star XMgraph.input=22 XMgraph
+	numports XMgraph.input=22 input 2
+	trysetstate XMgraph.input=22 title {Right Singular Vectors}
+	trysetstate XMgraph.input=22 saveFile {}
+	trysetstate XMgraph.input=22 options {-0 'SNR 20dB' -1 'SNR=30db' -nl -P =400x200+0+300}
+	trysetstate XMgraph.input=22 ignore {0 }
+	trysetstate XMgraph.input=22 xUnits 1.0
+	trysetstate XMgraph.input=22 xInit 0.0
+    star XMgraph.input=23 XMgraph
+	numports XMgraph.input=23 input 2
+	trysetstate XMgraph.input=23 title {Left Singular Vectors}
+	trysetstate XMgraph.input=23 saveFile {}
+	trysetstate XMgraph.input=23 options {-0 'SNR 20dB' -1 'SNR 30dB' -nl -P =390x200+760+300}
+	trysetstate XMgraph.input=23 ignore 0
+	trysetstate XMgraph.input=23 xUnits 1.0
+	trysetstate XMgraph.input=23 xInit 0.0
+    star XMgraph.input=24 XMgraph
+	numports XMgraph.input=24 input 2
+	trysetstate XMgraph.input=24 title {SVD_MUSIC_1 S(w) - Eigenspectrum}
+	trysetstate XMgraph.input=24 saveFile {}
+	trysetstate XMgraph.input=24 options {-0 'SNR 20dB' -1 'SNR 30dB' =1100x280+0+0}
+	trysetstate XMgraph.input=24 ignore 0
+	trysetstate XMgraph.input=24 xUnits 2*PI/resolution
+	trysetstate XMgraph.input=24 xInit -PI
+    star TkText.input=21 TkText
+	numports TkText.input=21 input 2
+	trysetstate TkText.input=21 label {Matrix of Left Singular Vectors}
+	trysetstate TkText.input=21 wait_between_outputs NO
+	trysetstate TkText.input=21 number_of_past_values 100
+    star TkText.input=22 TkText
+	numports TkText.input=22 input 2
+	trysetstate TkText.input=22 label {Matrix of Right Singular Vectors}
+	trysetstate TkText.input=22 wait_between_outputs NO
+	trysetstate TkText.input=22 number_of_past_values 100
+    star TkText.input=23 TkText
+	numports TkText.input=23 input 2
+	trysetstate TkText.input=23 label {Vector of Singular Values}
+	trysetstate TkText.input=23 wait_between_outputs NO
+	trysetstate TkText.input=23 number_of_past_values 100
+    star MUSIC_M1 MUSIC_M
+	trysetstate MUSIC_M1 numRows rows
+	trysetstate MUSIC_M1 numCols cols
+	trysetstate MUSIC_M1 numSignals 1
+	trysetstate MUSIC_M1 resolution resolution
+    star MUSIC_M2 MUSIC_M
+	trysetstate MUSIC_M2 numRows rows
+	trysetstate MUSIC_M2 numCols cols
+	trysetstate MUSIC_M2 numSignals 1
+	trysetstate MUSIC_M2 resolution resolution
+    star SVD_M1 SVD_M
+	trysetstate SVD_M1 rows rows
+	trysetstate SVD_M1 cols cols
+	trysetstate SVD_M1 threshold 0.00000000000000001
+	trysetstate SVD_M1 max_iterations 30
+    star SVD_M2 SVD_M
+	trysetstate SVD_M2 rows rows
+	trysetstate SVD_M2 cols cols
+	trysetstate SVD_M2 threshold 0.00000000000000001
+	trysetstate SVD_M2 max_iterations 30
+    star Matrix1 Matrix
+	trysetstate Matrix1 numRows rows
+	trysetstate Matrix1 numCols cols
+	trysetstate Matrix1 FloatMatrixContents {-.93126 .40357 1.40503 1.09130 -1.35104 -.93126 .40359 1.40503 -.61757 -1.35104 -.93126 .40357 .66602 -.61757 -1.35104 -.93126}
+    star Matrix2 Matrix
+	trysetstate Matrix2 numRows rows
+	trysetstate Matrix2 numCols cols
+	trysetstate Matrix2 FloatMatrixContents {-.94613 .40878 1.50696 1.14561 -1.24504 -.94613 .40878 1.50696 -.68038 -1.24504 -.95613 .40878 .45395 -.68038 -1.24504 -.94613}
+    star UnPk_M1 UnPk_M
+	trysetstate UnPk_M1 numRows rows
+	trysetstate UnPk_M1 numCols 1
+    star UnPk_M2 UnPk_M
+	trysetstate UnPk_M2 numRows rows
+	trysetstate UnPk_M2 numCols cols
+    star UnPk_M3 UnPk_M
+	trysetstate UnPk_M3 numRows rows
+	trysetstate UnPk_M3 numCols cols
+    star UnPk_M4 UnPk_M
+	trysetstate UnPk_M4 numRows rows
+	trysetstate UnPk_M4 numCols cols
+    star UnPk_M5 UnPk_M
+	trysetstate UnPk_M5 numRows rows
+	trysetstate UnPk_M5 numCols 1
+    star UnPk_M6 UnPk_M
+	trysetstate UnPk_M6 numRows rows
+	trysetstate UnPk_M6 numCols cols
+    node node0
+	nodeconnect SVD_M1 lsvec node0
+	nodeconnect TkText.input=21 input#1 node0
+	nodeconnect UnPk_M6 input node0
+    connect MUSIC_M2 output XMgraph.input=24 input#1
+    node node2
+	nodeconnect SVD_M1 rsvec node2
+	nodeconnect TkText.input=22 input#1 node2
+	nodeconnect MUSIC_M2 rsvec node2
+	nodeconnect UnPk_M4 input node2
+    connect UnPk_M3 output XMgraph.input=23 input#2
+    node node4
+	nodeconnect SVD_M1 svals node4
+	nodeconnect TkText.input=23 input#1 node4
+	nodeconnect UnPk_M5 input node4
+    connect UnPk_M4 output XMgraph.input=22 input#1
+    connect UnPk_M1 output XMgraph.input=21 input#2
+    connect MUSIC_M1 output XMgraph.input=24 input#2
+    connect UnPk_M6 output XMgraph.input=23 input#1
+    connect UnPk_M2 output XMgraph.input=22 input#2
+    node node10
+	nodeconnect SVD_M2 svals node10
+	nodeconnect TkText.input=23 input#2 node10
+	nodeconnect UnPk_M1 input node10
+    node node11
+	nodeconnect SVD_M2 rsvec node11
+	nodeconnect TkText.input=22 input#2 node11
+	nodeconnect MUSIC_M1 rsvec node11
+	nodeconnect UnPk_M2 input node11
+    node node12
+	nodeconnect SVD_M2 lsvec node12
+	nodeconnect TkText.input=21 input#2 node12
+	nodeconnect UnPk_M3 input node12
+    connect Matrix1 output SVD_M2 input
+    connect Matrix2 output SVD_M1 input
+    connect UnPk_M5 output XMgraph.input=21 input#1
+
