@@ -44,7 +44,7 @@ zone.
 <p>For more information, see the Soft Walls website at
 <a href="http://ptolemy.eecs.berkeley.edu/projects/softwalls/index.htm" target="_top"><code>http://ptolemy.eecs.berkeley.edu/projects/softwalls/index.htm</code></a>
 
-<ol>
+<ul>
   <li><a name="1">[1]</a>
   E. A. Lee, 
 <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/01/softwalls2/" target="_top">
@@ -53,6 +53,6 @@ zone.
     Laboratory Memorandum No. UCB/ERL M001/31, September 2001.</dd>
   <li><a name="2">[2]</a>
   J. Adam Cataldo, Edward A. Lee, and Xiaojun Liu, "<a href="http://ptolemy.eecs.berkeley.edu/papers/02/prelim2Dsoftwalls" target="_top">Preliminary Version of a Two-Dimensional Technical Specification for Softwalls</a>," <i>Technical Memorandum UCB/E RL M02/9</i>, University of California, Berkeley, CA 94720, April 17, 2002.
-</ol>
+</ul>
 
 
