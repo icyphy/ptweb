@@ -34,13 +34,25 @@ Remote places to go
 a network (such as ATM) with 48 byte packets and a variable loss
 probability. Note that this demo requires audio capability and will
 probably only work on Sun workstations.
+ <br>Images of the model generated with:
+<pre>
+cd $PTOLEMY/src/domains/sdf/demo
+$PTOLEMY/bin/prfacet -TOFILE /tmp/l.ps -N -n -p -x lossySpeech
+pstoimg /tmp/l.ps
+distill /tmp/l.ps
+</pre>
+
+<a href="atm/lossySpeech.pdf">PDF</a> -
+<a href="atm/lossySpeech.png">PNG</a>
 
 <dt> <CODE>lossySpeechPrevCell</CODE>
 
 <dd> Illustrate the effect on speech of a previous cell substitution
 policy in a network (such as ATM) with 48 byte packets and a variable
 loss probability. Note that this demo requires audio capability and
-will probably only work on Sun workstation
+will probably only work on Sun workstations.
+ <br>Images: <a href="atm/lossySpeechPrevCell.pdf">PDF</a> -
+<a href="atm/lossySpeechPrevCell.png">PNG</a>
 
 </dl>
 
