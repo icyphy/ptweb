@@ -43,6 +43,7 @@ Disallow: /~ptII/ptII
 Disallow: /~pino/DS
 Disallow: /~pino/Ptolemy
 Disallow: /~pino/Ptolemy/tycho
+Disallow: /~pwhitake/codeDoc
 
 # Diva is located in ~johnr and on www-cad
 Disallow: /diva
