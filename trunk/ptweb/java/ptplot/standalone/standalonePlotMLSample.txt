@@ -3,8 +3,7 @@
 <!-- Ptolemy plot, version 3.1, PlotML format. -->
 
 <plot>
-<title>A Plot</title>
-<title>A Colorless Plot</title>
+<title>A Standalone Colorless Plot</title>
 <xLabel>X Axis</xLabel>
 <yLabel>Y Axis</yLabel>
 <xTicks>
