@@ -15,9 +15,16 @@
 
 This project is a subcontract under
 the
-<a href="http://www.sanders.com/spard/acs_env/acs_env.html" target="_top">Adaptive Computing Program</A> of
+<a href="http://www.sanders.com/spard/acs_env/acs_env.html" target="_top">
+Adaptive Computing Program</A> of
+<a name="Sanders"><a href="http://www.sanders.com" target="_top">
+Sanders, a Lockheed Martin Company</a>.
+The program is funded by the
+<A HREF="http://www.darpa.mil/ito/">Information Technology Office</A>
+of the
+<A HREF="http://www.darpa.mil/">
+Defense Advanced Research Projects Agency (DARPA)</A>.
 
-<a name="Sanders"><a href="http://www.sanders.com" target="_top">Sanders, a Lockheed Martin Company</a>
 
 <p>
 <ul>
@@ -32,43 +39,37 @@ the
 
 <h1>Overview</h1>
 <p>
- <p>James Lundblad of the Ptolemy group is developed the ACS domain
-with Eric Pauer of Sanders.
+ <p>The Ptolemy group is cooperating with Sanders on the development
+of software for synthesizing configurations of adaptive computing hardware
+from high-level, abstract descriptions of computations.  A near-term
+result is the ACS domain of Ptolemy Classic, which supports design
+refinement from dataflow graphs through fixed-point analysis and
+design, through to FPGA synthesis.
 
- <p>A key feature of the ACS domain is to make it easier to generate
-different implementations of a simulation.  The ACS domain uses the
-Corona/Core approach, which was created by Jose Pino and Tom Parks
-while they were at UC Berkeley.  In the Corona/Core design, a star has
-one Interface, named the Corona, and one or more implementations,
-named Cores.
+<p>A key feature of the ACS domain is its software architecture
+supporting the synthesis of different implementations from the same
+specification. The ACS domain uses the Corona/Core approach, which was
+created by Jose Pino and Tom Parks while they were at UC Berkeley. In
+the Corona/Core design, a star has one Interface, named the Corona, and
+one or more implementations, named Cores.
 
- <p>The ACS domain will help in automating the FPGA design process;
-it will help in transforming an SDF graph into a reasonable FPGA
-implementation.  Initially, an 
-<a href="http://www.annapmicro.com" target="_top">Annapolis Microsystems</A> Wildforce
-board will be the target.
+<p>The ACS domain will help in automating the FPGA design process; it
+will help in transforming an SDF graph into a reasonable FPGA
+implementation. Initially, an <a href="http://www.annapmicro.com"
+target="_top">Annapolis Microsystems</A> Wildforce board will be the
+primary target.
 
- <p>Sanders has a web page describing the project at:
-<a href="http://www.sanders.com/spard/acs_env/acs_env.html" target="_top"><code>http://www.sanders.com/spard/acs_env/acs_env.html</code></a>
+<p>The first public release of ACS 
+is available in <a href="../../ptolemyclassic/pt0.7.1" target="_top">
+Ptolemy 0.7.1</a>
 
- <p>The Adaptive Computing Systems (ACS) Domain uses a different style of
-star than the rest of Ptolemy.  ACS splits a star into a single
-interface (called a Corona), and one or more implementations, called
-Cores.
-
- <p>The first public release of ACS 
-is available in <a href="../../ptolemyclassic/pt0.7.1" target="_top">Ptolemy 0.7.1</a>
-
- <p>Other links of interest:
+<p>Other links of interest:
 <menu>
 
 <li> <a href="http://www.sanders.com/spc/publish.html" target="_top">Sanders Signal Processing Center (SPC) Papers Page </a>
 
-<li> <a href="http://http.cs.berkeley.edu/projects/brass/" target="_top">BRASS Project</A> (Berkeley Reconfigurable Architecture, Systems and Software)
+<li> <a href="http://http.cs.berkeley.edu/projects/brass/" target="_top">
+BRASS Project</A> (Berkeley Reconfigurable Architecture, Systems and Software)
 </menu>
-
-
-<p><font size="2" color="#cc0000"> Last Updated: $Date$</font>
-
 </body>
 </html>

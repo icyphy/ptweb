@@ -6,28 +6,41 @@
 <title>Ptolemy II Snapshot Download</title>
 </head>
 <body>
-<img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet">
 <h1>Ptolemy II Snapshot Download</h1>
 
- <p>There are a number of caveats with that go along with this snapshot.
+<table>
+<tr>
+<td>
+<img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
+<td>
+At the <a href="../../conferences/99/main.htm">Ptolemy
+Miniconference</a> on February 19, 1999, we showed several Ptolemy II
+applet demonstrations. We are making available for download the Java
+code that drives demonstrations in order to solicit feedback and to
+illustrate the trajectory of the project. <font color=red>This software
+represents a snapshot of the state of our development tree and is not
+viewed by us as production quality code</font>. We expect to release
+production quality code in mid 1999.
+</table>
+<p>There are a number of caveats with that go along with this snapshot.
 
 <ul>
 
 <li> This release is intended for software developers who have
 experience with both Java and Ptolemy.
-<li> Many of the files in this release have not been design reviewed,
-code reviewed, or thorough tested.  
-<li> The code in the snapshot is already changing.  In particular,
-	<menu>
-	<li> All the demos are moving into their own subdirectories
-	<li> The Ordered Dataflow domain (OD) is moving from
-	<code>ptolemy/domains/od</code> to
-	<code>ptolemy/domains/odf</code>
-	</menu>
-
+<li> Some of the files in this release have not been design reviewed,
+code reviewed, or thorough tested. Classes that have undergone
+design review are marked "yellow" in the source file.  Classes that
+have undergone both design and code review are marked "green"
+in the source file.
+<li> The code in the snapshot is changing in our own development
+copy, and some of the changes are not backward compatible.  You should
+not rely on the interface of any class that is rated at less than "green."
+In rare circumstances we may also modify the interface of green classes
+before the 1.0 release.
 <li> Many of the demos were created on an ad hoc basis, and should
-not be viewed as templates for future demos.
-
+not be viewed as templates for future demos.  In particular, the applet
+code is unstructured, with considerable code duplication across applets.
 <li> The primary difference between this release and the Ptolemy II 0.1
 release is that we are including code for the domains.
 
@@ -73,7 +86,7 @@ Between Ptolemy II 0.2 and Ptolemy II 1.0, we plan on:
 <li> Writing lots of tests
 <li> Adding to the design doc
 </menu>
-Ptolemy II 1.0 is not likely to include a block editor
+Ptolemy II 1.0 is not likely to include a visual editor.
 
 <h2>Feedback</h2>
 
