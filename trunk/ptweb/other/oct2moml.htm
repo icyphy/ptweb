@@ -37,30 +37,29 @@ between Ptolemy Classic Star names and their parameters and
 Ptolemy II Actor names and their parameters
 
 <li> oct2moml is based on oct2ptcl, so it has the following oct2ptcl bugs: 
+
  <ul>
 
-<li> oct2ptcl is too picky about some facets.  It thinks facets are
-corrupt, but the facet will work fine in Ptolemy.  oct2ptcl is
-technically correct here, but by not processing semi-corrupt facets,
-oct2ptcl is not very useful
+ <li> oct2ptcl is too picky about some facets.  It thinks facets are
+ corrupt, but the facet will work fine in Ptolemy.  oct2ptcl is
+ technically correct here, but by not processing semi-corrupt facets,
+ oct2ptcl is not very useful
 
-
-<li> oct2ptcl has not been extended to handle initializable delays.
-The mdsdf:test:IIRusingFIR demo uses initializable delays.
-If we run oct2ptcl on this facet, we get:
-<pre>
+ <li> oct2ptcl has not been extended to handle initializable delays.
+ The mdsdf:test:IIRusingFIR demo uses initializable delays.
+ If we run oct2ptcl on this facet, we get:
+ <pre>
     connect Fork.output=21 output#2 FIR1 input
-</pre>
+ </pre>
 
-However, if we compile this facet with ptolemy, we get:
-<pre>
+ However, if we compile this facet with ptolemy, we get:
+ <pre>
     connect Fork.output=21 output#2 FIR1 input "0 1"
-</pre>
-
-
- <li> 
+ </pre>
  </ul>
+
 </ul>
+
 <h2>Installation</h2>
 <ol>
 <li> Download the Ptolemy Classic src and other.src tar files
