@@ -21,9 +21,7 @@ ABSTRACT
 <P>
 In this project, we are trying to provide a solution to support different cellular-network standards, namely GSM, and 3G standards of WCDMA, TD-SCDMA and CDMA2000. Our approach is to use an actor-oriented System-on-Chip (SoC) architecture, where a number of small DSP cores are developed to support various programmable functions. The idea behind is to develop a hardware platform for wireless communications which can be used to derive various SoC products by changing software only.
 <P>
-The first object (function block) for case study is the Rake receiver, as it is the key part of CDMA systems. We also focus on the shared features and compatibility between WCDMA and TD-SCDMA, due to their popularity and promising perspective in research and market.
-<P>
-The study starts with system functional analysis, in which we explore a shared block-diagram for the 2 standards. Further work will be complexity analysis, cross-standard adaptive algorithm, etc. Simulations at various levels are involved. Eventually, the architecture is designed to be set at a fairly optimal point, considering the trade-off among factors such as power, speed, flexibility, etc.
+We begin with looking into the RAKE receiver, as it is the key part of CDMA systems. We also focus on 2 standards first: WCDMA and TD-SCDMA, which appear to be quite popular and promising in research and market. The work is planned to progress in the following steps: (1)We start with system functional analysis, where we explore a shared block-diagram for the 2 standards. (2)We will then develop some adaptive algorithm and analyze the system complexity. (3)Based on these previous work, we are able to come up with decisions on system architecture and software/hardware partition. At each step, different levels of simulations are involved to support our ideas. (4)Eventually, the architecture is designed to be at a fairly optimal point, considering the trade-off among factors such as power, speed, flexibility, etc.
 <P>
 This wireless communications project is conducted in cooperation with National Semiconductor.
 
