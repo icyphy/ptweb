@@ -1,0 +1,143 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="Sinewave" extends="ptolemy.actor.TypedCompositeActor">
+    <doc>This composite actor generates a sine wave.</doc>
+    <property name="samplingFrequency" class="ptolemy.data.expr.Parameter" value="8000.0">
+        <doc>The sampling frequency, in the same units as the frequency.</doc>
+    </property>
+    <property name="frequency" class="ptolemy.data.expr.Parameter" value="440.0">
+        <doc>The frequency of the sinusoid, in the same units as the sampling frequency.</doc>
+    </property>
+    <property name="phase" class="ptolemy.data.expr.Parameter" value="0.0">
+        <doc>The phase, in radians.</doc>
+    </property>
+    <port name="output" class="ptolemy.actor.TypedIOPort">
+        <property name="output"/>
+        <doc>Sinusoidal waveform output.</doc>
+        <property name="_location" class="ptolemy.moml.Location" value="496.00001525878906, 120.00000381469727">
+        </property>
+    </port>
+    <entity name="Ramp" class="ptolemy.actor.lib.Ramp">
+        <property name="firingCountLimit" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="init" class="ptolemy.data.expr.Parameter" value="phase">
+        </property>
+        <property name="step" class="ptolemy.data.expr.Parameter" value="frequency*2*PI/samplingFrequency">
+        </property>
+        <property name="_location" class="ptolemy.moml.Location" value="95.0, 99.0">
+        </property>
+        <port name="output" class="ptolemy.actor.TypedIOPort">
+            <property name="output"/>
+        </port>
+        <port name="trigger" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+            <property name="multiport"/>
+        </port>
+    </entity>
+    <entity name="Sine Function" class="ptolemy.actor.lib.TrigFunction">
+        <property name="function" class="ptolemy.kernel.util.StringAttribute" value="sin">
+            <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+                <property name="acos" class="ptolemy.kernel.util.StringAttribute" value="acos">
+                </property>
+                <property name="asin" class="ptolemy.kernel.util.StringAttribute" value="asin">
+                </property>
+                <property name="atan" class="ptolemy.kernel.util.StringAttribute" value="atan">
+                </property>
+                <property name="cos" class="ptolemy.kernel.util.StringAttribute" value="cos">
+                </property>
+                <property name="sin" class="ptolemy.kernel.util.StringAttribute" value="sin">
+                </property>
+                <property name="tan" class="ptolemy.kernel.util.StringAttribute" value="tan">
+                </property>
+            </property>
+        </property>
+        <property name="_location" class="ptolemy.moml.Location" value="218.0, 91.0">
+        </property>
+        <port name="input" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+        </port>
+        <port name="output" class="ptolemy.actor.TypedIOPort">
+            <property name="output"/>
+        </port>
+    </entity>
+    <entity name="MathFunction0" class="ptolemy.actor.lib.MathFunction">
+        <property name="function" class="ptolemy.kernel.util.StringAttribute" value="square">
+            <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
+                <property name="exp" class="ptolemy.kernel.util.StringAttribute" value="exp">
+                </property>
+                <property name="log" class="ptolemy.kernel.util.StringAttribute" value="log">
+                </property>
+                <property name="remainder" class="ptolemy.kernel.util.StringAttribute" value="remainder">
+                </property>
+                <property name="sign" class="ptolemy.kernel.util.StringAttribute" value="sign">
+                </property>
+                <property name="square" class="ptolemy.kernel.util.StringAttribute" value="square">
+                </property>
+                <property name="sqrt" class="ptolemy.kernel.util.StringAttribute" value="sqrt">
+                </property>
+            </property>
+        </property>
+        <property name="_location" class="ptolemy.moml.Location" value="330.0, 102.0">
+        </property>
+        <port name="firstOperand" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+        </port>
+        <port name="output" class="ptolemy.actor.TypedIOPort">
+            <property name="output"/>
+        </port>
+    </entity>
+    <entity name="AddSubtract4" class="ptolemy.actor.lib.AddSubtract">
+        <property name="_location" class="ptolemy.moml.Location" value="425.0, 115.0">
+        </property>
+        <port name="plus" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+            <property name="multiport"/>
+        </port>
+        <port name="minus" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+            <property name="multiport"/>
+        </port>
+        <port name="output" class="ptolemy.actor.TypedIOPort">
+            <property name="output"/>
+        </port>
+    </entity>
+    <entity name="Gaussian7" class="ptolemy.actor.lib.Gaussian">
+        <property name="seed" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="mean" class="ptolemy.data.expr.Parameter" value="0.0">
+        </property>
+        <property name="standardDeviation" class="ptolemy.data.expr.Parameter" value="0.05">
+        </property>
+        <doc>Create a sequence of gaussian random variables</doc>
+        <property name="_location" class="ptolemy.moml.Location" value="306.0, 173.0">
+        </property>
+        <port name="output" class="ptolemy.actor.TypedIOPort">
+            <property name="output"/>
+        </port>
+        <port name="trigger" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+            <property name="multiport"/>
+        </port>
+    </entity>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation6" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation8" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="output" relation="relation6"/>
+    <link port="Ramp.output" relation="relation2"/>
+    <link port="Sine Function.input" relation="relation2"/>
+    <link port="Sine Function.output" relation="relation3"/>
+    <link port="MathFunction0.firstOperand" relation="relation3"/>
+    <link port="MathFunction0.output" relation="relation5"/>
+    <link port="AddSubtract4.plus" relation="relation5"/>
+    <link port="AddSubtract4.minus" relation="relation8"/>
+    <link port="AddSubtract4.output" relation="relation6"/>
+    <link port="Gaussian7.output" relation="relation8"/>
+</class>
