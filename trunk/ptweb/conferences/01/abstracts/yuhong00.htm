@@ -7,27 +7,13 @@
 </head>
 <body>
 <b>An Extended Type System for Component-Based Design</b>
-<br><i>Yuhong Xiong</i>, UC Berkeley
+<br><i>Yuhong Xiong and Edward A. Lee</i>, UC Berkeley
 <br>
 yuhong@eecs.berkeley.edu
-<p>
-Type systems in modern programming language are the most widely used
-and effective (semi)formal verification tools for software. The theory
-underlying type systems is simple, robust, and extremely powerful,
-based on fixed-point theorems in topology. The mathematical structure
-of a set of types is abstractly a lattice, and the theory can be
-applied to any property of the software that can be characterized
-using a lattice.  It need not be restricted to classical data types.
- 
-<p> In view of this, we have designed a set of Java classes in Ptolemy
-II that provide support for any type system that can be represented
-using such a lattice. This generic infrastructure has been first
-applied to the basic type system problem, that of ensuring
-consistent data typing, and supporting (polymorphic) type inference.
-But the infrastructure is designed to be extended to more sophisticated
-uses.
- 
-<p> The basic type system combines static typing with run-time type
+
+<p>In this talk, we are going to present two extensions to the basic
+type system in Ptolemy II.
+The basic type system combines static typing with run-time type
 checking. It supports polymorphic typing of system components, and
 allows automatic lossless type conversion at run-time. To achieve this,
 we use a lattice to model the lossless type conversion relation among
@@ -39,9 +25,9 @@ increases the safety and flexibility of the design environment,
 promotes component reuse, and helps simplify component development and
 optimization.
  
-<p> We are currently developing two extensions. One extension is to add
-support for structured types such as array and record types. The goal
-is to allow the elements of arrays and records to contain data tokens
+<p> One extension we have developed is to add
+support for structured types such as array and record types. We 
+allow the elements of arrays and records to contain data tokens
 of arbitrary types, including structured types, and be able to specify
 type constraints on them. Type constraints and type inference must
 propagate transparently across operators that construct and disassemble
