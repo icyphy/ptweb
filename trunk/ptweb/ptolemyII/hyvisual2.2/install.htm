@@ -282,7 +282,7 @@ function platformButtons()
 		document.write("InstData/Windows/VM/HyViInst.exe\">")
 		//
 		
-		document.writeln("<input type=\"SUBMIT\" value=\"Download Installer (22.7M) for Windows (includes Java 1.4.1_01 VM)\" >")
+		document.writeln("<input type=\"SUBMIT\" value=\"Download Installer (18.4M) for Windows (includes Java 1.4.1_01 VM)\" >")
 		//
 		document.writeln("<br></form>")
 		document.writeln("Enable Java in your browser to install directly from the web.<br>")
@@ -302,7 +302,7 @@ function platformButtons()
 		document.write("InstData/MacOSX/HyViInst.zip\">")
 		//
 		
-		document.writeln("<input type=\"SUBMIT\" value=\"Download Installer (16.4M) for Mac OS X (without Java VM)\" ><br>")
+		document.writeln("<input type=\"SUBMIT\" value=\"Download Installer (7.6M) for Mac OS X (without Java VM)\" ><br>")
 		//
 		if( enableAppletForMacOSX )
 		{
@@ -337,10 +337,10 @@ function platformButtons()
 		document.writeln("<b>Recommended installer for your platform...</b><br>")
 		document.write("<form method=\"get\" action=\"")
 		
-		document.write("InstData/GenericUnix/HyViInst.bin\">")
+		document.write("InstData/Java/HyViInst.jar\">")
 		//
 		
-		document.writeln("<input type=\"SUBMIT\" value=\"Download Installer (16.7M) for Unix\" ><br>")
+		document.writeln("<input type=\"SUBMIT\" value=\"Download Installer (8.0M) for Generic Java\" ><br>")
 		//
 		document.writeln("<br></form>")
 		document.writeln("Enable Java in your browser to install directly from the web.<br>")
@@ -609,7 +609,7 @@ To install using the recommended installer
 						<center>
 							 <a href="InstData/Windows/VM/HyViInst.exe"> 
 							<font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
-							(22.7M)
+							(18.4M)
 							 </font></a></center>
 						
 						</td>
@@ -619,7 +619,7 @@ To install using the recommended installer
 						<center>
 							 <a href="InstData/Windows/NoVM/HyViInst.exe"> 
 							<font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
-							(16.6M)
+							(8.0M)
 							 </font></a></center>
 						
 						</td>
@@ -674,7 +674,7 @@ To install using the recommended installer
 						
 						<center>
 							 <a href="InstData/MacOSX/HyViInst.zip"> <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
-							(16.4M)
+							(7.6M)
 							 </font></a></center>
 						
 						</td>
@@ -731,7 +731,7 @@ To install using the recommended installer
 						
 						<center>
 							 <a href="InstData/Linux/NoVM/HyViInst.bin"> <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
-							(16.7M)
+							(7.9M)
 							 </font></a></center>
 						
 						</td>
@@ -750,38 +750,37 @@ To install using the recommended installer
 							<script>
 							<!--
 
-	displayMarker("linux")
+	displayMarker("other")
 							// -->
 							</script>
 							</div>
 					</td>
-					<td align="center" valign="center"><img height="16" width="14" src="InstData/images/linux.gif"></td>
+					<td valign="bottom"><img height="16" width="26" src="InstData/images/other.gif"></td>
 					<td valign="bottom">
 						<div align="left">
 							<font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
 							<script>
 							<!--
 
-	setPlatFont("linux")
+	setPlatFont("other")
 							// -->
 							</script>
-							Linux
+							Other Java-enabled Platforms
 							<script>
 							<!--
 
-	endPlatFont("linux")
+	endPlatFont("other")
 							// -->
 							</script>
 							</font></div>
 					</td>
 					<td valign="bottom">
-						
 						</td>
 					<td valign="bottom"></td>
 					<td valign="bottom">
 						
 						<center>
-							 <a href="InstData/Linux/NoVM/HyViInst.bin"> <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
+							 <a href="InstData/Java/HyViInst.jar"> <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
 							(7.7M)
 							 </font></a></center>
 						
@@ -789,10 +788,14 @@ To install using the recommended installer
 					<td valign="bottom"></td>
 					<td valign="bottom">
 						<center>
-							<a href="#linux"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">View</font></a></center>
+							<a href="#other"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">View</font></a></center>
 					</td>
 				</tr>
 				
+
+
+			</table></b></font></p>
+		</center>
 
 				
 				
