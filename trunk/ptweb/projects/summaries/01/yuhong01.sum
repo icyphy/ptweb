@@ -68,6 +68,6 @@ relation between various protocols and may help design polymorphic
 components that can work with multiple protocols. For example, we can
 specify the behavior of a polymorphic component using a non-deterministic
 automaton. If this automaton simulates the automata of some specific
-protocols, this component can work with those protocols. 
+protocols, the component will be able to work with those protocols. 
 <p>
 
