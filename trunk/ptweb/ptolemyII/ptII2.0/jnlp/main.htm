@@ -17,9 +17,8 @@
 
         function insertLink(url, name) { 
         	if (javawsInstalled) { 
-                	document.write("<a href=" + url + ">" + name + "</a>"); 
-                } else { 
-                	document.write("<li> You need to <a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh?>Install Web Start from Sun</a> before installing <a href=" + url + ">"  + name + "</a>"); 
+                	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
+                	document.write("<li> <a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh?>Install Web Start from Sun</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
                 } 
         } 
  </SCRIPT> 
@@ -46,19 +45,21 @@
 
   <td>
   This is a demonstration release of Ptolemy II. 
-    <p>  <SCRIPT LANGUAGE="Javascript"> 
+ <p>Quick Start
+    <ol>  <SCRIPT LANGUAGE="Javascript"> 
 
              <!-- 
              insertLink("vergil.jnlp", 
                         "Ptolemy II 2.0 Web Start Download"); 
              // --> 
      </SCRIPT> 
+   </ol> 
   </td>
  </tr>
 </table>
 
  <p> <p>
-<h2>Quick Installation Instructions</h2>
+<h2>Installation Details</h2>
 
 <a href="http://java.sun.com/products/javawebstart/">Web Start</a>
 is a product from Sun that uses the Web to download applications.
@@ -119,7 +120,7 @@ File:OpenURL command in vergil:
 
  <p>The second model can be accessed with the following URL
 <pre>
-   http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/jnlp/dualMode.xml
+   http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/jnlp/v2v.xml
 </pre>
 
 
