@@ -13,9 +13,7 @@ SUM_SOURCES =  \
 	softwalls.sum \
         sensorNetworks.sum \
 	wireless.sum \
-	cacheAwareScheduling.sum \
 	structuredIA.sum \
-	smachine.sum \
         DDF_BDF.sum \
 	simTimedMoCs.sum
 
