@@ -8,6 +8,7 @@ HOMEPAGE
 http://ptolemy.eecs.berkeley.edu/~neuendor
 
 PHONE
+510-642-8884
 
 TITLE
 Real-time Embedded Control Systems and Ptolemy II
@@ -20,19 +21,21 @@ ABSTRACT
 Most of the domains that have been explored in conjunction with Ptolemy
 II emphasize deterministic and complete processing of input data. It
 could be said that the emphasis is on the precision of a reaction to
-input data. Some real-time applications, particularly systems involved
-with controlling physical objects, timely reactions are more important
-than precise reactions.
+input data. However, in some real-time applications,
+particularly systems involved with controlling physical objects, 
+timely reactions are more important than precise reactions.
 
-<p> This project uses the <i>port-based objects</i> model of
+<p> This project will use the <i>port-based objects</i> model of
 computation, implemented as a domain within Ptolemy II. The PBO model
 of computation has been shown to be an appropriate abstraction for
 designing controllers for real-time systems. Because it supports
 heterogeneous modeling, Ptolemy II can be used to combine a PBO model
-of a controller with a model of the system being controlled. Other
-Ptolemy II domains could be used to model hardware components of an
-embedded system, enabling hardware-software co-simulation. Furthermore,
-by using a microcontroller running an embedded Java virtual machine,
-the model of the system controller in Ptolemy II can translate directly
-into an java-based controller implementation.
+of a controller with models of the system components being controlled.
+Since the component models can be based on existing Ptolemy II domains, 
+hardware-software co-simulation of the resulting system will then be possible. 
+Lastly, by using a microcontroller running an embedded Java virtual machine,
+the model of the system controller in Ptolemy II could easily
+translate into a java-based controller implementation.
+<p>
+[1] <a href="http://www.ece.umd.edu/serts/bib/journals/tse97.shtml">D. Stewart, R. Volpe, P. Khosla, "Design of Dynamically Reconfigurable Real-Time Software using Port-Based Objects," <i>IEEE Trans. on Software Engineering</i>, Vol. 23, No. 12, pp. 759-776, December 1997</a>.
 
