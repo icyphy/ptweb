@@ -9,7 +9,6 @@ SOURCES = ptolemyII.sum \
 	  vogel02.sum \
 	  vthreads.sum \
 	  winthrop02.sum \
-	  winthrop02.jpg \
 	  yuhong02.sum
 
 
