@@ -66,8 +66,8 @@ Yet some other problems turn out to root in theories that worth further
 pursuing. For example, the theory underlying the global behavior of
 those highly parallel but mutually dependent components is of considerable
 interest. It is comparable to the process networks theory, but has many
-extensions and exceptions. Its decidability is certainly Turing-hard, as
-process networks are already Turing-complete.
+extensions and exceptions. Its decidability is certainly NP-hard, as
+process networks are already NP-complete.
 </p><p>
 In this project, problems such as those mentioned above will be studied. An
 implementation will be built into Ptolemy II to meet the goal of high-speed
