@@ -1,0 +1,433 @@
+2002-07-31  Christopher Hylands  <cxh@eecs.berkeley.edu>
+
+	* ptolemy/actor/gui/HTMLViewer
+	Paul Lieverse: Added code to handle mailto:
+	
+2002-07-15  Christopher Hylands  <cxh@eecs.berkeley.edu>
+
+	* ptolemy/actor/gui/JNLPUtilities.java
+	Added saveJarURLInClassPath()
+
+	* ptolemy/actor/gui/Browser
+	show(): Call saveJarURLInClassPath(), after calling
+	BrowserLauncher.openURL(), call setContainer(null) because we have
+	no way of communicating with the browser
+	
+2002-07-10  Christopher Hylands  <cxh@eecs.berkeley.edu>
+
+	* ptolemy/actor/gui/BrowserLauncher.java
+	If the url does not begin with http:, then look
+	it up as a file, if the file does not exist, look it
+	up in the classpath, if the url cannot be found in the classpath,
+	then pass the original url to the browser and hope for the best.
+	
+
+2002-07-08  Christopher Hylands  <cxh@eecs.berkeley.edu>
+
+	* ptolemy/vergil/basic/NamedObjController.java
+	If the docs cannot be found, then suggest that the
+	user install the documentation component
+	
+	* ptolemy/configs/doc/makefile
+	When creating demosPtiny.htm, substitute in a link
+	for completeDemosPtiny.htm
+	
+
+2002-06-18  Christopher Hylands  <cxh@eecs.berkeley.edu>
+
+	* bin/ptinvoke.in
+	Handle pathnames with spaces more gracefully.
+
+	* configure.in
+	* configure
+	Ed Willink, Christopher Hylands: Better URL for JavaCC" configure.in
+
+	* ptolemy/data/expr/makefile
+	modified classpath to handle JavaCC2.1
+	
+2002-06-16  Christopher Hylands  <cxh@eecs.berkeley.edu>
+
+	* configure
+	configure.in
+	We were checking for the existence of LEJOS_USER_DIR, but
+	if it was not found we were reporting that COMM_USER_DIR was not
+	present.
+	
+
+2002-06-14  Christopher Hylands  <cxh@eecs.berkeley.edu>
+
+	* ptolemy/plot/EditablePlot.java
+	ptolemy/plot/Histogram.java
+	ptolemy/plot/Plot.java
+	ptolemy/plot/PlotApplication.java
+	Fixed imports
+
+2002-06-11
+
+	* ptolemy/gui/Query.java:
+	getMaximumSize() now returns the preferred height but the maximum
+	width so that horizontal and vertical applets look good.  Bumped
+	up preferred height to 4x so that models that have parameters such
+	as GR/Pendulum look good
+
+	* lib/diva.jar
+	(John Reekie) Updated diva/canvas/toolbox/LabelFigure.class
+	to work with j2skd1.4.0
+	
+	* ptolemy/domains/sdf/lib/FIR.java
+	ptolemy/domains/sdf/lib/VariableFIR.java
+	ptolemy/domains/sdf/lib/test/auto/VariableFIR.java
+	(Edward A. Lee) Bug fix for VariableFIR.java
+	
+2002-06-10
+
+	* ptolemy/data/unit/demo/Units/Units.xml
+	(Winthrop Williams): Added title to results display
+	
+2002-06-04
+
+	* ptolemy/domains/sdf/lib/MaximumEntropySpectrum.xml
+	Changed wiring slightly
+	
+	* ptolemy/domains/sdf/lib/SmoothedPeriodogram.xml
+	* ptolemy/domains/sdf/lib/SmoothedSpectrum.xml
+	inputIsPower is now set to true
+	
+	* ptolemy/copernicus/gui/GeneratorTableau.java
+	Throw a better error message if saving the model does not set the
+	effigy 
+	
+2002-06-03
+
+	* doc/mainheader.htm
+	Mozilla/Netscape 6 has a bug with align=right, see
+	http://bugzilla.mozilla.org/show_bug.cgi?id=78820
+
+2002-05-30
+
+	* ptolemy/moml/Vertex.java
+	* ptolemy/moml/test/MoMLParser.tcl
+	Greg Rohling pointed out that when we export a vertex,
+	according to the DTD, the output should not include the class.
+	
+	* ptolemy/actor/gui/MoMLSimpleApplication.java
+	Don't skip MoML parsing errors
+	
+2002-05-29
+
+	* ptolemy/gui/Query.java
+	Added scrollbars so that we can view the Units
+
+2002-05-16
+
+	* ptolemy/actor/gui/MoMLApplication.java
+	If openStream() barfs, then print the file name that we were
+	to open.  Note that Web Start does not seem to work
+	very will if the path name to the vergil.jnlp file has a space
+	in it.
+
+	* ptolemy/actor/lib/URLReader.java 
+	If we throw an IllegalActionException, then be sure to include the
+	causing exception.
+	
+2002-05-15
+
+	* bin/ptinvoke.in
+	Added fix for 'basename: not found' message, added htmlconvert
+	
+	* ptolemy/kernel/test/makefile
+	* ptolemy/domains/sdf/lib/test/makefile
+	* ptolemy/domains/de/lib/test/makefile
+	Added double quotes to handle spaces in pathnames
+
+	* mk/jnlp.mk
+	Use # instead of % in sed statements in case the PTII_LOCALURL
+	as a space in it, which will come out as %20
+	
+	* ptolemy/data/unit/test/makefile
+	No need to have dummy.tcl as a dependency, fixed it
+	so we run the auto tests
+	
+2002-05-14
+
+	* ptolemy/domains/ct/kernel/CTEmbeddedDirector.java
+	* ptolemy/domains/ct/kernel/CTReceiver.java
+	* ptolemy/domains/ct/kernel/CTScheduler.java
+	(Jie Liu): Handles SignalTypes in CTReceiver
+	
+	* ptolemy/domains/ct/kernel/test/CTReceiver.tcl
+	* ptolemy/domains/ct/kernel/test/CTScheduler.tcl
+	(Jie Liu): fixed tests for CTScheduler and add test for
+	CTReceiver. Added SignalTypes to CTReceiver 
+	
+	* ptolemy/actor/IOPort.java
+	(Jie Liu): fixed a bug in sinkPortList(), and add an
+	insideSinkPortList() method. 
+
+	* ptolemy/domains/ct/demo/SigmaDelta/SigmaDelta.java
+	* ptolemy/domains/ct/demo/SquareWave/SquareWave.java
+	* ptolemy/domains/ct/demo/StickyMasses/StickyMasses.java
+	(Elaine Cheong): Cleaned up import statements
+	
+	* ptolemy/domains/ct/demo/BouncingBall/BouncingBall.htm
+	(Jie Liu): Uses MoMLApplet instead of PtolemyApplet, no longer
+	refers to the nonexistant Java version 
+	
+	* ptolemy/domains/ct/demo/Helicopter/Helicopter.java
+	* ptolemy/domains/ct/demo/Thermostat/Thermostat.java
+	(Jie Liu): Fixed the Java implementation to be compatible
+	with signal types.
+
+	* ptolemy/domains/ct/doc/toc.htm
+	(Jie Liu): Link to Units demo went to a .xml file instead of a .htm
+	file
+	
+	* ptolemy/domains/fsm/kernel/HSDirector.java
+	(Jie Liu): return a new CTReceiver with type DISCRETE in
+	newReceiver()" HSDirector.java 
+	
+	* ptolemy/domains/ct/doc/signal_types.htm
+	* ptolemy/domains/ct/doc/ct_lattice.gif
+	* ptolemy/domains/ct/doc/main.htm
+	(Jie Liu): Added documentation for setting signal types
+
+	* ptolemy/domains/ct/doc/makefile
+	Added signal_types.htm and ct_lattice.gif
+	
+	* ptolemy/configs/doc/docs.html
+	Added link to signal_types.htm and doc/expression.htm
+	
+	* ptolemy/configs/doc/vergilGraphEditorHelp.htm
+	* ptolemy/configs/doc/vergilFSMEditorHelp.htm
+	Added link to docs.htm
+	
+	* ptolemy/plot/doc/thirdparty.htm
+	Added Filter Design and Visualization applet
+
+	* ptolemy/configs/doc/demos.htm
+	(Edward A. Lee) Rearranged the order of the quick tour and
+	improved writeup
+	
+	* ptolemy/configs/doc/completeDemos.htm
+	(Edward A. Lee) New file that contains the listing by domain
+
+	* ptolemy/configs/doc/completeDemosPtiny.htm
+	* ptolemy/configs/doc/makefile
+	completeDemosPtiny.htm is derived from completeDemosPtiny.htm
+
+	* ptolemy/domains/pn/demo/OrderedMerge/OrderedMerge.xml
+	(Edward A. Lee) New demo of PN
+	
+	* ptolemy/domains/pn/demo/OrderedMerge/OrderedMerge.htm
+	* ptolemy/domains/pn/demo/OrderedMerge/OrderedMergeVergil.htm
+	* ptolemy/domains/pn/demo/OrderedMerge/makefile
+	* ptolemy/domains/pn/demo/makefile
+	* ptolemy/domains/pn/doc/toc.htm
+	Added OrderedMerge model
+	
+	* ptolemy/actor/lib/OrderedMerge.java
+	* ptolemy/actor/lib/esoteric.xml
+	* ptolemy/actor/lib/makefile
+	* ptolemy/configs/vergilConfiguration.xml
+	Added esoteric.xml, OrderedMerge.java 
+	
+	* ptolemy/actor/lib/javasound/AudioReader.java
+	(Steve Neuendorffer): Default value should use double quotes,
+	not &quot;
+	
+	* ptolemy/domains/ct/demo/Switch/Switch.xml:
+	(Edward A. Lee): Changed to use a modal model, and improved annotation
+	
+2002-05-13
+
+	* ptolemy/plot/plotml/PlotMLParser.java
+	* ptolemy/plot/doc/changes.htm
+	(Alberto Gobbi, Christopher Hylands):
+	Fix for <dataset name= ... connected=...> to PlotMLParser.java
+
+	* doc/javahtml.awk
+	* doc/whatsnew.awk
+	Added better header about what to do to update the derived files
+	
+	* ptolemy/domains/de/demo/ModalModel/ModalModel.xml
+	(Edward A. Lee) Added modal model demo
+	
+	* ptolemy/domains/de/demo/makefile
+	* ptolemy/domains/de/demo/ModalModel/makefile
+	* ptolemy/domains/de/demo/ModalModel/ModalModel.htm
+	* ptolemy/domains/de/doc/toc.htm
+	Added ModalModel directory
+	
+	* ptolemy/configs/doc
+	(Edward A. Lee) changed modal model demo and listed Switch demo
+	under CT
+	
+	* ptolemy/domains/de/demo/Inspection/makefile
+	make install now runs make jars
+
+2002-05-10
+
+	* ptolemy/configs/ptinyEffigies.xml
+	* ptolemy/configs/utilitiesLibrary.xml
+	(Edward A. Lee)
+	Adjusted positioning of annotation when we create a modal model
+
+	* ptolemy/kernel/util/test/VersionAttribute.tcl
+	Updated test that uses version after updating version to 2.0.1
+
+	* ptolemy/data/test/ComplexToken.tcl
+	Typo in test 11.0
+	
+	* ptolemy/copernicus/java/ModelTransformer.java
+	Throw a better error message if getToken() returns null
+	
+	* ptolemy/copernicus/java/Main.java
+	Added System.exit() to deal with generating code that uses a
+	plotter
+	
+2002-05-09
+
+	* ptolemy/plot/doc/thirdparty.htm	
+	Changed the name of DataBrowser to Datascape
+	
+2002-05-07
+
+	* ptolemy/data/ByteToken.java
+	* ptolemy/data/UnsignedByteToken.java
+	* ptolemy/data/type/BaseType.java
+	* ptolemy/data/type/TypeLattic.java
+	* ptolemy/data/IntToken.java
+	* ptolemy/data/test/ByteToken.java 
+	* ptolemy/data/test/UnsignedByteToken.java 
+	* ptolemy/copernicus/kernel/PtolemyUtilities.java
+	Renamed ByteToken to UnsignedByteToken
+	In Java, Bytes go from -2^7 to +2^7-1
+	The UnsignedByteToken class has a range from 0 to 255
+
+	* ptolemy/moml/filter/RemoveGraphicalClasses.java
+	Substitute null for AnnotationEditorFactory and
+	NodeControllerFactory so that we can generate an applet that will
+	run for moml/demo/modulation.xml
+	
+	* ptolemy/moml/filter/test/RemoveGraphicalClasses.tcl
+	Adjusted test results to reflect change in RemoveGraphicalClasses.java
+	
+	* ptolemy/copernicus/applet/compileCommandTemplate.txt
+	* ptolemy/copernicus/interpreted/compileCommandTemplate.txt
+	* ptolemy/copernicus/java/compileCommandTemplate.txt
+	* ptolemy/copernicus/shallow/compileCommandTemplate.txt
+	* ptolemy/copernicus/applet/makefile
+	* ptolemy/copernicus/interpreted/makefile
+	* ptolemy/copernicus/java/makefile
+	* ptolemy/copernicus/shallow/makefile
+	* ptolemy/copernicus/applet/runCommandTemplate.txt
+	* ptolemy/copernicus/interpreted/runCommandTemplate.txt
+	* ptolemy/copernicus/java/runCommandTemplate.txt
+	* ptolemy/copernicus/shallow/runCommandTemplate.txt
+	Added double quotes for @java@
+
+	* ptolemy/copernicus/kernel/Copernicus.java
+	Print out the command that we are going to run in a format
+	that can be cut and pasted.
+	
+	* ptolemy/gui/GUIStringUtilities.java
+	tokenizeForExec(): Do not tokenize 2.0 as a number, it causes
+	problems if $PTII is "ptII 2.0.1"
+	
+	* ptolemy/copernicus/applet/modelVergil.htm.in
+	Increased size, added controls=buttons
+	Include fsm.jar because vergil.jar uses classes in domains/fsm
+	
+2002-05-06
+
+	* ptolemy/matlab/makefile
+	* ptolemy/plot/makefile
+	* ptolemy/domains/ct/demo/jspaces/CarTracking/makefile 
+	* ptolemy/doc/makefile
+	* ptolemy/copernicus/java/makefile
+	* ptolemy/copernicus/java/compileCommandTemplate.txt
+	(Bug reported by Didier MAUUARY)
+	Added double quotes around makefile variables that are based on
+	the path to the Java Development kit so as 
+	to deal with spaces in pathnames
+	
+	* ptolemy/vergil/Vergil.htm
+	* ptolemy/vergil/vergilAppletDemo.xml
+	Adjusted layout
+	
+	* bin/ptinvoke.in
+	* util/lisp
+	* util/lisp/gud.el
+	* util/lisp/gud.elc
+	(Zoltan Kemenczy, Research In Motion, Ltd.)
+	The scripts that invoke Ptolemy II have been extended to support
+	jdb, the Java Debugger.
+
+	* doc/coding/debugging.htm
+	* doc/coding/toc.htm
+	* doc/coding/makefile
+	Documentation for the -debug and -jdb options
+
+	* util/lisp/README.txt
+	* util/lisp/jindent.el
+	* util/lisp/ptjavastyle.el
+	Move .el files out of util/testsuite
+
+	* util/lisp/ptemacs.el
+	Sample .emacs file
+	
+2002-05-04
+
+	* ptolemy/actor/gui/Configuration.java
+	* ptolemy/actor/gui/HTMLViewer.java
+	(Edward A. Lee, Christopher Hylands) - Fixes for internal
+	hyperlinks in an html file
+	
+	* ptolemy/vergil/actor/ActorController.java
+	Remove 'Look Inside' context menu choice if a configuration is not
+	found.  The MoMLAppletViewer does not include a configuration, so
+	the Look Inside menu choice did not do anything other than bring
+	up an error message.
+	
+	* doc/coding/testing.htm
+	(Winthrop Williams, Christopher Hylands) - Tuned up auto test section.
+	
+2002-04-30
+
+	* ptolemy/domains/giotto/demo/Multimode/Multimode2.xml:
+	(Haiyang Zheng) - Updated with new model
+
+	* ptolemy/data/expr/UtilityFunctions.java
+	Try harder to get the value of ptII if we are under Web Start.	
+
+	* ptolemy/copernicus/kernel/Generator.xml
+	Added MoMLViewerApplet and diva.graph.Controller for use with
+	applet code generator.
+
+	* ptolemy/copernicus/kernel/GeneratorAttribute.java
+	Strip off trailing / on ptIIUserDirectoryAsURL.
+
+	* ptolemy/copernicus/applet/AppletWriter.java
+	Applet Generation now works under Web Start.
+
+	* ptolemy/copernicus/applet/compileCommandTemplate.java
+	Added double quotes to handle paths with spaces in them.
+
+	* ptolemy/copernicus/applet/modelVergil.htm.in
+	Don't include xml text display applet.
+
+	* ptolemy/copernicus/gui/GeneratorAttribute.java
+	If ptIIUserDirectory cannot be found, then hit the Parameters button.
+
+	* ptolemy/domains/giotto/demo/Composite/*
+	* ptolemy/domains/giotto/makefile
+	* ptolemy/domains/giotto/doc/toc.htm
+	* ptolemy/configs/doc/demos.htm:
+	(Haiyang Zheng) - New demo
+	
+	* configure.in, configure:
+	configure should now work if $PTII contains spaces.
+	
+	* ptolemy/plot/PlotBox.java:
+	(Roger Schwenke, Christopher Hylands): Add better documentation
+	about how to use Log axes.
