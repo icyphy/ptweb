@@ -1,20 +1,33 @@
-<!-- @(#)search.html	1.5 11/05/97 -->
 <html>
 <head>
-<title>http://ptolemy.eecs.berkeley.edu Site Search</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>Site Search</title>
 </head>
-<body bgcolor="#eef7ff">
-<h1>http://ptolemy.eecs.berkeley.edu Site Search</h1>
+<h1>Ptolemy Website Search</h1>
+<p>
+<form method="post" action="/cgi-bin/htsearch">
+<input type="text" size="40" name="words" value="">
+<input type="submit" value="Search">
+<p>
+Match: <select name=method>
+<option value=and>All
+<option value=or>Any
+</select>
+Output Format: <select name=format>
+<option value=builtin-long>Long
+<option value=builtin-short>Short
+</select>
+</font>
+<input type=hidden name=config value=htdigpub>
+<input type=hidden name=restrict value="">
+<input type=hidden name=exclude value="">
+</form>
 
-Below is a list of publically available ways to search various parts
-of the Ptolemy web site.
+<p>
+<h1>Other Ptolemy-Related Search</h1>
 <MENU>
-<LI> <A HREF="http://ptolemy.eecs.berkeley.edu/htdig/searchpub.html">Search all the publically available pages on the Ptolemy web site</A>
-</MENU>
-
-Search only:
-<MENU>
-<LI> <A HREF="http://ptolemy.eecs.berkeley.edu/wais.html#Searching">Ptolemy Hackers mailing list</A>
+<LI> <A HREF="wais.htm#Searching">Ptolemy Hackers mailing list</A>
 <LI> <A HREF="http://ptolemy.eecs.berkeley.edu/papers/publications.html/search.html">Ptolemy Project Publications</A>
 <LI> Almagest: 
 <A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/users_man-wais.pl">User's Manual</A> -
@@ -22,10 +35,11 @@ Search only:
 <A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/kernel_man-wais.pl">Kernel Manual</A> 
 </MENU>
 
+<a href="http://htdig.sdsu.edu" target="_top">
+<IMG SRC="../image/htdig.gif" align=bottom alt="ht://Dig" border=0>
+This search engine uses ht://dig from San Diego State University.</a>
 <address>
-Last updated 11/05/97,
-Send comments to <a href="mailto:www@ptolemy.eecs.berkeley.edu">
-www@ptolemy.eecs.berkeley.edu</a>.
+Last updated $Date$
 </address>
 </body>
 </html>
