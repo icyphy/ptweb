@@ -22,6 +22,33 @@ machines to define discrete behavior.
 
 
 <menu>
+<li> <B>March 16, 2005</B>:
+<B>Note:</B> HyVisual has a <B>patch</B>.
+ <BR> If you run the
+<a href="hyvisual5.0/CanNotResolveStepSize.xml">CanNotResolveStepSize</a>
+model, then you may see an error:
+<pre>
+ptolemy.kernel.util.IllegalActionException:   in .Bug.manager
+Because:
+Fail to refine step size. The refined step size is less than the minimum
+time resolution, at time 6.9334276710
+   in .Bug.ModalModel.wait.CTEmbedded Director
+</pre>
+The <a href="hyvisual5.0/HyVisual-5.0-alpha-patch.tar"><CODE>HyVisual-5.0-alpha-patch.tar</CODE></a> 
+ file contains a tar file that fixes this bug. The patch file also
+contains a modified ContinuousSinewave actor that provides more a more
+reasonable sinewave.
+
+ <p>To install the patch:
+<ol>
+<li> Download and install HyVisual 5.0-alpha from the installers below
+
+<li> Download <a href="hyvisual5.0/HyVisual-5.0-alpha-patch.tar"><CODE>HyVisual-5.0-alpha-patch.tar</CODE></a> and uncompress the 
+and follow the instructions in the <CODE>ctPatch.README.txt</CODE> file.
+</ol>
+
+
+
 <li> <B>March 4, 2005</B>:
 HyVisual 5.0-alpha released
 
