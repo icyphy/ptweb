@@ -4,7 +4,7 @@ SOURCES = ptolemyII.sum \
 	  cont_and_disc.sum \
 	  copernicus02.sum \
 	  e_Ptolemy.sum \
-	  nest.sum \
+	  ndest.sum \
 	  starcharts.sum \
 	  vergil02.sum \
 	  vogel02.sum \
