@@ -55,6 +55,7 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 <li> <a href="#actor">Actor Limitations</a>
 	<menu>
 	<li> <a href="#AudioReader">AudioReader</a>
+	<li> <a href="#ViewScreen">ViewScreen</a>
 	</menu>
 
 <li> <a href="#ui">User Interface Limitations</a>
@@ -320,6 +321,70 @@ diff -c -r1.21 -r1.19.2.3
 cxh@cooley 153% 
 </pre>
 
+<h4><a name="ViewScreen">ViewScreen</a>
+The GR ViewScreen actor may display a black image.
+The fix is to patch <CODE> ptII/ptolemy/domains/gr/lib/ViewScreen.java</CODE>:
+Change this
+<pre>
+***************
+*** 265,271 ****
+          while (branches.hasMoreElements()) {
+              BranchGroup branchGroup = (BranchGroup) branches.nextElement();
+              if (branchGroup.getCapability(BranchGroup.ALLOW_DETACH)) {
+!                 simpleUniverse.getLocale().removeBranchGraph(branchGroup);
+              }
+          }
+  
+
+</pre>
+to
+<pre>
+--- 265,274 ----
+          while (branches.hasMoreElements()) {
+              BranchGroup branchGroup = (BranchGroup) branches.nextElement();
+              if (branchGroup.getCapability(BranchGroup.ALLOW_DETACH)) {
+!                 if (!(branchGroup instanceof
+!                             com.sun.j3d.utils.universe.ViewingPlatform)) {
+!                     simpleUniverse.getLocale().removeBranchGraph(branchGroup);
+!                 }
+              }
+          }
+</pre>
+If you downloaded the source version, you can edit the file yourself 
+or download a
+<a href="ViewScreen.java">fixed version of <CODE>ViewScreen.java</CODE></a>
+and recompile with:
+<pre>
+cd $PTII/ptolemy/domains/gr/lib
+make
+</pre>
+If you downloaded the Windows installer, then you can 
+<a href="gr.zip">download <CODE>gr.zip</CODE></a>
+uncompress it, which will create <CODE>gr.jar</CODE> and replace
+<CODE>Ptolemy_II_2.0.1/ptolemy/domains/gr/gr.jar</CODE> with the
+new version.
+ <br>Usually, the file to be replaced will be at
+<CODE>c:/Ptolemy/Ptolemy_II_2.0.1/ptolemy/domains/gr/gr.jar</CODE>
+
+ <p>This bug was reported by Jim Kleckner.
+
+ <p>Here is how to I replicated the bug:
+<ol>
+<li> On a Window XP laptop, uninstalled all previous versions of
+the Java SDK, JRE and Java 3d.
+
+<li> Rebooted
+
+<li> Installed Java 1.4.1_01 SDK
+
+<li> Installed Java 3d 1.3 Direct X.  Note that Java 3d 1.3.1-beta
+is also available
+
+<li> Installed Ptolemy II 2.0.1 by using the Windows installer.
+
+<li> Ran the GR demos, the demos run, but nothing but a black window is
+displayed.  
+</ol>
 
 <h3><a name="ui">User Interface Limitations</a></h3>
 
