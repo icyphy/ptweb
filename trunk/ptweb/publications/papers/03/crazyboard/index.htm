@@ -1,0 +1,32 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Implementation Issues in Hybrid Embedded Systems</title>
+</head>
+<body>
+<center>
+<h1>Implementation Issues in Hybrid Embedded Systems</h1>
+</center>
+<center>
+Stephen Neuendorffer
+<p>
+Memorandum UCB/ERL M03/22,
+<br> EECS, University of California, Berkeley, CA 94720, USA
+<BR>
+June 24, 2003
+</center>
+<br>
+<center>
+<a href="crazyboard.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+<BR>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+
+This paper presents an approach to the implementation of electronic computation systems whose behavior is tightly integrated with the physical world.   We call such systems \textit{hybrid embedded systems}.   Such systems are challenging from a design perspective because their behavior is governed by both continuous-state dynamics from the physical world and discrete-state dynamics from the computation.  There are several difficulties that appear in such systems.  For instance, understanding of the passage of time during computation is critical to understanding how the computation system affects the state of the physical world.  Hybrid embedded systems are also inherently concurrent; the computation system operates concurrently with the dynamics of the physical world, in addition to any concurrency that may be designed into the system.   In addition, hybrid embedded systems must generally operate within the constraints of traditional embedded systems.  They are inevitably constrained computationally, often have a complex computational architecture, and must perform predictably.  This paper presents an approach to the design of embedded systems utilizing component-based system models capable of representing concurrency, the passage of time, and both continuous and discrete behaviors.  These models allow for automatic generation of system implementations from high-level abstractions as well as the consideration of low-level architectural details where necessary.  We show how this technique can be ued to approach difficulties in the design of a complex digital control system.
+
+</body>
+</html>
+
