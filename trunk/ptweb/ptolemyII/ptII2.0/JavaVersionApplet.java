@@ -59,7 +59,7 @@ public class JavaVersionApplet extends JApplet {
         super.init();
 
         JFrame _frame = new JFrame();
-        _jTextArea = new JTextArea(1,40);
+        _jTextArea = new JTextArea(6,40);
         _jTextArea.setEditable(false);
         //_scrollPane = new JScrollPane(_jTextArea);
         //getContentPane().add(_scrollPane);
@@ -72,6 +72,20 @@ public class JavaVersionApplet extends JApplet {
                     + javaVersion + ", " + newline
                     + "which is sufficient to run Ptolemy II." + newline
                     + "You need only download the Ptolemy II distribution.");
+        } else if (javaVersion.startsWith("1.4")) {
+            _jTextArea.append("Congratulations, you are running Java "
+                    + javaVersion + ", " + newline
+                    + "which is sufficient to run Ptolemy II." + newline
+                    + "You need only download the Ptolemy II distribution."
+                    + "Note that the applets will run fine under Java 1.4"
+                    + newline
+                    + "but that the code generator will not work with "
+                    + newline
+                    + "Java 1.4, it currently requires Java 1.3." + newline
+                    + "So, if you are planning on running the code generator,"
+                    + newline
+                    + "you will need to install Java 1.3"
+                              );
         } else {
             _jTextArea.append("You are running Java "
                     + javaVersion + ". " + newline
