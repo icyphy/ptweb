@@ -31,6 +31,8 @@ Disallow: /~ptdesign/tycho/ptdesign-tycho
 Disallow: /~ptdesign/tycho/tcldp
 Disallow: /ptolemyII/ptII0.1alpha
 Disallow: /~ptII/java/opt
+Disallow: /~ptII/java/ptdesignvendors
+Disallow: /~ptII/ptII
 Disallow: /~pino/DS
 Disallow: /~pino/Ptolemy
 Disallow: /~pino/Ptolemy/tycho
