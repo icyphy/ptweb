@@ -18,7 +18,7 @@
         function insertLink(url, name) { 
         	if (javawsInstalled) { 
                 	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
-                	document.write("<li> <a href=\"http://java.sun.com/cgi-bin/javawebstart-platform.sh?\" target=_top>Install Web Start from Sun (720KB - 8.6Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
+                	document.write("<li> <a href="\"http://java.sun.com/cgi-bin/javawebstart-platform.sh?\"" target=_top>Install Web Start from Sun (720KB - 8.6Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
   
               } 
         } 
@@ -52,6 +52,10 @@ Ptolemy II is available in several formats:
 </menu>
 This page covers accessing Ptolemy II via Web Start.
 
+  </td>
+ </tr>
+</table>
+
         <p>This download of Ptolemy II uses an experimental web launching tool
        called Web Start that makes installation and updates particularly
        simple.  
@@ -61,8 +65,8 @@ This page covers accessing Ptolemy II via Web Start.
 	from the <a href="download.htm">Ptolemy II 2.0 Downloads</a> page
 
 
-  <h2>Quick Start</h2>
-    <ol>  <SCRIPT LANGUAGE="Javascript"> 
+ <h2>Quick Start</h2>
+   <ol>  <SCRIPT LANGUAGE="Javascript"> 
 
              <!-- 
              insertLink("jnlp/vergil.jnlp", 
@@ -70,11 +74,7 @@ This page covers accessing Ptolemy II via Web Start.
              // --> 
      </SCRIPT> 
    </ol> 
-  </td>
- </tr>
-</table>
 
- <p> <p>
 <h2>Installation Details</h2>
 
 <a href="http://java.sun.com/products/javawebstart/" target="_top">Web Start</a>
