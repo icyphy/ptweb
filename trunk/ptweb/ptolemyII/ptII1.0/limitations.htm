@@ -3,38 +3,30 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <link href="../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
-<title>Ptolemy II 1.0 beta2 Limitations</title>
+<title>Ptolemy II 1.0 Limitations</title>
 </head>
 <body>
-<h2>Ptolemy II 1.0 beta2 Limitations</h2>
+<h2>Ptolemy II 1.0 Limitations</h2>
 
 The <a href="ptII1.0/doc/ptII1.0.release.htm">Ptolemy II 1.0 Release notes</a>
 list limitations.  The Vergil welcome window has a link to
 a similar list.
 
- <p>Below we list limitations found after the Ptolemy II 1.0 beta2 release.
+ <p>Below we list limitations found after the Ptolemy II 1.0  release.
 
 <h2>Installer limitations</h2>
 
 <menu>
 
 <li> Unfortunately, the Installshield Installer has a number of 
-bugs.  See the <a href="download.htm#installshield_bugs">Installshield bugs</a>
+bugs.  See the <a href="installshield.htm#bugs">Installshield bugs</a>
 section for details.
 
 <li> We have only tested the Installshield Installers under Windows
 2000 and Windows 98.  Unix users should install from the
-<a href="ptII1.0beta2.src.tar.gz"><CODE>ptII1.0beta2.src.tar.gz</CODE></a>
+<a href="ptII1.0.src.tar.gz"><CODE>ptII1.0.src.tar.gz</CODE></a>
 tar file and
 follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>.
-
-<li> In the full Windows installer, the Ptiny choice does not install
-exactly the same files as the Ptiny choice in the Ptiny Windows
-installer.  The Ptiny choice in the full installer does not install a
-subset of the Java documentation.
-
-<li> During uninstallation, messages about intro.htm and
-vergilConfiguration.xml come up because we install those files twice.
 
 </menu>
 
@@ -60,16 +52,16 @@ menu choice.
 of the <CODE>HTML Demos and Docs</CODE> shortcut to include the doc directory.
  <p>
 <ol>
-<li> Start -&gt; Programs -&gt; Ptolemy -&gt; Ptolemy II 1.0 beta2 
+<li> Start -&gt; Programs -&gt; Ptolemy -&gt; Ptolemy II 1.0
 
 <li> Right click on <CODE>HTML Demos and Docs</CODE>
 
 
 <li> In <CODE>Start in</CODE>, change:
  <br>
-<CODE>"C:\Program Files\Ptolemy\Ptolemy II 1.0 beta2\"</CODE>
+<CODE>"C:\Program Files\Ptolemy\Ptolemy II 1.0\"</CODE>
  <br>to:
-<CODE>"C:\Program Files\Ptolemy\Ptolemy II 1.0 beta2\doc"</CODE>
+<CODE>"C:\Program Files\Ptolemy\Ptolemy II 1.0\doc"</CODE>
 
 </ol>
 
@@ -111,18 +103,13 @@ The Network demo does not work as a local applet because the xml file
 includes a reference to http://ptolemy.eecs.berkeley.edu, which is
 not on the local file system, so we get a SecurityException.
 
-<li> <code>vergil foo</code> hangs.  No window comes up if foo does not exist.
+<li> When running Vergil under the IBM JDK1.3.0, sometimes the images
+in the html file are very small.
 
+<li> <code>vergil foo</code> hangs.  No window comes up if foo does not exist.
 
 <li> The documentation for custom actors used in demonstrations is not
 included in the release.
-</menu>
-
-<h2>Compilation limitations</h2>
-
-<menu>
-<li> The tutorials in doc/tutorial do not compile
-
 </menu>
 
 If you find bugs, check the limitations page inside Vergil, then
@@ -139,7 +126,7 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 	<menu>
 	<li> Vergil
 	<li> The local version of the web pages
-	<li> The <a href="ptII1.0/doc/index.htm" target="_top">PtolemyII 1.0 beta2 website version of the web pages</a>
+	<li> The <a href="ptII1.0/doc/index.htm" target="_top">PtolemyII 1.0 website version of the web pages</a>
 	</menu>
 </menu>
 

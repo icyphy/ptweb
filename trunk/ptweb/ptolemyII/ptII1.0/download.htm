@@ -4,12 +4,12 @@
 <meta http-equiv="Expires" content="0">
 <link href="../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
-<title>Ptolemy II 1.0 beta2 Downloads</title>
+<title>Ptolemy II 1.0  Downloads</title>
 </head>
 <body>
-<h1>Ptolemy II 1.0 beta2 Downloads</h1>
+<h1>Ptolemy II 1.0  Downloads</h1>
 <p>
-<p>There are two versions of Ptolemy II 1.0 beta2:
+<p>There are two versions of Ptolemy II 1.0 :
 <menu>
 <li> Ptolemy II 1.0ptiny beta2 - A small release that includes only
 what is necessary to build and run models in common domains (
@@ -17,12 +17,7 @@ CT, DE, FSM, PN and SDF).  The Ptiny version is primarily for
 Windows 2000 - we do not recommend using it under Unix,
 and the download is roughly 6Mb in size.
 
- <p>The difference between Ptolemy II 1.0 beta and
-Ptolemy II 1.0 beta2 is that beta2 has additional actors that
-are used for the DSP (EECS225a) class.
- <p>
-
-<li> Ptolemy II 1.0 beta2 - The full version, which includes
+<li> Ptolemy II 1.0 - The full version, which includes
 what is in the Ptiny version and the source code and makefiles that are
 necessary to create your own actors.  
  <br>The full version also includes experimental domains.
@@ -38,8 +33,8 @@ Below are the downloads and resources available from this page.
 <li> <a href="http://java.sun.com/j2se/1.3/" target="_top">Link to the Java Development Kit (JDK) page at <CODE>http://java.sun.com/j2se/1.3/</CODE></a>.
 <li> Information about installing the <a href="cygwin.htm">Cygwin toolkit</a>.
 <li> <a href="ptII1_0ptinybeta2setup.exe">Ptolemy II 1.0 Ptiny beta2 Windows installer</a> (6Mb).
-<li> <a href="ptII1_0beta2setup.exe">Ptolemy II 1.0 beta2 Windows installer (includes source files)</a>, (20.8Mb).
-<li> <a href="ptII1.0beta2.src.tar.gz">Ptolemy II 1.0 beta2 source only</a> (5.3Mb). 
+<li> <a href="ptII1_0setup.exe">Ptolemy II 1.0 Windows installer (includes source files)</a>, (20.8Mb).
+<li> <a href="ptII1.0.src.tar.gz">Ptolemy II 1.0 source only</a> (5.3Mb). 
 </menu>
 
 <h2>Instructions</h2>
@@ -123,7 +118,7 @@ InstallShield, will install Ptolemy II, from Berkeley, on your machine.
  <B>or</B>
 <menu>
 <li> Download a 
-<a href="ptII1_0beta2setup.exe">Windows executable</a>, (20.8Mb) and execute it.
+<a href="ptII1_0setup.exe">Windows executable</a>, (20.8Mb) and execute it.
 </menu>
 If you are not planning on building your own actors, then you can run
 vergil via the Start menu.
@@ -132,7 +127,7 @@ vergil via the Start menu.
 <li> Standard tar file and configure method using the
 	<a href="cygwin.htm">Cygwin toolkit</a>.
   <ol>
-  <li> Download <a href="ptII1.0beta2.src.tar.gz"><CODE>ptII1.0beta2.src.tar.gz</CODE></a> (5.3Mb) 
+  <li> Download <a href="ptII1.0.src.tar.gz"><CODE>ptII1.0.src.tar.gz</CODE></a> (5.3Mb) 
 
   <li> Follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>
   </ol>
@@ -149,7 +144,7 @@ to set up your build environment.
 <menu>
 <li> Standard tar file and configure method:
   <ol>
-  <li> Download <a href="ptII1.0beta2.src.tar.gz"><CODE>ptII1.0beta2.src.tar.gz</CODE></a> (5.3Mb) 
+  <li> Download <a href="ptII1.0.src.tar.gz"><CODE>ptII1.0.src.tar.gz</CODE></a> (5.3Mb) 
 
   <li> Follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>
   </ol>
@@ -159,35 +154,6 @@ to set up your build environment.
 </menu>
 </menu>
 </menu>
-
-<h2><a name="installshield_bugs">Bugs</a></h2>
-The Installshield Installer has a number of bugs:
-<menu>
-<li> The word 'malformed' may appear in the initial installer window.
-(Installshield documents this bug in their 
-<a href="http://support.installshield.com/download/ipmprelnotes.asp" target="_top">Installshield Multi-platform Release Notes</a>.)
-<li> The file chooser dialog is very likely to bring up a dialog
-about not being able to access the A: drive.  The workaround is 
-to hit Cancel. (Documented in the Installshield Release notes)
-<li> By default, the Ptolemy II is installed in the All Users menu.
-Ideally, the user would be given a choice as to whether Ptolemy II
-was installed for the current user or in the All Users menu.
-<li> The user should be prompted for where in the Start menu 
-Ptolemy II is installed.
-<li> The size of the install may be reported as 0kb.
-<li> The percent completed bars may not work.
-<li> Installing a bundled JRE does not work well so we don't use it.
-Installshield Multiplatform edition can be configured to download a
-JVM, but the JVM gets installed in a _jvm directory and is not added
-to Add/Remove Programs and the browswers can't use the plugin.  
-
-<li> Installshield Multiplatform Edition can't update environment variables,
-so the user's path is not updated to include the directory where
-<CODE>vergil.exe</CODE> is located.
-</menu>
-
-See the <a href="limitations.htm">Limitations page</a> for
-other limitations.
 
 </body>
 </html>
