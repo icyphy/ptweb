@@ -15,6 +15,154 @@ a similar list.
  <p>Eventually, this page will list limitations
 found after the Ptolemy II 2.0.1 release.
 
+<dl>
+<dt> Dragging AudioReader into the canvas results in an error (8/26/02)
+<dd> If you drag the AudioReader actor into the canvas, you will get
+<pre>
+ptolemy.kernel.util.IllegalActionException: Error evaluating expression
+ "file://" + property("ptolemy.ptII.dir") + 
+ "/ptolemy/actor/lib/javasound/test/voice.wav""
+    in .<Unnamed Object>.AudioReader2.sourceURL
+ Because:
+  Failed to evaluate sourceURL 
+    '"file://C:\ptII/ptolemy/actor/lib/javasound/test/voice.wav"'
+        in .<Unnamed Object>.AudioReader2
+ Because:
+  C
+ at ptolemy.data.expr.Variable.validate(Variable.java:1029)
+...
+</pre>
+
+The reason the error occurs is because under Windows $PTII will likely
+have a backslash which causes problems when creating a URL.
+
+The fix is to add a new property called <CODE>ptolemy.ptII.dirAsURL</CODE>
+to <CODE>$PTII/ptolemy/data/expr/UtilityFunction.java</CODE>
+and modify <CODE>$PTII/ptolemy/actor/lib/javasound/AudioReader.java</CODE>
+to use it.
+
+<pre>
+cxh@cooley 161% cvs diff -c -D yesterday UtilityFunctions.java
+Index: UtilityFunctions.java
+===================================================================
+RCS file: /home/cvs/ptII/ptolemy/data/expr/UtilityFunctions.java,v
+retrieving revision 1.41
+retrieving revision 1.39.2.3
+diff -c -r1.41 -r1.39.2.3
+*** UtilityFunctions.java	2002/04/30 16:05:04	1.41
+--- UtilityFunctions.java	2002/08/27 00:42:36	1.39.2.3
+***************
+*** 62,68 ****
+  types of the arguments.
+  
+  @author  Neil Smyth, Christopher Hylands, Bart Kienhuis, Edward A. Lee
+! @version $Id$
+  @since Ptolemy II 0.2
+  */
+  public class UtilityFunctions {
+--- 62,68 ----
+  types of the arguments.
+  
+  @author  Neil Smyth, Christopher Hylands, Bart Kienhuis, Edward A. Lee
+! @version $Id$
+  @since Ptolemy II 0.2
+  */
+  public class UtilityFunctions {
+***************
+*** 140,145 ****
+--- 140,148 ----
+       *  then this property might not be set, in which case we look
+       *  for "ptolemy/kernel/util/NamedObj.class" and set the
+       *  property accordingly.
++      *  <dt> "ptolemy.ptII.dirAsURL"
++      *  <dd> Return $PTII as a URL.  For example, if $PTII was c:\ptII,
++      *  then return file:/c:/ptII/.
+       *  </dl>
+       *  @param propertyName The name of property.
+       *  @return A String containing the string value of the property.
+***************
+*** 161,166 ****
+--- 164,185 ----
+  	if (property != null) {
+  	    return property;
+  	}
++ 	if (propertyName.equals("ptolemy.ptII.dirAsURL")) {
++             // Return $PTII as a URL.  For example, if $PTII was c:\ptII,
++             // then return file:/c:/ptII/
++             File ptIIAsFile = new File(getProperty("ptolemy.ptII.dir"));
++             
++             try {
++                 URL ptIIAsURL = ptIIAsFile.toURL();
++                 return ptIIAsURL.toString();
++             } catch (java.net.MalformedURLException malformed) {
++                 throw new InternalErrorException(null, malformed,
++                         "While trying to find '" + propertyName 
++                         + "', could not convert '"
++                         + ptIIAsFile + "' to a URL");
++             }
++         }
++ 
+  	if (propertyName.equals("ptolemy.ptII.dir")) {
+  
+  	    String namedObjPath = "ptolemy/kernel/util/NamedObj.class";
+cxh@cooley 162% 
+</pre>
+
+<pre>
+cxh@cooley 152% cvs diff -c -D yesterday AudioReader.java
+Index: AudioReader.java
+===================================================================
+RCS file: /home/cvs/ptII/ptolemy/actor/lib/javasound/AudioReader.java,v
+retrieving revision 1.21
+retrieving revision 1.19.2.3
+diff -c -r1.21 -r1.19.2.3
+*** AudioReader.java	2002/05/17 22:29:59	1.21
+--- AudioReader.java	2002/08/27 00:44:10	1.19.2.3
+***************
+*** 92,98 ****
+  <p>
+  Note: Requires Java 2 v1.3.0 or later.
+  @author Brian K. Vogel, Christopher Hylands
+! @version $Id$
+  @since Ptolemy II 1.0
+  @see ptolemy.media.javasound.LiveSound
+  @see SoundWriter
+--- 92,98 ----
+  <p>
+  Note: Requires Java 2 v1.3.0 or later.
+  @author Brian K. Vogel, Christopher Hylands
+! @version $Id$
+  @since Ptolemy II 1.0
+  @see ptolemy.media.javasound.LiveSound
+  @see SoundWriter
+***************
+*** 113,121 ****
+      public AudioReader(CompositeEntity container, String name)
+              throws NameDuplicationException, IllegalActionException  {
+          super(container, name);
+! 	sourceURL.setExpression("\"file://\" "
+!                 + "+ property(\"ptolemy.ptII.dir\") "
+!                 + "+ \"/ptolemy/actor/lib/javasound/"
+                  + "test/voice.wav\"");
+      }
+  
+--- 113,122 ----
+      public AudioReader(CompositeEntity container, String name)
+              throws NameDuplicationException, IllegalActionException  {
+          super(container, name);
+!         // The property() method is defined in
+!         // ptolemy.data.expr.UtilityFunctions.java
+! 	sourceURL.setExpression("property(\"ptolemy.ptII.dirAsURL\") "
+!                 + "+ \"ptolemy/actor/lib/javasound/"
+                  + "test/voice.wav\"");
+      }
+  
+cxh@cooley 153% 
+</pre>
+
+
+</dl>
+
 
 
  <p>If you find bugs, check the limitations page inside Vergil, then
