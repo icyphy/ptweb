@@ -1,0 +1,33 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Abstract</title>
+</head>
+<body>
+<b>An Approach to Executing Ptolemy Classic Models under Ptolemy II</b>
+<br><i>Ned Stoffel, Dwight Richards, Neil Smyth*, and Matt Goodman</i>,
+<br>Telcordia Technologies, Inc. (*  Smyth is now with Altio)
+<br>ngs@research.telcordia.com
+</p>
+<p>
+We describe an approach, developed at Telcordia, for executing
+Ptolemy Classic simulation models under the control of Vergil,
+the Ptolemy II graphical user interface.  In our hybrid system,
+an extension to ptlang automatically creates proxy java classes
+from Ptolemy Classic model components written in Ptolemy Language.
+These java proxy classes are linked into Vergil.  This permits a
+user to build and configure models from these components within the
+Vergil GUI.  At execution time, a special Director subclass extracts
+the component parameters and topology from the Ptolemy II model.
+It then coordinates the execution of the corresponding C++ model
+in a Ptolemy Classic execution engine.  The model is transmitted
+to the Ptolemy Classic engine through a ptcl interpreter via a
+socket interface.  A separate socket connection transmits results
+back to the Vergil GUI where they are plotted.  Features and
+limitations of this hybrid simulation platform will be discussed.
+<p>
+ -- Work supported in part by the NIST Advanced Technology Program.
+</body>
+</html>

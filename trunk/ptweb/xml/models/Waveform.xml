@@ -8,9 +8,36 @@
     </property>
     <property name="phase" class="ptolemy.data.expr.Parameter" value="0.0">
     </property>
+    <property name="0:1:0:0:0:0:annotation1" class="ptolemy.kernel.util.Attribute">
+        <property name="_location" class="ptolemy.moml.Location" value="139.0, 275.0">
+        </property>
+        <property name="_iconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+           <svg>
+           <text x="20" style="font-size:12; font-family:sanserif; fill:black" y="20">This example generates a squared
+sinusoid and adds Gaussian noise to it.</text>
+           </svg>
+           </configure>
+        </property>
+    </property>
+    <property name="0:0:0:0:annotation1" class="ptolemy.kernel.util.Attribute">
+        <property name="_location" class="ptolemy.moml.Location" value="214.0, 65.0">
+        </property>
+        <property name="_iconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+           <svg>
+           <text x="20" style="font-size:14; font-family:sanserif; fill:blue" y="20">This simple composite actor resides on the
+Ptolemy website, and is used to illustrate that
+Ptolemy II models may contain components that
+are defined elsewhere on the net.  Its URL is:
+http://ptolemy.eecs.berkeley.edu/xml/models/Waveform.xml</text>
+           </svg>
+           </configure>
+        </property>
+    </property>
     <port name="output" class="ptolemy.actor.TypedIOPort">
         <property name="output"/>
-        <property name="_location" class="ptolemy.moml.Location" value="496.00001525878906, 120.00000381469727">
+        <property name="_location" class="ptolemy.moml.Location" value="540.0000152587891, 200.00000381469727">
         </property>
     </port>
     <entity name="Ramp" class="ptolemy.actor.lib.Ramp">
@@ -20,7 +47,7 @@
         </property>
         <property name="step" class="ptolemy.data.expr.Parameter" value="frequency*2*PI/samplingFrequency">
         </property>
-        <property name="_location" class="ptolemy.moml.Location" value="95.0, 99.0">
+        <property name="_location" class="ptolemy.moml.Location" value="132.0, 176.0">
         </property>
         <port name="output" class="ptolemy.actor.TypedIOPort">
             <property name="output"/>
@@ -47,7 +74,7 @@
                 </property>
             </property>
         </property>
-        <property name="_location" class="ptolemy.moml.Location" value="218.0, 91.0">
+        <property name="_location" class="ptolemy.moml.Location" value="243.0, 168.0">
         </property>
         <port name="input" class="ptolemy.actor.TypedIOPort">
             <property name="input"/>
@@ -56,7 +83,7 @@
             <property name="output"/>
         </port>
     </entity>
-    <entity name="MathFunction0" class="ptolemy.actor.lib.MathFunction">
+    <entity name="Square" class="ptolemy.actor.lib.MathFunction">
         <property name="function" class="ptolemy.kernel.util.StringAttribute" value="square">
             <property name="style" class="ptolemy.actor.gui.style.ChoiceStyle">
                 <property name="exp" class="ptolemy.kernel.util.StringAttribute" value="exp">
@@ -73,7 +100,7 @@
                 </property>
             </property>
         </property>
-        <property name="_location" class="ptolemy.moml.Location" value="330.0, 102.0">
+        <property name="_location" class="ptolemy.moml.Location" value="343.0, 174.0">
         </property>
         <port name="firstOperand" class="ptolemy.actor.TypedIOPort">
             <property name="input"/>
@@ -82,8 +109,8 @@
             <property name="output"/>
         </port>
     </entity>
-    <entity name="AddSubtract4" class="ptolemy.actor.lib.AddSubtract">
-        <property name="_location" class="ptolemy.moml.Location" value="425.0, 115.0">
+    <entity name="Adder" class="ptolemy.actor.lib.AddSubtract">
+        <property name="_location" class="ptolemy.moml.Location" value="469.0, 195.0">
         </property>
         <port name="plus" class="ptolemy.actor.TypedIOPort">
             <property name="input"/>
@@ -97,7 +124,7 @@
             <property name="output"/>
         </port>
     </entity>
-    <entity name="Gaussian7" class="ptolemy.actor.lib.Gaussian">
+    <entity name="Gaussian Noise" class="ptolemy.actor.lib.Gaussian">
         <property name="seed" class="ptolemy.data.expr.Parameter" value="0">
         </property>
         <property name="mean" class="ptolemy.data.expr.Parameter" value="0.0">
@@ -105,7 +132,7 @@
         <property name="standardDeviation" class="ptolemy.data.expr.Parameter" value="0.05">
         </property>
         <doc>Create a sequence of gaussian random variables</doc>
-        <property name="_location" class="ptolemy.moml.Location" value="306.0, 173.0">
+        <property name="_location" class="ptolemy.moml.Location" value="350.0, 253.0">
         </property>
         <port name="output" class="ptolemy.actor.TypedIOPort">
             <property name="output"/>
@@ -123,16 +150,16 @@
     </relation>
     <relation name="relation6" class="ptolemy.actor.TypedIORelation">
     </relation>
-    <relation name="relation8" class="ptolemy.actor.TypedIORelation">
+    <relation name="relation0" class="ptolemy.actor.TypedIORelation">
     </relation>
     <link port="output" relation="relation6"/>
     <link port="Ramp.output" relation="relation2"/>
     <link port="Sine Function.input" relation="relation2"/>
     <link port="Sine Function.output" relation="relation3"/>
-    <link port="MathFunction0.firstOperand" relation="relation3"/>
-    <link port="MathFunction0.output" relation="relation5"/>
-    <link port="AddSubtract4.plus" relation="relation5"/>
-    <link port="AddSubtract4.minus" relation="relation8"/>
-    <link port="AddSubtract4.output" relation="relation6"/>
-    <link port="Gaussian7.output" relation="relation8"/>
+    <link port="Square.firstOperand" relation="relation3"/>
+    <link port="Square.output" relation="relation5"/>
+    <link port="Adder.plus" relation="relation5"/>
+    <link port="Adder.plus" relation="relation0"/>
+    <link port="Adder.output" relation="relation6"/>
+    <link port="Gaussian Noise.output" relation="relation0"/>
 </class>

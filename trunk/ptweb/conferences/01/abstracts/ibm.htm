@@ -1,0 +1,47 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Abstract</title>
+</head>
+<body>
+<b>Diposets and Concurrent System Semantics</b>
+<br><i>John Davis, II</i>
+<br>IBM
+<br>davisjs@us.ibm.com
+<p>
+Modeling and designing concurrent systems requires a clear understanding
+of the types of relationships that exist between the components found
+in such systems. Two particularly important relationships
+found in concurrent systems
+are the <i>order</i> relation and the <i>containment</i> relation.
+The order relation represents the relative timing of component
+actions within a concurrent system and the containment relation
+facilitates human understanding of a system by abstracting a system's
+components into layers of visibility.
+<p>
+One major consequence of improper management of the order and containment
+relationships in a concurrent system is deadlock. <i>Deadlock</i> is an
+undesirable halting of a system's execution and is the most challenging
+type of concurrent system error to debug. The contents of this talk
+show that no methodology is currently available that can concisely,
+accurately and graphically model both the order and containment relations
+found in complex, concurrent systems. The result of the absence of a method
+suitable for modeling both order and containment is that analysis of
+concurrent systems is nearly impossible and the prevention of
+deadlock is extremely challenging.
+<p>
+I offer a solution to this problem by introducing the diposet. A
+<i>diposet</i> is a formal, mathematical structure that is similar in nature
+to a partially ordered set and is well suited to describing concurrent,
+computational systems. I define the diposet and show that
+it uses an <i>order-centric</i> approach that offers insight
+into the relative timing of events in a concurrent system and
+allows the specification of containment.
+The formal structure of a diposet is illustrated through the construction
+of several proofs and theorems and I provide real world examples to show
+that the diposet can model a wide variety of communication semantics
+including synchronous and asynchronous message passing.
+</body>
+</html>
