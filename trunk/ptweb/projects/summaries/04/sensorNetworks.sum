@@ -1,10 +1,24 @@
+NAMES
+Yang Zhao, Xiaojun Liu, Elaine Cheong, Sanjeev Kohli
+
+EMAIL
+ellen_zh@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~ellen_zh
+
+PHONE
+510-642-5457
+
+TITLE
 A Modeling and Design Environment for Sensor Networks
 
-Author: Yang Zhao, Xiaojun Liu, Elaine Cheong, Sanjeev Kohli,
-Advisor: Edward Lee
+CHAPTER
+02.cad
 
+ABSTRACT
 In this project, we are interested in developing a model and design environment for sensor networks. 
-
+<p>
 Sensor networks are characterized as distributed, dense, large scale, dynamic, resource limited, 
 unpredictable, real-time, data-centric (as contrast to address-centric in traditional networks), etc. 
 The uniqueness introduces research challenges to many fields, such as networking, operating systems, 
@@ -12,20 +26,23 @@ database, signal processing, software design, etc. On the other hand, programmin
 testing these systems could be very difficult, time consuming and expensive. A modeling, simulation 
 and design environment for these systems could be very helpful for people developing and testing new 
 algorithms and applications in various areas. 
-
+<p>
 As an early stage, Sanjeev Kohli and Xiaojun Liu have developed a sensor domain based on distributed 
 event semantics in Ptolemy II and implemented different channel models (such as wireless channel and 
 sound channel) to support different sensing and communicating mechanism. Yang Zhao and Xiaojun Liu 
 have been working on using higher order modeling techniques to capture dynamic structures in a set 
 of applications.
-
+<p>
 As the next step, we would like to continue our work in several directions:
-*  Learn modeling and design demands that people desire from different fields and
-   improve the expressiveness of the sensor domain.
-*  Look for a good programming model for channels to address issues like noise, 
-   collision, states, etc.
-*  Study challenges for distributing the computation to massive sensor nodes, including
-   synchronous/asynchronous, redundancy, unreliable, etc. and look for solutions from a
-   top down perspective.   
-*  Provide flexible co-simulation mechanism for sensor network models and their
-   working environment models.
+<p>
+*  Learn modeling and design demands that people desire from different fields and 
+improve the expressiveness of the sensor domain.
+<p>
+*  Look for a good programming model for channels to address issues like noise, collision, states, etc.
+<p>
+*  Study challenges for distributing the computation to massive sensor nodes, including 
+synchronous/asynchronous, redundancy, unreliable, etc. and look for solutions from a 
+top down perspective.   
+<p>
+*  Provide flexible co-simulation mechanism for sensor network models and their 
+working environment models.
