@@ -168,5 +168,47 @@ the latest versions, see the Cygwin website.
 can be found on the 
 for <a href="ptII2.0.1/doc/install.htm#cygwin">Ptolemy II Installation Page</a>
 
+<h2>Enabling Copy in Cygwin Bash under XP</h2>
+You may need to enable copy and paste in the bash shell window.
+
+ <p>If copy and paste are working properly, then you should be able to
+highlight text by left clicking and dragging the mouse over the text
+and then hitting the Enter key to copy the highlighted text.
+ <p>
+The Cygwin faq at
+<a href="http://www.cygwin.com/faq/faq.html#SEC54" target="_top"><CODE>http://www.cygwin.com/faq/faq.html#SEC54</CODE></a>
+says:
+<BLOCKQUOTE>
+How can I copy and paste into Cygwin console windows?
+
+ <p>Under Windows NT, open the properties dialog of the console
+window. The options contain a toggle button, named "Quick edit
+mode". It must be ON. Save the properties.
+
+ <p>Under Windows 9x, open the properties dialog of the console
+window. Select the Misc tab. Uncheck Fast Pasting. Check QuickEdit.
+
+ <p>You can also bind the insert key to paste from the clipboard by adding
+the following line to your .inputrc file:
+
+<pre>
+    "\e[2~": paste-from-clipboard 
+</pre>
+
+</BLOCKQUOTE>
+
+
+More precisely:
+<ol>
+<li> Start up bash by doing Start -&gt; Programs -&gt; Cygwin -&gt; Cygwin Bash Shell.
+
+<li> Right click on the icon in the upper left of the title bar and select
+properties
+
+<li> Under Options, select 'QuickEdit Mode', hit ok
+
+<li> Select 'Modify shortcut that started this window', hit ok
+</ol>
+
 </body>
 </html>
