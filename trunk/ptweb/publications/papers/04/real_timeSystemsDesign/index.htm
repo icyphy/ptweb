@@ -1,0 +1,38 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Real-Time Systems Design in Ptolemy II: A Time-Triggered Approach</title>
+</head>
+<body>
+<center>
+  <h1>Real-Time Systems Design in Ptolemy II: A Time-Triggered Approach</h1>
+</center>
+<center>
+  <p>N. Vinay Krishnan</p>
+  <p>Memorandum No. UCB/ERL M04/22<br>
+  July 12 2004 <br>
+Electronics Research Laboratory <br>
+College of Engineering <br>
+University of California, Berkeley 94720
+</p>
+  <p> <a href="VinayMS.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a> 
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+In this report is described a software infrastructure to enable users to design hard real-time systems from Ptolemy II [1]. The Giotto [2] domain within the Ptolemy II design environment is made use of to model systems which are then compiled and executed on KURT-Linux [3], a real time flavor of Linux.
+<p>
+The first stage of the software takes a graphical model as an input to generate intermediate code in the C language. This intermediate code consists of the task-code to be executed, as well as a representation of their timing requirements.  <p>
+The second stage, called the Embedded Machine [5] reads in the timing information and interprets it to release the tasks for execution as per the stated requirements. The released tasks can either be assigned to a standard scheduler such as EDF, or to a scheduling interpreter called the Scheduling machine, or S Machine.  
+<p>
+The S Machine was developed to gain fine grained control over the scheduling of tasks. The S Machine requires as input scheduling information that specifies a time line for the tasks involved thus giving the designer maximum flexibility over task scheduling, and consequently greater resource utilization.  The E&S Machines when compiled along with the generated task and timing code for the KURT-Linux platform forms an executable that delivers predictable real-time performance. The benefit this approach offers is that the real-time tasks can run along with ordinary Linux tasks without the timing properties of the real-time tasks being affected.
+<p> 
+An audio application was designed to illustrate the effectiveness of this tool-flow, which achieved a timing uncertainty of less than 130 microseconds in its task execution times.
+
+
+
+</body>
+</html>
+
