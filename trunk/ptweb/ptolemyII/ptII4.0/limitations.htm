@@ -49,6 +49,34 @@ for known limitations.
 See the <a href="mac.htm">Ptolemy II 4.0-alpha Notes for Mac OS X</a> page for
 details.
 
+<li> <B>Eclipse Problems</B>
+Eclipse may have problems setting up to build Ptolemy II because
+the <CODE>$PTII/.classpath</CODE> file has problems.
+ <p>Locally, we were able to use Eclipse after adding the following
+to <CODE>$PTII/.classpath.in</CODE>
+<pre>
+   &lt;<classpathentry excluding="cm/" kind="src" path="ptolemy/copernicus/c/test"/&amp;gt;
+</pre>
+and adding 
+<pre>
+ptolemy/copernicus/c/test/cm/|
+</pre>
+to the list of excluded files.
+</pre>
+See the new <a href=".classpath.in"><CODE>.classpath.in</CODE></a>
+file for details.
+ <p>At one point, the Java build path window came up and I had
+to remove jmf.jar and sound.jar
+
+ <p>I later removed the jxta jar files because they had this
+ bogus ${PTII} inside of them.  I'll fix configure momentarily.
+ This bug occurred because our devel tree contains the jxta jar files,
+ but we don't ship these jar files.
+ To remove the jxta jar files, right click on the ptII project, select
+ Properties -&gt; Java Build Path -&gt; Libraries
+ 
+ <p> You may later want to exclude ptolemy/moml/jxta from the build.
+
 <menu>
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
