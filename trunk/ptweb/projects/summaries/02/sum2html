@@ -1,6 +1,6 @@
 #!/bin/sh
 # ignored by Tcl \
-exec tclsh "$0" "$@"
+exec $PTII/bin/ptjacl "$0" "$@"
 
 set year 2002
 
