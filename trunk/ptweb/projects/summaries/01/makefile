@@ -1,5 +1,4 @@
 # $Id$
-
 OLDSOURCES = ptolemyII.sum \
 		moml.sum \
 		neuendor00.sum \
@@ -15,7 +14,10 @@ OLDSOURCES = ptolemyII.sum \
 		vissers00.sum \
 		softpract00.sum
 
-SOURCES = ptolemyII.sum
+SOURCES = ptolemyII.sum \
+	  cont_and_disc.sum \
+	  e_Ptolemy.sum \
+	  nest.sum
 
 index.html : $(SOURCES) sum2html
 	-chmod a+x sum2html
