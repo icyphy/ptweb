@@ -28,19 +28,30 @@ exploration easy, thereby helping designers in posing the important
 
 <p>
 
-Design space exploration consists in general of selecting particular
-parameter values, executing one or more models, and representing multi
-dimensional information produced by the models. Also, since many
-different models are created, executed, and studied, some kind of data
-management needs to be available. Ptolemy II seems to be well-suited
-for addressing the issues appear in design space
-exploration. PtolemyII has a well-engineered software architecture,
-clear defined actor model making it easy to implement and extend new
-functionality, and also, the advent of the graphical front-end makes
-the construction of a design space experiment easy. In developing the
-design space exploration domain, much of the research time will be
-devoted in how the data management needs to be integrated in the actor
-model such that the overall system is robust and has multi-user and
+The idea is to see design space exploration as a particular model of
+computation in Ptolemy II. In this model, tokens flow across actors
+that represent a particular tool. On a firing of an actor, the actor
+invokes a particular task. This model is very similar to the model
+used in the Nelsis design framework [1]. Examples of tasks are the
+generation of parameter values to span a design space, the execution
+of scripts, or the visualization of multi-dimensional data. An actor
+may also represent a complete Ptolemy II model. By using Ptolemy, we
+can use the graphical interface and the actor model. The graphical
+interface makes it easy to define a particular design flow. The actor
+model makes it easy to extend the DSE domain with new functionally,
+such as smarter ways to selected parameter values or view
+multi-dimensional data.
+
+<p>
+
+In design space exploration, many different models are created,
+executed, and studied. Therefore, some kind of data management needs
+to be available. Much of the research time will be devoted in how the
+data management needs to be integrated in the actor model in the DSE
+domain such that the overall system is robust, and has multi-user and
 multi-site capabilities. The later two issues are important as more
 and more designs happen in teams at various places at the same time.
 
+[1] K.O. ten Bosch, P. Bingley, P. van der Wolf. 
+"Design Flow Management in the Nelsis CAD Framework", 
+Proc. 28th ACM/IEEE Design Automation Conference. 1991. 

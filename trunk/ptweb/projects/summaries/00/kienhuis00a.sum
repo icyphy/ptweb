@@ -16,16 +16,14 @@ Compilation of Nested Loop Programs into Process Networks.
 CHAPTER
 02.cad
 
-ABSTRACT
-
 Novel high-performance, domain specific, embedded architectures are
 more and more composed of a microprocessor, some memory, and a number
 of dedicated coprocessors. Onto these embedded architectures,
 real-time applications will be executed that belong to the domain of
 multi-media processing, mobile communication, and adaptive array
-processing. These applications are in general are written in the C or
-Matlab language and have a specific structure, referred to as Nested
-Loop Program.
+processing. These applications are in general written in the C or
+Matlab language and contain parts that have a specific structure,
+referred to as Nested Loop Program.
 
 <p>
 
@@ -43,11 +41,46 @@ an inherent parallel model of computation like Process Networks.
 <P>
 
 This research focuses on the automatic transformation of Nested Loop
-Programs into Process Network specifications. This work makes
-extensive use of work done (lately) in the domain of integer linear
-algebra. To make the resulting Process Networks more accessible, we
-want to construct the Process Networks in the PN-domain of the
-PtolemyII system. This allows us to combine the derived process
-network description with other domains, enabling the description and
-simulation of more complex systems.
+Programs into Process Network specifications. This work is done in
+cooperation with Delft University of Technology. The transformation
+consists of a few steps.
 
+<ol> 
+
+<li> Extraction of a parameterized dependence graph from the Nested
+Loop Program using Parametric Integer Programming (PIP) [1]. The
+dependence graph expresses the available parallelism in the nested
+loop program.
+
+<li> Conversion of the parameterized dependence graph into a
+polyhedral reduced dependence graph model. This model is based on
+polytopes, making the dependence graph more amenable for further
+mathematical manipulation.
+
+<li> Manipulation of the polytope model. Various techniques are used
+like Ehrhart polynomials [2], Fourier/Motzkin, and various projection
+techniques to further manipulate polytopes and (re)construct missing
+polytopes [3].
+
+<li> Generation of the network and the individual Process Network
+actors from the polyhedral reduced dependence graph model.
+
+</ol>
+
+The resulting process network model is made accessible in the Process
+Networks (PN) domain of the Ptolemy II system. This allows the
+combination of the derived process network description with other
+domains, thus enabling the description and simulation of more complex
+systems. Also, by attributing the process network model with power and
+latency numbers, various kinds of design space exploration can be
+done.
+
+[1] P. Feautrier, "Dataflow Analysis of Arrays and Scalar Reference"
+Recherche Operationelle; Operations Research. 1991
+
+[2] Ph. Clauss and V. Loechner, "Parametric Analysis of Polyhedral
+Iteration Spaces". Journal of VLSI Signal Processing. 1998
+
+[3] Patrice Quinton, Sanjay Rajopadhye, and Tanguy Risset, "On
+Manipulating Z-polyhedra", Tech. Rep., Institut de Recherche en
+Informatique et Systemes Aleatoires. 1996
