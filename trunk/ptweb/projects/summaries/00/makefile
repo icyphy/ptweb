@@ -8,6 +8,8 @@ SOURCES = ptolemyII.sum \
 		liuj00.sum \
 		bilungNliuxj00.sum \
 		yuhong00.sum \
+		kienhuis00a.sum \
+		kienhuis00b.sum \
 		vogel00.sum \
 		ptplot00.sum \
 		softpract00.sum
