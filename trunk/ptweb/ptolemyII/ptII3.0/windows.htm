@@ -17,7 +17,7 @@
 <B>or</B>
 <menu>
 <li> 
-<a href="InstData/Windows/VM/ptIIinst.exe">Download the Ptolemy II 25.3 Mb Windows executable file that includes a private copy of the Java Runtime Environment</a>  
+<a href="InstData/Windows/VM/ptIIinst.exe">Download the Ptolemy II 25.3 Mb Windows executable file that includes a private copy of the Java Runtime Environment and some of the support packages such as Java 3D</a>  
 <B>Most Windows users will select this installer</B>
 </menu>
 <B>or</B>
@@ -60,7 +60,27 @@ to have a stable self contained Ptolemy II installation that does not
 rely on other versions of the JRE that might be on your machine.  Note
 that after installing with Ptolemy II with the private JRE you may
 later download another JRE later to view the applets.
- <br><B>Most Windows users will use this installer.</B>
+
+Note further that the private copy of the JRE includes 
+<menu>
+<li> Java 3D, which is required to run the Graphical (GR) domain demos.
+ <br>The version of Java 3D included in the JRE
+requires that DirectX is installed on your machine.
+ <br>If, when you run the GR domain demos, you get a message
+about <CODE>d3d8.dll</CODE> missing, then you probably need to install
+DirectX.
+ <br>DirectX can be downloaded from
+<a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><CODE>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</CODE></a>
+
+<li> The Java Advanced Imaging Interface, which is used by some
+of the actors.
+
+<li> The Java Media Framework, which is used by some
+of the actors.
+</menu>
+
+
+ <br><B>Most Windows users will use the installer with a private copy of the JRE</B>
 
  <p>Download the installer without the private copy of the JRE if you
 have either the JRE or the Java Development Kit (JDK) already installed.
@@ -102,12 +122,6 @@ less than 1.4, you should install the plug-in, JRE 1.4, or JDK 1.4
 or use download the installer that includes a private copy of the JRE
 
 
-<h4>Java 3D</h4>
-Java 3D is necessary to run the GR domain.
- <br> See the 
-<a href="http://java.sun.com/products/java-media/3D/download.html">GR domain documentation</a> for details.
-
-
 <h4>Java Installers</h4>
 
 <menu>
@@ -124,7 +138,10 @@ Java 3D is necessary to run the GR domain.
 <li> Windows DirectX Java 3D runtime necessary to run the GR domain (2.7 Mb):
 <a href="java3d-1_2_1_04-win32-directx-rt.exe"><CODE>java3d-1_2_1_04-win32-directx-rt.exe</CODE></a>  
  <br>The Windows DirectX Java 3D installer requires that DirectX is installed on your machine.
-DirectX can be downloaded from
+ <br>If, when you run the GR domain demos, you get a message
+about <CODE>d3d8.dll</CODE> missing, then you probably need to install
+DirectX.
+ <br>DirectX can be downloaded from
 <a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><CODE>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</CODE></a>
 
 
