@@ -10,23 +10,33 @@ http://www.cs.berkeley.edu/~ctsay/
 PHONE
 
 TITLE
-Java to C Converter, with Support for Ptolemy II SDF Actors
+Synthesis of Embedded Software in Ptolemy II
 
 CHAPTER
 02.cad
 
 ABSTRACT 
-The synchronous dataflow domain of Ptolemy II is excellent for representing 
-signal processing systems. This is expressed in Java using the Ptolemy II
-models. For the compilation of these models towards existing DSPs Java is
-often not directly suited, as there are few Java compilers and 
-Java virtual machines for DSP's. The final performance of the total system
-might also be hindered by a start with Java at this point in time.
 
-DSP's do have C compilers, which frequently generate optimized code. So
-the goal of the project is to generate C code from a Ptolemy II SDF system.
-To reach that goal, we must have the ability to translate ordinary Java code 
-into C code, which would be useful to many Java programmers. Once
-we have that ability, we will optimize the communication between SDF actors,
-to produce C code that is reasonably efficient.  
-
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII">Ptolemy II</a>
+provides a software environment for the modular construction of
+component-based software systems.  The emphasis is on modeling
+and simulation of embedded systems. This project extends that work
+towards design and synthesis of embedded software implementations.
+<p>
+The synchronous dataflow domain of Ptolemy II is excellent for
+representing certain kinds of embedded software, such as signal
+processing systems. But embedded signal processing usually imposes
+severe performance requirements on the embedded processor. Designers
+cannot afford the luxury of implementations based on more abstract
+computational platforms such as a Java virtual machine. Since Ptolemy
+II is entirely in Java, this means that Ptolemy II models cannot be
+directly used in such systems.
+<p>
+This project focuses on translating Ptolemy II specifications in
+the SDF domain into highly optimized C code that is suitable for
+compilation onto an embedded processor.  The approach is first to
+refine existing techniques for translation of Java into C, and second
+to customize the translation process to take advantage of the particular
+structure of SDF models. This approach permits libraries of components
+that are written in Java to be used in the deployed embedded systems,
+after conversion to C.

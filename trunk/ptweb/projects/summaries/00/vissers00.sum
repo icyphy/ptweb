@@ -1,14 +1,14 @@
 NAMES
-<A HREF="http://www-cad.eecs.berkeley.edu/~tah">Tom Henzinger
-<A HREF="http://ptolemy.eecs.berkeley.edu/~eal">Edward A. Lee
-<A HREF="http://www-cad.eecs.berkeley.edu/~alberto">Alberto Sangiovanni-Vincentelli
-<A HREF="http://ptolemy.eecs.berkeley.edu/~vissers">Kees A. Vissers (Visiting Industrial Fellow)
+<A HREF="http://www-cad.eecs.berkeley.edu/~tah">Tom Henzinger</a>,
+<A HREF="http://ptolemy.eecs.berkeley.edu/~eal">Edward A. Lee</a>,
+<A HREF="http://www-cad.eecs.berkeley.edu/~alberto">Alberto Sangiovanni-Vincentelli</a>, and
+<A HREF="http://ptolemy.eecs.berkeley.edu/~vissers">Kees A. Vissers</a> (Visiting Industrial Fellow)
 
 EMAIL
 vissers@eecs.berkeley.edu
 
 HOMEPAGE
-http://ptolemy.eecs.berkeley.edu/~{eal,vissers}
+http://ptolemy.eecs.berkeley.edu/~vissers
 
 PHONE
 510 643 7683
@@ -23,37 +23,51 @@ ABSTRACT
 
 The design of future complex systems will require methods and tools
 that can span a range of abstractions. In particular the specification
-at several levels deserves attention.  In this research we focus
-on the syntax and semantic models for system-level design. We divide the problem
-into parts: abstract syntax, syntactic transformations, concrete syntaxes, type
-systems, and semantic models. The objective is to achieve agreement within these
-parts to promote interoperatbility of tools and a deeper understanding of design 
-methodologies. 
+at several levels deserves attention. In this research we focus on the
+syntax and semantic models for system-level design. We divide the
+problem into parts: abstract syntax, syntactic transformations,
+concrete syntaxes, type systems, and semantic models. The objective is
+to achieve agreement within these parts to promote interoperatbility of
+tools and a deeper understanding of design methodologies.
 
 <p>
 
-Rather than a single monolithic specification, we plan to produce a set of
-specifications that cover orthogonal properties of specification languages.
-This results in a pragmatic approach to interoperability. For interoperability
-an essential part is that the underlying concepts are understood and
-designed with various degrees of compatibilty in mind.
+Rather than a single monolithic specification, we plan to produce a set
+of specifications that cover orthogonal properties of specification
+languages. This results in a pragmatic approach to interoperability.
+For interoperability an essential factor is that the underlying concepts
+are understood and designed with various degrees of compatibilty in
+mind.
 
 <P>
 
-We separate the problem into four parts, where we will address the research 
-issues in this order:
+We separate the problem into five parts, where we will address the
+research issues in (roughly) this order:
+
 <ol>
-<li> Abstract syntax. An abstract syntax defines how a design can be decomposed 
-into interconnected components. The abstract syntax is given in the mathematical
-language of sets and relations.
-<li> Syntactic Transformations. A set of operations transform one design into 
-another. They can be used to model higher-order functions and object-oriented 
-inheretance in an abstract way.
-<li> Concrete syntax. A concrete syntax defines how a design and transformations
-on a design can be represented and manipulated in a persistent, computer-useable
-format. Examples are XML with associcated DTDs, APIs, and netlist formats like 
-EDIF or a VHDL like syntax.
-<li> Semantics. A semantics gives a meaning to an interconnection of components.
-Examples can be that a connection represents a communication between two 
-processes or a transition between two states.
+<li> Abstract syntax. An abstract syntax defines how a design can
+be decomposed into interconnected components. The abstract syntax is
+given in the mathematical language of sets and relations.
+
+<li> Syntactic Transformations. A set of operations transform one
+design into another. They can be used to model higher-order functions
+and object-oriented inheretance in an abstract way.
+
+<li> Concrete syntax. A concrete syntax defines how a design and
+transformations on a design can be represented and manipulated in a
+persistent, computer-useable format. Examples are XML with associcated
+DTDs, APIs, and netlist formats like EDIF or a VHDL like syntax.
+
+<li> Type systems. A type system imposes constraints on the
+interconnection of computation, and provides for propogation of
+constraints through type inference and type resolution. We will
+give an abstract specification that permits tools to define the
+type systems they assume.
+
+<li> Semantics. A semantics gives a meaning to an interconnection of
+components. Examples can be that a connection represents a
+communication between two processes or a transition between two states.
+We will give a suite of semantic models applicable to component-based
+design.
+
 </ol> 

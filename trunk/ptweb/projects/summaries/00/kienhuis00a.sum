@@ -21,42 +21,38 @@ ABSTRACT
 Novel high-performance, domain specific, embedded architectures are
 often composed of a microprocessor, some memory, and a number
 of dedicated coprocessors. On these embedded architectures,
-real-time applications will be executed that belong to the domain of
+real-time applications will be executed that belong to the domains of
 multi-media processing, mobile communication, and adaptive array
-processing. These applications are in general written in the C or
+processing. These applications are often written in the C or
 Matlab language and contain parts that have a specific structure,
-referred to as Nested Loop Program.
+referred to as a <i>nested loop program.</i>
 
-<p>
-
-The C and Matlab language have an imperative model of
+<p> The C and Matlab languages realize an imperative model of
 computation. Although this model of computation is well accepted to
 specify applications, it does not reveal parallelism due to its
-inherent sequential nature, even though many applications contain a
-lot of parallelism. Compilers exist that are able to extract
-instruction level parallelism from the original specifications at a
-very fine level of granularity. They are, however, unable to exploit
-coarse-grained parallelism offered by the coprocessors of the
-architectures. A better specification format would be to use
-an inherently parallel model of computation like Process Networks.
+inherent sequential nature. But many applications contain alot of
+parallelism. Compilers exist that are able to extract instruction level
+parallelism from the original specifications at a very fine level of
+granularity. They are, however, unable to exploit coarse-grained
+parallelism offered by the coprocessors of the architectures. A better
+specification format would be to use an inherently parallel model of
+computation like <i>process networks</i>.
 
 <P>
-
-This research focuses on the automatic transformation of Nested Loop
-Programs into Process Network specifications. This work is done in
-cooperation with Delft University of Technology. The transformation
+This research focuses on the automatic transformation of nested loop
+programs into process network specifications. The transformation
 consists of a number of steps.
 
 <ol> 
 
-<li> Extraction of a parameterized dependence graph from the Nested
-Loop Program using Parametric Integer Programming (PIP) [1]. The
+<li> Extraction of a parameterized dependence graph from the nested
+loop program using parametric integer programming (PIP) [1]. The
 dependence graph expresses the available parallelism in the nested
 loop program.
 
 <li> Conversion of the parameterized dependence graph into a
 polyhedral reduced dependence graph model. This model is based on
-polytopes, making the dependence graph more amenable for further
+polytopes, making the dependence graph more amenable to further
 mathematical manipulation.
 
 <li> Manipulation of the polytope model. Various techniques are used
@@ -64,31 +60,34 @@ like Ehrhart polynomials [2], Fourier/Motzkin, and various projection
 techniques to further manipulate polytopes and (re)construct missing
 polytopes [3].
 
-<li> Generation of the network and the individual Process Network
+<li> Generation of the network and the individual process network
 actors from the polyhedral reduced dependence graph model.
 
 </ol>
 
-The resulting process network model is presented in the Ptolemy II system. 
-This allows the
-combination of the derived process network description with other
-domains, thus enabling the description and simulation of more complex
-systems. Also, by attributing the process network model with power and
-latency numbers, various kinds of design space exploration can be
-done.
+The resulting process network model is presented in the Ptolemy II
+system. This allows the combination of the derived process network
+description with other domains, thus enabling the description and
+simulation of more complex systems. Also, by attributing the process
+network model with power and latency numbers, various kinds of design
+space exploration can be done.
 
 <p>
+This work is done in
+cooperation with Delft University of Technology.
+<p>
 
-[1] P. Feautrier, "Dataflow Analysis of Arrays and Scalar Reference"
+<DL COMPACT>
+<DT> [1]
+<DD> P. Feautrier, "Dataflow Analysis of Arrays and Scalar Reference"
 Recherche Operationelle; Operations Research. 1991
 
-<p>
-
-[2] Ph. Clauss and V. Loechner, "Parametric Analysis of Polyhedral
+<DT> [2]
+<DD> Ph. Clauss and V. Loechner, "Parametric Analysis of Polyhedral
 Iteration Spaces". Journal of VLSI Signal Processing. 1998
 
-<p>
-
-[3] Patrice Quinton, Sanjay Rajopadhye, and Tanguy Risset, "On
+<DT> [3]
+<DD> Patrice Quinton, Sanjay Rajopadhye, and Tanguy Risset, "On
 Manipulating Z-polyhedra", Tech. Rep., Institut de Recherche en
 Informatique et Systemes Aleatoires. 1996
+</DL>

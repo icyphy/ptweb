@@ -17,28 +17,29 @@ CHAPTER
 
 ABSTRACT 
 
-Designing and intuitive and powerful user interface is a challenging task. 
-The learning curve for novice users should be small, and yet expert users
-should have easy access to advanced functionality.  Component-based design 
-tools pose a particular challenge for interface design.  Since the underlying
-tools are changing and maturing, the interface must be easily configurable and
-extensible.  Furthermore, the interface should not require significant 
-addition of user-interface code when new features are added to the underlying
+Designing an intuitive and powerful user interface is a challenging
+task. The learning curve for novice users should be small, and yet
+expert users should have easy access to advanced functionality.
+Component-based design tools pose a particular challenge for interface
+design because of their immaturity. Since the underlying tools are
+changing, the interface must be easily configurable and extensible.
+Furthermore, the interface should not require significant addition of
+user-interface code when new features are added to the underlying
 tools.
-<p>
-The goal of this work is to create a user interface for 
-Ptolemy II that is rich and powerful, yet also intuitive and 
-relatively simple to learn.  Keeping in line with our group's philosophy of
-software design, we concentrate on providing architecture to allow the
-interface to grow along with Ptolemy.
-State of the art techniques in interface design will be used to evaluate and 
-improve the design.   For consistency and ease of implementation, the 
-GUI will be based on Java/Swing and the 
-<a href="http://www.gigascale.org/diva">DIVA</a> graphics framework.
-An XML file format will form the basis for persistent file storage.
-<p>
-Although this work will be an important part of Ptolemy II, it is intended
-to be sufficiently general to be applicable to other design tools, and to  
-enable further research into visualization and collaboration in the 
-design of component-based models.
 
+<p> The goal of this work is to create a user interface for Ptolemy II
+that is rich and powerful, yet also intuitive and relatively simple to
+learn. The approach is to put heavy emphasis on developing a clean,
+modular, and extensible software architecture. Emphasis will be placed
+on direct manipulation of the component-based architecture, including
+on-line editing of executing models. State of the art techniques in
+interface design will be used to evaluate and improve the design. For
+consistency and ease of implementation, the interface will be based on
+Java/Swing and the <a href="http://www.gigascale.org/diva">Diva</a>
+graphics framework. An XML file format will form the basis for
+persistent file storage.
+
+<p> Although this work will be an important part of Ptolemy II, it is
+intended to be sufficiently general to be applicable to other design
+tools, and to enable further research into visualization and
+collaboration in the design of component-based models.

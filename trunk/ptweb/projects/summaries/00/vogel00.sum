@@ -18,42 +18,42 @@ CHAPTER
 
 ABSTRACT 
 
-This project focuses on the implementation of an audio signal processing algorithm 
-[2,3] under various domains in Ptolemy II and as a stand-alone Java application. The 
-current algorithm under study performs formant-corrected pitch shifting of human 
-vocal sounds. This algorithm requires a significant amount of control flow and data 
-flow in order to achieve sufficient performance to run in real-time on a modern 
-processor.
+This project is exploring the implementation of hard-real-time systems,
+particularly audio signal processing, using abstract models of
+computation and the Java language. We are currently implementing a
+particular audio signal processing algorithm [2,3] under various
+domains in Ptolemy II and as a stand-alone Java application, and
+evaluating the performance bottlenecks. The algorithm performs
+formant-corrected pitch shifting of human vocal sounds; it contains a
+significant amount of control logic as well as stream-based
+computation, and thus stresses the methods currently available in
+Ptolemy II.
+
+<p> A short-term objective of the project is to explore the suitability
+of Java for real-time audio processing. A longer term objective is to
+evaluate the efficacy of abstracted models of computation such as
+synchronous dataflow and finite-state machines for such
+algorithms. Through careful profiling, limitations imposed by the
+software architecture can be identified and corrected.
+This will also help us evaluate the long-term potential of virtual-machine
+architectures for hard-real-time processing.
+
+<p> Finally, since the pitch-shifting algorithm is fairly complex and
+requires both control flow and data flow, it is a good candidate for
+exploring several models of computation, including some of the more
+experimental models such as heterochronous dataflow (HDF) [1]. HDF is
+more expressive than synchronous dataflow (SDF), yet HDF retains
+desirable properties such as decidability (bounded memory, deadlock)
+and static schedules. A potential drawback to HDF is that it may
+be difficult (nonintuitive) to use. The process of implementing the
+pitch shifting algorithm in HDF may provide insight as to the
+intuitiveness of constructing models using this model of computation,
+and may also influence design decisions such as when to construct
+static vs. dynamic schedules.
+
 <p>
-There are a number of motivations for implementing algorithms such as the one 
-mentioned above where sufficient performance is desirable: Firstly, implementing such 
-an algorithm in Java provides means of exploring the suitability of Java to real-time 
-audio processing tasks. Implementing the same algorithm under various domains in 
-Ptolemy II and conducting a performance analysis provides a way to obtain 
-quantitative measurements which can be used to compare the overhead involved in 
-implementing a model under a specific domain vs. as a stand-alone Java application. 
-Secondly, since real-time performance is desirable, there is now the motivation to 
-perform optimizations to Ptolemy II in order to improve its performance by reducing 
-the overhead of executing the model under a given domain. The stand-alone Java 
-implementation can be used as a reference for the zero-overhead case. 
-In Ptolemy II the model of a function can be the implementation itself, so it is 
-important to understand and analyze the performance of the various models of 
-computation.
-<p>
-Finally, since the pitch-shifting algorithm is fairly complex and requires both 
-control flow and data flow, it is a good candidate for exploring several models of 
-computation, including
-some of the more experimental models such as heterochronous dataflow (HDF) [1]. HDF 
-is more expressive than Static Dataflow (SDF), yet HDF retains desirable properties 
-such as decidability (bounded memory, deadlock) and static schedules. The main 
-potential drawback to HDF is that it may be difficult (nonintuitive) to use. The 
-process of implementing the pitch shifting algorithm in HDF may provide insight as to 
-the intuitiveness of constructing models using this model of computation, and may 
-also influence design decisions such as when to construct static vs. dynamic 
-schedules.
-<p>
-This work is in collaboration with David Wessel at the Center for new music and
-audio technologies (CNMAT).
+This work is in collaboration with Prof. David Wessel at the Center for New
+Music and Audio Technologies (CNMAT).
 
 <DL COMPACT>
 <DT> [1]
@@ -62,7 +62,7 @@ audio technologies (CNMAT).
      Design of Integrated Circuits and Systems, Vol. 18, No. 6, pp.742-760,
      1999.
 <DT> [2]
-<DD> K. Lent, "An Efficient Method for Pitch Shifting Digitally Sampled Sounds," 
+<DD> K. Lent, "An Efficient Method for Pitch Shifting Digitally Sampled Sounds,"
      Computer Music J., vol. 13, pp. 65-71 (1989 Winter).
 <DT> [3]
 <DD> R. Bristow-Johnson, "A Detailed Analysis of a Time-Domain Formant-Corrected

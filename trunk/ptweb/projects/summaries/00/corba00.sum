@@ -13,43 +13,43 @@ PHONE
 642-2352/0395
 
 TITLE
-Distributed Design in Ptolemy II
+Distributed Modeling and Design in Ptolemy II
 
 CHAPTER
 02.cad
 
 ABSTRACT
 
-The advantages of distributed computing architectures can be 
-seen in a wide array of applications. The advantages include: 
-<OL>
-<LI>Facilities for collaboration between physically separated 
-users.
-<LI>Secure access to remote resources.
-<LI>Parallel execution to reduce computation duration.
-</OL>
-<P>
-The response of the CAD community to the rise of distributed 
-applications must be a two pronged approach. First, CAD tools 
-should themselves be distributed to leverage the benefits that 
-distributed architectures provide. Second, CAD tools should 
-incorporate facilities for effectively designing distributed 
-applications.
-<P>
-The Common Object Request Broker Architecture (CORBA) is a
-specification for distributed software systems that allows 
-software objects to communicate with one another independent 
-of their implementation language. We are exploring the use of
-CORBA to add distributed capabilities to the Ptolemy II 
-infrastructure. In addition, we are considering methods of
-using Ptolemy II to design and deploy distributed systems.
-Ptolemy II is a design environment that emphasizes the use of 
-hierarchical, heterogeneous specification semantics for the 
-design of complex computational systems.
-<P>
-In Ptolemy II, we have demonstrated the feasibility to import a 
-remote system as a component of a model, and execute the model 
-over a network. It is still an open issue as to what is the smallest 
-set of information that is needed to cross the boundary between local
-and remote components. Other issues that must be dealt with include
-real-time support and optimal underlying communication protocols.
+Network-integrated computing architectures offer facilities for
+federated collaboration between physically separate components and
+users. Distribution can improve robustness, simplify system
+architecture by allowing on-site processing, and improve security and
+confidentiality by avoiding transport of unnecessary data. It also
+facilities exploitation of specialized hardware, and its intrinsically
+parallel nature offers the promise of improved execution speeds.
+
+<P> Design tools can themselves be distributed to achieve these
+benefits, or they can incorporate facilities for effectively designing
+distributed applications.  Although this project addresses both problems,
+the emphasis is on the second.
+
+<P> The Common Object Request Broker Architecture (CORBA) is a
+specification for distributed software systems that allows software
+objects to communicate with one another independent of their
+implementation language. We are exploring the use of CORBA to add
+distributed capabilities to the Ptolemy II infrastructure. In addition,
+we are considering methods for using Ptolemy II to design and deploy
+distributed systems. Ptolemy II is a design environment for
+hierarchical, heterogeneous specification of component-based systems.
+
+<P> In Ptolemy II, we have demonstrated importing a remote model as a
+component of a larger model, executing the model in a distributed
+fashion over a network. Current work includes the definition of a
+distributed software architecture for such distributed modeling. Future
+work includes introducing real-time support, an developing support for
+an event-notification style of interaction.
+
+<p> A major application of this work is the <i>open control
+platform</i> (OCP), which we are developing collaboratively with Boeing
+and Georgia Tech. The OCP is a distributed component architecture for
+embedded control systems, particularly in the area of avionics.

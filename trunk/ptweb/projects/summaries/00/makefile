@@ -1,6 +1,7 @@
 # $Id$
 
 SOURCES = ptolemyII.sum \
+		moml.sum \
 		neuendor00.sum \
 		neuendor00b.sum \
 		tsaysummary.sum \
@@ -11,7 +12,6 @@ SOURCES = ptolemyII.sum \
 		kienhuis00a.sum \
 		kienhuis00b.sum \
 		vogel00.sum \
-		ptplot00.sum \
 		vissers00.sum \
 		softpract00.sum
 
