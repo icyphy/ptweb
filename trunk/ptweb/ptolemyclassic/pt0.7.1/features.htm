@@ -4,7 +4,7 @@
 <title>Ptolemy 0.7.1 Features</title>
 </head>
 <body bgcolor="#faf0e6">
-<H1>Ptolemy 0.7.1 Features</H1>
+<h1>Ptolemy 0.7.1 Features</h1>
  <table>
  <tr>
  <td><img src="/image/ptolemySmall.gif" alt="Mr. Ptolemy Image">
@@ -20,12 +20,12 @@
 </menu>
  </table>
 
-<H2><A NAME="pt0.7.1">What's in Ptolemy 0.7.1?</A> </h2>
+<h2><a name="pt0.7.1">What's in Ptolemy 0.7.1?</A> </h2>
 
-<H3>New work</H3>
-<MENU>
+<h3>New work</h3>
+<menu>
 
-<LI> Adaptive Computing Systems (ACS) domain.  
+<li> Adaptive Computing Systems (ACS) domain.  
 
  <br>James Lundblad of the Ptolemy group is developing the ACS domain
 with <a href="http://www.sanders.com">Sanders</a>, a Lockheed Martin company.
@@ -40,25 +40,25 @@ named Cores.
  <br>The ACS domain will help in automating the FPGA design process;
 it will help in transforming an SDF graph into a reasonable FPGA
 implementation.  Initially, an 
-<A HREF="http://www.annapmicro.com">Annapolis Microsystems</A> Wildforce
+<a href="http://www.annapmicro.com">Annapolis Microsystems</A> Wildforce
 board will be the target.
 
  <br>Sanders has a web page describing the project at:
-<a href="http://www.sanders.com/spard/acs_env/acs_env.html"><CODE>http://www.sanders.com/spard/acs_env/acs_env.html</CODE></a>
+<a href="http://www.sanders.com/spard/acs_env/acs_env.html"><code>http://www.sanders.com/spard/acs_env/acs_env.html</code></a>
 
-<LI> Mutating Topologies Within DE - Jens Voigt, John Davis II
+<li> Mutating Topologies Within DE - Jens Voigt, John Davis II
 
-  <BR> <A HREF="http://www.ifn.et.tu-dresden.de/~voigtje/"> 
+  <br> <a href="http://www.ifn.et.tu-dresden.de/~voigtje/"> 
        Jens Voigt </A> of Dresden University of Technology and John S. Davis 
        II of the Ptolemy Group have worked jointly to support dynamic
        higher order functions within the discrete event domain of Ptolemy 
        0.7.1. 
   <UL>
-  <LI>
+  <li>
   <!BR> Dynamic Higher Order Functions within the DE domain facilitate the 
        creation of simulations which have star/graph topologies that can 
        mutate during simulation runtime. The 
-       <A HREF="http://www.ifn.et.tu-dresden.de/~voigtje/DHOF/index.html"> 
+       <a href="http://www.ifn.et.tu-dresden.de/~voigtje/DHOF/index.html"> 
        Dynamic HOF interface</A>, which was created by Jens Voigt, employs a 
        style that is similar to the (static) higher order functions
        introduced in earlier versions of Ptolemy. Dynamic HOF stars allow for
@@ -66,7 +66,7 @@ board will be the target.
        themselves contain dynamic HOF stars so that cascaded mutations are 
        supported. The master blocks can be specified both graphically and 
        textually. 
-  <LI>
+  <li>
   <!BR> Runtime deletion of blocks requires removal of pending events that
        are destined for the block in question. The storage and retrieval of 
        pending events has played a critical role in discrete event modelling 
@@ -80,7 +80,7 @@ board will be the target.
        the FIFO queue-based DE scheduler. 
   </UL>
 
-<LI> HOF fixes - Tom Lane
+<li> HOF fixes - Tom Lane
 
 <li> C50 domain changes: Professor Brian Evans and his students
  <ul>
@@ -97,8 +97,8 @@ board will be the target.
 <li> Synchronous/Reactive C Code Generation (SRCGC) domain -
 Frederic Boulanger, SupÅÈlec 
 	
-<LI> Java version of <CODE>pxgraph</CODE>, 
-<A HREF="http://ptolemy.eecs.berkeley.edu/java/ptplot/index.html">Ptplot</A>,
+<li> Java version of <code>pxgraph</code>, 
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptplot/index.html">Ptplot</A>,
 - Edward A. Lee, Christopher Hylands -
 We will not ship the X11 pxgraph sources, but they are available on
 our website, along with binaries.
@@ -107,58 +107,58 @@ our website, along with binaries.
 Christopher Hylands -
 Ptolemy 0.7.1 runs under Windows NT using the
 Cygwin32 compiler and the Cygwin32 X11R6 binaries.  To run
-<CODE>pigi</CODE> under NT, you will need a NT X server.
+<code>pigi</code> under NT, you will need a NT X server.
 For more information, see
-<a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html"><CODE>http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html</CODE></a>
+<a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html"><code>http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html</code></a>
 
 
-<LI> Support for the <A HREF="http://www.cygnus.com/egcs/">EGCS</A> C++
+<li> Support for the <a href="http://www.cygnus.com/egcs/">EGCS</A> C++
 Compiler - Christopher Hylands
 
-<LI> Support for the gcc-2.8 C++
+<li> Support for the gcc-2.8 C++
 Compiler - Christopher Hylands -
 Currently gcc-2.8.0 crashes under Solaris2.5.1 when compiling certain
-c++ files with <CODE>-O -fPIC</CODE>. As a result, we are planning
+c++ files with <code>-O -fPIC</code>. As a result, we are planning
 on shipping using EGCS instead of FSF gcc.
 
-<LI> Ptolemy interfaces to Matlab and Mathematica - Brian Evans, Guy Maor,
+<li> Ptolemy interfaces to Matlab and Mathematica - Brian Evans, Guy Maor,
      and Wade Schwartzkopf
      <UL>
-     <LI> upgrade to work with Matlab 5 and Mathematica 3 by default but
+     <li> upgrade to work with Matlab 5 and Mathematica 3 by default but
           allow it to be recompiled with Matlab 4 and Mathematica 2.2
-     <LI> dynamically link the interface to Matlab
-     <LI> remove dependence of the PTcl class on the interfaces to
+     <li> dynamically link the interface to Matlab
+     <li> remove dependence of the PTcl class on the interfaces to
 	  Matlab and Mathematica Tcl commands, and instead, have the
 	  Matlab and Mathematica Tcl commands be registered.
      </UL>
 	We cannot ship binaries built with the current Matlab 5 interface,
 	since they will not work on machines that do not have Matlab installed.
 
-<LI> Tycho 0.2.1
-	<MENU>
+<li> Tycho 0.2.1
+	<menu>
 	<li> New package system - John Reekie, Christopher Hylands
 	<li> Emacs-style search and file open - Cliff Cordeiro
 	<li> HTTP, FTP, and mailto support - Kevin Chang, John Reekie
 	<li> New documentation viewer (idoc) - Cliff Cordeiro
-	</MENU>
+	</menu>
 
 
-</MENU>
+</menu>
 
-<H3>Minor changes</H3>
-<MENU>
-<LI> Vem/pigiRpc interlocks to prevent the dreaded "RPC Protocol Error" -
+<h3>Minor changes</h3>
+<menu>
+<li> Vem/pigiRpc interlocks to prevent the dreaded "RPC Protocol Error" -
      Tom Lane
 
-<LI> Custom display of universe parameters in run control panels.
+<li> Custom display of universe parameters in run control panels.
      It is now possible to add parameters to the Run Control panel by checking
      check boxes in the Edit Parameters Window.  - Tom Lane
 
-<LI> Support for using the
-     <A HREF="http://www.cs.tu-bs.de/softech/ddd/">ddd</A>
-     debugger from <CODE>pigi -debug</CODE> - Jens Voigt
+<li> Support for using the
+     <a href="http://www.cs.tu-bs.de/softech/ddd/">ddd</A>
+     debugger from <code>pigi -debug</code> - Jens Voigt
 
-<LI> Support for compiling Ptolemy under Solaris 2.5 for the PC using
+<li> Support for compiling Ptolemy under Solaris 2.5 for the PC using
      PTARCH=sol2.5pc - Dominique Ragot
 
 
@@ -169,37 +169,37 @@ on shipping using EGCS instead of FSF gcc.
 
 	<li> Create 2 new Ptolemy targets for Linux (linux.static, linux.debug)
 	<li> Work around to allow to use Complex class of GNU libg++
-	<li> <CODE>matlab.mk</CODE> and <CODE>mathematica.mk</CODE>
-	now allow predefinition of <CODE>MATLABDIR</CODE>
-	and <CODE>MATHEMATICADIR</CODE>
+	<li> <code>matlab.mk</code> and <CODE>mathematica.mk</CODE>
+	now allow predefinition of <code>MATLABDIR</code>
+	and <code>MATHEMATICADIR</code>
 	</menu>
 
 For complete details, see
-<a href="http://ptolemy.eecs.berkeley.edu/ptolemy0.7/patches/reimer/index.html"><CODE>http://ptolemy.eecs.berkeley.edu/ptolemy0.7/patches/reimer/index.html</CODE></a>
-</MENU>
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemy0.7/patches/reimer/index.html"><code>http://ptolemy.eecs.berkeley.edu/ptolemy0.7/patches/reimer/index.html</code></a>
+</menu>
 
-<H3>New Stars and Demos</H3>
-<MENU>
-<LI> HOFBusInterleave3 star - Tom Lane
-<LI> SDF SunVideo and VideoEdgeDetect - Luis Gutierrez
-<LI> DEXYgraph star - Jens Voigt
-<LI> 60GHz DE demo - Jens Voigt
-<LI> SDF contrib AIFF stars that read and play AIFF Audio files on
+<h3>New Stars and Demos</h3>
+<menu>
+<li> HOFBusInterleave3 star - Tom Lane
+<li> SDF SunVideo and VideoEdgeDetect - Luis Gutierrez
+<li> DEXYgraph star - Jens Voigt
+<li> 60GHz DE demo - Jens Voigt
+<li> SDF contrib AIFF stars that read and play AIFF Audio files on
      SGI machines - Charles B. Owen
-<LI> SDF and CGC neural network stars, galaxies, and demos -
+<li> SDF and CGC neural network stars, galaxies, and demos -
      Biao Lu and Brian Evans
-<LI> SDF smart antenna wireless communications demonstration using
+<li> SDF smart antenna wireless communications demonstration using
      the constant modulus algorithm -
      Srikanth Gummadi and Brian Evans
-<LI> SDF galaxies ITUDTMFGenerator and ITUDTMFplusNoiseGenerator
+<li> SDF galaxies ITUDTMFGenerator and ITUDTMFplusNoiseGenerator
      for testing Dual-Tone Multi-Frequency (touchtone) detectors
      for ITU compliance -
      Matt Felder, Jimmy Mason, and Brian Evans
-</MENU>
+</menu>
 
-<H3>Features that are unlikely to ship in 0.7.1</H3>
-<MENU>
-<LI> The Ptolemy II Java Kernel will not ship with Ptolemy 0.7.1.
+<h3>Features that are unlikely to ship in 0.7.1</h3>
+<menu>
+<li> The Ptolemy II Java Kernel will not ship with Ptolemy 0.7.1.
 <li> Support for Itcl3.0/Tcl8.0/Tk8.0
 	 <br> Itcl3.0 probably won't be out in final release form
 	until summer.  Currently, we plan on releasing Ptolemy 0.7.1
@@ -209,7 +209,7 @@ For complete details, see
 <li> Tycho 0.2.1 is not likely to include any sort of
 	replacement for vem.  We are concentrating on using Tycho
 	for the Ptolemy II graphical user interface.
-</MENU>
+</menu>
 <HR>
 <p>
 Last update: 06/14/98,
