@@ -14,9 +14,9 @@ CVS allows multiple developers to concurrently modify source code packages.
 <menu>
 <li> <a href="http://www.yahoo.com/Computers_and_Internet/Software/Programming_Tools/Software_Engineering/Configuration_Management/CVS___Concurrent_Versions_System/" target="_top">Yahoo CVS links</a>
 
-<li> <a href="http://www.cyclic.com" target="_top">Cyclic Software</a> - Commercial Support for CVS, lots of good links
+<li> <a href="http://www.cyclic.com" target="_top">Cyclic Software</a> - Commercial Support for CVS, lots of good links and binaries
 
-
+<li> <a href="http://www.wincvs.org/">WinCVS</a> 
 <li> <a href="http://www.cs.washington.edu/homes/gjb/ToolsTalks/project-management/" target="_top">CVS and RCS Tutorial</a>
 <li> Mailing Lists: -
 <a href="news:comp.software.config-mgmt"><CODE>comp.software.config-mgmt</CODE></a> -
@@ -26,7 +26,6 @@ CVS allows multiple developers to concurrently modify source code packages.
 <a href="cvs/doc/FAQ">Local copy from 10.x distribution </a> -
 <a href="http://www.cyclic.com/cvs/doc-faq.html" target="_top">Cyclic.com CVS FAQ</a> 
 
-<li> <a href="http://interactivate.com/public/cvswebsites/" target="_top">Interactive.com - CVS specific search engine.</a>
 <li> <a href="http://www.loria.fr/~molli/cvs-index.html" target="_top">CVS-Index at <CODE>www.loria.fr</CODE></a>
 
 <li> pcl-cvs emacs mode
@@ -58,11 +57,6 @@ Local Links
 
 <li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">JohnR's docs</a>, including information about setting up under windows.
 
-<li> <a href="cvsweb.htm">cvsweb</a> -
-<a href="http://ptolemy.eecs.berkeley.edu/cvs-web/read/cvsweb.cgi">cvsweb interface to Ptolemy Development tree</a>
-
-<li> <a href="sccs.htm">Notes about CVS and SCCS</a>
-
 <li> Documentation
 <menu>
 <li> <a href="cvs/doc">CVS PostScript and PDF documentation</a>
@@ -83,9 +77,6 @@ format.
 </menu>
 
 
-<li> <a href="../java/jacl.htm">Jacl developer information</a> 
-(includes an example of how to use a remote cvs repository)
-
 <li> <a href="http://ptolemy.eecs.berkeley.edu/~ptdesign/tycho/dcvs.html">Tycho notes about various distributed version control systems</a>
 </menu>
 
@@ -98,7 +89,6 @@ Contents
 <li> <a href="#binary">Binary Files</a>
 <li> <a href="#EDITOR">EDITOR Variable</a>
 <li> <a href="#localinstallation">Local Installation</a>
-<li> <a href="#cvsmapfs">cvsmapfs</a>
 </menu>
 
 
@@ -515,56 +505,6 @@ make install
 <CODE>.ps</CODE> and <CODE>.pdf</CODE> documentation files that
 were placed there by hand.o
 
-
-</ol>
- <HR>
-<h3><a name="complingCVSunderWindows">Compiling CVS Under Windows</a></h3>
-
-In the System Control Panel
-<ol>
-<li> Add
-
-<CODE>D:\Program Files\Microsoft Visual Studio\VC98\Bin;D:\Program Files\Microsoft Visual Studio\Common\MSDev98\Bin
-</CODE>
-to your Path
-
-
-<li> Create a new variable called INCLUDE and set it to
-<CODE>D:\Program Files\Microsoft Visual Studio\VC98\Include</CODE>
-
-<li> Create a new variable called LIB and set it to
-<CODE>D:\Program Files\Microsoft Visual Studio\VC98\LIB</CODE>
-
-</ol>
-
- <HR>
-<H2><a name="cvsmapfs">cvsmapfs</a></H2>
-
-<a href="http://www.cyclic.com/cyclic-pages/sysadmin.html"><CODE>http://www.cyclic.com/cyclic-pages/sysadmin.html</CODE></a> says
-<BLOCKQUOTE>
-
-Because CVS has a client/server protocol, it may be an alternative to
-tools such as rdist. One thing that CVS doesn't yet do is preserve
-file permissions and related information. You may be interested in
-<a href="http://www.cyclic.com/cyclic-pages/soft-cvsmapfs.html">cvsmapfs</a>
- which is an add-on package to do this.
-
-</BLOCKQUOTE>
-
- <hr>
-<h2>pcl-cvs Emacs mode</h2>
-
-See the remote links at the top.
- <p>Installation notes
-<ol>
-<li> downloaded from pcl-cvs 2.x: <a href="ftp://ftp.weird.com/pub/local/"><CODE>ftp://ftp.weird.com/pub/local/</CODE></a>
-
-<li> Untar'd  in <CODE>/usr/tools/gnu/lib/emacs/ohm-lisp</CODE>
-
-<li> edited <CODE>pcl-cvs.el</CODE> and added
-<pre>
-		    "/usr/eesww/gnu/cvs/bin"
-</pre>
 
 </ol>
 

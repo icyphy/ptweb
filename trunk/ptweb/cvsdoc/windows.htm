@@ -10,46 +10,79 @@
 
 <menu>
 
-<li> CVS and SSH binaries for NT <a href="http://ptolemy.eecs.berkeley.edu/~cxh/sa/nt/dists/cvs/cvsssh.exe"><CODE>cvsssh.exe</CODE></a> 
-(For use on .eecs.berkeley.edu machines only)
+<li> cvsssh1.10.5-1.2.14.1 - CVS and SSH binaries for NT
+<a href="dists/cvsssh1_10_5-1_2_14_1.exe">(For use on .eecs.berkeley.edu machines only)</a>
+
+<li> <a href="cvssshREADME.txt">cvsssh1.10.5-1.2.14.1 README.txt</a>,
+including installation instructions.
 
 <li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">JohnR's docs</a>, including information about setting up under windows.
+
+</menu>
+ssh-1.2.14.1-win32 is based on information found on 
+<a href="http://bmrc.berkeley.edu/people/chaffee/winntutil.html#sshnt" target="_top">Gordon Chaffee's SSH webpage</a>.
+
+His web page includes a <a href="patch-ssh-1.2.14">patch</a> against
+<a href="ftp://ftp.cs.hut.fi/pub/ssh/ssh-1.2.14.tar.gz">ssh-1.2.14</a>
+and links to the
+<a href="#ssh-1.2.14-win32">ssh-1.2.14.1-win32 Windows binaries from Finland</a>.
+
+ <p>The CVS and SSH binaries include encryption that the US Goverment
+classifies and a munition, so we can't make the binaries available
+to people outside of the EECS.Berkeley.EDU and CS.Berkeley.EDU domains.
+
+ <p>However, we can include instructions on how we built the binaries.
+
+If you can't download ssh-1.2.14.1, you might try the 
+<a href="ftp://ftp.cs.hut.fi/pub/ssh/contrib/ssh-1.2.14-win32bin.zip"><CODE>ssh-1.2.14-win32.bin.zip</CODE></a> binary from ftp.cs.hut.fi
+
+<h3>Changes between ssh-1.2.14-win32 and ssh-1.2.14.1-win32</h3>
+<menu>
+
+<li> Shipped as part of an Installshield installer that includes CVS 1.10.5
+
+<li> Bug fixes for RSA, which allows users to run cvs from NT without typing
+their password
 </menu>
 
-<h2>Installation instructions</h2>
-
-<h2><a name="troubleshootingNT">Troubleshooting NT</a></h2>
-<ol>
-<li> Reboot NT.
-<li> Be sure that you have created a key on the Unix side
-and copied the <CODE>identity*</CODE> files from Unix to NT
-
-<li> Be sure that <CODE>$HOME</CODE> is set for your NT account
-
-<li> Try using the <CODE>ssh.exe</CODE> binary that
-the <CODE>$CVS_RSH</CODE> variable refers to.
- <p>Below is an example where we rsh over to carson and get the date:
-<pre>
-bash-2.02$ echo $CVS_RSH
-D:\Program Files\Ptolemy\CVS SSH\ssh.exe
-bash-2.02$ /Program\ Files/Ptolemy/CVS\ SSH/ssh carson date
-Enter passphrase for RSA key 'cxh@carson.eecs.berkeley.edu':
-ld.so.1: /usr/local/bin/xauth: warning: /usr/4lib/libXmu.so.4.0: has older revision than expected 10
-Thu Feb  4 15:35:06 PST 1999
-</pre>
-Below is an example that failed because of an incorrect CVS password,
-note that the password is prompted for twice:
-<pre>
-bash-2.02$ /Program\ Files/Ptolemy/CVS\ SSH/ssh carson date
-Enter passphrase for RSA key 'cxh@carson.eecs.berkeley.edu':
-Bad passphrase.
-Password:
-Permission denied.
-bash-2.02$
-</pre>
-</ol>
 
 <h2>Build instructions</h2>
+<ol>
+<li> Currently, our tree is checked in to the repository as
+<CODE>ssh-1.2.14.1-win</CODE>, so if you already have
+CVS and you have a mho cluster account, you can do
+<pre>
+cvs co ssh-1.2.14.1-win
+</pre>
+
+
+
+<li> In the System Control Panel
+  <ol>
+  <li> Add
+
+  <CODE>D:\Program Files\Microsoft Visual Studio\VC98\Bin;D:\Program Files\Microsoft Visual Studio\Common\MSDev98\Bin</CODE>
+  to your Path
+
+  <li> Create a new variable called INCLUDE and set it to
+  <CODE>D:\Program Files\Microsoft Visual Studio\VC98\Include</CODE>
+
+  <li> Create a new variable called LIB and set it to
+  <CODE>D:\Program Files\Microsoft Visual Studio\VC98\LIB</CODE>
+
+</ol>
+
+<li> Under Cygwin bash, build ssh with:
+<pre>
+cd ssh-1.2.14.1
+nmake -f makefile.vc TOOLS32=d:\\PROGRA~1\MICROS~2\VC98
+</pre>
+
+
+<li> Grab the latest <CODE>cvs.exe</CODE> from
+<a href="http://download.cyclic.com/pub"><CODE>http://download.cyclic.com/pub</CODE></a>
+
+</ol>
 
 </body>
 </html>
