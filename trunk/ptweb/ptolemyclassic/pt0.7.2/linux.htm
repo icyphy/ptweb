@@ -126,8 +126,91 @@ make install &gt;&amp; install.out &amp;
 ../../../../src/domains/cg/kernel/CGTarget.cc:703: implicit declaration of func
 tion `int cuserid(...)'
 </pre>
+
+The change is to comment
+<pre>
       //msg   &lt;&lt; "User:      " &lt;&lt; cuserid(NULL) &lt;&lt; "\n"
+</pre>
+and use
+<pre>
       msg     &lt;&lt; "User:      " &lt;&lt; getlogin() &lt;&lt; "\n"
+</pre>
+
+
+<li> <CODE>vhdl/targets/SynthTarget.cc</CODE> needs a similar change
+<pre>
+        //      comCode &lt;&lt; "designer = \"" &lt;&lt; cuserid(NULL) &lt;&lt; "\"" &lt;&lt; "\n";
+</pre>
+<pre>
+        comCode &lt;&lt; "designer = \"" &lt;&lt; getlogin() &lt;&lt; "\"" &lt;&lt; "\n";
+
+</pre>
+As does <CODE>SynthArchTarget.cc</CODE>
+
+
+<li> acs/targets/StringArray.cc fails with
+<pre>
+../../../../src/domains/acs/targets/StringArray.cc:90: implicit declaration of function `int strcat(...)'
+</pre>
+The fix is to add
+<pre>
+#include &lt;string.h&gt;
+</pre>
+
+
+<li> acs/stars fails to link with
+<pre>
+ACSRamDelayFixSim.o(.data+0x0): multiple definition of `star_nm_ACSRamDelayFixSim'
+ACSRamDelayFixSim.o(.data+0x0): first defined here
+</pre>
+
+The fix is to edit <CODE>acs/stars/make.template</CODE> and
+find the second instance of ACSRamDelayFixSim.pl and 
+remove it and the remaining .pl files.  
+<pre>
+[root@dhcp-43-60 stars]# diff -c make.template.old make.template 
+*** make.template.old   2003-07-15 18:05:10.000000000 -0700
+--- make.template       2003-07-15 18:01:06.000000000 -0700
+***************
+*** 89,105 ****
+    ACSUnPackBits.pl ACSUnPackBitsCGFPGA.pl ACSUnPackBitsFixSim.pl \
+    ACSXMGraph.pl ACSXMGraphCGFPGA.pl ACSXMGraphFPCGC.pl ACSXMGraphFPSim.pl ACS\
+XMGraphFixSim.pl \
+    ACSXYgraph.pl ACSXYgraphCGFPGA.pl ACSXYgraphFPCGC.pl ACSXYgraphFPSim.pl ACS\
+XYgraphFixSim.pl \
+-   ACSRamDelayFixSim.pl \
+-   ACSRamp.pl ACSRampCGFPGA.pl ACSRampFPCGC.pl ACSRampFPSim.pl ACSRampFixSim.p\
+l \
+-   ACSShift.pl ACSShiftCGFPGA.pl ACSShiftFPSim.pl ACSShiftFixSim.pl \
+-   ACSSin.pl ACSSinCGFPGA.pl ACSSinFPCGC.pl ACSSinFPSim.pl ACSSinFixSim.pl \
+-   ACSSink.pl ACSSinkCGFPGA.pl ACSSinkFPCGC.pl ACSSinkFPSim.pl ACSSinkFixSim.p\
+l \
+-   ACSSource.pl ACSSourceCGFPGA.pl ACSSourceFPCGC.pl ACSSourceFPSim.pl ACSSour\
+ceFixSim.pl \
+-   ACSSqrt.pl ACSSqrtCGFPGA.pl ACSSqrtFPCGC.pl ACSSqrtFPSim.pl ACSSqrtFixSim.p\
+l \
+-   ACSSub.pl ACSSubCGFPGA.pl ACSSubFPCGC.pl ACSSubFPSim.pl ACSSubFixSim.pl \
+-   ACSUniSeq.pl ACSUniSeqCGFPGA.pl \
+-   ACSXMGraph.pl ACSXMGraphCGFPGA.pl ACSXMGraphFPCGC.pl ACSXMGraphFPSim.pl ACS\
+XMGraphFixSim.pl \
+-   ACSXYgraph.pl ACSXYgraphCGFPGA.pl ACSXYgraphFPCGC.pl ACSXYgraphFPSim.pl ACS\
+XYgraphFixSim.pl
+
+  # The .cc files
+  SRCS=$(PL_SRCS:.pl=.cc)
+--- 89,94 ----
+
+</pre>
+
+
+<li> pxgraph fails to compile
+<pre>
+../../../src/pxgraph/pxgraph/xgraph.h:77:21: macro "strchr" requires 2 arguments, but only 1 given
+</pre>
+The fix is to edit <CODE>ptolemy/src/pxgraph/pxgraph/xgraph.h</CODE>
+and comment out the declaration of strchr
+ <br>Then run <CODE>make install</CODE>
+
 </ol>
 
 </body>
