@@ -1,0 +1,127 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-11/1/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        4/1/01 - 6/30/01
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Stephen L. Hary
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our focus is on the design of process-oriented components and their
+runtime environment for embedded systems. The emphasis of this project
+is on the dynamics of the components, including the communication
+protocols that they use to interface with other components and the
+modeling of their state. The objective is to provide mechanisms for
+introspection, supporting both the ability of the run-time environment
+to safely dispatch tasks and the ability of components to adapt their
+interfaces using polymorphism. The focus is on real-time applications,
+which implies that models of time are a critical part of the
+abstractions that we will develop. The purpose of the mechanisms we
+develop is to improve robustness and safety while promoting
+component-based design.
+
+This reporting period had a breakthrough in our process-level type
+system. In particular, we have developed a formalism that represents
+the notion of interfaces and refinement in process-level components. We
+are further developing this formalism, and expect to have more to
+report in the next period.
+
+
+1.  Research Status
+
+A polymorphic process-level type system
+=======================================
+
+Tom Henzinger has developed a preliminary description of a formal
+structure for concurrent components with ports that solidifies the
+notion of an interface and of refinement. His formalism recognizes that
+input and output ports are contravariant, meaning that their
+inheritance structure is opposite. A refinement can have fewer input
+ports and more output ports, but not fewer output ports nor more input
+ports. Moreover, Tom has shown that assume-guarantee reasoning can be
+used when composing components. In particular, we can show that if a
+composition of two interfaces is valid, then a composition of
+refinements of these interfaces is also valid.  This is a very strong
+result that we believe forms the first building blocks of a true
+systems theory for actor-oriented design.
+
+
+Architectural models and Application models. 
+============================================
+
+On the trip to Tahoe on Friday, I came up with a really cool way to mix
+these two types of models.  The short summary is that
+the director of the application model contains the architectural model.
+I'll give you the details tomorrow, if you have a chance to talk.
+
+Code Generation
+===============
+
+
+
+Christopher Hylands 
+
+Steve Neuendorffer
+Ok, so I was a little confused apparently, SableCC and soot/jimple are
+released under the Library GPL, which is OK...  you only have to distribute
+source for the library.
+
+
+Other Software Improvements
+===========================
+
+
+
+Actor Libraries
+===============
+
+Example models
+==============
+
+
+Design and Code Reviews
+=======================
+
+We performed the following design reviews:
+
+We performed the following code reviews:
+
+
+Personnel
+=========
+
+
+Study Group
+===========
+
+Our sort-of weekly study group examined the following topics:
+
+
+
+2.  Interactions, Meetings, and Technology Transfer
+
+Presentations
+=============
+
+-- 
+
+
+Other Interactions
+==================
+
+*  Weekly meetings with Mobies Phase II project at Berkeley,
+   Mondays, 9-10am.
+
+
+3.  Publications
+
+
+4. Financial Data
+
+Provided separately on a quarterly basis by the university.

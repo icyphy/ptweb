@@ -1,0 +1,857 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-11/1/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        1/1/01 - 3/31/01
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Stephen L. Hary
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our focus is on the design of process-oriented components and their
+runtime environment for embedded systems. The emphasis of this project
+is on the dynamics of the components, including the communication
+protocols that they use to interface with other components and the
+modeling of their state. The objective is to provide mechanisms for
+introspection, supporting both the ability of the run-time environment
+to safely dispatch tasks and the ability of components to adapt their
+interfaces using polymorphism. The focus is on real-time applications,
+which implies that models of time are a critical part of the
+abstractions that we will develop. The purpose of the mechanisms we
+develop is to improve robustness and safety while promoting
+component-based design.
+
+This reporting period had several major events. First, we held the
+fourth annual Ptolemy Miniconference at the Claremont Hotel. It drew 93
+attendees from around the world. Second, we released version 1.0 of
+Ptolemy II on CD and on the web, as well as Ptplot 5.1, and Diva. A
+rather large amount of software progress and documentation improvements
+led up to this release. Third, we have made major progress on our
+polymorphic system-level type system by switching the modeling
+formalism to "interface automata."  Fourth, we have initiated the
+use of Ptolemy II in instruction, using it for the first time in our
+core graduate signal processing class.
+
+Ptolemy II 1.0 Release
+======================
+
+We released versions 1.0beta, 1.0, and 1.0.1 of Ptolemy II on CD and on
+the web. The release notes are appended in appendix A. This release
+includes a new version of our working design document, which has grown
+to about 400 pages and thoroughly documents the software architecture.
+The release size is about 60Mb, of which more than half is
+documentation. We have had interactions with a number of users of these
+releases worldwide, some of whom have created quite sophisticated
+models.
+
+
+Ptolemy Miniconference
+======================
+
+We held the 4-th Biennial Ptolemy Miniconference at the Claremont Hotel
+on March 22 and 23, and drew 93 people. We had 24 talks and 16 posters,
+with over half of the presentations and posters coming from outside
+Berkeley. We gave a tutorial on Ptolemy II on Friday afternoon for
+approximately 40 of the participants.  Details can be found at:
+
+   http://ptolemy.eecs.berkeley.edu/ptconf
+
+The attending organizations included:
+
+ - 3S Engineering,
+ - Aalborg University,
+ - Advantest Laboratories,
+ - Agile Design,
+ - Agilent Technologies,
+ - Altera,
+ - BAE Systems,
+ - Berkeley Design Technology,
+ - Brigham Young University,
+ - Berkeley's BWRC,
+ - Cadence Design Systems,
+ - Chameleon Systems,
+ - Corning Incorporated,
+ - Univ. of Torino,
+ - Ellipsis Digital Systems,
+ - Emmeskay,
+ - Ford Research Laboratory,
+ - Georgia Institute of Technology,
+ - GlobeSpan,
+ - IBM T.J. Watson,
+ - Isochip,
+ - Laboratoire des Images et des Signaux,
+ - Landmark Graphics,
+ - Leiden Institute of Advanced Computer Science,
+ - LIACS, Leiden University,
+ - Philips Laboratories,
+ - Radioplan GmbH,
+ - Raytheon,
+ - Research in Motion Limited,
+ - SAIC,
+ - Seoul National University,
+ - Synopsys,
+ - Telcordia Technologies,
+ - Thales,
+ - The University of Texas at Austin,
+ - Trimedia,
+ - University of Maryland,
+ - University of São Paulo,
+ - University of Southern California,
+ - University of Texas at Austin,
+ - Vanderbilt University,
+ - Virtual Photonics
+
+The program included invited speakers from organizations worldwide,
+plus members of the Ptolemy project describing current research at
+Berkeley. Topics included:
+
+·       Models of Computation
+·       Ptolemy II Software Architecture
+·       Hybrid and Modal Modeling
+·       Code Generation
+·       MoML - Modeling Markup Language
+·       Modeling Concurrency
+·       Ptolemy II Type System
+·       ePtolemy - Distributed Modeling
+·       Control Flow Modeling
+·       Modeling of Wireless Networks
+·       Modeling Optical Networks
+·       Implementing Radar and Sonar Systems
+·       Dataflow modeling
+·       EDA/Instrument integration
+·       Process Networks from Matlab code
+·       Distributed Optimization
+·       Distributed Synchronized Clocks
+·       Debugging Ptolemy Applications
+·       Software Practice
+·       GSRC Semantics Project
+
+Friday afternoon, March 23, was devoted to a tutorial on Ptolemy II,
+which covered:
+
+·       Using and extending the GUI
+·       Overview of the actor libraries
+·       Overview of the domains
+·       How to write actors
+·       How to write applets
+
+
+1.  Research Status
+
+Reflection extended to program dynamics
+=======================================
+
+System-level types are a mechanism for declaring as part of the
+interface to a component the dynamics of the interaction with the
+component through its ports. We have been developing a formal structure
+based on automata where the simulation relation between automata is
+used to construct a type lattice. An interface declaration takes the
+form of a nondeterministic automaton, and the simulation relationships
+between automata become analogous to subclassing or subtyping
+relationships in a classical type system.
+
+Recently, Luca de Alfaro, a postdoc in Tom Henzinger's group at
+Berkeley, has developed an alternative formal language for automata
+called interface automata. The key advantage of his formalism is in the
+way that product spaces are formed when automata are composed.
+Composition is critical in our context because the ports, directors,
+and actors are all described by automata, and the behavior is defined
+by the composition of these automata. In short, interface automata
+result in much smaller descriptions when composed, and more
+particularly, in descriptions that concisely contain the essential
+features of the composition.
+
+Yuhong Xiong and Xioajun Liu have begun the process of converting
+our automata type definitions for various domains into interface
+automata.  To support this work, they have created a domain in
+Ptolemy II that realizes interface automata.  This domain might
+evolve into an on-line reflection mechanism and a suite of type
+inference and type checking tools for system-level types.
+
+
+Type System
+===========
+
+A number of interesting issues have come up with the Ptolemy II
+type system.  For the most part, these have vindicated the flexible
+design that Yuhong Xiong has come up with, since he has been able
+to address each of the problems in a clean and systematic way.
+
+The first of these came up when creating a new polymorphic component,
+an Autocorrelation actor, in sdf.lib, which computes an average of the
+inputs. It does this polymorphically, using the add() and divide()
+methods of the Token class. However, in its first version, when given
+integer inputs, it does an integer divide, which yields unexpected
+results. 1/10 = 0, for example.
+
+Yuhong solved this problem by using a monotonic function to specify
+the type constraint. He added a type constraint
+
+  f(inputType)<=inputType
+
+where
+
+  f(inputType) =
+    if (inputType == BaseType.INT) {
+        return BaseType.DOUBLE;
+    } else if (inputType == BaseType.INT_MATRIX) {
+       return BaseType.DOUBLE_MATRIX;
+    } else {
+       return inputType;
+    }
+
+This way, if the input is connected to an int or int matrix source, the
+input type will be resolved to double or double matrix, and hence the
+divide will be a double divide. The ability to specify type constraints
+using a monotonic function is an extremely sophisticated aspect of the
+type system, and this application demonstrates its need.
+
+A second issue arose with the Scale actor, which polymorphically scales
+its input by a constant. By default, the Scale actor declared its
+output type to be at least as general as the input and the scale
+factor. The problem arises when the input is an array and the factor is
+a scalar. Arrays and scalars are incomparable in our type lattice, so
+the output data type resolves to general, which is the top of the type
+lattice.  A simpler constraint that the output be at least as general
+as the input suffices for this situation, but would not suffice if,
+for example, the input were a scalar double and the scale factor were
+complex.  Again, a monotonic function solves the problem:
+
+The function value is determined by:
+
+    f(portType, paramType) =
+         UNKNOWN,                  if portType=UNKNOWN
+         LUB(portType, paramType), if portType is a BaseType
+         {f(elemType(portType), paramType)}, if portType is an array type.
+
+where "LUB" is the least upper bound.
+
+A third, more minor issue arose, which turned out to be a bug
+in the base class for most actors, TypedAtomicActor. The logic in
+TypedAtomicActor to set default type constraints was:
+
+  In an actor, if an input port and an output port do not have
+  their declared types set, add a default constraint that the
+  type of the output is no less than the type of the input.
+
+The bug was that this constraint was applied even if another
+type constraint was specified.  This led to unexpected results.
+
+
+Hardware lab
+============
+
+We have received the TTA evaluation cluster from TTTech together with a
+CD-ROM with the latest TTPtools release. Our initial experience with it
+has not been positive. Win Williams, a highly experienced postdoctoral
+research staff person writes:
+
+     We are very fortunate to have had a visit by Jeong C. Kim of the
+     University of Michigan who had successfully used a TTTech cluster
+     before. He was able (after dozens of tries over several hours) to
+     upgrade the cluster's firmware to version 2. (This was a necessary
+     step before running the cluster's demo program.) After he
+     departed, I attempted to download the demo program to the cluster.
+     I had similar difficulties in that many repetitions of the
+     download procedure eventually resulted in a single successful
+     download. Dissatisfied with this iterative process, I sought, and
+     found, an alternative. I learned that downloading worked on the
+     first iteration when there was only one board in the cluster.
+     Thus, connecting each board one at a time in turn, downloading was
+     repeatably achieved in just 4 steps, instead of N. However, the
+     demo did not run. It turns out that each board in the cluster
+     requires two separate downloads. Furthermore, the software
+     recommended for accomplishing the second download differs from
+     that used for the first. It is software from a different vendor.
+     It was supplied with keys it claims are in the wrong file format.
+     The keys are now expired. We are in the process of acquiring new
+     keys in the correct format.
+
+This does not bode well for TTTech.
+
+Christoph Kirsch (postdoc in Tom Henzinger's group) is teaching a
+graduate seminar course on embedded software this semester. He is
+covering the TTA in this course.
+
+Title: Embedded Software Engineering
+
+Brief Overview: This 3 unit course will provide an introduction to
+embedded software engineering which is a young research discipline on
+design methodologies for embedded software development. The course
+begins with an introduction to real-time operating system concepts and
+real-time communication protocols. Techniques like rate-monotonic
+scheduling and earliest deadline first as well as real-time protocols
+like TTP and CAN will be illustrated. The second half of the course
+emphasizes the pros and cons of the two fundamentally important
+paradigms of event-triggered and time-triggered systems. An
+introduction to the two high-level embedded programming languages
+Esterel and Giotto will be presented. Esterel is a synchronous reactive
+language with an event-triggered semantics whereas Giotto has a
+time-triggered semantics. Giotto has recently been developed at UC
+Berkeley. Example programs in Esterel and Giotto will be implemented on
+Lego Mindstorm robots. Each week, a one and a half hour lecture will be
+presented and a one and a half hour discussion will be held.
+
+Goal of the course: Learn how to: evaluate applications with real-time
+requirements, identify adequate programming paradigm and platform,
+implement applications with real-time requirements.
+
+Literature:
+- Helmut Kopetz, Real-Time Systems: Design Principles for Distributed
+  Embedded Applications, 1997.
+- Giorgio C. Buttazzo, Hard Real-Time Computing Systems: Predictable
+  Scheduling Algorithms & Applications, 1997.
+- Gérard Berry, The Foundations of Esterel, in Proof, Language and
+  Interaction: Essays in Honour of Robin Milner, G. Plotkin, C.
+  Stirling and M. Tofte, editors, MIT Press, 2000.
+- Papers on special topics.
+
+Web: www.eecs.berkeley.edu/~fresco/giotto, www.esterel.org
+
+
+Expression Language
+===================
+
+We have made a number of improvements to the expression language in
+Ptolemy II, which is used to set parameters and (sometimes) to specify
+the functionality of an actor. The first improvement allows us to
+define polymorphic functions to use in the expression language.
+For example, the expression language now supports:
+
+   repeat(int, Token)
+
+This returns an ArrayToken that contains the specified number of
+copies of the Token.  For example,
+
+   repeat(5, 0.0)
+
+returns
+
+   {0.0, 0.0, 0.0, 0.0, 0.0}
+
+This change turned out to be fairly tricky because the expression
+language was previously only accepting primitive types as arguments to
+functions. Now it will accept arbitrary Tokens. In order to implement
+this, we had to work around a problem with Java that Class.getMethod()
+does not support polymorphism.
+
+Xiaojun Liu made some other enhancements to the expression language.
+First, it now allows methods with zero arguments, such as
+ComplexToken.absoluteValue(). Second, it now supports methods that take
+primitive types and return primitive types. Before it only supported
+methods that take tokens and return tokens are allowed. This removed a
+lot of useful methods, such as ArrayToken.length().
+
+
+Domain-Specific Models: Handling Time
+=====================================
+
+Chamberlain Fong identified problems with the discrete-time domain that
+are due to fundamental limitations in the handling of time as defined
+in the Ptolemy II kernel. In particular, he has discovered that in this
+domain, current time needs to be a property of the receivers in the
+input ports, rather than a global property of the director. He is
+working on an extension of the kernel that will correct this
+deficiency. A clear next step is to formally characterize the handling
+of time as a feature of the abstract semantics.
+
+
+Finite state machines
+=====================
+
+FSMs in Ptolemy II are used to construct hybrid systems models, modal
+models, and discrete control logic, such as supervisory controllers. We
+have improved the implementation of the FSM domain and the support for
+them in Vergil so that it is now possible construct nontrivial models
+visually. There are still a number of awkward aspects, but the
+mechanism is basically usable.
+
+First, we changed the FSM domain so that instead of "name_S", you now
+say "name_isPresent", and instead of "name_V", you now say "name". This
+makes guards and actions in FSMs much more readable.
+
+Second, we have simplified the specification of transition actions to a
+single parameter that takes a list of commands. This is somewhat more
+limited than the model that we had before, which offered separate
+actions that got executed when a transition was chosen and when a
+transition was taken (in the fire() and postfire() methods).
+
+Third, we have simplified the specification of guards, and do not by
+default offer the possibility in the UI of entering a trigger
+expression. Only guard expressions can be entered. Again, this limits
+the expressiveness, although a knowledgeable user can still create
+trigger expressions.
+
+We are rethinking the semantic model for FSMs, and may come up with a
+significantly different design for future use.
+
+
+Other Software Improvements
+===========================
+
+Christopher Hylands put a great deal of effort into the installer for
+Ptolemy II 1.0, resulting in a superbly smooth installation process
+that rivals that of the best commercial products. He also packaged
+an installer for Cygwin, the development environment that we use
+on Windows platforms, making it easier for developers to get up and
+coding.
+
+We have revamped the on-line applets to include interactive block
+diagrams in Vergil. This makes it easier for model builders to share
+and document their models, although the process of creating one of
+these applets is still more complex than we would like.
+
+We made a very large number of bug fixes and minor feature enhancements
+in anticipation of the 1.0 software release.
+
+Brian Vogel modified the SDFScheduler to handle models that contain
+actors with zero-rate ports. This is preliminary to building a
+full-featured heterochronous dataflow capability.
+
+Michael Schilman and Steve Neuendorffer put together a Diva release to
+match the code used in Ptolemy II version 1.0. This means that people
+interested only in the user interface infrastructure can easily
+separate it from Ptolemy II.
+
+Steve Neuendorffer has been working on MoML export and on the class
+definition and inheritance semantics of MoML. This is work-in-progress.
+
+Christopher Hylands and Steve Neuendorffer tracked down and fixed some
+serious memory consumption problems in Ptolemy II. The first problem
+turned out to be in the expression parser, which was allocating memory
+in 4K chunks, and was getting invoked to parse a very large number of
+small expressions. The second problem concerned listeners, which, it
+turns out, are a seriously problematic design pattern in Java. We need
+to redo all the listeners in Ptolemy II to use weak references so that
+they do not interfere with garbage collection.  The third problem turned
+out to be a bug in the Java implementation of drag and drop. This bug
+has been fixed by Sun in subsequent releases.
+
+Steve Neuendorffer fixed a few long standing bugs in the SDF scheduler.
+Tunneling entities now work properly. A tunneling entity is a composite
+entity where an input port is connected directly to an output port
+without an intervening actor. Also, entities that are connected only
+through external ports are now properly scheduled. Previously they were
+often considered to not be connected, since the scheduler ignored
+output ports.
+
+Steve Neuendorffer also modified code to the actor.sched package so
+that Scheduler are attributes of their StaticSchedulingDirector. This
+works in exactly the same way as Directors are attributes of
+CompositeActors. I.e. The last scheduler added is the 'current' one,
+remove a scheduler and the next most recent one added becomes
+'current', etc.
+
+
+Actor Libraries
+===============
+
+For the first time, we are using Ptolemy II in instruction. It is being
+used this semester as a central part of our core graduate signal
+processing class, which deals with statistical signal processing.
+To support the use in this class, we developed a number of actors
+for the actor library.  These include:
+
+ - Autocorrelation: An actor that estimates the autocorrelation of a
+   random process.
+ - Chop: An actor that divides a signal into chunks.
+ - Spectrum: An actor that uses an FFT to compute a simple spectrum.
+ - SmoothedSpectrum: An actor that implements the Blackman-Tukey spectral
+   estimation method.
+ - Lattice: A lattice filter.
+ - BlockLattice: A block lattice filter.
+ - LevinsonDurbin: implements the Levinson-Durbin algorithm to compute
+   linear predictor coefficients.
+ - MaximumEntropySpectrum: a composite actor that performs maximum-
+   entropy spectral estimation using LevinsonDurbin.
+ - RLattice: A recursive lattice filter.
+ - BlockRLattice: A block recursive lattice.
+
+Steve Neuendorffer also added:
+
+ - Counter
+ - Queue
+
+Paul Whitaker added:
+
+ - DotProduct
+
+Brian Vogel added several new audio actors:
+ - AudioReader
+ - AudioWriter
+ - AudioCapture
+ - AudioPlayer
+
+We have also improved the handling of arrays in actors by improving
+ArrayToSequence and adding the following actors:
+
+ - ArrayElement  (extract an element from an array)
+ - ArrayExtract  (extract a subarray from an array)
+
+An open issue concerns the actors that produce and consume multiple
+tokens is to serialize them on an ordinary scalar link, such as FFT.
+These are fashioned after actors in Ptolemy Classic. However, we have a
+much better type system than Ptolemy Classic, and we have domain
+polymorphic actors. The above model really only makes sense for SDF. It
+would be extremely costly, for example, in CSP.
+
+We suggest we use the following criterion:
+
+1) Actors whose production and consumption is most likely a
+   sample-rate conversion, such as Upsample and Downsample,
+   should produce and consume multiple tokens as before.
+
+2) Actors who are basically operating on arrays, such as
+   FFT, should consume and produce arrays.
+
+
+Example models
+==============
+
+Johan Eker has created an inverted pendulum model, which is three-mode
+control system that generates a graphical animation using Chamberlain
+Fong's GR domain.
+
+Steve Neuendorffer created a router priority policy model.
+
+
+Design and Code Reviews
+=======================
+
+We performed the following design reviews:
+
+ - actors in the actor.lib package
+ - discrete time (DT) kernel package
+ - actors in the actor.lib.conversions package
+ - actors in the domains.sdf.lib package
+ - some classes in the actor package
+ - domains.gr.kernel
+ - new audio actors (see above)
+ - new dsp actors (see above)
+ - the fsm domain
+
+
+Personnel
+=========
+
+Johan Eker joined our group as postdoc funded by the Swedish
+government. He comes from Lund, and has extensive control systems
+experience. Yang Zhao and Chris Chang have joined the group as graduate
+students.
+
+
+Study Group
+===========
+
+Our sort-of weekly study group examined the following topics:
+
+ - Interface Automata (see above)
+ - El Greco design tool (now called CoCentric Studio) by Synopsys
+ - Resource Kernel in real-time systems, by Raj Rajkumar et al.
+ - Manifold, a co-ordination language designed and implemented
+   at Dutch Mathematical Center (CWI), in Amsterdam.
+ - E-commerce and embedded systems
+ - Mobies Phase 1 OEP challenge problems
+
+
+2.  Interactions, Meetings, and Technology Transfer
+
+Presentations
+=============
+
+-- Project overview for Janos Sztipanovits of DARPA, January 31, 2001,
+   in Berkeley.
+
+-- "Process-Based Software Components for Networked Embedded Systems,"
+   Edward A. Lee, presentation at the Mobies PI meeting in New Orleans,
+   Jan. 23-25.
+
+
+Other Interactions
+==================
+
+* Ptolemy Miniconference (see above).
+
+* Use of Ptolemy II in 225a, Statistical Signal Processing (see above).
+
+* Weekly meetings with Mobies Phase II project at Berkeley,
+  Mondays, 9-10am.
+
+* Steve Neuendorffer visited Prof. Shuvra Bhattacharyya at the University
+  of Maryland in January, and discussed code generation and higher-order
+  components.
+
+* Prof. Shuvra Bhattacharyya, of the University of Maryland, has
+  created a very preliminary version of a C-code generator back-end to
+  the Ptolemy II code generator.
+
+* We sent a MoML document to Ford, who initiated an effort to create an
+  XML schema for models.
+
+* Met with Tunc Simsek (Mobies Phase 1) on Exception handling for
+  networks of hybrid automata.
+
+* Conference call with OEP team at Boeing on January 8.
+
+* Met with Anouck Girard and Mark Wilcutts to discuss powertrain models
+  and, more generally, phase 1 and 2 Mobies interactions. We believe
+  that that a synchronous model of computation where the clock tick is
+  driven by the engine RPM would possibly be a better modeling
+  framework than what Simulink offers. Anouck and Mark appear to need
+  mature software rather than the experimental framework that Ptolemy
+  II has to offer.
+
+* On March 16, we visited Kestrel (Edward Lee, Jorn Janneck, and
+  Xioajun Liu) to discuss generator technology.
+
+* Albert Benveniste from INRIA, France, visited our group and gave a
+  beautiful overview of stochastic models in synchronous languages.
+
+
+3.  Publications
+
+[1] The Ptolemy II Framework for Visual Languages Xiaojun Liu, Yuhong
+    Xiong, and Edward A. Lee submitted to Visual Languages and Formal
+    Methods (VLFM 2001).
+
+[2] John Davis II, Christopher Hylands, Bart Kienhuis, Edward A. Lee,
+    Jie Liu, Xia ojun Liu, Lukito Muliadi, Steve Neuendorffer, Jeff Tsay,
+    Brian Vogel, and Yuhong Xiong, "Heterogeneous Concurrent Modeling and
+    Design in Java," Technical Memorandum UCB/ERL M01/12, EECS, University
+    of California, Berkeley, March 15, 2001. 
+
+[3] Edward A. Lee, "Overview of the Ptolemy Project," Technical
+    Memorandum UCB/ERL M01/11, University of California, Berkeley, March 6,
+    2001. 
+
+[4] C. Fong, "Discrete-Time Dataflow Models for Visual Simulation in
+    Ptolemy II," Master's Report, Memorandum UCB/ERL M01/9, Electronics
+    Research Laboratory, University of California, Berkeley, January 2001.
+
+
+4. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+APPENDIX A
+==========
+
+Release Notes for Ptolemy 1.0
+-----------------------------
+
+Ptolemy II 1.0 is available for download from
+http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII1.0
+
+Ptolemy II is a software framework developed as part of the Ptolemy
+project. It is a Java-based component assembly framework with a
+graphical user interface called Vergil. Vergil itself is a component
+assembly defined in Ptolemy II.
+
+The Ptolemy project studies modeling, simulation, and design of
+concurrent, real-time, embedded systems. The focus is on assembly of
+concurrent components. The key underlying principle in the project is
+the use of well-defined models of computation that govern the
+interactions between components. A major problem area being addressed
+is the use of heterogeneous mixtures of models of computation.
+
+The Ptolemy Project web page (http://ptolemy.eecs.berkeley.edu)
+contains much more information about the project. The work is
+conducted in the Department of Electrical Engineering and Computer
+Sciences of the University of California at Berkeley. The project is
+directed by Prof. Edward A. Lee. The project is named after Claudius
+Ptolemaeus, the second century Greek astronomer, mathematician, and
+geographer.
+
+Ptolemy II includes a growing suite of domains, each of which realizes
+a model of computation. It also includes a component library, in which
+most components are domain polymorphic, in that they can operate in
+several of the domains. Most are also data polymorphic, in that they
+operate on several data types. The domains that have been implemented
+are listed below. Some of these are preliminary and/or experimental,
+as indicated below.
+
+CT: continuous-time modeling
+DE: discrete-event modeling
+FSM: finite state machines
+PN: process networks
+SDF: synchronous dataflow
+CSP: communicating sequential processes (experimental)
+DDE: distributed discrete events (experimental)
+DT: discrete time (experimental)
+Giotto: periodic time-driven (experimental)
+GR: 3-D graphics  (experimental)
+
+Ptolemy II contains the following features:
+
+* Vergil: A block-diagram editor for building models
+* User interface utilities for applets and applications
+* Live editing of models and parameters
+* Network integration
+* A sophisticated type system including
+           Type constant propagation,
+           Record Types,
+           Array types, and
+           Fixed-point type
+* An expression language for parameter expressions
+* Data and domain polymorphic component library
+* A polymorphic expression actor
+* A very simple XML file format called MoML
+* A flexible signal plotter
+* 3-D graphics animation infrastructure
+* Hierarchically interoperable domains
+* On-line documentation (in HTML)
+* Audio signal processing capabilities
+
+The Ptolemy II website contains Ptolemy II applets that can be run by
+using the Java Plug-in 1.3.
+
+Ptolemy II is available for download in two versions:
+
+* Ptiny - which can be used to build models in CT, DE, FSM, PN and SDF
+using built-in actors.  The Ptiny version is a 5.6Mb download
+for Windows.
+
+* Full - which includes other domains and support for developing
+custom actors.  The Full version is a 20Mb download for Windows
+or a 5.3Mb source only download for Windows and Unix.
+
+Christopher Hylands    cxh@eecs.berkeley.edu  University of California
+
+
+APPENDIX B
+==========
+
+Ptplot 5.1 is available for demonstration and download from
+the Ptplot home page at
+http://ptolemy.eecs.berkeley.edu/java/ptplot
+
+Ptplot is a set of two dimensional signal plotter components written
+in Java with the following properties:
+
+    * Embeddable in applets or applications.
+    * Auto-ranging.
+    * Automatic or manual labeling of axes.
+    * Automatic or manual tick marks.
+    * Logarithmic axes.
+    * Live, animated plots.
+    * Infinite zooming.
+    * Various plot styles: connected lines, scatter plot, bars, etc.
+    * Various point styles: none, dots, points, and unique marks.
+    * Multiple data sets and a legend.
+    * Color or black and white plotting.
+    * Error bars.
+    * Editable plots.
+    * PlotML, and XML language for specifying plots.
+    * Compatibility with pxgraph, an older plotting program.
+
+There is a set of demonstrations of the various capabilities. There are
+several ways to use the classes in the plot package.
+
+    * You can invoke an executable, ptplot, which is a shell script, to plot
+      data on the local file system or on the network.
+    * You can invoke an executable, pxgraph, which is a shell script, to
+      plot data that is stored in binary format compatible with the older
+      program pxgraph.
+    * You can invoke a Java application, such as PlotMLApplication, by
+      setting your CLASSPATH variable appropriately and using the java
+      executable that is included in your Java distribution.
+    * You can reference an existing applet class, such as PlotMLApplet, in
+      an HTML file. The applet parameters, such as dataurl, give the plot
+      data and format information, either by referring to another file on
+      the network, or by directly including the information. You do not even
+      have to have Ptplot installed on your server, since you can always
+      reference the Berkeley installation.
+    * You can create new classes derived from applet, frame, or application
+      classes to customize your plots. This allows you to completely control
+      the placement of plots on the screen, and to write Java code that
+      defines the data to be plotted.
+
+The plot data can be specified in any of three data formats:
+
+    * PlotML is an XML extension for plot data. Its syntax is similar to
+      that of HTML.
+    * An older, simpler syntax for plot data is also provided, although in
+      the long term, that syntax is unlikely to be maintained (it will not
+      necessarily be expanded to include new features). For simple data
+      plots, however, it is adequate. Using it for applets has the advantage
+      of making it possible to reference a slightly smaller jar file
+      containing the code, which makes for more responsive applets.
+    * A binary file format used by the popular pxgraph program, an extension
+      of xgraph, is supported by classes in the compat package. There is
+      also a shell script, called pxgraph, which invokes these classes.
+      Formatting information in pxgraph (and in the compat package) is
+      provided by command-line arguments, rather than being included with
+      the plot data, exactly as in the older program. Applets specify these
+      command-line arguments as an appet parameter.
+
+The main class implementing the plotter component is Plot. It is derived
+from PlotBox, which provides only the axes and decorations of the plot.
+This is implemented in a base class so that it can be reused for different
+kinds of plots. Live (animated) data plots are supported by the PlotLive
+class. This class is abstract; a derived class must be created to generate
+the data to plot (or collect it from some other application). Editable
+plots (where a user can interactively modify the data being plotted) are
+supported by the EditablePlot class.
+
+The above classes define panels that are used by placing them into a user
+interface context such as an applet or the top-level window of an
+application. A number of classes are provided to support common situations,
+but you should keep in mind that these classes are by no means
+comprehensive. Many interesting uses of the plot package involve writing
+Java code to create customized user interfaces that include one or more
+plots. The most commonly used built-in classes are those in the plotml
+package, which can read PlotML files and the older textual syntax. These
+classes are include:
+
+    * PlotMLApplet: A simple applet that can read PlotML files off the web
+      and render them.
+    * EditablePlotMLApplet: A version that allows editing of any data set in
+      the plot.
+    * PlotMLFrame: A top-level window containing a plot defined by a PlotML
+      file.
+    * PlotMLApplication: An application that can be invoked from the command
+      line and reads PlotML files.
+    * EditablePlotMLApplication: An extension that allows editing of any
+      data set in the plot.
+
+The last of these is the class invoked by the ptplot command-line script.
+It can open plot files, edit them, print them, and save them. There are
+simpler version of some of these in the plot package that cannot read
+PlotML files, but can read an older, simpler syntax. The only reason to use
+these simpler versions is for the slightly smaller jar file sizes, which
+can improve the responsivity of applets.
+
+TwoPlotExample is a very simple sample Ptplot application that uses only
+core classes in the plot package, and exercises complete control over the
+layout of the page.
+
+Backward compatibility with the C pxgraph program is provided in the compat
+package by the PxgraphApplet and PxgraphApplication classes in the compat
+package.
+
+This code owes a heavy debt to David Harrison, the original author of
+xgraph, which runs under the X window system on Unix platforms. An
+extension to xgraph called pxgraph, written by Joe Buck, reads binary files
+as well as ASCII. For compatibility with these programs, we have provided a
+Bourne Shell script called pxgraph that is a drop-in replacement for either
+xgraph or pxgraph. Unlike the original program, however, the Java
+implementation does not depend on the X window system. We have provided a
+DOS batch file called pxgraph.bat that brings pxgraph capability to Windows
+platforms.
+
+Ptplot5.1 has many new feature over the last standalone release
+(Ptplot3.1).  The key new features:
+  * Ptplot applets now require Swing, which basically requires the JDK1.2
+    plugin.
+
+  * Various classes were modified to make them thread safe.
+
+  * X persistence is now supported.
+
+  There are many other changes as well.
