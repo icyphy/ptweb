@@ -2,7 +2,6 @@
 
 # .sum files that are used to create the .html files
 SUM_SOURCES = ptolemyII.sum \
-	  cont_and_disc.sum \
 	  copernicus02.sum \
 	  e_Ptolemy.sum \
 	  ndest.sum \
