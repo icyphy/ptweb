@@ -2,11 +2,10 @@
 
 # .sum files that are used to create the .html files
 SUM_SOURCES =  \
+	ptolemyII.sum \
 	copernicus03.sum \
-	e_Ptolemy.sum \
 	hyzheng03.sum \
 	ndest.sum \
-	ptolemyII.sum \
 	starcharts.sum \
 	vergil03.sum 
 
