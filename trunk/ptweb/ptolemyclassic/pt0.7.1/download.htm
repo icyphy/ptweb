@@ -1,0 +1,348 @@
+<!-- @(#)download.html	1.15 08/24/98 -->
+<html>
+<head>
+<title>Download Ptolemy 0.7.1</title>
+</head>
+<body bgcolor="#faf0e6">
+<h1>Download Ptolemy 0.7.1</h1>
+
+<P>This file duplicates some of the material found in the files below,
+but the page does provide links to the ptolemy0.7.1 tar files.
+
+<HR>
+<H2>Places to go</H2>
+<menu>
+	<li> <a href="index.html">Main Ptolemy 0.7.1 Page</a>
+	<li> <a href="features.html">Ptolemy 0.7.1 Features</a>
+	<li> <a href="release.html">Ptolemy 0.7.1 Release Notes</a>
+	<li><A HREF="../papers/almagest/index.html">The Almagest</A>: the three
+	volumes of Ptolemy documentation, including
+	<A HREF="../papers/almagest/appendixA.html">Appendix A of
+	the Ptolemy User's Manual</A>, which includes Ptolemy 0.7
+	Installation instructions in pdf, PostScript, html and ASCII
+	<LI> <A HREF="ptolemy0.7.1/html/">Late breaking ptolemy0.7.1 Bugs and other notes</A>
+	<li> <a href="../index.html">Top-Level Ptolemy Page</a>
+</menu>
+
+<HR>
+<H2>Quick installation instructions</H2> 
+	
+	Here are the instructions for downloading ptolemy0.7.1  If you
+	are already familiar with Ptolemy, you might be able to get by
+	with these quick instructions.  If you are new to Ptolemy, you
+	may want to look over the <A
+	HREF="#DetailedInstructions">Detailed Instructions</A> below.
+	
+	<MENU>
+
+	<LI> If you are running under Solaris2.5.1 or HPUX10.20, you
+	can <A HREF="#PrebuiltBinaries">download prebuilt binaries
+	built by the Ptolemy group</A>.
+	
+	<LI> Eventually, we will have 
+	<A HREF="#PrebuiltContribBinaries">contributed
+	binaries</A> for certain other platforms, including HPUX9,
+	Solaris2.4 and DEC Alpha. 
+	
+	<LI> If we don't have prebuilt binaries available, you will
+	have to <A HREF="#ScratchSources">download scratch sources
+	</A> build from scratch.
+
+	<li> Note that in Ptolemy 0.7.1, the Java version of
+	<CODE>pxgraph</CODE> is the default.  If you don't
+	have Java installed, see the
+	<a href="release.html#pxgraph">Pxgraph Release Notes</a>
+	 <br> To use the Java <CODE>pxgraph</CODE>, either
+	set <CODE>JAVAHOME</CODE> to the location of your
+	JDK, or be sure that <CODE>javac</CODE> is in your path.
+	See the
+	<a href="release.html#pxgraph">Pxgraph Release Notes</a>
+	for more information
+	</MENU>
+
+<H3>Common download configurations</H3>
+	
+The Ptolemy distribution consists of several different GNU zipped tar
+files that can be mixed or matched.  Below are several common sets of files.
+	
+ <P>For a description of what is in the tar files, and what you need
+to run Ptolemy, see the <A HREF="#tar file description">description of
+the ptolemy0.7.1 tar files</A> below.
+
+<H4> <A NAME="PrebuiltBinaries">Download Prebuilt Binaries built by the Ptolemy group</A></H4>
+	
+Note that you must down load the <CODE>src</CODE> tar file to run
+prebuilt binaries.  The <CODE>src</CODE> tar file contains files that
+are used at runtime.
+
+<MENU>
+<LI> <A NAME="Solaris2.5.1">Solaris2.5.1</A> (Sparc)
+	 binary distribution, with gcc (135 Mb uncompressed and untar'd):
+	<A HREF="ptolemy0.7.1/pt0.7.1p1.src.tar.gz"><CODE>src</CODE></A> (15.6 Mb) -
+
+	<A HREF="ptolemy0.7.1/pt0.7.1p1.sol2.5.tar.gz"><CODE>sol2.5 Ptolemy binaries</CODE></A> (25.3 Mb) -
+
+	<A HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.sol2.5.tar.gz"><CODE>sol2.5 egcs-1.0.2 binaries</CODE></A> (6.3 Mb)
+
+<LI> <A NAME="HPUX10.20">HPUX10.20</A> binary distribution, with gcc:
+	<A HREF="ptolemy0.7.1/pt0.7.1p1.src.tar.gz"><CODE>src</CODE></A> (15.6 Mb) -
+
+	<A HREF="ptolemy0.7.1/pt0.7.1p1.hppa.tar.gz"><CODE>hppa Ptolemy binaries </CODE></A> (33.9 Mb compressed) -
+
+	<A HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.hppa.tar.gz"><CODE>hppa egcs-1.0.2 binaries</CODE></A> (8.1 Mb compressed)
+
+ <br> To use the HPUX10.20 binaries, you must have X11R6 installed.
+See <A HREF="ptolemy0.7.1/README.hpux"><CODE>README.hpux</CODE></A> for
+details. A tar file of X11R6 is available at <A
+HREF="ptolemy0.7.1/contrib/hpux/XR6built-6.11-sd-9.03.tar.gz"><CODE>XR6built-6.11-sd-9.03.tar.gz</CODE></A>.
+
+
+</MENU>
+
+
+<H4><A NAME="PrebuiltContribBinaries">Download Prebuilt Binaries
+	contributed by others</A></H4>
+
+The Ptolemy group provides binaries for Solaris2.5.1, and
+HPUX10.20.  Below are downloads for binaries that were contributed by
+others, or built by the Ptolemy group, but not tested thoroughly.
+Note that you must download the <CODE>src</CODE> tar file to use
+prebuilt binaries.
+
+ <P>In alphabetical order by operating system
+<MENU>
+
+
+<LI> DEC Alpha Digital Unix 4.0 from 
+<A HREF="mailto:cxh@eecs.berkeley.edu">Christopher Hylands</A>.
+	 <br>
+	Local Digital Unix 4.0 Distribution:
+	<A HREF="ptolemy0.7.1/contrib/alpha4/README_DECAlpha"><CODE>README_DECAlpha</CODE></A> -
+	<A HREF="ptolemy0.7.1/contrib/alpha4/pt0.7.1p1.alpha4.tar.gz">alpha4 Ptolemy binaries</A> (42.3Mb) -
+	<A HREF="ptolemy0.7.1/contrib/alpha4/pt0.7.1.gnu.alpha4.tar.gz">alpha4 Gnu binaries</A> (6.9Mb)
+	( You will also need the <A HREF="ptolemy0.7.1/pt0.7.1p1.src.tar.gz"><CODE>src</CODE></A> (15.6 Mb) tar file that is shared among all platforms)
+
+
+<li> Red Hat Linux 5.1 from
+	<a href="mailto:reimer@e-technik.tu-ilmenau.de">Wolfgang Reimer</a>
+	<menu>
+	<li> <a href="ftp://ftp.tu-ilmenau.de/pub/unix/ptolemy/ptolemy0.7.1.linux"><CODE>Remote ftp site in Germany</CODE></a>
+
+<li> <A HREF="ptolemy0.7.1/contrib/linux/pt0.7.1.rh5.1.linux">Local copy (except for debugging binaries)
+	</menu>
+
+<li> Windows NT from
+<A HREF="mailto:cxh@eecs.berkeley.edu">Christopher Hylands</A>.
+  <br> We don't provide prebuilt binaries yet, but you can
+follow the instructions in
+<a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html"><CODE>$PTOLEMY/doc/html/nt</CODE></a>
+
+</MENU>
+
+
+<H4><A NAME="ScratchSources">Sources to build from scratch</A></H4>
+
+<MENU>
+
+<LI> Sources to build everything from scratch on non-HP platforms:
+
+	<A HREF="ptolemy0.7.1/pt0.7.1p1.src.tar.gz"><CODE>src</CODE></A> (15.6 Mb) -
+	<A HREF="ptolemy0.7.1/pt0.7.1.other.src.tar.gz"><CODE>other.src</CODE></A> (7.5 Mb) -	
+	<A HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.tar.gz"><CODE>gnu</CODE></A> (9.4 Mb) -
+	
+<LI> Sources to build everything from scratch on an HPUX10.20 platform:
+	<A HREF="ptolemy0.7.1/pt0.7.1p1.src.tar.gz"><CODE>src</CODE></A> (15.6 Mb) -
+	<A HREF="ptolemy0.7.1/pt0.7.1.other.src.tar.gz"><CODE>other.src</CODE></A> (7.5 Mb) -	
+	<A HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.hppa.src.tar.gz"><CODE>gnu.hppa.src</CODE></A> (14.5 Mb)
+
+</MENU>
+	
+<H3>Building From Scratch</H3>
+	
+<OL>
+	
+<LI>	To rebuild from scratch, grab the following tar
+	files:
+	
+	<A HREF="ptolemy0.7.1/pt0.7.1p1.src.tar.gz"><CODE>src</CODE></A> (15.6 Mb), 
+	
+	<A HREF="ptolemy0.7.1/pt0.7.1.other.src.tar.gz"><CODE>other.src</CODE></A> (7.5 Mb),
+
+<LI> If you don't have egcs-1.0.2 and GNU make, and
+	are on anything other than the HP, grab <A
+	HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.tar.gz"><CODE>gnu</CODE></A> (9.4Mb)
+	(This file includes <CODE>bison-1.24</CODE> and
+	<CODE>flex-2.5.2</CODE>).  If you are on the HP, then you will
+	want to grab <A
+	HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.hppa.src.tar.gz"><CODE>gnu.hppa.src</CODE></A> (14.5 Mb),
+	which includes everything in the <CODE>gnu</CODE> file in
+	addition to <CODE>binutils-2.6</CODE>.
+	
+
+<LI> Gunzip and untar the files.  If you are on anything but a HP,
+	you will need around 400 Mb to build GNU, tcltk, octtools and
+	ptolemy.  If you are short on space, see the <A
+	HREF="#DiskSpace">Disk Space</A> section below.
+
+<LI> Set your <CODE>PTOLEMY</CODE> variable, your <CODE>PTARCH</CODE>
+	variable, and your path.  You could source <CODE>ptolemy/.cshrc</CODE>
+	or place the following in your <CODE>.cshrc</CODE>
+	<PRE>	
+	setenv PTOLEMY /your/ptolemy
+	setenv PTARCH `/your/ptolemy/bin/ptarch`
+	set path = ($PTOLEMY/bin $PTOLEMY/bin.$PTARCH $path)
+	</PRE>
+	Where <CODE>/your/ptolemy</CODE> is the location of the Ptolemy tree.
+	
+	 <P>You need to have <CODE>$PTOLEMY/bin</CODE> so you can find
+	<CODE>genStarTable</CODE> which is used to create files like
+	<CODE>sdf/stars/sdfstars.c</CODE>
+	
+	 <P>If you will be building the GNU tools under Solaris, you
+	need to have <CODE>/usr/bin</CODE> in your path before
+	<CODE>/usr/ucb</CODE>, see <CODE>$PTOLEMY/src/gnu/README</CODE>
+
+	 <p>If you are using the Java version of <CODE>pxgraph</CODE>,
+	either set <CODE>JAVAHOME</CODE> to the location of your
+	JDK, or be sure that <CODE>javac</CODE> is in your path.
+	See the
+	<a href="release.html#pxgraph">Pxgraph Release Notes</a>
+	for more information
+
+<LI> If you have the GNU tools installed, then do:
+	<PRE>
+	cd $PTOLEMY; make everything &gt;&amp; log.out &amp;
+	</PRE>
+	Note that GNU make should be in your path as <CODE>make</CODE>.
+	
+<LI> If you do not have the GNU tools installed, then you should
+	read <CODE>$PTOLEMY/src/gnu/README</CODE> and then do:
+	<PRE>
+	cd $PTOLEMY; make bootstrap &gt;&amp; log.out &amp;
+	</PRE>
+
+<LI> If you are planning on building tar files for shipping, you might
+	want to check out
+	<A HREF="ptolemy0.7.1/contrib/pt0.7.1.builddist.tar.gz"><CODE>pt0.7.1.builddist.tar.gz</CODE></A>
+	which contains a makefile and Gnu tar exclusion files that we use
+	here at UC Berkeley to create distributions.  These files are
+	very rough, but might be of use.
+</OL>	
+
+<HR>
+<H2><A NAME="DetailedInstructions">Detailed instructions</A></H2>
+	Below is amplification of the quick and dirty instructions above.
+	 <P>For the complete installation documentation, see
+	<A HREF="../papers/almagest/appendixA.html">Appendix A of
+	the Ptolemy User's Manual</A>.
+
+	 <P>The ptolemy0.7.1 release includes the Appendix A in
+	html format at <CODE>$PTOLEMY/doc/html</CODE>.
+
+	<P>You can obtain the tar files either from this web page, or
+	by using anonymous ftp to
+	<CODE>ptolemy.eecs.berkeley.edu</CODE>.  The files are in
+	<CODE>pub/ptolemy/ptolemy0.7.1</CODE>.
+
+
+ <P>Below is a <A NAME="tar file description">description</A> of the
+ptolemy0.7.1 source tar files.
+
+<P>Ptolemy requires the X window system.  Ptolemy relies on a subset of
+the GNU tools, such as GNU make and gcc/g++.  The binaries for the
+GNU tools on some architectures are supplied as a separate compressed
+tar file. It is possible to build Ptolemy with non-GNU compilers.
+
+<P>Ptolemy includes the Tycho system.  Tycho is a graphical front end
+that uses Itcl.
+
+<p>Ptolemy 0.7.1 uses a Java version of <CODE>pxgraph</CODE> to plot
+data.  If you don't have Java installed, you can build an X11
+version, see the
+<a href="release.html#pxgraph">Pxgraph Release Notes</a> for more information 
+
+<MENU>
+
+<LI> The 0.7.1 <A HREF="ptolemy0.7.1/pt0.7.1p1.src.tar.gz"><CODE>src</CODE></A>
+	file is about 15.6 Mb gzipped. 
+
+<LI> The 0.7.1 <A HREF="ptolemy0.7.1/pt0.7.1.other.src.tar.gz"><CODE>other.src</CODE></A>
+	file is about 7.5 Mb gzipped.
+
+	The <CODE>other.src</CODE> file includes octtools, Itcl2.2 and xv
+	sources.  Itcl2.2 includes Tcl7.6/Tk4.2.  ptolemy0.7.1 requires Itcl2.2
+	for Tycho, which is used to view files, manage dialog boxes and
+	other tasks.
+
+<LI> The 0.7.1 <A HREF="ptolemy0.7.1/pt0.7.1.oct.src.tar.gz"><CODE>oct.src</CODE></A>
+	file is about 2.1 Mb gzipped.
+
+	The <CODE>oct.src</CODE> file includes only the octtools sources.
+	This file has not been tested extensively.  If you already have Itcl2.2
+	and xv, then you can download <CODE>oct.src</CODE> instead of
+	 <CODE>other.src</CODE> 
+
+<LI> The 0.7.1 <A	HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.tar.gz"><CODE>gnu</CODE></A>
+	sources is about 9.4 Mb gzipped.
+
+<br>The 0.7.1 gnu tar file includes egcs-1.0.2.  If you
+	can build the egcs compiler with shared libraries, then
+	incremental linking may work better for you.
+	<CODE>sol2.5</CODE> and <CODE>hppa</CODE> are the two
+	architectures that have been built with shared libraries in
+	house.
+
+	 <br>If you download the 0.7.1 gnu sources, then you can install the
+	GNU tools by typing:
+<PRE>
+cd $PTOLEMY
+make install_gnu
+</PRE>
+
+
+
+<LI> The 0.7.1 
+<A HREF="ptolemy0.7.1/gnu/pt0.7.1.gnu.hppa.src.tar.gz"><CODE>gnu.hppa.src</CODE></A>
+	sources is about 14.5 Mb gzipped.  <CODE>gnu.hppa.src</CODE>
+	differs from <CODE>gnu</CODE> in that
+	<CODE>gnu.hppa.src</CODE> contains GNU binutils so that we
+	build <CODE>gas</CODE> for use on the hppa.
+
+</MENU>
+	
+
+<H3><A NAME="DiskSpace">Disk Space</A></H3>
+
+	Under Solaris2.5.1, untarring the <CODE>src</CODE>,
+	<CODE>sol2.5</CODE> and <CODE>gnu.sol2.5</CODE> tar files took up about
+	139 Mb of space.  Of that 139 Mb, 24.4 Mb were consumed by the
+	GNU binaries, and 23.4 Mb were taken up by itcl2.0 and tcltk.
+
+	<P>In a test build of the 0.7.1 release on a
+	Solaris2.5.1 machine building from <CODE>src</CODE>,
+	<CODE>other.src</CODE> and <CODE>gnu</CODE>, the total amount
+	of disk space used was 392 Mb.  If you build in stages and
+	delete <CODE>obj.$PTARCH/gnu</CODE> (81.6 Mb),
+	<CODE>obj.$PTARCH/tcltk</CODE> (25.6 Mb) and
+	<CODE>obj.$PTARCH/octtools</CODE> (11.3 Mb) as you go, then you
+	should be able to get by with less space (approx 273 Mb).  If
+	need be, you can remove <CODE>src/gnu</CODE> (56 Mb),
+	<CODE>src/tcltk</CODE> (11 Mb) and
+	<CODE>src/octtools</CODE> (9.5 Mb) after you have installed each
+	of them.
+
+	To free up space, you may want to remove the following:
+	<MENU>
+	<LI> <CODE>$PTOLEMY/src/domains/sdf/demo/ppimage</CODE> (~1020
+	Kb). This file is used by some of the image processing demos.
+	</MENU>
+        
+<p>
+<hr>
+<address>
+Last updated 08/24/98,
+Send comments to <a href="mailto:www@ptolemy.eecs.berkeley.edu">
+www@ptolemy.eecs.berkeley.edu</a>.
+</address>
+</body>
+</html>
