@@ -1,4 +1,4 @@
-<!-- MoML DTD Version 1.1, UC Berkeley -->
+<!-- MoML DTD Version 1.2, UC Berkeley -->
 <!-- $Id$ -->
 <!-- If you update this file, please also update:  -->
 <!--    ptII/ptolemy/moml/MoML_1.dtd, -->
@@ -34,6 +34,7 @@
 <!ELEMENT deleteRelation EMPTY>
 <!ATTLIST deleteRelation name CDATA #REQUIRED>
 
+<!-- NOTE: deprecated.  Use property instead. -->
 <!ELEMENT director (configure | property)*>
 <!ATTLIST director name CDATA "director"
                    class CDATA #REQUIRED>
