@@ -13,7 +13,7 @@ SUM_SOURCES =  \
 	softwalls.sum \
         ePtolemy05.sum \
         sensorNetworks.sum \
-	structuredIA.sum \
+	compositionalDataflow.sum \
         DDF_BDF.sum \
 	simTimedMoCs.sum
 
