@@ -1,0 +1,353 @@
+
+8:00-8:30 - Registration
+
+8:30-9:50 - First session
+
+     * Ptolemy Project Status and Overview 
+       Edward A. Lee
+     * Kepler Project Status and Overview
+       Bertram Ludaescher, UC Davis
+     * TBA-1
+     * TBA-2
+       
+9:50-10:10 - Break
+
+10:10-11:10 - Second session
+
+     * TBA-3
+     * TBA-4
+     * TBA-5
+       
+11:10-12:00 - Poster Briefings
+
+     * Poster presenters are encouraged to give a 3 minute presentation
+       about their poster.
+       
+12:00-1:00 - Lunch
+
+1:00-3:00 - Poster session
+
+3:00-4:00 - Afternoon session
+
+     * TBA-6
+     * TBA-7
+     * TBA-8
+     * TBA-9
+
+4:20-5:25 - Feature presenatation and Summary
+
+     * David Bacon (45 minutes)
+     * Edward A. Lee Future Directions (20 minutes)
+       
+       
+5:20-7:00 - Reception
+
+
+Possible Presentations
+----------------------
+
+We have 8 slots, I've ordered the talks roughly by my preference.
+
+The idea was to mix the Kepler and Ptolemy talks.
+We could either group the industry talks or spread them out.
+
+1) David Bacon 
+   Need title
+   Put last, right before Edward's Future directions talk.
+   Also, should we give David more time?  Edward says 45 minutes?n
+
+2) Ilkay Altintas <altintas@sdsc.edu> (Joint work with Matt) 
+   "Distributed Computing in Kepler"
+
+3) Haiyang Zheng
+   "Operational Semantics for Hybrid Systems"
+
+4) Xiaojun Liu
+   "DE Semantics" Need title?
+
+5) Shawn Bowers (Rowland Johnson)
+   "The Semantic Type System"
+
+6) Chad Berkley, possibly with Matt
+  "Workflow Encapsulation: The KSW File"
+
+  Note that this could probably be done in conjunction with matt or
+  someone else who would be presenting on the kepler object management
+  system.
+
+7) Daniel Lázaro Cuadrado
+   "The Distributed-SDF Domain"
+
+The purpose of the Distributed-SDF domain for Ptolemy II is to allow
+distributed simulation of SDF models. It builds on top of the existing
+SDF domain by extending it. From the user's point of view, using the
+Distributed-SDF director is sufficient to run the distributed
+version. It provides options (in the form of parameters in the
+configuration dialog) to generate sequential or parallel schedules and
+to execute the simulation in a local or distributed manner.
+
+The director relies on the Distributed-SDF scheduler (that extends the
+existing SDF scheduler) to generate parallel schedules. The parallel
+schedule is computed by performing a topological sort of the acyclic
+graph that can be derived from the model's topology. For the
+distributed execution of the model, a distributed platform is
+required. For this purpose, server processes must be running on the
+different machines that will constitute the distributed platform. In
+order to make this distributed platform dynamic and transparent for
+the user, we use JINI as a peer discovery protocol. The server
+processes register with a lookup service and they are discovered by
+the Distributed-SDF director whenever a simulation is to be
+performed. Once the director has gathered a number of servers
+sufficient to run the simulation, it deploys them on the different
+servers. MoML descriptions of the pre-initialized actors are sent over
+the network to the different servers and loaded dynamically from local
+storage. After the actors are loaded remotely, virtual connections
+(over the network) are made among them in a way that mimics the ones
+in the original model, making the communication between actors
+decentralized. One of the architectural issues is how to identify the
+receivers in a distributed setup. A receiver that resides locally in a
+model can be distinctly identified but not when is distributed. To
+solve this, the receiver class has been extended with a tag. Once the
+actors are distributed and virtually connected, the distributed
+platform is ready to start the simulation. The Distributed-SDF
+director orchestrates the execution of the scheduler in a centralized
+manner. In order to allow parallel executions of actors, it creates
+threads locally to control every distributed actor. This allows to
+simultaneously firing those actors that are ready and have no
+interdependencies. Since several actors can be executing at the same
+time, and can have different processing times, after every schedule
+level, a synchronization step is introduced. When an actor is executed
+remotely, it is embedded in a model with a director and its inputs and
+outputs are connected to modified relations that make them believe
+they are embedded in the original model. Those relations are in charge
+of receiving the tokens and placing them at the right receiver. The
+same goes for the output ports. Tokens are sent over the net to the
+distributed processes that are expecting to receive them.
+The distributed-SDF domain provides certain advantages derived from
+its distributed nature. First of all, known memory bounds of the JVM
+can be overcome. Second, it yields smaller simulation times, mainly
+for models with high degree of parallelism and granularity.
+
+
+8) Edward Lee "Actor-Oriented Classes"
+
+9) Horst Salzwedel, MLDesigner 
+   "Large scale networked system simulation using MLDesigner"
+  
+  >If you have another slot I can present also results on
+  >"Modeling and simulation of in-flight aeronautical services"
+
+10) Timothy M McPhillips
+
+  "The Beagle Extension to Ptolemy II: Pipelined Scientific Workflows
+  for Inferring Evolutionary Relationships"
+
+  > I would like to present either a talk or a poster.  I will need
+  > power and a table for a monitor if I present a poster, but I can
+  > bring my own LCD display.
+
+  Large-scale scientific research projects commonly span widely
+  separated computing and experimental resources. The challenge of the
+  future will be to provide small research groups with access to
+  virtual laboratories composed of network-accessible, high-throughput
+  research tools. Unfortunately, even current projects are limited by
+  the lack of comprehensive computing infrastructure for supporting
+  data-intensive, highthroughput research. The Natural Diversity
+  Discovery Project (NDDP) is developing a software framework to
+  address key aspects of this problem. NDDP software builds on the
+  Ptolemy II heterogeneous modeling and design system, adding
+  capabilities for managing collections of data in pipelined
+  scientific workflows. Paired tokens delimit nested collections of
+  associated data. These collections provide support for customizing
+  actor behavior, handling exceptions, controlling data flow, storing
+  metadata, and recording data provenance. The NDDP is applying
+  pipelined scientific workflows to the problem of inferring
+  phylogenetic trees.  Objectives include developing a collaboratory
+  for evolutionary biologists and providing a web-based discovery
+  environment for the general public.
+
+11) Darryl Koivisto <Darryl.Koivisto@mirabilisdesign.com>
+  "Turing Machine based Script Language running at several
+  Million Instructions per Second."
+
+12) Jorn Janneck
+   Need title
+  
+13) Tim H. Wong, UC Davis
+   "Develop Data Grid Workflows using Storage Resource Broker and Kepler"
+
+
+14) Dan Higgins
+    "Integration of R in Kepler"
+
+    This would review our efforts to incorporate R into Kepler,
+    including CommandLine hacks/demos, use of RServer, data type
+    conversion issues, graphics generation, etc.
+
+15) Dan Higgins
+    "Adding GIS into Kepler" (Check on title)
+
+    Experience adding various local GIS functions into Kepler as part
+    of the SEEK/BEAM Environmental Niche workflow. This would include
+    experience adding custom C code (GARP, GRASS subroutines) and
+    native Java actors for GIS grids; Also, a discussion of the use of
+    the ImageJ image processing package from NIH into Kepler for use
+    in displaying results and adding numerous image processing
+    features using the code in the ImageJ package.
+
+16) Duncan Temple Lang (R guru and now
+    Assoc. Prof. for Statistics) might be an interesting person to invite
+    from a scientific workflows perspective (panel or invited speaker).
+
+
+17) Mohamed A. Salem, Mirabilis
+
+  "Ptolemy-Oriented Structural, Reconfigurable and Heterogeneous Hardware
+  Design, Verification and Synthesis"
+
+
+This Paper investigates the suitability of "Ptolemy II" platform for
+current complex hardware systems' design, modeling, simulation,
+verification, synthesis and implementation. 
+
+Systems' complexity, lower process nodes, low power, high performance,
+high cost, short time-to-market, standard-based protocols and
+successful completion of ASICs constitute a set of current hardware
+designs' challenges. The ESL (Electronic System Level) transition to
+higher abstraction, system verification techniques, reconfigurable
+platforms, seamless hardware/software architectures and structured
+ASICs comprise some innovative methodical strategies to cross hurdles.
+ 
+"Ptolemy II" platform introduces comprehensive set of features;
+concurrency, heterogeneity, hierarchical structure, portability,
+distributed modeling, component-based framework, code generation,
+openness and others; that supports implementation of the innovative
+hardware design solutions. 
+
+This paper studies advantages of "Ptolemy II" features adoption from
+the innovative hardware design process perspective, presents past and
+current "Ptolemy II" hardware design efforts' status and proposes
+several future research work topics addressing "Ptolemy II" and
+hardware design complete unified platform.
+
+The paper concludes that "Ptolemy II" current platform has low
+entry-barrier for hardware designers; taking into account the new
+hardware design challenges; and calls for potential contribution from
+the hardware design community to the proposed research topics
+addressing an optimized "Ptolemy II" platform for complex hardware
+chip designs.
+
+
+18) Mokhoo Mbobi <Mokhoo.Mbobi@supelec.fr>
+
+  Integration of a Flat Heterogeneous Domain in Ptolemy II
+
+  Heterogeneous systems become very varied, obeying very different
+  functioning laws by mixing different technical domains which have
+  different methods of modeling and design from/to each other and do not
+  consider their components and their interrelationships in the same
+  way. In each domain the interactions between components are controlled
+  and governed by a specific Model of Computation (MoC). In order to mix
+  these different technical domains, some heterogeneous modeling tools
+  generally focus on a fixed set of MoCs. Since they use few MoCs that
+  are known beforehand, they can easily define the union of these MoCs,
+  and the total knowledge of the interactions between these MoCs allows
+  a complete modeling.
+
+  See
+  http://ptolemy.eecs.berkeley.edu/~cxh/tmp2/pdf/Mbobi.pdf
+
+
+* Ivan Jeukins can't make it
+
+
+Posters
+-------
+
+* Stephen Neuendorffer
+  "Hierarchical Reconfiguration of Dataflow Models"
+  Steve is willing to present
+
+* Elaine Cheong
+  "Viptos: A Graphical Development and Simulation Environment 
+  for TinyOS-based Wireless Sensor Networks"
+
+* Alex G. Olson and Brian L. Evans
+  Deadlock Detection for Distributed Process Networks
+
+
+  Embedded Signal Processing Laboratory,
+  Wireless Networking and Communications Group,
+  The University of Texas at Austin, Austin, TX 78712 USA
+  aolson@ece.utexas.edu - bevans@ece.utexas.edu
+
+  Abstract
+
+  The Process Network (PN) model, which consists of concurrent processes
+  communicating over first-in first out unidirectional queues, is useful for
+  modeling and exploiting functional parallelism in streaming data
+  applications. The PN model maps easily onto multi-processor and/or
+  multi-threaded targets. Since the PN model is Turing complete, memory
+  requirements cannot be predicted statically. In general, any bounded
+  memory scheduling algorithm for this model requires run-time deadlock
+  detection. The few PN implementations that perform deadlock detection
+  detect only global deadlocks. Not all local deadlocks, however, will cause
+  a PN system to reach global deadlock. In this paper, we present the first
+  local deadlock detection algorithm for PN models. The proposed algorithm
+  is based on the Mitchell and Merritt algorithm and is suitable for both
+  parallel and distributed PN implementations.
+
+* GEON workflows (Efrat et al)
+* ROADNet (real-time sensor networks, Tobin Fricke et al)
+* GeoStreams (UC Davis project, real-time satellite workflow)
+* Kepler/R coupling (SEEK, Dan Higgins)
+* Kepler/SRB coupling for data-intensive workflows (UCSD/UCD)
+* some more SEEK workflows ... probably..
+* Yang Zhao "Building Reliable Distributed Models"
+* Thomas Feng "Backtracking in Ptolemy Models"
+* Efrat Frank "A Scientific Workflow Approach to Managing Geosciences Data"
+
+  Geological information retrieval and processing is essential for 
+  solving geosciences problems. These problems often require complex data 
+  access and computational analysis methods and components that can be 
+  composed in a meaningful order into a geoscience workflow to assist 
+  scientific discovery.
+
+  The data access methods often involve metadata interpreter, database 
+  access to both relational and geo-spatial (e.g. shapefiles) databases, 
+  efficient storage functionality, such as SRB, and other file transfer 
+  methods. The processing components consist of generic components such as 
+  web service access and browser functionality, and domain specific 
+  components such as classification algorithms, arcIMS services and 
+  interpolation algorithms.  These components can be represented as actors.
+
+  In this poster, we present several geosciences workflows that 
+  utilize the above-mentioned functionality to automate scientific analyses 
+  that lead to geoscience discoveries.
+
+* Ayla Khan
+  "SCIRun and Kepler Dataflow Integration"
+
+  Building useful scientific workflows often requires disparate
+  software to interoperate in the workflow pipeline. The C++-based
+  SCIRun problem solving environment provides a multi-threaded
+  GUI-based platform for building dataflow networks. SCIRun networks
+  are built using integrated scientific computation algorithms, data
+  processing, simulation and visualization tools. The Kepler project,
+  based on Ptolemy II software, provides developers with tools for
+  building complex, distributed and data-intensive scientific
+  workflows using the Vergil interface. The Scientific Process
+  Automation (SPA) project uses Kepler to build loosely coupled
+  workflows using web services and workflow automation tools.
+
+  Our goal is to incorporate SCIRun in SPA workflows. To this end, we
+  used Java Native Interface (JNI) functions to create an interface
+  encapsulated in a Ptolemy-based actor to instantiate SCIRun in the
+  same address space as the Java-based Kepler process. As a prototype
+  of this integration, a triangle mesh dataset was generated in Vergil
+  and carried to SCIRun through this interface, where a SCIRun network
+  converted the data into a SCRun mesh and used SCIRun models to
+  visualize the results.  Using similar methods, SCIRun can be
+  inserted into SPA workflows as an automated analysis tool controlled
+  by a Kepler-based actor.
+
