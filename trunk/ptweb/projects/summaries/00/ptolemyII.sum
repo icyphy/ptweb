@@ -26,7 +26,8 @@ supports clustered hierarchical graphs, which are collections of
 functionality and can communicate via the relations.  Its
 <I>domains</I> extend the actor package by imposing <I>models of
 computation</I> on the interaction between entities.  Examples of
-models of computation include discrete-event systems, dataflow,
+models of computation include continuous-time systems, 
+discrete-event systems, dataflow,
 process networks, synchronous/reactive systems, and communicating
 sequential processes.
 
