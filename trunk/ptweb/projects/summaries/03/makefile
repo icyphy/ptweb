@@ -5,7 +5,7 @@ SUM_SOURCES =  \
 	ptolemyII.sum \
 	copernicus03.sum \
 	hyzheng03.sum \
-	ndest.sum \
+	tinygals.sum \
 	starcharts.sum \
 	vergil03.sum \
 	ptplot03.sum
