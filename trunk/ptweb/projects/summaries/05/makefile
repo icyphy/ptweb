@@ -6,13 +6,13 @@ SUM_SOURCES =  \
 	copernicus05.sum \
 	distributedComponentManagement.sum \
 	compositionalityAnalysis.sum \
+        fsmExtension.sum \
         softDevel05.sum \
 	tinygals.sum \
 	vergil05.sum \
 	ptplot05.sum \
 	softwalls.sum \
         sensorNetworks.sum \
-	wireless.sum \
 	structuredIA.sum \
         DDF_BDF.sum \
 	simTimedMoCs.sum
