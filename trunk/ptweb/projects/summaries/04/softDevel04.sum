@@ -19,12 +19,24 @@ ABSTRACT
 The goal is to train electrical engineers in the art of 
 software development through hands on activities such
 as design and code reviews, Extreme Programming, test suites
-and nightly builds.
+and nightly builds[1][2].
 
-<p> 
-   Christopher Hylands Brooks, 
+<p>Recent results include the release of
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/" target="_top">Ptolemy II</a> and set up of nightly build environments for
+<a href="http://www.gigascale.org/mescal" target="_top">Mescal</a>
+and
+<a href="http://www.gigascale.org/metropolis" target="_top">Metropolis</a>.
+
+
+
+<p> [1] J. Reekie, S. Neuendorffer, C. Hylands and E. A. Lee "Software
+Practice in the Ptolemy Project," Technical Report Series,
+GSRC-TR-1999-01, Gigascale Semiconductor Research Center, University
+of California, Berkeley, CA 94720, April 1999.
+<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/sftwareprac/" target="_top">http://ptolemy.eecs.berkeley.edu/publications/papers/99/sftwareprac/</a>
+
+<p> [2]  Christopher Hylands Brooks, 
 "Software Development in the Academic Environment,"
-(<a href="http://chess.eecs.berkeley.edu/publications/talks/03/hylandsbrooks9-30.pdf">PDF</a>
-<a href="http://chess.eecs.berkeley.edu/publications/talks/03/hylandsbrooks9-30.ppt">PPT</a>), Chess Workshop,  September 30, 2003.
+(<a href="http://chess.eecs.berkeley.edu/publications/talks/03/hylandsbrooks9-30.pdf" target="_top">PDF</a>
+<a href="http://chess.eecs.berkeley.edu/publications/talks/03/hylandsbrooks9-30.ppt" target="_top">PPT</a>), Chess Workshop,  September 30, 2003.
 
- 
