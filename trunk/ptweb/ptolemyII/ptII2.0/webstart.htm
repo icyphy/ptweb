@@ -18,7 +18,7 @@
         function insertLink(url, name) { 
         	if (javawsInstalled) { 
                 	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
-                	document.write("<li> <a href=\"http://java.sun.com/cgi-bin/javawebstart-platform.sh?\" target=_top>Install Web Start from Sun (720KB - 8.6Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
+                	document.write("<li> <a href="\"http://java.sun.com/cgi-bin/javawebstart-platform.sh?\"" target=_top>Install Web Start from Sun (720KB - 8.6Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
   
               } 
         } 
@@ -48,9 +48,10 @@
 Ptolemy II is available in several formats:
 <menu>
 <li> <a href="applet.htm">Applets</a>
+<li> This page covers downloading Ptolemy II via Web Start.
+<li> <a href="windows.htm">Windows Installer</a>
 <li> <a href="download.htm">Source Downloads</a>
 </menu>
-This page covers accessing Ptolemy II via Web Start.
 
   </td>
  </tr>
