@@ -18,7 +18,9 @@
 	# Edit ptII/doc/ptIIfaq.htm
 	cp ptII/doc/ptIIfaq.htm ptweb/ptolemyII/ptIIfaq.htm
 	cd ptweb/ptolemyII
-	cvs commit -m "Updated faq" ptIIfaq.htm
+	cvs commit -m "Updated faq in ptII Tree" ptIIfaq.htm
+       Then update the Public website, see:
+        http://www.gigascale.org/ptolemy/group/public.htm
  -->
 
 <h1>Ptolemy II Frequently Asked Questions</h1>
@@ -288,6 +290,29 @@ expression.  For example, if foo.txt contained
 </pre>
 Then the expression would resolve to an array of two elements, 1.0 and
 2.0.
+
+ <p>
+ptII/ptolemy/data/expr/Constants.java defines PTII and HOME
+as variables like PI and true.  PTII can be used in an expression
+to refer to a file relative to the Ptolemy II installation directory.
+
+ <p><CODE>PTII</CODE> is the value of the ptolemy.ptII.dir Java property,
+which is set when vergil is invoked.
+
+ <p><CODE>HOME</CODE> is the value of the user.dir property.  
+Unsigned applets can read user.dir
+
+ <p>The expression language includes the <CODE>property()</CODE>
+ method that will read Java properties from the local environment.
+
+ <p><CODE>property("ptolemy.ptII.dir")</CODE>
+ is set to the value of $PTII when
+vergil etc. are invoked. 
+
+ <p>For example:
+<pre>
+property("ptolemy.ptII.dir") + "/ptolemy/actor/lib/test/auto/FileWriter1Output.txt"
+</pre>
 
 </dl>
 
