@@ -14,7 +14,7 @@ PHONE
 510-642-6627
 
 TITLE
-CAL: A novel actor language
+CAL: A Novel Actor Language
 
 CHAPTER
 03.cad
@@ -25,15 +25,8 @@ ABSTRACT
 mean of modeling distributed knowledge-based algorithms. Actors has
 since then become widely used.
 
-<P> An Actor is a computational entity that communicates with other
-actors and the environment by passing tokens via its input and output
-ports. Actor may have state and parameters. When an actor is executed,
-it is said to be fired. During a firing, input tokens are consumed,
-output tokens are produced, and the internal state is updates. Actors
-are connected to form models or applications.
-
 <P> CAL is a small domain-specific language for writing down the
-functionality of actors - including specifically their ports, their
+functionality of actors - including specifically their ports, 
 parameters, typing constraints, and firing rules. It is designed to be
 embedded in an environment providing necessary infrastructure, such as
 data types, operations and function libraries. The goal is to provide
