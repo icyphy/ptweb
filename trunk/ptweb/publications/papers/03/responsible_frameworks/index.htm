@@ -1,0 +1,39 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Heterogeneous Concurrent Modeling and Design in Java</title>
+</head>
+<body>
+<center>
+  <h1>Actor-Oriented Control System Design:<br> A Responsible Framework Perspective  
+
+</h1>
+</center>
+<center>
+<p>Jie Liu, Johan Eker, J&ouml;rn W. Janneck,  Xiaojun Liu, and Edward A. Lee
+<p>to appear in <i>IEEE Transactions on Control System Technology</i>, March, 2003</p>
+<p> <a href="responsible_frameworks.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+Complex control systems are heterogeneous, in the sense of discrete computer-based controllers interacting with
+continuous physical plants, regular data sampling interleaving with irregular communication and user interaction,
+and multilayer and multimode control laws. This heterogeneity imposes great challenges for control system design
+in terms of end-to-end control performance modeling and simulation, traceable refinements from algorithms to
+software/hardware implementation, and component reuse. This paper presents an actor-oriented design methodology
+that tackles these issues by separating the data-centric computational components (a.k.a. actors) and the control-
+flow-centric scheduling and activation mechanisms (a.k.a. frameworks). Semantically different frameworks are
+composed hierarchically to manage heterogeneous models and achieve actor and framework reuse. We introduce
+a notion of responsible frameworks to characterize the property that a framework can aggregate individual actors
+execution into a well-defined composite execution such that heterogeneous models can be composed.
+<p>
+This methodology is implemented in the Ptolemy II software environment. We discuss how some of the
+most useful models for control system design are implemented as responsible frameworks. As an example, the
+methodology and the Ptolemy II software environment is applied to the design of a distributed, real-time software
+implementation of a pendulum inversion and stabilization system.
+</body>
+</html>
+
