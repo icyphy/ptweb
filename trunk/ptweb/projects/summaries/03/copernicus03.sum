@@ -37,7 +37,7 @@ models (domain-polymorphism), can be configured with different parameters
 of most optimized implementations.
 
 <li> A model consists of components, their ports, and the connections
- between those ports.  The model of computation assocatied with a model 
+ between those ports.  The model of computation associated with a model 
 determines how connected components communicate and control their execution.
 In some cases the boundaries of components correspond to physical boundaries
 of the implemented system.  For example, there might be one component for
@@ -46,7 +46,7 @@ boundaries of components often have no physical importance in a system.  They
 are specified arbitrarily by the system designer, or because of the
 social structure of group designing the model, or because of the availability
 of reusable components.  Simple code generation strategies blindly preserve the
-structure of the model, which can result in unnecessaryv overhead.
+structure of the model, which can result in unnecessary overhead.
 </ol>
 
 At some level, these problems can be ameliorated using traditional code 

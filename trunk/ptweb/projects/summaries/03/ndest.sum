@@ -20,7 +20,7 @@ CHAPTER
 ABSTRACT 
 
 We consider networked embedded systems, where computers with sensors
-and actuators communicate via CAN bus, ethernet, bluetooth, or other
+and actuators communicate via CAN bus, Ethernet, bluetooth, or other
 networking technology.  These systems can be event-triggered or
 time-triggered.  The network can be reliable (e.g. CAN bus) or ad-hoc
 (e.g. smart dust).  We are exploring two types of systems:
