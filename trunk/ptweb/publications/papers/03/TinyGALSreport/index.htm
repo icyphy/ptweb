@@ -1,0 +1,51 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Design and Implementation of TinyGALS: A Programming Model for Event-Driven Embedded Systems</title>
+</head>
+<body>
+<center>
+  <h1>Design and Implementation of TinyGALS: A Programming Model for Event-Driven Embedded Systems</h1>
+</center>
+<center>
+  <p>Elaine Cheong</p>
+  <p>Memorandum No. UCB/ERL M03/14<br>
+23 May 2003 <br>
+Electronics Research Laboratory <br>
+College of Engineering <br>
+University of California, Berkeley 94720
+</p>
+  <p> <a href="TinyGALSreport.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+<p>TinyGALS is a globally asynchronous, locally synchronous model for
+programming event-driven embedded systems.  At the local level,
+software <i>components</i> communicate with each other synchronously
+via method calls.  Components are composed to form <i>modules</i>.  At
+the global level, modules communicate with each other asynchronously
+via message passing, which separates the flow of control between
+modules.  TinyGUYS is a guarded yet synchronous model designed to
+allow thread-safe sharing of global state between modules without
+explicitly passing messages.  This programming model is structured
+such that code for all intermodule communication, module triggering
+mechanisms, and access to guarded global variables can be
+automatically generated from a high level specification.  We present
+language constructs for this specification, as well as a detailed
+description of the semantics of this programming model.  We also
+discuss issues of determinacy that result from the event-driven nature
+of the target application domain.
+
+<p>We have implemented the programming model and tools for code
+generation on a wireless sensor network platform known as the Berkeley
+motes.  We present details of the code generation process, which is
+designed to be compatible with components written for TinyOS, a
+component-based runtime environment for the motes.  We describe a
+redesign of a multi-hop ad hoc communication protocol using the
+TinyGALS model.
+</body>
+</html>
+
