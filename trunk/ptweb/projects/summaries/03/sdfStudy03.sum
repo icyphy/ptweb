@@ -1,0 +1,39 @@
+NAMES
+Haiyang Zheng
+
+EMAIL
+hyzheng@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~hyzheng
+
+PHONE
+510-642-6899
+
+TITLE
+Study of Synchronous Dataflow
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+The purpose of this project is to study some properties of Synchronous Dataflow (SDF) including the abstractions of actors and the composibility of SDF models. 
+<p>
+In a SDF model, actors have static firing rules: they consume and produce a fixed number of tokens in each firing. The token consumption and production rates of an actor are the abstraction of the actor. Based on this abstraction, an efficient, static schedule can be solved with the balance equations between actors. An important constraint about the firing rules of SDF is that an actor can't fire unless all its inputs have enough tokens. Sometimes this constraint is too conservative that some executable models fail to find the executable schedules [1], [2]. It is because the SDF abstraction of the actors isn't sufficient.
+<p>
+This project aims to find a sufficient abstraction with the exposure of the internals of actors. The basic idea is to seperate the computation and communication of an actor, and to abstract the communication part. The abstraction focuses on what condition the actor affects the environment. The schedule based on this abstraction reflects the computation of actors better than general SDF schedule. This abstraction can be regarded as a refinement of the SDF abstraction. 
+<p> 
+This abstraction can be used to study the composibility of SDF models. A composite SDF model has several SDF models embedded inside. The SDF abstraction of this composite model is based on the solution of the balance equations between the actors inside. This abstraction indicates the requirement for the composite model to restore its original state. It also abstract away some of the internal communication behaviors, which is valuable to the schedulability study of the composition of SDF models. Our new abstraction catches the communication part and the schedulability analysis can be done without flatting the composite models. 
+
+<p>
+Reference:
+<p>
+1. A comparison of synchronous and cycle-static dataflow 
+Parks, T.M.; Pino, J.L.; Lee, E.A.
+Signals, Systems and Computers, 1995. Conference Record of the Twenty-Ninth Asilomar Conference on , Volume: 1 , 1996
+Page(s): 204 -210 vol.1
+<p>
+2. Cyclo-static Dataflow Greet Bilsen, Marc Engels, Rudy Lauwereins, and Peperstraete. 
+IEEE Transaction on Signal Processing, VOL 44 No. 2. Feburary 1996
+
