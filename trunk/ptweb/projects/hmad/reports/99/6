@@ -1,0 +1,266 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 July 24, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        5/15/99 - 6/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have split the development tree in preparation for releasing version
+0.3 of Ptolemy II, completed the first version of the
+domain-polymorphic actor library, and added two tutorial chapters to
+the documentation. We have also implemented a first version of a
+fixed-point capability in Ptolemy II and made progress on translating
+Matlab specifications into process networks. Our UT Austin
+subcontractors have made progress using process networks on networks of
+workstations for real-time beamforming.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Software Release
+----------------
+
+We had a code freeze from May 25-27, during which we updated all source
+code files for proper formatting and copyright notices, and then split
+the tree on May 27 by creating a CVS fork. We have created a draft web
+site for the 0.3 release, and significantly improved the documentation.
+In particular, we have added a UML overview as an appendix to the first
+chapter, and written two new tutorial chapters, one on writing applets,
+and one on the actor libraries.
+
+
+Domain Polymorphic Actor Library
+--------------------------------
+
+The first version of the domain-polymorphic actor library has been
+completed. This library provides a set of actors that can operate in
+most domains, and a simple set of marker interfaces that define the
+basic assumptions of an actor (whether it operates on sequences and
+whether it uses the notion of model time).
+
+
+Software Engineering
+--------------------
+
+Xiaojun Liu has reworked the data.expr package, which violated our
+policy on compile-time vs. run-time exceptions. In brief, a run-time
+exception can be used only when there is a testable precondition. The
+data.expr package was using run-time exceptions for parse errors in
+expressions. But the only way to test whether an expression is well
+formed is to parse it, so this is not a testable precondition.
+Converting to compile-time exceptions means that all code that uses
+the package has to explicitly handle (or throw) the exceptions.
+This is appropriate.
+
+
+Design Reviews:
+   none
+
+Advanced to Yellow (in response to design reviews):
+   actor/gui/PtolemyApplet
+   domains/sdf/gui/SDFApplet
+   domains/sdf/demo/Expression/ExpressionApplet
+   domains/sdf/demo/ComSystem/ComSystem
+   domains/de/gui/DEApplet
+   domains/de/demo/Inspection/InspectionApplet
+   actor/lib/Expression
+   actor/lib/Pulse
+   actor/gui/Placeable
+
+Code Reviews:
+   none
+
+Advanced to Green (in response to code reviews):
+   actor/lib/AddSubtract
+   actor/lib/Average
+   actor/lib/Bernoulli
+   actor/lib/Const
+   actor/lib/Gaussian
+   actor/lib/MultiplyDivide
+   actor/lib/Ramp
+   actor/lib/Random
+   actor/lib/Recorder
+   actor/lib/SequenceSource
+   actor/lib/Sink
+   actor/lib/Source
+   actor/lib/TimedActor
+   actor/lib/TimedSource
+   actor/lib/Transformer
+   actor/gui/Plotter
+   actor/gui/SequencePlotter
+   actor/gui/TimedPlotter
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Fixed-Point Arithmetic
+----------------------
+
+Bart Kienhuis has created a FixPoint class, which implements fixed
+point arithmetic, and a FixToken class, which encapsulates data in
+fixed-point format. Polymorphic actors will be able to transparently
+operate on fixed-point numbers. We are adapting the type system to be
+able to handle this. It is a significant change, because in principle,
+fixed-point numbers imply an infinite type lattice, assuming all
+possible precisions are allowed. So far, the type system has only had
+to deal with finite type lattices.
+
+
+Matlab to Process Networks
+--------------------------
+
+Bart Kienhuis is developing a set of utilities for converting
+specifications of functionality in Matlab to Process Network
+descriptions. The tool is called Compaan, Compilation from Matlab to
+Process Networks. He has been working on a Matlab parser using
+JavaCC/jjtree, and on converting some code originally developed at
+Delft (in the Netherlands) into the Ptolemy II framework.
+
+
+Real-Time High-Performance Signal and Image Processing on Workstations
+----------------------------------------------------------------------
+
+(UT Austin Subcontract)
+
+To achieve real-time performance, data-intensive sonar beamformers have
+traditionally been implemented in expensive custom hardware. Current
+second-generation sonar beamformers use several dozen programmable
+processors in customized configurations. In this work, we use the
+workstation as the design environment and the target platform. We
+propose this approach for third-generation designs because it reduces
+development time and cost over the other two approaches. [1]
+
+We employ a framework for developing scalable software implementations
+of beamformers on workstations that models the concurrency and
+parallelism in beamformers using the Process Network model of
+computation developed by Thomas Park and Edward Lee at UC Berkeley.
+This model guarantees determinate execution of concurrent programs
+regardless of the scheduling algorithm being used. We employ Parks'
+scheduling algorithm that always finds a bounded execution if one
+exists. We have shown that conventional beamforming algorithms always
+have at least one bounded execution. [1]
+
+We implement the framework in C++ using lightweight real-time POSIX
+threads. We evaluate the framework implementation by prototyping a
+three-dimensional 4-GFLOP 1-GB digital interpolation sonar beamformer
+on a Sun Ultra Enterprise workstation. The beamformer exhibits
+near-linear speedup using 1 to 8 processors and could be implemented in
+real-time with 12 336-MHz UltraSPARC-II processors. The real-time data
+input/output requirements of 160 MB/s input and 80 MB/s output are met
+by the use of custom hardware, which would have to designed for any
+beamformer implementation. [1][2]
+
+We plan to release the framework and sonar beamformer implementation as
+freely distributable software by the end of the summer. We are starting
+to apply the framework to synthetic aperture radar (SAR) systems which
+require the same amount of computation, memory, and data input/output
+as 3-D sonar beamforming systems. They key difference is that the
+kernels are different. SAR systems rely heavily on fast Fourier
+transforms.
+
+
+Discrete-Event Modeling
+-----------------------
+
+We have made a pass on the code in the DE domain to clean up a
+few standing problems and generally edit the code.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Nothing to report on this task.
+
+
+2.  Equipment/Infrastructure Status:
+
+- Christopher Hylands identified a few minor problems in Jacl (the Java
+  implementation of Tcl) and provided a test file and a patch to the
+  maintainers.
+
+
+3.  Interactions and Technology Transfer
+
+See presentations below.
+
+
+4.  Personnel Status
+
+Four undergraduates have signed on to work in the Ptolemy project
+over the summer:
+
+- Manda Sutijono, who will work on user interface infrastructure.
+
+- Shankar Rao, who will work on media interface infrastructure
+  (primarily audio).
+
+- John Li, who will work on actor libraries.
+
+- Michael Leung, who will work on actor libraries.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+- We have committed to demonstrate Ptolem1y II at the university booth
+  at DAC '99 in New Orleans. The demonstration is entitled "U.C.
+  Berkeley: Ptolemy II: A Java-based, heterogeneous modeling and design
+  tool applied to concurrent systems."
+
+- "Heterogenous Modeling and Design using Ptolemy II," Stephen
+  Neuendorffer, invited talk at Univ. of Maryland, College Park,
+  May 28, 1999.
+
+- "Heterogeneous Modeling and Design," invited talk by Edward A. Lee
+  at INRIA Rhone-Alpes, Grenoble, France, June 7, 1999.
+
+- "Introduction to the Ptolemy II System," John Davis II and Steve
+  Neuendorffer, presentation to the GSRC (Gigascale Silicon Research
+  Center), UC Berkeley, June 9, 1999.
+
+
+Publications
+------------
+
+[1] G. E. Allen and B. L. Evans, "Real-Time Sonar Beamforming on a Unix
+    Workstation Using Process Networks and POSIX Threads," IEEE Transactions
+    on Signal Processing, submitted.
+
+[2] G. E. Allen and B. L. Evans, "Real-Time High-Throughput Sonar
+    Beamforming Kernels Using Native Signal Processing and Memory Latency
+    Hiding Techniques," Proc. IEEE Asilomar Conf. on Signals, Systems, and
+    Computers, Oct. 25-28, 1999, Pacific Grove, CA, submitted.
+
+[3] Jie Liu, Xiaojun Liu, Tak-Kuen John Koo, Bruno Sinopoli, Shankar
+    Sastry, Edward A. Lee "Hierarchical hybrid system simulation",
+    submitted to the 1999 CDC, Invited paper.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to complete the release of version 0.3 of Ptolemy II, and
+finish developing the tutorial material in the documentation.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
