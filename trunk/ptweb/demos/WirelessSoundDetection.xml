@@ -232,7 +232,7 @@ GraphicalLocator)</text></svg></configure>
     <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{408.5, 329.5}">
     </property>
     <property name="WirelessDirector" class="ptolemy.domains.wireless.kernel.WirelessDirector">
-        <property name="stopTime" class="ptolemy.data.expr.Parameter" value="10.0">
+        <property name="stopTime" class="ptolemy.data.expr.Parameter" value="Infinity">
         </property>
         <property name="synchronizeToRealTime" class="ptolemy.data.expr.Parameter" value="true">
         </property>
