@@ -1,5 +1,5 @@
 NAMES
-Adam Cataldo, Xiaojun Liu, and Zhongning Chen
+Adam Cataldo and Xiaojun Liu
 
 EMAIL
 acataldo@eecs.berkeley.edu
@@ -33,23 +33,18 @@ three-dimensional model of the earth’s surface, augmented with the no-fly zones.
 the no-fly zones change.&nbsp; One of our design principles is to give the pilot
 as much control as possible, subject to the constraint that the aircraft can
 never enter the no-fly zone.
-<p>We have developed a control algorithm for two-dimensional infinite wall [2]. This algorithm uses a simplified model of the aircraft dynamics and
-adds a bias to the pilot's control as the aircraft gets near the no-fly
-zone. The bias is increased and decreased gradually, and the algorithm is provably safe,
+<p>We have developed several candidate control algorithms for Soft Walls [2]. Our algorithms 
+add a bias to the pilot's control as the aircraft gets near the no-fly
+zone. The bias is increased and decreased gradually, and the algorithms are provably safe,
 that is,
 the aircraft can never enter the
-no-fly zone. Our next goal is to
-find a control algorithm which works for any convex, two-dimensional no-fly
-zone.
+no-fly zone. We are now addressing the computational complexity problems that we will need to solve in order to implement such a strategy.
 <p>For more information, see the Soft Walls website at
-<a href="http://ptolemy.eecs.berkeley.edu/projects/softwalls/index.htm" target="_top"><code>http://ptolemy.eecs.berkeley.edu/projects/softwalls/</code></a>
+<a href="http://softwalls.eecs.berkeley.edu/index.htm" target="_top"><code>http://softwalls.eecs.berkeley.edu</code></a>
 
 <p><a name="1">[1]</a>
-Edward A. Lee, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/01/softwalls2/">Soft Walls - Modifying Flight Control Systems to Limit the Flight Space of Commercial Aircraft (<i>Draft 2</i>)</a>,"<i>Revised from Technical Memorandum UCB/ERL M01/31</i>, University of California, Berkeley, CA 94720, October 3, 2001.
+Edward A. Lee, "<a href="http://ptolemy.eecs.berkeley.edu/papers/03/softwalls/index.htm">Soft Walls: Frequently Asked Questions </a>,"<i>Technical Memorandum UCB/ERL M03/31</i>, University of California, Berkeley, CA 94720, July 21, 2003.
 
 <p><a name="2">[2]</a>
-  J. Adam Cataldo, Edward A. Lee, and Xiaojun Liu, "<a href="http://ptolemy.eecs.berkeley.edu/papers/02/prelim2Dsoftwalls">Preliminary Version of a Two-Dimensional Technical Specification for Softwalls</a>,"
- <i>Technical Memorandum UCB/ERL M02/9</i>, University of California, Berkeley, CA 94720, April 17, 2002.
-
-
-
+  Adam Cataldo, "<a href="http://ptolemy.eecs.berkeley.edu/papers/03/softwalls/masters.htm">Control Algorithms for Soft Walls</a>," Master's Report,
+ <i>Technical Memorandum UCB/ERL M03/42</i>, University of California, Berkeley, CA 94720, October 15, 2003.
