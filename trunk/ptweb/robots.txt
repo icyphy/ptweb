@@ -42,6 +42,7 @@ Disallow: /ptolemyII/ptII0.3/ptII0.3
 Disallow: /ptolemyII/ptII0.4/ptII0.4
 Disallow: /ptolemyII/ptII0.4/ptII0.4beta
 Disallow: /ptolemyII/ptII1.0/ptII1.0beta
+Disallow: /ptolemyII/ptII1.0/ptII1.0
 Disallow: /ptolemyII/ptII1.0ptiny
 Disallow: /ptolemyII/ptIIlatest
 Disallow: /~ptII/java/opt
