@@ -5,6 +5,7 @@ SUM_SOURCES =  \
 	ptolemyII.sum \
 	copernicus05.sum \
 	compositionalityAnalysis.sum \
+	operationalSemanticsOfHS.sum \
         fsmExtension.sum \
         softDevel05.sum \
 	ptinygals.sum \
