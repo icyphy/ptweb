@@ -8,30 +8,45 @@
 <body>
 <h1>Absolutely Positively On Time: What Would It Take?</h1>
 <p><a href="http://ptolemy.eecs.berkeley.edu/~eal">Edward A. Lee</a></p>
-<p><i>Editorial, February 19, 2005</i><br>
+<p><i>Editorial, March 8, 2005</i><br>
 </p>
 <p>
 
-Twentieth century computer science has taught us that everything that
-can be computed can be specified by a Turing machine. "Computation" is
-accomplished by a terminating sequence of state transformations. This
-core abstraction underlies the design of nearly all computers,
-programming languages, and operating systems in use today. But
-unfortunately, this core abstraction does not fit embedded software
-very well.
+Despite considerable progress in software and hardware techniques, when
+embedded computing systems absolutely must meet tight timing
+constraints, many of the advances in computing become part of the
+problem rather than part of the solution. Although synchronous digital
+logic delivers precise timing determinacy, advances in computer
+architecture have made it difficult or impossible to estimate the
+execution time of software. Moreover, networking techniques introduce
+variability and stochastic behavior, and operating systems rely on best
+effort techniques. Worse, programming languages lack time in their
+semantics, so timing requirements are only specified indirectly. In
+this column, I examine the following question, "if precise timeliness
+in a networked embedded system is absolutely essential, what has to
+change?" The answer, unfortunately, is "nearly everything."
 
-<p>Embedded software might be thought of as "software on small computers."
-In this traditional view, the principal problem is resource limitations
-(small memory, small data word sizes, and relatively slow clocks).
-Solutions emphasize efficiency; software is written at a very low level
-(in assembly code or C), operating systems with a rich suite of
-services are avoided, and specialized computer architectures such as
-programmable DSPs and network processors are developed to provide
-hardware support for common operations. These solutions have defined
-the practice of embedded software design and development for the last
-25 years or so.
+<p> Twentieth century computer science has taught us that everything
+that can be computed can be specified by a Turing machine.
+"Computation" is accomplished by a terminating sequence of state
+transformations. This core abstraction underlies the design of nearly
+all computers, programming languages, and operating systems in use
+today. But unfortunately, this core abstraction does not fit embedded
+software very well.
 
-<p>Of course, thanks to the semiconductor industry's ability to follow
+<p> This core abstraction fits reasonably well if embedded software is
+simply "software on small computers." In this view, embedded software
+differs from other software only in its resource limitations (small
+memory, small data word sizes, and relatively slow clocks). In this
+view, the "embedded software problem" is an optimization problem.
+Solutions emphasize efficiency; engineers write software at a very low
+level (in assembly code or C), avoid operating systems with a rich
+suite of services, and use specialized computer architectures such as
+programmable DSPs and network processors that provide hardware support
+for common operations. These solutions have defined the practice of
+embedded software design and development for the last 25 years or so.
+
+<p> Of course, thanks to the semiconductor industry's ability to follow
 Moore's law, the resource limitations of 25 years ago should have
 almost entirely evaporated today. Why then has embedded software design
 and development changed so little? It may be that extreme competitive
@@ -42,55 +57,62 @@ has proven more important than efficiency. It is arguable that resource
 limitations are not the only defining factor for embedded software, and
 may not even be the principal factor.
 
-<p>Computer scientists lament that embedded software engineers avoid many
-of the modern technology improvements in computing. These engineers
-write assembly code! This has been out of fashion in computer science
-since the 1960s. However, some of the tasks these engineers face are
-not well supported by more modern techniques. For example, no
-widespread programming language exposes interrupts in its semantics,
-and yet interrupts are an essential part of embedded software design.
-More fundamentally, programming languages give no way to integrate
-hardware into software designs. The assumption is that all such
-integration is provided in a generic way by an operating system.
+<p> There are clues that embedded software differs from other software
+in more fundamental ways. If we examine carefully why engineers write
+embedded software in assembly code or C, we discover that efficiency is
+not the only concern, and may not even be the main concern. The reasons
+may include, for example, the need to count cycles in a critical inner
+loop, not to make it fast, but rather to make it predictable. No widely
+used programming language integrates a way to specify timing
+requirements or constraints. Instead, the abstractions they offer are
+about scalability (inheritance, dynamic binding, polymorphism, memory
+management), and, if anything, further obscure timing (consider the
+impact of garbage collection on timing). Counting cycles, of course,
+becomes extremely difficult on modern processor architectures, where
+memory hierarchy (caches), dynamic dispatch, and speculative execution
+make it nearly impossible to tell how long it will take to execute a
+particular piece of code. Worse, execution time is context dependent,
+which leads to unmanageable variability. Still worse, programming
+languages are almost always Turing complete, and as a consequence,
+execution time is undecidable in general. Embedded software designers
+must choose alternative processor architectures such as programmable
+DSPs, and must use disciplined programming techniques (e.g. avoiding
+recursion) to get predictable timing.
 
-<p>Let us examine a few more examples. Object-oriented techniques such as
-inheritance, dynamic binding, and polymorphism are rarely used in
-practice with embedded software development. Processors used for
-embedded systems, such as programmable DSPs, are designed not by
-mainstream computer architects, but by domain specialists in areas such
-as signal processing. They typically avoid memory hierarchy,
-speculative execution, branch prediction techniques, and dynamic
-dispatch. Engineers often avoid operating systems altogether, and
-largely avoid automated memory management. (To be fair, there are some
-successful applications of these technologies in embedded software,
-such as the use of Java in cell phones, but their application remains
-limited and is largely providing services that are actually more akin
-to general-purpose software applications).
+<p> Another reason engineers stick to low-level programming is that
+embedded software typically has to interact with hardware that is
+specialized to the application. In conventional software, interaction
+with hardware is the domain of the operating system. Device drivers are
+not typically part of an application program, and are not typically
+created by application designers. But in the embedded software context,
+generic hardware interfaces are rarer. The fact is that creating
+interfaces to hardware is not something that higher level languages
+support. For example, although concurrency is not uncommon in modern
+programming languages (consider threads in Java), no widely used
+programming language includes in its semantics the notion of
+interrupts. Yet the concept is not difficult, and it can be built into
+programming languages (consider for example nesC and TinyOS, which are
+widely used for programming sensor networks).
 
-<p>Is this avoidance of so many recent improvements in computation due to
-ignorance? I don't think so. The disconnect is with the core
-abstractions and in all the technologies built on those core
-abstractions. There are plenty of indicators that embedded software is
-fundamentally different. For example:
+<p> It becomes apparent that the avoidance of so many recent
+improvements in computation is not due to ignorance of those
+improvements. It is due to a mismatch of the core abstractions and the
+technologies built on those core abstractions. In embedded software,
+time matters. In the 20th century abstractions of computing, time is
+irrelevant. In embedded software, concurrency and interaction with
+hardware are intrinsic, since embedded software engages the physical
+world in non-trivial ways (more than keyboards and screens). The most
+influential 20th century computing abstractions speak only weakly about
+concurrency, if at all. Even the core 20th century notion of
+"computable" is at odds with the requirements of embedded software. In
+this notion, useful computation terminates, but termination is
+undecidable. In embedded software, termination is failure, and yet to
+get predictable timing, subcomputations must decidably terminate.
 
-<ul>
-<li> Timing matters. In the 20th century abstractions of computing, time
-is irrelevant.
-
-<li> Concurrency is intrinsic to the applications. Embedded software
-engages the physical world, which is highly concurrent. Core computing
-abstractions say nothing about concurrency. Concurrency is built on top
-of these core abstractions using threads, processes, and ad hoc
-primitives that lie outside the core abstractions.
-
-<li> Termination is failure. In computing abstractions, non-terminating
-programs fall into an equivalence class of defective programs.
-</ul>
-
-<p>Embedded systems are integrations of software and hardware where the
-software reacts to sensor data and issues commands to actuators. The
-physical system is an integral part of the design and the software must
-be conceptualized to operate in concert with that physical system.
+<p> Embedded systems are integrations of software and hardware where
+the software reacts to sensor data and/or issues commands to actuators.
+The physical system is an integral part of the design and the software
+must be conceptualized to operate in concert with that physical system.
 Physical systems are intrinsically concurrent and temporal. Actions and
 reactions happen simultaneously and over time, and the metric
 properties of time are an essential part of the behavior of the system.
@@ -101,39 +123,47 @@ prevailing imperative abstraction is overlaid with another, that of
 threads or processes, typically provided by the operating system, but
 occasionally by the language (as in Java).
 
-<p>The lack of timing in the core abstraction is a flaw, from the
+<p> The lack of timing in the core abstraction is a flaw, from the
 perspective of embedded software, and threads as a concurrency model
 are a poor match for embedded systems. They are mainly focused on
 providing an illusion of parallelism in fundamentally sequential
 models, and they work well only for modest levels of concurrency or for
 highly decoupled systems that are sharing resources, where best-effort
-scheduling policies are sufficient.
+scheduling policies are sufficient. Indeed, several recent innovative
+embedded software frameworks, such as Simulink (from The MathWorks),
+nesC and TinyOS (from Berkeley), and Lustre/SCADE (from Esterel
+Technologies) are concurrent programming languages with no threads or
+processes in the programmer's model.
 
-<p>Embedded software systems are generally held to a much higher
+<p> Embedded software systems are generally held to a much higher
 reliability standard than general purpose software. Often, failures in
 the software can be life threatening (e.g., in avionics and military
-systems). The prevailing concurrency model based on threads does not
-achieve adequate reliability. In this prevailing model, interaction
-between threads is extremely difficult for humans to understand. The
+systems). The prevailing concurrency model in general purpose software
+that is based on threads does not achieve adequate reliability. In this
+prevailing model, interaction between threads is extremely difficult
+for humans to understand. Although it is arguable that concurrent
+computation is inherently complex, threads make it far more complex
+because between any two atomic operations (a concept that is rarely
+well defined), any part of the state of the system can change. The
 basic techniques for controlling this interaction use semaphores and
-mutual exclusion locks, methods that date back to the 1960s. These
-techniques often lead to deadlock or livelock conditions, where all or
-part of a program cannot continue executing. In general-purpose
+mutual exclusion locks, methods that date back to the 1960s. Many uses
+of these techniques lead to deadlock or livelock. In general-purpose
 computing, this is inconvenient, and typically forces a restart of the
 program (or even a reboot of the machine). However, in embedded
 software, such errors can be far more than inconvenient. Moreover,
 software is often written without sufficient use of these interlock
 mechanisms, resulting in race conditions that yield nondeterministic
-program behavior.
+program behavior. In practice, errors due to misuse (or no use) of
+semaphores and mutual exclusion locks are extremely difficult to detect
+by testing. Code can be exercised for years before a design flaw
+appears. Static analysis techniques can help (e.g. Sun Microsystems'
+LockLint), but these methods are often thwarted by conservative
+approximations and/or false positives, and they are not widely used in
+practice. 
 
-<p>In practice, errors due to misuse (or no use) of semaphores and mutual
-exclusion locks are extremely difficult to detect by testing. Code can
-be exercised for years before a design flaw appears. Static analysis
-techniques can help (e.g. Sun Microsystems' LockLint), but these
-methods are often thwarted by conservative approximations and/or false
-positives, and they are not widely used in practice.
+<p>
 
-<p>It can be argued that the unreliability of multi-threaded programs is
+It can be argued that the unreliability of multi-threaded programs is
 due at least in part to inadequate software engineering processes. For
 example, better code reviews, better specifications, better compliance
 testing, and better planning of the development process can help solve
@@ -148,40 +178,56 @@ that are difficult to understand, then these improvements will fall
 short of delivering reliable software. Incomprehensible software will
 always be unreliable software.
 
-<p>Prevailing industrial practice in embedded software relies on bench
+<p>
+
+Prevailing industrial practice in embedded software relies on bench
 testing for concurrency and timing properties. This has worked
 reasonably well, because programs are small, and because the software
-gets entombed in a box with no outside connectivity that can alter the
+gets encased in a box with no outside connectivity that can alter the
 behavior of the software. However, applications today demand that
 embedded systems be feature-rich and networked, so bench testing and
-entombing become inadequate. In a networked environment, it becomes
-impossible to test the software under all possible conditions.
+encasing become inadequate. In a networked environment, it becomes
+impossible to test the software under all possible conditions, because
+the environment is not known. Moreover, general-purpose networking
+techniques themselves make program behavior much more unpredictable.
+<p>
 
-<p>What would it take to achieve concurrent and networked embedded
-software that was absolutely positively on time? Unfortunately,
-everything would have to change. The core abstractions of computing
-need to be modified to embrace time. Computer architectures need to be
-changed to deliver precisely timed behaviors. Networking techniques
-need to be changed to provide time concurrence. Programming languages
-have to change to embrace time and concurrency in their core semantics.
-Operating systems have to change to relying on priorities (a
-fundamentally best-effort technique) to indirectly specify timing
-requirements. Software engineering methods need to change to specify
-and analyze the temporal dynamics of software. What is needed is nearly
-a reinvention of computer science.
+What would it take to achieve concurrent and networked embedded
+software that was absolutely positively on time (say, to the precision
+and reliability of digital logic)? Unfortunately, everything would have
+to change. The core abstractions of computing need to be modified to
+embrace time. Computer architectures need to be changed to deliver
+precisely timed behaviors. Networking techniques need to be changed to
+provide time concurrence. Programming languages have to change to
+embrace time and concurrency in their core semantics. Operating systems
+have to change to rely less on priorities to (indirectly) specify
+timing requirements. Software engineering methods need to change to
+specify and analyze the temporal dynamics of software. And the
+traditional boundary between the operating system and the programming
+language needs to be rethought. What is needed is nearly a reinvention
+of computer science.
 
-<p>Fortunately, there is quite a bit to draw on. To name a few examples,
+<p>
+
+Fortunately, there is quite a bit to draw on. To name a few examples,
 architecture techniques such as software-managed caches promise to
 deliver much of the benefit of memory hierarchy without the timing
 unpredictability. Operating systems such as TinyOS provide simple ways
-to create thin wrappers around hardware. Programming languages such as
-Lustre/SCADE provide understandable and analyzable concurrency.
-Embedded software languages such as Simulink provide time in their
-semantics. Network time synchronization methods such as IEEE 1588
-provide time concurrence at resolutions (tens of nanoseconds) far finer
-than any processor or software architectures can deal with today. The
-time is ripe to pull these techniques together and build the 21st
-Century (Embedded) Computer Science.
+to create thin wrappers around hardware, and with nesC, alter the
+OS/language boundary. Programming languages such as Lustre/SCADE
+provide understandable and analyzable concurrency. Embedded software
+languages such as Simulink provide time in their semantics. Network
+time synchronization methods such as IEEE 1588 provide time concurrence
+at resolutions (tens of nanoseconds) far finer than any processor or
+software architectures can deal with today. The time is ripe to pull
+these techniques together and build the 21st Century (Embedded)
+Computer Science.
+
+<p>
+<p>
+<p>
+
+Thanks to helpful comments from Elaine Cheong and Douglas Niehaus.
 
 <p>
 </body>
