@@ -18,7 +18,7 @@ CHAPTER
 
 ABSTRACT
 
-Type systems in modern programming language are the most widely used
+Type systems in modern programming languages are the most widely used
 and effective (semi)formal verification tools for software. The theory
 underlying type systems is simple, robust, and extremely powerful,
 based on fixed-point theorems in topology. The mathematical structure
@@ -31,7 +31,7 @@ II that provide support for any type system that can be represented
 using such a lattice. This generic infrastructure has been first
 applied to the basic type system problem, that of ensuring
 consistent data typing, and supporting (polymorphic) type inference.
-But the infrastructure is designed to be extended to more sophisticated
+But the infrastructure is designed to be extensible to more sophisticated
 uses.
 
 <p> The basic type system combines static typing with run-time type
@@ -54,7 +54,7 @@ type constraints on them. Type constraints and type inference must
 propagate transparently across operators that construct and disassemble
 such structures. One of the major difficulties in this extension is
 that the type lattice becomes infinite, which raises questions on the
-convergence of type checks and inference.
+convergence of type checking and inference.
 
 <p> A more innovative (and speculative) extension is to <i>process-level
 types</i>. These types represent dynamic properties of an application,
@@ -63,10 +63,10 @@ system. One of the dynamic properties we have studied is communication
 protocol. We have attempted to characterize different communication
 protocols as types and describe these types using automata. Furthermore,
 we have organized these types into a system-level type lattice using the
-simulation relation. This lattice provides significant insight into the
-relation between various protocols and may help design polymorphic
-components that can work with multiple protocols. For example, we can
-specify the behavior of a polymorphic component using a non-deterministic
+simulation relation among automata. This lattice provides significant
+insight into the relation among various protocols and may help design
+polymorphic components that can work with multiple protocols. For example,
+we can specify the behavior of a polymorphic component using a non-deterministic
 automaton. If this automaton simulates the automata of some specific
 protocols, the component will be able to work with those protocols. 
 <p>
