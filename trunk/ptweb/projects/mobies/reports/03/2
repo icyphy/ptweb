@@ -29,10 +29,21 @@ improve robustness and safety while promoting component-based design.
 This reporting period was marked by an implementation of the E1
 experiment for the software radio OEP ("Ethereal Sting"), first
 production of executable C code after Java-to-C translation of code
-generated from a Ptolemy II model, FIXME
+generated from a Ptolemy II model, the introduction of mobile models in
+Ptolemy II, improved semantics for hybrid systems models, a first
+version of an interface checking framework for Ptolemy II, many
+software improvements, and a new release of Ptolemy II.
 
 
 1.  Research Status
+
+Software Release
+================
+
+We released Ptolemy II 3.0-beta, and distributed it on CD at the
+Ptolemy Miniconference and on the web. The release information is
+appended in the appendix.
+
 
 Ethereal Sting OEP
 ==================
@@ -76,7 +87,7 @@ bugs or limitations exposed by the experiment. The experiment also
 stimulated further work on comm/signal processing libraries.
 
 Looking forward, Yang Zhao, Steve Neuendorffer and Xiaojun Liu
-prototyped an approach to model-based design of the supervisorty
+prototyped an approach to model-based design of the supervisory
 structure, and demonstrated this at the working group meeting in June.
 This approach allocates signal analysis tasks to compute resources.
 The components in this model include:
@@ -84,7 +95,7 @@ The components in this model include:
 * A PushConsumer actor that receives pushed data provided via CORBA,
   where the data is an XML model of a signal analysis (SA) algorithm.
 
-* A MobileModel actor that accepts a StringToken containing an XML
+* A Model actor that accepts a StringToken containing an XML
   description of a model. It then executes that model on a stream of
   input data.
 
@@ -139,7 +150,7 @@ Haiyang Zheng has made a number of improvements to the operational
 semantics of hybrid systems and the corresponding implementation in
 Ptolemy II. In particular,
 
-* He has greatly improved the handling of intantaneous transitions in
+* He has greatly improved the handling of instantaneous transitions in
   continuous-time signals, giving these signals a semantics where the
   signal at a discontinuity has two or more values. The value before
   and after the discontinuity is well-defined and unique.
@@ -196,17 +207,26 @@ reports progress on the C code generation.
   The compiler can detect whether or not the garbage collector exists.
 
 - More progress was made in integrating the code generator with
-  Ptolemy II. Some C code is now generated for simple ptolemy tests
+  Ptolemy II. Some C code is now generated for simple Ptolemy tests
   without causing conflicts with the ptII tree. We are working on
   modifications required on the copernicus kernel to integrate this
   further. Full compilation with code pruning turned on is being
   enabled. Single-class compilation works.
 
 In related work, Christopher Hylands did some evaluation of gcj, which
-is the GNU native java compiler. The numbers are rather rough, but
-basically using gcj results in about a 4x improvment over a standard
-Ptolemy run and about 1.4x improvment over the best deep codegen
+is the GNU native Java compiler. The numbers are rather rough, but
+basically using gcj results in about a 4x improvement over a standard
+Ptolemy run and about 1.4x improvement over the best deep codegen
 output. The resulting code size is rather large.
+
+Steve Neuendorffer reports that he managed to successfully run
+generated code on the Dallas Semiconductor TINI board. The main
+difficulty is one of libraries. The TINI board supports libraries that
+approximate JDK1.1, with some hardware specific enhancements, like CAN
+bus access. There are several places where we use non-JDK1.1
+facilities. Steve was careful to avoid problematic classes, but this is
+not an ideal solution. Another problem is the use of hardware-specific
+libraries.
 
 
 Component Interaction
@@ -224,8 +244,8 @@ application. Xiaojun and Yang have created a preliminary document (as
 yet unpublished) describing this work.
 
 The CI domain bears interesting semantic relationships to dataflow
-models, to the Click Modular Router architecture created by Eddie
-Kohler of MIT, and to TinyGals [4]. We are working on a report.
+models, to the Click Modular Router architecture, and to TinyGals [4].
+We are working on a report.
 
 
 Interface Checking in Ptolemy II
@@ -248,6 +268,25 @@ indeed be realized by executing the model.) This "interface
 compatibility checking" as a service has appeal to us, because if
 successful, we could think about doing the same for languages such as
 UML and Simulink.
+
+
+Behavioral Types
+================
+
+Eleftherios Matsikoudis designed a better algorithm for identifying the
+least upper bound (LUB) of a set of nodes in a partial order. His
+algorithm has order n complexity rather than order n^2, as our previous
+implementation did.
+
+Lefteris has also proposed an improvement over transient states for
+interface automata specifying behavioral types. IAs have some
+difficulty modeling the atomicity of method calls because of input and
+output are on separate transitions. However, transient states are
+global... there can only be one transient state active at a time in an
+entire system. Lefteris has proposed instead associated lock variables
+by name with transitions. Taking a suitably labeled transition acquires
+the lock or releases it. He is working on extending the composition
+operator and formalism of IAs to accommodate this extension.
 
 
 Communications Library
@@ -306,7 +345,7 @@ With help from Zoltan Kemenczy of Research In Motion, we have improved
 further the integration of the Ptolemy II expression language with its
 type system. In particular, we can now define built-in functions (vs.
 functions defined in the expression language) that have arbitrarily
-complex (and polymorophic) type signatures. The way this works is that
+complex (and polymorphic) type signatures. The way this works is that
 along with function itself, which is registered with the expression
 language, a type function is registered that, given the types of the
 arguments, returns the type of the result. This has been used to get
@@ -320,7 +359,55 @@ supports assignments, and can therefore be used for simple scripting.
 Yang Zhao added the first set of higher-order functions to the
 expression language. For example, map takes a function and an array and
 applies the function to the elements of the array, returning the array
-of results. This is fully integrated with the type system.
+of results. The iterate function takes a function and applies it a
+specified number of times beginning with some initial value. For
+example,
+
+   iterate(function(x) x+1, 10, 0)}
+
+yields the result array
+
+   {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+These higher-order functions are fully integrated with the type system.
+
+Steve Neuendorffer improved comparisons between function tokens so that
+two function closures are considered equal (by the isEqualTo() method)
+if they are congruent. Congruency allows for arbitrary names of
+internally bound variables. Hence
+
+   function(x,y) x+y
+
+is congruent to
+
+   function(a,b) a+b
+
+If a function has free variables, as in for example,
+
+   function(x,y) x+y+z
+
+then there is a subtlety. If this is evaluated in an environment where
+the value of z is 5, then the above function evaluation yields the same
+result as another function
+
+   function(a,b) a+b+5
+
+However, it will not be the same as evaluating the original function in
+an environment where the value of z is not 5.  Currently, two functions
+are considered equal if free variables have the same name, and hence
+the above functions are not equal.
+
+This allows us to check for congruence of expressions with registered
+constants, without evaluating the expression, but has the downside of
+saying that "5+ 2*pi" is not equal to "5 + twotimespi", even if we had
+a constant named twotimespi. This seems like a reasonable compromise,
+since registered constants are in fact variables, so we have no
+assurance that their values will remain constant.
+
+The expression language now fully supports complex data types. Thus,
+the following operations (and many more) are now supported on complex
+args, complex matrices, and complex arrays: exp(), cos(), log(), and
+abs() (which returns the magnitude).
 
 
 Sensor Networks Model
@@ -487,9 +574,66 @@ Improvements to Basic Modeling Infrastructure
 -- Steve Neuendorffer added a debugging tool to the expression language
    that traces evaluation of a parse tree.
 
--- Xiaojun Liu improved the error reporting of the PythonScript actor.
+-- Added I/O actors:
+   + ArrayPlotter actor for displaying live, changing plots;
+   + InteractiveShell actor for textual input and output;
 
--- Added an ArrayPlotter actor for displaying live, changing plots.
+-- Steve Neuendorffer changed RandomSource, the base class for random
+   signal generators, to ensure random behavior even on very fast
+   machines. In Java, a random variable can be created using:
+      new Random()
+   which is equivalent to
+      new Random(System.currentTimeMillis())
+   On a fast machine, more than one such random variable might be
+   created within a millisecond, which implies then that they will have
+   the same seed, and consequently will be perfectly correlated.
+
+-- Paul Yang and Christopher Hylands created a Joystick actor, which
+   allows the use of a Joystick to provide inputs to a Ptolemy II model.
+
+-- Steve Neuendorffer made a clean-up pass on the 3-D graphic domain
+   (GR), in preparation for work to add 2D graphics capabilities. Most
+   importantly, he fixed a long standing issue with some GR actors where
+   they were statically referencing the last viewscreen created. This
+   made it difficult to construct models in vergil, and impossible to
+   have multiple view screens in a model.
+
+-- We made a number of improvements to the Python interface, including
+   making it easier to design and edit functionality for actors specified
+   in Python and improved error reporting.
+
+-- We created a new attribute class, TextEditorFactory, which works as
+   follows: If you put it in an actor, and set its attributeName
+   parameter to the name of a StringAttribute of the parent, then
+   configuring the actor brings up a text editor to edit that
+   StringAttribute.
+
+-- Rachel Zhou has made a number of improvements to the library of
+   communications actors.
+
+-- Christopher Hylands created a mechanism for running all demos without
+   having to individually open them.  This complements our automated test
+   suite, permitting easy sanity checks on packages to be released.
+
+-- Christopher Hylands also created a mechanism for automatically
+   determining which optional software packages are installed and
+   providing appropriate copyright notices.
+
+-- We have begun using the IBM Eclipse integrated development tool,
+   and in particular, made a number of changes in our repository so
+   that developers get a reasonable starting point when they check out
+   the CVS tree.
+
+-- Steve Neuendorffer modified the BasicFigure class in Diva (the
+   graphics package on which the Ptolemy II UI is built) so that it is
+   now possible to usefully modify the shape of the figure dynamically,
+   taking into account the transformations to the figure. His solution
+   is to keep track of the transformation sequence of the BasicFigure
+   internally. He added a new method, setPrototypeShape() which
+   specifies the shape of the figure before transformations. This
+   method can be called to modify the shape of the figure, and the
+   modification will then be subjected to the same transformations that
+   had been applied to the previous figure.
 
 
 Study Group
@@ -499,6 +643,8 @@ Our quasi-weekly study group examined the following topics:
 
 -- Moses, a modeling tool from ETH, Switzerland.
 -- PI calculus.
+-- Guy Steel's paper on Growing a Language
+-- Constraint languages and continuous constraint languages
 
 
 2.  Interactions, Meetings, and Technology Transfer
@@ -512,6 +658,13 @@ Presentations and Meetings
 
 * Simulation to Implementation: Hardware in the Loop Simulation and
   Code Generation, Chess Review May 8, 2003 Berkeley, CA.
+
+* Urban Traffic Light Control Modeling -- A Hybrid System Perspective
+  Yang Zhao and Ye Zhou, Class Project Presentation, Hybrid Systems
+  Class, May, 2003.
+
+* Implementation issues in Hybrid Embedded Systems, Stephen Neuendorffer
+  Class Project Presentation, Hybrid Systems Class, May, 2003.
 
 
 Technology Transfer
@@ -631,7 +784,7 @@ Other Interactions
     actors with the system environment. After successful composition,
     the composition automaton will contain the complete token exchange
     information of the composite actor system. We will extract this
-    information into a Petri Net, which we then analyse to make
+    information into a Petri Net, which we then analyze to make
     statements on boundedness, deadlock as well as on the existence of
     legal firing sequences for the composite actor system."
 
@@ -651,6 +804,18 @@ Other Interactions
 
 * Elaine Cheong attended the IPSN workshop at PARC in June
   (http://www.parc.com/events/ipsn03/).
+
+* The Lawrence Livermore Lab project Nuclear and Atomic Database
+  Systems (NADS) uses the Ptolemy II plotter to display nuclear cross
+  section and atomic data in a graphical and tabulated format. They
+  currently display ENDL (Evaluated Nuclear Data Library), Radiation
+  Chemistry Library and ENDFB-V (Evaluated Nuclear Data File). They
+  have plans to expand to other cross sections, show processed data and
+  show experimental data.
+
+* Steve Neuendorffer and Elaine Cheong attended the federated computer
+  science conferences in San Diego, PLDI (a programming languages
+  conference) and LCTES (an embedded systems conference).
 
 
 4. Publications
@@ -686,3 +851,634 @@ Provided separately on a quarterly basis by the university.
 
 Appendix
 ========
+
+Ptolemy II 3.0-beta is available for download from
+http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII3.0.
+Below is the release information.
+
+Ptolemy II is a software framework developed as part of the Ptolemy
+project. It is a Java-based component assembly framework with a
+graphical user interface called Vergil. Vergil enables design of
+systems by block diagrams and state machine diagrams.
+
+The Ptolemy project studies modeling, simulation, and design of
+concurrent, real-time, embedded systems. The focus is on assembly of
+concurrent components. The key underlying principle in the project is
+the use of well-defined models of computation that govern the
+interactions between components. A major problem area being addressed
+is the use of heterogeneous mixtures of models of computation.
+
+The Ptolemy Project web page (http://ptolemy.eecs.berkeley.edu)
+contains much more information about the project. The work is
+conducted in the Department of Electrical Engineering and Computer
+Sciences of the University of California at Berkeley. The project is
+directed by Prof. Edward A. Lee. The project is named after Claudius
+Ptolemaeus, the second century Greek astronomer, mathematician, and
+geographer.
+
+Ptolemy II includes a growing suite of domains, each of which realizes
+a model of computation. It also includes a component library, in which
+most components are domain polymorphic, in that they can operate in
+several of the domains. Most are also data polymorphic, in that they
+operate on several data types. The domains that have been implemented
+are listed below. Some of these are preliminary and/or experimental,
+as indicated below.
+
+Ptolemy II 3.0 includes a HSIF to Ptolemy converter, the expression
+language has been reworked and the code generator updated.  It also
+includes a set of mature and experimental domains, and a more
+comprehensive actor library than previous releases.
+
+Below is a text version of the web page that describes the release.
+---start---
+                         Ptolemy II 3.0 Release Notes
+                                       
+   Ptolemy II is a set of Java packages supporting heterogeneous,
+   concurrent modeling and design. Its kernel package supports clustered
+   hierarchical graphs, which are collections of entities and relations
+   between those entities. Its actor package extends the kernel so that
+   entities have functionality and can communicate via the relations. Its
+   domains extend the actor package by imposing models of computation on
+   the interaction between entities. Examples of models of computation
+   include discrete-event systems, dataflow, process networks,
+   synchronous/reactive systems, and communicating sequential processes.
+   
+   Ptolemy II includes a number of support packages, such as data,
+   providing a type system, data encapsulation and an expression
+   parser, plot, providing visual display of data, math, providing
+   matrix and vector math and signal processing functions, and graph,
+   providing graph-theoretic manipulations.
+   
+   The Ptolemy II Design Document describes the Ptolemy II design and
+   the implementation of the Java classes.
+   
+   The "Using Vergil" chapter ( PDF - HTML) describes how to use
+   Vergil.
+   
+Complete List of Domains in Ptolemy II
+
+
+     * CI: component interaction (experimental),
+     * CSP: communicating sequential processes,
+     * CT: continuous-time modeling,
+     * DE: discrete-event modeling,
+     * DDE: distributed discrete events (experimental),
+     * DT: discrete time,
+     * FSM: finite state machines,
+     * Giotto: periodic time-driven (experimental),
+     * GR: 3-D graphics (experimental),
+     * PN: process networks,
+     * SDF: synchronous dataflow,
+     * SR: synchronous/reactive, and
+     * TM: timed multitasking (experimental).
+       
+Platforms
+
+
+   The core of Ptolemy II 3.0 is 100% Java, so it should work on any
+   platform that has JDK1.4 or later
+   
+   We developed Ptolemy II 3.0 under Solaris 8 and Windows XP sp1 and
+   with JDK1.4.1_02. Ptolemy II 3.0 will not compile under Java 1.3
+   because we use the java.lang.URI class, which is present only in Java
+   1.4 and later
+   
+Major Features that are new in Ptolemy 3.0
+
+
+     Continuous Time (CT) domain rework for improved mixed signal and
+       hybrid systems semantics (Jie Liu, Parc, and Haiyang Zheng).
+     Component Interaction Domain (Yang Zhao, Xiaojun Liu) - The CI
+       domain models systems that contain both data-driven and
+       demand-driven styles of computation.
+     Rework of FSM domain to support chained transitions and better
+       hybrid systems semantics (Haiyang Zheng).
+     Expression language rework to create a full-featured, functional and
+       higher-order expression language with extensive support for
+       composite types such as matrices, arrays, and records; the
+       expression language is also now fully integrated with the Ptolemy
+       II type system (Steve Neuendorffer, Edward A. Lee).
+     Configurations have been reworked to make it much easier to create
+       standalone tools that extract portions of the Ptolemy II
+       infrastructure and have customized user interfaces, documentation,
+       and actor and director libraries. Configurations have been
+       refactored into separate directories in $PTII/ptolemy/configs, and
+       one example of such a standalone tool, HyVisual, is provided.
+     Updates to Vergil, the user interface for building models (Steve
+       Neuendorffer, Edward A. Lee, John Reekie):
+          Run buttons on the toolbar and hotkeys.
+          Persistent window sizing and placement.
+          Undo/Redo.
+          Port Parameters.
+          vergil -help lists available configurations.
+          Full-screen mode for use in presentations.
+     Other user interface improvements (Steve Neuendorffer, Edward A.
+       Lee):
+          Interactive shells infrastructure.
+          An interactive expression shell using this infrastructure.
+          Infrastructure for specialized token viewers. Files with the
+            extension .ptd are now opened by a token viewer. The default
+            token viewers is a text editor, but others can be added in
+            the configuration.
+          A matrix token viewer.
+     HSIF Support (Haiyang Zheng). The Hybrid System Interchange Format
+       (HSIF), was developed by the Institute of Software Integrated
+       Systems (ISIS) at Vanderbilt University as part of the ISIS
+       MoBIES effort. The HSIF documentation states:
+        "The goal of HSIF is to define an interchange format for hybrid
+            system models that can be shared between modeling and
+            analysis tools. HSIF models represent dynamic systems, whose
+            dynamics includes both continuous and discrete behaviors."
+       Haiyang Zheng developed a set of XSLT files that convert HSIF into
+       MoML, the XML format used to represent Ptolemy II Models. See the
+       HSIF/MoML documentation.
+     A first version of higher-order components, the
+       MultiInstanceComposite actor (Zoltan Kemenczy and Sean
+       Simmons, Research In Motion, Ltd.). This actor creates a
+       parameterized number of instances of a composite actor.
+     Python integration, with a PythonScript actor that permits
+       definition of actors in Python (Xiaojun Liu). This uses
+       Jython, a Java implementation of Python.
+       
+Other Features that are new in Ptolemy II 3.0
+
+     * Ptolemy II Matlab interface updates (Zoltan Kemenczy and Sean
+       Simmons, Research In Motion, Ltd.):
+          Logical variable support for Matlab version 6.5 (R13).
+          Remove (the need for) ptmatlab.dll being in the user's path.
+          Removed warnings for gcc version 3.2 (used by latest cygwins).
+          Add support/configuration for building on Linux.
+       Resources:
+          Ptolemy II Matlab Interface Overview Java class
+            documentation
+          Matlab Expression Demonstration,
+          Matlab Continuous Time Demonstration
+       These demos require that Matlab be installed locally; they will
+       not work within an applet, but will work with Web Start.
+     * Code generator improvements (Steve Neuendorffer, Christopher
+       Hylands): The Java code generator now handles Expression actors.
+       The code generator now works with Java 1.4. The applet generator
+       has been extended to copy necessary jar files on an as needed
+       basis.
+     * FunctionToken class (Xiaojun Liu, Steve Neuendorffer): An
+       expression that defines a function can be passed among actors in a
+       function token.
+     * Transition Refinements: A transition in an FSM can have a
+       refinement, which is a model that executes when the refinement is
+       taken.
+     * FileAttribute class (Edward A. Lee). This attribute makes it
+       easy to create a parameter in an actor that represents a file or
+       resource. It supports specification of files using paths relative
+       to the model, the classpath, or the user directory. It also
+       provides a convenient user interface for selecting and accessing
+       files on the file system.
+     * ImageToken class (James Yeh): An abstract token that contains
+       images. Derived tokens such as AWTImageToken,
+       ptolemy.actor.lib.jai.JAIImageToken provide concrete classes.
+     * Interface to C actors using the Java Native Interface (Vincent
+       Arnould, Thales, contributor: Christopher Hylands): The jni
+       package contains a prototype of an interface between Ptolemy II
+       actors and C code by using the Java Native Interface (JNI). To use
+       this facility, you must download and install Ptolemy II from
+       source.
+       
+  New Demonstrations
+  
+     CI: Component Interaction
+          Router
+     CT: Continuous Time
+          Compared Clocks
+          Matlab Continuous Time Demonstration
+          HSIF Thermostat and Swimming Pool
+            This example shows a simple thermostat modeled as a hybrid
+            system. The purpose of the example is to demonstrate the
+            ability that HyVisual has to import models defined in HSIF,
+            the Hybrid System Interchange Format. To run HSIF models, you
+            must invoke Ptolemy II with the -hyvisual command line
+            argument or else run the HyVisual Web Edition. These models
+            will not work in a standard Ptolemy II vergil or Web Edition
+            because to support HSIF, we need to check xml each file to
+            see if it is an HSIF file of a MoML file. This check slows
+            Ptolemy II down slightly.
+            See the HSIF/MoML documentation for details.
+          HSIF Swimming Pool.
+            This example shows a simple hybrid system model of a pool.
+          Level Crossing Detector
+          Sampled Clocks
+     DE: Discrete Event
+          HOC DE (New in Ptolemy II 3.0)
+     FSM: Finite State Machine
+          Chained Transitions
+          Modal Binary Symmetric Channel
+          State Tracker
+     SDF: Synchronous Dataflow
+          DFT Subset
+          Fourier Series
+          Sound Spectrum
+       
+  New Actors
+  
+     * ptolemy.actor.lib:
+       
+        BusAssembler
+                (Zoltan Kemenczy, Research in Motion Limited) Assemble
+                input port channels into output bus.
+                
+        BusDisassembler
+                (Zoltan Kemenczy, Research in Motion Limited) split input
+                bus channels onto output port channels.
+                
+        Rician
+                (Rachel Zhou) An actor that outputs a random sequence
+                with a Rician distribution.
+                
+        Stop
+                (Edward A. Lee) An actor that stops a model executing
+                when it receives a true token.
+                
+        ThrowException
+                (Edward A. Lee) An actor that throws an exception when it
+                receives a true token.
+                
+        ThrowModelError
+                (Edward A. Lee) An actor that throws a model error when
+                it receives a true token.
+                
+     * ptolemy.actor.lib.comm:
+       
+        ConvolutionalCoder
+                (Rachel Zhou) Generate a convolutional code.
+                
+        DeScrambler
+                (Rachel Zhou) Descramble the input bit sequence using a
+                feedback shift register.
+                
+        HadamardCode
+                (Rachel Zhou) Produce a Hadamard codeword by selecting a
+                row from a Hadamard matrix.
+                
+        Scrambler
+                (Rachel Zhou) Given an input bit sequence, scramble it in
+                a pseudo random way.
+                
+        ViterbiDecoder
+                (Rachel Zhou) Viterbi Decoder.
+                
+     * ptolemy.actor.lib.conversions:
+       
+        ExpressionToToken
+                (Steve Neuendorffer) An actor that reads expressions and
+                parses them into tokens.
+                
+        TokenToExpression
+                (Steve Neuendorffer) An actor that converts tokens into
+                expressions.
+                
+     * ptolemy.actor.lib.jai:
+       
+        Java Advanced Imaging actors
+                (James Yeh) Actors that use the Java Advanced Imagining
+                framework
+                
+     * ptolemy.actor.lib.jmf:
+       
+        Java Media Framework actors
+                (James Yeh) Actors that use the Java Media Framework
+                
+Backward compatibility issues
+
+   Most models developed under Ptolemy II 1.0.1 or 2.0.1 or HyVisual
+   2.2-beta should run under Ptolemy II 3.0. The MoMLParser includes a
+   list of backward compatibility filters that make certain changes on
+   models when read, handling such issues as actors being moved or
+   renamed and parameter names being changed. The filters themselves are
+   defined in ptolemy.moml.filter. If you have developed your own
+   actors under Ptolemy II 2.0.1 by writing your own Java files, you
+   should recompile all your Java code with the new release. In theory,
+   copying the .class files should work, but recompiling is safer.
+   
+   Not all changes can be handled automatically, since some have semantic
+   content. We begin with a description of the changes that are not
+   handled, followed by a description of changes that are handled.
+   
+  Backward compatible issues that are not handled automatically
+  
+     In the CT (continuous-time) domain, instances of Clock and
+       TriggeredClock very likely should be manually changed to
+       ContinuousClock and TriggeredContinuousClock. The reason for this
+       is that we have made progress on the semantics of signals with
+       discontinuities and have improved the software implementation. We
+       created a new set of clocks for the CT domain. ContinuousClock and
+       TriggeredContinuousClock generate piecewise constant signals with
+       discontinuities. The discontinuities are correctly handled
+       regardless of step sizes, and threshold crossing detectors
+       properly identify discrete transitions across the threshold. In
+       principle, Clock and TriggeredClock can still be used in CT
+       models, e.g. to generate a sequence of events, but it is better to
+       use the EventSource actor for this purpose.
+     In hybrid systems models (CT + FSM), the signal types for modal
+       models may not be inferred as expected. If a modal model has both
+       continuous and discrete signal types at its inputs, it may need
+       manual adjustment of the output signal types. To do this, right
+       click an output port and add a "signalType" parameter; then set
+       the value of the parameter to "CONTINUOUS" or "DISCRETE" depending
+       on your needs.
+     AudioReader now uses a FileAttribute instead of a string valued
+       parameter. The name of this parameter has changed from sourceURL
+       to fileOrURL to conform with LineReader and ExpressionReader.
+     Longs are now printed with a trailing capital L character.
+     We have improved the way that the SDF (synchronous dataflow) domain
+       implements rate propagation. Previously, SDF would infer the rates
+       of ports of an SDF model, and create parameters named
+       "tokenConsumptionRate" "tokenInitProduction" and
+       "tokenConsumptionRate". However, this has two bad side effects:
+         1. If a port has these parameters already, then the SDF
+            scheduler overrides them. This may not be correct.
+         2. If a port has these parameters already, then running a model
+            will mark it dirty, resulting in a prompt to save the model
+            on exit.
+       We've changed this so that it sets these values only if the
+       parameters do not exist already, and stores them in new attributes
+       called "_tokenConsumptionRate" "_tokenInitProduction" and
+       "_tokenConsumptionRate". These are transient (instances of
+       Variable rather than Parameter), so they will not trigger a prompt
+       to save.
+       
+  Backward compatible issues that are handled automatically
+  
+     ptolemy.moml.filter.AddEditorFactory: If a parameter has a
+       _location, then add a VisibleParameterEditorFactory named
+       _editorFactory. This supports double clicking on visible
+       parameters.
+     ptolemy.moml.filter.AddIcon: Add specialized icons that display in
+       Vergil the value of one of the parameters or certain actors. The
+       affected actors are:
+          ptolemy.actor.lib.Const
+          ptolemy.actor.lib.MathFunction
+          ptolemy.actor.lib.TrigFunction
+          ptolemy.actor.lib.Scale
+          ptolemy.actor.lib.Expression
+     ptolemy.moml.filter.ClassChanges: change class names that have been
+       renamed or moved to a different package. The changes are:
+          ptolemy.kernel.util.VersionAttribute ->
+            ptolemy.kernel.attributes.VersionAttribute
+          ptolemy.moml.Location -> ptolemy.kernel.util.Location
+          ptolemy.actor.lib.comm.SerialComm ->
+            ptolemy.actor.lib.io.comm.SerialComm
+     ptolemy.moml.filter.HideAnnotationNames: If an annotation name ends
+       with 'annotation1', then add _hideName if necessary. This prevents
+       labels from appearing above visible parameters in Vergil.
+     ptolemy.moml.filter.ParameterNameChanges: Update any Parameter names
+       that have been changed. Below are the actors that are affected,
+       along with the Parameter name and the new name:
+          ptolemy.domains.pn.kernel.PNDirector
+               Initial_queue_capacity -> initialQueueCapacity
+     ptolemy.moml.filter.PortNameChanges: Update any actor port names
+       that have been changed. Below are the actors that are affected,
+       along with the old port name and the new port name:
+          ptolemy.actor.lib.conversions.CartesianToComplex
+               imag -> y
+               real -> x
+          ptolemy.actor.lib.Sleep
+               delay -> sleepTime
+          ptolemy.actor.lib.conversions.ComplexToCartesian
+               imag -> y
+               real -> x
+     ptolemy.moml.filter.PropertyClassChanges: Update any actor port
+       class names that have been changed. Below are the actors that are
+       affected, along with the port name and the new classname:
+          ptolemy.domains.sdf.lib.vq.HTVQEncode
+               input -> ptolemy.actor.TypedIOPort
+               output -> ptolemy.actor.TypedIOPort
+          ptolemy.domains.sdf.lib.vq.VQDecode
+               input -> ptolemy.actor.TypedIOPort
+               output -> ptolemy.actor.TypedIOPort
+          ptolemy.domains.sdf.lib.vq.ImagePartition
+               input -> ptolemy.actor.TypedIOPort
+               output -> ptolemy.actor.TypedIOPort
+          ptolemy.domains.sdf.lib.vq.ImageUnpartition
+               input -> ptolemy.actor.TypedIOPort
+               output -> ptolemy.actor.TypedIOPort
+          ptolemy.actor.lib.Expression
+               expression -> ptolemy.kernel.util.StringAttribute
+   
+Limitations
+
+   Version 3.0 has the following limitations:
+   
+  Release Limitations
+  
+     * 3.0-beta issues
+          + The following documentation has not yet been updated for 3.0:
+            Using Vergil, the Expressions documentation
+          + The Design Document is not included in 3.0-beta, we will
+            include it in the production release of 3.0
+     * The gzipped tar file that contains the Ptolemy II distribution
+       requires GNU tar or WinZip. Solaris 2.5.1 tar will fail to untar
+       this file with a checksum error because the pathnames are longer
+       than 100 characters. If you do not have GNU tar, you can obtain
+       source and selected binaries from
+       ftp://ptolemy.eecs.berkeley.edu/pub/gnu.
+       Note further that some of the .class names are longer than 31
+       characters, which may cause problems when downloading zip files on
+       the Macintosh and using Stuffit.
+     * The documentation for custom actors used in demonstrations is not
+       included in the release. The source code for the custom actors can
+       be found in the source download.
+     * If a URL ends with #in_browser, then Ptolemy II will invoke the
+       User's web browser. Unfortunately, this does not always work,
+       especially under Windows if Netscape is already running. The
+       workaround is to exit Netscape and let Ptolemy II start up
+       Netscape for you.
+     * Web Start does not work very well if the pathname to the
+       vergil.jnlp file has spaces in it. The workaround is to place your
+       Ptolemy II tree in a directory that does not have spaces in the
+       path name if you plan on using Web Start.
+     * Applet issues:
+          + We've experienced problems with the browser freezing when
+            between applets. What happens is that the previous applet
+            gets a InterruptedException and pops up a modal dialog box,
+            which freezed the browser. We are working on a solution.
+          + The Ptolemy II Applets require Java 1.4.1_02 so as to prevent
+            problems with Windows XP and Radeon displays that causes XP
+            to hang when a Java application is exiting. For details, see
+            http://developer.java.sun.com/developer/bugParade/bugs/47
+            13003.html
+            For non-applet situations, we can invoke the browser with
+            -Dsun.java2d.d3d=false or -Dsun.java2d.noddraw=true, but for
+            applets we must require Java 1.4.1_02 or later.
+            As a result, the applet html code requires version 1.4.1_02,
+            so if you have 1.4.2 installed, you may need to reinstall the
+            1.4.1_02 JRE for the applets to work.
+          + Applets seem to run out of memory after about 82Mb.
+          + There are no Jython or Cal applets
+          + Opera has problems viewing applets that are on the local file
+            system. In particular, it seems to have problems with urls
+            like file:///d|/ptII/ptolemy/plot/demo/FourierSeries.htm
+            which work fine in Netscape 4.x, IE, Mozilla.
+            However, if I use the following style of URL, then some of
+            the applets work:
+            file://localhost/d:/ptII/ptolemy/plot/demo/FourierSeries.htm.
+            Unfortunately any applet that accesses a data file will not
+            work with the above URL style because the data file will be
+            outside the codebase.
+            The solution is to install a web server on the local machine
+            and view the applets using http://localhost/
+          + Opera 6.03/Windows 2000/Java 1.4.0, may have problems running
+            applets that include diva.jar if diva.jar is not downloaded
+            in the first applet. To reproduce this problem:
+              1. Run SDF Butterfly, which does not use diva.jar
+              2. SDF Expression, which uses diva.jar
+              3. In Opera, do Window -> Special -> Java Console, and you
+                 will see the following stack trace
+                 java.lang.NoClassDefFoundError: diva/graph/GraphController
+                 at java.lang.Class.getDeclaredConstructors0(Native Method)
+                 at java.lang.Class.privateGetDeclaredConstructors(Class.java:1576)
+                 at java.lang.Class.getConstructor0(Class.java:1748)
+                 at java.lang.Class.newInstance0(Class.java:266)
+                 at java.lang.Class.newInstance(Class.java:249)
+                 at opera.PluginPanel.run(opera/PluginPanel.java:343)
+                 at java.lang.Thread.run(Thread.java:536)
+            The problem only occurs under Opera.
+          + Running the Networked demo via an applet on the local file
+            system results in an AccessControlException.
+            com.microstar.xml.XmlException: XML element "entity" triggers exception:
+              java.lang.Exception: Attempted to lookup 'Waveform', but got:
+              java.lang.ClassNotFoundException: Waveform
+              Attempted to find as a moml class, but got:
+             java.security.AccessControlException: access denied
+             (java.net.SocketPermission ptolemy.eecs.berkeley.edu resolve)
+             in file:/C:/Program Files/Ptolemy/Ptolemy II 3.0 beta2/
+                   ptolemy/moml/demo/Networked/ at line 62 and column 118
+
+            The Network demo does not work as a local applet because the
+            xml file includes a reference to
+            http://ptolemy.eecs.berkeley.edu, which is not on the local
+            file system, so we get a SecurityException.
+            The workaround is to run the applet by downloading it from
+            the Ptolemy Website:
+            http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII3.0/ptII3.
+            0/ptolemy/moml/demo/Networked/Networked.htm
+     * Windows Installer Issues:
+          + The Interface to C actors using the Java Native Interface is
+            not available via the Windows Installer (or Web Start). To
+            use the JNI/Ptolemy II interface, you must download Ptolemy
+            II as source files and compile.
+          + Sometimes running a model that uses the Matlab interface will
+            cause Ptolemy II to exit. We are not sure why.
+          + The Windows task bar shows a 'Launch Anywhere' icon instead
+            of a Vergil Icon.
+          + The Cal facility does not work because Cal requires
+            saxon7.jar yet having saxon7.jar in the classpath causes
+            problems for the Hyvisual HSIF to MoML converter.
+     * Web Start issues:
+          + The Python Ptolemizer demo does not work under Web Start,
+            probably because Jython cannot handle loading classes from
+            the Ptolemy II classes.
+          + Viewing a pdf file may bring up a blank window along with the
+            pdf file. Running the code generator may bring up a blank
+            window while the java or javac processes are running.
+          + Some of the links on the GR domain instructions page might
+            not work under Web Start because the files they refer to are
+            not present.
+     * Limitations in demonstrations
+          + CT CarTracking should be run using View->Run so that the user
+            can change the fault parameter.
+          + HTVQ demo: The displays do not go away when the demo is
+            exited.
+          + GR demos: The ViewScreen actor does not go away when the demo
+            is exited.
+          + GR demos: Under Java 3D 1.3.1-beta, the ViewScreen actor may
+            display a black image when a second GR demo is run.
+            The workaround is to install Java 3D 1.2.1_04.
+          + Bouncer demo: If the user drags the bouncing icon, it no
+            longer bounces
+          + TM Merged Events: Clicking on the 'Plot Schedule' icon brings
+            up a plot, but the plot remains empty, the schedule never
+            appears
+       
+  Limitations in the Actor Libraries
+  
+     * The actor library is far from complete.
+     * The Expression actor does not properly propagate type constraints
+       in an expression-dependent fashion. It works correctly for
+       double-valued expressions of double-valued inputs.
+     * The Ptolemy parameter parser uses comma "," to separate elements
+       in an array. This causes problems when Ptolemy is run on European
+       machines that use a comma "1,0" instead of a period "1.1" in
+       floating point numbers.
+     * The readFile() parameter function does not work with applets.
+     * The Matlab interface works only under Windows and it requires that
+       Matlab be installed on the local machine. The Matlab interface
+       should work with version of Matlab from R11 (5.3) and up to and
+       including R13 (6.5)
+       Didier Mauuary reports that under Windows 98, configure failed to
+       set up the MATLAB_DIR, PTCC and PTDLLTOOL makefile variables, but
+       after he set them by hand:
+ MATLAB_DIR = /cygdrive/c/MATLABR11
+ PTCC = gcc
+ PTDLLTOOL = dlltool
+       he was able to get farther with the recompilation of the Matlab
+       interface.
+     * The actor.lib.comm.SerialComm actor requires that Javacomm is
+       installed http://java.sun.com/products/javacomm/index.html.
+       The SerialComm actor will only work under Windows.
+       
+  Limitations in the PN Domain
+  
+   The PN domain documents that it locally handles mutations. However,
+   this is currently not true in the implementation. For the basic PN
+   model, this doesn't really matter, since mutations happen pretty much
+   the same as they would otherwise. (i.e. they are non-deterministic in
+   when they execute) However, for timed PN models, there is actually
+   some expressiveness lost, since timed PN models can locally execute
+   mutations deterministically.
+   
+  Limitations in the User Interface
+  
+   Below are some of the limitations of Vergil, the Ptolemy II Graphical
+   User Interface.
+     * If there are multiple windows open for a model, say, the top level
+       vergil window and the tree view, or the top level window and the
+       inside look of a composite component, when the top level window is
+       closed, all other windows are closed, but the user is not prompted
+       to save any change to the model.
+     * When setting the type of a port, we should provide a combo box
+       that lists the common ports
+     * When creating a Modal Model, use Control-Right-Button to drawn
+       arcs between nodes. One potential workaround would be to have an
+       information message in the status bar about this.
+     * You should not change the names of built in ports - The port
+       mechanism should disallow port name changes on ports that are
+       named in Java. The UI could recognize this. The UI should not
+       allow the user to remove built in Java defined ports.
+     * Manually setting of the types of actors like ArrayToSequence that
+       have constraints on their element types can cause problems.
+     * HTVQ demo is badly laid out when run under vergil.
+     * Weak support for multiports in the graph editor.
+     * It is difficult to control wire routing.
+     * Cannot have more than one vertex in a connection.
+     * No mechanism to set the width of a relation.
+     * The integrated web browser is not a full-featured browser.
+     * Icon editor not yet integrated.
+     * Debugger not yet integrated.
+     * It is difficult to add actors to the libraries.
+     * No dynamic class reloading.
+       
+  Code Generation Limitations
+  
+   Code Generation limitations are covered on the Code Generation
+   page.
+   
+  Missing Domains
+  
+     * Boolean and integer dataflow.
+     * Dynamic dataflow
+       
+   For limitations discovered after the release, see the Ptolemy II
+   3.0 website
+   
+   Last Updated: $Date$
+
+
+--end--
