@@ -21,7 +21,7 @@ ABSTRACT
 <p> This work is focused on the design of a modular and extensible 
 user interface toolkit for Ptolemy II that is rich and powerful, 
 yet also intuitive and relatively simple to learn.  
-<a href="http://ptolemy.eecs.berkeley.edu/java/vergil>Vergil</a> 
+<a href="http://ptolemy.eecs.berkeley.edu/java/vergil" target="_top">Vergil</a> 
 uses an interactively editable block diagram to represent a Ptolemy II model.
 The block diagram
 editor can be used to construct and configure the model prior to execution
@@ -44,7 +44,7 @@ styles.
 <p>
 Vergil is built entirely using Java, Swing and the Java2D graphics package.  
 The block diagram editor makes use of the
-<a href="http://www.gigascale.org/diva">Diva</a> graphics framework for
+<a href="http://www.gigascale.org/diva" target="_top">Diva</a> graphics framework for
 manipulating figures.
 
 <p> Although this work is an important part of Ptolemy II, it is
