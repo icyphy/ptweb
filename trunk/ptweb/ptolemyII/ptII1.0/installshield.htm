@@ -22,10 +22,26 @@ Ptolemy II is installed.
 <li> Installing a bundled JRE does not work well so we don't use it.
 Installshield Multiplatform edition can be configured to download a
 JVM, but the JVM gets installed in a _jvm directory and is not added
-to Add/Remove Programs and the browswers can't use the plugin.  
-<li> Installshield Multiplatform Edition can't update environment variables,
-so the user's path is not updated to include the directory where
-<CODE>vergil.exe</CODE> is located.
+to Add/Remove Programs and the browswers can't use the plug-in.  
+
+ <br>The JRE is roughly 5Mb in size, so it is not feasible to 
+require users who are downloading small applications to pull over
+a 5Mb file they may or may not need.
+
+<li> Before upgrading your JVM, you should uninstall Ptolemy II.  The
+uninstaller may not work if the JVM that was used at install time
+cannot be found.
+
+<li> If you upgrade your JVM, then you may need to reinstall Ptolemy II.
+The problem here is that the Installshield Launcher that is run
+from the Start menu has the JVM that was found at install time hardwired
+into it.  Sadly, the launcher will not try to find another JVM
+if the installtime JVM is not found.
+
+<li> Installshield Multiplatform Edition 4.0 can't update environment
+variables, so the user's path is not updated to include the directory
+where <CODE>vergil.exe</CODE> is located.  This might be fixed in
+Installshield Multiplatform 4.01.
 
 </menu>
 
@@ -57,7 +73,7 @@ The launchers then also verify the JVM and start up Vergil.
  <p>You can generate a log file that contains the Java verification steps 
 by running the following command in Cygwin Bash:
 <pre>
-e:/ptII1_0setup.exe -is:logfile c:/tmp/log.txt
+e:/ptII1_0_1setup.exe -is:logfile c:/tmp/log.txt
 </pre>
 By reviewing the output, you might be able to determine where
 the Installer is looking for the JVM 
@@ -69,22 +85,22 @@ The Installshield installer and launchers contain several files
 that can be extracted with the <CODE>-is:extract</CODE> command
 
 <pre>
-bash-2.03$ ./ptII1_0setup.exe -is:extract
+bash-2.03$ ./ptII1_0_1setup.exe -is:extract
 bash-2.03$ ls
-Verify.class          ptII1_0setup.jar      sun_win32_131001.jvm
+Verify.class          ptII1_0_1setup.jar      sun_win32_131001.jvm
 ibm_win32_122.jvm     sun_win32_122.jvm     sun_win32_131002.jvm
 ibm_win32_130.jvm     sun_win32_13.jvm      sun_win32_13101.jvm
 input.tag             sun_win32_13001.jvm   sun_win32_13102.jvm
 instructions.txt      sun_win32_13002.jvm   sun_win32_131b.jvm
 launch.txt            sun_win32_13003.jvm
-ptII1_0setup.exe      sun_win32_131.jvm
+ptII1_0_1setup.exe      sun_win32_131.jvm
 bash-2.03$
 </pre>
 
 You can try running the installer by hand, without running
 the verification step:
 <pre>
-java -jar ptII1_0setup.jar
+java -jar ptII1_0_1setup.jar
 </pre>
 Note that the Installshield launchers will still try to verify
 the JDK version, so they are unlikely to work if the Installshield
@@ -117,7 +133,7 @@ The Installshield verification step is likely to reject non-standard JVMs
 <dt> <CODE>-is:log <I>logfile</I></CODE>
 <dd> Send log output to <CODE><I>logfile</I></CODE>
 To generate a log file, run
-<CODE>e:/ptII1_0setup.exe -is:logfile c:/tmp/log.txt</CODE>
+<CODE>e:/ptII1_0_1setup.exe -is:logfile c:/tmp/log.txt</CODE>
 
 <dt> <CODE>-is:silent</CODE>
 <dd> Run in silent mode?
