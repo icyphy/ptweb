@@ -14,14 +14,47 @@ a similar list.
 
  <p>Below we list limitations found after the Ptolemy II 1.0 beta release.
 
+<h2>Installer limitations</h2>
 
 <menu>
-
-<li> The tutorials in doc/tutorial do not compile
 <li> We have only tested the Installshield Installers under Windows 2000 and Windows 98.  Unix users should install from the 
 <a href="ptII1.0beta.src.tar.gz"><CODE>ptII1.0beta.src.tar.gz</CODE></a>
 tar file and
 follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>
+
+
+<li> In the full Windows installer, the Ptiny choice does not install
+exactly the same files as the Ptiny choice in the Ptiny Windows
+installer.  The Ptiny choice in the full installer does not install a
+subset of the Java documentation.
+
+
+<li> During uninstall, message about intro.htm comes up because
+we install it twice.  The solution is to use a conditional??
+</menu>
+
+<h2>Runtime limitations</h2>
+<menu>
+<li> Security concern dialog comes up when we run any model
+that contains a Sinewave actor via an applet.
+ <br>The problem
+is that the model is, in fact, being loaded over the net.
+So the warning is correct.  However, the _entire model_
+is being loaded over the net into an applet, so the warning
+need not be displayed.
+
+<li> Running the Networked demo via an applet on the local
+file system results in an AccessControlException.
+
+<li> <code>vergil foo</code> hangs.  No window comes up if foo does not exist.
+
+</menu>
+
+<h2>Compilation limitations</h2>
+
+<menu>
+<li> The tutorials in doc/tutorial do not compile
+
 </menu>
 
 If you find bugs, check the limitations page inside Vergil, then
