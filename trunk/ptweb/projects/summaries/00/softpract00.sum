@@ -10,18 +10,21 @@ http://ptolemy.eecs.berkeley.edu/
 PHONE
 
 TITLE
-Software Design Practices in an Academic Setting
+Software Engeneering Practices in an Academic Setting
 
 CHAPTER
 02.cad
 
 ABSTRACT 
 
-The Ptolemy Project has an extensive history of releasing freely
-available software.  In the past, software development efforts in
-academia have often relied upon the super-human efforts of the 'hero
-programmer'.  When the star programmer leaves, software quality
-sometimes suffers.
+The Ptolemy Project has an extensive history of making research
+results available in the form of controlled releases of the software
+for the general research community.
+In the past, software development efforts in
+academia have often relied upon the personal quality standards 
+of a few individuals. Sometimes there is the super-human effort of the 'hero
+programmer'. This makes it hard to produce well-defined quality software
+with a team of people.
 
 <p>Our group has developed a set of methods for training new software
 developers, passing on good software practices and collaborating as a
@@ -36,7 +39,9 @@ regular design and code reviews of software under development.
 <p>One outgrowth of the design and review system was to implement
 a code rating system, where code that is less stable is red, 
 code that has been design reviewed is yellow, and code
-that has been design and code reviewed is green.
+that has been design and code reviewed is green. This made the
+design of the code a subject that can be explicitly discussed in the
+team and has also increased the overall quality of the results.
 
 <p>The Ptolemy project has a long standing tradition of nightly builds,
 but after studying development processes, we decided to make the build

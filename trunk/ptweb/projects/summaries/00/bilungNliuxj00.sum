@@ -19,14 +19,14 @@ CHAPTER
 ABSTRACT 
 
 Most modern systems include control functionality for the proper
-sequencing of the computation tasks, and switching and coordinating between
+sequencing of the computation tasks, and for switching and coordinating between
 different operation modes. Finite state machines (FSMs) have long
 been used to specify control flow for control-dominated problems. In large
 systems, however, the control functionality can become so complex that the
 flat, sequential FSM model becomes impractical.
 <P>
 Hierarchical concurrent FSMs (HCFSMs) increase the usefulness of FSMs by
-extending with structuring and communication mechanisms. However, most
+extending them with structuring and communication mechanisms. However, most
 formalisms that support HCFSMs, such as Statecharts and its variants,
 tightly integrate the concurrency semantics with the FSM semantics.
 In our approach [1], we add hierarchy and heterogeneity to the FSM. This allows

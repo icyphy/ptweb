@@ -19,8 +19,8 @@ CHAPTER
 ABSTRACT 
 
 Novel high-performance, domain specific, embedded architectures are
-more and more composed of a microprocessor, some memory, and a number
-of dedicated coprocessors. Onto these embedded architectures,
+often composed of a microprocessor, some memory, and a number
+of dedicated coprocessors. On these embedded architectures,
 real-time applications will be executed that belong to the domain of
 multi-media processing, mobile communication, and adaptive array
 processing. These applications are in general written in the C or
@@ -37,15 +37,15 @@ lot of parallelism. Compilers exist that are able to extract
 instruction level parallelism from the original specifications at a
 very fine level of granularity. They are, however, unable to exploit
 coarse-grained parallelism offered by the coprocessors of the
-architectures. Instead, a better specification format would be to use
-an inherent parallel model of computation like Process Networks.
+architectures. A better specification format would be to use
+an inherently parallel model of computation like Process Networks.
 
 <P>
 
 This research focuses on the automatic transformation of Nested Loop
 Programs into Process Network specifications. This work is done in
 cooperation with Delft University of Technology. The transformation
-consists of a few steps.
+consists of a number of steps.
 
 <ol> 
 
@@ -69,8 +69,8 @@ actors from the polyhedral reduced dependence graph model.
 
 </ol>
 
-The resulting process network model is made accessible in the Process
-Networks (PN) domain of the Ptolemy II system. This allows the
+The resulting process network model is presented in the Ptolemy II system. 
+This allows the
 combination of the derived process network description with other
 domains, thus enabling the description and simulation of more complex
 systems. Also, by attributing the process network model with power and

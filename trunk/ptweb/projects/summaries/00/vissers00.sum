@@ -1,12 +1,14 @@
 NAMES
-Tom Henzinger, Edward A. Lee, Alberto Sangiovanni-Vincentelli, Kees A. Vissers 
-(Visiting Industrial Fellow)
+<A HREF="http://www-cad.eecs.berkeley.edu/~tah">Tom Henzinger
+<A HREF="http://ptolemy.eecs.berkeley.edu/~eal">Edward A. Lee
+<A HREF="http://www-cad.eecs.berkeley.edu/~alberto">Alberto Sangiovanni-Vincentelli
+<A HREF="http://ptolemy.eecs.berkeley.edu/~vissers">Kees A. Vissers (Visiting Industrial Fellow)
 
 EMAIL
 vissers@eecs.berkeley.edu
 
 HOMEPAGE
-http://ptolemy.eecs.berkeley.edu/~vissers
+http://ptolemy.eecs.berkeley.edu/~{eal,vissers}
 
 PHONE
 510 643 7683
