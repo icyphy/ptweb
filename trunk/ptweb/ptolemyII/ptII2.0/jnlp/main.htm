@@ -18,7 +18,7 @@
         function insertLink(url, name) { 
         	if (javawsInstalled) { 
                 	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
-                	document.write("<li> <a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh?>Install Web Start from Sun</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
+                	document.write("<li> <a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh? target="_top">Install Web Start from Sun (5.3Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
   
               } 
         } 
@@ -51,7 +51,7 @@
 
              <!-- 
              insertLink("vergil.jnlp", 
-                        "Ptolemy II 2.0 Web Edition Download"); 
+                        "Ptolemy II 2.0 Web Edition Download (~10Mb)"); 
              // --> 
      </SCRIPT> 
    </ol> 
@@ -62,21 +62,23 @@
  <p> <p>
 <h2>Installation Details</h2>
 
-<a href="http://java.sun.com/products/javawebstart/">Web Start</a>
+<a href="http://java.sun.com/products/javawebstart/" target="_top">Web Start</a>
 is a product from Sun that is used to download the Ptolemy II 2.0 Web Edition.
 
 <ol>
-<li> This web page attempts to detect whether Java Web Start
+<li> This web page attempts to detect whether Web Start
 is already installed.  If the Quick Steps list above 
 contains
 
 <BLOCKQUOTE>
-<a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh?>Install Web Start from Sun</a>
+<a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?" target="_top">Install Web Start from Sun</a>
 </BLOCKQUOTE>
 
-then download and install Java Web Start by following
-the  <a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install
-Web Start from Sun</a> link.  If the bold text is not present, then
+then download and install Web Start by following
+the
+<a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?" target="_top">Install Web Start from Sun</a>
+
+link.  If this step is not present, then
 Web Start is already installed and you can proceed with clicking
 on the 
 <BLOCKQUOTE>
@@ -97,15 +99,15 @@ downloading the <a href="vergil.jnlp">Ptolemy II 2.0 Web Edition Download</a>,
 it could be that the Web Start detection has failed even though
 Web Start is properly installed.
 
+<li> The download is roughly 10Mb, 
+roughly half the size of the application download is consumed
+by the HTML documentation of the Ptolemy II Java classes.
+
 <li> Note that the Ptolemy II Web Start applications may be
 signed with a certificate that is not registered with a certificate
 authority, so you may be prompted with a window stating
 that the certificate from <CODE>Claudius Ptolemaus</CODE> is unknown.
 You should hit the <CODE>OK</CODE> button to proceed with start up.
-
-<li> The download is roughly 10Mb, 
-roughly half the size of the application download is consumed
-by the HTML documentation of the Ptolemy II Java classes.
 
 </ol>
 
