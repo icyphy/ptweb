@@ -2,6 +2,8 @@
 <!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
     "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
 <class name="Waveform" extends="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.util.VersionAttribute" value="2.1-devel">
+    </property>
     <property name="samplingFrequency" class="ptolemy.data.expr.Parameter" value="8000.0">
     </property>
     <property name="frequency" class="ptolemy.data.expr.Parameter" value="440.0">
@@ -9,7 +11,7 @@
     <property name="phase" class="ptolemy.data.expr.Parameter" value="0.0">
     </property>
     <property name="0:1:0:0:0:0:annotation1" class="ptolemy.kernel.util.Attribute">
-        <property name="_location" class="ptolemy.moml.Location" value="139.0, 275.0">
+        <property name="_location" class="ptolemy.moml.Location" value="45.0, 230.0">
         </property>
         <property name="_iconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
             <configure>
@@ -19,9 +21,11 @@ sinusoid and adds Gaussian noise to it.</text>
            </svg>
            </configure>
         </property>
+        <property name="_hideName" class="ptolemy.data.expr.Parameter">
+        </property>
     </property>
     <property name="0:0:0:0:annotation1" class="ptolemy.kernel.util.Attribute">
-        <property name="_location" class="ptolemy.moml.Location" value="214.0, 65.0">
+        <property name="_location" class="ptolemy.moml.Location" value="180.0, 10.0">
         </property>
         <property name="_iconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
             <configure>
@@ -34,6 +38,12 @@ http://ptolemy.eecs.berkeley.edu/xml/models/Waveform.xml</text>
            </svg>
            </configure>
         </property>
+        <property name="_hideName" class="ptolemy.data.expr.Parameter">
+        </property>
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[600, 400]">
+    </property>
+    <property name="_vergilLocation" class="ptolemy.actor.gui.LocationAttribute" value="[104, 127]">
     </property>
     <port name="output" class="ptolemy.actor.TypedIOPort">
         <property name="output"/>
@@ -76,6 +86,12 @@ http://ptolemy.eecs.berkeley.edu/xml/models/Waveform.xml</text>
         </property>
         <property name="_location" class="ptolemy.moml.Location" value="243.0, 168.0">
         </property>
+        <property name="_icon" class="ptolemy.vergil.icon.AttributeValueIcon">
+            <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="function">
+            </property>
+            <property name="displayWidth" class="ptolemy.data.expr.Parameter" value="6">
+            </property>
+        </property>
         <port name="input" class="ptolemy.actor.TypedIOPort">
             <property name="input"/>
         </port>
@@ -101,6 +117,12 @@ http://ptolemy.eecs.berkeley.edu/xml/models/Waveform.xml</text>
             </property>
         </property>
         <property name="_location" class="ptolemy.moml.Location" value="343.0, 174.0">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.AttributeValueIcon">
+            <property name="attributeName" class="ptolemy.kernel.util.StringAttribute" value="function">
+            </property>
+            <property name="displayWidth" class="ptolemy.data.expr.Parameter" value="6">
+            </property>
         </property>
         <port name="firstOperand" class="ptolemy.actor.TypedIOPort">
             <property name="input"/>
