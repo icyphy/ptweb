@@ -1,0 +1,46 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>TinyGALS</title>
+</head>
+<body>
+
+<h1>TinyGALS</h1>
+We are announcing the alpha release of galsC, a language and compiler
+for use with the TinyGALS programming model, which uses 
+<a href="http://webs.cs.berkeley.edu/tos/" target="_top">TinyOS</a> as the
+underlying component model.  galsC is compatible with TinyOS 1.x and
+nesC 1.1.1.  You can use the galsC compiler to compile all your
+existing TinyOS programs.
+
+<p>TinyGALS is a globally asynchronous, locally synchronous model for
+programming event-driven embedded systems, especially sensor
+networks.  At the local level, software components communicate with
+each other synchronously via method calls.  Components are composed to
+form actors.  At the global level, actors communicate with each other
+asynchronously via message passing, which separates the flow of
+control between actors.  A complementary model called TinyGUYS is a
+guarded yet synchronous model designed to allow thread-safe sharing of
+global state between actors without explicitly passing messages.  The
+TinyGALS programming model is structured such that code for all
+inter-actor communication, actor triggering mechanisms, and access to
+guarded global variables can be automatically generated from a high
+level specification.
+
+<p>By raising concurrency concerns above the level of TinyOS components,
+the TinyGALS programming model allows programmers to focus on the main
+tasks that the application must execute.  Programs developed using
+this task-oriented model are thread safe and easy to debug.
+
+<p>For more information and download instructions, please see:
+<a href="http://galsc.sourceforge.net/" target="_top">http://galsc.sourceforge.net/</a>
+
+<p>To receive future announcements about galsC, please sign up here:
+<a href="http://lists.sourceforge.net/lists/listinfo/galsc-announce" target="_top">http://lists.sourceforge.net/lists/listinfo/galsc-announce</a>
+
+
+<p><font size="2" color="#cc0000">Last Updated: $Date$</font>
+</body>
+</html>
