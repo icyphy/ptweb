@@ -27,6 +27,6 @@ DSP's do have C compilers, which frequently generate optimized code. So
 the goal of the project is to generate C code from a Ptolemy II SDF system.
 To reach that goal, we must have the ability to translate ordinary Java code 
 into C code as well, which would be useful to many Java programmers. Once
-we have that abiility, we will optimize the communication between SDF actors,
+we have that ability, we will optimize the communication between SDF actors,
 to produce C code that is reasonably efficient.  
 
