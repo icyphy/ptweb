@@ -7,14 +7,14 @@
 <!-- The top-level element can be either model or class. -->
 
 <!ELEMENT model (class | configure | deleteEntity | deletePort |
-		deleteRelation | director | doc | entity | import | link |
-                property | relation | rendition | unlink)*>
+		deleteRelation | director | doc | entity | group | import |
+                input | link | property | relation | rendition | unlink)*>
 <!ATTLIST model name CDATA #REQUIRED
                 class CDATA #IMPLIED>
 
 <!ELEMENT class (class | configure | deleteEntity | deletePort |
 		 deleteRelation | director | doc |
-                 entity | import | link |
+                 entity | group | import | input | link |
                  property | relation | rendition | unlink)*>
 <!ATTLIST class name CDATA #REQUIRED
                 extends CDATA #IMPLIED>
@@ -28,6 +28,9 @@
 <!ELEMENT deletePort EMPTY>
 <!ATTLIST deletePort name CDATA #REQUIRED>
 
+<!ELEMENT deleteProperty EMPTY>
+<!ATTLIST deleteProperty name CDATA #REQUIRED>
+
 <!ELEMENT deleteRelation EMPTY>
 <!ATTLIST deleteRelation name CDATA #REQUIRED>
 
@@ -36,17 +39,24 @@
                    class CDATA #REQUIRED>
 
 <!ELEMENT doc (#PCDATA)>
+<!ATTLIST doc name CDATA "_doc_">
 
 <!ELEMENT entity (class | configure | deleteEntity | deletePort |
 		  deleteRelation | director | doc |
-                  entity | import | link | port |
+                  entity | group | import | input | link | port |
                   property | relation | rendition | unlink)*>
 <!ATTLIST entity name CDATA #REQUIRED
                  class CDATA #IMPLIED>
 
+<!ELEMENT group ANY>
+
 <!ELEMENT import EMPTY>
 <!ATTLIST import source CDATA #REQUIRED
                  base CDATA #IMPLIED>
+
+<!ELEMENT input EMPTY>
+<!ATTLIST input source CDATA #REQUIRED
+                base CDATA #IMPLIED>
 
 <!ELEMENT link EMPTY>
 <!ATTLIST link insertAt CDATA #IMPLIED
@@ -75,6 +85,7 @@
 
 <!ELEMENT unlink EMPTY>
 <!ATTLIST unlink index CDATA #IMPLIED
+                 insideIndex CDATA #IMPLIED
 		 insideIndex CDATA #IMPLIED
                  port CDATA #REQUIRED
                  relation CDATA #REQUIRED>
