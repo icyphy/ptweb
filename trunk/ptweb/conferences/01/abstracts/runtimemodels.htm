@@ -6,11 +6,37 @@
 <title>Abstract</title>
 </head>
 <body>
-<b></b>
-<br><i></i>
+<b>Run-Time Models for Measurement and Control Systems and Their Support in 
+Ptolemy II
+</b>
+<br><i>Jie Liu, Stan Jefferson, and Edward A. Lee</i>
+UC Berkeley/Agilent Technologies, Palo Alto, CA
 <br>
-<br>
+liuj@eecs.berkeley.edu
 <p>
+Measurement and control systems are intrinsically distributed and 
+real-time, as they consist sensor and actuator nodes that interact with 
+the physical world directly. Embedded software in the computational nodes 
+is responsible for reacting to sensor data and produce actuation within 
+time constraints. This report discusses run-time computation models for 
+this kind of real-time embedded software, from both the data-flow and the 
+control-flow perspectives. In general, data-flow centric models are 
+natural for describing measurement and control algorithms and are easy to 
+be used in distributed systems, but they lack mechanisms to control the 
+execution order of components to fulfill time constrains. Control-flow 
+centric models are good at handling reactiveness and real-time issues but 
+are hard to distribute. Most useful run-time models have to support both 
+data-flow and control-flow, and make trade-offs when necessary. 
 <p>
+In this report, we discuss how this is done in Ptolemy II, a software framework 
+for embedded software. Five models, the synchronous dataflow (SDF) model, 
+the Giotto model, the finite state machine (FSM) model, the real-time 
+process (RTP) model, and the time-synced discrete event (TSDE) model are 
+studied with respect to the data-flow and the control-flow perspectives. 
+Ptolemy II, which is usually used as a multi-model design environment, is 
+extended to support various run-time models. A goal of this extension is 
+to study the properties of run-time models and their composition. Several 
+measurement and control systems are prototyped to illustrate the run-time 
+support in Ptolemy II.
 </body>
 </html>
