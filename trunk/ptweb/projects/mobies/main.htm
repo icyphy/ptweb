@@ -36,21 +36,19 @@ Tom Henzinger</a>
 This project aims to develop
 technology for systematic composition of embedded software components.
 </p>
-<h2>Objectives</h2>
+<h2>Objective</h2>
 <p>
 Our focus is on the design of process-oriented components and their
-runtime environment for embedded systems. The emphasis of this project
-is on the dynamics of the components, including the communication
-protocols that they use to interface with other components and the
-modeling of their state. The objective is to provide mechanisms for
-introspection, supporting both the ability of the run-time environment
-to safely dispatch tasks and the ability of components to adapt their
-interfaces using polymorphism. The focus is on real-time applications,
-which implies that models of time are a critical part of the
-abstractions that we will develop. The purpose of the mechanisms we
-develop is to improve robustness and safety while promoting
-component-based design.
-</p>
+runtime environments for real-time embedded systems. The emphasis of
+this project is on frameworks within which components interact. We are
+defining suitable semantics for such frameworks, with a particular
+objective of modeling time and temporal requirements as an integral
+part of the computational model. We are characterizing these semantics
+by developing a "system-level type system," which extends the concept
+of a type system to program dynamics. We are defining generators to
+take abstract, system-level models and produce embedded real-time
+software.
+<h2>Approach</h2>
 <p>
 Strong type systems have done more than any other "formal method" to
 improve robustness and composability of software. However, type systems
@@ -62,8 +60,11 @@ properties, such as calling conventions that state that one method must
 be called only if another method has been called, are not expressed in
 the interface definition of a component, except informally. And most
 system integration problems today arise because of incompatibilities in
-the dynamic properties of software components.
-</p>
+the dynamic properties of software components. Component-based design
+is particularly vulnerable to errors in the dynamics of component
+interfaces. Often these errors arise because of unclear specification
+(or even muddled design) of the semantic framework within which
+components interact.
 <p>
 While promising methods, such as design by contract, have been explored
 by the research community, our approach is to focus on those techniques
@@ -71,7 +72,6 @@ that are formally manipulable, and those that embrace concurrency. Type
 systems are an example of formally manipulable models, and their formal
 properties account in no small part for their robustness in
 application.
-</p>
 <p>
 Our focus is on the design of process-oriented components.  Such
 components operate concurrently, and we are particularly concerned
@@ -86,35 +86,133 @@ common with a classical "type" that mechanisms such as type
 consistency checks, type inference, and polymorphism can be applied.
 We will develop code generators that use this type system information
 to produce high-quality embedded software.
-</p>
 <p>
 Our interest is in real-time applications, which implies that models of
-time are a critical part of the abstractions that we will develop. The
-purpose of the mechanisms we develop is to improve robustness and
-safety while promoting component-based design. Code generation mechanism
-must produce code that respects the time semantics in the model.
-Such "correct by construction" generated code promises to be much more
-robust than hand-tweaked code running under a priority-driven multitasking
-embedded operating system.
-</p>
-<h2>Approach</h2>
+time are a critical part of the abstractions that we are developing.
+Although there are component-oriented design environments that embrace
+time in their semantics, such as Simulink and Real-Time CORBA, we believe
+that the space of semantic possibilities has not been explored, and that
+the best semantic models for component-based real-time systems design
+have not yet been discovered.  We are therefore building a "software
+laboratory" called Ptolemy II that supports such exploration.
 <p>
-Our approach is to build on top of a Java infrastructure that we have been
-developing at Berkeley called Ptolemy II. We will augment component
-interfaces to capture dynamic properties, particularly concurrency,
+The purpose of the mechanisms we develop is to improve robustness and
+safety while promoting component-based design. Code generation
+mechanisms must produce code that respects the time semantics in the
+model. Such "correct by construction" generated code promises to be
+much more robust than hand-tweaked code running under a priority-driven
+multitasking embedded operating system. We are therefore equipping
+the Ptolemy II software laboratory with an extensible generator toolkit
+that can be used to build code generators from a variety of semantic
+models.
+<p>
+This project is concerned with the dynamics of the components, including
+the communication protocols that they use to interface with other
+components and the modeling of their state. To support a richer form of
+dynamics, where models adapt and mutate at run time, we plan to provide
+mechanisms for introspection, supporting both the ability of the
+run-time environment to safely dispatch tasks and the ability of
+components to adapt their interfaces using polymorphism. The purpose of
+the mechanisms we develop is to improve robustness and safety while
+promoting component-based design.
+<p>
+Within the Ptolemy II laboratory, we are augmenting component interface
+definitions to capture dynamic properties, particularly concurrency,
 communication protocols, and real-time requirements and properties. We
-will define domains, which are models of computation (MoC) that govern
-the interactions of components, and we will define the MoCs as sets of
-compatible dynamic types. These MoCs will capture design patterns for
-component-based concurrent system designs. We will build code generators
-that exploit the type information to produce "correct by construction"
-embedded software. Finally, we will integrate
+are defining "domains," which realize models of computation (MoC) that
+govern the interactions of components, and we are defining the MoCs as
+sets of compatible dynamic types. These MoCs will capture design
+patterns for component-based concurrent system designs. We are building
+code generators that exploit the type information to produce "correct
+by construction" embedded software. Finally, we are integrating
 modeling of physical and information processes, viewing the models as a
 form of reflection (where a system contains a model of itself).
-</p>
+<h2>Recent Accomplishments</h2>
+<p>
+Released version 1.0 of the Ptolemy II software laboratory. This
+release includes domains for continuous-time modeling, discrete event
+modeling, synchronous/periodic modeling (Giotto), finite-state machine
+modeling, and dataflow modeling, as well as a semantic framework for
+hierarchically combining domains to get mixed models, including hybrid
+systems, concurrent state machines, and mixed-signal models.
+<p>
+Developed an interface type system, first using standard nondeterministic
+automata, and then using interface automata, where a partial order
+based on simulation relations provides the underlying formal properties
+of the type system. We have characterized a number of domains, and have
+demonstrated a software tool for composing automata.
+<p>
+Created a control system design using four Ptolemy II domains for a
+software controller for an inverted pendulum. This concept
+demonstration illustrates how to construct discrete modal models that
+are designed to run in software, and then embed those models within
+continuous-time models of the physical plant.
+<p>
+Created a concept demonstration for a code generation framework for
+Ptolemy II models that is based on the Titanium Java compiler from
+UC Berkeley.
+<p>
+Create a visual interface for Ptolemy II so that models can be
+constructed graphically rather than textually.
+
+<h2>Current Plan</h2>
+<p>
+We are rearchitecting the Titanium-based code generator to use Soot
+instead.  Soot is a compiler infrastructure from McGill University that
+uses Java byte code as the source code specification. We are adapting
+it to use Java byte code definitions of components as specifications,
+and are developing code generators for a variety of domains that are
+pertinent to real-time embedded computing. We will also demonstrate
+a mechanism for hierarchically generating code from heterogeneous models.
+<p>
+We are developing a theory based on "interface automata" (a dialect of
+finite-state machines invented by Luca de Alfaro) to define dynamic
+properties of components are part of their type signature. We are
+building a software tool that composes such interface definitions
+as the starting point for a type checker, and to help develop insight
+about the suitability of particular automata signatures.
+<p>
+We are designing semantic frameworks (models of computation) for real-
+time embedded computing that yield better predictability than standard
+RTOS-based approaches.  One direction is synchronous, time-triggered
+(Giotto) and another is asynchronous, event-driven (HPM - hierarchical
+preemptive multitasking). Both approaches will lead to domains from
+which we can generate code.
+<p>
+We plan to systematize certain commonly used design patterns by
+showing how the functional language concept of higher-order functions
+can be adapted to component-based design.  Patterns are realized by
+components that synthesize complex models from particular combinators.
+The components serve as tools that help in the construction of
+graphical models that follow such regular patterns.
+
+<h2>Technology Transition</h2>
+
+All software that we develop is released in well-packaged, reviewed,
+and documented open source code. Our standard copyright agreement is
+very liberal, permitting commercialization of the software and
+derivative works. We have a strong track record of transitioning our
+results into commercial and defense environments. Previous releases of
+Ptolemy software appear verbatim in a highly regarded EDA product from
+Agilent called ADS (advanced development system), and in a photonics
+design tool from Virtual Photonics. Our software has also strongly
+influenced products from Cadence SPW (signal processing worksystem),
+and Synopsys (Cocentric Studio), and it has been used for internal
+developments in a defense context by Lockheed/Martin and by Thomson CSF
+(now called Thales). We also have effective collaborations with other
+Mobies contractors, via the recent Ptolemy II 1.0 release, including
+Vanderbilt and Georgia Tech. Our recent two-day Ptolemy Miniconference
+drew 93 people from 43 organizations worldwide, where many of these
+organizations are using and extending our concepts and software.
+<p>
+Although technically we do not provide support for our software, we
+have in the past been able to provide some support through newsgroups,
+e-mail mailing lists, and the World Wide Web. We plan to continue this
+informal support network for software developed under this project, and
+to extend it with the use of applets for dissemination and education of
+potential users.
 
 <h2>Resources</h2>
-
 <dl>
 <dt> <a href="presentations/main.htm">Presentations</a>
 <dt><a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/embedded/" target="main">Embedded Software - An Agenda for Research</a>,
