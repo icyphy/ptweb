@@ -5,6 +5,7 @@ SUM_SOURCES =  \
 	ptolemyII.sum \
 	copernicus04.sum \
 	sdfStudy04.sum \
+	softDevel04.sum \
 	tinygals.sum \
 	vergil04.sum \
 	ptplot04.sum \
