@@ -23,5 +23,7 @@ The current Ptolemy II software uses modal model to compose finite state machine
 <P>
 In this project, we would like to experiment adding expressiveness in state transitions of  FSM. Transitions should be able to infer the consumption and production of tokens. This  requires correctly parsing the guard and action expressions in the transition. The study  plan is as follows: (1) We will first study the case where all the inferred ports have  rate 1. Ports that are not inferred have rate zero. (2) Next we shall design a syntax  where multirate ports can be specified. We assume there is no state refinement in the  above two cases. (3) We study the case where both transition and state refinement consume  and/or produce tokens.
 <P>
+References:
+<p>
 [1] C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, H. Zheng "Heterogeneous  Concurrent Modeling and Design in Java (Volume 3: Ptolemy II Domains) ," Technical  Memorandum UCB/ERL M04/17, June 24, 2004, University of California, Berkeley, CA USA  94720. 
 <P>
