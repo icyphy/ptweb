@@ -1,0 +1,75 @@
+NAMES
+Thomas H. Feng
+
+EMAIL
+tfeng@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~tfeng/
+
+PHONE
+
+TITLE
+Distributed Modeling and Simulation with Backtracking
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+Distributed modeling and simulation are an active research area. It has
+received increasing concerns, particularly because high-speed networks
+and cluster computer systems become widely available. There are many
+good reasons for using such systems in large-scale modeling and
+simulation, some of which are:
+
+<ul type="circle">
+  <li>
+    <p>to make full use of the combined power of the computing resources
+available in a network by involving them in a simulation, which is too
+slow or too large to fit into a single affordable computer;</p>
+  </li>
+  <li>
+    <p>to simulate a real application featuring the ability of high-speed
+distributed computation;</p>
+  </li>
+  <li>
+    <p>to model the behavior of a P2P (peer-to-peer) or CS (client-server)
+network, to analyze its performance with a simulation identical to its
+real behavior, and finally to optimize it and re-engine it;</p>
+  </li>
+  <li>
+    <p>and to enable cooperation in the modeling process with participants
+from different physical locations.</p>
+  </li>
+</ul>
+
+<p>
+Ptolemy II is a modeling and simulation framework suitable for addressing
+such requirements. To incorporate the ability of high-speed distributed
+computation into Ptolemy II, a number of interesting problems are going to
+be studied thoroughly.
+</p><p>
+Some of the arising problems are technically hard.
+One example is the strategy employed to overcome network latency while
+still maximizing speed. Time Warp is one approach, and there are others
+under research.
+</p><p>
+Some other problems are more tractable and partially
+satisfactory solutions have been found. One example is the backtracking
+requirement for the above-mentioned strategy. Thomas has discovered that,
+by use of the bleeding-edge technology of AspectJ, it is possible to
+rollback a Ptolemy II model in the middle of its simulation with
+relatively small overhead. Refinement and improvement will be further
+studied.
+</p><p>
+Yet some other problems turn out to root in theories that worth further
+pursuing. For example, the theory underlying the global behavior of
+those highly parallel but mutually dependent components is of considerable
+interest. It is comparable to the process networks theory, but has many
+extensions and exceptions. Its decidability is certainly Turing-hard, as
+process networks are already Turing-complete.
+</p><p>
+In this project, problems such as those mentioned above will be studied. An
+implementation will be built into Ptolemy II to meet the goal of high-speed
+distributed modeling and simulation.
+</p>
