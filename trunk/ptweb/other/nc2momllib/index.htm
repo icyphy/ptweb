@@ -134,20 +134,20 @@ setenv TOSROOT $PTII/vendors/ptinyos/tinyos-1.x
 setenv TOSDIR $TOSROOT/tos
             </pre>
         </ul>
-      <li> Download the <a href="nc2momllib-1.1.1-1.tar.gz">nc2momllib distribution</a> in $PTII/vendors/ptinyos and install it:
+      <li> Download the <a href="nc2momllib-1.1.1-1.tar.gz">nc2momllib distribution</a> and save it in $PTII/vendors/ptinyos.  Install it:
         <pre>
 cd $PTII/vendors/ptinyos
 gunzip nc2momllib-1.1.1-1.tar.gz
 tar xvf nc2momllib-1.1.1-1.tar
         </pre>
 
-      <li> Run configure for nesc 
+      <li> Run configure for nc2momllib: 
         <pre>
 cd $PTII/vendors/ptinyos/nc2momllib-1.1.1-1
 ./configure --prefix=$PTII/vendors/ptinyos
         </pre>
 
-      <li> Install nesc 
+      <li> Install nc2momllib: 
         <pre>
 make
 make install
@@ -155,7 +155,7 @@ make install
         This will create directories in <code>$PTII/vendors/ptinyos</code>
 
       <li> <a name="NC2MOMLLIB_NESC">Set another environment variable</a> (NC2MOMLLIB_NESC) that
-      points to the nesc installation.
+      points to the nc2momllib installation.
 
         <ul>
           <li> Under bash, type:
