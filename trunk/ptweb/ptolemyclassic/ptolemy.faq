@@ -12,7 +12,7 @@ CONTENTS:
         1.6 Who was Ptolemy?
         1.7 What is Tycho?
         1.8 What is Ptolemy II?
-
+        1.9 What is the difference between Ptolemy 0.7 and Ptolemy II
 2.0 Getting Ptolemy
         2.1 Ptolemy FTP site
         2.2 Ptolemy WWW site 
@@ -253,6 +253,36 @@ encapsulation and an expression parser, etc.
 
 For more information about Ptolemy II, see:
 http://ptolemy.eecs.berkeley.edu/ptolemyII/
+
+
+1.9 What is the difference between Ptolemy 0.7 and Ptolemy II?
+
+Ptolemy 0.7.2devel is the latest version of Ptolemy Classic, it is
+available for download if you send email to cxh@eecs.berkeley.edu
+
+Ptolemy 0.x is not under active development, which is good in that
+it means it is fairly stable.
+ 
+Ptolemy 0.x does not work very well under Windows, but it does work
+well under Solaris and other versions of Unix such as Linux.
+
+Ptolemy 0.x is written using C++.
+
+If you are comfortable with C++, then you may want to download Ptolemy
+0.7.2devel and install it.
+ 
+As of 5/02, Ptolemy II 2.0-beta is the latest version of Ptolemy II,
+it is available from the Ptolemy website at http://ptolemy.eecs.berkeley.edu
+Ptolemy II is under very active development, but does not have
+as many functional blocks as Ptolemy Classic
+
+Ptolemy II was developed under Windows 2000, and it will run
+on Solaris, Linux and Mac OSX
+
+Ptolemy II is written using Java.
+ 
+Java is basically a better version of C++, so if you are comfortable
+with C++, you may want to learn Java :-)
 
 2.0  GETTING PTOLEMY
 
