@@ -1,0 +1,133 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-11/1/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        4/1/02 - 6/30/02
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Dale Vancleave
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our focus is on component-based design using principled models of
+computation and their runtime environments for embedded systems. The
+emphasis of this project is on the dynamics of the components,
+including the communication protocols that they use to interface with
+other components, the modeling of their state, and their flow of
+control. The objective is to provide mechanisms for introspection,
+supporting both the ability of the run-time environment to safely
+dispatch tasks and the ability of components to adapt their interfaces
+using polymorphism. The focus is on real-time applications, which
+implies that models of time are a critical part of the abstractions
+that we are developing. The purpose of the mechanisms we develop is to
+improve robustness and safety while promoting component-based design.
+
+This reporting period was quite busy. FIXME
+
+
+1.  Research Status
+
+
+Automotive OEP
+==============
+
+
+Software Distribution
+=====================
+
+
+Software Distribution Mechanisms
+================================
+
+
+Code Generation - Token Unboxing
+================================
+
+
+Code Generation - Other Work
+============================
+
+
+Circuit Synthesis
+=================
+
+Software Release
+================
+
+
+Meta Modeling
+=============
+
+
+Timed Multitasking
+==================
+
+Caltrop - An Actor Language
+===========================
+
+Calif - An abstract intermediate form 
+=====================================
+
+
+Unit Systems
+============
+
+Type System
+===========
+
+
+I/O Actors
+==========
+
+Miscellaneous Software Infrastructure Improvements
+==================================================
+
+
+Personnel
+=========
+
+
+
+Study Group
+===========
+
+Our quasi-weekly study group examined the following topics:
+
+-- 
+
+
+2.  Interactions, Meetings, and Technology Transfer
+
+Presentations
+=============
+
+*  Jorn Janneck, "Ptolemy II," Workshop on Semantics Foundation
+   of Engineering Design Languages, Grenoble, France, 14 April, 2002.
+
+
+Technology Transfer
+===================
+
+* 
+
+
+Other Interactions
+==================
+
+* 
+ 
+
+4. Publications
+
+[1] 
+
+
+5. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
