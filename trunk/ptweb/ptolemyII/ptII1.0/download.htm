@@ -65,7 +65,8 @@ Downloads:
 <li> There are two ways to install Ptolemy II Ptiny on Windows machines:
  
 <menu>
-<li> <a href="setupPtiny.htm">Run the installer as an applet</a>.
+<li> Log in with administrative privileges and
+<a href="setupPtiny.htm">run the installer as an applet</a>.
 This applet, from
 InstallShield, will install Ptolemy II, from Berkeley, on your machine.
 </menu>
@@ -106,7 +107,8 @@ java -jar ptII1_0ptinybetasetup.jar
 <li> There are two ways to install Ptolemy II on Windows machines:
  
 <menu>
-<li> <a href="setup.htm">Run the installer as an applet</a>.
+<li> 
+<a href="setup.htm">Run the installer as an applet</a>.
 This applet, from
 InstallShield, will install Ptolemy II, from Berkeley, on your machine.
 </menu>
@@ -153,14 +155,29 @@ java -jar ptII1_0betasetup.jar
 <h2><a name="installshield_bugs">Bugs</a></h2>
 The Installshield Installer has a number of bugs:
 <menu>
+<li> The word 'malformed' may appear in the initial installer window.
+(Installshield documents this bug in their 
+<a href="http://support.installshield.com/download/ipmprelnotes.asp" target="_top">Installshield Multi-platform Release Notes</a>.)
+<li> The file chooser dialog is very likely to bring up a dialog
+about not being able to access the A: drive.  The workaround is 
+to hit Cancel. (Documented in the Installshield Release notes)
+<li> By default, the Ptolemy II is installed in the All Users menu.
+Ideally, the user would be given a choice as to whether Ptolemy II
+was installed for the current user or in the All Users menu.
+<li> The user should be prompted for where in the Start menu 
+Ptolemy II is installed.
 <li> The size of the install may be reported as 0kb.
 <li> The percent completed bars may not work.
-<li> You may see the word 'malformed' in the initial installer window.
 <li> Installing a bundled JRE does not work well so we don't use it.
-<li> Other installer bugs can be found in the
-<a href="http://support.installshield.com/download/ipmprelnotes.asp" target="_top">Installshield Multi-platform Release Notes</a>.
+Installshield Multiplatform edition can be configured to download a
+JVM, but the JVM gets installed in a _jvm directory and is not added
+to Add/Remove Programs and the browswers can't use the plugin.  
 
+<li> Installshield Multiplatform Edition can't update environment variables,
+so the user's path is not updated to include the directory where
+<CODE>vergil.exe</CODE> is located.
 </menu>
+
 See the <a href="limitations.htm">Limitations page</a> for
 other limitations.
 
