@@ -1,0 +1,107 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>Hardware/Software Codesign in Ptolemy Classic</title>
+</head>
+<body>
+
+<h1>Hardware/Software Codesign in Ptolemy Classic</h1>
+
+<h2>Remote Places to go</h2>
+<menu>
+<li> The UC Berkeley CAD group is using
+	Ptolemy as a framework for the
+	<a href="http://www-cad.eecs.berkeley.edu/Respep/Research/hsc/abstract.html">POLIS system</a>,
+	which is a hardware/software codesign package, with application to
+	automatic control.
+	Contact: 
+	<a href="mailto:polis-questions@ic.eecs.berkeley.edu"><CODE>polis-questions@ic.eecs.berkeley.edu</CODE></a>
+	  <p>
+	<menu>
+	<li> <a href="http://www.eecs.berkeley.edu/~mudit/PolisPresentation.ps">Mudit Goel and Neil Smyth's Presentation about Polis</a>
+	<li> <a href="http://www.eecs.berkeley.edu/~mudit/PolisReport.ps">Mudit Goel and Neil Smyth's Polis Report</a>
+	</menu>
+
+<li> <a href="http://mirage.snu.ac.kr/"><CODE>http://mirage.snu.ac.kr/</CODE></a> - Professor Soonhoi Ha's group at Seoul National University:
+Codesign And Parallel processing LABoratory, 
+
+<li> <a href="http://vhdl.org/pub/vi/pub/codesign/">IEEE DASC Hardware Software Codesign Study Group</a>
+
+</menu>
+
+<h2>Papers</h2>
+
+<menu>
+<li> For more recent codesign papers by the Ptolemy group, use
+the <a href="papers/publications.html/search.html">Ptolemy Publications Search</a> mechanism to search for <CODE>codesign</CODE>
+
+
+<li> Ron Galicia's slides: <a href="http://ptolemy.eecs.berkeley.edu/~galicia/HWSW/support/index.html">Supporting Hardware/Software Codesign in Ptolemy</a> (8/97)
+
+<li> Seehyun Kim's paper <a href="http://ptolemy.eecs.berkeley.edu/papers/97/fixedpointInfra/"><I>Design of Embedded Systems: Formal Models, Validation,
+and Synthesis </I></a>
+
+<li> Two papers by Eric Pauer of <a href="http://www.sanders.com">Sanders</a>,
+a Lockheed Martin Company use Ptolemy for codesign.
+
+See Sanders'
+<a href="http://www.sanders.com/spc/publish.html">Advanced Technology Published Papers</a>
+for abstracts
+<menu>
+<li> <a href="http://www.sanders.com/spc/publish/hpsc_ptol.pdf">High Performance Scalable Computing Performance Modeling Using Ptolemy</a>
+     (12 pages, 545 KBytes, PDF) -- Eric Pauer, May 1997, IASTED ICMS
+     ...or, alternative <a href="http://www.sanders.com/spc/publish/hpsc_ptol_short.pdf">short version</a> (4 pages, 165 KBytes, PDF)
+
+<li> <a href="http://www.sanders.com/spc/publish/arch_trade.pdf">An Architectural Trade Capability Using the Ptolemy Kernel</a>
+(4 pages, 116 KBytes, PDF) -- Eric Pauer and Jon Prime, May 1996, IEEE ICASSP 
+<a href="#IEEE">See redistribution notice below</a>
+</menu>
+
+<li> <a href="papers/codesign">Older Codesign papers</a>. 
+
+</menu>
+<h2>Hardware/Software Codesign and Ptolemy Today</h2>
+In Ptolemy 0.7, the following domains
+have elements of Hardware/Software Codesign:
+<menu>
+
+<li> <a href="acs">Adaptive Computing Systems (ACS) Domain</a>.  In
+Ptolemy 0.7, ACS can simulate systems in Floating Point, Fixed Point
+or CGC Floating Point.  We are considering extending ACS to use vhdl
+
+<li> The Motorola 56x/VHDL/CGC demos include elements of Hardware/Software codesign.
+
+</menu>
+
+<h2>Thor</h2>
+The Thor domain was used in Ptolemy for hardware/software codesign.
+ <p>
+Like the DE domain, the Thor domain was event-driven. However, it was
+specialized to register-transfer level simulation of digital
+circuits. It was based on the Thor simulator developed at Stanford,
+which in turn was based on a simulation kernel developed at the
+University of Colorado. The domain was written by Suengjun Lee. Its
+capabilities were similar to a variety of commercial circuit
+simulators. The Thor domain was based on very old circuit simulation
+technology. Contemporary equivalents include VHDL and Verilog
+simulators. The VHDL domains thus replace Thor, at least in part,
+although currently the star library is not as rich.
+
+ <p><a href="ftp://ptolemy.eecs.berkeley.edu/pub/ptolemy/ptolemy0.5.2">Ptolemy 0.5.2</a> was the last release that included the Thor domain.
+
+ <p>R. Alverson, et al., THOR user's manual: Tutorial and commands, Technical Report CSL-TR-88-348, Stanford University, January 1988
+<a href="ftp://ptolemy.eecs.berkeley.edu/pub/ptolemy/ptolemy0.5.2/patches/tar/thor_man.tar.gz
+ "><CODE>ftp://ptolemy.eecs.berkeley.edu/pub/ptolemy/ptolemy0.5.2/patches/tar/thor_man.tar.gz</CODE></a>
+
+<hr>
+<B><a name="IEEE">IEEE Note 1</a></B>
+ <br>Copyright IEEE. This paper was published in the conference proceedings and on the date indicated. Personal use of this
+material is permitted. However, permission to reprint/republish this material for advertising or promotional purposes or for
+creating new collective works for resale or redistribution to servers or lists, or to reuse any copyrighted component of this work
+in other works, must be obtained from the IEEE. Contact: Manager, Copyrights and Permissions / IEEE Service Center / 445
+Hoes Lane / P.O. Box 1331 / Piscataway, NJ 08855-1331, USA. Telephone: + Intl. 908-562-3966.
+
+</body>
+</html>
