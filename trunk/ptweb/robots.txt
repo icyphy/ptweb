@@ -30,6 +30,7 @@ Disallow: /~ptdesign/star-demo-index
 Disallow: /~ptdesign/tycho/ptdesign-tycho
 Disallow: /~ptdesign/tycho/tcldp
 Disallow: /ptolemyII/ptII0.1alpha
+Disallow: /~ptII/java/opt
 Disallow: /~pino/DS
 Disallow: /~pino/Ptolemy
 Disallow: /~pino/Ptolemy/tycho
