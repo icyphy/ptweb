@@ -44,15 +44,12 @@ zone.
 <p>For more information, see the Soft Walls website at
 <a href="http://ptolemy.eecs.berkeley.edu/projects/softwalls/index.htm" target="_top"><code>http://ptolemy.eecs.berkeley.edu/projects/softwalls/index.htm</code></a>
 
-<dl>
-  <dt><a name="1">[1]</a>
-  <dd>E. A. Lee, 
-<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/01/softwalls2/" target="_top">
-"Soft Walls: Modifying Flight Control Systems to Limit the Flight Space of Commercial Aircraft,"</a>
-    UC Berkeley Electronics Research
-    Laboratory Memorandum No. UCB/ERL M001/31, September 2001.</dd>
-  <dl><a name="2">[2]</a>
-  <dd>J. Adam Cataldo, Edward A. Lee, and Xiaojun Liu, "<a href="http://ptolemy.eecs.berkeley.edu/papers/02/prelim2Dsoftwalls" target="_top">Preliminary Version of a Two-Dimensional Technical Specification for Softwalls</a>," <i>Technical Memorandum UCB/E RL M02/9</i>, University of California, Berkeley, CA 94720, April 17, 2002.
-</dl>
+<p><a name="1">[1]</a>
+Edward A. Lee, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/01/softwalls2/">Soft Walls - Modifying Flight Control Systems to Limit the Flight Space of Commercial Aircraft (<i>Draft 2</i>)</a>,"<i>Revised from Technical Memorandum UCB/ERL M01/31</i>, University of California, Berkeley, CA 94720, October 3, 2001.
+
+<p><a name="2">[2]</a>
+  J. Adam Cataldo, Edward A. Lee, and Xiaojun Liu, "<a href="http://ptolemy.eecs.berkeley.edu/papers/02/prelim2Dsoftwalls" target="_top">Preliminary Version of a Two-Dimensional Technical Specification for Softwalls</a>,"
+ <i>Technical Memorandum UCB/ERL M02/9</i>, University of California, Berkeley, CA 94720, April 17, 2002.
+
 
 
