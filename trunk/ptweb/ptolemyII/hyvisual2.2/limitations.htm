@@ -19,16 +19,6 @@ Version 2.2 has a number of limitations.
 
 <!--hyVisualDocs-->
 
-<li> The documentation for custom actors used in demonstrations is not
-included in the release.  The source code for the custom actors can be
-found in the source download.
-
-<li> If a URL ends with <CODE>#in_browser</CODE>, then
-Ptolemy II will invoke the User's web browser.  Unfortunately, this
-does not always work, especially under Windows if Netscape is already
-running.  The workaround is to exit Netscape and let Ptolemy II
-start up Netscape for you.
-
 <li> Ptolemy II requires Java 1.4 or later because we use the 
 java.net.URI class. If Ptolemy II fails to start and you see
 a message about java.net.URI or possibly ptolemy.vergil.VergilApplication,
@@ -56,18 +46,26 @@ Files/DirectX/Setup/dxsetup" application, or in the Display
 Properties panel: click 'Advanced' button, then go to
 'Troubleshoot' tab, and set the slider on the second mark
 from the left.
+</BLOCKQUOTE>
 
 <!--hyVisualDocs-->
+
+<li> If a URL ends with <CODE>#in_browser</CODE>, then
+Ptolemy II will invoke the User's web browser.  Unfortunately, this
+does not always work, especially under Windows if Netscape is already
+running.  The workaround is to exit Netscape and let Ptolemy II
+start up Netscape for you.
+
 
 <li> Web Start issues:
 	<ul>
 
-
-	<li> The Initial HTML intro screen may be rendered incorrectly.
-
 	<li> Viewing a pdf file may bring up a blank window along with
 	the pdf file.  Running the code generator may bring up
 	a blank window while the java or javac processes are running.
+	We've seen this problem under Windows 98.
+	The workaround is to access the documentation via
+	<a href="http://ptolemy.eecs.berkeley.edu/hyvisual/hyvisualdoc.htm" target="_top"><CODE>http://ptolemy.eecs.berkeley.edu/hyvisual/hyvisualdoc.htm</CODE></a>
 
 	<li> Web Start is limited to about 65Mb of memory
 	 <br>If you try to run all the demos, then eventually you may
