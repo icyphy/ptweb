@@ -1,0 +1,31 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Synchronous Data Flow</title>
+</head>
+<body>
+<center>
+<h1>Synchronous Data Flow</h1>
+</center>
+<center>
+Edward A. Lee and David G. Messerschmitt
+</center>
+<br>
+<center>
+<i>Proceedings of the IEEE,</i> September, 1987.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="synchdataflow.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.
+berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A><br>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+Data flow is a natural paradigm for describing DSP applications for concurrent implementation on parallel hardware.  Data flow programs for signal processing are directed graphs where each node represents a function and each arc represents a signal path.  Synchronous data flow (SDF) is a special case of data flow (either atomic or large grain) in which the number of data samples produced or consumed by each node on each invocation is specified a priori.  Nodes can be scheduled statically (at compile time) onto single or parallel programmable processors so the run-time overhead usually associated with data flow evaporates. Multiple sample rates within the same system are easily and naturally handled.  Conditions for correctness of SDF graph are expaline and scheduleing algorithms are described for homogeneous parallel processors sharing memory.  A preliminary SDF software system for automatically generating assembly language code for DSP microcomputers is described.  Two new efficiency techniques are introduced, static buffering and an extension to SDF to efficiently implement conditionals.
+
+</body>
+</html>
+
