@@ -1,9 +1,9 @@
 <!-- $Id$ -->
 <html>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
-<title>Ptolemy II 2.0 Web Ramp Download</title>
+<title>Ptolemy II 2.0 Web Start Download</title>
 <SCRIPT LANGUAGE="Javascript"> 
 	var javawsInstalled = 0; 
 	isIE = "false"; 
@@ -15,11 +15,11 @@
                 isIE = "true"; 
         } 
 
-        function insertLink(img, url, name) { 
+        function insertLink(url, name) { 
         	if (javawsInstalled) { 
-                	document.write("<a href=" + url + "><img src=" + img + " border=0 align=left>" + name + "</a>"); 
+                	document.write("<a href=" + url + ">" + name + "</a>"); 
                 } else { 
-                	document.write("<li> You need to <a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh?>Install Web Start from Sun</a> before installing <a href=" + url + ">"  + name + "</a>"); 
+                	document.write("<li> You need to <a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install Web Start from Sun</a> before installing <a href=" + url + ">"  + name + "</a>"); 
                 } 
         } 
  </SCRIPT> 
@@ -36,9 +36,7 @@
 
 </head>
 <body>
-<h1>
-Ptolemy II 2.0 Web Ramp Download
-</h1>
+<h1>Ptolemy II 2.0 Web Start Download</h1>
 
 <table>
 <tr>
@@ -47,29 +45,17 @@ Ptolemy II 2.0 Web Ramp Download
   </td>
 
   <td>
-  This is an internal interim runtime only release of Ptolemy II.
-   <br>This download does not include source files.	
+  This is a demonstration release of Ptolemy II. 
+    <p>  <SCRIPT LANGUAGE="Javascript"> 
+
+             <!-- 
+             insertLink("vergil.jnlp", 
+                        "Ptolemy II 2.0 Web Start Download"); 
+             // --> 
+     </SCRIPT> 
   </td>
  </tr>
 </table>
-
- <p> <p>
-<center>
- <table border>
-  <tr>
-   <td>
-     <SCRIPT LANGUAGE="Javascript"> 
-
-             <!-- 
-             insertLink("doc/img/PtolemyIISmallIcon.gif",
-			"vergil.jnlp", 
-                        "Vergil (Full Runtime) Web Start Download"); 
-             // --> 
-     </SCRIPT> 
-   </td>
-  </tr>
- </table>
-</center>
 
  <p> <p>
 <h2>Quick Installation Instructions</h2>
