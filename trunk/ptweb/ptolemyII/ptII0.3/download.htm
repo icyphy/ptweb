@@ -1,0 +1,78 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II Snapshot Download</title>
+</head>
+<body>
+<h1>Ptolemy II Snapshot Download</h1>
+
+<table>
+<tr>
+<td>
+<img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
+<td>
+This Snapshot release consists of infrastructure for software
+developers who want to use Ptolemy to develop models of their own.
+
+</table>
+<p>There are a number of caveats with that go along with this snapshot.
+
+<ul>
+
+<li> This release is intended for software developers who have
+experience with both Java and Ptolemy.
+
+<li> Some of the files in this release have not been design reviewed,
+code reviewed, or thorough tested. Classes that have undergone
+design review are marked "yellow" in the source file.  Classes that
+have undergone both design and code review are marked "green"
+in the source file.
+
+<li> The code in the snapshot is changing in our own development
+copy, and some of the changes are not backward compatible.  You should
+not rely on the interface of any class that is rated at less than "green."
+In rare circumstances we may also modify the interface of green classes
+before the 1.0 release.
+
+<li> The primary difference between this release and the Ptolemy II 0.2
+release is that this release includes Polymorphic actors in 
+<CODE>ptolemy.actors.lib</CODE> and other infrastructor for actor authors.
+
+</ul>
+
+<h2>Download</h2>
+
+<menu>
+<li> Gzipped Tar file: <a href="ptII0.3devel.tar.gz"><code>ptII0.3devel.tar.gz</code></a> (12.8Mb)
+</menu>
+
+The tar files include all the <code>.class</code>, <CODE>.jar</CODE> 
+and javadoc html documentation, so you need not recompile to use Ptolemy II.
+
+This release was compiled with JDK1.2,
+but most of the demos will run under JDK1.1.  The demos in
+the guidemo directories all use Diva, which requires JDK1.2
+
+ <p>For further information about rebuilding Ptolemy II, see
+<a href="ptII0.3devel/doc/install.html"><code>ptII0.3devel/doc/install.html</code></a>
+
+<h2>Future plans</h2>
+Currently, we are planning on shipping Ptolemy II 1.0 in November, 1999.
+Between Ptolemy II 0.3 and Ptolemy II 1.0, we plan on: 
+<menu>
+<li> Design and code reviewing most of the code
+<li> Writing lots of tests
+<li> Adding to the design doc
+</menu>
+Ptolemy II 1.0 is not likely to include a visual editor.
+
+<h2>Feedback</h2>
+
+ Please send any feedback to
+<a href="mailto:ptII@eecs.berkeley.edu"><code>ptII@eecs.berkeley.edu</code></a>.
+
+
+</body>
+</html>
