@@ -1,5 +1,5 @@
 NAMES
-Christopher Hylands Brooks, Edward Lee, Jie Liu, Xiaojun Liu, Stephen Neuendorffer, Yuhong Xiong, Yang Zhao, Haiyang Zheng
+Christopher Brooks, Edward Lee, Jie Liu, Xiaojun Liu, Stephen Neuendorffer, Yuhong Xiong, Yang Zhao, Haiyang Zheng
 
 EMAIL
 eal@eecs.berkeley.edu
@@ -40,6 +40,7 @@ between entities.
  Domains that have been created include:
 
 <ul>
+<li><i>CI</i>: modeling of component interaction or push/pull systems;
 <li><i>CSP</i>: modeling of communicating sequential processes, where
     interactions have a rendezvous style, including both conditional send
     and conditional receive;
@@ -50,14 +51,18 @@ between entities.
 <li><i>DDE</i>: a distributable version of discrete-event modeling, where
     management of the advancement of time is distributed;
 <li><i>DT</i>: modeling of discrete-time systems (an extension of SDF);
-<li><i>Giotto</i>: modeling of periodic time-driven systems;
 <li><i>FSM</i>: modeling of finite state machines;
+<li><i>Giotto</i>: modeling of periodic time-driven systems;
 <li><i>PN</i>: modeling of Kahn process networks, which are implemented
     as communicating Java threads;
+<li><i>PSDF</i>: (parameterized synchronous dataflow) an extension
+    of SDF that allows for more extensive reconfiguration of models;
 <li><i>SDF</i>: (synchronous dataflow) modeling of deterministic,
     repetitive stream-based computations, such as signal processing;
-<li><i>SR</i>: modeling of synchronous/reactive systems; and
-<li><i>SR</i>: modeling of timed multitasking systems.
+<li><i>SR</i>: modeling of synchronous/reactive systems;
+<li><i>TM</i>: modeling of timed multitasking systems; and
+<li><i>Wireless</i>: Wireless components and channels.
+
 </ul>
 
 The Ptolemy II software architecture supports interaction between domains
@@ -78,19 +83,26 @@ For more information about Ptolemy II, see
 <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII" target="_top"><code>http://ptolemy.eecs.berkeley.edu/ptolemyII</code></a>
 
 
-<p> [1] C. Hylands, E. A. Lee, J. Liu, X. Liu, S. Neuendorffer, Y. Xiong, H. Zheng (eds.),
+<p> [1] C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, H. Zheng (eds.),
 
-<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/03/ptIIDesignIntro">"Heterogeneous Concurrent Modeling and Design in Java (Volume 1: Introduction to Ptolemy II),"</a>
+<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/04/ptIIDesignIntro">"Heterogeneous Concurrent Modeling and Design in Java (Volume 1: Introduction to Ptolemy II),"</a>
+Memorandum UCB/ERL M04/27,
+EECS, University of California, Berkeley, CA USA 94720
+July 29, 2004
 
-TechnicalMemorandum UCB/ERL M03/27, University of California, Berkeley, CA USA 94720, July 16, 2003.
+<p> [2] C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, H. Zheng (eds.),
 
-<p> [2] C. Hylands, E. A. Lee, J. Liu, X. Liu, S. Neuendorffer, Y. Xiong, H. Zheng, (eds.),
+<a href="http://ptolemy.eecs.berkeley.edu/papers/04/ptIIDesignSoftware">"Heterogeneous Concurrent Modeling and Design in Java (Volume 2: Ptolemy II Software Architecture),"</a>
 
-<a href="http://ptolemy.eecs.berkeley.edu/papers/03/ptIIDesignSoftware">"Heterogeneous Concurrent Modeling and Design in Java (Volume 2: Ptolemy II Software Architecture),"</a>
+Memorandum UCB/ERL M04/16,
+EECS, University of California, Berkeley, CA USA 94720
+June 24, 2004
 
-TechnicalMemorandum UCB/ERL M03/28, University of California, Berkeley, CA USA 94720, July 16, 2003.
 
-<p> [3] C. Hylands, E. A. Lee, J. Liu, X. Liu, S. Neuendorffer, Y. Xiong, H. Zheng (eds.),
-<a href="http://ptolemy.eecs.berkeley.edu/papers/03/ptIIDesignDomains">"Heterogeneous Concurrent Modeling and Design in Java (Volume 3: Ptolemy II Domains),"</a>
-TechnicalMemorandum UCB/ERL M03/29, University of California, Berkeley, CA USA 94720, July 16, 2003.
+<p> [3] C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, H. Zheng (eds.),
+<a href="http://ptolemy.eecs.berkeley.edu/papers/04/ptIIDesignDomains">"Heterogeneous Concurrent Modeling and Design in Java (Volume 3: Ptolemy II Domains),"</a>
+Memorandum UCB/ERL M04/17,
+EECS, University of California, Berkeley, CA USA 94720
+June 24, 2004
+
 
