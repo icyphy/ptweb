@@ -1,5 +1,5 @@
 NAMES
-Elaine Cheong, Chamberlain Fong, Christopher Hylands, Takahide Inoue (Visiting Scholar) Edward A. Lee, Jie Liu, Xiaojun Liu, Steve Neuendorffer, Claudius Ptolemaus, John Reekie, Sonia Sachs, Mary P. Stewart, Brian Vogel and Yuhong Xiong.
+Adam Cataldo, Chris Chang, Elaine Cheong, Christopher Hylands, Edward A. Lee, Xiaojun Liu, Steve Neuendorffer, Claudius Ptolemaus, John Reekie, Mary P. Stewart, James Yeh, Yang Zhao, and Ye Zhou
 
 EMAIL
 eal@eecs.berkeley.edu
@@ -39,20 +39,15 @@ between entities. Domains that have been created include:
     deterministic handling of simultaneous events;
 <li><i>DDE</i>: a distributable version of discrete-event modeling, where
     management of the advancement of time is distributed;
+<li><i>DT</i>: modeling of discrete-time systems (an extension of SDF);
+<li><i>Giotto</i>: modeling of periodic time-driven systems
 <li><i>FSM</i>: modeling of finite state machines;
 <li><i>PN</i>: modeling of Kahn process networks, which are implemented
-    as communicating Java threads; and
+    as communicating Java threads;
 <li><i>SDF</i>: (synchronous dataflow) modeling of deterministic,
-    repetitive stream-based computations, such as signal processing.
-</ul>
-
-Domains that are planned include:
-
-<ul>
-<li><i>DT</i>: modeling of discrete-time systems (an extension of SDF);
-<li><i>SR</i>: modeling of synchronous/reactive systems;
-<li><i>PBO</i>: modeling of port-based objects, where temporal constraints
-    take precedence over data determinacy.
+    repetitive stream-based computations, such as signal processing
+<li><i>SR</i>: modeling of synchronous/reactive systems; and
+<li><i>SR</i>: modeling of timed multitasking systems.
 </ul>
 
 The Ptolemy II software architecture supports interaction between domains
