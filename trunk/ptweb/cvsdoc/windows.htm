@@ -10,22 +10,37 @@
 
 <menu>
 
-<li> cvsssh1.10.5-1.2.14.1 - CVS and SSH binaries for NT
+<li> cvsssh1.10.5-1.2.14.1 - CVS-1.10.5 and SSH-1.2.14.1 binaries
+for Windows NT
 <a href="dist/cvsssh1_10_5-1_2_14_1.exe">(For use on .eecs.berkeley.edu machines only)</a>
 
-<li> <a href="cvssshREADME.txt">cvsssh1.10.5-1.2.14.1 README.txt</a>,
-including installation instructions.
 
-<li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">JohnR's docs</a>, including information about setting up under windows.
+<li> The cvsssh distribution includes the following pieces:
+
+  <menu>
+  <li> The cvsssh distribution is shipped with a
+  <a href="cvssshREADME.txt">README.txt</a> file that describes the
+  installation process.
+
+  <li> The cvsssh distribution also includes 
+  <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">John Reekie's CVS docs</a>, including information about setting up under Windows.
+
+  <li> The Windows Help files are part of
+  <a href="http://www.wincvs.org">Wincvs</a>.  
+  The help files are available as:
+  <a href="cvshlp.zip"><CODE>cvshlp.zip</CODE></a>
+
+
+
+  <li> ssh-1.2.14.1-win32 is based on information found on 
+  <a href="http://bmrc.berkeley.edu/people/chaffee/winntutil.html#sshnt" target="_top">Gordon Chaffee's SSH webpage</a>.
+
+   <br>His web page includes a <a href="patch-ssh-1.2.14">patch</a> against
+   <a href="ftp://ftp.cs.hut.fi/pub/ssh/ssh-1.2.14.tar.gz">ssh-1.2.14</a>
+   and links to the
+   <a href="#ssh-1.2.14-win32">ssh-1.2.14.1-win32 Windows binaries from Finland</a>.
 
 </menu>
-ssh-1.2.14.1-win32 is based on information found on 
-<a href="http://bmrc.berkeley.edu/people/chaffee/winntutil.html#sshnt" target="_top">Gordon Chaffee's SSH webpage</a>.
-
-His web page includes a <a href="patch-ssh-1.2.14">patch</a> against
-<a href="ftp://ftp.cs.hut.fi/pub/ssh/ssh-1.2.14.tar.gz">ssh-1.2.14</a>
-and links to the
-<a href="#ssh-1.2.14-win32">ssh-1.2.14.1-win32 Windows binaries from Finland</a>.
 
  <p>The CVS and SSH binaries include encryption that the US Goverment
 classifies and a munition, so we can't make the binaries available
@@ -41,12 +56,16 @@ If you can't download ssh-1.2.14.1, you might try the
 
 <li> Shipped as part of an Installshield installer that includes CVS 1.10.5
 
-<li> Bug fixes for RSA, which allows users to run cvs from NT without typing
-their password
+<li> Included the Windows Help files.
+
+<li> Bug fixes for .shosts and RSA,
+which allows users to run cvs from NT without typing their password.
 </menu>
 
 
 <h2>Build instructions</h2>
+The binaries were built with VC++6.0 via a Cygwin bash shell.
+
 <ol>
 <li> Currently, our tree is checked in to the repository as
 <CODE>ssh-1.2.14.1-win</CODE>, so if you already have
@@ -54,7 +73,6 @@ CVS and you have a mho cluster account, you can do
 <pre>
 cvs co ssh-1.2.14.1-win
 </pre>
-
 
 
 <li> In the System Control Panel
@@ -78,9 +96,9 @@ cd ssh-1.2.14.1
 nmake -f makefile.vc TOOLS32=d:\\PROGRA~1\MICROS~2\VC98
 </pre>
 
-
 <li> Grab the latest <CODE>cvs.exe</CODE> from
 <a href="http://download.cyclic.com/pub"><CODE>http://download.cyclic.com/pub</CODE></a>
+
 
 </ol>
 
