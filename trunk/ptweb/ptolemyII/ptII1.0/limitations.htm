@@ -64,6 +64,24 @@ ptolemy.actor.Manager run(): elapsed time: 23004 ms
 
 <li> Running the Networked demo via an applet on the local
 file system results in an AccessControlException.
+<pre>
+com.microstar.xml.XmlException: XML element "entity" triggers exception:
+  java.lang.Exception: Attempted to lookup 'Waveform', but got: 
+  java.lang.ClassNotFoundException: Waveform
+Attempted to find as a moml class, but got: java.security.AccessControlException: access denied (java.net.SocketPermission ptolemy.eecs.berkeley.edu resolve) in file:/C:/Program Files/Ptolemy/Ptolemy II 1.0 beta/ptolemy/moml/demo/Networked/ at line 62 and column 118
+	at ptolemy.moml.MoMLParser.startElement(MoMLParser.java:1341)
+	at com.microstar.xml.XmlParser.parseElement(XmlParser.java:944)
+	at com.microstar.xml.XmlParser.parseContent(XmlParser.java:1117)
+	at com.microstar.xml.XmlParser.parseElement(XmlParser.java:946)
+	at com.microstar.xml.XmlParser.parseDocument(XmlParser.java:495)
+	at com.microstar.xml.XmlParser.doParse(XmlParser.java:175)
+	at com.microstar.xml.XmlParser.parse(XmlParser.java:145)
+	at ptolemy.moml.MoMLParser.parse(MoMLParser.java:492)
+	at ptolemy.moml.MoMLParser.parse(MoMLParser.java:471)
+	at ptolemy.moml.MoMLParser.parse(MoMLParser.java:456)
+	at ptolemy.actor.gui.MoMLApplet._createModel(MoMLApplet.java:188)
+</pre>
+
 
 <li> <code>vergil foo</code> hangs.  No window comes up if foo does not exist.
 
