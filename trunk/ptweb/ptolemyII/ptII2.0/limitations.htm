@@ -49,7 +49,8 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 
 <li> <a href="#ui">User Interface Limitations</a>
 	<menu>
-	<li> <a href="#RenamingPorts">Renaming Ports</a></h4>
+	<li> <a href="#RenamingPorts">Renaming Ports</a>
+        <li> <a href="#EditStyles">Edit Styles</a>
 	</menu>
 <li> <a href="#mac">MacOS X Limitations</a>
 	<menu>
@@ -293,6 +294,47 @@ $
 
 </pre>
 
+<h4><a name="EditStyles">Edit Styles button does not do anything</a></h4>
+If you double click on an actor that has parameters, then the 'Edit
+Parameters' window comes up.  That window has an 'Edit Styles' button.
+In Ptolemy II 2.0.1, that button does not do anything, a fix is below.
+ <p>The reason the bug occurred is because the development tree includes
+a file chooser style that was incomplete, so it did not ship with
+the release.
+ <p>The change below to ptII2.0.1/ptolemy/actor/gui/style/StyleConfigurer.java
+fixes this bug.
+
+<pre>
+cxh@DOPLAP03 /cygdrive/c/ptII2.0.2/ptolemy/actor/gui/style
+$ cvs diff -c StyleConfigurer.java
+Index: StyleConfigurer.java
+===================================================================
+RCS file: /home/cvs/ptII/ptolemy/actor/gui/style/StyleConfigurer.java,v
+retrieving revision 1.17.2.1
+diff -c -r1.17.2.1 StyleConfigurer.java
+*** StyleConfigurer.java        2002/02/25 17:56:42     1.17.2.1
+--- StyleConfigurer.java        2002/09/11 15:59:18
+***************
+*** 95,101 ****
+            // existing styles).
+              // Don't ship with the FileChooser enabled.
+            // parameterStyles = new ParameterEditorStyle[5];
+!           // parameterStyles = new ParameterEditorStyle[4];
+            parameterStyles[0] = new LineStyle();
+            parameterStyles[0].setName("Line");
+            parameterStyles[1] = new CheckBoxStyle();
+--- 95,101 ----
+            // existing styles).
+              // Don't ship with the FileChooser enabled.
+            // parameterStyles = new ParameterEditorStyle[5];
+!           parameterStyles = new ParameterEditorStyle[4];
+            parameterStyles[0] = new LineStyle();
+            parameterStyles[0].setName("Line");
+            parameterStyles[1] = new CheckBoxStyle();
+
+cxh@DOPLAP03 /cygdrive/c/ptII2.0.2/ptolemy/actor/gui/style
+$
+</pre>
 
 <h3><a name="mac">MacOS X Limitations</a></h3>
 <dl>
