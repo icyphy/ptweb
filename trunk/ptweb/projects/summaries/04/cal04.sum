@@ -1,0 +1,58 @@
+NAMES
+Joern Janneck, Chris Chang, Yang Zhao
+
+EMAIL
+janneck@eecs.berkeley.edu
+cbc@eecs.berkeley.edu
+ellen_zh@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.gigascale.org/caltrop/
+
+PHONE
+510-642-6059
+510-642-6627
+
+TITLE
+CAL: A Novel Actor Language
+
+CHAPTER
+03.cad
+
+ABSTRACT 
+
+<P> The concept of actors was first introduced by Carl Hewitt as a
+mean of modeling distributed knowledge-based algorithms. Actors has
+since then become widely used.
+
+<P> CAL is a small domain-specific language for writing down the
+functionality of actors - including specifically their ports, 
+parameters, typing constraints, and firing rules. It is designed to be
+embedded in an environment providing necessary infrastructure, such as
+data types, operations and function libraries. The goal is to provide
+a concise high-level description of actors by providing statically
+analyzable information about the behavior of an actor, such as
+production and consumption rates, to facilitate schedule, compose, and
+static check of actor networks.
+
+<P>Current work includes:
+<ol>
+
+<li> using program transformation techniques for manipulating CAL
+actor specifications, and compositions of CAL actors. The
+transformations are expressed as XSLT scripts manipulating the XML
+document that represents the CAL abstract syntax tree.
+
+<li> generating executable code from an actor description, in order to
+simulate or eventually implement an actor on some target platform.
+
+<li> scheduling.
+
+<li> compatibility checking between connected actors.
+
+<li> CAL language developing and changing.
+
+</ol>
+
+<p>For more information about CAL, see
+<a href="http://www.gigascale.org/caltrop/" target="_top"><code>http://www.gigascale.org/caltrop</code></a>
