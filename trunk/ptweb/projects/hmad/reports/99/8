@@ -1,0 +1,392 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 September 14, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        7/15/99 - 8/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have produced two first versions of XML-based languages for tool
+interoperability. MoML, the Modeling Markup Language specifies
+component-based designs, and PlotML specifies data to be rendered in
+graphical form. In another advance for interoperability, we have
+created a CORBA interface for Ptolemy II actors, which can now reside
+anywhere on the internet. We have made progress on translation of
+Matlab specifications into process networks. And we have completed and
+released version 0.3 of Ptolemy II, which includes an extensive
+tutorial and programmers manual. See:
+
+  http://ptolemy.eecs.berkeley.edu/publications/papers/99/HMAD
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Software Release
+----------------
+
+On August 2, we released version 0.3 of Ptolemy II.  The release
+notes are appended as an appendix.  Thanks especially to John Davis
+for last minute detective work that solved some difficult problems
+with the multithreaded domains.
+
+
+Network-Integrated Component-Based Design
+-----------------------------------------
+
+Jie Liu has implemented a preliminary version of the CORBA interface
+for Ptolemy actors. The code wraps a remote actor in a local proxy. The
+remote actor can be constructed using the usual Ptolemy II hierarchy,
+and thus can have arbitrary complexity.  Thus, Ptolemy II models can
+be distributed on the internet, using components coming from anywhere.
+
+
+MoML - The Modeling Markup Language
+-----------------------------------
+
+We have completed version 0.1 of MoML, an XML language for specifying
+component-based designs. MoML can be used to construct web pages that
+include Ptolemy II models without writing Java code. It is intended to
+live independently of Ptolemy software, although clearly its design has
+been influenced by Ptolemy II. Moreover, we view Ptolemy II as
+providing a reference implementation for a language that we hope will
+become much more widely used. It is intended to be an interchange
+format for component-based designs regardless of the semantics of the
+interaction of components. See:
+
+   http://ptolemy.eecs.berkeley.edu/~eal/moml.pdf
+
+
+PlotML - An XML Language for Plot Data
+--------------------------------------
+
+We have defined PlotML, and XML language for plot data, and have extended
+the plot package in Ptolemy II to support it.  In particular, the plot
+package classes now read and write PlotML as their preferred file format.
+
+
+Plotting Components
+-------------------
+
+We have enhanced the plot package in Ptolemy II to support interactive
+editing of plots and their display properties.
+ 
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Libraries
+---------
+
+John Li has completed a suite of logic actors for the Ptolemy II
+domain-polymorphic actor library.
+
+Shankar Rao has developed a class that provides a simple interface
+to Sun's new audio API.
+
+Manda Sutijono has contributed a slider mechanism for the Query class,
+a generic and very easy to use GUI component.
+
+Michael Leung, together with Steve Neuendorffer, has developed a
+Huffman coder/encoder with code-book, partly to serve as a large test
+case for the SDF domain.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+The development of MoML (see above) is motivated by a realization that
+interoperability of tools requires at minimum, a compatible abstract
+syntax. This turns out to be even more important than a compatible
+semantics and far more important than a compatible concrete syntax.
+While the concrete syntax is the file format (or API) used to define a
+component-based design, the abstract syntax is the logical structure of
+that design. MoML is intended to represent only this abstract syntax.
+Thus, it is a minimal concrete syntax with annotation capabilities to
+permit the insertion of semantic data.
+
+
+Matlab translation
+------------------
+
+Bart Kienhuis is working on translation of Matlab specifications into
+process network models. He can currently create ILP problems for all
+data-dependencies in a Matlab program. He can also solve these ILP
+problems using PIP, a very efficient Parametric Integer Linear Program
+solver written in C by Paul Feautrier from INRIA. He has constructed
+the Java to C interface. All solutions generated are validated and he
+is confident that the solutions found are correct.
+
+Currently he is combining the many solutions found into a single
+program. Here he has encountered in a big problem. The number of
+solutions found, and the effort to combine them, caused a lot of
+copying and thus a put a severe load on the memory of a computer. He
+reworked his data-structure to improve the situation. He can now
+combine variable results into a single parse tree. Each new solution
+found is added to already existing solution.
+
+Bart can now determine the Lexicographical maximum between two variable
+statements in the parse tree. Finding the lexicographical maximum
+results in a new if/then/else tree, which is added to the parse
+tree.
+
+Bart had some difficulty porting his software to Windows NT, since
+it required extensive interaction with Matlab and with C libraries,
+but he completed the port.
+
+
+2.  Equipment/Infrastructure Status:
+
+No changes.
+
+
+3.  Interactions and Technology Transfer
+
+- Professor Ed Deprettere from Delft University visited our group from
+  July 28 to August 5.  He works in the design of high performance
+  parallel systems.
+
+- Svante Signell from Ericson gave our group an informal presentation
+  of a proposal for a common model format on July 16.
+
+- Dirk Seewald of Virtual Photonics reports that in the last few
+  months, over 50 industry experts have completed training in the
+  Photonic Transmission Design Suite (PTDS), which is based in part on
+  Ptolemy Classic. He says, "The now proven PTDS training format combines
+  short, sharp lectures on topical issues with hands on laboratory
+  exercises. In the course of the 3 day program, participants learn to
+  use advanced visualization tools and implement complex setups to model
+  fibers, optical amplifiers and WDM long haul transmission systems, for
+  example."
+
+- We have sent to Prof. Michael J. Wirthlin of BYU a preliminary
+  version of the FixPoint class written by Bart Keinhuis. Michael is
+  using Ptolemy for hardware modeling.
+
+
+4.  Personnel Status
+
+Kees Vissers, from Philips Natlab in Eindhoven, has joined our group
+for one year as a visiting industrial fellow. He brings with him a huge
+amount of experience in video hardware and software together with
+architectures and software for the design of such systems.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+- Jie Liu gave a talk on CORBA and TAO (a CORBA ORB supporting real-time
+  features) to the robotics group at UC Berkeley on July 28.
+
+- Kees Vissers, visiting industrial fellow from Philips, gave a talk to
+  our group on "Video Algorithms and Architectures."
+
+
+Publications
+------------
+
+[1] J. Davis, R. Galicia, M. Goel, C. Hylands, E.A. Lee, J. Liu, X. Liu,
+    L. Muliadi, S. Neuendorffer, J. Reekie, N. Smyth, J. Tsay and
+    Y. Xiong, "Heterogeneous Concurrent Modeling and Design in Java,"
+    Technical Report UCB/ERL No. M99/40, University of California,
+    Berkeley, CA 94720, July 19, 1999.
+
+[2] S. S. Bhattacharyya, P. K. Murthy, and E. A. Lee, "Synthesis of
+    Embedded Software from Synchronous Dataflow Specifications," Journal of
+    VLSI Signal Processing Systems, vol. 21, no. 2, pp. 151-166, June,
+    1999.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to continue work on MoML and on Ptolemy II support for it. We
+will also release a new version of the plot package as a standalone
+tool.  In addition, we are planning to begin to instrument Ptolemy II
+for performance.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+APPENDIX: Ptolemy II version 0.3 Release Notes
+==============================================
+
+Ptolemy II 0.3 is available for online demonstrations and downloading.
+
+Ptolemy II is a set of Java packages supporting heterogeneous,
+concurrent modeling and design. Its kernel package supports clustered
+hierarchical graphs, which are collections of entities and relations
+between those entities. Its actor package extends the kernel so that
+entities have functionality and can communicate via the relations. Its
+domains extend the actor package by imposing models of computation on
+the interaction between entities. Examples of models of computation
+include discrete-event systems, dataflow, process networks,
+synchronous/reactive systems, and communicating sequential processes.
+Ptolemy II includes a number of support packages, such as graph,
+providing graph-theoretic manipulations, math, providing matrix and
+vector math and signal processing functions, plot, providing visual
+display of data, data, providing a type system, data encapsulation and
+an expression parser, etc.
+
+The release is available via the Ptolemy 0.3 links at
+http://ptolemy.eecs.berkeley.edu/ptolemyII
+
+The primary change between Ptolemy II 0.3alpha1 and 0.3 is the
+completion of the Ptolemy II design document:
+
+J. Davis, R. Galicia, M. Goel, C. Hylands, E.A. Lee, J. Liu, X. Liu,
+L. Muliadi, S. Neuendorffer, J. Reekie, N. Smyth, J. Tsay and
+Y. Xiong, "Heterogeneous Concurrent Modeling and Design in Java,"
+Technical Report UCB/ERL No. M99/40, University of California,
+Berkeley, CA 94720, July 19, 1999.
+
+
+This document is included in the 0.3 downloads, and is available
+separately via:
+http://ptolemy.eecs.berkeley.edu/publications/papers/99/HMAD
+
+
+
+Below is a list of other changes that occurred between 0.3alpha1 and
+0.3.  I apologize in advance if I missed anyone's contributions.
+
+
+        * actor/Manager 
+        * actor/process/ProcessDirector 
+        * actor/process/ProcessThread
+        * dde/kernel/DDEDirector 
+        * csp/kernel/CSPDirector 
+        John Davis, Jr.: Changes for deadlock issues with JDK1.2.2
+
+
+        * actor/event/test/RemoveActor
+        Edward A. Lee: Fix to known failing test
+
+
+        * actor/gui/Plotter.java
+        Edward A. Lee: made _panel protected, improved clone method, added
+        startingDataset parameter 
+        
+        * actor/gui/SequencePlotter.java
+        Edward A. Lee: removed unnecessary statements, improved clone
+        method, added startingDataset parameter
+        
+        * actor/gui/TimedPlotter.java
+        Edward A. Lee: improved clone method, added startingDataset parameter
+
+
+        * actor/gui/XYPlotter.java
+        Edward A. Lee: improved clone method, added startingDataset parameter
+
+
+        * actor/lib/Poisson.java
+        Edward A. Lee: declared parameter type (omission)
+        
+        * actor/util/CalendarQueue.java
+        * actor/util/test/CalendarQueue.tcl
+        * de/kernel/DECQEventQueue.java
+        * de/kernel/DEDirector.java
+        * de/kernel/DEEventQueue.java
+        * pn/kernel/TimedPNDirector.java
+        Steve Neuendorffer: Changed the instances of IllegalAccessException to
+        IllegalActionException 
+        
+        * data/expr/test/Parameter.tcl
+        Edward A. Lee: Added new test for misfeature when evaluating
+        expressions 
+        
+        * data/expr/test/AttributeChanged.java
+        Edward A. Lee: new file
+        
+        * doc/makefile
+        Added tutorial to MISC_FILES for make checkjunk
+        
+        * ct/lib/CTZeroCrossingDetector.java
+        * ct/lib/CTZeroOrderHold.java
+        Jie Liu: fixed typos
+
+
+        * csp/demo/BusContention/makefile:
+        * dde/demo/LocalZeno/makefile:
+        Added two .class files for make checkjunk
+        
+        * dde/kernel/DDEReceiver.java:
+        John Davis, Jr.: Fixed a subtle bug in _hasToken() that was
+        causing a race condition. Now there is a check for
+        getRcvrTime() == INACTIVE.
+
+
+        * dde/kernel/TimeKeeper.java:
+        Typo in copyright
+
+
+        * dde/kernel/test/FlowThrough.java:
+        John Davis, Jr.: Cleaned up comments in conjunction with tests
+        that helped find the DDEReceiver._hasToken() bug.
+        
+        * de/lib/WaitingTime.java
+        Edward A. Lee, Jie Liu: import ptolemy.actor.lib.TimedActor and
+        SequenceActor 
+        
+        * sdf/makefile
+        Added test to MISC_FILES for make checkjunk
+        
+        * sdf/kernel/SDFScheduler.java
+        * sdf/kernel/test/SDFDirector.java
+        * sdf/kernel/test/SDFScheduler.java
+        Steve Neuendorffer: Fixed a bug that was not handling
+        transparent composite actors correctly.  Part of this involved
+        some significant rework in _scheduleConnectedActors.  The
+        abnoxiousness with catching the NoSuchErrorException to
+        determine when to finish has been removed from
+        _scheduleConnectedActors. 
+
+
+        If a relation is connected to only input ports, but not output ports,
+        then an exception is now thrown.  Added a test case for this.
+        
+        * sdf/kernel/test/ArrayFIFOQueue.tcl
+        Steve Neuendorffer: removed trailing spaces 
+
+
+        * graph/CPO.java        
+        Steve Neuendorffer: minor documentation fix.  upset and
+        downset throw an exception if the returned sets are infinite. 
+
+
+        * plot/Plot.java
+        Edward A. Lee: avoid calling setNumSets() (deprecated)
+
+
+        * plot/PlotApplication.java
+        Edward A. Lee: generalize to be able to contain classes
+        derived from Plot 
+
+
+        * plot/PlotBox.java
+        Edward A. Lee: workaround for bug in jdk1.1.7B, which does not
+        properly handle mouse events in listeners.  restrict zooming
+        to only work with button 1
+
+
+        * util/testsuite/ptlocaldict
+        Added more words from design doc
+
