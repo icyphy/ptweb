@@ -1,0 +1,39 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Abstract</title>
+</head>
+<body>
+<b>System-Level Modeling of Continuous and Discrete Dynamics</b>
+<br><i>Jie Liu</i>, UC Berkeley
+<br>
+liuj@eecs.berkeley.edu
+<p>
+Complex systems like mixed-signal electronic systems, micro
+electro-mechanical systems (MEMS), and real-time control systems,
+contain both continuous and discrete dynamics. Typically, continuous
+dynamics take the form of ordinary differential equations (ODEs) and
+discrete dynamics may be in the form of a discrete-event model or
+finite state machines. Such systems are modeled in Ptolemy II using
+hierarchical heterogeneous components in the continuous time (CT),
+discrete event (DE), and finite state machine (FSM) domains.
+ 
+<P> In order to achieve a correct simulation of such systems, it is
+essential for the continuous-time simulation engine to have the ability
+to detect and handle discrete events. The central part of this work
+is the study of the formal semantics of the models and their
+interaction, including causality, determinacy, fixed-point behavior,
+event detection and signal conversions.
+ 
+<P> The semantics study also yields a deep insight into the interaction
+of heterogeneous (simulation) CAD tools. We are developing a
+methodology that classifies existing CAD tools by their underlying
+models of computation (MoC), and embeds CAD tools only in the Ptolemy
+II domains that have the same MoC. Ptolemy II acts as the standard
+semantic glue for the external tools. Thus, for example, a digital
+hardware simulation tool based on Verilog or VHDL can interact with an
+analog simulation tool such as Saber through a Ptolemy II backplane.
+</body>
+</html>
