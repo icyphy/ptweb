@@ -4,7 +4,7 @@
 SUM_SOURCES =  \
 	ptolemyII.sum \
 	copernicus04.sum \
-	sdfStudy04.sum \
+	compositionalityAnalysis.sum \
 	softDevel04.sum \
 	tinygals.sum \
 	vergil04.sum \
