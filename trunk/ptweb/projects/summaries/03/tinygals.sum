@@ -44,8 +44,8 @@ programming model and code generation facilities have been implemented
 for a wireless sensor network platform known as the Berkeley motes.
 TinyOS is an event-based operating system for these networked sensors
 being developed by the group of Prof. David Culler.  Our
-implementation of TinyGALS uses TinyOS as the underlying component
-model, which has an interface abstraction that is consistent with
+implementation of TinyGALS uses the component model provided by
+TinyOS, which has an interface abstraction that is consistent with
 synchronous method calls.  The TinyGALS code generator is designed to
 work with preexisting TinyOS components, thus enabling code reuse.
 <P>
