@@ -84,14 +84,15 @@ achieve distributed multitasking among unreliable nodes.
 <DD> E. Cheong, J. Liebman, J. Liu, F. Zhao, "TinyGALS: A Programming
      Model for Event-Driven Embedded Systems," in <I>Proc. of the
      18th Annual ACM Symposium on Applied Computing</I> (SAC'03),
-     Melbourne, FL, Mar. 9-12, 2003.
+     Melbourne, FL, Mar. 9-12, 2003.  <a href="http://ptolemy.eecs.berkeley.edu/papers/03/TinyGALS/" target="_top"><code>http://ptolemy.eecs.berkeley.edu/papers/03/TinyGALS/</code></a>
 <DT> [2]
 <DD> Elaine Cheong, "Design and Implementation of TinyGALS: A
      Programming Model for Event-Driven Embedded Systems," Master's
      Report, <I>Technical Memorandum No. UCB/ERL M03/14</I>, University of
-     California, Berkeley, CA, 94720, USA, May 23, 2003.
+     California, Berkeley, CA, 94720, USA, May 23, 2003.  <a href="http://ptolemy.eecs.berkeley.edu/papers/03/TinyGALSreport/" target="_top"><code>http://ptolemy.eecs.berkeley.edu/papers/03/TinyGALSreport/</code></a>
+
 <DT> [3]
-<DD> The Ptolemy Project. http://ptolemy.eecs.berkeley.edu
+<DD> The Ptolemy Project. <a href="http://ptolemy.eecs.berkeley.edu" target="_top"><code>http://ptolemy.eecs.berkeley.edu</code></a>
 <DT> [4]
-<DD> TinyOS.  http://webs.cs.berkeley.edu/tos
+<DD> TinyOS.  <a href="http://webs.cs.berkeley.edu/tos" target="_top"><code>http://webs.cs.berkeley.edu/tos</code></a>
 </DL>
