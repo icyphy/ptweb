@@ -1,0 +1,49 @@
+NAMES
+N. Vinay Krishnan
+
+EMAIL
+vkris@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~vkris
+
+PHONE
+510-664-2846
+
+TITLE
+An Interpretive-Scheduler for Schedule Carrying Code
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+This project is done in conjunction with the work carried out by Christoph
+Kirsch and Slobodan Matic, on schedule-carrying code.
+    
+A new approach is looked at for development of hard-real time software,
+where the programmer can explicitly specify his scheduling requirements
+while designing his code[1]. It will be divided into two parts, known as the
+E(Embedded)-Code and the S(Schedule)-Code[2], which will run on two
+interpreters by the names of E-Machine[3] and S-Machine respectively.
+<p>
+The E-Code consists of event-driven code. It primary purpose while executing
+on the E-Machine is to react to the environment, in the sense of handling
+interrupts, or receiving messages. This results in releasing tasks to be
+executed to the S-Machine. The S-code subsequently schedules these tasks on
+the underlying system.
+<p>
+Thus the details of the hardware the application is running on is abstracted
+away from the E-Code, as any and all interactions such as timer interrupts,
+preemption, etc are handled by the S-Code.
+<p>
+The project aims to come up with an S-code interpreter, i.e. an S-Machine,
+which makes use of the API provided by <A HREF="http://www.ittc.ku.edu/kurt">KURT-Linux</A>.
+KURT-Linux is a flavor of Linux which has real-time extensions added onto it,
+allowing a programmer to write his own schedulers. The S-Machine designed will
+analyze the different tasks that could be given it by the E-Code, and will
+generate an explicit schedule for the overall task set.
+
+
+[1] Christoph M. Kirsch, Thomas A. Henzinger, and Marco A.A. Sanvido. A programmable microkernel for real-time systems. Technical Report UCB/CSD-3-1250, University of California, Berkeley, June 2003.
+[2] Thomas A. Henzinger, Christoph M. Kirsch, and Slobodan Matic. Schedule carrying code. Proceedings of the Third International Conference on Embedded Software (EMSOFT), Lecture Notes in Computer Science, Springer-Verlag, 2003.
+[3] Thomas A. Henzinger and Christoph M. Kirsch. The Embedded Machine: Predictable, portable real-time code. Proceedings of the International Conference on Programming Language Design and Implementation (PLDI), ACM Press, 2002, pp. 315-326.
