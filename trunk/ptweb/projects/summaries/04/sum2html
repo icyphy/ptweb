@@ -2,7 +2,7 @@
 # ignored by Tcl \
 exec $PTII/bin/ptjacl "$0" "$@"
 
-set year 2003
+set year 2004
 
 # $Id$
 # Parser/scanner for the ERL research summaries
