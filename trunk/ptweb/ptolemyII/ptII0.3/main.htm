@@ -28,21 +28,30 @@ we have not yet made any commitment, even internally, to keeping the
 interface the same.  You can find the code rating at the beginning of
 all source code files. Unrated files are all "red."
 
- <p>There are also some serious infrastructural problems with applets
-that we believe are due to quality problems with the Sun plugin that
-is required to run the applets.  Applications and applets run under
-the Sun appletviewer do not exhibit these problems.
-
- <p>The Ptolemy II 0.3 applets require the JDK1.2 plugin.
-If you have JDK1.2 installed on your machine, then the plugin may
+ <p>The Ptolemy II 0.3 applets require the JDK1.2 plug-in.
+If you have JDK1.2 installed on your machine, then the plug-in may
 already be installed.  
-You may obtain the JDK1.2 plugin from
-<a href="http://www.javasoft.com/products/plugin/" target="_top">JavaSoft</a>
-The plugin is easiest to use from a Windows machine.  If you don't
+You may obtain the JDK1.2 plug-in from
+<a href="http://www.javasoft.com/products/plug-in/" target="_top">JavaSoft</a>
+The plug-in is easiest to use from a Windows machine.  If you don't
 have access to a Windows machine, you can run the applets by
 downloading Ptolemy II 0.3 and running <CODE>make demo</CODE>.
 For more information, see the
-<a href="ptII0.3/doc/install.htm">Plugin</a> section of the Installation page.
+<a href="ptII0.3/doc/install.htm">Plug-In</a> section of the Installation page.
+
+ <p>There are also some serious infrastructural problems with applets
+that we believe are due to quality problems with the Sun plug-in that
+is required to run the applets.  Applications and applets run under
+the Sun appletviewer do not exhibit these problems.
+
+<li> The JDK1.2.1 Plug-in has a 
+<a href="http://developer.java.sun.com/developer/bugParade/bugs/4236070.html">known bug</a>
+that causes the Netscape or Iexplorer process to linger after exiting.
+The workaround is to turn of the JIT using the Java Plug-in Control
+Panel, see the
+<a href="ptII0.3/doc/troubleshooting#jit">Troubleshooting guide</a>
+for details.
+
 
  <p> The first applet that is run will download
 <code>ptsupport.jar</code>, which is 478k.  Each applet then will
@@ -56,7 +65,7 @@ delays before the first applet runs.
 
 <p>A known problem is that some of the applets do not stop properly,
 and will not run a second time without reloading the Java classes.
-Unfortunately, the JDK1.2.1 plugin makes it difficult to reload the
+Unfortunately, the JDK1.2.1 plug-in makes it difficult to reload the
 classes, the easiest thing is to restart your browser.
 (The <a href="ptII0.3/doc/troubleshooting.htm">Troubleshooting Guide</a>
 includes a method of reloading Java classes by turning off the
