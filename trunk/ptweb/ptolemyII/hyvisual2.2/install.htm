@@ -483,6 +483,10 @@ setArchiveFile()
 
 
 
+				<param name="PlatformName5"			value="Other Platforms">
+				<param name="InstallerName5"		value="InstData/Java/HyViInst.jar">
+				<param name="SizeInBytes5"			value="8057513">
+				<param name="IsPureJava5"			value="Yes">
 
 				<param name="PlatformName6"			value="Unix">
 				<param name="IsUnix6"					value="Yes">
@@ -740,56 +744,57 @@ To install using the recommended installer
 				
 
 				
-
-				
-
-				
 				<tr>
 					<td valign="bottom">
 						<div align="left">
 							<script>
 							<!--
 
-	displayMarker("unix")
+	displayMarker("linux")
 							// -->
 							</script>
 							</div>
 					</td>
-					<td align="center" valign="center"><img height="16" width="26" src="InstData/images/unix.gif"></td>
+					<td align="center" valign="center"><img height="16" width="14" src="InstData/images/linux.gif"></td>
 					<td valign="bottom">
 						<div align="left">
 							<font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
 							<script>
 							<!--
 
-	setPlatFont("unix")
+	setPlatFont("linux")
 							// -->
 							</script>
-							Any Unix Platform
+							Linux
 							<script>
 							<!--
 
-	endPlatFont("unix")
+	endPlatFont("linux")
 							// -->
 							</script>
 							</font></div>
 					</td>
-					<td valign="bottom"></td>
+					<td valign="bottom">
+						
+						</td>
 					<td valign="bottom"></td>
 					<td valign="bottom">
 						
 						<center>
-							 <a href="InstData/GenericUnix/HyViInst.bin"> <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
-							(16.7M)
+							 <a href="InstData/Linux/NoVM/HyViInst.bin"> <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Download
+							(7.7M)
 							 </font></a></center>
 						
 						</td>
 					<td valign="bottom"></td>
 					<td valign="bottom">
 						<center>
-							<a href="#unix"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">View</font></a></center>
+							<a href="#linux"><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">View</font></a></center>
 					</td>
 				</tr>
+				
+
+				
 				
 
 				
@@ -904,36 +909,48 @@ To install using the recommended installer
 
 
 
+<!--	OTHER	-->
 
-
-
-
-<!--	UNIX	-->
 		<center>
 			<p>
 			<hr>
 			</p>
 		</center>
 		<div align="left">
-			<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="5"><a name="unix"></a>Generic Unix Instructions:</font><br>
+			<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="5"><a name="other"></a>All Other Platforms Instructions:</font><br>
 			</p>
+		</div>
+		<div align="left">
 			<ul>
-				<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b>Instructions</b></font></p>
+				<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b>Instructions (Unix or Unix-like operating systems)</b></font></p>
 				<ul>
-					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">After downloading open a shell and, </font><font size="4"><b><code>&nbsp;cd&nbsp;</code></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">to the directory where you downloaded the installer</font>.
-					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">At the prompt type: </font><font size="4"><b><code>&nbsp;sh ./HyViInst.bin</code></b></font>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">For Java 2, after downloading, type<br>
+					</font><font size="4"><b><code>&nbsp;&nbsp;java -jar HyViInst.jar</code></b></font>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">For Java 1.1, after downloading, type<br>
+					</font><font size="4"><b><code>&nbsp;&nbsp;jre -cp HyViInst.jar install</code></b></font>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">If that does not work, try<br>
+					</font><font size="4"><b><code>&nbsp;&nbsp;java -classpath </code></b><code>[path to]<b>classes.zip:HyViInst.jar install</b></code></font>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">If that does not work either, on sh-like shells, try<br>
+					</font><font size="4"><b><code>&nbsp;&nbsp;cd </code></b><code>[to directory where HyViInst.jar is located]</code></font><br>
+					<font size="4"><b><code>&nbsp;&nbsp;CLASSPATH=</code></b><code>HyViInst.jar</b></code></font><br>
+					<font size="4"><b><code>&nbsp;&nbsp;export CLASSPATH</code></b></font><br>
+					<font size="4"><b><code>&nbsp;&nbsp;java install</code></b></font>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Or for csh-like shells, try<br>
+					</font><font size="4"><b><code>&nbsp;&nbsp;cd </code></b><code>[to directory where HyViInst.jar is located]</code></font><br>
+					<font size="4"><b><code>&nbsp;&nbsp;setenv CLASSPATH </code></b><code>HyViInst.jar</b></code></font><br>
+					<font size="4"><b><code>&nbsp;&nbsp;java install</code></b></font>
 				</ul>
 				<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><b><br>
-				Notes</b></font></p>
+				Instructions (for other platforms)</b></font></p>
 				<ul>
-					<!-- Cases (possible installs) (1): Unix sans VM alone; (2) Unix with VM (is never the case); (3) Unix both with and without VM (is never the case) -->
-					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">You need to install a Java 1.4 (or later) virtual machine. You can download one from <a href="http://www.ZeroG.com/redirect/redirectJava.htm">Sun's Java web site</a> or contact your OS manufacturer.</font>
-            	</ul>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Be sure you have Java 1.1.8 or later installed. You can download Java from <a href="http://www.ZeroG.com/redirect/redirectJava.htm">Sun's site</a></font>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">In a console window, change to the directory where you downloaded</font><font size="4"><b><code>&nbsp;HyViInst.jar&nbsp;</code></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">to before running the installer</font>
+					<li><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Your operating system may invoke Java in a different way. To start the installer, add</font><font size="4"><b><code>&nbsp;HyViInst.jar&nbsp;</code></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">to your</font><font size="4"><b><code>&nbsp;CLASSPATH</code></b></font><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">, then start the main class of the installer named</font><font size="4"><b><code>&nbsp;install</code></b></font>
+				</ul>
 				<p><font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2"><br>
 				(<a href="#top">Go To Top</a>)</font></p>
 			</ul>
 		</div>
-
 
 
 
