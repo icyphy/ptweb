@@ -1,0 +1,57 @@
+<html>
+<head>
+<Title>Filter Design</Title>
+</head>
+<body bgcolor="#faf0e6">
+<h1><a name="Digital Filter Design">Digital Filter Design tool</a></h1>
+<hr>
+You can design a IIR Filter with the following applet
+<p>
+This is an applet that allows you to design digital filter graphically.
+There should be three plots and one parameter panel.  The three
+plots are: a Pole-Zero plot in z-plane, frequency domain plot, and time
+domain plot.  Frequency domain plot includes magnitude plot, magnitude
+in dB, and phase plot.  Use the choice widget on the left side of
+the plot to toggle among them.  By default it designs a Butterworth
+approximation, using bilinear transform lowpass filter.  You can change
+the type of filter to highpass, bandpass, bandstop by select the 
+check box on the parameter panel.
+<p>
+<p>
+<br>
+The plots are based on <A HREF = "http://ptolemy.eecs.berkeley.edu/java/ptplot/"> ptplot </a>.
+<p>
+I added some interactive objects in the plot to allow the user changing
+ the design parameters on the plots.  The interactive components are
+the poles/zeros (in circle and cross ) in z-plane plot, the gain and
+frequency of band in the magnitude plot. You can change 
+the passband and stopband's  gain and frequency by select the blue lines
+in the magnitude plot with your right most mouse button, and drag to 
+your desire location.  Notice the horizontal line only move along
+y-axis, while the vertical line move on x-axis.  As you drag, there
+will be number displayed on the upper left hand side of the plot tell
+you the value.  Or you can hold down on control key and click on
+the interactive component, a window will appear for you to enter
+the exact value of the parameter.  Every time you change the gains/frequency, 
+a new filter will be designed.  So in the same way you can change
+the pole zero location on the Z-plane plot.  But also you can 
+add pole-zero or delete pole-zero by click the appropriate button.
+<p>
+<p>
+
+Other functionalities are on the way, I will update this page
+often.  Have fun!
+<p>
+<p>
+
+<br>
+ 
+<applet name="PtFilter" codebase = "ptfilter" code="ptolemy.filter.applet.FiltApplet" width=950 height=850 
+    alt="If you had a java-enabled browser, you would see an applet here."
+>
+<param name="type" value="IIR">
+</applet>
+<p>
+</body>
+</html>
+
