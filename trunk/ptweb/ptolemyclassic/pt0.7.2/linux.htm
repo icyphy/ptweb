@@ -40,6 +40,11 @@ PTARCH=linux
 export PTARCH
 
 PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
+
+# To use the X11 pxgraph, follow the instructions
+# in $PTOLEMY/src/pxgraph/README.txt and uncomment the next line.
+PT_USE_X11_PXGRAPH=yes
+export PT_USE_X11_PXGRAPH
 </pre>
 
 <li> 
@@ -211,6 +216,16 @@ The fix is to edit <CODE>ptolemy/src/pxgraph/pxgraph/xgraph.h</CODE>
 and comment out the declaration of strchr
  <br>Then run <CODE>make install</CODE>
 
+<li>When running a model that uses the Java version of pxgraph,
+the output is screwy.  For example, the butterfly model results in
+in the 10^38 range.  The problem here is with the binary data
+format of the Java version of pxgraph.  The solution is to use
+the X11 version of pxgraph by doing:
+<pre>
+PT_USE_X11_PXGRAPH=yes
+export PT_USE_X11_PXGRAPH
+</pre>
+(The sample .bashrc above has been adjusted accordingly)
 </ol>
 
 </body>
