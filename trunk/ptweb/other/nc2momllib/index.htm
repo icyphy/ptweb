@@ -55,11 +55,13 @@ find it and automatically make the TinyOS libraries available.</p>
               href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
               Installshield Wizard</a>.  Run the wizard, and choose
               "Custom" install.  Install only the AVR tools.  <b>Do
-              not choose the "cygwin" install option (it will overwrite
-              and corrupt your current cygwin installation) or the
-              "TinyOS" install option (you will install this later from
-              CVS as a separate step).</b> This will install all of
-              the above rpms for you.
+              not choose the "cygwin" install option (it will
+              overwrite and corrupt your current cygwin installation)
+              or the "TinyOS" install option (you will install this
+              later from CVS as a separate step).</b> You may choose
+              to install the other remaining options if you do not
+              already have them installed on your system. The wizard
+              will install all of the selected rpms for you.
 
               <li> Or you can download the rpms separately from <a
               href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/">here</a>.  More convenient links are included here:
@@ -121,14 +123,16 @@ cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/tinyos co tinyos-1.x
 export TOSROOT=$PTII/vendors/ptinyos/tinyos-1.x
 export TOSDIR=$TOSROOT/tos
             </pre>
+
           <li>Under Windows with Cygwin, you can permanently set
           environment variables from the System control panel. For
           details, see <a
           href="../../../../doc/install.htm#settingptII">Set the value of
           the PTII environment variable</a>. While you are setting
           environment variables in Windows, you may want to set <a
-          href="#NC2MOMLLIB_NESC">NC2MOMLLIB_NESC</a>. <li>Under csh
-          or tcsh:
+          href="#NC2MOMLLIB_NESC_dist">NC2MOMLLIB_NESC</a>.
+
+          <li>Under csh or tcsh:
             <pre>
 setenv TOSROOT $PTII/vendors/ptinyos/tinyos-1.x
 setenv TOSDIR $TOSROOT/tos
@@ -146,6 +150,12 @@ tar xvf nc2momllib-1.1.1-1.tar
 cd $PTII/vendors/ptinyos/nc2momllib-1.1.1-1
 ./configure --prefix=$PTII/vendors/ptinyos
         </pre>
+        If you are using Cygwin, and configure has trouble finding
+        <code>TOSROOT</code> or <code>TOSDIR</code>, try expanding your
+        <code>$PTII</code> environment variable to
+        <code>/cygdrive/c/ptII</code> or something similar.  Also try
+        expanding the <code>TOSROOT</code> and <code>TOSDIR</code>
+        environment variables if you still have problems.
 
       <li> Install nc2momllib: 
         <pre>
@@ -154,7 +164,13 @@ make install
         </pre>
         This will create directories in <code>$PTII/vendors/ptinyos</code>
 
-      <li> <a name="NC2MOMLLIB_NESC">Set another environment variable</a> (NC2MOMLLIB_NESC) that
+        <p>If you are using Cygwin and make cannot find avr-gcc, then
+        avr-gcc is probably not in your path.  Locate avr-gcc and add
+        the directory to your path.  If you cannot find avr-gcc, then
+        the AVR rpm's were not installed correctly, and you will need
+        to try to reinstall them.
+
+      <li> <a name="NC2MOMLLIB_NESC_dist">Set another environment variable</a> (NC2MOMLLIB_NESC) that
       points to the nc2momllib installation.
 
         <ul>
@@ -230,11 +246,13 @@ make momllib mica
               href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
               Installshield Wizard</a>.  Run the wizard, and choose
               "Custom" install.  Install only the AVR tools.  <b>Do
-              not choose the "cygwin" install option (it will overwrite
-              and corrupt your current cygwin installation) or the
-              "TinyOS" install option (you will install this later from
-              CVS as a separate step).</b> This will install all of
-              the above rpms for you.
+              not choose the "cygwin" install option (it will
+              overwrite and corrupt your current cygwin installation)
+              or the "TinyOS" install option (you will install this
+              later from CVS as a separate step).</b> You may choose
+              to install the other remaining options if you do not
+              already have them installed on your system.  The wizard
+              will install all of the selected rpms for you.
 
               <li> Or you can download the rpms separately from <a
               href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/">here</a>.  More convenient links are included here:
@@ -296,14 +314,16 @@ cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/tinyos co tinyos-1.x
 export TOSROOT=$PTII/vendors/ptinyos/tinyos-1.x
 export TOSDIR=$TOSROOT/tos
             </pre>
+
           <li>Under Windows with Cygwin, you can permanently set
           environment variables from the System control panel. For
           details, see <a
           href="../../../../doc/install.htm#settingptII">Set the value of
           the PTII environment variable</a>. While you are setting
           environment variables in Windows, you may want to set <a
-          href="#NC2MOMLLIB_NESC">NC2MOMLLIB_NESC</a>. <li>Under csh
-          or tcsh:
+          href="#NC2MOMLLIB_NESC_source">NC2MOMLLIB_NESC</a>. 
+
+          <li>Under csh or tcsh:
             <pre>
 setenv TOSROOT $PTII/vendors/ptinyos/tinyos-1.x
 setenv TOSDIR $TOSROOT/tos
@@ -330,15 +350,27 @@ cd $PTII/vendors/ptinyos/nesc
         <pre>
 ./configure --prefix=$PTII/vendors/ptinyos
         </pre>
+        If you are using Cygwin, and configure has trouble finding
+        <code>TOSROOT</code> or <code>TOSDIR</code>, try expanding your
+        <code>$PTII</code> environment variable to
+        <code>/cygdrive/c/ptII</code> or something similar.  Also try
+        expanding the <code>TOSROOT</code> and <code>TOSDIR</code>
+        environment variables if you still have problems.
 
       <li> Install nesc 
         <pre>
 make
 make install
         </pre>
-        This will create directories in <code>$PTII/vendors/ptinyos</code>
+        This will create directories in <code>$PTII/vendors/ptinyos</code>.
 
-      <li> <a name="NC2MOMLLIB_NESC">Set another environment variable</a> (NC2MOMLLIB_NESC) that
+        <p>If you are using Cygwin and make cannot find avr-gcc, then
+        avr-gcc is probably not in your path.  Locate avr-gcc and add
+        the directory to your path.  If you cannot find avr-gcc, then
+        the AVR rpm's were not installed correctly, and you will need
+        to try to reinstall them.
+
+      <li> <a name="NC2MOMLLIB_NESC_source">Set another environment variable</a> (NC2MOMLLIB_NESC) that
       points to the nesc installation.
 
         <ul>
