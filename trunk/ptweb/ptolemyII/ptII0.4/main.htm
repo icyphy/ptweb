@@ -14,19 +14,13 @@ Ptolemy II 0.4 is the second Ptolemy II release to include domains,
 actors, and applets of sufficient quality and architectural stability
 to use as models for development.  The domain-polymorphic actor libraries,
 in the ptolemy.actor.lib and ptolemy.actor.gui packages are still small,
-but reasonably solid.  An infrastructure for easily constructing applets
-is also provided, and several of the domains have matured to the point
-that serious modeling is possible.  The documentation has progressed
-considerably, and now includes a tutorial on writing applets and
-chapters on actor libraries and several of the domains.
+but reasonably solid.
 
- <p>Nonetheless, Ptolemy II 0.4 is still an interim release. It includes
-a great deal of code that has not progressed beyond our "yellow" code
-rating, and some that has not progressed beyond "red."  You should use
-caution when basing your own development on such code. For such code,
-we have not yet made any commitment, even internally, to keeping the
-interface the same.  You can find the code rating at the beginning of
-all source code files. Unrated files are all "red."
+ <p>Ptolemy II 0.4 supports an XML language called MoML for specifying
+component-based models.
+Chapter 2 of the <a href="ptII0.4/doc/design/index.htm">Ptolemy II Design Document</a> describes how to use MoML to create models.
+
+ <p> The <a href="ptII0.4/doc/ptII0.4.release.htm">Ptolemy II 0.4 release</a> notes describe limitations in the release.
 
  <p>The Ptolemy II 0.4 applets require the JDK1.2 plug-in.
 If you have JDK1.2 installed on your machine, then the plug-in may
@@ -39,36 +33,15 @@ downloading Ptolemy II 0.4 and running <CODE>make demo</CODE>.
 For more information, see the
 <a href="ptII0.4/doc/install.htm">Plug-In</a> section of the Installation page.
 
- <p>There are also some serious infrastructural problems with applets
-that we believe are due to quality problems with the Sun plug-in that
-is required to run the applets.  Applications and applets run under
-the Sun appletviewer do not exhibit these problems.
-
-<p> The JDK1.2.1 Plug-in has a 
-<a href="http://developer.java.sun.com/developer/bugParade/bugs/4236070.html" target="_top">known bug</a>
-that causes the Netscape or Iexplorer process to linger after exiting.
-The workaround is to turn off the JIT using the Java Plug-in Control
-Panel, see the
-<a href="ptII0.4/doc/troubleshooting.htm#jit">Troubleshooting guide</a>
-for details.
-
-<p>Another known problem is that some of the applets will not run a
-second time without reloading the Java classes.  Unfortunately, the
-JDK1.2.1 plug-in makes it difficult to reload the classes, the easiest
-thing is to restart your browser.
-(The <a href="ptII0.4/doc/troubleshooting.htm">Troubleshooting Guide</a>
-includes a method of reloading Java classes by turning off the
-Jar Cache).  
-
  <p> When you visit a Ptolemy II applet, the first applet that is run
-will download <code>ptsupport.jar</code>, which is 478k.  Each applet
+will download <code>ptsupport.jar</code>, which is 671k.  Each applet
 then will download smaller domain specific jar files of between 18k
 and 65k.  If you have a slow network connection, or if there is
 congestion in the network or on our server, you may experience
 significant delays before the first applet runs.
 
  <p>Some of the applets use Diva, a visualization package.
-<code>diva.jar</code> file is roughly 550k.
+<code>diva.jar</code> file is roughly 814k.
 
 
  <p>We would be interested in any feedback you might have concerning
