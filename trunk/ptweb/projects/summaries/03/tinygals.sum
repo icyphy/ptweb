@@ -22,26 +22,43 @@ ABSTRACT
 Networked embedded systems such as wireless sensor networks are
 usually designed to be event-driven so that they are reactive and
 power-efficient.  Programming embedded systems with multiple reactive
-tasks is difficult due to the complexity of managing concurrency of
-execution threads and consistency of shared states.
+tasks is difficult due to the complex nature of managing the
+concurrency of execution threads and consistency of shared states.
 <P>
-We have designed a globally asynchronous and locally synchronous model
-(TinyGALS) for programming event-driven embedded systems.  Software
-components are composed locally through synchronous method calls to
-form modules, and asynchronous message passing is used between modules
-to separate the flow of control.  In addition, we have designed a
-guarded yet synchronous model (TinyGUYS), which allows thread-safe
-sharing of global state by multiple modules without explicitly passing
-messages.
+We have designed a globally asynchronous and locally synchronous
+model, called TinyGALS, for programming event-driven embedded systems [1].
+Software components are composed locally through synchronous method
+calls to form modules, and asynchronous message passing is used
+between modules to separate the flow of control.  In addition, we have
+designed a guarded yet synchronous model, TinyGUYS, which allows
+thread-safe sharing of global state by multiple modules without
+explicitly passing messages.  Our notions of synchrony and asynchrony,
+which are consistent with the usage of these terms in distributed
+programming paradigms, refer to whether the software flow of control
+is immediately transferred to a component.
 <P>
 With this highly structured programming model, all asynchronous
 message passing code and module triggering mechanisms can be
 automatically generated from a high-level specification.  The
 programming model and code generation facilities have been implemented
-on a wireless sensor network platform known as the Berkeley motes.
-TinyOS is an event-based operating system for networked sensors being
-developed by the group of Prof. David Culler.  The TinyGALS code
-generation tools are designed to reuse TinyOS components, which have an
-interface abstraction that is consistent with synchronous method
-calls.
+for a wireless sensor network platform known as the Berkeley motes.
+TinyOS is an event-based operating system for these networked sensors
+being developed by the group of Prof. David Culler.  Our
+implementation of TinyGALS uses TinyOS as the underlying component
+model, which has an interface abstraction that is consistent with
+synchronous method calls.  The TinyGALS code generator is designed to
+work with preexisting TinyOS components, thus enabling code reuse.
+<P>
+We are currently working on formalizing the dynamic properties of
+TinyGALS, as well as developing a more robust implementation for
+communication and scheduling.  TinyGALS is currently intended for
+running on a single node.  We later plan to extend the TinyGALS model
+to multiple nodes for distributed multi-tasking.
 
+<DL COMPACT>
+<DT> [1]
+<DD> E. Cheong, J. Liebman, J. Liu, F. Zhao, "TinyGALS: A Programming
+     Model for Event-Driven Embedded Systems," in <I>Proc. of the
+     18th Annual ACM Symposium on Applied Computing</I> (SAC'03),
+     Melbourne, FL, Mar. 9-12, 2003.
+</DL>
