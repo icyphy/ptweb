@@ -9,6 +9,9 @@
 <h1>Installing Ptolemy 0.7.2 Under Linux</h1>
 Below are notes about installing under Red Hat 8 in July, 2003
 
+<p>It might be worth trying the rpms on
+<a href="ftp://ftp.tu-ilmenau.de/pub/unix/ptolemy/ptolemy0.7.1.linux" target="_top">ftp://ftp.tu-ilmenau.de/pub/unix/ptolemy/ptolemy0.7.1.linux</a>
+
 <ol>
 
 <li> See <a href="download.htm">Download Ptolemy 0.7.2</a>
@@ -215,6 +218,14 @@ XYgraphFixSim.pl
 The fix is to edit <CODE>ptolemy/src/pxgraph/pxgraph/xgraph.h</CODE>
 and comment out the declaration of strchr
  <br>Then run <CODE>make install</CODE>
+
+<li>Run a sample demo by doing
+<pre>
+cd $PTOLEMY
+ptiny src/domains/sdf/demo/butterfly
+</pre>
+After the Ptolemy Welcome Window comes up, move the mouse over the 
+model and type a capital <code>R</code> to run it.
 
 <li>When running a model that uses the Java version of pxgraph,
 the output is screwy.  For example, the butterfly model results in
