@@ -1,0 +1,285 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 January 4, 2000
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        10/15/99 - 11/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We continue to make good progress on the type system, on MoML, and on
+the user interface for Ptolemy II. We have also updated the group
+research summaries at
+
+  http://ptolemy.eecs.berkeley.edu/projects/summaries/00/index.html
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Type System
+-----------
+
+Yuhong Xiong continues to make outstanding progress with the Ptolemy II
+type system. He has lately gained significant insight on the use of
+monotonic functions to specify type constraints, which we will
+illustrate here by discussing the AbsoluteValue actor. This actor is
+data and domain polymorphic, and computes the absolute value of the
+input data.
+
+To make the AbsoluteValue actor work for all the scalar types, which
+include int, long, fix, double, and complex, we need to specify the
+following type constraint: the output type is the same as the input
+type unless the input type is complex, in which case, the output type
+is double.  This sort of constraint cannot be specified simply as
+type inequalities.
+
+This constraint can be specified with the help of a monotonic function
+f of the input type. That is, we can specify the the inequality
+constraint
+
+        f(inType) <= outType
+
+where f is just (in pseudo code),
+
+        f = (inType == complex) ? double : inType;
+
+The inequality solving algorithm we use allows this kind of inequality,
+with the lesser term a function, when searching for the least solution.
+
+This new type constraint has been implemented. In the current
+infrastructure, each inequality term is an instance of an interface
+InequalityTerm defined in the graph package. For the AbsoluteValue
+actor, an inner class that implements InequalityTerm is used to
+represent the monotonic function. The implementation does not require
+changes on the underlying infrastructure.
+
+In addition, Yuhong has made progress on the support for composite
+types, such as arrays and records. ArrayToken is a token that contains
+an array of tokens. All the element tokens must have the same type, but
+that type can be any token type, including the type of the ArrayToken
+itself. That is, we can have an array of arrays. Type constraints can
+be specified between the type of the array element and the types of
+other objects in the system. ArrayToken is different from the existing
+MatrixTokens in that MatrixTokens contain primitive data, such as int,
+double, while ArrayToken contains Ptolemy Tokens. ArrayToken is
+experimental in Ptolemy II. The impact on type resolution is still
+being studied. However, two experiments have shown its usefulness.
+
+(1) Using ArrayToken to Specify a Sequence of Values in Source Actors:
+
+    In the source actors Pulse, Clock, and Poisson, ArrayToken can be
+    used to specify a sequence of values to produce at the output. The
+    advantage of using ArrayToken, instead of MatrixToken, is that we
+    can make the actor send out arbitrary tokens. For example, if the
+    ArrayToken contains an array of StringTokens, the source actor will
+    send out StringToken at each firing. This might be useful in a
+    control system for generating periodic messages. The type
+    constraint in this case is that the type of the output port is no
+    less than the type of the array element.
+
+    The ArrayToken above is contained in a "values" parameter of the
+    source actor. The expression language in Ptolemy supports array
+    expressions, but they will be evaluated to MatrixTokens. To allow
+    the user to set the "values" parameter easily through an array
+    expression, the ArrayType class, which represent the type of
+    ArrayTokens, provides conversion from MatrixToken to ArrayToken. If
+    a MatrixToken to be converted has more than one row, it will be
+    converted to an array of arrays. This way, if the type of the
+    output of these source actors has a corresponding MatrixToken type,
+    the values can simply be set through the setExpression() method of
+    Parameter.
+
+    Currently, ArrayToken is only used by the Pulse actor, but it will
+    also be used by Clock and Poisson very soon.
+
+(2) Conversion Between a Sequence and an Array
+
+    Two actors SequenceToArray and ArrayToSequence are added to the SDF
+    actor library that perform conversion between a sequence of tokens
+    and an ArrayToken. Type constraints in these actors ensure that the
+    type of the array element is the same as the type of the sequence
+    tokens. In SequenceToArray, the parameter TokenConsumptionRate of
+    the input port determines the length of the output array. When two
+    SequenceToArray actors are cascaded, the output of the second actor
+    will be an array of array. For example, if the first
+    SequenceToArray consumes 2 tokens at each firing and the second
+    consumes 3, the output of the second actor will be an ArrayToken
+    containing 3 ArrayTokens, each of which contains 2 tokens. This is
+    effectively a 3x2 array. The ArrayToSequence actor works on the
+    other direction.
+
+
+MoML - The Modeling Markup Language
+-----------------------------------
+
+The Ptolemy II kernel now exports MoML descriptions of models.  MoML
+(Modeling Markup Language) is an XML language for persistent storage
+of component-based designs.  It is intended to be able to serve
+as an interchange formate between tools.
+
+We have updated both PtPlot and the MoML support in Ptolemy II to use
+public DTDs. This means that there is no longer any need to include the
+DTD in the XML file, which should significantly reduce file sizes.
+
+
+User Interface
+--------------
+
+Steve Neuendorffer's visual editor for Ptolemy II, now called Vergil,
+now supports reading and writing MoML files (XML) for persistent
+storage of designs.
+
+Brian Vogel created a new class, PtolemyQuery, which manages an
+interactive dialog for setting parameter values.  Consistency
+of parameter values with the value displayed in the dialog is
+automatically maintained.
+
+
+General Software updates
+------------------------
+
+We have converted all the applets as well as the base classes that
+support both applets and applications to use swing. Swing, also known
+as the Java Foundation Toolkit, provides a much more modern
+user-interface infrastructure than the classic AWT.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Plot Package
+------------
+
+We have converted the plot package to use swing. This makes it easier
+to integrate it with modern, swing-based Java applications and applets.
+It also made it possible to significantly improve the menus and
+clipboard interaction.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Jie Liu has made major progress on combining the formal fixed-point
+semantics of continuous-time and discrete-event systems. He is able to
+use these hybrid formal models to prove causality in certain
+combinations, and to show that causality cannot be proved in other
+combinations.
+
+
+ Generic (Cross Task)
+ ====================
+
+Design reviews
+--------------
+
+ - MoML language
+ - actor.gui package.
+ - kernel package updates
+ - kernel.util package updates
+
+
+Code reviews
+------------
+
+ - kernel package updates
+ - kernel.util package updates
+
+
+2.  Equipment/Infrastructure Status:
+
+no changes.
+
+
+3.  Interactions and Technology Transfer
+
+- Jose Luis Pino of Agilent, formerly Hewlett-Packard, says, "I thought
+  you would like to know we have already invested close to 70 R&D man
+  years just on HP Ptolemy. This does not include any of the GUI, data
+  display or work on the analog/RF simulation engines. The commercial
+  version of Ptolemy has been very well received by our customers."
+
+- A few members of the Ptolemy Group met with Jim Gray of Microsoft
+  on November 3, 1999, and gave him an overview of the Ptolemy project.
+
+- Jörn W. Janneck, of the Computer Engineering and Networks Laboratory
+  at ETH, Zurich, spent two weeks visiting our group.  He is a member
+  of the research group of Lothar Thiele, which is in spirit probably
+  the closest research group (in approach and research problems) to
+  our own. 
+
+- The POLIS Team at UC Berkeley announced a new release of the Polis
+  system, based on Ptolemy Classic:
+
+    It is our pleasure to announce the public availability of the
+    POLIS-0.4 co-design environment for control-dominated embedded
+    systems. POLIS offers an integrated interactive environment for
+    specification, co-simulation, formal verification, and synthesis of
+    embedded systems implemented as a mix of hardware and software
+    components. Most of the information about POLIS, including pointers
+    to source and object code (for various CPUs and OSes) is available
+    at our WEB site http://www-cad.eecs.berkeley.edu/~polis.
+
+- Prof. Douglas C. Schmidt of Washington University, creator of TAO, a
+  CORBA ORB with real-time support, visited our group Wednesday Nov. 10. 
+
+- Prof. Dr.-Ing. J. Teich, of Paderborn, Germany, visited our group.
+
+- Pieter van der Wolf of Philips Research, Einhoven, The Netherlands,
+  visited our group for one afternoon.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+none.
+
+
+Publications
+------------
+
+[1] Liu, Liu, Koo, Sinopoli, Sastry, and Lee, "Hierarchical hybrid
+    system simulation," invited paper to the CDC'99 session "Modeling of
+    hybrid systems: theory and computational tools," to be presented Dec 9.
+      
+
+Study Group Topics
+------------------
+
+- Embedded Java/Java Virtual Machines
+- Java hardware architectures
+- Port-Based Objects
+- Time Triggered Architectures
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are converging on the next release, and so plan to focus on
+responding to design review issues and improving the user-level
+interaction of Ptolemy II.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
