@@ -39,7 +39,7 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 <li> <a href="ptII4.0/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
 </menu>
 
-<h2>Changed between 4.0 and 4.0</h2>
+<h2>Changed between 4.0-beta and 4.0</h2>
 <menu>
 
 <li> Support for the Macintosh is greatly improved.
@@ -120,10 +120,12 @@ PTII=c:/Ptolemy/ptII
 
 <li> Various junk files have been excluded from the release.
 
+<li> The JAIImageReader actor now reads images from URLs.
+
 </menu>
 
 
-<h2>Changed between 4.0-alpha and 4.0</h2>
+<h2>Changed between 4.0-alpha and 4.0-beta</h2>
 
 <h3>Feature enhancements</h3>
 
@@ -243,9 +245,6 @@ ptolemy.kernel.util.IllegalActionException: The number of elements in the
 input ArrayToken (2047) is not the same as the arrayLength parameter (2048).
 </pre>
 
-<li> The JAIImageReader actor does not work under WebStart.
-The problem is that JAIImageReader cannot read from a URL.
-
 </menu>
 
 
@@ -267,6 +266,10 @@ $PTII/ptolemy/actor/lib/BooleanSwitch.java
 <li>Matlab interface has problems work with gcc-3.3
  Under Windows, the Matlab interface has problems at runtime with gcc-3.3.
 <br>Under Windows, we recommend using gcc-3.2.
+
+
+<li> The code generator GUI has been removed from the configuration,
+instead use <CODE>$PTII/bin/copernicus</CODE>.
 
  <li> Plot windows don't resize when control panel is resized
   <br>If a model with plotters
