@@ -19,7 +19,7 @@ CHAPTER
 ABSTRACT
 
 Type systems in modern programming languages are the most widely used
-and effective (semi)formal verification tools for software. The theory
+and effective semiformal verification tools for software. The theory
 underlying type systems is simple, robust, and extremely powerful,
 based on fixed-point theorems in topology. The mathematical structure
 of a set of types is abstractly a lattice, and the theory can be
@@ -29,12 +29,12 @@ using a lattice.  It need not be restricted to classical data types.
 <p> In view of this, we have designed a set of Java classes in Ptolemy
 II that provide support for any type system that can be represented
 using such a lattice. This generic infrastructure has been first
-applied to the basic type system problem, that of ensuring
+applied to a type system problem, that of ensuring
 consistent data typing, and supporting (polymorphic) type inference.
 But the infrastructure is designed to be extensible to more sophisticated
 uses.
 
-<p> The basic type system combines static typing with run-time type
+<p> The type system combines static typing with run-time type
 checking. It supports polymorphic typing of system components, and
 allows automatic lossless type conversion at run-time. To achieve this,
 we use a lattice to model the subtyping relation among types, and use
@@ -50,7 +50,7 @@ This system increases the safety and flexibility of the design environment,
 promotes component reuse, and helps simplify component development and
 optimization.
 
-<p> An innovative (and speculative) extension to the basic type system
+<p> An innovative (and speculative) extension to the type system
 is to <i>process-level types</i>. These types represent dynamic properties
 of an application, rather than the static data types traditionally dealt
 with in a type system. One of the dynamic properties we have studied is
