@@ -35,7 +35,7 @@
 #	     ptolemy website
 
 # 1) Check that the Content-type is set
-# 1.1) Check that default.css or toc.css is used
+# 1.1) Check that default.css, toc.css, or frameset is used
 # 2) Check that all commas have spaces
 # 3) Check for FIXME
 # 4) Check for %W% %G% %Q%, which are from SCCS
@@ -53,15 +53,17 @@ doesnot () {
 for file in $@
 do
 	# 1) Check that the Content-type is set
-	doesnot '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">'  " "
+	doesnot '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">|frameset'  " "
 
-	# 1.1) Check that default.css or toc.css is used
-	doesnot 'lib/default.css" rel="stylesheet" type="text/css">|lib/toc.css" rel="stylesheet" type="text/css">'
+	# 1.1) Check that default.css, toc.css or framesetis used
+	doesnot 'lib/default.css" rel="stylesheet" type="text/css">|lib/toc.css" rel="stylesheet" type="text/css">|frameset'
 
 	# 2) Check that all commas have spaces
 	# A line that contains ", is ok
 	# A line that contains ,</i> is ok
-	results=`egrep '[^"],[^v" ]' $file | grep -v ',[</i>]'`
+	# A line that contains frameset is ok
+	# A line that contains ,000 is ok
+	results=`egrep '[^"],[^v" ]' $file | grep -v ',[</i>]' | grep -v frameset | grep -v ,000`
 	if [ "x$results" != "x" ]; then
 	    echo "$file: comma without out trailing space:"
 	    echo "$results"
