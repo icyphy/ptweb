@@ -1,3 +1,4 @@
+<!-- MoML DTD Version 1, UC Berkeley -->
 <!ELEMENT model (property | class | configure | doc | director |
                 entity | import | link | relation)*>
 <!ATTLIST model name CDATA #REQUIRED
