@@ -1,0 +1,48 @@
+NAMES
+Yuhong Xiong
+
+EMAIL
+yuhong@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~yuhong
+
+PHONE
+510-494-8878
+
+TITLE
+Extended Type System for Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+We are developing two extensions to the Ptolemy II type system.  The current 
+type system combines static typing with run-time type checking. It supports 
+polymorphic typing of system components, and allows automatic lossless type 
+conversion at run-time. To achieve this, we use a lattice to model the 
+lossless type conversion relation among types, and use inequalities defined 
+over the type lattice to specify type constraints in components and across 
+components. The system of inequalities can be solved efficiently, with 
+existence and uniqueness of a solution guaranteed by fixed-point theorems. 
+This type system increases the safety and flexibility of the design 
+environment, promotes component reuse, and helps simplify component 
+development and optimization. The infrastructure we have built is generic 
+in that it is not bound to one particular type lattice. So it can be used
+to experiment with extended type systems.
+
+One extension to this type system is to add support for structured types 
+such as array and record types. The goal is to allow the elements of arrays 
+and records to contain data tokens of arbitrary types, including structured 
+types, and be able to specify type constraints on them. One of the major 
+difficulty for this extension is that the type lattice will become infinite, 
+which raises questions on the convergence of type resolution.
+
+A more significant extension is on system level types. We will try to
+characterize the communication protocols used between system components, 
+or some of the real-time properties of the system as types, and design 
+a process-level type system to facilitate heterogeneous real-time modeling. 
+This may potentially bring some of the benefit of data typing to the process 
+level.
+

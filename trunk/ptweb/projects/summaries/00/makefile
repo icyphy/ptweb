@@ -6,7 +6,8 @@ SOURCES = ptolemyII.sum \
 		tsaysummary.sum \
 		corba00.sum \
 		liuj00.sum \
-		bilungNliuxj00.sum
+		bilungNliuxj00.sum \
+		yuhong00.sum
 
 index.html : $(SOURCES) sum2html
 	-chmod a+x sum2html
