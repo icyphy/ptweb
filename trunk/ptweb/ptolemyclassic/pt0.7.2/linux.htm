@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Installing Ptolemy 0.7.2 Under Linux</h1>
-Below are notes about installing under Red Hat 8 in July, 2003
+Below are notes about installing under Red Hat 8 in July, 2003 [and also Red Hat 9.0]
 
 <p>It might be worth trying the rpms on
 <a href="ftp://ftp.tu-ilmenau.de/pub/unix/ptolemy/ptolemy0.7.1.linux" target="_top">ftp://ftp.tu-ilmenau.de/pub/unix/ptolemy/ptolemy0.7.1.linux</a>
@@ -33,6 +33,10 @@ tar -zxf downloads/pt0.7.2devel.src.tar.gz
 tar -zxf downloads/pt0.7.2devel.other.src.tar.gz
 </pre>
 
+<ul>
+<li>
+[Red Hat 9.0]: I am logged in as celaine.  I have untarred the .tar.gz files in ~/ptclassic.  Modify the instructions below accordingly.
+</ul>
 
 <li> Create <CODE>$PTOLEMY/.bashrc</CODE> and add the following
 <pre>
@@ -115,7 +119,28 @@ I then restarted with
 make install_tcltk
 </pre>
 
+<ul>
+<li>
+[Red Hat 9.0]: After making the above fix, I get:
+<pre>
+In file included from
+/home/celaine/ptclassic/ptolemy/src/tcltk/tk8.0.5pt/unix/tkAppInit.c:16:
+/home/celaine/ptclassic/ptolemy/src/tcltk/tk8.0.5pt/unix/../generic/tk.h:78:
+X11/Xlib.h: No such file or directory
+</pre>
 
+The fix is to install <a href="http://www.redhat.com/swr/i386/XFree86-devel-4.3.0-2.i386.html"><CODE>XFree86-devel-4.3.0-2.i386.rpm</CODE></a> from <a href="http://www.redhat.com">redhat.com</a>, which will give you the necessary header files.  You may also need to install other rpms in the dependency list, including <a href="http://www.redhat.com/swr/i386/fontconfig-devel-2.1-9.i386.html"><CODE>fontconfig-devel-2.1-9.i386.rpm</CODE></a> and <a href="http://www.redhat.com/swr/i386/freetype-devel-2.1.3-6.i386.html"><CODE>freetype-devel-2.1.3-6.i386.rpm</CODE></a>.
+
+To reconfigure the build to detect <CODE>/usr/X11R6/lib/libX11.a</CODE>, do:
+<pre>
+rm -rf obj.linux/tcltk/
+</pre>
+
+Rerun:
+<pre>
+make install_tcltk
+</pre>
+</ul>
 
 <li> Proceed with installing octtools:
 <pre>
@@ -237,6 +262,44 @@ PT_USE_X11_PXGRAPH=yes
 export PT_USE_X11_PXGRAPH
 </pre>
 (The sample .bashrc above has been adjusted accordingly)
+
+<ul>
+<li>
+[Red Hat 9.0]: If it complains that it cannot find ptiny, run <CODE>make install</CODE> in <CODE>obj.linux/pigiRpc</CODE>
+
+<li>
+[Red Hat 9.0]: I get the following message in the terminal window after clicking on "Go":
+<pre>
+/home/celaine/ptclassic/ptolemy/bin/pxgraph: Could not find /home/celaine/ptclassic/ptolemy/bin.linux/pxgraph.x11
+    $PT_USE_X11_PXGRAPH was set, so Ptolemy is attempting to
+    use the X11 pxgraph instead of the Java pxgraph.
+    See /home/celaine/ptclassic/ptolemy/src/pxgraph/README.txt for more information
+</pre>
+<CODE>cd</CODE> to <CODE>obj.linux/pxgraph</CODE> and run <CODE>make install</CODE>.  I got the following errors:
+
+<pre>
+In file included from ../../../src/pxgraph/pxgraph/xgout.h:37,
+                 from ../../../src/pxgraph/pxgraph/xgraph.c:47:
+../../../src/pxgraph/pxgraph/xgraph.h:74: macro `strcpy' used without args
+</pre>
+
+and
+
+<pre>
+gcc -c -O3 -fomit-frame-pointer  -Wall -Wcast-align -Wsynth -Dlinux -D_REENTRANT -DI_UNISTD  -I../../../src/pxgraph/pxgraph -I/usr/X11R6/include -DNEED_STRICMP=1   ../../../src/pxgraph/pxgraph/xtb.c
+../../../src/pxgraph/pxgraph/xtb.c:77: macro `strcpy' used without args
+</pre>
+
+Comment out the lines in <CODE>src/pxgraph/pxgraph/xgraph.h</CODE> and <CODE>src/pxgraph/pxgraph/xtb.c</CODE> that say:
+
+<pre>
+extern char *strcpy();
+</pre>
+
+Rerun <CODE>make install</CODE>
+
+</ul>
+
 </ol>
 
 </body>
