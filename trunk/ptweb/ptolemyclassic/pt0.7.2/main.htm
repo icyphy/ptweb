@@ -11,11 +11,48 @@
 <h1>Ptolemy 0.7.2</h1>
 <ul>
 
-Currently, Ptolemy 0.7.2devel is in active development.  
-The source tree is being updated on a fairly regular basis, so the
-tree is not yet publicaly available.  If you would like access to
-the 0.7.2devel sources, please send email to
-<a href="mailto:cxh@eecs.berkeley.edu"><code>cxh@eecs.berkeley.edu</code></a>.
+Ptolemy 0.7.2devel is available for download by seasoned developers.
+
+ <p>If you would like access to the 0.7.2devel sources, please send email
+to <a href="mailto:cxh@eecs.berkeley.edu"><code>cxh@eecs.berkeley.edu</code></a>.
+ <p>Ptolemy 0.7.2devel includes the following new features:
+<menu>
+<li> Changes to the ACS domain by Eric Pauer's group at Sanders, a Lockheed Martin Company
+
+<li> Support for gcc-2.95.1
+
+<li> Support for Itcl3.0 and Tcl/Tk 8.0.5
+
+<li> Better support for NT4.0 under Cygwin b20.2
+
+</menu>
+
+ <p>Development of Ptolemy Classic is winding down at UC Berkeley,
+the 0.7.2devel release has not undergone strenuous testing.  At this time,
+we are not planning on doing further Ptolemy Classic releases, most
+of our effort is going into <a href="../ptolemyII">Ptolemy II</a>.
+
+<menu>
+
+<li> There are various minor problems with Tycho, such as menu traversal,
+that were caused by the upgrade to Itcl3.0
+
+<li> The VHDL domain is basically untested - We had to upgrade Synopsys,
+so it likely broke the VHDL domain.
+
+<li> The CG56 domain is untested
+
+<li> The NT port is rather immature, it does not really reflect the overall
+level of quality in Ptolemy Classic.   On the PC Platform, you might
+want to run under Linux instead.
+
+<li> The NT port is rather slow, the problem has to do with the event
+loop, the bugs page says:
+
+</menu>
+
+Most of the problems are basically bit rot, which occurs to software
+over time as the OS and compilers change.
 
 </body>
 </html>
