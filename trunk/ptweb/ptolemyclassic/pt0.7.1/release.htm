@@ -235,9 +235,9 @@ section in $PTOLEMY/tycho/kernel/gui/Dialog.itcl
 <pre>
 # if $autoraise {
     # If the user mouses in another window, raise
-    # bind $instance <Button> "+raise $instance"
+    # bind $instance &lt;Button&gt; "+raise $instance"
     # If the user moves the mouse in another window, raise
-    # bind $instance <Motion> "+raise $instance"
+    # bind $instance &lt;Motion&gt; "+raise $instance"
 # }
 </pre>
 
@@ -266,7 +266,7 @@ int st_strhash(string, modulus)
        ".. will have a problem when the value variable "val" is equal
        to the maximum negative integer value (for the particular OS its being
        run on say if its 32 bit OS the value would be -2^31 = -2147483648)
-       val < 0 ? -val : val will still be -val for such a case due to the
+       val &lt; 0 ? -val : val will still be -val for such a case due to the
        property of maximum negative integer that -val == val.
 
        As an example if we have a input string to this function like
@@ -284,7 +284,7 @@ int st_strhash(string, modulus)
     unsigned int newhash = -val;
     return (newhash%modulus);
   } else {
-    return ((val < 0) ? -val : val)%modulus;
+    return ((val &lt; 0) ? -val : val)%modulus;
   }
 }
 
