@@ -3,11 +3,13 @@
 User-agent: *
 Disallow: /~cxh/faq
 Disallow: /~cxh/lprng
+Disallow: /~cxh/local
 Disallow: /~cxh/sapub/AudioFile
 Disallow: /~cxh/sa/amanda
 Disallow: /~cxh/sa/mhonarc
 Disallow: /~cxh/sa/nt/dists
 Disallow: /~cxh/sapub/spamlib/old
+Disallow: /~cxh/tmp
 Disallow: /~johnr/norobots
 Disallow: /~johnr/local/nt/bulk/ibm/OLD
 Disallow: /~ptdesign/Ptolemy
