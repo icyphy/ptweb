@@ -36,6 +36,7 @@ Disallow: /~ptdesign/ptweb
 Disallow: /ptolemyII/ptII0.1alpha
 Disallow: /ptolemyII/ptII0.2
 Disallow: /ptolemyII/ptII0.3
+Disallow: /ptolemyII/ptII0.4/ptII0.4
 Disallow: /ptolemyII/ptIIlatest
 Disallow: /~ptII/java/opt
 Disallow: /~ptII/java/ptdesignvendors
