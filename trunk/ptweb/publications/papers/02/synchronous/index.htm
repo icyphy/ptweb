@@ -1,0 +1,41 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Multidimensional Synchronous Dataflow</title>
+</head>
+<body>
+<center>
+<h1>Multidimensional Synchronous Dataflow</h1>
+</center>
+<center>
+Praveen K. Murthy and Edward A. Lee
+</center>
+<br>
+<center>
+<br><br>
+<i>IEEE Transactions on Signal Processing</i>, volume 50, no. 8, pp. 2064-2079, August 2002.  
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="synchronous.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berk
+eley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+Signal flow graphs with dataflow semantics have been used in signal processing system simulation, algorithm development, and real-time system design. Dataflow semantics implicitly expose function parallelism by imposing only a partial ordering constraint on the execution of functions. One particular
+form of dataflow, synchronous dataflow (SDF) has been quite popular in programming environments for
+DSP since it has strong formal properties and is ideally suited for expressing multirate DSP algorithms.
+However, SDF and other dataflow models use FIFO queues on the communication channels, and are thus
+ideally suited only for one-dimensional signal processing algorithms. While multidimensional systems can
+also be expressed by collapsing arrays into one-dimensional streams, such modeling is often awkward and
+can obscure potential data parallelism that might be present.
+<p>
+SDF can be generalized to multiple dimensions; this model is called multidimensional synchronous dataflow (MDSDF). This paper presents MDSDF, and shows how MDSDF can be efficiently used to model a variety of multidimensional DSP systems, as well as other types of systems that are not modeled
+elegantly in SDF. However, MDSDF generalizes the FIFO queues used in SDF to arrays, and thus is capable only of expressing systems sampled on rectangular lattices. This paper also presents a generalization of MDSDF that is capable of handling arbitrary sampling lattices, and lattice-changing operations such as non-rectangular decimation and interpolation. An example of a practical system is given to show the usefulness of this model. The key challenge in generalizing the MDSDF model is preserving static schedulability, which eliminates the overhead associated with dynamic scheduling, and preserving a model where
+data parallelism, as well as functional parallelism, is fully explicit.
+</body>
+</html>
+
