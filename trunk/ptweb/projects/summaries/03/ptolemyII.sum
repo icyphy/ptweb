@@ -23,7 +23,7 @@ ABSTRACT
   <img src="PtolemyIISmall.gif" alt="Mr. Ptolemy">
  </td>
  <td>
-<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII">Ptolemy II</a> is
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII" target="_top">Ptolemy II</a> is
 a set of Java packages supporting heterogeneous, concurrent modeling,
 simulation, and design of component-based systems. The emphasis is on a
 clean, modular software architecture, divided into a set of coherent,
