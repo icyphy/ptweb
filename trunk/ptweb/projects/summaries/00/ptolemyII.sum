@@ -43,7 +43,7 @@ between entities. Domains that have been created include:
 <li><i>PN</i>: modeling of Kahn process networks, which are implemented
     as communicating Java threads; and
 <li><i>SDF</i>: (synchronous dataflow) modeling of deterministic,
-    repetative stream-based computations, such as signal processing.
+    repetitive stream-based computations, such as signal processing.
 </ul>
 
 Domains that are planned include:

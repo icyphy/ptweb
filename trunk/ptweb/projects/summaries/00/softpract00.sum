@@ -10,7 +10,7 @@ http://ptolemy.eecs.berkeley.edu/
 PHONE
 
 TITLE
-Software Engeneering Practices in an Academic Setting
+Software Engineering Practices in an Academic Setting
 
 CHAPTER
 02.cad
@@ -31,7 +31,7 @@ super-human effort of a 'hero programmer.'
 inadequacy of natural language for conveying with precision many of the
 most interesting complex research results.  Academic papers make heavy
 use of formal mathematical languages in an effort to improve precision.
-But not all research is ammenable to such languages.  Algorithms,
+But not all research is amenable to such languages.  Algorithms,
 design methodologies, and innovative designs are often best conveyed
 in software.  Software becomes the medium for human communication.
 But unlike published papers, there is no peer-review mechanism for

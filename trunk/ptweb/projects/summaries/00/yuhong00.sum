@@ -51,7 +51,7 @@ support for structured types such as array and record types. The goal
 is to allow the elements of arrays and records to contain data tokens
 of arbitrary types, including structured types, and be able to specify
 type constraints on them. Type constraints and type inference must
-propogate transparently across operators that construct and disassemble
+propagate transparently across operators that construct and disassemble
 such structures. One of the major difficulties in this extension is
 that the type lattice becomes infinite, which raises questions on the
 convergence of type checks and inference.

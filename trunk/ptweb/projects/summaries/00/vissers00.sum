@@ -1,8 +1,5 @@
 NAMES
-<A HREF="http://www-cad.eecs.berkeley.edu/~tah">Tom Henzinger</a>,
-<A HREF="http://ptolemy.eecs.berkeley.edu/~eal">Edward A. Lee</a>,
-<A HREF="http://www-cad.eecs.berkeley.edu/~alberto">Alberto Sangiovanni-Vincentelli</a>, and
-<A HREF="http://ptolemy.eecs.berkeley.edu/~vissers">Kees A. Vissers</a> (Visiting Industrial Fellow)
+<A HREF="http://www-cad.eecs.berkeley.edu/~tah">Tom Henzinger</a>, <A HREF="http://ptolemy.eecs.berkeley.edu/~eal">Edward A. Lee</a>, <A HREF="http://www-cad.eecs.berkeley.edu/~alberto">Alberto Sangiovanni-Vincentelli</a>, and <A HREF="http://ptolemy.eecs.berkeley.edu/~vissers">Kees A. Vissers</a> (Visiting Industrial Fellow)
 
 EMAIL
 vissers@eecs.berkeley.edu
@@ -36,7 +33,7 @@ Rather than a single monolithic specification, we plan to produce a set
 of specifications that cover orthogonal properties of specification
 languages. This results in a pragmatic approach to interoperability.
 For interoperability an essential factor is that the underlying concepts
-are understood and designed with various degrees of compatibilty in
+are understood and designed with various degrees of compatibility in
 mind.
 
 <P>
@@ -51,15 +48,15 @@ given in the mathematical language of sets and relations.
 
 <li> Syntactic Transformations. A set of operations transform one
 design into another. They can be used to model higher-order functions
-and object-oriented inheretance in an abstract way.
+and object-oriented inheritance in an abstract way.
 
 <li> Concrete syntax. A concrete syntax defines how a design and
 transformations on a design can be represented and manipulated in a
-persistent, computer-useable format. Examples are XML with associcated
+persistent, computer-usable format. Examples are XML with associated
 DTDs, APIs, and netlist formats like EDIF or a VHDL like syntax.
 
 <li> Type systems. A type system imposes constraints on the
-interconnection of computation, and provides for propogation of
+interconnection of computation, and provides for propagation of
 constraints through type inference and type resolution. We will
 give an abstract specification that permits tools to define the
 type systems they assume.
