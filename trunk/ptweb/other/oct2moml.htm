@@ -1,0 +1,67 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>oct2moml</title>
+</head>
+<body>
+
+<h1>oct2moml</h1>
+Oct2moml is a start at a tool that converts Ptolemy Classic Octtools Facets
+to Ptolemy II MoML files.
+ <p>This tool is incomplete and totally unsupported, but it is useful
+for getting a start on converting Ptolemy Classic Octtools facets
+to MoML Files
+<h2>Limitations</h2>
+
+<ol>
+<li> Galaxies are not handled well
+<li> There is not necessarily a one-to-one translation
+between Ptolemy Classic Star names and their parameters and
+Ptolemy II Actor names and their parameters
+<li> 
+</ol>
+<h2>Installation</h2>
+<ol>
+<li> Download the Ptolemy Classic src and other.src tar files
+
+<li> Build Octtools:
+<pre>
+cd $PTOLEMY
+./MAKEARCH
+make install_octtools
+</pre>
+
+
+<li> Download oct2moml-1.0.tar.gz from
+<a href="http://ptolemy.eecs.berkeley.edu/other/oct2moml-1.0.tar.gz"><CODE>http://ptolemy.eecs.berkeley.edu/other/oct2moml-1.0.tar.gz</CODE></a>
+and untar it
+<pre>
+cd $PTOLEMY
+tar -zxf oct2moml-1.0.tar.gz
+</pre>
+
+
+<li> Build oct2moml.  Currently, MAKEARCH does not build a separate
+obj.$PTARCH directory for oct2moml, so you will need to build
+the source files in the <CODE>src/</CODE> directory:
+<pre>
+cd $PTOLEMY/src/octtools/tkoct/top
+make
+cd ../oct2moml
+make
+</pre>
+
+
+<li> To test oct2moml, run
+<pre>
+oct2moml -g $PTOLEMY/src/domains/sdf/demo/butterfly
+</pre>
+
+
+</ol>
+
+
+</body>
+</html>
