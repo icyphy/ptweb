@@ -18,8 +18,24 @@ for messages after 1/1/97.
 <li> <a href="http://www.mail-archive.com/ptolemy-hackers@ptolemy.eecs.berkeley.edu/" target="_top">
 Mail-archive</a> search for messages after 1/20/99.
 
-<li> <a href="http://ptolemy.eecs.berkeley.edu/cgi-bin/ptolemy-hackers-wais.pl" target="main">WAIS (Wide Area Information Servers)</a>
-search for all messages ever posted (this is a no-frills interface).
+<li>Search the Ptolemy-hackers archive for messages posted since 1992.
+<form method="post" action="/cgi-bin/htsearch">
+<input type="text" size="40" name="words" value="">
+<input type="submit" value="Search">
+<p>
+Match: <select name=method>
+<option value=and>All
+<option value=or>Any
+</select>
+Output Format: <select name=format>
+<option value=builtin-long>Long
+<option value=builtin-short>Short
+</select>
+</font>
+<input type=hidden name=config value=htdigptolemy-hackers>
+<input type=hidden name=restrict value="">
+<input type=hidden name=exclude value="">
+</form>
 
 </UL>
 You can also earch the newsgroup (<code>comp.soft-sys.ptolemy</code>).
