@@ -1,13 +1,6 @@
-To: "Edward A. Lee" <eal@eecs.berkeley.edu>
-cc: eallocal@eecs.berkeley.edu
-Fcc: +drafts
-Subject: Re: Fwd: Research Summary abstracts 
-In-reply-to: Your message of Mon, 24 Sep 2001 15:00:34 -0700.
-             <5.1.0.14.0.20010924150017.05055bf8@mho.eecs.berkeley.edu> 
---------
 I did the heavy lifting
 I copied the summaries over from laster year, they are visible at
-http://ptolemy.eecs.berkeley.edu/projects/summaries/02/index.html
+http://ptolemy.eecs.berkeley.edu/projects/summaries/03/index.html
 but there are no links from the website to them yet.
 
 We need someone to coordinate this.
@@ -18,7 +11,7 @@ summary.
 To do this,
 1. Check out a copy of the website
    cvs -d :ext:cooley.eecs.berkeley.edu:/users/cvs/Repository co ptweb
-2. go to ptweb/projects/summaries/02
+2. go to ptweb/projects/summaries/03
 
 3. If your .sum file exists, updatit
    if it does not exist, copy an existing one, add it it to the
@@ -31,10 +24,13 @@ To do this,
 5.  Check in your changed sum file (and makefile if necessary)
     cvs commit -m "Added my research" yourfile.sum makefile
 
-6. Become the ptII user on messier by using kerberos
-   kinit
-   rlogin -8xl ptII messier 
-   cd ~ptII/ptweb/projects/summaries/02
+6. Become the ptII user on messier, see
+   http://www.gigascale.org/ptolemy/group/public.htm
+
+   Once you are set up, use ssh to log on to a Unix machine such
+   as cooley, then do
+   ssh -l ptII messier
+   cd ~ptII/ptweb/projects/summaries/03
    cvs update
    make
 	
