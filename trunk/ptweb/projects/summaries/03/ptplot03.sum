@@ -1,0 +1,42 @@
+NAMES
+Edward A. Lee, Christopher Hylands
+
+EMAIL
+ptplot@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/java/ptplot
+
+PHONE
+
+TITLE
+Ptplot - A Java 2D Signal plotter
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+Ptplot is a set of two dimensional signal plotters components
+written in Java with the following properties:
+<ul>
+<li> Embeddable in applets or applications.
+<li> Auto-ranging.
+<li> Automatic or manual labeling of axes.
+<li> Automatic or manual tick marks.
+<li> Logarithmic axes.
+<li> Live, animated plots.
+<li> Infinite zooming.
+<li> Various plot styles: connected lines, scatter plot, bars, etc.
+<li> Various point styles: none, dots, points, and unique marks.
+<li> Multiple data sets and a legend.
+<li> Color or black and white plotting.
+<li> Error bars.
+<li> Editable plots.
+<li> PlotML, and XML language for specifying plots.
+<li> Compatibility with pxgraph, an older plotting program.
+</ul>
+
+The Ptplot home page can be found at:
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptplot/">http://ptolemy.eecs.berkeley.edu/java/ptplot</a>
+
