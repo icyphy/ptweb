@@ -29,7 +29,7 @@ for Windows NT
   <a href="http://download.cyclic.com/pub"><CODE>http://download.cyclic.com/pub</CODE></a>
 
   <li> The Windows Help files are part of
-  <a href="http://www.wincvs.org">Wincvs</a>.  
+  <a href="http://www.wincvs.org/" target="_top">WinCVS</a>
   The help files are available as:
   <a href="cvshlp.zip"><CODE>cvshlp.zip</CODE></a>
 
@@ -98,6 +98,22 @@ nmake -f makefile.vc TOOLS32=d:\\PROGRA~1\MICROS~2\VC98
 </pre>
 
 </ol>
+
+<h2>CVSSSH To Do List</h2>
+<ul>
+<li> Check in the various redistributable pieces, such as the help
+files and the InstallShield script and setup file.
+
+<li> Look into path length problems.  Windows apparently has
+a hard time with variables over 128 characters.
+
+<li> Upgrade from ssh-1.2.14 to ssh-1.2.26
+
+<li> Ship the <CODE>README.txt</CODE> file as an HTML file instead
+This will require setting up InstallShield to start up a browser.
+
+</ul>
+
 
 </body>
 </html>
