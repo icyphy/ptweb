@@ -33,7 +33,7 @@ telephony network, which is isochronous (sharing a common frequency,
 though not quite a common time base) demonstrates that highly reliable 
 networked real-time systems are achievable when there is shared 
 temporal information.
-
+<P>
 Given a common time base, we can take a very different approach to task 
 management than priority-based scheduling. One approach is to apply 
 conservative distributed discrete-event simulation technology, not to
@@ -50,7 +50,7 @@ An interesting elaboration of this technique, which relies on faster
 than real-time computation, is to perform optimistic computation with 
 rollback, where obviously interaction with physical actuators offers 
 a physical barrier to rollback.
-
+<P>
 We are also exploring a second approach, in collaboration with the group 
 of Prof. Tom Henzinger, where a common time base is used to orchestrate 
 synchronous periodic computations in hard real-time systems. In this 
