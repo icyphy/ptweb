@@ -18,9 +18,16 @@
 <p><a href="copyright.htm" target="main">Copyright</A>
 
 <p>
-<FORM ACTION="http://ptolemy.eecs.berkeley.edu/cgi-bin/searchPtolemyRefs" target="main">
-<input type="text" NAME="query" size="15">
+<form method="post" action="/cgi-bin/htsearch" target="main">
+<input type="text" size="40" name="words" value="">
 <input type="submit" value="Search">
+
+</font>
+<input type=hidden name=config value=htdigpubs>
+<input type=hidden name=restrict value="">
+<input type=hidden name=exclude value="">
+</form>
+
 <p>
 <a href="help.htm" target="main">Help</A>
 <p>
