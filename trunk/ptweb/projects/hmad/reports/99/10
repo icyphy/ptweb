@@ -1,0 +1,286 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 October 25, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        9/15/99 - 10/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have made major improvements to the type system in Ptolemy II and to
+MoML (our XML modeling language). We have also continued to use code
+profiling to effect significant speed improvements in Ptolemy II
+models. Finally, we attended the Composite CAD principal investigators'
+meeting in Agora Hills, California, October 5-7, where we presented
+Ptolemy II demonstrations.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Type System
+-----------
+
+Yuhong Xiong and Steve Neuendorffer have completed a major extension of
+the Ptolemy II system. The change is to use classes like "BaseType",
+"ArrayType", etc. to represent token types, instead of instances of
+Class. This is for supporting arrays and records, and making the type
+system more flexible. This change also benefits current types. The type
+classes have a convert() method, so that we don't need to use
+reflection to find the convert() method in the token from an instance
+of Class. This should yield significant performance improvements when
+automatic type conversion is occurring. Also, all the type related
+classes will be moved into the data.type subpackage, so the
+code organization is cleaner.
+
+
+MoML - The Modeling Markup Language
+-----------------------------------
+
+We have further refined MoML, and improved the Ptolemy II support for it.
+In particular:
+
+1) We removed the tight dependence that the MoML parser had on the
+   actor package. You can now use MoML to instantiate virtually any
+   Ptolemy II classes. In order to do this, we had to work around the fact
+   that Java's reflection mechanism does not support polymorphism directly.
+   We had to build our own support for polymorphic reflection.
+
+2) The top-level of a MoML file can now be "class" as well as "model".
+   This is more natural if you are defining only a single class in a file.
+
+3) We merged setParameter and parameter elements into one.
+
+4) The configure element can now accept in-line configuration information
+   that is any textual data, including XML in a non-MoML dialect.
+
+5) The doc element can now accept HTML elements using the same mechanism
+   that the configure element accepts XML.
+
+6) "include" changed to "import".
+
+7) Changed "icon" element to "rendition".
+
+8) Replaced x=, y= elements with a location element.
+
+To better support MoML in Ptolemy II, we have defined a suite of
+subclasses of Attribute which allow annotations to be attached to
+kernel objects. We plan to use these annotations for storing graphical
+rendition information used by the GUI.
+
+
+Component Naming
+----------------
+
+We have made a number of changes that affect the way names of components
+are handled, mainly to better support MoML. Specifically:
+
+1) NamedObj throws an exception if you give the object
+   a name with a period in it.  This required modifying Nameable.java
+   so now all calls to setName() have to handle IllegalActionException.
+   I changed all classes in the tree that had to be changed.
+
+2) NamedObj.getAttribute() accepts composite names, and will look for
+   hierarchically nested attributes.  I.e., you can have a NamedObj "x"
+   with attribute "a" that contains and attribute "b", and 
+   x.getAttribute("a.b") will return the right attribute.
+
+3) Entity.getAttribute() overrides this to search ports.  I.e., If NamedObj x
+   contains Port p with attribute a, you can get it by x.getAttribute("p.a").
+   Note that the kernel does not enforce unique names of ports and attributes.
+   If you have a port named "y" with attribute "a" and an attribute
+   named "y" with (sub)attribute "a", then getAttribute("y.a") is
+   ambiguous.  The current implementation returns the attribute.
+
+4) CompositeEntity now overrides getAttribute() and defines getRelation()
+   and getEntity() to search contained entities.  Again, there is ambiguity.
+   The order of search is entities, attributes, ports, relations.
+
+5) CompositeEntity now overrides getPort() and getRelation() to accept
+   compound names.
+
+6) CompositeEntity.getEntity() now accepts composite names.
+
+This gives a generally more consistent use of naming throughout. You
+can now ask a top-level entity for any object in the model if you know
+(a) the full name of the object and (b) whether it's an attribute,
+port, entity, or relation.
+
+The next step would be to require unique names, and have a single
+method that will access all four... Requiring unique names is somewhat
+tricky because the name of an object can be changed at any time.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Audio
+-----
+
+Last month we reported that Brian K. Vogel wrote a Java application
+which performs real-time pitch shifting of vocal sounds. Audio input
+comes from the PC microphone or line-in. This verified that Java is
+capable of at least limited real-time processing. Brian has implemented
+the application in the Ptolemy II SDF domain, and finds that real-time
+performance is maintained. This means that Ptolemy II itself is not
+introducing unacceptable overhead for this particular application, at
+least at the (relatively coarse) level of granularity that he used. It
+runs in real-time at 22050 Hz sample rate on a Celeron PC. 44100 Hz is
+a little choppy, however. He used the SDFIOPort sendArray() and
+getArray() methods (designed by Steve Neuendorffer) on all of the
+actors to improve performance (currently using consumption/production
+rate = 512).
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Nothing to report.
+
+
+ Generic (Cross Task)
+ ====================
+
+Design reviews
+--------------
+
+ - DE kernel
+ - actor util classes (esp CalendarQueue)
+ - actor.lib classes
+
+Steve Neuendorffer improved the scripts used to make the review web
+pages.
+
+
+Conversion to JDK 1.2 Collections
+---------------------------------
+
+We continue the process of modifying kernel code to use the
+collections that are included in the JDK 1.2 util package (lists, hash
+maps, and sets) rather than the third party collections package
+(designed by Doug Lea). The JDK 1.2 collections package are more mature
+and have better performance.
+
+
+Performance
+-----------
+
+We have improved the efficiency of the debug listener mechanism, which
+is used to monitor the execution of a model while debugging.  On our
+(now standard) speed tests, this change alone yielded a 25% to 30%
+improvement in execution speed.
+
+We have also improved performance by introducing a protected _workspace
+variable to use instead of workspace() method. It turns out that method
+calls in Java are surprisingly expensive.
+
+We also modified the send() method of IOPort and TypedIOPort to
+silently discard tokens if the channel index is out of range (this is a
+semantic change that is primarily motivated by performance
+improvements, but also yields more uniform behavior for disconnected or
+partially connected ports).
+
+We modified all actors in the actor library to use send() instead of
+broadcast(), resulting in a performance improvement on our tests of about
+10%.
+
+
+2.  Equipment/Infrastructure Status:
+
+We have evaluated several Java profiling tools, and have settled on
+JProbe. We have ordered several copies.
+
+
+3.  Interactions and Technology Transfer
+
+ - Michael Henze <henze@ti.et-inf.uni-siegen.de> in Germany has
+   programmed a code generation domain for DLX processor in Ptolemy
+   Classic. The DLX is 32bit processor.
+
+ - Beth Savoy, of Corning, Inc. writes:
+
+    I am setting up a process by which my dept will rate its codes
+    through a review process.  I would like to adapt the Ptolemy
+    project's process to our needs, which I believe is the intention
+    in publishing it...
+
+   For reference, the principal document on this process is:
+
+   J. Reekie, S. Neuendorffer, C. Hylands and E. A. Lee "Software
+   Practice in the Ptolemy Project," Technical Report Series,
+   GSRC-TR-1999-01, Gigascale Semiconductor Research Center, University
+   of California, Berkeley, CA 94720, April 1999.
+
+   http://ptolemy.eecs.berkeley.edu/publications/papers/99/sftwareprac/
+
+ - Xavier Warzee of Thomson, CSF has contacted us about coordinating
+   contributions to Ptolemy II and Ptolemy Classic by three students
+   at Supelec in France.
+
+ - Joern Janneck of ETH, Switzerland, arrived for a two week visit with
+   our group.  His group at ETH has been developing software and semantic
+   approaches that have a great deal in common with Ptolemy II.
+
+
+4.  Personnel Status
+
+Chamberlain Fong has joined the group as a new graduate student.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+* Edward A. Lee, "Heterogeneous Modeling and Design," Composite CAD
+  principal investigators' meeting in Agora Hills, California, October 7.
+
+* Bilung Lee, "Control Logic using Finite State Machines", presentation
+  at the Sunnyvale campus of Synopsys, September 27, 1999.
+
+* Bart Kienhuis, "Compilation from Matlab to Process Networks", CASES
+  Workshop.
+
+* Co-organized a DARPA workshop "MOBIES," on model-based embedded software,
+  held in Berkeley on September 29.
+
+
+Publications
+------------
+
+none.
+
+
+Study Group
+-----------
+
+We have covered the following topics in our weekly study group:
+
+* Architecture description languages (ADLs).
+* Component Object Model (COM).
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+Ptolemy II kernel classes will be augmented to export MoML descriptions,
+we will convert existing graphics code to use swing, and we will continue
+to improve the GUI.s
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+

@@ -1,0 +1,395 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 October 24, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        8/15/99 - 9/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have released PtPlot 3.1, a new version of the plot package
+supporting an XML file format, editable plots, and interactive plot
+formatting. We have also redesigned the discrete-event domain to
+improve its handling of simultaneous events (correcting some bugs and
+giving it more deterministic semantics), and simultaneously improved
+its execution speed by about a factor of 20.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Software Release
+----------------
+
+On August 20, 1999, we released PtPlot 3.1, a new version of our
+Java-based plot package. The major changes are:
+
+- Editable data sets
+- Editable plot format
+- PlotML file format
+- Histograms
+- EPS export
+
+The release notes are included as an appendix.
+
+
+Graphical User Interface
+------------------------
+
+Steve Neuendorffer demonstrated to our group an early version of a
+block-diagram editor for Ptolemy II. It is built on top of Diva, a GUI
+toolkit jointly developed by our group and Prof. Richard Newton's
+group.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Audio
+-----
+
+Shankar Rao has developed an interface to the Java Advanced Audio API
+for use within Ptolemy. While the emphasis is on ease of use, he has
+been tuning the performance to support real-time audio processing in
+Java.
+
+Brian K. Vogel wrote a Java application which performs real-time pitch
+shifting of vocal sounds. Audio input comes from the PC microphone or
+line-in. This verifies that Java is capable of at least limited
+real-time processing. This application requires JDK 1.3 beta and at
+least a Pentium II 400 MHz class processor to run at 22050 Hz sample
+rate. 44100 Hz performance might be possible on a 600 MHz Pentium III.
+
+Since the pitch shifting algorithm is pitch-synchronous, a pitch
+detector is used to provide a pitch estimate of the input signal. Brian
+is currently using cepstrum analysis. The pitch detector will only look
+for pitches in the range of the fundamental of human vocal sounds, and
+will not work on sources with a fundamental much higher than 300 Hz.
+The pitch detector works by computing the (real) cepstrum, given by
+IDFT(log(magnitude(DFT(input_signal)))), and then doing peak finding in
+the high-time part of the cepstrum.
+
+Currently, only the ptolemy.math package is used (for FFT, IFFT). The
+next step is to implement this in the SDF domain. This will give us a
+chance to see what optimization can be made to improve SDF performance.
+
+
+Discrete-Event Modeling
+-----------------------
+
+We have modified the calendar queue scheduler and the way it is used in
+the discrete-event (DE) domain to correct a set of (moderaterly
+serious) bugs in handling simultaneous events. The solution is to
+introduce a third field into the DEEvent key, on which events are
+sorted. Specifically, It now sorts on the basis of:
+
+  time stamp
+  microstep
+  depth
+
+in that order. The microstep is new. The way it works is that if you
+call fireAt() with current time as the argument (to schedule an actor
+firing later, but at the same time stamp as the current time), then the
+microstep is incremented. This mechanism maintains determinacy in the
+handling of simultaneous events.
+
+These changes also resulted in some changes to the actor package:
+
+ - The Executable interface now has preinitialize() and initialize()
+   methods. The first is invoked before type resolution, the second
+   after. Previously, we had only one method, and it was invoked before
+   type resolution.
+
+ - Manager and Director both support this. All domains transparently
+   start executing both methods.
+
+In addition, the DE domain now fully supports mutations (where the
+structure of a model changes while it is executing), and the DE
+chapter of the design document gives a brief tutorial on constructing
+mutating models.
+
+In addition, the DE director now gives reasonable support for debug
+listeners. If you attach a debug listener to it, you can closely
+monitor what's happening in the event queue and scheduling.
+
+Finally, by using code profiling, we have improved the speed of
+execution of models in the DE domain by about a factor of 20 (measured
+on a test model with no I/O).
+
+
+Synchronous Dataflow
+--------------------
+
+The synchronous dataflow (SDF) domain now fully supports mutations
+(where the structure of a model changes while it is executing). Since
+this domain uses static scheduling, mutations are performed between
+iterations of the schedule, and the schedule is recomputed as
+necessary.
+
+The Delay actor in the SDF domain has also been rewritten and is now
+much cleaner.  This actor is fairly central to the operation of the
+domain.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Nothing to report.
+
+
+ Generic (Cross Task)
+ ====================
+
+Design reviews
+--------------
+
+ - PlotML and GUI infrastructure approach
+ - logic actor library
+ - gui package
+ - audio classes
+ - conversion actors
+
+
+Conversion to JDK 1.2 Collections
+---------------------------------
+
+We have begun the process of modifying kernel code to use the
+collections that are included in the JDK 1.2 util package (lists, hash
+maps, and sets) rather than the third party collections package
+(designed by Doug Lea). The JDK 1.2 collections package are more mature
+and have better performance.  So far, some of the classes in the actor,
+actor.util, kernel, and kernel.util packages have been converted.
+
+
+
+2.  Equipment/Infrastructure Status:
+
+* Christopher Hyland upgraded the default version of Java from JDK1.2.1
+  to JDK1.2.2
+
+
+3.  Interactions and Technology Transfer
+
+* Wolfgang Reimer (Dr.-Ing.), of Ilmenau Technical University, Germany
+  has released Ptolemy 0.7.1p1 for RedHat Linux 6.0 (x86). See:
+
+    ftp://kapella.e-technik.tu-ilmenau.de/pub/ptolemy-0.7.1p1-10/
+
+  Minor bugs fixed with this release:
+
+- fixed bug reported by Patrick Meyer <p.meyer@signaal.nl>
+  (ACSSinFPCGC.pl computes a cosine instead of a sine)
+
+- fixed bin/xv (script won't exit if no viewer is installed)
+
+- changed all && command lists to || command lists in spec file to avoid
+  non-zero exit status which could cause rpm-2.5.x to exit
+
+- fixed warning about non-existing owner/group "test"
+
+
+* On August 18, Mike Schuette from Motorola visited our group. He is
+  investigating methodologies and supportive tool frameworks for
+  Motorola to performing architectural evaluation in embedded systems.
+
+
+* We have engaged in a dialog with Michael J. Wirthlin of BYU, who is
+  developing "JHDL", a VHDL-based design language that integrates with
+  Java.  He is exploring the use of Ptolemy II as a framework for this.
+
+
+* Jerome Prieur of Virtual Photonics reports:
+
+  "In the last few months, over 70 industry experts have completed
+  training in the Photonic Transmission Design Suite (PTDS). Open
+  sessions have been conducted at MCI Worldcom, with participation from
+  high tech companies such as Chorum, Antec, Qtera, Siemens, Corning,
+  Avanex, Tyco and JDS-Uniphase. Programs have also been conducted on
+  site at Lucent, Ericsson and the University of Aston for BICC,
+  Marconi and recently at Alcatel."
+
+  PTDS is based in part on Ptolemy Classic.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Study Group
+-----------
+
+With the start of the Fall semester, we have resumed our Friday
+afternoon study group.  The first topic was Express, a UML-like
+language used extensively in mechanical design.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to continue performance improvements through code profiling,
+work on MoML (our XML modeling language), work on the GUI, and
+conversion of existing graphical code to use swing.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+APPENDIX
+========
+
+Ptplot 3.1 is available for demonstration and download from the Ptplot
+home page at http://ptolemy.eecs.berkeley.edu/java/ptplot.
+
+Ptplot is a set of two dimensional signal plotters components written
+in Java with the following properties:
+
+   * Embeddable in applets or applications.
+   * Auto-ranging.
+   * Automatic or manual labeling of axes.
+   * Automatic or manual tick marks.
+   * Logarithmic axes.
+   * Live, animated plots.
+   * Infinite zooming.
+   * Various plot styles: connected lines, scatter plot, bars, etc.
+   * Various point styles: none, dots, points, and unique marks.
+   * Multiple data sets and a legend.
+   * Color or black and white plotting.
+   * Error bars.
+   * Editable plots.
+   * PlotML, and XML language for specifying plots.
+   * Compatibility with pxgraph, an older plotting program.
+
+There is a set of demonstrations of the various capabilities. There are
+several ways to use the classes in the plot package.
+
+   * You can invoke an executable, ptplot, which is a shell script, to plot
+     data on the local file system or on the network.
+   * You can invoke an executable, pxgraph, which is a shell script, to
+     plot data that is stored in binary format compatible with the older
+     program pxgraph.
+   * You can invoke a Java application, such as PlotMLApplication, by
+     setting your CLASSPATH variable appropriately and using the java
+     executable that is included in your Java distribution.
+   * You can reference an existing applet class, such as PlotMLApplet, in
+     an HTML file. The applet parameters, such as dataurl, give the plot
+     data and format information, either by referring to another file on
+     the network, or by directly including the information. You do not even
+     have to have Ptplot installed on your server, since you can always
+     reference the Berkeley installation.
+   * You can create new classes derived from applet, frame, or application
+     classes to customize your plots. This allows you to completely control
+     the placement of plots on the screen, and to write Java code that
+     defines the data to be plotted.
+
+The plot data can be specified in any of three data formats:
+
+   * PlotML is an XML extension for plot data. Its syntax is similar to
+     that of HTML.
+   * An older, simpler syntax for plot data is also provided, although in
+     the long term, that syntax is unlikely to be maintained (it will not
+     necessarily be expanded to include new features). For simple data
+     plots, however, it is adequate. Using it for applets has the advantage
+     of making it possible to reference a slightly smaller jar file
+     containing the code, which makes for more responsive applets.
+   * A binary file format used by the popular pxgraph program, an extension
+     of xgraph, is supported by classes in the compat package. There is
+     also a shell script, called pxgraph, which invokes these classes.
+     Formatting information in pxgraph (and in the compat package) is
+     provided by command-line arguments, rather than being included with
+     the plot data, exactly as in the older program. Applets specify these
+     command-line arguments as an appet parameter.
+
+The main class implementing the plotter component is Plot. It is derived
+from PlotBox, which provides only the axes and decorations of the plot.
+This is implemented in a base class so that it can be reused for different
+kinds of plots. Live (animated) data plots are supported by the PlotLive
+class. This class is abstract; a derived class must be created to generate
+the data to plot (or collect it from some other application). Editable
+plots (where a user can interactively modify the data being plotted) are
+supported by the EditablePlot class.
+
+The above classes define panels that are used by placing them into a user
+interface context such as an applet or the top-level window of an
+application. A number of classes are provided to support common situations,
+but you should keep in mind that these classes are by no means
+comprehensive. Many interesting uses of the plot package involve writing
+Java code to create customized user interfaces that include one or more
+plots. The most commonly used built-in classes are those in the plotml
+package, which can read PlotML files and the older textual syntax. These
+classes are include:
+
+   * PlotMLApplet: A simple applet that can read PlotML files off the web
+     and render them.
+   * EditablePlotMLApplet: A version that allows editing of any data set in
+     the plot.
+   * PlotMLFrame: A top-level window containing a plot defined by a PlotML
+     file.
+   * PlotMLApplication: An application that can be invoked from the command
+     line and reads PlotML files.
+   * EditablePlotMLApplication: An extension that allows editing of any
+     data set in the plot.
+
+The last of these is the class invoked by the ptplot command-line script.
+It can open plot files, edit them, print them, and save them. There are
+simpler version of some of these in the plot package that cannot read
+PlotML files, but can read an older, simpler syntax. The only reason to use
+these simpler versions is for the slightly smaller jar file sizes, which
+can improve the responsivity of applets.
+
+TwoPlotExample is a very simple sample Ptplot application that uses only
+core classes in the plot package, and exercises complete control over the
+layout of the page.
+
+Backward compatibility with the C pxgraph program is provided in the compat
+package by the PxgraphApplet and PxgraphApplication classes in the compat
+package.
+
+This code owes a heavy debt to David Harrison, the original author of
+xgraph, which runs under the X window system on Unix platforms. An
+extension to xgraph called pxgraph, written by Joe Buck, reads binary files
+as well as ASCII. For compatibility with these programs, we have provided a
+Bourne Shell script called pxgraph that is a drop-in replacement for either
+xgraph or pxgraph. Unlike the original program, however, the Java
+implementation does not depend on the X window system. We have provided a
+DOS batch file called pxgraph.bat that brings pxgraph capability to Windows
+platforms.
+
+Ptplot3.1 has many new feature over the last standalone release
+(Ptplot2.0).  The key new features:
+
+ * Editable plots (invoke ptplot, and try Edit:Edit Dataset... use the
+   right mouse button to edit the dataset).
+
+ * Editable format (invoke ptplot, and try Edit:Format).
+
+ * PlotML file format.
+
+ * Histogram plots
+
+ * The standalone applications have menus
+
+ * Better printing support, including generation of EPS files
+
+There are many other changes as well.
+
+Send bug reports, questions or comments to
+ptplot@ptolemy.eecs.berkeley.edu  
+
+
