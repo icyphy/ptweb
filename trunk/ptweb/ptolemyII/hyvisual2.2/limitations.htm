@@ -124,11 +124,6 @@ in an array.  This causes problems when Ptolemy is run on
 European machines that use a comma "1,0" instead of a period "1.1"
 in floating point numbers.
 
-<li> After running the CT Square Wave demonstration, the user
-may be asked to save the model.  This is because the inside of 
-ContinuousTransferFunction composite actor was out of date.
-
-
 <li>You can't use column matrices in FSM actions, because of the semicolon 
 delimiter.
 
@@ -149,8 +144,6 @@ box that lists the common ports
 drawn arcs between nodes.  One potential workaround would
 be to have an information message in the status bar about this.
 
-<li> Viewing html source does not work.
-
 <li> You should not change the names of built in ports - The port
 mechanism should disallow port name changes on ports that are
 named in Java.  The UI could recognize this.  The UI should
@@ -162,6 +155,8 @@ have constraints on their element types can cause problems.
 <!--hyVisualDocs-->
 <li> The Undo mechanism is under development.  Not
 all actions undoable.
+
+<li> The documentation for the parameter utilitie is not included
 <li> The save in library and make hierarchy facilities are under development
 <li>Weak support for multiports in the graph editor.
 <li>It is difficult to control wire routing.
@@ -173,6 +168,48 @@ all actions undoable.
 <li>It is difficult to add actors to the libraries.
 <li>No dynamic class reloading.
 </ul>
+
+<h3>Changes</h3>
+
+<h4>Changes between 2.2-beta-2 and 2.2-beta-3</h4>
+
+<menu>
+<li>  If HyVisual is started up using Web Start or the ZeroG
+InstallAnywhere installer, then the notion of the current directory
+is changed to the user's home directory.  Previously, the current
+directory would be something like
+<CODE>c:/Program Files/Ptolemy/HyVisual 2.2-beta-2</CODE>
+
+<li> Professor Lee tuned the configuration and removed actors
+that will not work in HyVisual
+
+<li> Professor Lee fixed the SquareWave demo so that the user is
+no longer prompted to save the model after running it.
+
+<li> If HyVisual gets an error while reading in the configuration,
+a dialog box pops up with the stack trace.  Previously, if the
+user started HyVisual from a menu, then stderr and stdout would
+not be visible to the user and if there was an error, the user
+would not see any of the diagnostics.  
+
+
+<li> The documentation for the ptolemy.actors.parameters package is
+included in the release so that the 'Get Documentation' right
+menu choice works for IntRangeParameter and portParameter, which
+are available under the Utilities tree branch. 
+Note that 'Get Documentation' does not work for parameter
+
+</menu>
+
+<h4>Changes between 2.2-beta and 2.2-beta-2</h4>
+
+<menu>
+<li>  Professor Lee improved the annotations of many of the models
+<li>  Minor spelling fixes
+</menu>
+
+
+-Christopher
 
 </body>
 </html>
