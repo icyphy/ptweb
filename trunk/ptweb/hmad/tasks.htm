@@ -1,0 +1,142 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<Title>HMAD Tasks</title>
+</head>
+<body>
+<h1><a name="XXX editor">HMAD Tasks</a></h1>
+
+<p>
+<a href="ptolemyhmad.html">HMAD Home Page</a><br>
+<p>
+<h1>Heterogeneous Modeling and Design</h1>
+<p>
+This project is organized along the following two phases
+and six tasks:
+
+<h2>Phase 1 (18 months)</h2>
+
+<h3>Task 1: Modular deployable design tools</h3>
+
+System-level design tools such as our Ptolemy environment tend to be
+large monolithic software systems, following the VLSI CAD tradition.
+This makes them difficult to use, maintain, and support, Moreover,
+increasingly, design tools are expected to perform in an environment
+where design and evolution of a larger system is ongoing, persisting
+well beyond initial system deployment. We are exploiting software
+technologies such as abstract machines, web-based design, migrating
+processes, client-server architectures, and object-request brokers to
+break apart the design tools into modular building blocks. One
+consequence is that certain elements of a design tool (such as
+schedulers, user-interfaces, displays, controls, and even models) can
+be deployed as part of system, facilitating maintenance, adaptation,
+evolution, and documentation. An underlying object-oriented software
+architecture will provide the modular heterogeneity amenable to such
+partitioning.
+
+<h3>Task 2: Domain-specific design tools</h3>
+
+High-level design tools tend to be domain-specific, supporting a narrow
+range of design problems. Successful examples include Spice for circuit
+modeling, digital hardware design tools, and visual dataflow
+environments for signal processing. Many of these tools share common
+principles. Most can be viewed in fact as languages in that they have a
+syntax (either ASCII or pictorial) and a semantics. For electronic
+systems, the semantics is often concurrent, in that modules
+conceptually (or physically) operate at the same time, interacting
+through signals. For MEMS systems, the semantics is always concurrent,
+reflecting an underlying physical modeling problem, and interaction is
+through physical effects. We are studying and developing various
+domain-specific approaches appropriate to composite CAD. These include
+Spice-level modeling of circuits and mechanical systems, discrete-event
+modeling of synchronous and asynchronous digital hardware, dataflow
+modeling of discrete-time systems and embedded software, state-machine
+modeling of sequential controllers, and various higher-level models
+that focus on resource allocation and system-level design, applicable
+for example to hardware/software codesign.
+
+<h3>Task 3: Heterogeneous interaction semantics</h3>
+
+Frequently, domain-specific design tools and languages need to be
+combined to design and model heterogeneous systems. One example of
+great commercial interest is in wireless communication, where
+Spice-level modeling of RF circuits needs to be combined with
+functional modeling of signal processing that is often implemented in
+embedded software. MEMS systems are similar, if a bit more complex, in
+that they may combine physical models at the level of differential
+equations, Spice-level circuit models for analog driving and sensing
+circuitry, functional models of sequential control logic, and
+functional models of signal processing that deal with sensor data or
+actuator control signals. Each of these is best supported by a distinct
+modeling paradigm, language, and tool. These tools tend to grow and
+evolve in isolation, making it difficult to combine them to achieve
+system-level design. We are studying and developing theory and
+techniques for heterogenous combinations of such tools
+and languages.
+
+<h2>Phase 2 (18 months)</h2>
+
+<h3>Task 4: Process level type system</h3>
+
+Strongly typed programming languages are more robust than weakly typed
+languages. Static type systems can prevent many common software faults
+and facilitate compiler optimizations. We will extend this concept to
+composite system-level design to facilitate heterogeneous modeling and
+design. We will develop a type system for concurrent processes that
+regulates the interaction between heterogeneous system components. The
+notion of types will be adapted beyond that of numerics and data
+structures to encompass such notions as a continuous-time signal, a
+discrete-time signal, a set of discrete-events in time, a rendezvous,
+or a sequence of messages. Instead of defining variables, our types
+define signals. The forms that signals can take determine the types of
+the processes that interact with these signals. A type hierarchy will
+determine how processes can be combined and type resolution and
+translation will be developed to support heterogeneous modeling.
+
+<h3>Task 5: System-level validation</h3>
+
+Formal analysis can play a major role in validating designs of embedded
+systems. Models of computation based on a formal mathematical
+framework, such as differential equations, synchronous/reactive models,
+communicating finite-state machines, and dataflow models, have been
+used to design systems that provably have some desirable property such
+as safety, stability, or liveness. Such techniques have been applied in
+hybrid systems, which combine continuous-time differential equation
+models with discrete finite automata. However, the methods used today
+mostly do not scale well to practical systems. Key questions frequently
+become undecidable, and many of those that remain decidable become
+intractably complex. We will develop systematic techniques that can
+applied to practical systems. The keys are information hiding and
+hierarchy. Simple, mathematical models of computation can be used to
+define the interaction between modules at a large grain level. We will
+show that by hiding the internal implementation of modules, they can
+become large and complex without adversely affecting the ability to
+answer key validation questions at the system level.
+
+<h3>Task 6: System-level visualization</h3>
+
+We will construct an object-oriented design visualization environment
+for complex, evolving, distributed systems. Initially (at least) this
+will be based on the Tycho syntax manager that we have begun under the
+Ptolemy project. Tycho supports syntax-directed editing and
+domain-specific graphical visualization by using a modular,
+object-oriented software architecture. This architecture will support
+deployable design tools; visualization modules will be separable from
+the design environment. We will devise visual representations to
+illustrate the concurrent and real-time behavior of composite systems.
+We expect that different visual syntaxes will be required for different
+models of computation (physical modeling of MEMS components will likely
+require significantly different representations than the automata that
+control them). We will devise live, direct-manipulation interfaces for
+design and modeling composite systems.
+
+
+Copyright &#169 1998, The Regents of the University of California.
+All rights reserved.
+<br>
+Last updated: 03/02/98,
+comments to: <author>tycho@eecs.berkeley.edu</author>
+</body>
+</html>
