@@ -17,7 +17,8 @@ OLDSOURCES = ptolemyII.sum \
 SOURCES = ptolemyII.sum \
 	  cont_and_disc.sum \
 	  e_Ptolemy.sum \
-	  nest.sum
+	  nest.sum \
+	  celaine.sum
 
 index.html : $(SOURCES) sum2html
 	-chmod a+x sum2html
