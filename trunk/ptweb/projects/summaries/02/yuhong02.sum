@@ -8,7 +8,7 @@ HOMEPAGE
 http://ptolemy.eecs.berkeley.edu/~yuhong
 
 PHONE
-510-494-8878
+510-642-6873
 
 TITLE
 An Extended Type System for Component-Based Design
@@ -37,37 +37,37 @@ uses.
 <p> The basic type system combines static typing with run-time type
 checking. It supports polymorphic typing of system components, and
 allows automatic lossless type conversion at run-time. To achieve this,
-we use a lattice to model the lossless type conversion relation among
-types, and use inequalities defined over the type lattice to specify
-type constraints in components and across components. The system of
-inequalities can be solved efficiently, with existence and uniqueness
-of a solution guaranteed by fixed-point theorems. This type system
-increases the safety and flexibility of the design environment,
+we use a lattice to model the subtyping relation among types, and use
+inequalities defined over the type lattice to specify type constraints
+in components and across components. The system of inequalities can be
+solved efficiently, with existence and uniqueness of a solution
+guaranteed by fixed-point theorems. This type system supports both the
+base types, such as int, double, and strings, and structured types such
+as array and record types. For structured types, we allow the elements
+of arrays and records to contain data tokens of arbitrary types, including
+structured types, and we are able to specify type constraints on them.
+This system increases the safety and flexibility of the design environment,
 promotes component reuse, and helps simplify component development and
 optimization.
 
-<p> We are currently developing two extensions. One extension is to add
-support for structured types such as array and record types. The goal
-is to allow the elements of arrays and records to contain data tokens
-of arbitrary types, including structured types, and be able to specify
-type constraints on them. Type constraints and type inference must
-propagate transparently across operators that construct and disassemble
-such structures. One of the major difficulties in this extension is
-that the type lattice becomes infinite, which raises questions on the
-convergence of type checking and inference.
-
-<p> A more innovative (and speculative) extension is to <i>process-level
-types</i>. These types represent dynamic properties of an application,
-rather than the static data types traditionally dealt with in a type
-system. One of the dynamic properties we have studied is communication
-protocol. We have attempted to characterize different communication
-protocols as types and describe these types using automata. Furthermore,
-we have organized these types into a system-level type lattice using the
-simulation relation among automata. This lattice provides significant
-insight into the relation among various protocols and may help design
-polymorphic components that can work with multiple protocols. For example,
-we can specify the behavior of a polymorphic component using a non-deterministic
-automaton. If this automaton simulates the automata of some specific
-protocols, the component will be able to work with those protocols. 
+<p> An innovative (and speculative) extension to the basic type system
+is to <i>process-level types</i>. These types represent dynamic properties
+of an application, rather than the static data types traditionally dealt
+with in a type system. One of the dynamic properties we have studied is
+communication protocol. We characterize different communication
+protocols as types and describe these types using a light-weight formalism
+called interface automata. In addition, we describe the behavior of
+components using interface automata, and check the compatibility of the
+components with the communication types through automata composition.
+Furthermore, we have organized the communication types into a system-level
+type lattice using the alternating simulation relation among automata.
+This lattice provides significant insight into the relation among various
+protocols and helps the design and verification of polymorphic components
+that can work with multiple protocols. For example, The alternating
+simulation relations can be viewed as the subtyping relation among the
+communication types.  According to a theorem in interface automata, if a
+component is compatible with a certain communication type in the lattice,
+it is also compatible with its subtypes. This is analogous to the subtyping
+polymorphism in object-oriented languages.
 <p>
 
