@@ -13,7 +13,8 @@ SUM_SOURCES =  \
 	cal04.sum \
 	softwalls.sum \
 	wireless.sum \
-	cacheAwareScheduling.sum 
+	cacheAwareScheduling.sum \
+	structuredIA.sum  
 
 # other sources that are not .sum files 
 OTHER_SRCS =
