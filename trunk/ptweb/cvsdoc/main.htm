@@ -16,7 +16,6 @@ CVS allows multiple developers to concurrently modify source code packages.
 
 <li> <a href="http://www.cyclic.com" target="_top">Cyclic Software</a> - Commercial Support for CVS, lots of good links and binaries
 
-<li> <a href="http://www.wincvs.org/">WinCVS</a> 
 <li> <a href="http://www.cs.washington.edu/homes/gjb/ToolsTalks/project-management/" target="_top">CVS and RCS Tutorial</a>
 <li> Mailing Lists: -
 <a href="news:comp.software.config-mgmt"><CODE>comp.software.config-mgmt</CODE></a> -
@@ -27,6 +26,14 @@ CVS allows multiple developers to concurrently modify source code packages.
 <a href="http://www.cyclic.com/cvs/doc-faq.html" target="_top">Cyclic.com CVS FAQ</a> 
 
 <li> <a href="http://www.loria.fr/~molli/cvs-index.html" target="_top">CVS-Index at <CODE>www.loria.fr</CODE></a>
+
+<li> <a href="http://www.wincvs.org/">WinCVS</a> - Windows CVS GUI
+
+<li> <a href="http://www.cyclic.com/tkcvs/index.html" target="_top">tkCVS</a> - Tk Interface to CVS
+
+<li> <a href="http://www.ice.com/cvs/" target="_top">jCVS</a> - Java Interface to CVS
+
+<li> <a href="http://www.scriptics.com/software/netcvs.html" target="_top">Scriptics NetCVS page</a>
 
 <li> pcl-cvs emacs mode
 	<menu>
@@ -40,44 +47,35 @@ CVS allows multiple developers to concurrently modify source code packages.
 	<br> <a href="ftp://rum.cs.yale.edu/pub/monnier/pcl-cvs.tar.gz"><CODE>ftp://rum.cs.yale.edu/pub/monnier/pcl-cvs.tar.gz</CODE></a>
 	</menu>
 
-<li> <a href="http://www.cyclic.com/tkcvs/index.html" target="_top">tkCVS</a> - Tk Interface to CVS
 
-<li> <a href="http://www.ice.com/cvs/" target="_top">jCVS</a> - Java Interface to CVS
-<LI> <A HREF="http://www.extreme.indiana.edu/hpjava/cvsClient/index.html" target="_top">cvsClient</A> - jdk1.0.2 Java Interface to CVS
-
-<li> <a href="http://www.scriptics.com/software/netcvs.html" target="_top">Scriptics NetCVS page</a>
 </MENU>
 
 Local Links
 <menu>
-<li> CVS and SSH binaries for NT
-<a href="http://ptolemy.eecs.berkeley.edu/~cxh/sa/nt/dists/cvs/cvsssh.exe"><CODE>cvsssh.exe</CODE></a> 
-(For use on .eecs.berkeley.edu machines only) -
-<a href="windows.htm">Detailed Windows Instructions</a>
+
+<li> <a href="windows.htm">CVS and SSH binaries</a> for Windows
 
 <li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">JohnR's docs</a>, including information about setting up under windows.
 
+<li> <a href="http://ptolemy.eecs.berkeley.edu/~ptII/cvsdoc">CVS Resources for the Ptolemy Group Only</a>
+
 <li> Documentation
-<menu>
-<li> <a href="cvs/doc">CVS PostScript and PDF documentation</a>
+  <menu>
+  <li> <a href="cvs/doc">CVS PostScript and PDF documentation</a>
 
-<li> <a href="http://www.cs.utah.edu/csinfo/texinfo/cvs/cvs_toc.html">CVS HTML Documentation (Dated 5/1/96) </a>
+  <li> The CVS and SSH installer above includes CVS documentation in
+  Windows Help format which was taken from WinCVS.  The two Windows Help
+  format files are available as
+  <a href="cvshlp.zip"><CODE>cvshlp.zip</CODE></a>
 
-<li> Man pages:
-<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs"><CODE>cvs(1)</CODE></A>
--
-<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs.5"><CODE>cvs(5)</CODE></A>
--
-<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvsbug"><CODE>cvsbug</CODE></A>
-<li> <a href="emacsvc.html">Emacs VC Mode and CVS</a>
-<li> To get Emacs info format documentation, start up emacs and type
-M-x info, then search for <CODE>CVS1.10</CODE>.
-<li> The cvsssh.exe file above includes CVS documentation in Windows Help
-format.
-</menu>
+  <li> <a href="http://www.cs.utah.edu/csinfo/texinfo/cvs/cvs_toc.html">CVS HTML Documentation (Dated 5/1/96)</a>
 
+  <li> Man pages:
+  <A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs"><CODE>cvs(1)</CODE></A> -
+  <A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs.5"><CODE>cvs(5)</CODE></A> -
+  <A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvsbug"><CODE>cvsbug</CODE></A>
+  </menu>
 
-<li> <a href="http://ptolemy.eecs.berkeley.edu/~ptdesign/tycho/dcvs.html">Tycho notes about various distributed version control systems</a>
 </menu>
 
 Contents
@@ -216,7 +214,7 @@ cvs -d :ext:carson.eecs.berkeley.edu:/users/cvs/Repository co pt
 
 <li> You should set your PTII environment variable to point to
 the ptII directory.  Also, you should be sure that the java 
-<CODE>bin</CODE> directory (i.e. <CODE>/jdk1.1.6/bin</CODE>)
+<CODE>bin</CODE> directory (i.e. <CODE>/jdk1.2.1/bin</CODE>)
 and the current directory (i.e. <CODE>.</CODE>) are in your PATH. 
 
 <li> Build it:
@@ -503,10 +501,11 @@ make install
 
 <li> <CODE>/usr/eesww/share/gnu/cvs-1.10.3/doc</CODE> contains
 <CODE>.ps</CODE> and <CODE>.pdf</CODE> documentation files that
-were placed there by hand.o
+were placed there by hand.
 
 
 </ol>
 
+<p><font size="2" color="#cc0000">Last Updated: $Date$</font>
 </body>
 </html>
