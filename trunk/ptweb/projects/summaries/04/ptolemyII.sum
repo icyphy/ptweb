@@ -1,5 +1,5 @@
 NAMES
-Adam Cataldo, Chris Chang, Elaine Cheong, Christopher Hylands Brooks, Edward A. Lee, Xiaojun Liu, Steve Neuendorffer, Claudius Ptolemaeus, John Reekie, Mary P. Stewart, James Yeh, Yang Zhao, Haiyang Zheng and Ye Zhou
+Christopher Hylands Brooks, Edward Lee, Jie Liu, Xiaojun Liu, Stephen Neuendorffer, Yuhong Xiong, Yang Zhao, Haiyang Zheng
 
 EMAIL
 eal@eecs.berkeley.edu
@@ -23,7 +23,7 @@ ABSTRACT
   <img src="PtolemyIISmall.gif" alt="Mr. Ptolemy">
  </td>
  <td>
-Ptolemy II [1] is
+Ptolemy II [1][2][3] is
 a set of Java packages supporting heterogeneous, concurrent modeling,
 simulation, and design of component-based systems. The emphasis is on a
 clean, modular software architecture, divided into a set of coherent,
@@ -77,5 +77,20 @@ Ptolemy II includes a number of support packages, such as
 For more information about Ptolemy II, see
 <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII" target="_top"><code>http://ptolemy.eecs.berkeley.edu/ptolemyII</code></a>
 
-<p>[1]Shuvra S. Bhattacharyya, Elaine Cheong, John Davis II, Mudit Goel, Christopher Hylands, Bart Kienhuis, Edward A. Lee, Jie Liu, Xiaojun Liu, Lukito Muliadi, Steve Neuendorffer, John Reekie, Neil Smyth, Jeff Tsay, Brian Vogel, Winthrop Williams, Yuhong Xiong, Haiyang Zheng, "<a href="http://ptolemy.eecs.berkeley.edu/papers/02/ptIIdesign">Heterogeneous Concurrent Modeling and Design in Java</a>," Memorandum UCB/ERL M02/23, University of California, Berkeley, CA  USA  94720, August 5, 2002.
+
+<p> [1] C. Hylands, E. A. Lee, J. Liu, X. Liu, S. Neuendorffer, Y. Xiong, H. Zheng (eds.),
+
+<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/03/ptIIDesignIntro">"Heterogeneous Concurrent Modeling and Design in Java (Volume 1: Introduction to Ptolemy II),"</a>
+
+TechnicalMemorandum UCB/ERL M03/27, University of California, Berkeley, CA USA 94720, July 16, 2003.
+
+<p> [2] C. Hylands, E. A. Lee, J. Liu, X. Liu, S. Neuendorffer, Y. Xiong, H. Zheng, (eds.),
+
+<a href="http://ptolemy.eecs.berkeley.edu/papers/03/ptIIDesignSoftware">"Heterogeneous Concurrent Modeling and Design in Java (Volume 2: Ptolemy II Software Architecture),"</a>
+
+TechnicalMemorandum UCB/ERL M03/28, University of California, Berkeley, CA USA 94720, July 16, 2003.
+
+<p> [3] C. Hylands, E. A. Lee, J. Liu, X. Liu, S. Neuendorffer, Y. Xiong, H. Zheng (eds.),
+<a href="http://ptolemy.eecs.berkeley.edu/papers/03/ptIIDesignDomains">"Heterogeneous Concurrent Modeling and Design in Java (Volume 3: Ptolemy II Domains),"</a>
+TechnicalMemorandum UCB/ERL M03/29, University of California, Berkeley, CA USA 94720, July 16, 2003.
 
