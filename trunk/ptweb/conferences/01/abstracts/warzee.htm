@@ -1,0 +1,36 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Abstract</title>
+</head>
+<body>
+<b></b>
+<br><i>System behavior analysis with UML and Ptolemy II</i> 
+<br>
+We use UML to design systems. First, we collect systems requirements with 
+Use Cases.  These Use Cases are refined with Message Sequence Charts 
+(MSCs) and FSM charts.  MSCs describe interactions between components. 
+Each component may be refined in terms of new MSCs or FSMs.  
+<p>
+Today, only Rhapsody from ILogix allows animation of these UML models 
+to check the behavior of systems. Esterel Studio, from Simulog, allows 
+us to formally verify control part of systems behaviors by generating 
+Esterel code from UML models. But this environment is limited 
+only to reactive systems.
+<p>
+Our goal is to map UML models to Ptolemy II in order to use a larger set 
+of semantics allowing us to check behaviors of distributed, hybrid, and 
+embedded systems. MSCs will be mapped to tolemy II models using DE, CT or 
+CSP domains and FSMs will be mapped to FSM domain.
+Currently, we develop a plugin for Rose/Rational to generate MoML files. 
+UML models will be decorated with attributes needed to select Ptolemy II 
+domains during MoML generation.
+
+
+<p>
+
+<p>
+</body>
+</html>
