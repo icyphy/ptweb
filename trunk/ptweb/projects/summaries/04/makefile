@@ -16,6 +16,7 @@ SUM_SOURCES =  \
 	wireless.sum \
 	cacheAwareScheduling.sum \
 	structuredIA.sum \
+	smachine.sum \
       DDF_BDF.sum  
 
 # other sources that are not .sum files 
