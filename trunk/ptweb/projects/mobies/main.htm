@@ -6,79 +6,101 @@
 <title>MoBIES Home Page</title>
 </head>
 <body>
-<h1>MoBIES</h1>
-<table>
-<tr>
-<td>
-<img alt="Ptolemy Picture" width=165 height=200 src="../../image/ptolemySmall.gif" align=left vspace=5>
-<td>
+<h1>MoBIES project - Model-Based Integration of Embedded Software</h1>
+<p>
+This project is funded by the
+<A HREF="http://www.darpa.mil/" target="_top">
+Defense Advanced Research Projects Agency (DARPA)</A>
+<A HREF="http://www.darpa.mil/ito" target="_top">
+Information Technology Office (ITO)</A>.
+Its goal is to develop technology for
+<b>Process-Based Software Components for Networked Embedded Systems</b>.
 
-
-This project is funded by the <A HREF="http://www.darpa.mil/" target="_top">
-Defense Advanced Research Projects Agency (DARPA)</A>.
 <p>
 <ul>
 <li><em>Principal Investigator</em>:
-	<a href="http://ptolemy.eecs.berkeley.edu/~eal/" target="_top">Edward A. Lee</a>
+	<a href="http://ptolemy.eecs.berkeley.edu/~eal/" target="_top">
+Edward A. Lee</a>
+<li><em>Co-Principal Investigator</em>:
+	<a href="http://www.eecs.berkeley.edu/~tah/" target="_top">
+Tom Henzinger</a>
 <li>
 	<em>Organization</em>:
 	<a href="http://www.berkeley.edu/" target="_top">University of California at Berkeley</a>
-<li> <em>Start date</em>: March 2000
-<li> <em>End date</em>: December 2002
-</table>
-<B>News Flash: 02/10/00</B> - We would like to 
-<a href="../../jobs/body.htm" target="body">hire a Programmer/Analyst IV</a>
-for this project.
+<li> <em>Start date</em>: June 2000
+<li> <em>End date</em>: November 2004
+</ul>
+</p>
+<p>
+This project aims to develop
+technology for systematic composition of embedded software components.
+</p>
+<h2>Premise</h2>
+<p>
+Strong type systems have done more than any other "formal method" to
+improve robustness and composability of software. However, type systems
+today (at least those in common usage) talk only about static
+properties of component interfaces. The type signature of functions,
+procedures, and methods defines the data layout of arguments and
+returned values, but fails to define calling conventions. Dynamic
+properties, such as calling conventions that state that one method must
+be called only if another method has been called, are not expressed in
+the interface definition of a component, except informally. And most
+system integration problems today arise because of incompatibilities in
+the dynamic properties of software components.
+</p>
+<p>
+While promising methods, such as design by contract, have been explored
+by the research community, our approach is to focus on those techniques
+that are formally manipulable, and those that embrace concurrency. Type
+systems are an example of formally manipulable models, and their formal
+properties account in no small part for their robustness in
+application.
+</p>
+<p>
+Our focus is on the design of process-oriented components.  Such
+components operate concurrently, and we are particularly concerned
+with the dynamics of their interaction, including for example the
+communication protocols that they use when exchanging data.
+Our approach is inspired by type systems, in that we propose to
+characterize such dynamics as part of the interface definition
+of a component.  The characterization itself will have enough in
+common with a classical "type" that mechanisms such as type
+consistency checks, type inference, and polymorphism can be applied.
+</p>
+<p>
+Our interest is in real-time applications, which implies that models of
+time are a critical part of the abstractions that we will develop. The
+purpose of the mechanisms we develop is to improve robustness and
+safety while promoting component-based design.
+</p>
+<h2>Approach</h2>
+<p>
 
-<h2>Overview</h2>
-<p>The Model Based Integration of Embedded Software (MoBIES) project is a
-4 phase, 33 month, Defense Advanced Research Project Agency (DARPA)
-sponsored program to develop Process-Based Software Components for
-Networked Embedded Systems.
-
- <p>Embedded software is that which resides in devices that are not
-first-and-foremost computers. It is pervasive, appearing in vehicles,
-communications devices, aircraft, security systems, weapons systems,
-consumer electronics, toys, trains, printers, modems, copiers,
-thermostats, manufacturing systems, appliances, etc.  Embedded systems
-is a rapidly growing market, estimated to be $1.6 billion/year by 2003
-with a 15% annual growth rate
-(<a href="http://www.esofta.com/vdcsummary.pdf" target="_top"><CODE>http://www.esofta.com/vdcsummary.pdf</CODE></a>)
-
-<h2>Objective</h2>
-
- <p> Our focus is on the design of process-oriented components and
-their runtime environment for networked embedded systems. The emphasis
-of this project is on the dynamics of the components, including the
-communication protocols that they use to interface with other
-components and the modeling of their state. The objective is to
-provide mechanisms for introspection, supporting both the ability of
-the run-time environment to safely dispatch tasks and the ability of
-components to adapt their interfaces using polymorphism. The focus is
-on real-time applications, which implies that models of time are a
-critical part of the abstractions that we will develop. The purpose of
-the mechanisms we develop is to improve robustness and safety while
-promoting component-based design.
-
-<h2>Scope</h2>
-
- <p> Our plan is to build on top of Java infrastructure, particularly
-its networking support (initially at least, JINI and CORBA). We will
-coordinate with other contractors on the run-time environment,
-especially on thread scheduling with real-time capabilities. The main
-focus, however, will be on how process-oriented components are
-designed, how their interfaces are defined and reflected at run time,
-how their state is reflected at run time, and how this reflected
-information can be used to promote robustness, safety, and real-time
-performance.
+Our plan is to build on top of a Java infrastructure that we have been
+developing at Berkeley called Ptolemy II. We will augment component
+interfaces to capture dynamic properties, particularly concurrency,
+communication protocols, and real-time requirements and properties. We
+will define domains, which are models of computation (MoC) that govern
+the interactions of components, and we will define the MoCs as sets of
+compatible dynamic types. These MoCs will capture design patterns for
+component-based concurrent system designs. Finally, we will integrate
+modeling of physical and information processes, viewing the models as a
+form of reflection (where a system contains a model of itself).
 
 <h2>Resources</h2>
 
-<menu>
+<dl>
+<dt> <a href="../../presentations/00/ptolemyII.pdf" target="_top">
+Process-Based Software Components for Networked Embedded Systems</a>
+<dd> June 27, 2000, DARPA-Mobies Kickoff, Monterey CA.
 
-<li> <a href="http://www.darpa.mil/ito/solicitations/cbd_00-19.html" target="_top">BAA #00-19 Model-Based Integration of Embedded Software (MoBIES) CBD Reference</a>
+<dt> <a href="http://www.darpa.mil/ito/solicitations/cbd_00-19.html" target="_top">
+BAA #00-19 Model-Based Integration of Embedded Software (MoBIES)</a>
+<dd>CBD Reference
 
-<li>Edward A. Lee, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/embedded/" target="main">Embedded Software - An Agenda for Research</a>," ERL Technical Report UCB/ERL No. M99/63, Dept. EECS, University of California, Berkeley, CA  94720, December 15, 1999.
+<dt><a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/embedded/" target="main">Embedded Software - An Agenda for Research</a>,
+<dd>ERL Technical Report UCB/ERL No. M99/63, Dept. EECS, University of California, Berkeley, CA  94720, December 15, 1999.
 </menu>
 </body>
 </html>
