@@ -124,12 +124,10 @@ in an array.  This causes problems when Ptolemy is run on
 European machines that use a comma "1,0" instead of a period "1.1"
 in floating point numbers.
 
-<li> The CT ContinuousTransferFunction actor is a Higher Order
-Function (HOF) actor that modifies the graph when it is run.  As a
-result, when a model that uses this actor is run, the model is
-modified and when the model is closed, the user will be asked if they
-would like to save the model.  The CT SquareWave demonstration
-exhibits this behaviour.
+<li> After running the CT Square Wave demonstration, the user
+may be asked to save the model.  This is because the inside of 
+ContinuousTransferFunction composite actor was out of date.
+
 
 <li>You can't use column matrices in FSM actions, because of the semicolon 
 delimiter.
