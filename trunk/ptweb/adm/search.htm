@@ -1,0 +1,212 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>Search Engine</title>
+</head>
+<body>
+<h1>Search Engine</h1>
+
+Currently, we use <A HREF="http://htdig.sdsu.edu/">Htdig</A>
+
+
+<h2>htdig installation notes</h2>
+
+<OL>
+<li> PDF files get searched if <CODE>acroread</CODE> can
+be found as <CODE>/usr/local/bin/acroread</CODE>
+
+<li> When building htdig, be sure that the binaries
+can find all of their shared libraries.  I had to edit
+<CODE>Makefile.config.in</CODE> and add the -R argument:
+<pre>
+LDFLAGS=	@LDFLAGS@ $(LIBDIRS) -Wl,-R/usr/local/apache/htdig/lib
+</pre>
+
+<LI> You should run <CODE>configure</CODE> on brahe so that the
+pathnames are set up properly.  Definitely don't run it on 
+messier, or you may get <CODE>/export</CODE> in your paths
+
+<li> Configure with:
+<pre>
+./configure -prefix /usr/local/apache/htdig
+</pre>
+
+
+<li> Run <CODE>make</CODE>, then <CODE>make install</CODE>
+
+<li> Copy <CODE>htsearch</CODE>:
+<pre>
+cp htsearch/htsearch /usr/local/apache/share/cgi-bin
+</pre>
+
+<li> Run <CODE>ldd htdig/htdig</CODE> and then copy
+the libstdc++ shared library to <CODE>/usr/local/apache/htdig/lib</CODE>
+<pre>
+cxh@carson 16% ldd htdig/htdig
+	libnsl.so.1 =>	 /usr/lib/libnsl.so.1
+	libsocket.so.1 =>	 /usr/lib/libsocket.so.1
+	libstdc++.so.2.9.0 =>	 /users/cxh/pt/gnu/sol2.5/lib/libstdc++.so.2.9.0
+	libm.so.1 =>	 /usr/lib/libm.so.1
+	libc.so.1 =>	 /usr/lib/libc.so.1
+	libdl.so.1 =>	 /usr/lib/libdl.so.1
+	libintl.so.1 =>	 /usr/lib/libintl.so.1
+	libmp.so.1 =>	 /usr/lib/libmp.so.1
+	libw.so.1 =>	 /usr/lib/libw.so.1
+cxh@carson 17% mkdir /usr/local/apache/htdig/lib
+cxh@carson 18% cp /users/cxh/pt/gnu/sol2.5/lib/libstdc++.so.2.9.0 /usr/local/apache/htdig/lib
+
+</pre>
+
+
+<LI> We have two search engine databases:
+<OL>
+<LI> A database consisting of all of the publically available pages:
+This search is controlled by
+
+<LI> A database consisting of all of the publically available pages, and the
+group pages that are protected by hostname.
+</OL>
+
+<LI> The database files reside on messier in 
+<CODE>/vol/messier/messier1/htdig</CODE>
+
+<LI> <A HREF="file:///usr/local/apache/htdig/conf/htdig.conf"><CODE>/usr/local/apache/conf/htdig.conf</CODE></A> controls the engine for
+the public pages and the protected pages
+ <br>
+The <CODE>database_dir</CODE> should be set to:
+<pre>
+database_dir:		/vol/messier/messier1/htdig/db
+</pre>
+
+I edited it and commented out <CODE>start_url</CODE>
+and added:
+<PRE>
+start_url:		http://ptolemy.eecs.berkeley.edu/
+</PRE>
+
+I also added <CODE>/private/</CODE> to <CODE>exclude_urls</CODE>
+<PRE>
+exclude_urls:		/cgi-bin/ .cgi /private/ /CVS/ .rpm .zip .jar .ps /RCS/ /SCCS/ /tmp/ /bak/ .gz .tar split
+</PRE>
+<CODE>maintainer</CODE> was also changed:
+<pre>
+maintainer:		www@ptolemy.eecs.berkeley.edu
+</pre>
+
+
+<LI> <A HREF="file:///usr/local/apache/htdig/conf/htdigpub.conf"><CODE>/usr/local/apache/conf/htdigpub.conf</CODE></A> controls the engine for
+the public pages.
+ <br> The only difference between <CODE>htdig.conf</CODE> and
+<CODE>htdigpub.conf</CODE> is that <CODE>htdigpub.conf</CODE>
+uses a different database
+
+<pre>
+database_dir:		/vol/messier/messier1/htdig/dbpub
+</pre>
+
+
+<li> <a href="file:///usr/local/apache/htdig/bin/rundig"><CODE>/usr/local/apache/htdig/bin/rundig</CODE></a> is the script that is run
+that creates the database.  
+ <br>Change <CODE>DBDIR</CODE> to point to the <CODE>database_dir</CODE>
+<pre>
+DBDIR=/vol/messier/messier1/htdig/db
+</pre>
+
+<li> <a href="file:///usr/local/apache/htdig/bin/rundig"><CODE>/usr/local/apache/htdig/bin/rundigpub</CODE></a> is the script that is run
+that creates the public only database.
+ <br>Change <CODE>DBDIR</CODE> to point to the <CODE>database_dir</CODE>
+<pre>
+DBDIR=/vol/messier/messier1/htdig/dbpub
+</pre>
+Set <CODE>opts</CODE> so that it always includes the public config file
+<pre>
+# This will add lots of debugging output to all of the programs
+stats= opts= alt=
+opts="-c /usr/local/apache/htdig/conf/htdigpub.conf" 
+</pre>
+
+
+<li> We modified the html files in 
+<a href="file:///usr/local/apache/htdig/common"><CODE>/usr/local/apache/htdig/common</CODE></a> so that they use the 
+Ptolemy website style sheets.  One thing to note is
+that we used an absolute path for the default.css files
+
+
+<li> There are two files that need to be initialized by running
+<CODE>htdig</CODE>.  
+<pre>
+cxh@carson 81% ./htsearch
+Enter value for words: foo
+DB2 problem...: /usr/local/apache/htdig/common/synonyms.db: No such file or directory
+DB2 problem...: /usr/local/apache/htdig/common/word2root.db: No such file or directory
+
+</pre>
+
+</OL>
+
+
+
+<H3>Public htdig database</H3>
+<MENU>
+<LI> The public htdig search page is at 
+<A HREF="http://ptolemy.eecs.berkeley.edu/htdig/searchpub.html">http://ptolemy.eecs.berkeley.edu/htdig/searchpub.html</A>
+
+<LI> The htdig database is updated twice a week
+by the <CODE>majordom</CODE> user on forney.  See 
+<A HREF="file:///usr/local/adm/cron.htdigpub"><CODE>/usr/local/adm/cron.htdigpub</CODE></A>.
+Forney is not included in the <CODE>/usr/local/amanda/htaccess/ohmCluster</CODE> page, so the non-public group pages are not included in the Public
+only database.
+</MENU>
+<H3>Public and group htdig database</H3>
+<MENU>
+<LI> The public and group htdig search page is at 
+<A HREF="http://ptolemy.eecs.berkeley.edu/~ptdesign/htdig/search.html">http://ptolemy.eecs.berkeley.edu/~ptdesign/htdig/search.html</A>
+
+<LI> The htdig database is updated three times a week by a cronjob
+run by the <CODE>majordom</CODE> user on messier.  See 
+<A HREF="file:///usr/local/adm/cron.majordom"><CODE>/usr/local/adm/cron.majordom</CODE></A>
+</MENU>
+
+<H3>Running the engine by hand</H3>
+
+ <P>The <CODE>htdig</CODE> search engine is run as a cron job from by
+the <CODE>majordom</CODE> user on <CODE>messier</CODE>.  As root on
+messier, you can use <CODE>crontab -l majordom</CODE> to see the
+command to run htdig.  If you run <CODE>htdig</CODE>, you must su
+first to <CODE>majordom</CODE> on messier.
+<PRE>
+su - majordom
+/opt/www/htdig/bin/rundig -v >& /tmp/htdig2.out &
+</PRE>
+<H3>Htdig problems</H3>
+<MENU>
+
+<LI> Check the log files in <CODE>/tmp</CODE>
+
+<LI> Make sure that you have not run out of disk space.
+<pre>
+df . | grep dev
+</pre>
+If the disk filled up, look at <CODE>/tmp/htdig.out</CODE> (careful, it is big) and then add any bogus directories to
+<CODE>~ptdesign/adm/www/robots.txt</CODE>
+ <br>The rerun the search engine by hand
+<LI> If you have links that end in question marks, then htdig gets
+bogged down and fails to finish.  The classic example of this is to
+have a header in a file that ends in a question mark, and then have a
+link to that target.
+
+
+<li> To test the search engine from a Unix prompt, pass
+in the appropriate configuration file:
+<pre>
+cxh@carson 102% /usr/local/apache/share/cgi-bin/htsearch -c /usr/local/apache/htdig/conf/htdigpub.conf
+Enter value for words: object
+Enter value for format: long
+</pre>
+
+</MENU>
+
+</body>
+</html>
