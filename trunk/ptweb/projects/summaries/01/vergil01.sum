@@ -1,0 +1,49 @@
+NAMES
+Stephen Neuendorffer
+
+EMAIL
+neuendor@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~neuendor
+
+PHONE
+510-642-8884
+
+TITLE
+Vergil: User interface for Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+<p> This work is oriented around creating a modular and extensible 
+user interface for Ptolemy II that is rich and powerful, 
+yet also intuitive and relatively simple to
+learn.  
+<a href="http://ptolemy.eecs.berkeley.edu/java/vergil/body.htm>Vergil</a> 
+is oriented around an editable, interactive
+block diagram that represents the Ptolemy II model.  The block diagram
+editor can be used to construct and configure the model prior to execution
+and to directly manipulate a model while it is being executed.  The basic
+block diagram editor directly represents the components, ports, relations, 
+and links at the level that they exists in the Ptolemy II kernel.  A similar 
+editor allows a state machine model to be edited directly as a bubble and 
+arc diagram.  Models are stored persistently using the MoML XML schema.
+<p>
+The Vergil application itself is architected with software components built 
+using the Ptolemy II kernel.  This architecture allows it to be easily 
+configured and extended by manipulating these components.  MoML is used
+here as well to specify the component configuration of Vergil, such as 
+component libraries, graphical icons, and strategies for opening new files.
+<p>
+Vergil is built entirely using Java, Swing and the Java2D graphics package.  
+The block diagram editor makes use of the
+<a href="http://www.gigascale.org/diva">Diva</a> graphics framework for
+manipulating figures.
+
+<p> Although this work is an important part of Ptolemy II, it is
+intended to be sufficiently general to be applicable to other design
+tools, and to enable further research into visualization and
+design of component-based models.
