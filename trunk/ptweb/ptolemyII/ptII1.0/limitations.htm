@@ -48,6 +48,23 @@ So the warning is correct.  However, the _entire model_
 is being loaded over the net into an applet, so the warning
 need not be displayed.
 
+
+<li> The DDE Zeno demo fails:
+<pre>
+ptolemy.kernel.util.IllegalActionException: ..Clock.values: Error evaluating expression "[1, 1, 1]":
+ptolemy.kernel.util.IllegalActionException: ..Clock.values: Variable._setToken: Cannot store a token of type intMatrix, which is incompatible with type (unknown)array
+	at ptolemy.data.expr.Variable._evaluate(Variable.java:1187)
+	at ptolemy.data.expr.Variable.propagate(Variable.java:527)
+	at ptolemy.data.expr.Variable.validate(Variable.java:957)
+	at ptolemy.actor.AtomicActor.preinitialize(AtomicActor.java:382)
+	at ptolemy.actor.Director.preinitialize(Director.java:466)
+	at ptolemy.actor.CompositeActor.preinitialize(CompositeActor.java:638)
+	at ptolemy.actor.Manager.initialize(Manager.java:369)
+	at ptolemy.actor.Manager.execute(Manager.java:238)
+	at ptolemy.actor.Manager.run(Manager.java:662)
+	at java.lang.Thread.run(Unknown Source)
+</pre>
+
 <li> Running the Networked demo via an applet on the local
 file system results in an AccessControlException.
 
