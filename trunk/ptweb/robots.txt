@@ -29,6 +29,7 @@ Disallow: /~ptdesign/java/swing
 Disallow: /~ptdesign/star-demo-index
 Disallow: /~ptdesign/tycho/ptdesign-tycho
 Disallow: /~ptdesign/tycho/tcldp
+Disallow: /~ptdesign/ptweb
 Disallow: /ptolemyII/ptII0.1alpha
 Disallow: /~ptII/java/opt
 Disallow: /~ptII/java/ptdesignvendors
