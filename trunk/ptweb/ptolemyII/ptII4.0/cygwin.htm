@@ -192,10 +192,10 @@ findutils-4.1.7-4
 gawk-3.1.3-4
 gdbm-1.8.3-7
 grep-2.5-1
-groff-1.18.1-2		 optional.
+groff-1.18.1-2		 required by man
 gzip-1.3.5-1
 less-381-1
-libbz2_1-1.0.2-2
+libbz2_1-1.0.2-2	 required by tar
 libgdbm-1.8.0.5		 required by cvs
 libiconv2-1.9.1-3	 required by sed
 libintl1-0.10.40-1
@@ -208,7 +208,7 @@ libreadline5-4.2-2
 login-1.9-7		optional
 make-3.80-1
 man-1.5k-3		optional
-minires-0.97-1		?
+minires-0.97-1		Required by openssh
 ncurses-5.3-1		Required by readline
 openssh-3.up1-1  	Used by cvs
 openssl-0.9.7d-3	Required by openssh
@@ -236,12 +236,16 @@ autoconf-stable-2.13-5
 binutils-20030307-1
 db4.1	                 required by perl
 gcc-3.3.1-3
+gcc-g++-3.3.1-3		 Matlab interface uses a C++ file
 gcc-mingw-core-20031020
+gcc-mingw-g++-20031020-1
 gcc-mingw-20020817-5
+libbz2_1-1.0.2-5	Used by g++?
 m4-1.4-1
 mingw-runtime-3.2-1
 mktemp-1.5-3
 perl-5-8.2-1.tar.gz      sadly, autoconf requires perl
+pcre-4.5-1	
 w32api-2.5-1
 </pre>
 
