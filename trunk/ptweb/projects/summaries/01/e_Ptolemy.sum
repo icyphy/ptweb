@@ -1,0 +1,28 @@
+NAMES
+Jie Liu
+Xiaojun Liu
+Sonia Sachs
+
+EMAIL
+ssachs@media.lbl.gov
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/
+
+PHONE
+
+TITLE
+e-Ptolemy: A Distributed Framework for Software Systems
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+Network-integrated computing architectures offer facilities for federated collaboration between physically separate components and users. Distribution can improve robustness, simplify system architecture by allowing on-site processing, and improve security and confidentiality by avoiding transport of unnecessary data. It also facilities exploitation of specialized hardware, and its intrinsically parallel nature offers the promise of improved execution speeds.  
+
+Traditional distributed computing is built on the client-server model, which lacks object-orientation and could be hard to scale up. Middleware technologies, like the Common Object Request Broker Architecture (CORBA) and the Distributed Common Object Model (DCOM) offer object models and scalability, but the programming model is too liberal to analyze formal properties of a system. In this project, we are exploring the concept of models of computation in distributed software systems. In particular, we extend the Ptolemy II infrastructure with CORBA compatibility and study the implication of Ptolemy component architecture, message passing mechanisms, and execution models.
+
+We have demonstrated importing a remote model as a component of a larger model, executing the model in a distributed fashion over a network. We have also implemented a publish/subscribe type of message passing mechanism based on JINI and JavaSpaces. Current work includes the definition of a clean interface for distributed components and their interaction, and the exploration of real-time issues under the framework. 
+
+A major application of this work is the open control platform (OCP), which we are developing collaboratively with Boeing and Georgia Tech. The OCP is a distributed component architecture for embedded control systems, particularly in the area of avionics.

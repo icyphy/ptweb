@@ -1,0 +1,24 @@
+NAMES
+Jie Liu
+
+EMAIL
+liuj@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~liuj
+
+PHONE
+
+TITLE
+Component-Based Hierarchical Modeling of Systems with Continuous and Discrete Dynamics
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+Complex systems like mixed-signal electronic systems, micro electro-mechanical systems (MEMS), and real-time control systems, contain both continuous and discrete dynamics. Typically, continuous dynamics take the form of ordinary differential equations (ODEs) and discrete dynamics may be in the form of a discrete-event model or finite state machines. Such systems are modeled in Ptolemy II using hierarchical heterogeneous components in the continuous time (CT), discrete event (DE), and finite state machine (FSM) domains. The study starts with what the components are in each model, and how to compose the models hierarchically. 
+
+A fundamental issue for modeling systems with continuous and discrete dynamics is to understand the formal semantics of such systems. Problems like causality, determinacy, fixed-point behavior, and signal conversions must be answered. For example, although the conditions under which a CT or a DE system has a unique behavior is well understood, putting the conditions together does not necessarily yield a deterministic mixed-signal system. 
+
+The semantics study also yields a deep insight for the interaction of heterogeneous (simulation) CAD tools. We are developing a methodology that classifies existing CAD tools by their underlying models of computation (MoC), and embeds CAD tools only in the Ptolemy II domains that have the same MoC. Ptolemy II acts as the standard semantic glue for the external tools. Thus, for example, a digital hardware simulation tool based on Verilog or VHDL can interact with an analog simulation tool such as Saber through a Ptolemy II backplane.
