@@ -3,15 +3,106 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <link href="../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
-<title>Ptolemy II 2.0</title>
+<title>Ptolemy II 2.0 JNLP release</title>
+<SCRIPT LANGUAGE="Javascript"> 
+	var javawsInstalled = 0; 
+	isIE = "false"; 
+
+        if (navigator.mimeTypes && navigator.mimeTypes.length) { 
+        	x = navigator.mimeTypes['application/x-java-jnlp-file']; 
+                if (x) javawsInstalled = 1; 
+        } else { 
+                isIE = "true"; 
+        } 
+
+        function insertLink(url, name) { 
+        	if (javawsInstalled) { 
+                	document.write("<li> <a href=" + url + ">"  + name + "</a>"); 
+                } else { 
+                	document.write("<li> You need to <a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install Web Start from Sun</a> before installing <a href=" + url + ">"  + name + "</a>"); 
+                } 
+        } 
+ </SCRIPT> 
+<SCRIPT LANGUAGE="VBScript"> 
+          on error resume next 
+          If isIE = "true" Then 
+            If Not(IsObject(CreateObject("JavaWebStart.IsInstalled"))) Then 
+                  javawsInstalled = 0 
+            Else 
+                  javawsInstalled = 1 
+            End If 
+          End If 
+      </SCRIPT>
+
 </head>
 <body>
 <h1>
-<a name="Ptolemy II 2.0">Ptolemy II 2.0  Release</a></h1>
+<a name="Ptolemy II 2.0">Ptolemy II 2.0 JNLP Release</a></h1>
+
 <table>
-<tr><td>
-<img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
-<td>
-Ptolemy II 2.0 is not yet available
+<tr>
+  <td>
+  <img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
+  </td>
+
+  <td>
+  Ptolemy II 2.0 is not yet available.  We expect an alpha release
+  in March, 2002.
+  </td>
+
+</table>
+<h2>Quick Installation Instructions</h2>
+
+<a href="http://java.sun.com/products/javawebstart/">Web Start</a>
+is a product from Sun that uses the Web to download applications.
+
+<ol>
+<li> This web page attempts to detect whether Java Web Start
+is already installed.  If the box below contains
+<pre>
+ You need to <a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install Web Start from Sun</a> before installing . . .
+</pre>
+Then download and install Java Web Start by following
+the  <a
+href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install
+Web Start from Sun</a> link
+
+<li> Restart your browser and return to this page.
+
+<li> Hopefully, the Web Start detection will work and the
+<CODE>You will need to install Web Start from Sun </CODE>
+message will not be present.
+ <br><B>Even if the message is present</B>, try
+downloading Vergil by clicking on the link
+
+<li> Note that the Ptolemy II Web Start applications may be
+signed with a certificate that is not registered with a certificate
+authority, so you may be prompted with a window stating
+that the certificate from <CODE>Claudius Ptolemaus</CODE> is unknown.
+You should hit the <CODE>OK</CODE> button to proceed with the download.
+
+<li> The download is roughly 10Mb, 
+roughly half the size of the application download is consumed
+by the HTML documentation of the Ptolemy II Java classes.
+
+</ol>
+
+For more information, see the
+<a href="webStartHelp.htm">Web Start Help</a> page.
+
+
+<table border>
+ <tr>
+<SCRIPT LANGUAGE="Javascript"> 
+
+
+             <!-- 
+             insertLink("../vergil.jnlp", 
+                        "Vergil (Full Runtime) Web Start Download"); 
+             // --> 
+</SCRIPT> 
+ </tr>
+ </table>
+
 </body>
 </html>
