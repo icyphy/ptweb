@@ -39,9 +39,118 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 <li> <a href="ptII4.0-beta/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
 </menu>
 
+<h4>Changed between 4.0-alpha and 4.0-beta</h4>
+
+<h5>Feature enhancements</h5>
+
+<menu>
+<li> 
+
+<li> IterateOverArray usability features: Look inside now skips a level
+   to show the model that actually gets iterated rather than the
+   intermediate level.  Also, IterateComposite can be dropped on
+   IterateOverArray, and changes to its ports either inside or outside
+   will be reflected in the IterateOverArray actor.
+
+<li> Gave a more reasonable title to window used to edit custom icons.
+
+<li> New actor: SetProperties, in the wireless domain.
+   FIXME: Not in the libraries.
+
+
+
+
+</menu>
+
+<h5>Bug Fixes</h5>
+
+
+<menu>
+<li> Fixed bug that didn't allow changing the name of graphical attributes
+   when there were subclasses.
+
+
+<li> Fixed potential deadlock in simultaneous accesses to a CrossReferenceList.
+
+
+<li> If change requests are queued in a top-level entity
+   and then its container is set, the change requests
+   were never executed.  Now, they are transferred to
+   the new container.
+
+
+<li> If a change request is made during cloning of an
+   object, then the change request was executed immediately
+   even if deferChangeRequests(true) has been called on
+   object being cloned.  This is because during cloning,
+   the cloned object has no container.  Now, the clone()
+   method of NamedObj ensures that every cloned object
+   has deferChangeRequests(true) set before it starts
+   to get populated with its contents.  This means that
+   callers to clone() need to set it back to false if
+   this is what they want.
+
+
+<li> Improved performance of models that animate execution by changing parameters of icons (removed spurious acquisition of write permission on the 
+Workspace).
+
+
+<li> StyleConfigurer was directly making kernel calls rather than issuing
+   change requests to apply changes.  This could result in exceptions if
+   a style is changed while a model is running, and it also means that
+   changes to a style are not propagated to subclasses and instances.
+
+
+<li> Fixed bug where deleting class definitions and subclasses or instances would
+   throw a spurious exception because it would try to delete the subclasses or
+   instances twice.
+
+
+<li> Fixed bug where editing the custom icon of a class definition did not
+   propagate to instances and subclasses until the model was closed and 
+reopened.
+
+
+<li> Fixed bug where dropping an actor into a model, followed by undo
+   left the icon in the model (but without any associated actor) until
+   the model was closed and re-opened.
+
+
+<li> Removed a leak in diva.graph.AbstractGraphController where figures
+   that are no longer being used by the model were still stored in a
+   private hash table.
+
+
+<li> Fixed a bug with TerrainModel in the wireless domain where the geometry
+   that was used for determining terrain obstacles didn't match the
+   geometry displayed in the icon.
+
+
+<li> StyleConfigurer was directly making kernel calls rather than issuing
+   change requests to apply changes.  This could result in exceptions if
+   a style is changed while a model is running, and it also means that
+   changes to a style are not propagated to subclasses and instances.
+
+
+<li> Many uses of the "_hideName" attribute were Parameter or Attribute
+   rather than SingletonAttribute.  Changed to consistently be
+   SingletonAttribute.
+
+
+<li> Configure now handles causes where the Java Advanced Imaging (JAI)
+interface is in a location outside of the JRE
+
+<li> Configure now sets up <CODE>$PTII/.classpath</CODE> properly
+for use by Eclipse
+
+<li> Broken HTML links have been fixed.
+
+</menu>
+
 <h4>Contents</h4>
 
 <menu>
+
 <li>See the
 <a href="ptII4.0-beta/doc/ptII4.0.release.htm#limitations">Ptolemy II 4.0-alpha Release notes</a>
 for known limitations.
