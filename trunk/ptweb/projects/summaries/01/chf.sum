@@ -9,16 +9,16 @@ HOMEPAGE
 PHONE
 
 TITLE
-Components-based visual simulation in Ptolemy II
+Component-based visual models in Ptolemy II
 
 CHAPTER
 02.cad
 
 ABSTRACT 
 
-Ptolemy II provides a rich and powerful visual language for heterogeneous design and simulation of components-based software systems.  However, until recently, most of the simulation results under Ptolemy II were only viewable through plotted data or text traces. We anticipate a wide variety of situations where we need simulations that react to user-interaction.  We also anticipate a wide variety of situations where we want to animate the results of our simulated systems. In view of these, we have built an infrastructure for providing better visualizations in Ptolemy II. Visualization is enhanced through 3D graphics, animation, and user-interaction. This new visualization framework serves as a domain in Ptolemy II.  It adheres with the components-based architecture of Ptolemy II and follows synchronous/reactive (SR) semantics. 
+Ptolemy II provides a rich and powerful visual language for heterogeneous design and simulation of component-based software systems.  However, until recently, most execution results under Ptolemy II were only viewable through plotted data or text traces. We anticipate a wide variety of situations where we need simulations that react to user-interaction.  We also anticipate a wide variety of situations where we want to animate the results of our models. In view of these, we have built an infrastructure for providing better visualization in Ptolemy II. Visualization is enhanced through 3D graphics, animation, and user-interaction. This new visualization framework is architected as a domain in Ptolemy II and follows synchronous/reactive (SR) semantics. 
 <P>
-The main application of this visualization framework would be in the joint-simulation of the functional operation, reactive behavior, and visual appearance of embedded devices.  The visualization framework works seamlessly with other domains in Ptolemy II such as discrete event (DE), continuous time (CT), synchronous dataflow (SDF), and finite state machines (FSM).  Hence, we can use the well-defined models of computation in each domain to drive our visual simulations. Our eventual goal is to have fully-interactive simulation of the overall system operation of embedded devices.
+The main application of this visualization framework will be in the joint-simulation of the functional operation, reactive behavior, and visual appearance of embedded devices.  The visualization framework works seamlessly with other domains in Ptolemy II such as discrete event (DE), continuous time (CT), synchronous dataflow (SDF), and finite state machines (FSM).  Hence, we can use the well-defined models of computation in each domain to drive our visual simulations. Our eventual goal is to have fully-interactive simulation of the overall system operation of embedded devices.
 
 
 
