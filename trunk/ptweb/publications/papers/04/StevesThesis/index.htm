@@ -1,0 +1,40 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Actor-Oriented Metaprogramming</title>
+</head>
+<body>
+<center>
+  <h1>Actor-Oriented Metaprogramming</h1>
+</center>
+<center>
+<p>Stephen Neuendorffer<p>
+<p>
+PhD Thesis
+<p> <a href="oneside.pdf" target="_top">Single-Sided <img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+<p> <a href="twoside.pdf" target="_top">Double-Sided <img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+<p> Also available as: <i>Technical Memorandum UCB/ERL M05/1</i>, University of California, Berkeley, CA  94720, January 4, 2005.
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+
+Robust design of concurrent systems is important in many areas of engineering, from embedded systems to scientific computing.  Designing such systems using dataflow-oriented models can expose large amounts of concurrency to system implementation.  Utilizing this concurrency effectively enables distributed execution and increased throughput, or reduced power usage at the same throughput.  Code generation can then be used to automatically transform the design into an implementation, allowing design refactoring at the dataflow level and reduced design time over hand implementation. <p>
+
+This thesis focuses particularly on the benefits and disadvantages that arise when constructing models from generic, parameterized, dataflow-oriented components called <i>actors</i>.  A designer can easily reuse actors in different models with different parameter values, data types, and interaction semantics.  Additionally, during execution of a model actors can be reconfigured by changing their connections or assigning new parameter values.  This form of reconfiguration can conveniently represent adaptive systems, systems with multiple operating modes, systems without fixed structure, and systems that control other systems.  Ptolemy II is a Java-based design environment that supports the construction and execution of hierarchical, reconfigurable models using actors. <p>
+
+Unfortunately, allowing unconstrained reconfiguration of actors can sometimes cause problems.  If a model is reconfigured, it may no longer accurately represent the system being modeled.  Reconfiguration may prevent the application of static scheduling analysis to improve execution performance.  In systems with data type parameters, reconfiguration may prevent static analysis of data types, eliminating an important form of error detection.  In such cases, it is therefore useful to limit which parameters or structures in a model can be reconfigured, or when during execution reconfiguration can occur. <p>
+
+This thesis describes a reconfiguration analysis that determines when reconfiguration occurs in a hierarchical model.  Given appropriate formulated constraints, the analysis can alert a designer to potential design problems.  The analysis is based on a mathematical framework for approximately describing periodic points in the behavior of a model.  This framework has a lattice structure that reflects the hierarchical structure of actors in a model.  Because of the lattice structure of the framework, this analysis can be performed efficiently.  Models of two different systems are presented where this analysis helps verify that reconfiguration does not violate the assumptions of the model. <p>
+
+Run-time reconfiguration of actors not only presents difficulties for a system modeler, but can also impede efficient system implementation.  In order to support run-time reconfiguration of actors in Java, Ptolemy II introduces extra levels of indirection into many operations.  The overhead from this indirection is incurred in all models, even if a particular model does not use reconfiguration. <p>
+
+In order to remove the indirection overhead, we have developed a system called Copernicus which transforms a Ptolemy II model into self-contained Java code.  In performing this transformation the Java code for each actor is specialized to its usage in a particular model.  As a result, indirection overhead only remains in the generated code if it is required by reconfiguration in the model.  The specialization is guided by various types of static analysis, including data type analysis and analysis of reconfiguration.  In certain cases, the generated code runs 100 times faster and with almost no memory allocation, compared to the same model running in a Ptolemy II simulation.  For small examples, performance close to handwritten Java code has been achieved. <p>
+
+<p>
+</body>
+</html>
+
+
