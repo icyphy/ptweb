@@ -28,7 +28,7 @@ An example is the hierarchically nested continuous or discrete models. See figur
 <p>
 Another difficulty is that the MOC of the composite may not be any of the individual components, even if the MOC's of the individual components are the same. An example is shown in figure 2. In one iteration, the composite actor, firstly reacts to the second input and generates some output, and then, reacts to the first input. It is not the discrete events semantics any more. We have to introduce something similar to the synchronous reactive semantics, which we call Timed SR. The semantics of Timed SR has two folds: one is about the event handling and causality analysis like DE, while the other one is about the fix point at each instance of events like SR. The preliminary research showed that the process of finding optimal schedule of SR models can be improved by introducing the functional dependencies. 
 <p>
-<img src="CompositionalityAnalysis_1.GIF" alt="Multiple Runs of Composite Actor">
+<img src="CompositionalityAnalysis_2.GIF" alt="Multiple Runs of Composite Actor">
 <p>
 An even more challenging problem is about the compositionality of distributed components. Normal SR models suffer from the asynchrony of distributed systems, while DE models are powerful on communication networks. We think Timed SR may provide a better semantics to study the composite of distributed systems.
 <p>
