@@ -13,11 +13,8 @@
  <img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
 </td>
 </table>
-<p> In Ptolemy II 4.0-alpha the expression language has been reworked and the code generator updated.
-It also includes a set of
-mature and experimental domains, and a more comprehensive actor
-library than previous releases.
-
+<p> Ptolemy II 4.0 includes hierarchical classes, subclasses
+and inner classes as well as a wireless domain.
 
 <h2>Quick Start Instructions</h2>
 <p>
@@ -98,7 +95,7 @@ various installers.
  <td><a href="applet.htm">Applets</a></td>
  <td>
  The applets work best with the 
-<a href="http://java.sun.com/j2se/1.4.1/download.html" target="_top">Java 1.4.1_02 JRE</a>.  See also
+<a href="http://java.sun.com/j2se/1.4.2/download.html" target="_top">Java 1.4.2_04 JRE</a>.  See also
 <a href="http://java.sun.com/products/plugin/" target="_top">Java 1.4 plugin</a></td>
 
  <td>Windows, Linux, MacOS X, Solaris</td>
@@ -124,7 +121,7 @@ various installers.
 <tr>
  <td><a href="windows.htm">Windows Installer</a></td>
  <td>InstallAnywhere, untested on other platforms,
- 1.4.1_02 Java Runtime Environment optionally downloaded </td>
+ 1.4.2_04 Java Runtime Environment optionally downloaded </td>
  <td>Windows only</td>
  <td>24.7 Mb - 47.8 Mb</td>
  <td>Yes</td>
@@ -146,52 +143,6 @@ various installers.
 </tr>
 
 </table>
-
-
-<h2>Changes between Ptolemy II 3.0.1 and 4.0-alpha</h2>
-Ptolemy II 3.0.1 was an interim release with a narrow distribution.
-<br>The following changes occurred between 3.0.1 and 4.0-alpha
-
-<h3>Actors that were added between Ptolemy II 3.0.1 and 4.0-alpha</h3>
-<dl>
-<dt> <a href="ptII4.0-alpha/doc/codeDoc/ptolemy/actor/lib/ArrayMaximum.html"><code>ArrayMaximum</code></a>
-<dd> (Mark Oliver)
-Extract maximum element from an array.
-
-<dt> <a href="ptII4.0-alpha/doc/codeDoc/ptolemy/actor/lib/ArrayMinimum.html"><code>ArrayMinimum</code></a>
-<dd> (Mark Oliver, Edward A. Lee)
-Extract minimum element from an array.
-
-</dl>
-
-<h3>Enhancements between Ptolemy II 3.0.1 and 4.0-alpha</h3>
-<dl>
-<dt> <code>$PTII/configure.in</code>,
-<code>$PTII/configure</code>,
-<code>$PTII/.classpath.in</code>,
-<code>$PTII/.eclipse.epf</code>,
-<code>$PTII/configs/FindClass.java</code>
-<dd> Support for <a href="ptII4.0-alpha/doc/coding/eclipse.htm">configuring Eclipse</a>.
-
-</dl>
-<h3>Bug Fixes between Ptolemy II 3.0.1 and 4.0-alpha</h3>
-<dl>
-<dt> <code>ptolemy/domains/sdf/lib/vq/ImageSequence.java</code>
-<dd> Adjusted initial value of imageURLTemplate parameter
-<dt> <code>ptolemy/domains/sdf/lib/Autocorrelation.java</code>
-<dd> Can now handle complex data.
-<dt> <code>lib/saxon7.jar</code>
-Updated to 7.6.5 of Saxon.  This was necessary to get both
-the HSIF demos and the Cal demos to work.
-<dt> <code>ptolemy/vergil/actor/ActorEditorGraphController.java</code>
-<dd> Under MacOS look and feel, use Command-Click to create new
-relations and drag new edges
-<dt> <code>ptolemy/vergil/toolbox/PtolemyTransferable.java</code>
-<dd> Under MacOS look and feel, change how we instantiate
-the DataFlavor so as to avoid a stack trace
-<dt> <code>ptolemy/actor/gui/TextEffigy.java</code>
-<dd> If the user tries to open a missing file, throw a better exception.
-</dl>
 
 <h4> Places to go</h4>
 <menu>
