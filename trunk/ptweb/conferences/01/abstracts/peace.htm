@@ -1,0 +1,39 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Abstract</title>
+</head>
+<body>
+<b>PeaCE: Ptolemy extension as Codesign Environment</b>
+<br><i>Soonhoi Ha</i>Seoul National University, Korea
+<br>
+peacemakers@iris.snu.ac.kr
+<br>
+PeaCE is a codesign environment for rapid development of heterogeneous 
+digital systems targetting from system-on-chip (SOC) design to distributed 
+heterogeneous system design. The PeaCE project aims to cover the 
+multi-facets of codesign tasks: codesign of hardware and software modules, 
+and codesign of control and function modules. Since it is built on top of 
+Ptolemy (Ptolemy classic, not Ptolemy II), basically PeaCE inherits all 
+nice features of Ptolemy: seamless integration of diverse models of 
+computations, powerful simulation capabilities specially for DSP 
+applications, and much more. However, PeaCE differs from Ptolemy that it 
+does not allow arbitrary integration of heterogeneous models of 
+computation. Instead, PeaCE introduces the concept of "codesign backplane" 
+that is the top-level model of computation (actually derived from DE model 
+of computation). Control logic is specified with an extended FSM model 
+(called, flexible FSM) that supports hierarchy, concurrency, internal 
+event, and variable state. Computation modules are specified with an 
+extended SDF model (called, SPDF) that supports controlled global state. 
+Then, inter-model communications and synchronizations are performed 
+through the codesign backplane.
+Even though it is developed as a University research project, it targets 
+for applying a new design methodology in the real system design. To use 
+PeaCE for a real system design, you have to customize the environment 
+somewhat though we are making best efforts to minimize such customizing 
+work for fast system development.
+
+</Body>
+</html>
