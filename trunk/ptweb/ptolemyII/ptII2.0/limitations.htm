@@ -1,0 +1,182 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II 2.0 Limitations</title>
+</head>
+<body>
+<h2>Ptolemy II 2.0 Limitations</h2>
+
+The <a href="ptII2.0/doc/ptII2.0.release.htm">Ptolemy II 2.0 Release notes</a>
+list limitations.  The Vergil welcome window has a link to
+a similar list.
+
+ <p>Below we list limitations found after the Ptolemy II 2.0  release.
+
+<h2>Installer limitations</h2>
+
+<menu>
+
+<li> Unfortunately, the Installshield Installer has a number of 
+bugs.  See the <a href="installshield.htm#bugs">Installshield bugs</a>
+section for details.
+
+<li> We have only tested the Installshield Installers under Windows
+2000 and Windows 98.  Unix users should install from the
+<a href="ptII2.0.src.tar.gz"><CODE>ptII2.0.src.tar.gz</CODE></a>
+tar file and
+follow the <a href="ptII2.0/doc/install.htm">Installation Instructions</a>.
+
+<li> Under Linux SuSe 6.4, jdk1.3.0_02, you may see a Java compiler
+exception
+
+<pre>
+make[5]: Leaving directory 
+`/opt/ptolemy/ptII2.0/ptolemy/actor/lib/logic/test'rm -f `basename 
+LogicFunction.java .java`.class
+CLASSPATH="../../../.." "/usr/java/jdk1.3/bin/javac" -g -O 
+LogicFunction.java
+../../../../ptolemy/kernel/util/StringAttribute.java:144: cannot access 
+ptolemy.kernel.util.Settable.Visibility
+file ptolemy/kernel/util/Settable$Visibility.class not found
+    public Settable.Visibility getVisibility() {
+                   ^
+An exception has occurred in the compiler (1.3.0). Please file a bug at 
+the Java Developer Connection (http://java.sun.com/cgi-bin/bugreport.cgi). 
+ Include your program and the following diagnostic in your report.  Thank 
+you.
+java.lang.NullPointerException
+        at com.sun.tools.javac.v8.comp.Check$Validator._case(Check.java:440)
+        at com.sun.tools.javac.v8.tree.Tree$Select.visit(Tree.java:963)
+        at com.sun.tools.javac.v8.comp.Check.validate(Check.java:403)
+        at com.sun.tools.javac.v8.comp.Attr._case(Attr.java:361)
+        at com.sun.tools.javac.v8.tree.Tree$MethodDef.visit(Tree.java:441)
+        at com.sun.tools.javac.v8.comp.Attr.attribTree(Attr.java:234)
+        at com.sun.tools.javac.v8.comp.Attr.attribStat(Attr.java:276)
+        at com.sun.tools.javac.v8.comp.Attr.attribClass(Attr.java:1415)
+        at 
+com.sun.tools.javac.v8.JavaCompiler.compile(JavaCompiler.java:378)
+        at com.sun.tools.javac.v8.Main.compile(Main.java:247)
+        at com.sun.tools.javac.Main.main(Main.java:16)
+make[4]: *** [LogicFunction.class] Error 4
+
+</pre>
+The solution is to either run
+<pre>
+./configure; make clean; make install 
+</pre>
+or to upgrade to JDK1.3.1rc1.
+ <br>Thanks to <I>Christian Stimming</I> for reporting this.
+</menu>
+
+<h2>Runtime limitations</h2>
+<menu>
+
+
+<li> Under Linux SuSe 6.4, jdk1.3.0_02, you may have problems
+entering a <CODE>*</CODE> (asterisk) in a parameter editing textbox.
+Upgrading to JDK1.3.1rc1 may help.
+Other test to try include running the swing demos and trying to
+the entry widget in the the Ptplot Edit-&gt;Format window.
+ <br>Thanks to <I>Christian Stimming</I> for reporting this.
+
+<li> Under Netscape 4.7 and Windows 2000, the applets won't start
+when installed on a local file system.  The Java 1.3 Plug-in console
+window says:
+<pre>
+Error: access denied (java.lang.RuntimePermission modifyThreadGroup)
+java.security.AccessControlException: access denied (java.lang.RuntimePermission modifyThreadGroup)
+	at java.security.AccessControlContext.checkPermission(Unknown Source)
+	at java.security.AccessController.checkPermission(Unknown Source)
+	at java.lang.SecurityManager.checkPermission(Unknown Source)
+</pre>
+
+This error occurs when Netscape is not yet running, and <CODE>HTML Demos and Docs</CODE> starts a new Netscape process.  A workaround is to start up 
+Netscape by hand and then click on the <CODE>HTML Demos and Docs</CODE>
+menu choice.
+
+ <p>The fix is to change the <CODE>Start in</CODE> directory
+of the <CODE>HTML Demos and Docs</CODE> shortcut to include the doc directory.
+ <p>
+<ol>
+<li> Start -&gt; Programs -&gt; Ptolemy -&gt; Ptolemy II 2.0
+
+<li> Right click on <CODE>HTML Demos and Docs</CODE>
+
+
+<li> In <CODE>Start in</CODE>, change:
+ <br>
+<CODE>"C:\Program Files\Ptolemy\Ptolemy II 2.0\"</CODE>
+ <br>to:
+<CODE>"C:\Program Files\Ptolemy\Ptolemy II 2.0\doc"</CODE>
+
+</ol>
+
+
+<li> The DDE Zeno demo produces an error message in the Java Plug-in console
+window:
+<pre>
+java.lang.IllegalArgumentException: LowerJoin - Attempt to set current time to the past; time = 50.001. The _lastTime was 54.0
+	at ptolemy.domains.dde.kernel.PrioritizedTimedQueue.put(PrioritizedTimedQueue.java:297)
+	at ptolemy.domains.dde.kernel.DDEReceiver.put(DDEReceiver.java:580)
+	at ptolemy.domains.dde.kernel.DDEReceiver.put(DDEReceiver.java:549)
+	at ptolemy.domains.dde.kernel.FeedBackDelay._sendOutToken(FeedBackDelay.java:247)
+	at ptolemy.domains.dde.kernel.FeedBackDelay.fire(FeedBackDelay.java:175)
+	at ptolemy.actor.process.ProcessThread.run(ProcessThread.java:126)
+ptolemy.actor.Manager run(): elapsed time: 23004 ms
+</pre>
+
+<li> Running the Networked demo via an applet on the local
+file system results in an AccessControlException.
+<pre>
+com.microstar.xml.XmlException: XML element "entity" triggers exception:
+  java.lang.Exception: Attempted to lookup 'Waveform', but got: 
+  java.lang.ClassNotFoundException: Waveform
+Attempted to find as a moml class, but got: java.security.AccessControlException: access denied (java.net.SocketPermission ptolemy.eecs.berkeley.edu resolve) in file:/C:/Program Files/Ptolemy/Ptolemy II 2.0 beta2/ptolemy/moml/demo/Networked/ at line 62 and column 118
+	at ptolemy.moml.MoMLParser.startElement(MoMLParser.java:1341)
+	at com.microstar.xml.XmlParser.parseElement(XmlParser.java:944)
+	at com.microstar.xml.XmlParser.parseContent(XmlParser.java:1117)
+	at com.microstar.xml.XmlParser.parseElement(XmlParser.java:946)
+	at com.microstar.xml.XmlParser.parseDocument(XmlParser.java:495)
+	at com.microstar.xml.XmlParser.doParse(XmlParser.java:175)
+	at com.microstar.xml.XmlParser.parse(XmlParser.java:145)
+	at ptolemy.moml.MoMLParser.parse(MoMLParser.java:492)
+	at ptolemy.moml.MoMLParser.parse(MoMLParser.java:471)
+	at ptolemy.moml.MoMLParser.parse(MoMLParser.java:456)
+	at ptolemy.actor.gui.MoMLApplet._createModel(MoMLApplet.java:188)
+</pre>
+
+The Network demo does not work as a local applet because the xml file
+includes a reference to http://ptolemy.eecs.berkeley.edu, which is
+not on the local file system, so we get a SecurityException.
+
+<li> When running Vergil under the IBM JDK1.3.0, sometimes the images
+in the html file are very small.
+
+<li> <code>vergil foo</code> hangs.  No window comes up if foo does not exist.
+
+<li> The documentation for custom actors used in demonstrations is not
+included in the release.
+</menu>
+
+If you find bugs, check the limitations page inside Vergil, then
+check this page, and then send email to
+<a href="mailto:ptolemy@eecs.berkeley.edu"><CODE>ptolemy@eecs.berkeley.edu</CODE></a>
+ <p>In your email, please be sure to list
+<menu>
+<li> What operating system you are operating under (Windows 2000 SR1? Solaris 7?)
+
+<li> What version of Java you are running. (Run java -version, or use
+our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
+
+<li> Whether the problem occurs in
+	<menu>
+	<li> Vergil
+	<li> The local version of the web pages
+	<li> The <a href="ptII2.0/doc/index.htm" target="_top">PtolemyII 2.0 website version of the web pages</a>
+	</menu>
+</menu>
+
+</body>
+</html>
