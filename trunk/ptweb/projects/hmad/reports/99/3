@@ -1,0 +1,304 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 March 25, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        2/15/99 - 3/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+The major event in this reporting period was the Ptolemy Miniconference
+at Berkeley on Friday, February 19. We had presenters from 9
+organizations and a total of 65 attendees from 34 organizations (listed
+below). The miniconference was covered by EE Times (see
+http://www.eet.com/story/OEG19990223S0020). We have put on the web a
+snapshot of the demos of Ptolemy II that we ran at the Miniconference
+(see http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII0.2/), all of which
+are applets.
+
+A second major event was a complete re-architecting of our project
+web page (see http://ptolemy.eecs.berkeley.edu).
+
+A third major event is our second public release of Ptolemy II,
+designated version 0.2devel (see
+http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII0.2/download.html). This
+release, like version 0.1, is meant for use by developers, not end
+users. Unlike version 0.1, however, it includes a number of domains.
+
+Finally, we constructed our first true hybrid system model, combining
+finite automata with continuous-time modeling.  This example simulates
+the dynamics of a helicopter operating in various modes.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+
+Domain Polymorphic Actor Library
+--------------------------------
+
+The software infrastructure we are designing supports two distinct
+kinds of polymorphism, domain and data polymorphism.  Data polymorphism
+permits actor functionality to be specified independently of the type
+of data in the streams it is processing.  Domain polymorphism permits
+actor functionality to be specified independently of the communication
+protocols used to communicate among actors.
+
+We have begun the substantial project of designing a rich data and
+domain polymorphic actor library. This is a critical step towards
+creating release of Ptolemy II that can be used directly by system
+modelers. This is a challenging effort because the utility of this
+library depends on a careful balance between library size and
+parameterization of the components.
+
+
+Applet Building
+---------------
+
+Based on the experience of developing a set of applets for the
+Miniconference, we have undertaken to build an infrastructure that
+makes it very easy for users to construct applets that use Ptolemy II.
+There are many parts to this problem. One is the design of a set of jar
+files containing sets of Ptolemy II packages that are minimal in size
+but likely to be useful on their own. Another is the design of a set of
+base classes that encode common use patterns.
+
+
+Type System
+-----------
+
+We have realized that with relatively small changes, the type system we
+have been building can be extended to apply to parameters, expressions
+on parameters, and guards on state transitions (which are also
+expressions). Previously, the type system had only applied to ports of
+actors. The approach is to create a Typeable interface that is
+implemented by both TypedIOPort and Variable (a base class for
+parameters and guards).  The type system will then work on whatever
+web of interpendencies are created between objects that implement
+the Typeable interface.
+
+This extension has fairly profound implications.  It means that the
+expression language of Ptolemy II acquires the same sophisticated type
+system as its component language, and that the type dependencies across
+the two languages can be expressed and resolved.
+
+
+Plot Package
+------------
+
+Our plot package, which has been separately released for longer than
+any other part of Ptolemy II, has been rated by JARS - The Java Applet
+Rating Service - http://jars.developer.com/. We received a 981 out of
+1000 for ptplot this time, up from 959/1000. Ptplot 2.0 made it into
+the top 5% as did Ptplot 1.0. Below is the most recent rating:
+
+  From: webmaster@jars.com
+  To: cxh@eecs.berkeley.edu
+  Subject: JARS Ratings Notice
+  Date: Tue, 23 Feb 1999 04:42:44 -0500 (EST)
+
+  The following resource has been rated:
+
+  Resource Name  : Ptplot: Java xgraph plotter
+  Developer ID   : CH5
+  Resource  ID   : CH5-2
+
+  --------------------------------------------
+  Presentation : 198
+  AppletPerfect: 296
+  Function     : 197
+  Originality  : 290
+  --------------------------------------------
+  Total        : 981 (out of a possible 1000.)
+
+We have also added facilities for automatically constructing and
+displaying histograms to the plot package.
+
+
+User Interface
+--------------
+
+Olaf Lenzmann, of Virtual Photonics - BNeD, demonstrated a new user
+interface for block diagram editing, and has informed us that he plans
+to release this interface under open source. We are working with his
+team on an XML file format to ensure usability of the interface with
+Ptolemy II.
+
+
+Software Engineering
+--------------------
+
+Design Reviews:
+   - actor.lib package
+   - math.Fraction class
+   - actor.sched package (response to review completed).
+
+Code Reviews:
+   - graph package
+
+
+Other Software
+--------------
+
+We have released Diva 0.2, a collaborative project with the CAD Group
+at Berkeley.  It is a first step toward a software infrastructure for 
+visualizing and interacting with dynamic information spaces. 
+
+This release consists of several Java packages: 
+
+    - The Diva canvas is a structured graphics layer over the Java2D API. It
+      has a layered and recursive architecture, support persistent graphical
+      objects, and has high-level interaction support. 
+
+    - The Diva graph package contains an easy-to-use architecture for graph 
+      visualization. Its architecture follows the model-view separation. It 
+      includes graph layout and editing. 
+
+    - The Diva sketch package provides data structures and algorithms for 
+      "digital ink" and gesture recognition for pen-based user interfaces.
+
+Highlights of this release: 
+    - A neat "digital whiteboard" and sketch-based graph editor. 
+    - Smart "connectors." 
+    - Polyline2D and Polygon2D shapes (for those who miss them in Java2D!). 
+
+Diva 0.2 can be downloaded at: 
+
+      http://www-cad.eecs.berkeley.edu/diva
+
+As the infrastructure matures, we believe it can be applied in a variety of 
+information-intensive domains, ranging from software and hardware systems 
+design to data browsing and exploration.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Nothing to report on this task.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Hybrid Systems
+--------------
+
+Jie Liu and Xiaojun Liu, in a collaboration with John Koo of the
+Control Group at Berkeley, constructed a hybrid system model that
+combines the FSM (finite state machine) and CT (continuous time)
+domains of Ptolemy II.  This is the first true "hybrid system" model
+that we have constructed.  This model uses the FSM to define the
+modes of operation of a helicopter (hovering, rising, ...) and CT
+to model its dynamics.
+
+
+2.  Equipment/Infrastructure Status:
+
+Nothing to report.
+
+
+3.  Interactions and Technology Transfer
+
+-- The Ptolemy Miniconference at Berkeley on Friday, February 19. We had
+   presenters from 9 organizations, listed below:
+
+      UC Berkeley
+      Thomson-CSF
+      Sanders (Lockheed/Martin)
+      Hewlett-Packard 
+      Virtual Photonics - BNeD 
+      Technical University of Dresden 
+      University of Texas at Austin 
+      White Eagle System Technology 
+      University of Pittsburgh
+
+   We had a total of 65 attendees from 34 organizations, listed below:
+
+     Air Force Research Lab
+     Angeles Design Systems
+     Virtual Photonics
+     Bellcore
+     Berkeley Design Technology, Inc. (BDTI) 
+     Boeing
+     Brigham Young University
+     Cadence Design Systems 
+     Cisco
+     Conexant Inc.
+     Corning Incorporated 
+     Data Flux systems Inc. 
+     Directv
+     Dresden University
+     Fujitsu
+     Hewlett Packard
+     Hughes Space & Communication
+     Lawrence Livermore National Laboratory 
+     Lucent Technologies
+     LYR Signal Processing 
+     Mentor Graphics
+     National Semiconductor
+     Naval Research Laboratory
+     Philips Research
+     RWTH Aachen 
+     Sanders
+     Satlabs LLC
+     Synopsys
+     Technical University of Ilmenau, Germany
+     Thomson-CSF
+     UCB
+     University of Pittsburgh
+     UT Austin
+     White Eagle Systems
+
+  The miniconference was covered by EE Times (see
+  http://www.eet.com/story/OEG19990223S0020). We have put on the web a
+  snapshot of the demos of Ptolemy II that we ran at the Miniconference
+  (see http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII0.2/), all of
+  which are applets.
+
+  Information about the miniconference can be found at:
+
+      http://ptolemy.eecs.berkeley.edu/conferences/
+
+-- Jens Voigt of the Technical University of Dresden, Germany, spent one
+   week visiting our group.  His group in Germany is working on modeling
+   of wireless systems using Ptolemy software.
+
+
+4.  Personnel Status
+
+Manda Sutijono, an undergraduate, has joined the group to work on
+the gui package.
+
+
+5.  Talks/Presentations/Publications:
+
+See the section above on the Ptolemy Miniconference.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are focussing on the domain and data polymorphic actor library and
+the impact that the type system has on its design, plus the
+infrastructure provided to application and applet builders. These are
+the critical areas of need before version 1.0 of the software can be
+released.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
