@@ -13,12 +13,16 @@
 <li> Ptolemy II 1.0ptiny beta - A small release that includes only
 what is necessary to build and run models in common domains (
 CT, DE, FSM, PN and SDF).  The Ptiny version is primarily for
-Windows 2000, and the download is roughly 6Mb in size.
+Windows 2000 - we do not recommend using it under Unix,
+and the download is roughly 6Mb in size.
+
 <li> Ptolemy II 1.0 beta - The full version, which includes
 what is in the Ptiny version and what is necessary to create your own actors. 
 The full version also includes experimental domains.
 The full version is for Windows 2000 and various flavors of Unix and
-the download is roughly 20Mb in size.
+the download is roughly 20Mb in size.  The source only version
+of the full version is roughly 5.3Mb. 
+
 </menu>
 
 <h2>1. Install Java, if necessary</h2>
@@ -77,23 +81,9 @@ InstallShield, will install Ptolemy II, from Berkeley, on your machine.
 </menu>
 <p>
 
-<li> Other Platforms: download the gzipped jar file:
-<br>(Note that we have not tested this yet. Please let us know whether it
-works or not by sending email to ptII@ptolemy.eecs.berkeley.edu.)
-<ol>
-
-<li> Download 
-<a href="ptII1_0ptinybetasetup.jar.gz"><CODE>ptII1_0ptinybetasetup.jar.gz</CODE></a> (5.6Mb)
-
-<li> Uncompress it with either <a href="http://www.winzip.com" target="_top">Winzip</a>
-or
-<a href="http://sources.redhat.com/cygwin/" target="_top">Cygwin</a>
-
-<li> Run on the command line:
-<code>
-java -jar ptII1_0ptinybetasetup.jar
-</code>
-
+<li> Other Platforms: 
+ <br> The Ptiny installer is not recommended under other platforms.
+Instead, use the full version below.
 </ol>
 
 
@@ -103,7 +93,7 @@ java -jar ptII1_0ptinybetasetup.jar
 
 <menu>
 
-<li> There are two ways to install Ptolemy II on Windows machines:
+<li> There are three ways to install Ptolemy II on Windows machines:
  
 <menu>
 <li> 
@@ -123,10 +113,19 @@ vergil via the Start menu.
 <a href="cygwin.htm">Cygwin toolkit</a>, and then
 follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>
 to set up your build environment.  
+ <B>or</B>
+<menu>
+<li> Standard tar file and configure method using the
+	<a href="cygwin.htm">Cygwin toolkit</a>
+  <ol>
+  <li> Download <a href="ptII1.0beta.src.tar.gz"><CODE>ptII1.0beta.src.tar.gz</CODE></a> (5.3Mb) 
 
+  <li> Follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>
+  </ol>
+</menu>
 <p>
 <li> Other Platforms: 
- <p>There are two installation methods available:
+ <p>There is one installation method available for other platforms:
 <menu>
 <li> Standard tar file and configure method:
   <ol>
@@ -135,24 +134,6 @@ to set up your build environment.
   <li> Follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>
   </ol>
 </menu>
-<B>or</B>
-<menu>
-<li> Installshield installer:
-<br>(Note that we have not tested this yet. Please let us know whether it
-works or not by sending email to ptolemy@ptolemy.eecs.berkeley.edu.)
-<ol>
-
-<li> Download <a href="ptII1_0betasetup.jar.gz"><CODE>ptII1_0betasetup.jar.gz</CODE></a> (20.5Mb)
-
-<li> Uncompress it with either <a href="http://www.winzip.com" target="_top">Winzip</a>
-or
-<a href="http://sources.redhat.com/cygwin/" target="_top">Cygwin</a>
-
-<li> Run on the command line:
-<code>
-java -jar ptII1_0betasetup.jar
-</code>
-
 </ol>
 
 </menu>
