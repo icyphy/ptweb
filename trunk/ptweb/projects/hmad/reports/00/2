@@ -1,0 +1,296 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 9/30/00
+DATE:                 February 21, 2000
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        1/15/00 - 2/15/00
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have released the beta version of Ptolemy II, version 0.4.
+See the appendix for the release notes.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+CORBA and Embedded Software
+---------------------------
+
+Brian Vogel wrote a simple demo applet that uses CORBA to obtain and
+plot data from the ultrasonic detector connected to norbert (the NT
+machine in 524). The url is:
+
+  http://norbert.eecs.berkeley.edu/sensor.htm
+
+This is the first step in creating distributed Java capabilities.
+The next step is to integrate this into a Ptolemy II distributed
+component architecture.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Audio
+-----
+
+Brian K. Vogel has added SoundCapture and SoundPlayback to the
+ptolemy.media.javasound package. These classes support capturing and
+playing back audio. They use the brand new JDK 1.3.0 rc1 version of
+Java Sound. It is used by the new version of the AudioSource and
+AudioSink actors. These are SDF actors rather than domain-polymorphic
+actors so that they can exploit the efficiency with which SDF can
+manager large sequences of data.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ========================L===================
+
+Nothing to report.
+
+
+ Generic (Cross Task)
+ ====================
+
+User Interface
+--------------
+
+Steve Neuendorffer has finished a simplified manhattan routing
+algorithm for Vergil, the Ptolemy II GUI.
+
+
+Math Package
+------------
+
+Jeff Tsay checked in *ArrayMath.java and *MatrixMath.java where * is
+Double, Float, Integer and Long. He has removed MatrixMath.java because
+it is now renamed to DoubleMatrixMath.java. He is working on filling in
+the operations for the matrix tokens.
+
+
+Class Loader
+------------
+
+Christopher Hylands has been working on a mechanism for applets to be
+able to access files relative to the classpath. It turns out that the
+getResources() method in java.lang.ClassLoader will search the
+classpath for a file and return a URL to it, so this is just what we
+need, however, an applet does not seem to have direct access to the
+class loader. Nonetheless, he used this mechanism to improve the way
+that applications access files.
+
+
+Design Reviews
+--------------
+
+ Wed 1/26        FSM Director
+ Wed 2/2         MoML
+ Wed 2/9         Vergil
+ Mon 2/14        Sound
+
+2.  Equipment/Infrastructure Status:
+
+no changes.
+
+
+3.  Interactions and Technology Transfer
+
+- Neil Smyth of Telcordia has made progress on the use of Vergil as a
+  GUI for Ptolemy Classic. The ClassicDirector in Vergil generates a ptcl
+  representation of the universe, then starts up ptcl in a separate
+  process. The ptcl process initially acts as a server, to which the JVM
+  connects and transfers over the ptcl script using a very simple protocol
+  (ready->send_>done), after which ptcl executes the script. He is using
+  sockets to achieve the transfer.
+
+- Frederic Boulanger of Supelec in France reports that they will start
+  writing code for a debugger that will be a plug-in for Vergil. They
+  plan to implement the following operations:
+  - go: run until the end of the execution or a breakpoint is met
+  - step : step over one iteration of an actor [prefire() -> postfire()]
+  - step into : same thing, but consider each actor of a
+    composite actor individually
+  - step out : run until the end of the iteration of a composite actor.
+  - microstep : step over one activation of an actor [fire()].
+   ("microstep into" is not necessary since "step into" will stop before 
+   the prefire of the first inner actor).
+
+  All these operations may be interrupted if a breakpoint is met. 
+  Breakpoints may be set on:
+  - initialize()
+  - prefire()
+  - fire()
+  - postfire()
+  - wrapup()
+  - a condition on the value or the status of data on a port
+
+  The last one depends on the domain, since there may not be any data
+  to compare to something (DE), or waiting for data may make no sense
+  (CT or SDF).
+
+- Prof. Patrick Dewilde, director of Dimes, Delft University, The
+  Netherlands, visited our group on February 9.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+- "Embedded Software - A Research Agenda," Edward A. Lee, invited talk
+  at BDTI, Berkeley, CA, Feb. 1, 2000.
+
+
+Publications
+------------
+
+[1] Jie Liu, Xiaojun Liu, and Edward A. Lee, "Interoperation of
+    Heterogeneous CAD Tools in Ptolemy II," Journal of Modeling and
+    Simulation of Microsystems, JMSM, Accepted for publication in vol. 1,
+    no. 2, 2000.
+
+
+Study Group Topics
+------------------
+
+- Extreme Programming (XP)
+- SystemC
+- EPOC/Symbian
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are planning the final release (version 0.4) of Ptolemy II.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+APPENDIX
+========
+
+Release announcement for Ptolemy II 0.4 beta
+--------------------------------------------
+
+Ptolemy II 0.4beta is available for download, see
+http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII0.4/
+
+If you are running Netscape Communicator, or Microsoft Internet
+Explorer, and have the JDK1.2.2 plugin installed, then you can run
+the applet demos.  Other users will need to download and install
+Ptolemy II to run the applets.
+
+The beta version of the release notes are as follows:
+
+--start--
+Ptolemy II 0.4beta Release Notes
+--------------------------------
+
+Ptolemy II 0.4beta is a release of the Ptolemy II Java classes and
+the Ptolemy II design document
+
+Ptolemy II 0.4beta includes applet demonstrations of the domains, but it
+does not include a GUI. 
+
+The design document describes the Ptolemy II design and the
+implementation of the Java classes. 
+
+The Ptolemy design document is shipped with Ptolemy 0.4, it can be
+found in $PTII/doc/design. The most recent copy of the Ptolemy II
+design document can be found online at
+http://ptolemy.eecs.berkeley.edu/ptolemyII/doc/design.html 
+
+Major Features that are new in Ptolemy 0.4 
+
+* Ptolemy II 0.4 supports an XML language called MoML for specifying
+  component-based models. (Edward A. Lee, Steve Neuendorffer and the
+  Ptolemy Team) 
+
+* The source code for the Finite State Machine (FSM) domain is
+  included. (Xiaojun Liu and the Ptolemy Team) 
+
+* Major rewrite of the type system. (Yuhong Xiong) 
+
+* The Discrete Event domain has been tuned for performance. (Edward
+  A. Lee and the Ptolemy Team) 
+
+* We are moving away from the JDK1.1 collections package and using the
+  JDK1.2 collections classes from java.util. Methods that shipped with
+  Ptolemy II 0.3 that used the JDK 1.1 collections package have been
+  marked as deprecated in Ptolemy II 0.4. It is our intention to remove
+  these deprecated methods in Ptolemy II 1.0 and to no longer ship the
+  $PTII/collections directory. (The Ptolemy Team) 
+
+* Support for fix point data types. (Bart Kienhuis, Yuhong Xiong) 
+
+* Various demonstrations have been added, removed and/or rewritten. (The
+  Ptolemy Team) 
+
+* Commmand line invocation of models via $PTOLEMY/bin/ptolemy. (Edward
+  A. Lee, Christopher Hylands and the Ptolemy Team) 
+
+Platforms
+---------
+The core of Ptolemy II 0.4 is 100% Java, so it should work on any
+platform that has JDK1.2. 
+
+We developed Ptolemy II 0.4 under Solaris 2.5.1 and NT4.0sp3 and later
+with JDK1.2.2. Ptolemy II 0.4 has also been built and tested under
+JDK1.3 beta. 
+
+Ptolemy II 0.4 will not compile under JDK1.1.x. 
+
+See the Jacl section of the installation page for information about
+the Ptolemy II test suite 
+
+Limitations
+-----------
+
+* The gzipped tar file that contains the Ptolemy II distribution
+  requires GNU tar or WinZip. Solaris 2.5.1 tar will fail to untar this
+  file with a checksum error because the pathnames are longer than 100
+  characters. If you do not have GNU tar, you can obtain source and
+  selected binaries from ftp://ptolemy.eecs.berkeley.edu/pub/gnu. 
+
+* Ptolemy II 0.4 does not include a GUI. 
+
+* This is the first release of the Finite State Machine domain (FSM)
+  which has the following limitations 
+   * The FSM design document chapter is not part of the 0.4 beta 
+   * There are not very many tests for FSM 
+   * MoML support for FSM models is incomplete. 
+
+* The readFile() parameter function does not work with applets. 
+
+* The import statement in MoML requires the base attribute. The
+  following will not work: 
+  <import source="testClass2.xml"/>
+
+  Use the following instead 
+  <import base="../../.." source="ptolemy/moml/test/testClass2.xml"/>
+
+* The JDK1.2.1 Plug-in has a bug that causes the Netscape or Iexplorer
+  process to linger after exiting. The workaround is to turn of the JIT
+  using the Java Plug-in Control Panel, see the Troubleshooting guide
+  for details. This bug may be fixed in JDK1.2.2. 
+--end--

@@ -1,0 +1,471 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 9/30/00
+DATE:                 February 21, 2000
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        11/15/99 - 12/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+MoML, a language for specifying models in XML, is maturing. The same
+MoML file can now be used for either Ptolemy II applications or
+applets, and we have created a script for executing such models from
+the command line. We have also created a Heterochronous Dataflow (HDF)
+capability, a fixed-point datatype, and we have made progress on a code
+generation mechanism. We have also made a number of improvements to the
+software infrastructure, in anticipation of the forthcoming software
+release.  Finally, outside interactions and technology transfer
+continue unabated.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+
+MoML - The Modeling Markup Language
+-----------------------------------
+
+MoML files can now be used in both applets and applications without
+change. Top-level parameters and director parameters are editable on
+screen. We have created a command-line interface so that models can be
+executed more easily by starting a Java application. The application
+supports opening MoML files, saving the model to another file (or to
+the same file, which you might want to do to save a mutation). It also
+provides documentation for the model, defined in the XML file (via the
+Help menu), and tooltips for the parameters (also given in the XML
+file).
+
+When using a MoML file in an application, it is possible to import
+a file that is specified relative to the classpath.  E.g.:
+
+   <import source="ptolemy.moml.demo.sinwave.xml"/>
+
+This means that an application can directly refer to XML files in
+the Ptolemy tree without copying them.
+
+In the course of this effort, we discovered some major subtleties (and
+some interesting research questions) due to a mismatch between the
+current design of Ptolemy II and the MoML language.
+
+MoML supports inheritance by permitting you to extend existing classes.
+Ptolemy II reads MoML that uses this inheritance mechanism. For
+example, consider the following MoML file:
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/archive/moml.dtd">
+<model name="top" class="ptolemy.kernel.CompositeEntity">
+    <class name="base" extends="ptolemy.kernel.CompositeEntity">
+        <entity name="e1" class="ptolemy.kernel.ComponentEntity">
+        </entity>
+    </class>
+    <class name="derived" extends="base">
+        <entity name="e2" class="ptolemy.kernel.ComponentEntity">
+        </entity>
+    </class>
+</model>
+
+Here, the “derived” class extends the “base” class by adding another
+entity to it. However, there is a key limitation in Ptolemy II.
+Invoking the exportMoML() methods discards the inheritance link. For
+the above example, top.exportMoML() will produce:
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/archive/moml.dtd">
+<model name="top" class="ptolemy.kernel.CompositeEntity">
+    <class name="base" extends="ptolemy.kernel.CompositeEntity">
+        <entity name="e1" class="ptolemy.kernel.ComponentEntity">
+        </entity>
+    </class>
+    <class name="derived" extends="ptolemy.kernel.CompositeEntity">
+        <entity name="e1" class="ptolemy.kernel.ComponentEntity">
+        </entity>
+        <entity name="e2" class="ptolemy.kernel.ComponentEntity">
+        </entity>
+    </class>
+</model>
+
+The derived class no longer extends the base class. This is caused by
+the addition of an entity to the derived class. 
+
+The reasons for this flaw are subtle and fairly deep, and a good
+mechanism for correcting it remains an open research question.
+Fortunately, this flaw is not visible at the level of a block diagram
+editor, because no known block diagram editor provides visual
+inheritance mechanisms like those in MoML. It is again an open research
+question to identify such a mechanism.
+
+We explain further. In object-oriented languages such as C++ and Java,
+all instances of a class share the same code for their methods. Only
+the instance variables differ among instances of a class. In Ptolemy
+II, however, the “code” for a composite entity is its topology. Ptolemy
+II has no mechanism for sharing the same topology among instances of
+the composite entity. Instead, it clones the base topology when
+creating an instance or a derived topology. The difficulty arises when
+either the base or the derived topology changes.
+
+If the base topology changes after the derived topology has been
+created, then ideally, the derived topology should reflect those
+changes. Unfortunately, this is difficult to do. All changes to the
+base would have to be mirrored in the derived, which would require all
+code that modifies the base, including user-written code in actors, to
+mirror the changes in all derived classes. Such an approach would place
+an undue burden on code developers, and the resulting code would have
+very little chance of being correct.
+
+One possibility would be to prohibit changes in the base topology after
+a derived topology is created. However, this is excessively
+restrictive. In Ptolemy II, the references() method of NamedObj returns
+a list of objects that were derived by cloning a particular object.
+This list can be used by a user interface to re-clone the base,
+replacing the derived instances with new ones.
+
+If the derived topology changes after cloning, as in the above example,
+and these changes involve only addition to the topology (new entities,
+ports, relations, or links) or changes to parameter values, then in
+principle it would not be difficult to generate those additions in the
+MoML body. However, even detecting the changes is non-trivial, since
+they can occur arbitrarily deeply in the topology. A block diagram
+editor can largely avoid the problem by providing no mechanism for
+editing the derived topology. Only the base topology can be edited.
+
+The mechanism in Ptolemy II is conservative, in that if a MoML file is
+exported, it correctly reflects the topology. However, it loses
+information about the heritage of composite objects that are derived
+from others.
+
+There is an additional subtlety. If a topology is modified by directly
+making kernel calls, then exportMoML() will normally export the
+modified topology. However, if a derived component is modified, then
+exportMoML() may fail to catch the changes. In particular, consider the
+following example:
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/archive/moml.dtd">
+<model name="top" class="ptolemy.kernel.CompositeEntity">
+    <class name="base" extends="ptolemy.kernel.CompositeEntity">
+        <entity name="e1" class="ptolemy.kernel.ComponentEntity">
+        </entity>
+    </class>
+    <entity name="derived" class="base">
+    </entity>
+</model>
+
+Here, the derived class does not modify the topology, so exportMoML()
+produces:
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE model PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/archive/moml.dtd">
+<model name="top" class="ptolemy.kernel.CompositeEntity">
+    <class name="base" extends="ptolemy.kernel.CompositeEntity">
+        <entity name="e1" class="ptolemy.kernel.ComponentEntity">
+        </entity>
+    </class>
+    <entity name="derived" class=".top.base">
+    </entity>
+</model>
+
+This MoML code will be exported even if the derived class has been
+modified by making direct kernel calls. This actually can prove to be
+convenient. It means that if a model mutates during execution, and is
+later saved, that a user interface can ensure that only the original
+model, before mutations, is saved. It does this by creating a class for
+the model, instantiating the class without modifying it, and executing
+the instance.
+
+
+Code Generation
+---------------
+
+Jeff Tsay has adapted an open-source Java compiler to generate
+an abstract syntax tree that describes a Ptolemy II application.
+The intent is to attach various back-ends to this to generate
+efficient code for particular models.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Heterochronous Dataflow
+-----------------------
+
+Brian Vogel has created a heterochronous dataflow capability, which
+allows state machines to be nested with synchronous dataflow. He
+created a simple hysteresis demonstration. The goal of HDF is to
+support dynamic modification of production and consumption profiles of
+composite actors without giving up static scheduling and compile-time
+assurance of freedom from deadlock.
+
+
+Actor Libraries
+---------------
+
+Yuhong Xiong overhauled the Interpolator actor in actor.lib. The major
+changes are: (1) moved the computation code to a new class
+ptolemy.math.Interpolation; (2) support "wrapping" as well as extending
+by 0. He also wrote some tests for it.
+
+
+Communicating Sequential Processes
+----------------------------------
+
+We have fixed a long-standing problem in the CSP domain that made it
+impossible to run certain models more than once without getting
+deadlocked threads. This problem proved to be extremely subtle,
+underscoring again the difficulty of writing multithreading Java
+programs without the help of a Ptolemy II domain. The problem was that
+when an actor called delay(), and the model execution was terminated
+while the actor was delayed, then the thread would not get terminated.
+We have modified CSPDirector and CSP actor so that the delay() method
+throws a ProcessTerminationException when wrapup() on the director is
+called.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Nothing to report on this task.
+
+
+ Generic (Cross Task)
+ ====================
+
+Collection Package
+------------------
+
+In a team effort that involved almost everybody in the group, we have
+purged Ptolemy II of its dependence on the outdated collections
+package, replacing it with the collections capabilities of Java 1.1.
+
+
+Fixed-Point Modeling
+--------------------
+
+Bart Kienhuis has created a fixed-point datatype in Ptolemy II, and
+two demonstrations that use it.  It works with polymorphic actors,
+and thus automatically inherits a rich library of actors.
+
+
+Command-Line Interfaces
+-----------------------
+
+We have also improved the command-line interface to Ptolemy II with
+two new classes:
+
+   PtolemyApplication
+   MoMLApplication
+
+These have some pretty powerful features.  Neither has any GUI (that
+comes next), but you can do the following:
+
+  java ptolemy.actor.gui.PtolemyApplication -param1 "value" -param2 "value" \
+        -class ptolemy.actor.gui.test.TestModel
+
+and you will create an instance of the class named by the -class argument
+(which is required to be a CompositeActor), set its parameters "param1"
+and "param2" and run it.
+
+You can also create multiple classes and run them in separate threads
+under the same JVM at the same time by giving multiple -class args.
+The parameter names can refer to _anything in the model_.
+E.g., for an SDF model with a director named "director", you can do:
+
+   java ptolemy.actor.gui.PtolemyApplication -director.iterations 40 \
+        -class classname
+
+to get a run of 40 iterations.
+
+If you use the MoMLApplication class, then in addition to (or instead
+of) the -class option, you can specify an xml file:
+
+   java ptolemy.actor.gui.MoMLApplication [params] foo.xml
+
+
+Command-line infrastructure
+---------------------------
+
+Christopher Hylands set up a script that will invoke the various
+Ptolemy II standalone applications. The script looks at what name it
+was called with and then invokes java on the appropriate class.
+
+Here's how the script works:
+
+configure reads in $PTII/bin/ptinvoke.in and generates 
+$PTII/bin/ptinvoke
+
+$PTII/bin/makefile has rules that use ln -s to create links
+for the following standalone applications
+        histogram
+        ptjacl
+        ptjaclapp 
+        ptplot
+        ptolemy
+        pxgraph
+        vergil 
+
+Note that if you call ptinvoke directly, then it will invoke the
+class and pass the rest of the arguments along.
+
+For example:
+$PTII/bin/ptinvoke ptolemy.plot.compat.PxgraphApplication \
+     -binary $PTII/ptolemy/plot/demo/data/bin.plt
+
+Thus, if you have a standalone application that you are testing,
+you should be able to start it up more easily than setting CLASSPATH
+and passing in -cp $CLASSPATH.
+
+He also created .bat scripts that correspond to the various shell
+scripts for use under Windows when Cygwin is not installed.
+
+
+User Interface
+--------------
+
+Steve Neuendorffer, Edward Lee and Bart Kienhuis have put together some
+ideas on how parameters get displayed in the GUI, and how Ptolemy
+Entities specify how they are configured. The ideas make use of a
+Factory design pattern.
+
+Actors could contain a Configurer, which would be a subclass of
+Attribute. A Configurer is a factory for swing components that
+configure different aspects of that actor. When the Vergil wishes to
+bring up a window to configure an Actor, it would check for an instance
+of a configurer and, if one exists, it would ask it to create a
+component that Vergil would place on the screen. If no configurer
+exists, then a default configurer (probably an improved version of
+ptolemy.actor.gui.ParemeterEditor) would be created. This mechanism
+would be useful for actors like an FIR filter, which could specify a
+configurer that would create a pole-zero plot.
+
+A separate mechanism for changing how Parameters are viewed also could
+make use of a factory design pattern. Depending on what a parameter
+represents, it may be more useful to use a different on screen
+representation (such as a typein entry box, a slider, or a radio
+button). A Parameter could contain a factory for creating these
+widgets, which the ParameterEditor class could make use of.
+
+
+Code reviews
+------------
+
+ - DDE (distributed discrete events) domain.
+
+
+2.  Equipment/Infrastructure Status:
+
+no changes.
+
+
+3.  Interactions and Technology Transfer
+
+- We met on December 3 with Steve Shultz of VHDL International to
+  discuss our efforts on system-level design languages.
+
+- Our collaborative project with the GSRC center (gigascale silicon
+  research center) on system-level design languages has been reported
+  in EE Times, together with some complementary efforts.  See:
+
+    Foundation laid for next-generation languages
+    http://eet.com/story/OEG19991203
+
+- John Eidson, Stan Jefferson, and FIXME, from Agilent Labs, formerly
+  Hewlett Packard, visited our group on November 19 to discuss
+  cooperation on smart sensors.
+
+- We have set up an active collaboration with Supelec, in France,
+  where three students, Brieuc Desoutter, Guillaume Vibert, and
+  Pedro Domecq Marquez, under the Direction of Prof. Frederic
+  Boulanger, will be working with us on the user interface.
+
+- Neil Smyth of Telcordia send the following update:
+
+    "Telcordia Technologies has ported their Wavelength Domain
+    Simulator (WDS) into Ptolemy Classic, from a previous
+    implementation in Cadence's SPW. The simulator allows rapid
+    evaluation of the spectral performance of large scale optical
+    networks. Due to the impact of wavelength division multiplexing
+    each fiber in a network normally now contains many channels, and
+    the full solution of the network from first conditions in the time
+    or frequency domains would be infeasible. WDS operates by dividing
+    the spectral range of interest into small intervals, and
+    propagating the power in each of these intervals through the
+    network. This very coarse sampling means that pulse shape
+    information (time domain) has been lost, but gives the user
+    feedback on the signal-noise ratios on all channels in the network,
+    as well as allowing the user to evaluate the performance of the
+    network under varying power level boundary conditions."
+
+  Neil is also working on using MoML as a persistent file format for
+  Ptolemy Classic, and using Vergil as a visual editor.
+
+- Gerard Damm of Alcatel reports that he has managed to get unconnected
+  actors to communicate, validating one of our design objectives in
+  Ptolemy II.  He is using Ptolemy II for modeling highly dynamic
+  wireless networks.
+
+- We have had extensive discussions with Ed Willink of Racal Research,
+  Ltd., in England, on a variety of issues. He is interested in using
+  Ptolemy II to specify arbitrary radio systems in an implementation
+  independent fashion.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+none.
+
+
+Publications
+------------
+
+[1] Yuhong Xiong and Edward A. Lee, "An Extensible Type System for
+    Component-Based Design," accepted by Tools and Algorithms for the
+    Construction and Analysis of Systems TACAS 2000, March, 2000.
+
+[2] Edward A. Lee, "Modeling Concurrent Real-Time Processes using
+    Discrete Events," Annals of Software Engineering, vol. 7, 1999,
+    pp. 25-45.
+
+[3] Walid A. Najjar, Edward A. Lee, and Guang R. Gao, "Advances in
+    the Dataflow Computational Model," Parallel Computing, vol. 25,
+    1999, pp. 1907-1929.  
+
+Study Group Topics
+------------------
+
+- Every little bit counts: toward more reliable software.
+- Formal Methods.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are planning a release (version 0.4) of Ptolemy II.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+

@@ -1,0 +1,194 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 9/30/00
+DATE:                 February 21, 2000
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        12/15/99 - 1/15/00
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+In a major milestone, we have compiled and run a small portion of
+Ptolemy II on a Palm Pilot using the KVM, a small Java virtual machine.
+We have also made major progress on system-level types, and have been
+catching up on responses to design and code reviews, in anticipation
+of a new software release.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+KVM
+---
+
+Christopher Hylands has successfully compiled the kernel.util and
+kernel packages of Ptolemy II to execute under the KVM, an extremely
+small Java virtual machine that runs on Palm Pilots and similar
+devices. This is a promising first step towards using Ptolemy II models
+in deployed embedded software. This work has raised a number of issues,
+and we are working on formulating a plan for making Ptolemy software
+compatible with such small virtual machines.  For example, the KVM does
+not have the cloning machanism present in a full JVM.  Thus, we have
+to modify the kernel so that it does not depend on it.
+
+
+MoML - The Modeling Markup Language
+-----------------------------------
+
+In response to the design review of MoML, we have made some minor changes
+to the language:
+
+  - The location element now takes a "value" attribute rather than "x",
+    "y", and "z". The value should be something like "10, 10"
+
+  - A port no longer has a "direction" attribute. Instead, it uses an
+    empty property. Eg.:
+
+      <port name="x" class="...">
+        <property name="output"/>
+      </port>
+
+We have also inserted the MoML chapter into the design document.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Nothing to report.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Yuhong Xiong has constructed state machine models of the interaction
+semantics embodied in the receiver classes of each of key domains in
+Ptolemy II. He has also constructed abstractions of these that
+represent the design of domain polymorphic actors. The abstraction used
+in the simulation relation for automata. The resulting hierarchy of
+automata forms the beginnings of a system-level type system that can be
+used to systematically design domain-polymorphic actors.
+
+
+ Generic (Cross Task)
+ ====================
+
+Variables and Parameters
+------------------------
+
+We've changed the Variable class so that now you can add a "value
+listener" to it. We have changed PtolemyQuery so that it automatically
+registers as a value listener. So now, if a parameter is updated by
+some other mechanism than via the GUI, the GUI is updated.
+
+
+Code Coverage
+-------------
+
+Christopher Hylands has added many tests to fill in some gaps
+in our automated test suites.
+
+
+2.  Equipment/Infrastructure Status:
+
+no changes.
+
+
+3.  Interactions and Technology Transfer
+
+- Jens Voigt at the Technical University in Dresden reports that he
+  successfully "ported" PtolemyII0.3 to Linux. Using SUN's recently
+  released JDK1.2.2 for Linux there was nothing to do for using ptII on
+  Linux except a recompile of everything. He is not quite sure, but He
+  thinks this recompile might be necessary because of the rc1 status of
+  the Linux JDK.
+
+- Arnaud LAPREVOTE, of Free&ALter Soft in France, announced on the
+  Ptolemy newsgroup a Matlab-like capability designed, in part, to work
+  with Ptolemy software. He said:
+
+    "I am very happy to announce the release of SigLab 1.0 beta. SigLab
+    is a calculator specially designed for working on signals.You may
+    load,save or generate signals, do various operations on and between
+    the signals (addition, ..., log, abs, sin, ..., filtering,
+    convolution, fft, correlation).SigLab was designed for being able
+    to handle results of simulations or measurements. It means it can
+    handle signals with millions of points in just keeping in memory a
+    small piece of each signals. However, to keep good performance, it
+    caches in memory portions of the signals. SigLab is fully written
+    in scilab and tcl/tk. Then it should be easy for anybody to add new
+    functions. In anyway, SigLab does not try to compete with Ptolemy.
+    Both tools are complementary. With Ptolemy, you design system and
+    simulate systems, with SigLab you analyze the results of your
+    simulations."
+
+    "SigLab was specifically thought for Ptolemy users. You will then
+    find stars ready to use. SigLab will start at the end of the
+    simulation and show all signals that you asked. The provided stars
+    are not very satisfying. They only save results in ascii format,
+    and the interaction mechanism with SigLab is not fully satisfying.
+    However, it is usable."
+
+  Free&ALter Soft provides services on free software for Unix,
+  especially on Solaris, HPUX, Irix and Linux. For 3 years, they have
+  also provided services on Ptolemy to some customers in France. They
+  have full training material ready, and a lot of experience in
+  assisting users.  Contact: arnaud.laprevote@freealter.com.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+- Program Review, January 12, 2000, for Bob Hillman and Jim Hanna of
+  Rome Laborarory.  Agenda:
+
+    9-9:45:      Overview of the project (Edward Lee)
+    break 
+    10-11:       Heterogeneous modeling (Jie Liu) 
+    11-11:30:    Type system (Yuhong Xiong)
+    11:30-11:45: Paths to synthesis (fixed-point, etc.) (Bart Kienhuis)
+    11:45-12:00: Vergil graphical editor (Steve Neuendorffer)
+    12:00-1:30:  Lunch
+    1:30-3:30:   Interactive, tutorial walkthrough
+
+
+Publications
+------------
+
+[1] Edward A. Lee, "Embedded Software - An Agenda for Research,"
+    Technical Memorandum UCB/ERL M99/63, December 15, 1999.
+
+
+Study Group Topics
+------------------
+
+- Extreme Programming (XP)
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are planning a release (version 0.4) of Ptolemy II.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
