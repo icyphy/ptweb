@@ -1,0 +1,38 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Communication modeling in Ptolemy II</title>
+</head>
+<body>
+<center>
+  <h1>Communication Systems Modeling in Ptolemy II</h1>
+</center>
+<center>
+  <p>Ye Zhou</p>
+  <p>Memorandum No. UCB/ERL M03/53<br>
+  December 18 2003 <br>
+Electronics Research Laboratory <br>
+College of Engineering <br>
+University of California, Berkeley 94720
+</p>
+  <p> <a href="communicationModeling.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a> 
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+<p>Synchronous Dataflow (SDF) is useful in modeling communications and signal
+processing systems. We describe a communication actor library based on the SDF
+semantics in Ptolemy II and show how to use these actors to simulate
+communication systems. However, many communication and signal processing systems
+nowadays use adaptive algorithms and control protocols. These sometimes violate
+SDF principles in that SDF actors must have fixed rates during execution. A.
+Girault, B. Lee, and E. A. Lee proposed in [7] a new model of computation called
+Heterochronous Dataflow (HDF). HDF extends SDF by allowing rate changes in
+actors during execution. HDF is a heterogeneous composition of SDF and Finite
+State Machines (FSM). We describe an HDF domain implementation in Ptolemy II.
+Examples and discussions are given to show how HDF can be used in various forms.</p>
+</body>
+</html>
+
