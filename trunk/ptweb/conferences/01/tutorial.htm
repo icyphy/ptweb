@@ -20,9 +20,80 @@ covering the following topics:
 The latter two topics require some background in Java programming.
 <p>
 <font color=red>We strongly recommend that you bring a laptop
-computer running Windows 98 or Windows 2000.</font>
+computer running Windows 2000 or Windows 98 (Windows 2000 is strongly preferred).</font>
 This will enable you to follow the tutorial on your own
 machine, developing applications and code as you go.
+<p>The laptop should have the following software installed:
+<menu>
+<li> JDK1.3.0 from
+<a href="http://java.sun.com/j2se/1.3/" target="_top"><CODE>http://java.sun.com/j2se/1.3/</CODE></a>
+ <p>Install the full SDK, which includes the compiler <CODE>javac</CODE>.
+
+<li> The Cygwin toolkit:
+<ol>
+<li> Install the Cygwin toolkit from
+<a href="http://sources.redhat.com/cygwin/" target="_top"><CODE>http://sources.redhat.com/cygwin/</CODE></a>
+ <p>Complete installation instructions can be found at
+<a href="http://sources.redhat.com/cygwin/faq" target="_top"><CODE>http://sources.redhat.com/cygwin/faq</CODE></a>, below is a summary:
+<ol>
+<li> Create an empty directory
+
+<li> Download <a href="http://sources.redhat.com/cygwin/setup.exe"><CODE>http://sources.redhat.com/cygwin/setup.exe</CODE></a> and save it in the empty directory
+
+<li> Click on <CODE>setup</CODE>
+
+<li> Select Install from Internet
+
+<li> Use the default Local Package Directory, which should be the
+directory you created above.
+
+<li> Select <CODE>c:\cygwin</CODE> as your install root directory.
+
+<li> Select 'Default Text File Type' of DOS.
+
+<li> If you are not behind a firewall, click on direct connection.
+
+<li> Select a nearby mirror.
+
+<li> You will be presented with a list of packages to install.
+ <br>A complete installation takes at least 75Mb.
+
+ <p>At the minimum, select the packages below, which is roughly a 3Mb download 
+	that expands into an 8.7Mb installation.
+	<ul>
+	<li> ash -  For <CODE>/bin/sh</CODE>
+	<li> bash 
+	<li> cygwin
+	<li> diff - Configure uses <CODE>cmp</CODE>
+	<li> fileutils - For <CODE>ls</CODE>
+	<li> grep - Used by configure
+	<li> make
+	<li> sed - Needed by config.status, which is created by configure
+	<li> shellutils - For <CODE>basename</CODE>
+	<li> textutils - For <CODE>cat</CODE> and <CODE>tr</CODE>
+	</ul>
+
+	 <p> If you are serious about development you may also want: 
+	<ul>
+
+	<li> autoconf - requires gawk, grep, m4
+	<li> find
+	<li> gzip
+	<li> less
+	<li> tar
+	<li> sed
+	</ul>
+
+ </ol>
+
+<li> Ptolemy II 1.0, which is not yet released.
+ <br> We will provide a cd with Ptolemy II on it to all conference attendees.
+</menu>
+
+Ideally, the above installations will be completed before arriving at
+the conference, but we will have staff available to assist in the
+installation process.
+
 <p>
 <font color=red>
 You must <a href="registration.htm" target="_top">
