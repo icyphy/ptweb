@@ -12,7 +12,8 @@ CONTENTS:
         1.6 Who was Ptolemy?
         1.7 What is Tycho?
         1.8 What is Ptolemy II?
-        1.9 What is the difference between Ptolemy 0.7 and Ptolemy II
+        1.9 What is the difference between Ptolemy 0.7 and Ptolemy II?
+
 2.0 Getting Ptolemy
         2.1 Ptolemy FTP site
         2.2 Ptolemy WWW site 
@@ -97,10 +98,11 @@ hppa9          HPUX9
 linux          RedHat Linux 5.0	 In rpm format
 
 Binaries for these ports can be found in:
-ftp://ptolemy.eecs.berkeley.edu/pub/ptolemy/contrib
+http://ptolemy.eecs.berkeley.edu/ptolemyclassic/pt0.7.1/download.htm
 
 Active ports by others that we are folding fixes in from, but we don't
-provide binaries.  See ftp://ptolemy.eecs.berkeley.edu/pub/ptolemy/contrib
+provide binaries.  See
+http://ptolemy.eecs.berkeley.edu/ptolemyclassic/pt0.7.1/ptolemy0.7.1/patches/
 for available patches.
 
 aix            AIX4.1           RS/6000
@@ -163,9 +165,9 @@ Ptolemy includes the Tycho system.  Tycho is a graphical front end
 that uses Itcl.
 
 
-1.4  Demonstration Version (Ptiny Ptolemy)
+1.4  Demonstration Version (Ptiny Ptolemy Classic)
 
-The demonstration version of Ptolemy, known as Ptiny Ptolemy, is a
+The demonstration version of Ptolemy, known as Ptiny Ptolemy Classic, is a
 subset of Ptolemy designed to give users a sample of the power and
 flexibility of Ptolemy without taking up quite so much disk space.
 Ptiny Ptolemy is also meant for the classroom as all of the Ptolemy
@@ -174,22 +176,16 @@ laboratory exercises may be performed with Ptiny Ptolemy alone.
 Ptiny Ptolemy runs on the Sun 4, HP-PA, and DECStation (MIPS)
 workstations.  You will need 12 Mbytes of disk space to install it.
 
-The demonstration version of Ptolemy is available via FTP in the
-ptolemy.eecs.berkeley.edu FTP site in the pub/ptolemy/ptiny0.5
-directory.  More information on the Ptolemy FTP site is in the GETTING
-PTOLEMY section.  Ptiny Ptolemy is not available on tape at this time.
-
-Joe Buck has created a linux only version of Ptiny 0.5.2, available on
-the Ptolemy ftp site as
-pub/ptolemy/contrib/linux/pt-0.5.2tiny-linux.tar.gz.
+The demonstration version of Ptolemy is available via 
+http://ptolemy.eecs.berkeley.edu/ptolemyclassic/ptolemy/ptiny0.5/
+Ptiny Ptolemy is not available on tape at this time.
 
 1.5  Current release
 
 The current production release of Ptolemy is version 0.7.1p1.  This is
 the the seventh major release of Ptolemy.  The zero out in front is to
 remind users that this is University software and not a commercial
-product.  Patches to the current release are found in the Ptolemy FTP
-site.
+product.
 
 Ptolemy0.7.1 was released on June 12, 1998.
 
@@ -288,42 +284,17 @@ with C++, you may want to learn Java :-)
 
 2.1  Ptolemy FTP site
 
-The Ptolemy FTP site is: ptolemy.eecs.berkeley.edu
-
-This site contains the latest release of Ptolemy, patches to the
-current release, a postscript version of the Ptolemy manual, the
-demonstration version of Ptolemy, selected Ptolemy papers and journal
-articles, as well as the log files for the mailing list.
-
-For those unfamiliar with anonymous ftp, here's what you do:
-FTP to Internet host "ptolemy.eecs.berkeley.edu"  (128.32.240.78)
-Login as "anonymous"; use your full email address as the password
-
-	cd pub
-
-get the README file and follow its instructions.
-
-Note that if you are downloading binary files from the Ptolemy ftp
-site, be sure to turn on binary mode by typing 'binary'.  The Ptolemy
-distribution tar files are binary files and should be downloaded in
-binary mode.
-
-There is an FTP mirror in Japan: ftp.iij.ad.jp This site is a mirror
-of the Berkeley site.  Ptolemy is in the pub/misc/ptolemy directory.
-
-There is a WWW mirror of in France at
-http://ptolemy.thomson-csf.fr/ptolemy
-and a ftp mirror at
-ftp://ptolemy.thomson-csf.fr/mirrors/ptolemy.eecs.berkeley.edu/
+Formerly, we had an FTP site, but because of security concerns, 
+that site was removed in early 2002.
 
 2.2  Ptolemy WWW site
 
 There is a World Wide Web (WWW) page for Ptolemy:
 	http://ptolemy.eecs.berkeley.edu/
+
 The Ptolemy WWW page contains information about Ptolemy,
-demonstrations of Ptolemy programs, and access to the Ptolemy FTP
-site, and a hypertext version of the Users's Manual and the Kernel
-Manual.
+demonstrations of Ptolemy programs, and a hypertext version of the
+Users's Manual and the Kernel Manual.
 
 
 2.3 Is Ptolemy available on CDROM?
@@ -346,7 +317,7 @@ User's Manual, Programmer's Manual, and Kernel Manual.
 The new user will only need the User's Manual to get started.
 
 All three volumes are available in PostScript, HTML and PDF formats
-from the Ptolemy FTP site at
+from the Ptolemy web site at
 http://ptolemy.eecs.berkeley.edu/papers/almagest/index.html
 
 In addition, bound hard copies of each of the volumes are available
@@ -366,13 +337,12 @@ volume, but this is subject to change.
 2.5  Technical Papers from the Ptolemy Group 
 
 A number of Ptolemy related papers and journal articles are available
-in the ptolemy.eecs.berkeley.edu FTP site in the pub/ptolemy/papers
-directory and also via the Ptolemy WWW homepage
-(http://ptolemy.eecs.berkeley.edu).  From the Ptolemy homepage, one
-can search the publications by keyword. Some of the papers are in the
-postscript format, and require a postscript printer or viewer.  Other
-papers are in HTML format.  The paper "overview" gives an overview of
-Ptolemy and would be of particular interest to new users.
+via the Ptolemy WWW homepage (http://ptolemy.eecs.berkeley.edu).  From
+the Ptolemy homepage, one can search the publications by keyword. Some
+of the papers are in the postscript format, and require a postscript
+printer or viewer.  Other papers are in HTML format.  The paper
+"overview" gives an overview of Ptolemy and would be of particular
+interest to new users.
 
 
 3.0  PTOLEMY USERS GROUPS
@@ -481,8 +451,7 @@ http://ptolemy.eecs.berkeley.edu/papers/almagest/docs/user/html/pigi.doc12.html
 
 4.3 How do I ship facets
 	Facets are in binary, so you can use tar and uuencode.
-	See:
-	See ftp://ptolemy.eecs.berkeley.edu/pub/ptolemy/contrib/stars/README
+	Try searching the ptolemy-hackers archive for details
 
 5.0  TROUBLESHOOTING PTOLEMY
 
