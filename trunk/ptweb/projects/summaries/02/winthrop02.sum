@@ -1,0 +1,27 @@
+NAMES
+Winthrop Williams
+
+EMAIL
+winthrop@robotics.eecs.berkeley.edu
+
+HOMEPAGE
+http://robotics.eecs.berkeley.edu/~winthrop/ptolemy
+
+PHONE
+510-642-7824
+
+TITLE
+Models of Computation for I/O
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+This project stimulates research into models of computation by attempting to realize real-time hardware-connected Ptolemy II systems.  The first such attempt successfully demonstrated remote teleoperation with force feedback at a sample rate of 125 Hz.  Difficulties encountered are raising questions of how models of computation can and should interact with physical processes.  Models may be augmented to define how they engage physicality, for example by encompassing threads which may block awaiting hardware events.  Future attempts may include low-latency web-controlled robots with custom (beyond browser) WebStart-ed remote user interfaces.  </P>
+
+<IMG SRC="winthrop02.jpg" WIDTH=391 HEIGHT=230><BR>
+
+A major objective of this work is to move towards software development tools which facilitate understanding of the system being designed.  Models of computation are a part of this quest, as are semantics and syntactic representations.  This research is biased towards syntactic systems like Ptolemy II which include diagrams analogous to the schematic diagrams of electronic circuitry.<BR>
+
+<P>A complementary clarifying approach is the development of a "Picture book" of models of computation.  This book will depict each model of computation via a set of Interface Automata diagrams.  These diagrams will facilitate walk-throughs of various computational scenarios, including heterogeneous compositions.</P>
