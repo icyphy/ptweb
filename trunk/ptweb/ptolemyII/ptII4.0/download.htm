@@ -10,15 +10,23 @@
 <h1>Ptolemy II 4.0-alpha Source Downloads</h1>
 
 <h2>Downloads</h2>
-Below are the downloads and resources available from this page.
+<h3>Quick Instructions</h3>
+
+If you want to rebuild from source, download:
+ <p><a href="ptII4.0-alpha.src.tar.gz"><B>Ptolemy II 4.0-alpha source only</B></a> (20.1 Mb)
+ <p>Then 
+<a href="ptII/doc/install.htm">follow the instructions</a>.
+
+<h2>All downloads and resources</h2>
+
+Below are the downloads and resources available from this page
 <menu>
  <! -- See the ../ptII1.0/download.htm file for files we need to eventually
 provide
 -->
 
 <li> Windows Java Runtime Environment (JRE):
- <br><a href="j2re-1_4_1_02-windows-i586.exe"><CODE>j2re-1_4_1_02-windows-i586.exe</CODE></a> U.S. English only (8.3 Mb)
- <br><a href="j2re-1_4_1_02-windows-i586-i.exe"><CODE>j2re-1_4_1_02-windows-i586-i.exe</CODE></a> All Languages (10.2 Mb)
+ <br><a href="j2re-1_4_2_04-windows-i586-p.exe"><CODE>j2re-1_4_2_04-windows-i586-p.exe</CODE></a> All Languages (15.3 Mb)
  <br>The JRE is needed to run Ptolemy II, but is not sufficient to recompile
 Ptolemy II from sources.
 
@@ -28,7 +36,7 @@ Ptolemy II from sources.
 but is not sufficient to recompile the GR domain from sources.
 
 <li> Windows and other platforms Java Development Kit (JDK): 
- <br><a href="http://java.sun.com/j2se/1.4.1/" target="_top"><CODE>http://java.sun.com/j2se/1.4.1/</CODE></a>. 
+ <br><a href="http://java.sun.com/j2se/1.4.2/" target="_top"><CODE>http://java.sun.com/j2se/1.4.2/</CODE></a>. 
  <br>The JDK is needed to recompile Ptolemy II.  The JDK includes the JRE.
  <br>If you are recompiling Ptolemy II from source, then download the JDK.
 
@@ -41,15 +49,10 @@ The Java 3D SDK includes the Java 3D runtime.
 <li> Information about installing the <a href="cygwin.htm">Cygwin toolkit</a>
 - Cygwin is needed to recompile Ptolemy II.
 
-<li> <a href="ptII4.0-alpha.src.tar.gz">Ptolemy II 4.0-alpha source only</a> (20.4 Mb). 
-<li> <a href="ptII4.0-alpha.tar.gz">Precompiled Ptolemy II 4.0-alpha, includes sources</a> (57.5 Mb).  (Not recommended, use the source only download above)
+<li> <a href="ptII4.0-alpha.src.tar.gz"><b>Ptolemy II 4.0-alpha source only</b></a> (20.1 Mb).
 
-<li> Diva source files:
-<a href="diva-22Apr03.tar.gz"><code>diva-22Apr03.tar.gz</code></a> (1.8 Mb),
-<a href="diva-22Apr03.zip"><code>diva-22Apr03.zip</code></a> (2.5Mb)
-(It is not necessary to download the Diva source files to build
-Ptolemy II, Ptolemy II includes diva.jar.  Download the diva .tar.gz
-or .zip if you are interested in extending the Ptolemy II GUI itself)
+<li> <a href="ptII4.0-alpha.tar.gz">Precompiled Ptolemy II 4.0-alpha, includes sources</a> (44.5 Mb).  (Not recommended, use the source only download above)
+
 </menu>
 
 <h2>Instructions</h2>
@@ -57,7 +60,7 @@ or .zip if you are interested in extending the Ptolemy II GUI itself)
 <h2>1. Install Java, if necessary</h2>
 <p>
 All versions of Ptolemy II 4.0-alpha require Java 1.4 or later.
-Java 1.4.1_02 is preferred.
+Java 1.4.2_04 is preferred.
 
 <br>To run Ptolemy II, the Java runtime environment (JRE) is sufficient.
 
@@ -95,13 +98,13 @@ would need to install the JDK.
 
 <menu>
 <li> Windows Java Runtime Environment (JRE):
- <br><a href="j2re-1_4_1_02-windows-i586.exe"><CODE>j2re-1_4_1_02-windows-i586.exe</CODE></a> U.S. English only (8.3 Mb)
- <br><a href="j2re-1_4_1_02-windows-i586-i.exe"><CODE>j2re-1_4_1_02-windows-i586-i.exe</CODE></a> All Languages (10.2 Mb)
+ <br><a href="j2re-1_4_2_04-windows-i586-p.exe"><CODE>j2re-1_4_2_04-windows-i586-p.exe</CODE></a> All Languages (15.3 Mb)
+
  <br>The JRE is needed to run Ptolemy II, but is not sufficient to recompile
 Ptolemy II from sources
 
 <li> Windows and other platforms Java Development Kit (JDK): 
- <br><a href="http://java.sun.com/j2se/1.4.1/" target="_top"><CODE>http://java.sun.com/j2se/1.4/</CODE></a>. 
+ <br><a href="http://java.sun.com/j2se/1.4.2/" target="_top"><CODE>http://java.sun.com/j2se/1.4.2/</CODE></a>. 
  <br>The JDK is needed to recompile Ptolemy II.  The JDK includes the JRE.
  <br>If you are recompiling Ptolemy II from source, then download the JDK.
 
@@ -126,7 +129,7 @@ of the Cygwin toolkit
 Now that the Java Development Kit and Cygwin are installed:
   <ol>
 
-  <li> Download <a href="ptII4.0-alpha.src.tar.gz"><CODE>ptII4.0-alpha.src.tar.gz</CODE></a> (20.4 Mb) 
+  <li> Download <a href="ptII4.0-alpha.src.tar.gz"><CODE>ptII4.0-alpha.src.tar.gz</CODE></a> (20.1 Mb) 
 
   <li> Follow the <a href="ptII4.0-alpha/doc/install.htm">Installation Instructions</a>
   </ol>
@@ -144,42 +147,25 @@ using one of the other methods listed at the top of this page.
 
 <li> Install the Windows Java Runtime Environment (JRE):
   <br>Download
- <br><a href="j2re-1_4_1_02-windows-i586.exe"><CODE>j2re-1_4_1_02-windows-i586.exe</CODE></a> U.S. English only (8.3 Mb)
-   <br><B>or</B>
- <br><a href="j2re-1_4_1_02-windows-i586-i.exe"><CODE>j2re-1_4_1_02-windows-i586-i.exe</CODE></a> All Languages (10.2 Mb)
+ <br><a href="j2re-1_4_2_04-windows-i586-p.exe"><CODE>j2re-1_4_2_04-windows-i586-p.exe</CODE></a> All Languages (15.3 Mb)
+
  <br>
   The JRE is needed to run Ptolemy II, but does not include
   the <CODE>javac</CODE> compiler, so the JRE is <B>not</B>
   sufficient to recompile Ptolemy II from sources.
 
   <li> Download and uncompress
-  <a href="ptII4.0-alpha.tar.gz">Precompiled Ptolemy II 4.0-alpha, includes sources</a> (57.5 Mb). 
+  <a href="ptII4.0-alpha.tar.gz">Precompiled Ptolemy II 4.0-alpha, includes sources</a> (44.5 Mb). 
 
   <li> Follow the <a href="ptII4.0-alpha/doc/troubleshooting.htm#vergil">How do I start Vergil by hand?</a> instructions
 
   </ol>
 
 <h2>Diva</h2> 
-It is not necessary to download the Diva source files to build
-Ptolemy II, Ptolemy II includes diva.jar.  Download the diva .tar.gz
-or .zip if you are interested in extending the Ptolemy II GUI itself.
+As of Ptolemy II 4.0, we include the sources of a subset of Diva.
 
-
-<ol>
-<li> Download either 
-<a href="diva-22Apr03.tar.gz"><code>diva-22Apr03.tar.gz</code></a> (1.8 Mb),
-<b>or</b>
-<a href="diva-22Apr03.zip"><code>diva-22Apr03.zip</code></a> (2.5Mb)
-<li> Change to the Ptolemy II directory and uncompress them.  For
-example:
-<pre>
-cd $PTII
-tar -zxf /tmp/diva-22Apr03.tar.gz
-</pre>
-<li> Follow the instructions in 
-<code>$PTII/diva/README.txt</code> 
-
-</ol>
+<p>It is not necessary to download the Diva source files to build or run
+Ptolemy II.
 
 
 <h4> Places to go</h4>
