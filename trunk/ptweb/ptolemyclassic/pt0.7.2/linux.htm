@@ -38,13 +38,32 @@ tar -zxf downloads/pt0.7.2devel.other.src.tar.gz
 [Red Hat 9.0]: I am logged in as celaine.  I have untarred the .tar.gz files in ~/ptclassic.  Modify the instructions below accordingly.
 </ul>
 
-<li> Create <CODE>$PTOLEMY/.bashrc</CODE> and add the following
+<li> Create <CODE>$PTOLEMY/.bashrc</CODE> and add the following:
 <pre>
 PTOLEMY=/root/ptolemy
 export PTOLEMY
 
 PTARCH=linux
 export PTARCH
+
+PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
+
+# To use the X11 pxgraph, follow the instructions
+# in $PTOLEMY/src/pxgraph/README.txt and uncomment the next line.
+PT_USE_X11_PXGRAPH=yes
+export PT_USE_X11_PXGRAPH
+</pre>
+
+[Debug version]: To compile the debug version, create <CODE>$PTOLEMY/.bashrc</CODE> and add the following instead:
+<pre>
+PTOLEMY=/root/ptolemy
+export PTOLEMY
+
+PTARCH=linux.debug
+export PTARCH
+
+PT_DEBUG=ptgdb
+export PT_DEBUG
 
 PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
 
@@ -85,6 +104,7 @@ cd $PTOLEMY
 make bootstrap &gt;&amp; boot2.out &amp;
 </pre>
 
+[Debug version]: The directory name should be <CODE>obj.linux.debug</CODE> instead of <CODE>obj.linux</CODE>.
 
 <li> While installing tcltk, I got:
 <pre>
@@ -136,6 +156,8 @@ To reconfigure the build to detect <CODE>/usr/X11R6/lib/libX11.a</CODE>, do:
 <pre>
 rm -rf obj.linux/tcltk/
 </pre>
+
+[Debug version]: The directory name should be <CODE>obj.linux.debug</CODE> instead of <CODE>obj.linux</CODE>.
 
 Rerun:
 <pre>
@@ -300,6 +322,27 @@ extern char *strcpy();
 Rerun <CODE>make install</CODE>
 
 </ul>
+[Debug version]: The directory name should be <CODE>obj.linux.debug</CODE> instead of <CODE>obj.linux</CODE>.
+
+<li>[Debug version]: Try to run <CODE>pigi</CODE>.  If you get this error message, it is not running the correct binary:
+
+<pre>
+pigi: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.debug does not exist or is not
+       executable. Using /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc instead.
+</pre>
+
+<li>[Debug version]: In <CODE>obj.linux.debug/pigiRpc</CODE>:
+
+<pre>
+make pigiRpc.ptrim.debug
+</pre>
+
+Try to run <CODE>ptrim -debug</CODE>.  The following error message is ok:
+
+<pre>
+ptrim: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.ptrim.debug does not exist or is not
+       executable. Using /home/celaine/ptclassic/ptolemy/obj.linux.debug/pigiRpc/pigiRpc.ptrim.debug instead.
+</pre>
 
 </ol>
 
