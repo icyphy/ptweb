@@ -1,0 +1,101 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II 2.0.1 Applets</title>
+</head>
+<body>
+<h1><a name="Ptolemy II 2.0.1 Applets ">Ptolemy II 2.0.1 Applets</a></h1>
+
+Ptolemy II is available in several formats.
+ <p>This page covers accessing Ptolemy II via applets.
+ <p>Other formats include:
+<menu>
+<li> <a href="webstart.htm">Installing Ptolemy II via the web using Web Start</a>
+<li> <a href="windows.htm">Installing Ptolemy II via a traditional Windows Installer</a>
+<li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a>
+</menu>
+
+
+ <p> You can browse Ptolemy II and run demonstration applets
+without downloading the distribution by accessing the
+<a href="ptII2.0.1/doc/index.htm" target="_top">web copy</a>.
+<p>The web copy is merely a set of web pages that were created
+when we untar'd the distribution on the Ptolemy web site.
+Note that the web copy and the 
+<a href="webstart.htm">Web Start</a> installations are different, 
+the web copy is a set of web pages where some of the pages
+contain applets, and Web Start is a set of jar files that
+get downloaded to your machine so that you can run Ptolemy II
+at a later time, even if you are not connected to the network.
+For details, see the <a href="main.htm#summary">Installation Summary</a>
+
+<p>Note that to access the web copy applets you need a reasonably high
+speed internet connection, DSL or better, or you will wait quite a bit
+for applet downloads.
+
+<br>Note that the applet demonstrations work best with Windows, and that 
+you will need to have the Java 1.3 or 1.4 plug-in from
+<a href="http://www.javasoft.com/products/plugin/" target="_top">JavaSoft</a>
+installed.  If you do not have the plug-in installed, you can still browse
+the distribution and look at the source code and documentation.
+
+<p>To run the applets applets in a web browser, you will need the
+Java 1.3 or 1.4 plug-in.
+If you Java installed on your machine, then the plug-in may
+already be available.  To find out, try running the applets.  
+You may obtain the plug-in from
+<a href="http://java.sun.com/products/plugin/" target="_top"><CODE>http://java.sun.com/products/plugin/</CODE></a>
+The plug-in is easiest to use from a Windows machine.
+
+<!--
+NOTE: Following not really equivalent to running the applets. EAL.
+If you do not
+have access to a Windows machine, you can run the applets by
+downloading Ptolemy II 1.0 and running <CODE>make demo</CODE>.
+-->
+
+<p>
+One way to determine what version of Java (if any) is installed 
+is to run our
+<a href="JavaVersionApplet.htm">Java Version Applet </a>, which
+uses the Java 1.3 plug-in.
+Another way is to run the command below to see whether
+you have Java installed, and whether it is the proper version:
+<pre>
+java -version
+</pre>
+If the command cannot be found, or the version that is printed is
+less than 1.3, you should install the plug-in, JRE 1.3, or JDK 1.3
+
+ <p> When you visit a Ptolemy II applet, the first applet that is run
+will download <code>ptsupport.jar</code>, which is 1.25Mb.  Each applet
+then will download smaller domain specific jar files of between 18k
+and 65k.  If you have a slow network connection, or if there is
+congestion in the network or on our server, you may experience
+significant delays before the first applet runs.
+Some of the applets use Diva, a visualization package. The
+<code>diva.jar</code> file is roughly 977k.
+We are interested in any feedback you might have concerning
+these demos.  You can send email to 
+<a href="mailto:ptII@eecs.berkeley.edu"><code>ptII@eecs.berkeley.edu</code></a>.
+<p>
+
+<h4> Places to go</h4>
+<menu>
+
+<li> For more information, see the
+plug-in section of the <a href="ptII2.0.1/doc/install.htm#Plugin">Ptolemy II Installation</a> page
+
+
+<li> The 
+"<a href="ptII2.0.1/doc/design/usingVergil/index.htm" target="_top">Using Vergil</a>" chapter from the
+<a href="ptII2.0.1/doc/design/design.pdf" target="_top">Ptolemy II Design Document</a>
+<li><a href="limitations.htm">Limitations</a>
+</menu>
+
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+</body>
+</html>

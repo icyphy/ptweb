@@ -1,0 +1,182 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta http-equiv="Expires" content="0">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Installshield</title>
+</head>
+<body>
+<h1>Installshield</h1>
+
+<h2><a name="bugs">Bugs</a></h2>
+The Installshield Installer has a number of bugs:
+<menu>
+<li> By default, the Ptolemy II is installed in the All Users menu.
+Ideally, the user would be given a choice as to whether Ptolemy II
+was installed for the current user or in the All Users menu.
+
+<li> If you choose to install using the Installshield installer
+applet, then hitting cancel does not stop the download.
+
+<li> The user should be prompted for where in the Start menu 
+Ptolemy II is installed.
+<li> The size of the install may be reported as 0kb.
+<li> The percent completed bars may not work.
+<li> Installing a bundled JRE does not work well so we don't use it.
+Installshield Multiplatform edition can be configured to download a
+JVM, but the JVM gets installed in a _jvm directory and is not added
+to Add/Remove Programs and the browswers can't use the plug-in.  
+
+ <br>The JRE is roughly 5Mb in size, so it is not feasible to 
+require users who are downloading small applications to pull over
+a 5Mb file they may or may not need.
+
+<li> Before upgrading your JVM, you should uninstall Ptolemy II.  The
+uninstaller may not work if the JVM that was used at install time
+cannot be found.
+
+<li> If you upgrade your JVM, then you may need to reinstall Ptolemy II.
+The problem here is that the Installshield Launcher that is run
+from the Start menu has the JVM that was found at install time hardwired
+into it.  Sadly, the launcher will not try to find another JVM
+if the installtime JVM is not found.
+
+<li> Installshield Multiplatform Edition 4.0 can't update environment
+variables, so the user's path is not updated to include the directory
+where <CODE>vergil.exe</CODE> is located.  This might be fixed in
+Installshield Multiplatform 4.01.
+
+</menu>
+
+See the <a href="limitations.htm">Limitations page</a> for
+other limitations.
+
+<h2><a name="debugging">Debugging</a></h2>
+
+The most common problem with the Installshield Installer is that it
+will fail to resolve the JVM.  This is a shortcoming in Installshield
+Multiplatform, ideally the installer would check the version number
+and use any JVM greater than version 1.3.  Instead, we need to 
+specify each JVM by hand.  
+
+ <p>The first thing to try is installing a more recent JVM.
+
+ <p>If, under NT with JDK1.3, you get the following message when
+you run the installer:
+<pre>
+L'linstruction 0x77ff7741b emploi l'adresse m?moire
+0x00000034
+la memoire ne peeut pas etre "read".
+</pre>
+Then be sure that Sun's java.exe is in your path before the Microsoft
+java.exe.
+
+ <p>Ultimately, you may find it easier to download the source Ptolemy
+II distribution, install Cygwin and a JDK and then rebuild by scratch.
+
+ <p>If you are interested in trying to debug Installshield, below are
+some notes
+
+<h3>JVM Verification</h3>
+The Installshield installer verifies the version of the JVM, runs
+the installer and then adds Installshield launchers to your Start Menu.
+The launchers then also verify the JVM and start up Vergil.
+
+
+ <p>You can generate a log file that contains the Java verification steps 
+by running the following command in Cygwin Bash:
+<pre>
+e:/ptII1_0_1setup.exe -is:logfile c:/tmp/log.txt
+</pre>
+By reviewing the output, you might be able to determine where
+the Installer is looking for the JVM 
+
+ <p>Note that the Installshield launchers also verify the JVM.
+
+<h3>Extraction</h3>
+The Installshield installer and launchers contain several files
+that can be extracted with the <CODE>-is:extract</CODE> command
+
+<pre>
+bash-2.03$ ./ptII1_0_1setup.exe -is:extract
+bash-2.03$ ls
+Verify.class          ptII1_0_1setup.jar      sun_win32_131001.jvm
+ibm_win32_122.jvm     sun_win32_122.jvm     sun_win32_131002.jvm
+ibm_win32_130.jvm     sun_win32_13.jvm      sun_win32_13101.jvm
+input.tag             sun_win32_13001.jvm   sun_win32_13102.jvm
+instructions.txt      sun_win32_13002.jvm   sun_win32_131b.jvm
+launch.txt            sun_win32_13003.jvm
+ptII1_0_1setup.exe      sun_win32_131.jvm
+bash-2.03$
+</pre>
+
+You can try running the installer by hand, without running
+the verification step:
+<pre>
+java -jar ptII1_0_1setup.jar
+</pre>
+Note that the Installshield launchers will still try to verify
+the JDK version, so they are unlikely to work if the Installshield
+installer fails.
+
+ <p>If the installer hangs part way through, try running in console
+mode:
+<pre>
+java -jar ptII1_0_1setup.jar -console
+</pre>
+
+ <p>Another workaround would be to start Vergil by hand, see
+<a href="ptII1.0/doc/troubleshooting.htm#vergil">Troubleshooting Vergil</a>.
+
+
+<h3>Command Line arguments</h3>
+The Windows Installshield .exe files can take the following
+command line arguments:
+
+<dl>
+<dt> <CODE>-is:extract</CODE>
+<dd> Extract the components from the .exe file.
+
+<dt> <CODE>-is:in</CODE>
+<dd> Unknown, probably for input files.
+
+<dt> <CODE>-is:javaconsole</CODE>
+<dd> After JVM resolution, bring up a window that will display
+the contents of standard out.  Another workaround is to
+run the installer in a DOS or Bash shell
+
+<dt> <CODE>-is:javahome</CODE>
+<dd> Unknown, could be a way to specify which JVM to use.  Unfortunately
+The Installshield verification step is likely to reject non-standard JVMs
+
+<dt> <CODE>-is:log <I>logfile</I></CODE>
+<dd> Send log output to <CODE><I>logfile</I></CODE>
+To generate a log file, run
+<CODE>e:/ptII1_0_1setup.exe -is:logfile c:/tmp/log.txt</CODE>
+
+<dt> <CODE>-is:silent</CODE>
+<dd> Run in silent mode?
+
+<dt> <CODE>-is:tempdir <I>tempdir</I></CODE>
+<dd> Use <CODE><I>tempdir</I></CODE> as a temporary directory.
+
+<dt> <CODE>-is:version</CODE>
+<dd> Print out the version of the installer?
+
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
