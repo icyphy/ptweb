@@ -58,10 +58,6 @@ Disallow: /java/old
 Disallow: /oldwww/
 Disallow: /opt/
 Disallow: /papers/publications.html/tycho.latest
-
-# Temporarily don't search in people 3/99
-Disallow: /people/
-
 Disallow: /private/
 Disallow: /ptolemy0.6/contrib
 Disallow: /ptolemy0.6/gnu
