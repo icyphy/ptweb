@@ -9,26 +9,29 @@
 
 <h1>Links</h1>
 
-The following list summarizes some of the current and historical uses
-of the software environment by companies, research laboratories, and
-universities, i.e., other than by the Ptolemy Group at U.C. Berkeley.
-Uses of Ptolemy in internal company projects are not reported here.
-We will be happy to mention any third-party uses of Ptolemy.
+The Ptolemy project actively collaborates with other research and
+development project, and welcomes both commercial and non-commercial
+applications of our software. The following list summarizes some of the
+current and historical interactions. Uses of Ptolemy software in
+internal company projects are not reported here.
+To have your project included, please send email to
+<a href="mailto:ptolemy@ptolemy.eecs.berkeley.edu">
+ptolemy@ptolemy.eecs.berkeley.edu</a>.
 
 <p>
-<h2>Current</h2>
+<h2>Current Projects</h2>
 <menu>
-<li> <a href="#berbex">Universidad de Vigo, Spain</a>
-<li> <a href="#bned">BNeD Broadband Network Design</a>
+<li> <a href="#bned">BNeD - Virtual Photonics</a>
 <li> <a href="#cadence">Cadence</a>
 <li> <a href="#dresden">Dresden University of Technology</a>
 <li> <a href="#hp">HP EESof</a>
-<li> <a href="#lyre">Lyre</a>
+<li> <a href="#lyre">Lyre Technologies</a>
+<li> <a href="#ucberkeleyPOLIS">POLIS Project (U.C. Berkeley)</a>
 <li> <a href="#sandersACS">Sanders Algorithm Analysis and Mapping Project</a>
 <li> <a href="#sss">Structured Software Systems</A>
 <li> <a href="#thomson-csf">Thomson CSF</a>
-<li> <a href="#ucberkeleyPOLIS">U.C. Berkeley POLIS Project</a>
 <li> <a href="#pitt">University of Pittsburgh and U.C. San Diego</A>
+<li> <a href="#berbex">Universidad de Vigo, Spain</a>
 <li> <a href="#texas">UT Austin</a>
 <li> <a href="#west">W.E.S.T.</a>
 </menu>
@@ -46,72 +49,79 @@ We will be happy to mention any third-party uses of Ptolemy.
 <h2>Current</h2>
 
 <ul>
-<li><a name="berbex">Universidad de Vigo, Spain</a>,
-     created <a href="http://www.tsc.uvigo.es/GTS/BerbeX/" target="_top">BerbeX</a>,
-     a COFDM-based digital TV transmission systems simulator, which
-     uses Ptolemy.
-     <p>
 
-<li><a name="bned">BNeD</a>,
-     <a href="http://www.bned.com" target="_top">Broadband Network Design</A>,
-     in Berlin, Germany, has developed and sells a library
-     (BroadNeD)  for the
-     simulation of optical telecommunication networks.  The optical devices are
+<li><a name="bned"></a><a href="http://www.bned.com" target="_top">
+BNeD - Broadband Network Design - Virtual Photonics</a>
+     produces the Photonic Transmission Design Suite (PTDS), a software
+     environment for
+     simulation of optical telecommunication networks.  Optical devices are
      modeled from the systems point of view using advanced algorithmic modeling
      and allow in their totality the simulation of next generation optical
-     networks with different network architectures.  Ptolemy is used as the
-     simulation environment.
-	On February 29, 1998, BNeD and HP 
-	announced a plan
-	to develop fiber optics software. 
-	(<a href="http://www.newspage.com/cgi-bin/NA.GetStory?story=b0224110.500&date=19980225&level1=46510&level2=46516&level3=19887" target="_top">Remote copy of the announcement</a> -
-	<a href="hp_bned.htm">Local copy</a>)
-     <p>
+     networks with different network architectures.  Ptolemy forms the basis
+     for much of the simulation environment.
+     Virtual Photonics has a
+     <a href="hp_bned.htm">joint marketing agreement</a> with
+     <a href="#hp">Hewlett-Packard</a>, who also has products based
+     on Ptolemy software.
+<p>
 
 <li><a name="cadence"></a>
      <a href="http://www.cadence.com/" target="_top">Cadence</a> has
      developed a new architecture for "full-system, mixed-level, and
-     mixed-domain simulation" based on research from the Ptolemy Project.
+     mixed-domain simulation" based in part
+     on research from the Ptolemy Project.
      They leveraged Ptolemy's "system-level design framework that allows
-     mixing of multiple models of computation".  Cadence describes their
-     new CONVERGENCE Simulation Architecture in a
-     <a href="cadence_press.htm">press release</a>.
-     The computation model and scheduling algorithms in Cadence's Signal
-     Processing WorkSystem were heavily influenced by Ptolemy's Synchronous
-     Dataflow domain and its scheduling algorithms.
+     mixing of multiple models of computation".
+     The first <a href="cadence_press.htm">press release</a>
+     describes the CONVERGENCE Simulation Architecture and mentions
+     its roots in the Ptolemy project.
+     The computational model and scheduling algorithms in Cadence's Signal
+     Processing WorkSystem (SPW) were heavily influenced by Ptolemy's
+     Synchronous Dataflow domain and its scheduling algorithms.
      <p>
 
-
-<li><a name="dresden">Dresden University of Technology</a> has develop
-    <a href="http://www.ifn.et.tu-dresden.de/~fischer/wines.html" target="_top">WiNeS</a> -
-	Wireless Network System Simulator.  The Ptolemy 0.7.1 Discrete
-	Event Contrib palette includes a Tk demonstration of a WiNeS
-	prototype.
+<li><a name="dresden">Dresden University of Technology</a> has developed
+    <a href="http://www.ifn.et.tu-dresden.de/~fischer/wines.html" target="_top">
+	WiNeS</a> -
+	Wireless Network System Simulator.  This is based on Ptolemy Classic,
+	although the research team has also been experimenting with
+	Ptolemy II.
 	Contact: <a href="mailto:voigtje@ifn.et.tu-dresden.de">Jens Voigt</a> 
         <p>
 
-<li><a name="hp">HP EESof, a division of Hewlett Packard</a> has 
-	a version of
-	<a href="http://www.tmo.hp.com/tmo/hpeesof/products/ads/dsp.html" target="_top">HP DSP Designer</A>,
-	which is based on research from the Ptolemy Project.
-	The <a href="hp_press.htm">press release</a> announcing the
-	product summarizes its capabilities.
+<li><a name="hp">HP EESof, a division of Hewlett Packard</a> has announced
+<a href="http://www.tmo.hp.com/tmo/hpeesof/products/ads/dsp.html" target="_top">HP DSP Designer</A>, which is based in part on research and software
+from the Ptolemy Project. The website states that it
+"provides HP Ptolemy hybrid dataflow and time-domain design and
+simulation capability for design and verification of DSP algorithms with
+realistic RF and analog distortions DSP, analog and RF systems."
+The <a href="hp_press.htm">press release</a> announcing the
+product mentions it roots in the Ptolemy project.
 	<p>
 
 <li><a name="lyre"></a>
-	<a href="http://www.lyre.qc.ca/lsp/index.html" target="_top">Lyre</a>
-	 sells a Motororola 56x/Xilinx 4000 standalone box that
-	uses Ptolemy under Linux.
+<a href="http://www.lyre.qc.ca/lsp/index.html" target="_top">
+Lyre Technologies</a> offers the
+SignalMaster<sup>TM</sup>
+family of rapid-prototyping DSP tools for embedded systems
+development. These tools support code generation for
+Motorola 56000 and Analog Devices SHARC families of DSP
+processors.  The product includes a standalone box with a DSP,
+a general-purpose microprocessor, and a Xilinx FPGA, plus
+Ptolemy-based software for code generation.
 	<p>
 
 <li> <a name="sandersACS">Sanders, a Lockheed Martin Company</a>
-	is extending Ptolemy as part of a 
-	<a href="http://www.sanders.com/spard/acs_env/acs_env.html" target="_top">Algorithm Analysis and Mapping</a> DARPA research project.
+is extending Ptolemy as part of a 
+<a href="http://www.sanders.com/spard/acs_env/acs_env.html" target="_top">
+Algorithm Analysis and Mapping</a> DARPA research project.
+This project includes retargettable design with fixed-point
+analysis and hardware synthesis targetted at FPGAs.
 	<p>
 
 <li><a name="sss">SSS</a>,
 <a href="http://www.strsoft.com/" target="_top">Structured Software Systems</a>,
-is working on automated securities trading systems based on Ptolemy.
+is working on automated securities trading systems based on Ptolemy Classic.
 SSS uses a derivative of the DE domain for both historical testing and
 live execution of trading systems.  SSS has also made numerous small
 improvements in the Ptolemy infrastructure, most of which have found
@@ -120,99 +130,102 @@ Contact: <a href="mailto:frank@strsoft.com">Frank Key</a> or
 <a href="mailto:tgl@sss.pgh.pa.us">Tom Lane</a>.
 <p>
 
-<li><a name="thomson-csf">Thompson</a>,
-     <a href="http://sctf.thomson-csf.fr/" target="_top">CSF</a>,
+<li><a name="thomson-csf"></a>
+     <a href="http://sctf.thomson-csf.fr/" target="_top">Thompson CSF</a>,
      in Orsay, France, has developed their own Ptolemy domain and
      performed a valuable evaluation of Ptolemy.
-     <a href="http://sctf.thomson-csf.fr/~warzee/" target="_top">A summary their work
-     with Ptolemy</a> is available.
-     <ul>
-     <li>They have developed a multidimensional dataflow domain called
-	 <a href="ftp://sctf.thomson-csf.fr/pub/ptolemy/papers/thomson-csf/asm/user_manual_arrayol.ps.gz">ArrayOL</a>
-	 which is based on the <a href="http://www.ilog.com" target="_top">Ilog Views</a>
-	 C++ graphical user-interface library.
-	 Contact: <a href="mailto:warzee@sctf.thomson-csf.fr">Xavier Warzee</a>
-	 <p>
-     <li>They have performed an in-depth
-	 <a href="http://sctf.thomson-csf.fr:80/~warzee/contrib/thomson-csf/reports/sctf/ptolemy_evaluation/ptolemyReport.html" target="_top">Evaluation of Ptolemy 0.4.1</a>.
-	 Contact: <a href="mailto:warzee@sctf.thomson-csf.fr">Xavier Warzee</a>
-     </ul>
+     <a href="http://sctf.thomson-csf.fr/~warzee/" target="_top">
+A summary their work with Ptolemy</a> is available.
+They have developed a multidimensional dataflow domain called
+<a href="ftp://sctf.thomson-csf.fr/pub/ptolemy/papers/thomson-csf/asm/user_manual_arrayol.ps.gz">ArrayOL</a>
+which is based on the <a href="http://www.ilog.com" target="_top">Ilog Views</a>
+C++ graphical user-interface library.
+Contact: <a href="mailto:warzee@sctf.thomson-csf.fr">Xavier Warzee</a>
+They have also performed an in-depth
+<a href="http://sctf.thomson-csf.fr:80/~warzee/contrib/thomson-csf/reports/sctf/ptolemy_evaluation/ptolemyReport.html" target="_top">
+Evaluation of Ptolemy 0.4.1</a>.
      <p>
 
 <li> <a name="ucberkeleyPOLIS">The UC Berkeley CAD group</a> is using
-	Ptolemy as a framework for the
-	<a href="http://www-cad.eecs.berkeley.edu/Respep/Research/hsc/abstract.html" target="_top">POLIS system</a>,
-	which is a hardware/software codesign package, with application to
-	automatic control.
-	Contact: 
-	<a href="mailto:polis-questions@ic.eecs.berkeley.edu"><code>polis-questions@ic.eecs.berkeley.edu</code></a>
+Ptolemy as a framework for the
+<a href="http://www-cad.eecs.berkeley.edu/Respep/Research/hsc/abstract.html" target="_top">
+POLIS system</a>,
+which is a hardware/software codesign package, with application to
+automatic control.  POLIS has formed the basis for the Felix design
+environment being marketed by Cadence Design Systems.
+Contact: 
+<a href="mailto:polis-questions@ic.eecs.berkeley.edu"><code>
+polis-questions@ic.eecs.berkeley.edu</code></a>
 	  <p>
 
 <li><a name="pitt">University of Pittsburgh</A> Optical Computing Group
 	and University of California at San Diego
-	<a href="http://soliton.ucsd.edu/" target="_top">OptoElectronic Computing Group</a>
+	<a href="http://soliton.ucsd.edu/" target="_top">
+	OptoElectronic Computing Group</a>
         use Ptolemy in designing and simulating
 	Free Space Optoelectronic Information Processing Systems.
-        <ul>
-	<li> <a href="http://kona.ee.pitt.edu:80/steve/CAD_FS-OIPS.html" target="_top">Computer Aided Design and Simulation of Free Space Optoelectronic Information Processing Systems</A>. 
+See
+<a href="http://kona.ee.pitt.edu:80/steve/CAD_FS-OIPS.html" target="_top">
+"Computer Aided Design and Simulation of Free Space
+Optoelectronic Information Processing Systems"</A>. 
 	Contact: <a href="mailto:steve@ee.pitt.edu">Steven P. Levitan</A>
-	</ul> <p>
+	<p>
 
 <li><a name="texas">The University of Texas at Austin</a>
 	uses Ptolemy in both research and education.
-    <ul>
-    <li><a href="http://anchovy.ece.utexas.edu/~gummadi/" target="_top">Srikanth Gummadi</a>
-	is using Ptolemy to develop, simulate, and synthesize real-time
-	constant modulus arrays for smart antennas.
-	The arrays can be modelled completely in the Synchronous Dataflow
-	model of computation.
-        Contact: <a href="http://anchovy.ece.utexas.edu/~gummadi" target="_top">Srikanth
-	Gummadi</a>.
+<a href="http://anchovy.ece.utexas.edu/~gummadi/" target="_top">
+Srikanth Gummadi</a>
+is using Ptolemy to develop, simulate, and synthesize real-time
+constant modulus arrays for smart antennas.
+The arrays can be modelled completely in the Synchronous Dataflow
+model of computation.
+Contact: <a href="http://anchovy.ece.utexas.edu/~gummadi" target="_top">Srikanth
+Gummadi</a>.
+Ashutosh Kulkarni is using Ptolemy in benchmarking code generation
+methodologies.
+<a href="http://anchovy.ece.utexas.edu/~blu/" target="_top">Biao Lu</a>
+is using Ptolemy for modeling, simulating, and synthesizing
+heterogeneous sytems composed of neural network and signal/image
+processing subsystems by mixing dataflow models.
+Most (artificial) neural network and signal/image processing
+subsystems can be modeled using Synchronous Data.
+Some neural networks, such as Cellular Neural Networks,
+and some signal processing subsystems, such as timing recovery
+in modems, require Boolean Dataflow.
+Contact: <a href="http://anchovy.ece.utexas.edu/~blu" target="_top">Biao Lu</a>.
+<a href="http://www.ece.utexas.edu/~bevans" target="_top">Prof. Brian Evans</a>
+uses Ptolemy as a laboratory for students in
+<a href="http://www.ece.utexas.edu/~bevans/courses/ee382c/" target="_top">
+Embedded Software Systems</a> to explore computational models,
+synthesis of embedded software, and heterogeneous system
+simulation.
+Contact: <a href="http://www.ece.utexas.edu/~bevans" target="_top">Prof. Brian
+Evans</a>.
     <p>
-    <li>Ashutosh Kulkarni is using Ptolemy in benchmarking code generation
-        methodologies.
-        Contact: Ashutosh Kulkarni
-    <p>
-    <li><a href="http://anchovy.ece.utexas.edu/~blu/" target="_top">Biao Lu</a>
-        is using Ptolemy for modeling, simulating, and synthesizing
-	heterogeneous sytems composed of neural network and signal/image
-	processing subsystems by mixing dataflow models.
-	Most (artificial) neural network and signal/image processing
-	subsystems can be modeled using Synchronous Data.
-	Some neural networks, such as Cellular Neural Networks,
-	and some signal processing subsystems, such as timing recovery
-	in modems, require Boolean Dataflow.
-        Contact: <a href="http://anchovy.ece.utexas.edu/~blu" target="_top">Biao Lu</a>.
-    <p>
-    <li><a href="http://www.ece.utexas.edu/~bevans" target="_top">Prof. Brian Evans</a>
-        uses Ptolemy as a laboratory for students in
-	<a href="http://www.ece.utexas.edu/~bevans/courses/ee382c/" target="_top">Embedded
-	Software Systems</a> to explore computational models,
-	synthesis of embedded software, and heterogeneous system
-	simulation.
-        Contact: <a href="http://www.ece.utexas.edu/~bevans" target="_top">Prof. Brian
-	Evans</a>.
-    </ul>
-    <p>
+
+<li><a name="berbex">Universidad de Vigo, Spain</a>,
+     created <a href="http://www.tsc.uvigo.es/GTS/BerbeX/" target="_top">BerbeX</a>,
+     a COFDM-based digital TV transmission systems simulator, which
+     uses Ptolemy.
+     <p>
 
 <!--
 Based on a submission by Richard Tobias.
 -->
 <li><a name="west">White Eagle Systems Technology, Inc.,</a> uses Ptolemy
 	in designing systems and developing CAD tools.
-     <ul>
-     <li>Hardware/software codesign of signal processing systems for
+One project involves hardware/software codesign of signal processing systems for
 	speech, RADAR, networking and telecommunications.
 	They have developed their own Ptolemy code generation domains
 	for various DSP processors.
-	Contact: <a href="mailto:rjjt@WESTinc.com">Richard Tobias</a><p>
-     <li>Developed a dataflow CAD tool derived from research by the
-	<a href="http://ptolemy.eecs.berkeley.edu/" target="_top">Ptolemy</a> and
-	<a href="http://infopad.eecs.berkeley.edu/~hyper/" target="_top">Hyper</a>
-	projects at U.C. Berkeley.
-	The tool assigned, scheduled, and generated code for the Mercury
-	RACE architecture.
-	The tool was used to develop radar and sonar applications on
+	Contact: <a href="mailto:rjjt@WESTinc.com">Richard Tobias</a>
+They have also developed a dataflow CAD tool derived from Ptolemy project
+research and the
+<a href="http://infopad.eecs.berkeley.edu/~hyper/" target="_top">Hyper</a>
+project at U.C. Berkeley.
+	The tool assigns, schedules, and generates code for the Mercury
+	RACEWAY architecture.
+	The tool has been used to develop radar and sonar applications on
 	Mercury systems with over 128 Intel i860 processors.
 	Contact: <a href="mailto:rjjt@WESTinc.com">Richard Tobias</a>
      </ul>
