@@ -26,7 +26,16 @@ machines to define discrete behavior.
 <B>Note:</B> HyVisual has a <B>patch</B>.
  <BR> If you run the
 <a href="hyvisual5.0/CanNotResolveStepSize.xml">CanNotResolveStepSize</a>
-model, then you may see an error:
+model with either
+<pre>
+$PTII/bin/hyvisual http://ptolemy.eecs.berkeley.edu/hyvisual/hyvisual5.0/CanNotResolveStepSize.xml
+</pre>
+or start HyVisual from the command line and do
+File -&gt; Open URL and enter
+<pre>
+http://ptolemy.eecs.berkeley.edu/hyvisual/hyvisual5.0/CanNotResolveStepSize.xml
+</pre>
+then you may see an error:
 <pre>
 ptolemy.kernel.util.IllegalActionException:   in .Bug.manager
 Because:
