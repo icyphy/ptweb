@@ -1,0 +1,688 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-9/30/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        4/1/03 - 6/30/03
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Dale Vancleave, dale.vancleave@wpafb.af.mil
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our focus is on component-based design using principled models of
+computation and their runtime environments for embedded systems. The
+emphasis of this project is on the dynamics of the components,
+including the communication protocols that they use to interface with
+other components, the modeling of their state, and their flow of
+control. The objective is to provide mechanisms for introspection,
+supporting both the ability of the run-time environment to safely
+dispatch tasks and the ability of components to adapt their interfaces
+using polymorphism. The focus is on real-time applications, which
+implies that models of time are a critical part of the abstractions
+that we are developing. The purpose of the mechanisms we develop is to
+improve robustness and safety while promoting component-based design.
+
+This reporting period was marked by an implementation of the E1
+experiment for the software radio OEP ("Ethereal Sting"), first
+production of executable C code after Java-to-C translation of code
+generated from a Ptolemy II model, FIXME
+
+
+1.  Research Status
+
+Ethereal Sting OEP
+==================
+
+We implemented the E0 algorithms in Ptolemy II. In the process, we
+exposed the following limitations with the component library:
+
+* The actor library had no actor for array maximum. This was added later
+  by Mark Oliver of Wright Patterson AFB, whose design we have built into
+  our library.  A reasonable workaround was to use a signal bus with its
+  width equal to the desired array size.  However, this exposed the
+  following limitation:
+
+* Type resolution was very slow when using very wide signal busses.
+  This was fixed by Steve Neuendorffer.
+
+* The AudioReader actor was unfinished. It used an outdated mechanism
+  for specifying the input file and didn't correctly deliver multichannel
+  signals.
+
+* Our FFT actor performs only radix-2 FFTs. A workaround would have been
+  to use the Ptolemy II/MATLAB interface to invoke the MATLAB fft function,
+  but we found that the algorithm performed adequately with this limitation.
+
+* Code generation didn't correctly handle the updated mechanism for
+  specifying input files, so when the AudioReader actor was updated,
+  code generation for this actor stopped working.  There was also
+  an error in the generated code for the absolute() function.
+
+Log of effort:
+
+There were three active participants from our group, plus some
+spectators. We spent 0.5 hours examining EtherealSting website and
+figuring out what to do, 2 hours constructing and experimenting with
+the model to detect the baud rate, 1 hour fixing bug in AudioReader
+actor to use FileAttribute, and 4 hours experimenting with code
+generation. Our implementation started with a model constructed by
+Edward Lee at the Mobies PI meeting (which took, perhaps, 1.5 hours to
+build). The total time spent was 9 hours, of which 6.5 hours fixing
+bugs or limitations exposed by the experiment. The experiment also
+stimulated further work on comm/signal processing libraries.
+
+Looking forward, Yang Zhao, Steve Neuendorffer and Xiaojun Liu
+prototyped an approach to model-based design of the supervisorty
+structure, and demonstrated this at the working group meeting in June.
+This approach allocates signal analysis tasks to compute resources.
+The components in this model include:
+
+* A PushConsumer actor that receives pushed data provided via CORBA,
+  where the data is an XML model of a signal analysis (SA) algorithm.
+
+* A MobileModel actor that accepts a StringToken containing an XML
+  description of a model. It then executes that model on a stream of
+  input data.
+
+* A PushConsumer actor that receives pushed data provided via CORBA,
+  where the data is a user request for signal analysis.
+
+* A PushSupplier actor that sends an XML representation of an SA model
+  via CORBA.
+
+* A supervisor state machine that implements the resource allocation
+  logic.
+
+* A model of a user, which includes a model that supplies the signal
+  data, a PushSupplier actor that sends a request for signal analysis to
+  the task manager, and a PullSupplier actor that provides signal data on
+  demand from SA algorithm.
+
+To make this mechanism workable, there are a number of open issues that
+have to be dealt with:
+
+* We have to handle failures of the mobile model, perhaps using the
+  “model error handler” mechanism in Ptolemy II.
+
+* We need secure execution of the mobile model by limiting the
+  authority granted to actors in that model. One approach is to use the
+  Java sandbox in the Java security model. However, in this case, all
+  Java code executed is locally defined, so an alternative is to mark
+  actors and directors that convey no authority and to set the
+  MobileModel security level to restrict actors to a subset.
+
+* We need encrypted communication of models & data, which are currently
+  XML plain text.
+
+* We need authenticated access to MobileModels.
+
+
+Mobile Models and Mobile Functions
+==================================
+
+Yang Zhao, Xiaojun Liu, and Steve Neuendorffer created actors in
+Ptolemy II supporting mobile code. There are two forms. MobileFunction
+accepts a function defined in the expression language, and MobileModel
+accepts a Ptolemy II model. Both apply the accepted function/model to
+streams of inputs. This opens up a rich set of possibilities for
+model-based design, and a host of security and type system questions.
+
+
+Improved Operational Semantics for Hybrid Systems
+=================================================
+
+Haiyang Zheng has made a number of improvements to the operational
+semantics of hybrid systems and the corresponding implementation in
+Ptolemy II. In particular,
+
+* He has greatly improved the handling of intantaneous transitions in
+  continuous-time signals, giving these signals a semantics where the
+  signal at a discontinuity has two or more values. The value before
+  and after the discontinuity is well-defined and unique.
+
+* He has improved the library in Ptolemy II for modeling such signals,
+  creating for example a flexible ContinuousClock actor that produces
+  periodic piecewise-constant signals that can be started and stopped.
+
+* He has also improved the behavior of the Sampler actor, and given it
+  a consistent semantics when it samples a continuous signal at a
+  discontinuity.
+
+* He has improved the LevelCrossingDetector that it is correctly and
+  precisely triggered when a discontinuity crosses the specified
+  threshold.
+
+* He has improved the signal type inference mechanism to reduce the
+  number of circumstances in which a user needs to explicitly declare a
+  signal discrete or continuous.
+
+* He has improved the evaluation of guards in the state machines of
+  modal models so that a transition is triggered (rather than enabled,
+  as it was before) when the guard becomes true, and he has improved
+  the algorithm that is used to identify the point in time at which the
+  guard becomes true.
+
+* He has introduced "chained transitions," which are transitions that
+  are taken after spending zero time in a state. These occur when, upon
+  entering a state, a guard on an outgoing transition is true. This
+  removes a form of nondeterminism that existed in the timing of such
+  transitions.
+
+
+Code Generation
+===============
+
+Shuvra Bhattacharyya, under subcontract at the University of Maryland,
+reports progress on the C code generation.
+
+- Code Generation was enabled for the C6000 series of DSPs from TI. C
+  code and a makefile targeted at a C6000 can be generated by giving
+  the flag "-target C6000" to the Java-to-C compiler. Generated code
+  compiles correctly for the platform, and we were able to run small
+  test programs on the hardware.
+
+- A series of measurements was taken to quantify the code size and
+  performance of the C code generator. We observed performance (in
+  terms of execution time) to be comparable to Sun's JVM (with
+  JIT-compilation enabled) or GNU's gcj Java-to-native-code compiler.
+  However, we observed the size to the generated executable to be an
+  order of magnitude smaller, on average, compared to gcj.
+
+- "auto-detect" support for the garbage collection library was added.
+  The compiler can detect whether or not the garbage collector exists.
+
+- More progress was made in integrating the code generator with
+  Ptolemy II. Some C code is now generated for simple ptolemy tests
+  without causing conflicts with the ptII tree. We are working on
+  modifications required on the copernicus kernel to integrate this
+  further. Full compilation with code pruning turned on is being
+  enabled. Single-class compilation works.
+
+In related work, Christopher Hylands did some evaluation of gcj, which
+is the GNU native java compiler. The numbers are rather rough, but
+basically using gcj results in about a 4x improvment over a standard
+Ptolemy run and about 1.4x improvment over the best deep codegen
+output. The resulting code size is rather large.
+
+
+Component Interaction
+=====================
+
+Xiaojun Liu and Yang Zhao have created (and we have previously
+reported) a "component interaction" (CI) domain, which extends dataflow
+by supporting both push and pull style interactions and by supporting
+nondeterminism. We have evaluated a number of alternatives for
+multithreaded and distributed implementations of CI, and have realized
+that the Click Modular Router, created by Eddie Kohler from MIT, offers
+one of several possible approaches to such an implementation. Click is
+used for designing router software, which is a performance-intensive
+application. Xiaojun and Yang have created a preliminary document (as
+yet unpublished) describing this work.
+
+The CI domain bears interesting semantic relationships to dataflow
+models, to the Click Modular Router architecture created by Eddie
+Kohler of MIT, and to TinyGals [4]. We are working on a report.
+
+
+Interface Checking in Ptolemy II
+================================
+
+Arindam Chakrabarti and Eleftherios Matsikoudis constructed a framework
+for building into Ptolemy II models interface checkers for arbitrary
+interface theories. These interface checkers are configurable
+components that be collected in a library, and interface definitions
+are attributes that can be attached to actors in an actor-oriented
+design. A user selects an interface theory from a fixed number of
+choices in a library and associates interfaces as attributes of ports
+(similar to data types) and relations. The checker is invoked by
+pushing a button on the component icon. Operationally, the interfaces
+and topology are shipped off to Chick, a tool developed by Tom
+Henzinger's group that checks compatibility, and returns either a
+confirmation or incompatible behaviors. (It would be interesting to
+then, in a second step, check if these incompatible behaviors can
+indeed be realized by executing the model.) This "interface
+compatibility checking" as a service has appeal to us, because if
+successful, we could think about doing the same for languages such as
+UML and Simulink.
+
+
+Communications Library
+======================
+
+Inspired in part by the work on the Ethereal Sting OEP, we have built a
+number of actors in an effort to begin building up a serious
+communications systems library. Rachel Zhou has created (in
+alphabetical order):
+
+  ConvolutionalCoder
+  DeScrambler
+  HadamardCode
+  HammingCoder
+  HammingDecoder
+  Scrambler
+  ViterbiDecoder
+
+These add to the already extensive signal processing library
+in Ptolemy II.
+
+
+Image Processing Library
+========================
+
+James Yeh has created an image processing library in Ptolemy II based
+on Sun's JAI (Java Advanced Imaging) API and JMF (Java Media Framework)
+API.  The JAI actors include:
+
+  DoubleMatrixToJAI        JAIDataCaster          JAIPNMWriter     
+  JAIAffineTransform       JAIEdgeDetection       JAIPeriodicShift     
+  JAIBMPWriter             JAIIDCT                JAIPhase     
+  JAIBandCombine           JAIIDFT                JAIPolarToComplex     
+  JAIBandSelect            JAIImageReader         JAIRotate     
+  JAIBorder                JAIImageToken          JAIScale     
+  JAIBoxFilter             JAIInvert              JAITIFFWriter     
+  JAIConvolve              JAIJPEGWriter          JAIToDoubleMatrix     
+  JAICrop                  JAILog                 JAITranslate     
+  JAIDCT                   JAIMagnitude           JAITranspose     
+  JAIDFT                   JAIMedianFilter     
+
+The JMF actors include:
+
+  AudioPlayer
+  JMFImageToken
+  VideoCamera
+
+The AudioPlayer enables Ptolemy II to play MP3's, MIDI files, and CD
+tracks.
+
+
+Type System and Expressions
+===========================
+
+With help from Zoltan Kemenczy of Research In Motion, we have improved
+further the integration of the Ptolemy II expression language with its
+type system. In particular, we can now define built-in functions (vs.
+functions defined in the expression language) that have arbitrarily
+complex (and polymorophic) type signatures. The way this works is that
+along with function itself, which is registered with the expression
+language, a type function is registered that, given the types of the
+arguments, returns the type of the result. This has been used to get
+precise type inference for several of our more complicated built-in
+functions.
+
+We have also continued to make many improvements in the expression
+language, and have implemented an expression evaluation shell that
+supports assignments, and can therefore be used for simple scripting.
+
+Yang Zhao added the first set of higher-order functions to the
+expression language. For example, map takes a function and an array and
+applies the function to the elements of the array, returning the array
+of results. This is fully integrated with the type system.
+
+
+Sensor Networks Model
+=====================
+
+Sanjeev Kohli and Vinay Krishnan created a Ptolemy model of a sensor
+network with an efficient query broadcasting scheme. This model has an
+interesting visualization that is very unlike standard Ptolemy II block
+diagrams. It stimulated a flurry of work on model visualization since
+it used an unusual architecture in which no explicit connections
+between actors are created. We created a mechanism for attaching
+attributes to actors that modify the icon for the actor. This is used
+in this model to display the communication range of the sensor node.
+
+
+Peer-to-Peer Models and Multicast
+=================================
+
+Yang Zhao created modified the DatagramReader actor to handle multicast
+and then used this modification to prototype a peer-to-peer chat
+application in Ptolemy II. This is illustrative of the
+network-integrated models that we expect to be creating in the future.
+
+
+Recursive Functions
+===================
+
+Although it was not our intent to include this capability in the
+Ptolemy II expression language, Jorn Janneck and Steve Neuendorffer
+realized that we have the ability to define explicitly recursive
+functions, since we can pass functions to other functions. For
+example, if we define
+
+  factorial = function(x:int,f:(function(x,f) int)) (x<1?1:x*f(x-1,f))
+
+then we can call:
+
+  factorial(4,factorial)
+
+which returns 24.
+
+This is somewhat awkward, but interesting. It relies on the fact that
+the ternary if (represented by the syntax p?x:y, where p is a
+predicate) only evaluates one of its branches. Note that there are
+interesting recursive functions that cannot be evaluated because we
+evaluate arguments strictly.
+
+Things get more interesting when we consider less trivial recursive
+functions. The Ackerman function is a function that grows faster than
+any exponential function. It is in some sense the simplest function
+that cannot be specified using only for loops. It can be defined in
+the Ptolemy II expression language as follows:
+
+  ackerman = function(x:int,y:int,f:(function(x,f) int))
+        (x==0?y+1:
+          (y==0?f(x-1,1,f):
+                f(x-1,f(x,y-1,f),f)))
+
+But now,
+
+  ackerman(3,4,ackerman)
+
+works fine and returns 125, which is 2^(4+3)-3. However,
+
+  ackerman(4,1,ackerman)
+
+gives a stack overflow exception.  It is not clear to us at this point
+whether this unintended capability is useful.
+
+
+Improvements to Basic Modeling Infrastructure
+=============================================
+
+-- Xiaojun Liu and Leftherios Matsikoudis diagnosed a flaw in the core
+   support provided by Ptolemy II for thread-safe multitasking
+   execution of models. The problem was that no mechanism had been
+   provided for a request for read or write access to the workspace to
+   be canceled. In particular, if the requesting thread is interrupted
+   (as happens, for instance, when a web page containing an applet is
+   closed), then all applet threads are interrupted. In the previous
+   design, the Workspace class would catch the InterruptedException and
+   throw InternalErrorException. Since this is a runtime exception, it
+   is not caught by any code. The calling thread typically responds by
+   releasing the read or write access (which it has not successfully
+   acquired) before handling the exception. This leaves the workspace
+   in an inconsistent state. If the top-level model then tries to
+   acquire workspace permissions as part of handling the exception,
+   then threaded applications and applets could deadlock. It was
+   extremely difficult to diagnose and fix this problem.
+
+-- Elaine Cheong and Steve Neuendorffer changed the semantics of
+   operations on record types so that, for example, rec1 + rec2 yields
+   a record containing only the common elements, whose values are then
+   added. We also changed the convert() method to discard fields when a
+   record is upcast. The reasons for this change are:
+   1) This makes code generation with records practical.
+   2) This makes expression operations identical to actor operations.
+   3) The one key disadvantage (pointed out by Zoltan Kemenczy of
+      Research in Motion) has an easy workaround, and an even better
+      long term solution: The issue is that if distinct record types
+      are multiplexed to travel over the same connections, then the
+      ports on the connection will have to be explicitly declared to be
+      of type "general". This type is the one type we have that
+      functions like a C-style union: Converting anything to "general"
+      returns the same token unchanged. The long term better solution
+      is to support true union types.
+
+-- Christopher Hylands created a test suite for the applet generator.
+   He ran this test suite on 302 models in the demonstration suite.
+   It took about two hours to generate applets for these models, but
+   10 of the models failed to generate applets. We are looking into
+   these failures.
+
+-- Haiyang Zheng fixed a failure in the TM domain, determining that the
+   prefire method did not update the current time correctly, and that
+   the first TM event should be processed before the DE events. There
+   are two times in TMDirector: the outsideTime and the currentTime. At
+   the beginning of the prefire method, without executing any statement
+   inside this method, the outsideTime refers the start time of current
+   iteration, while the currentTime refers the start time of the start
+   time of last iteration. The outsideTime is after the currentTime.
+   The getCurrentTime() method of TMDirector returns the currentTime.
+   When the director processes the DE events, e.g. a fireAt request
+   from a clock, the director uses the outsideTime. When the clock
+   fires, it calls getDirector().getCurrentTime(), which does not
+   return the outsideTime. This mismatch of time causes the clock to
+   stop firing.
+
+-- Christopher Hylands ported Ptolemy II to Java 1.4.2-beta, resolving
+   a few relatively minor issues that arose.
+
+-- Tracking down an intermittent deadlock in an automated test
+   constructed from the ordered merge demo of the process networks
+   domain, Xiaojun Liu identified a bug in ProcessDirector.wrapup().
+   The stack trace showed that there were two threads trying to acquire
+   lock on two objects in different order, resulting in the deadlock.
+   Analyzing the PN domain code shows that deadlock is not possible in
+   one run of the model. The problem was that ProcessDirector.wrapup()
+   returned without waiting until all process threads (one per actor in
+   the model) stopped. If the model was run again immediately, as was done
+   in the test, there could be "leftover" threads that made
+   inconsistent the internal state of ProcessDirector - specifically,
+   by modifying the active actor count in ProcessDirector - resulting
+   in deadlock on the second run. Adding a wait solved the problem.
+
+-- Steve Neuendorffer added an ActorToken to the data package. This
+   token carries an actor (which may be a composite, and hence a
+   model), and will play a major role in building higher-order
+   components in Ptolemy II. Currently the type of an ActorToken is
+   unspecific. The plan is to make the type of an actor contravariant
+   between inputs and outputs, both in the number of ports and in the
+   type of those ports. The least upper bound of all actor types is the
+   type that has every possible input, and creates no outputs. Every
+   actor can be lossless converted to this type by ignoring the extra
+   inputs, and ignoring whatever the actor produces.
+
+-- Jorn Janneck added a director to Ptolemy II that realizes a fair
+   execution policy. In each iteration, it executes those actors whose
+   prefire() methods indicate that they are willing to be fired. Note
+   that this director will often yield nondeterministic execution.
+
+-- Paul Yang added a Joystick actor that takes input from a joystick.
+
+-- Steve Neuendorffer added a debugging tool to the expression language
+   that traces evaluation of a parse tree.
+
+-- Xiaojun Liu improved the error reporting of the PythonScript actor.
+
+-- Added an ArrayPlotter actor for displaying live, changing plots.
+
+
+Study Group
+===========
+
+Our quasi-weekly study group examined the following topics:
+
+-- Moses, a modeling tool from ETH, Switzerland.
+-- PI calculus.
+
+
+2.  Interactions, Meetings, and Technology Transfer
+
+
+Presentations and Meetings
+==========================
+
+* Mobies Ethereal Sting OEP: The Ptolemy II Experiment, Ethereal Sting
+  Working Group Meeting June 10, 2003 Arlington, VA.
+
+* Simulation to Implementation: Hardware in the Loop Simulation and
+  Code Generation, Chess Review May 8, 2003 Berkeley, CA.
+
+
+Technology Transfer
+===================
+
+We held the Fifth Biennial Ptolemy Miniconference, where technology
+developed with SEC funding was showcased together with other work. The
+Miniconference was held on Friday, May 9, 2003, at the Claremont Hotel,
+Berkeley and was attended by 90 people from 43 organizations worldwide.
+The presentations are available at:
+
+  http://ptolemy.eecs.berkeley.edu/conferences/03/
+
+The program included the following presentations and posters:
+
+ - Project Status and Overview,
+   Edward A. Lee, UC Berkeley
+ - SimWORKS, A hybrid Java/C++ simulation platform,
+   Ned Stoffel, RSoft Design
+ - Mescal System Design Methodology,
+   Andrew Mihal, UC Berkeley Mescal Group
+ - Embedded S/W Development Using PTII: Modeling Extensions,
+   Data Representation, Compilation,
+   Zoltan Kemenczy and Sean Simmons, Research in Motion
+ - Java Code Generation,
+   Steve Neuendorffer, UC Berkeley Ptolemy Group
+ - C Code Generation,
+   Ankush Varma, Shuvra S. Bhattacharyya, University of Maryland,
+ - JHDL Hardware Generation,
+   Michael J. Wirthlin, Matthew Koecher, Brigham Young University
+ - Ptolemy II and MDA,
+   Vincent Arnould of Thales
+ - The Ptolemy II Graph Package,
+   Shahrooz Shahparnia, Fuat Keceli, Ming-Yung Ko,Yuhong Xiong,
+   Jie Liu, Shuvra S. Bhattacharyya University of Maryland
+ - The OpenModelica Project - Object-Oriented Modeling and
+   Simulation for Continuous and Discrete-Event Systems,
+   Peter Bunus, Peter Fritzson, Peter Aronsson, Vadim Engelson,
+   Levon Saldamli. Linkoping University, Sweden
+ - Embedded S/W Development Using PTII (Poster),
+   Zoltan Kemenczy and Sean Simmons, Research in Motion
+ - Verification of Process Networks derived from Matlab
+   by Compaan using Ptolemy,
+   Bart Kienhuis, Leiden University, The Netherlands
+ - Design Space Exploration in Ptolemy,
+   Bart Kienhuis, Leiden University, The Netherlands
+ - Efficient and orderly co-simulation of heterogeneous
+   computational models,
+   Daniel Lázaro Cuadrado
+ - Simulation to Implementation: Hardware in the Loop
+   Simulation and Code Generation,
+   Steve Neuendorffer, UC Berkeley Ptolemy Group
+ - Methods for Monitoring, Benchmarking and Tuning
+   of Ptolemy II Models' Performance,
+   Mohamed Salem, Ellipsis Design
+ - Using High-level Synthesis from SystemC for
+   Architectural Exploration,
+   John Sanguinetti, Forte Design Systems
+ - Formal composition of web services,
+   Xavier Warzee, Valtech Technologies/General Electric Medical Systems
+ - JHDL Domain,
+   Michael J. Wirthlin, Trent Vandenberghe, Brigham Young University
+ - Image Processing in Ptolemy II,
+   James Yeh, UC Berkeley Ptolemy Group
+ - Distributed Ptolemy Models,
+   Yang Zhao, Xiaojun Liu, UC Berkeley Ptolemy Group
+ - Communications Systems Modeling in Ptolemy II,
+   Rachel Zhou, UC Berkeley Ptolemy Group
+ - Models of Computation in Hollywood,
+   Chamberlain Fong, Digital Domain
+ - Cal: An Actor Definition Language,
+   Joern Janneck, UC Berkeley Ptolemy Group
+ - Multiple Objetive Evolutionary Programming (MOEP),
+   Greg Rohling, Georgia Tech
+ - The Component Interaction Domain: Modeling Event-Driven
+   and Demand-Driven Applications,
+   Xiaojun Liu, Yang Zhao, UC Berkeley Ptolemy Group
+ - TinyGALS: A Programming Model for Event-Driven Embedded Systems,
+   Elaine Cheong, UC Berkeley Ptolemy Group
+ - Conditional Scheduling for Giotto,
+   Ben Horowitz, UC Berkeley Massacio Project
+ - Plans for the Future,
+   Edward A. Lee, UC Berkeley Ptolemy Group
+
+
+Other Interactions
+==================
+
+* Participated in the Ethereal Sting working group meeting in Arlington,
+  June 10, 2003.
+
+* Peter Bunus of the Modelica Project in Linköping University, Sweden,
+  visited us in May. He gave a talk about "open Modelica" and we
+  discussed various options for interfacing Modelica and Ptolemy II.
+
+* Dominique Ragot of Thales contributed a distributed process networks
+  (DPN) domain to Ptolemy II.  This domain supports parallel execution
+  of Ptolemy II models on SMP machines or distributed networks.
+
+* Ernesto Wandeler of ETH Zürich, Switzerland, completed his Diploma
+  Thesis in our group. His thesis is entitled "Static Analysis of Actor
+  Networks" and has the following abstract:
+
+    "In this thesis we present a new interface theory based approach to
+    static analysis of actor systems. We first introduce a new
+    interface theory, which is based on Interface Automata and which is
+    capable of counting with natural numbers. Using this new interface
+    theory, we can capture both, the temporal aspects of an actor
+    interface as well as an actor’s token exchange rate. We will show,
+    how to automatically extract this information from actors written
+    in the Cal Actor Language (CAL). We further present a method to
+    capture the interface information as well as the connection
+    information of dataflow system environments into an interface
+    automaton. In our approach, this automaton acts as glue between the
+    actor automata of the system, and by successfully composing all
+    actor automata with it, we can prove interface compatibility of all
+    actors with the system environment. After successful composition,
+    the composition automaton will contain the complete token exchange
+    information of the composite actor system. We will extract this
+    information into a Petri Net, which we then analyse to make
+    statements on boundedness, deadlock as well as on the existence of
+    legal firing sequences for the composite actor system."
+
+* Zoltan Kemenczy and Sean Simmons of Research in Motion Limited
+  submitted an update to the Ptolemy II/MATLAB interface containing:
+  1) Logical variable support for Matlab version 6.5 (R13);
+  2) Remove (the need for) ptmatlab.dll being in the user's path;
+  3) Removed warnings for gcc version 3.2 (used by latest cygwins); and
+  4) Add support/configuration for building on Linux.
+  5) A method to evaluate a Matlab expression within a Ptolemy II scope.
+
+* Abhijit Bare of the Computer Networking Research Laboratory at
+  Colorado State University reports that they have used the PtPlot
+  graph package for plotting Reorder Density for a sequence of packets
+  received on a network. See:
+  http://www.engr.colostate.edu/ece/Research/cnrl/Reorder_Applet.html
+
+* Elaine Cheong attended the IPSN workshop at PARC in June
+  (http://www.parc.com/events/ipsn03/).
+
+
+4. Publications
+
+[1] Jie Liu and Edward A. Lee,"On the Causality of Mixed-Signal and
+    Hybrid Models," in 6th International Workshop on Hybrid Systems:
+    Computation and Control (HSCC '03), April 3-5, 2003, Prague,
+    Czech Republic.
+
+[2] Stephen Neuendorffer,"Implementation Issues in Hybrid Embedded
+    Systems", Technical Memorandum No. UCB/ERL M03/22, University of
+    California, Berkeley, CA, 94720, USA, June 24, 2003 (with SEC).
+    http://ptolemy.eecs.berkeley.edu/publications/papers/03/crazyboard/
+
+[3] Stephen A. Edwards and Edward A. Lee,"The Semantics and Execution
+    of a Synchronous Block-Diagram Language", Science of Computer
+    Programming, Vol. 48, no. 1, July 2003. 
+
+[4] Elaine Cheong,"Design and Implementation of TinyGALS: A Programming
+    Model for Event-Driven Embedded Systems," Master's Report,
+    Technical Memorandum No. UCB/ERL M03/14, University of California,
+    Berkeley, CA, 94720, USA, May 23, 2003.
+
+[5] Ernesto Wandeler, "Static Analysis of Actor Networks," Technical
+    Memorandum UCB/ERL M03/7, Swiss Federal Institute of Technology
+    (Diploma Thesis), Zurich, Switzerland, March 2003. 
+
+
+5. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+Appendix
+========
