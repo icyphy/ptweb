@@ -1,0 +1,33 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Heterogeneous Concurrent Modeling and Design in Java</title>
+</head>
+<body>
+<center>
+<h1>Heterogeneous Concurrent Modeling and Design in Java</h1>
+</center>
+<center>
+John Davis, II, Christopher Hylands, Bart Kienhuis, Edward A. Lee, Jie Liu, Xiaojun Liu, Lukito Muliadi, Steve Neuendorffer, Jeff Tsay, Brian Vogel, and Yuhong Xiong
+<br>
+Memorandum UCB/ERL M01/12,<br> EECS, University of California, Berkeley, CA  USA 94720
+<BR>
+March 15, 2001
+</CENTER>
+<p>
+<CENTER>
+<a href="designdoc.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu
+/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+The chapters in Part I describe how to construct Ptolemy II models for web-based modeling or building applications. The first chapter includes an overview of Ptolemy II software, and a brief description of each of the models of computation that have been implemented (and some that are just planned). It describes the package structure of the software, and includes as an appendix a brief tutorial on UML notation, which is used throughout this document to explain the structure of the software. The second chapter is a tutorial on building models using Vergil, a graphical user interface where models are built pictorially. The next chapter gives an overview of actor libraries. These two chapters, plus one of the domain chapters, will be sufficient for users to start building interesting models in the selected domain. The fourth chapter gives a tutorial on designing actors in Java. The fifth explains MoML, the XML schema used by Vergil to store models. And the sixth chapter, the final one in this part, explains how to construct custom applets.
+<p>
+Part II describes the software architecture of Ptolemy II. The first chapter covers the kernel package, which provides a set of Java classes supporting clustered graph topologies for models. Cluster graphs provide a very general abstract syntax for component-based modeling, without assuming or imposing any semantics on the models. The actor package begins to add semantics by providing basic infrastructure for data transport between components. The data package provides classes to encapsulate the data that is transported. It also provides an extensible type system and an interpreted expression language. The graph package provides graph-theoretic algorithms that are used in the type system and by schedulers in the individual domains. The plot package provides a visual data plotting utility that is used in many of the applets and applications. Vergil is the graphical front end to Ptolemy II and Vergil itself uses Ptolemy II to describe its own configuration.
+<p>
+The chapters in Part III describe existing Ptolemy domains. The domains implement models of computation, which are summarized in chapter 1. Most of these models of computation can be viewed as a framework for component-based design, where the framework defines the interaction mechanism between the components. Some of the domains (CSP, DDE, and PN) are thread-oriented, meaning that the components implement Java threads. These can be viewed, therefore, as abstractions upon which to build threaded Java programs. These abstractions are much easier to use (much higher level) than the raw threads and monitors of Java. Others (CT, DE, SDF) of the domains implement their own scheduling between actors, rather than relying on threads. This usual results in much more efficient execution. The non-threaded domains are described first, followed by the threaded domains. Within this grouping, the domains are ordered alphabetically (which is an arbitrary choice). The FSM domain is in a category by itself, since in it, the components are not producers and consumers of data, but rather are states.
+</body>
+</html>
+
