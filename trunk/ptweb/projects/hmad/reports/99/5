@@ -1,0 +1,244 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 May 30, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        4/15/99 - 5/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have acquired considerable new insight on the properties of domain
+polymorphic actors, and have used this insight to better define the
+library and to validate (or some cases, invalidate) the design of
+various domains with respect to their handling of domain polymorphic
+actors.  We have also made progress in handling mutable systems and
+have constructed a major new hybrid system example.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Domain Polymorphic Actor Library
+--------------------------------
+
+This library continues to evolve, although the task of building a
+generically useful actor library has proved daunting. We are up to
+approximately 40 actors in this library, and have verified their
+functionality in most domains.
+
+There are two natural categories of actor functionality, those that are
+sequence based and those that are time based. These two categories are
+indicated by two empty Java interfaces, SequenceActor and TimedActor.
+Actors typically implement zero, one or both interfaces. Actors that
+implement neither interface can operate equally well in either timed or
+untimed domains. This includes all functional actors, for examples.
+Actors that implement SequenceActor fundamentally operate on sequences
+of tokens. Actors that implement TimedActor use the notion of current
+time to process data.
+
+Domains that attach no significance to sequences (such as CT,
+continuous time), reject actors that implement SequenceActor. Domains
+that attach no significance to time (such SDF, synchronous dataflow),
+reject actors that implement TimedActor. Occasionally, actors are both
+sequence based and time based. Such actors seem to be primarily useful
+in the DE (discrete event) domain.
+
+
+Expression Language
+-------------------
+
+Xiaojun Liu has added to the Ptolemy II expression language
+Matlab-style matrix construction, including for example
+
+   "[1, 2, 3]" to specify a row vector,
+   "[1; 2; 3]" to specify a column vector,
+   "[1, 2; 3, 4]" to specify a matrix, and
+   "[0:1:10; 0:2:20]" to specify a matrix with eleven columns and two rows.
+
+The elements of the matrices and vectors can be arbitrary subexpressions.
+He has also added the capability to detect constant sub-expressions, so
+they are evaluated only once.
+
+
+Type System
+-----------
+
+Yuhong Xiong made a study of the ML language and presented a synopsis
+to the group at our regular group lunch.
+
+
+Mutable Systems
+---------------
+
+We have completely redesigned the kernel.event package, which supports
+run-time topology mutations. The new design (our third) involves a
+number of compromises between replicating functionality of the kernel
+and providing a rich semantics. In contrast to the previous design, it
+no longer attempts to perform detailed notification to listeners of the
+mutations. In addition, it does not attempt to provide an undo
+mechanism. These two capabilities made the previous design far too
+dependent on the complicated design of the kernel, having to
+essentially mirror the details of the design. The resulting duplication
+of structure resulted in fragile code, where changes on one side would
+fail to be replicated on the other side.
+
+
+Execution Control
+-----------------
+
+The Manager class in Ptolemy II provides domain-independent control
+over the execution of a model residing in either an application or an
+applet. We have overhauled the design of this class to support more
+fine-grained control, primarily so that we can more effectively test
+mutations, which are run-time changes in the structure of a model.
+
+
+Software Engineering
+--------------------
+
+John Davis led our regular Friday study group in examining the
+Capability Maturity Model (CMM) as developed by Carnegie Mellon's
+Software Engineering Institute.
+
+Design Reviews:
+  - data package modifications (Variable class)
+  - actor package modifications (Manager + listeners)
+  - kernel/event
+
+Code Reviews:
+  - actor/lib (domain-polymorphic actor library)
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Jie Liu led our Friday study group in studying state charts in UML
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Hybrid Systems
+--------------
+
+Jie Liu and Xiaojun Liu have created a "sticky masses" model using the
+Ptolemy II CT (continuous time) and FSM (finite state machine) domains.
+This model is much more interesting than typical hybrid systems
+examples. It includes two point masses on springs that oscillate. When
+they collide, the stick together with an exponentially decaying
+stickiness. They eventually come apart and continue to oscillate. A
+modal model uses two states, one representing the masses when they are
+apart, and the other representing the masses when they are stuck
+together.
+
+
+2.  Equipment/Infrastructure Status:
+
+Christopher Hylands created a cvs/ssh package, which permits secure
+access (with encrypted passwords) to our cvs repository from laptops,
+wherever they might be. His work has broader utility than in just our
+group, and he has made the download available at:
+
+   http://ptolemy.eecs.berkeley.edu/cvsdoc/windowsidx.htm
+
+
+3.  Interactions and Technology Transfer
+
+-----
+Carolyn Talcott (Stanford), Jose Meseguer (SRI), David Barton
+(Intermetrics), Perry Alexander (Univ. of Cincinnatti), Richard Newton
+(Berkeley), and several members of the Ptolemy project met at Berkeley
+on April 28 to discuss the role we could play in the evolution of SLDL
+(System-Level Design Language) effort.
+
+-----
+Claudio Passerone, of Cadence Berkeley Labs, modified the DE domain in
+Ptolemy Classic to better support Polis, an experimental
+hardware/software codesign simulator that Cadence has been developing
+in cooperation with Berkeley. A partial commercialization of this work
+is the recently announced VSS system from Cadence. Below is a
+description of the changes that Claudio made to Ptolemy. These are
+mostly small changes and fixes on an architecture created by Neil Smyth
+and Mudit Goel of the Ptolemy group.
+
+   The objective was to fix some bugs and extend the capabilities of
+   the Resource Contention Scheduler. This scheduler is mostly used by
+   the Polis HW/SW codesign tool to simulate systems with shared
+   resources, but it can be used also by other people without using
+   Polis. There is no code in Ptolemy which is Polis specific, but to
+   use this scheduler there are some rules to be followed when writing
+   DERCStars.
+
+* How the Resource Contention Scheduler works
+
+   The RC Scheduler is used to schedule stars which should access a
+   shared resource in mutual exclusion. The shared resource does not
+   appear as a star in the netlist, but it is just specified as a data
+   member of the class DERCStar (string resource). Each star can have
+   no more than one resource, but multiple stars can use the same
+   resource. Resources cannot be changed at run time.
+
+   At the beginning, in the setup of each RCStar, the string resource
+   should be assigned a name (in Polis this is done by copying a
+   parameter of the star). Also the variable needsSharedResource should
+   be assigned a value, which is non zero if the resource needs to be
+   arbitrated, otherwise it is zero. The RCScheduler setup will then
+   call the method getResources() and will create an object of the
+   class Resource for each unique resource specified by stars in the
+   netlist. The resource itself will then be responsible of scheduling
+   events emitted by RCStars.
+
+   During operation, RCStar should take special care when emitting
+   events, since events should be redirected to a queue belonging to
+   the resource. So, before executing a star, the resource will check
+   if it is itself available, and only then will events be scheduled in
+   the global queue. Some scheduling policies also support interrupts:
+   this means that events of the interrupted star which have not been
+   yet scheduled yet, are delayed by an amount equal to the delay
+   introduced by the interrupting star.
+
+-----
+Luca Benini of Stanford visited our group to brief us on JavaCAD, a
+distributed IP-based design environment under development under the
+direction of Prof. Nanni de Micheli.
+
+
+4.  Personnel Status
+
+Jennifer Basler has left, leaving the group without a grant administrator.
+Diane Chang is temporarily filling in.
+
+
+5.  Talks/Presentations/Publications:
+
+Edward Lee presented a position paper at a DARPA workshop on
+Software Creation for Embedded Systems, Boston, MA, May 10 and 11.
+
+
+6.  Difficulties/Problems
+
+Christopher Hylands discovered that the JIT compiler that comes with
+the Java 1.2 plugin causes lingering processes under Windows NT. This
+is apparently a known bug, but since we have converted to using JDK
+1.2, then this will be a chronic problem with Ptolemy II applets until
+Sun fixes the problem.
+
+
+7.  Next Quarter Plans
+
+We plan to release version 0.3 of Ptolemy II, which will include, for
+the first time, a usable infrastructure for constructing actor
+libraries and applets in various domains.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.

@@ -192,7 +192,7 @@ Here is his description of the applet:
   Once a network element is activated, it asks the base station for a
   resource. This communication is done through the channel. As long as
   the base station still has resources available, it gives one to the
-  quering network element. The number of resources as well as the
+  querying network element. The number of resources as well as the
   parameter of the traffic model can be set. 
 
   If the service time of the network element is over, it returns the
@@ -216,7 +216,10 @@ Ptolemy Classic, added a new architecture "linux-ppc."
 
 4.  Personnel Status
 
-No changes.
+Yuhong Xiong will join Synopsys as an intern in the summer. Mudit Goel
+will be graduating and leaving the group. Lukito Muliadi will be
+graduating and leaving the group. John Li, Shankar Rao, Michael Leung,
+and Manda Sutijono will be joining the group to work during the summer.
 
 
 5.  Talks/Presentations/Publications:
