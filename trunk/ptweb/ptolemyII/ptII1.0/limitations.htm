@@ -49,20 +49,17 @@ is being loaded over the net into an applet, so the warning
 need not be displayed.
 
 
-<li> The DDE Zeno demo fails:
+<li> The DDE Zeno demo produces an error message in the Java Plug-in console
+window:
 <pre>
-ptolemy.kernel.util.IllegalActionException: ..Clock.values: Error evaluating expression "[1, 1, 1]":
-ptolemy.kernel.util.IllegalActionException: ..Clock.values: Variable._setToken: Cannot store a token of type intMatrix, which is incompatible with type (unknown)array
-	at ptolemy.data.expr.Variable._evaluate(Variable.java:1187)
-	at ptolemy.data.expr.Variable.propagate(Variable.java:527)
-	at ptolemy.data.expr.Variable.validate(Variable.java:957)
-	at ptolemy.actor.AtomicActor.preinitialize(AtomicActor.java:382)
-	at ptolemy.actor.Director.preinitialize(Director.java:466)
-	at ptolemy.actor.CompositeActor.preinitialize(CompositeActor.java:638)
-	at ptolemy.actor.Manager.initialize(Manager.java:369)
-	at ptolemy.actor.Manager.execute(Manager.java:238)
-	at ptolemy.actor.Manager.run(Manager.java:662)
-	at java.lang.Thread.run(Unknown Source)
+java.lang.IllegalArgumentException: LowerJoin - Attempt to set current time to the past; time = 50.001. The _lastTime was 54.0
+	at ptolemy.domains.dde.kernel.PrioritizedTimedQueue.put(PrioritizedTimedQueue.java:297)
+	at ptolemy.domains.dde.kernel.DDEReceiver.put(DDEReceiver.java:580)
+	at ptolemy.domains.dde.kernel.DDEReceiver.put(DDEReceiver.java:549)
+	at ptolemy.domains.dde.kernel.FeedBackDelay._sendOutToken(FeedBackDelay.java:247)
+	at ptolemy.domains.dde.kernel.FeedBackDelay.fire(FeedBackDelay.java:175)
+	at ptolemy.actor.process.ProcessThread.run(ProcessThread.java:126)
+ptolemy.actor.Manager run(): elapsed time: 23004 ms
 </pre>
 
 <li> Running the Networked demo via an applet on the local
