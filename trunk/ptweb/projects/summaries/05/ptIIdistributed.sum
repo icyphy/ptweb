@@ -26,7 +26,7 @@ simulation, some of which are:
   <li>
     <p>to make full use of the combined power of the computing resources
 available in a network by involving them in a simulation, which is too
-slow or too large to fit into a single affordable computer;</p>
+slow or too large to fit into a single affordable machine;</p>
   </li>
   <li>
     <p>to simulate a real application featuring the ability of high-speed
@@ -65,7 +65,7 @@ transparently insert rollback code into a Ptolemy II models with
 relatively small overhead. I am studying refinements, improvements,
 and semantic implications.
 </p><p>
-In this project, I will also take a formal approach to describe the global
+In this project, I will take a formal approach to describe the global
 semantics of those highly autonomous but still mutually dependent components
 in a distributed system.
 This work will probably give rise to a formalism which, like PN (process
