@@ -103,7 +103,7 @@ Disallow: /eecs20/homework
 Disallow: /eecs20/homeworks
 Disallow: /eecs20/hwkSpr02
 Disallow: /eecs20/problemSession
-Disallow: /eecs20/labs
+Disallow: /eecs20/labs/solutions
 Disallow: /eecs20/book
 Disallow: /eecs20/week1/solutions
 Disallow: /eecs20/week2/solutions
