@@ -18,7 +18,7 @@ CHAPTER
 ABSTRACT
 
 <h3>PtinyOS</h3>
-<a href="http://webs.cs.berkeley.edu/tos" target="_top">TinyOS</a> [1] is an open-source operating system designed for wireless embedded sensor networks.  It has been ported to over a dozen platforms and numerous sensor boards, including the Berkeley/Crossbow Motes, which are based on the Atmel AVR 8-/16-bit microcontroller series.  TinyOS uses a component-based architecture which enables code reuse and minimizes code size.  It uses an event-driven execution model which allows it to respond to events from the wireless radio and sensor interfaces.  TinyOS applications are written in nesC, an extension of the C programming language that is designed to embody the structuring concepts and execution model of TinyOS.
+<a href="http://www.tinyos.net/" target="_top">TinyOS</a> [1] is an open-source operating system designed for wireless embedded sensor networks.  It has been ported to over a dozen platforms and numerous sensor boards, including the Berkeley/Crossbow Motes, which are based on the Atmel AVR 8-/16-bit microcontroller series.  TinyOS uses a component-based architecture which enables code reuse and minimizes code size.  It uses an event-driven execution model which allows it to respond to events from the wireless radio and sensor interfaces.  TinyOS applications are written in nesC, an extension of the C programming language that is designed to embody the structuring concepts and execution model of TinyOS.
 
 <p>
 TOSSIM [2] is a simulator for TinyOS.  TOSSIM compiles directly from nesC code for a TinyOS application, which allows users to run nesC code on the PC.  It supports discrete event simulation of TinyOS sensor networks and execution of nesC/TinyOS programs for the sensor nodes.
@@ -34,7 +34,7 @@ Using the experience gained from extending the "ptinyos" domain, this project wi
 
 <DL COMPACT>
 <DT> [1]
-<DD> Jason Hill, Robert Szewczyk, Alec Woo, Seth Hollar, David Culler, Kristofer Pister, "System architecture directions for network sensors," ASPLOS 2000, Cambridge, November 2000.
+<DD> Jason Hill, Robert Szewczyk, Alec Woo, Seth Hollar, David Culler, Kristofer Pister, "System architecture directions for network sensors," ASPLOS 2000, Cambridge, November 2000.  <a href="http://www.tinyos.net/" target="_top">http://www.tinyos.net/</a>
 <DT> [2]
 <DD> Philip Levis, Nelson Lee, Matt Welsh, and David Culler, "TOSSIM: Accurate and Scalable Simulation of Entire TinyOS Applications", Proceedings of the First ACM Conference on Embedded Networked Sensor Systems (SenSys 2003).
 <DT> [3]
@@ -44,5 +44,5 @@ Using the experience gained from extending the "ptinyos" domain, this project wi
 <DT> [5]
 <DD> Elaine Cheong, "Design and Implementation of TinyGALS: A Programming Model for Event-Driven Embedded Systems," Master's Report, Technical Memorandum UCB/ERL M03/14, University of California, Berkeley, CA, 94720, USA, May 23, 2003.
 <DT> [6]
-<DD> Elaine Cheong and Jie Liu, "galsC: A Language for Event-Driven Embedded Systems," Technical Memorandum UCB/ERL M04/7, University of California, Berkeley, CA 94720, USA, April 20, 2004.
+<DD> Elaine Cheong and Jie Liu, "galsC: A Language for Event-Driven Embedded Systems," Technical Memorandum UCB/ERL M04/7, University of California, Berkeley, CA 94720, USA, April 20, 2004.  <a href="http://galsc.sourceforge.net/" target="_top">http://galsc.sourceforge.net/</a>
 </DL>
