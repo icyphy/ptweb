@@ -42,7 +42,7 @@ formal analysis. The notion of compositionality serves as a compass in this
 process, offering a solid correctness criterion for the proposed formalism. 
 Questions on optimality issues are also to be addressed.
 
-<p>[1] E. A. Lee, <a> href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/dataflow/">“A Denotational Semantics for Dataflow with Firing”</a>, 
+<p>[1] E. A. Lee, <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/dataflow/">“A Denotational Semantics for Dataflow with Firing”</a>, 
 Memorandum UCB/ERL M97/3, Electronics Research Laboratory, U. C. Berkeley, January 1997.
-<p>[2] T. M. Parks, <a> href="http://ptolemy.eecs.berkeley.edu/publications/papers/95/parksThesis/">“Bounded Scheduling of Process Networks”</a>, 
+<p>[2] T. M. Parks, <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/95/parksThesis/">“Bounded Scheduling of Process Networks”</a>, 
 Technical Memorandum UCB/ERL-95-105, Ph.D. Thesis, EECS Department, University of California, Berkeley, CA 94720, December 1995.
