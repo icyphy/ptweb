@@ -1,0 +1,973 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-9/30/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        1/1/03 - 3/31/03
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Dale Vancleave, dale.vancleave@wpafb.af.mil
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our focus is on component-based design using principled models of
+computation and their runtime environments for embedded systems. The
+emphasis of this project is on the dynamics of the components,
+including the communication protocols that they use to interface with
+other components, the modeling of their state, and their flow of
+control. The objective is to provide mechanisms for introspection,
+supporting both the ability of the run-time environment to safely
+dispatch tasks and the ability of components to adapt their interfaces
+using polymorphism. The focus is on real-time applications, which
+implies that models of time are a critical part of the abstractions
+that we are developing. The purpose of the mechanisms we develop is to
+improve robustness and safety while promoting component-based design.
+
+This reporting period was marked by extensive technology transfer
+activity, a release of an HSIF-capable hybrid system modeling tool
+(HyVisual), an implementation of the E0 experiment for the software
+radio OEP ("Ethereal Sting"), an integration of Ptolemy II with Python,
+major improvements to our continuous-time modeling semantics (to better
+support hybrid systems), major improvements to the Ptolemy II
+expression language and its integration with the type system, and major
+progress in C code generation (under subcontract at the Univ. of
+Maryland).
+
+
+1.  Research Status
+
+Ethereal Sting OEP
+==================
+
+We implemented the Ethereal Sting E0 OEP experiment using Ptolemy II. A
+core team of three people worked collaboratively, with and realized the
+baud-rate detection. The log of time spent follows:
+
+0.5 hours examining EtherealSting website and figuring out what to do.
+2.0 hours constructing model to detect the baud rate.
+    Built by modifying a model constructed by Edward Lee at the
+    Mobies PI meeting (which took, perhaps, 1.5 hours to build).
+0.5 hours fixing bug in type system that made execution very slow
+    on large data sets.
+1.0 hour fixing bug in AudioReader actor to use FileAttribute.
+
+An additional 3 hours was spent by one of the participants fixing a bug
+in the AudioReader actor that made it impossible to read stereo audio
+files (which the SWRI team was using to distribute the radio data).
+There is one key limitation in our implementation. The native FFT
+function in Ptolemy II can only handle radix 2 FFTs, so it is limited
+to using a power of 2. We chose to use the largest power of 2 smaller
+than the data set size, which is a 32,768 point FFT. We could
+alternatively use a 65,536 point FFT with zero padding, or use the
+MATLAB interface to invoke the MATLAB fft() function, which supports
+arbitrary size.
+
+Steve Neuendorffer spend some additional time (perhaps 1 hour) creating
+a "task manager" that invokes baud rate estimator in E0. This is a
+placeholder for a more sophisticated distributed task manager that
+could manage the invocation of several data analysis modules.
+
+Stimulated in part by the Ethereal Sting OEP, Rachel Zhou has begun the
+construction of a communications library in Ptolemy II. She has created
+actors for convolutional coding, Viterbi decoding, scrambling,
+descrambling, and pseudo-random sequence generation (Hadammard codes).
+Rachel also created an example model that implements a rake receiver.
+
+
+Automotive OEP
+==============
+
+Haiyang Zheng attended the automotive OEP working group meeting in
+March in Michigan. Haiyang had extensive discussions with the new team
+from GM, taking over from Ken Henry, who is retiring. Edward Lee
+participated in part of the meeting by phone. Much of the discussion
+centered around the role of formal verification in modeling and the use
+of HSIF for model exchange. A major point of discussion was whether it
+was reasonable for Ptolemy II to export HSIF (to complement its ability
+to import HSIF). We pointed out that in order to be able to export HSIF
+for arbitrary models, the semantics of hybrid system modeling would
+have to be made less expressive than they currently is. Nonetheless, a
+major objective that we had in the construction of HyVisual (see below)
+was to show how a semantically rich infrastructure could be specialized
+to create useful but more narrowly targeted tools. HyVisual, although
+it is a major restriction on Ptolemy II, is still semantically richer
+than HSIF. We could restrict it further to make it fully HSIF
+compliant, but model builders usually ask for more semantic richness,
+not less. Our strategy, which we believe is better, it to facilitate
+the construction of abstracted models that can be verified by MoBIES
+verfication tools. For hybrid systems aspects of a design, these
+abstracted models could be represented in HSIF. These abstracted models
+rely on a generalized notion of interfaces that Tom Henzinger is
+currently developing.
+
+
+HyVisual
+========
+
+We released HyVisual 2.2-beta on CD (distributed at the Mobies PI
+meeting), and on the web with Webstart and a standalone Windows
+installer (.exe file). The release announcement is included as an
+appendix. The Hybrid System Visual Modeler (HyVisual) is a
+block-diagram editor and simulator for continuous-time dynamical
+systems and hybrid systems. Hybrid systems mix continuous-time
+dynamics, discrete events, and discrete mode changes. This visual
+modeler supports construction of hierarchical hybrid systems. It uses a
+block-diagram representation of ordinary differential equations (ODEs)
+to define continuous dynamics, and allows mixing of continuous-time
+signals with events that are discrete in time. It uses a bubble-and-arc
+diagram representation of finite state machines to define discrete
+behavior driven by mode transitions.
+
+HyVisual is a "specialized configuration" of Ptolemy II 2.2 (hence the
+odd version number for the first version). In order to create HyVisual,
+we modified Ptolemy II so that all visible details of an application,
+including help pages, on-line documentation, menu contents, welcome
+splash screen, and default model contents are customizable by creating
+a Ptolemy II model (in an XML file) that is called a "configuration."
+We created a standard directory structure for configurations. The plan
+is to create other specialized configurations for special purposes
+(such as software radio research).
+
+HyVisual imports HSIF models (see below) and is being used in a
+graduate class on hybrid systems this semester at UC Berkeley. The
+distribution includes tutorial documentation.
+
+
+Heterogeneous Tool Integration
+==============================
+
+Xiaojun Liu created a Python interface to Ptolemy II (using a pure Java
+implementation of Python called Jython). This complements the other
+integrated scripting languages, Matlab and Tcl. Python is powerful,
+modern, object-oriented, dynamically typed scripting language that is
+well suited to interacting with Ptolemy II classes. Xiaojun created an
+example model that included a Python actor with a script that would
+send email to specified address when a test fails.
+
+A simple example of an actor specification in Python looks like this:
+
+class Main :
+    "scale"
+    def fire(self) :
+        if not self.input.hasToken(0) :
+            return
+        s = self.scale.getToken()
+        t = self.input.get(0)
+        self.output.broadcast(s.multiply(t))
+
+An instance of this "Main" class is created during initialization of
+the Python actor. Calls to methods in the Executable interface are
+delegated to this instance, if the corresponding method is defined in
+the class. In the method body, input and output are ports added to the
+actor, and scale is a parameter added to the actor.
+
+Jython can be downloaded from: http://www.jython.org/download.html. The
+jar file is about 700K.
+
+
+HSIF and Hybrid System Modeling
+===============================
+
+HSIF is a proposed hybrid system interchange format that the Mobies
+community is working on. Haiyang Zheng implemented the tool for reading
+HSIF into Ptolemy, which we have previously reported. In the course of
+studying models from the Mobies community, we have opened a number of
+semantics questions about Hybrid systems.
+
+The first issue came up when studying a "swimming pool" example
+provided by Oleg Sokolsky of Penn, based on another model by Bruce
+Krogh of CMU. In the CT domain of Ptolemy II (created by Jie Liu) when
+it worked in concert with the FSM domain (created by Xiaojun Liu), the
+semantics of guards on transitions was that of enabling but not forcing
+a transition. The transition would be taken at the first sample time
+after the guard becomes true. However, when that occurred depended on
+the ODE solver and its parameters. This could lead to unexpected
+results. For instance, Haiyang Zheng discovered that if too large a
+step was taken, then a model could find that more than one transition
+was enabled. If, on the other hand, the transition were taken as soon
+as the guard became true, then no such nondeterminacy would arise. This
+is a form of unexpected and uncontrollable nondeterminacy that is
+particularly detrimental to modeling. The model builder builds a model
+that he/she fully believes to be deterministic, but because of
+arbitrary choices made by the solver, an execution of the model reveals
+nondeterminism.
+
+Our first solution (suggested by Steve Neuendorffer) was to catch the
+error triggered by the nondeterminism (our FSM domain does not allow
+guards on multiple outgoing transitions to be simultaneously true), and
+refine the step size until either the nondeterminism disappears, or if
+it persists, the modeling engine decides that the model is
+fundamentally nondeterministic. This solution, however, proved awkward.
+
+We decided that this semantics was not acceptable. Haiyang Zheng then
+implemented a strategy whereby the solver ensures that a sample time is
+calculated at the precise point where the guard first becomes true. He
+used a clever technique to analyze the structure of the guard
+expression to successively refine the step size. His technique finds
+the point at which the guard first becomes true in very few steps for
+the most common forms of the guard expression, where simulation
+quantities are compared against constants. His technique unifies the
+event detectors of the CT domain with the use of guards on transitions
+in the FSM domain, giving them essentially the same semantics. But for
+common forms of guard expressions, his technique is more efficient than
+the search technique used by the event detectors. Replacing event
+detectors with guard expressions can result in models that simulate
+significantly faster.
+
+A second issue that arose was that signals with discontinuities were
+not dealt with uniformly by the CT solver. If the source of the
+discontinuity was a discrete event, then the CT domain would use a
+"breakpoint solver" to evaluate the signals on either side of the
+discontinuity. The result was, as expected, that the signal would have
+two distinct values at the time point of the discontinuity. However,
+certain discontinuities were not dealt with this way, resulting in
+either steep but continuous signals or errors in the execution due to
+the inability of the solver to reduce the step size sufficiently. We
+have completely overhauled this mechanism, and created a new family of
+key actors (Clock, TriggeredClock, ContinuousClock, and
+LevelCrossingDetector), which modify previous versions of these actors
+to yield consistent, understandable, and expected behavior.
+
+A third issue is that HSIF did not include a syntax for specifying
+initial values of continuous variables, which was fine for verification
+but problematic for simulation. Haiyang Zheng extended the HSIF syntax
+with an attribute called "initialValue" to "VarRef." This attribute is
+only necessary for an integrator inside the initial state (refinement)
+of a modal model. He modified the swimming pool HSIF file accordingly,
+and modified his XSL script for importing into Ptolemy II.
+
+
+Continuous-Time Modeling
+========================
+
+The abstract semantics of Ptolemy II include a prefire() method for
+each actor, which returns a boolean that indicates whether or not
+firing of the actor can proceed. Previously the continuous-time (CT)
+domain of Ptolemy II was not properly implementing the abstract
+semantics. The issues are extremely subtle. Here is a synopsis.
+
+It used to be that CT would invoke prefire() for all actors at the
+beginning of an iteration. This is not correct because prefire() can
+read input data, and in CT, the input data is not assured to be valid.
+Unfortunately, it proved rather difficult to change this.
+
+The problem is that CT divides execution of actors into phases. It
+first performs a "resolve states" phase, where it is trying to figure
+out what the inputs to the integrators are. To do this, it invokes a
+solver that may fire actors repeatedly if they are in a chain of actors
+feeding the input of an integrator. The right thing to do is to invoke
+prefire() just prior to the first invocation of fire() for each of
+these actors.
+
+The actors in a chain leading to an integrator input are called "state
+transition actors" because they affect the state update that will occur
+in the integrator. In order to be able to prefire() the state
+transition actors, we have to first ask the integrators to emit their
+outputs. Fortunately, the integrators have a method to do that,
+emitTentativeOutput().
+
+Potentially, the changes could change slightly the behavior of models.
+In particular, if any actor accesses current time in its prefire()
+method, then it will now see a later time: the time of the conclusion
+of the step rather than the beginning of the step. This is unfortunate,
+since actually the conclusion of the step is only an estimate when
+prefire() is invoked, and may be reduced in the process of resolving
+the states.
+
+The integrator actors, however, which do depend on reading time in
+prefire(), are assured of getting the start time of the step, because
+these prefire() methods are invoked at the start of the iteration, as
+before.
+
+If we want actors to see a valid current time during prefire, then
+there is more work to do. In particular, we would need to set current
+time back before each call to prefire(). This would not be that hard to
+do, but it seems really ugly, so we have not done it.
+
+
+Type System and Expressions
+===========================
+
+With an eye towards being able to define components (actors and state
+machines) more easily, we have made a number of improvements to the
+Ptolemy II expression language. Steve Neuendorffer created a type
+inference mechanism for expressions so that type relationships between
+inputs and outputs can be inferred from the expressions that define the
+value relationships. In effect, the interface definition of the
+component is partially inferred, like the type signature of functions
+in ML. A particular problem he ran into is that externally defined
+functions, if they are polymorphic, function as opaque barriers to the
+inference engine. We continue to work on a solution for this, but for
+now, Steve created a cast() function that forces the data type of the
+argument and thus results in easy inference.
+
+Steve also improved the way that expressions on FSM transitions were
+parsed and evaluated, allowing for better integration in the type
+system and a more robust infrastructure.
+
+Steve also modified added a new type, EventType, a new token,
+EventToken for representing pure events, and a new class
+ptolemy.data.expr.GeneralToken, which is a singleton representative
+used in the expression language for declaring types to be general.
+These were necessary because Token was serving triple duty as a base
+class, an instance representing events, and as a type representative
+for the top of the lattice. This caused problems inferring types for
+Java code in the code generator and for representing types returned
+from Java methods invoked in the expression language. Now Token is just
+a base class.
+
+Steve also refactored the code that evaluates expressions by creating a
+base class ParseTreeVisitor to make it easier to modify the expression
+language, and added many tests, including tests for type inference.
+
+We enhanced the expression language evaluator so improve its
+polymorphism. It can now execute operations between distinct data types
+when the two types have a least upper bound in the type lattice that
+defines the option. We have also revised the way records with distinct
+types operated to make the semantics more amenable to efficient code
+generation.
+
+We made many other improvements to the expression language, its built
+in function library, and its documentation. These improvements are too
+numerous and detailed to describe here, but will be described in the
+documentation accompanying the next Ptolemy II release.
+
+Many of the expression language improvements were made as part of an
+exercise in "extreme programming" (XP), a currently popular software
+engineering process that reflects many of the principles that we have
+followed for years. A group of 10 of met in the lab for two entire days
+and, driven by the creation of user documentation (our stand-in for the
+"customer"), and driven by the existing and newly created regression
+tests, we paired up and implemented capabilities using team
+programming. The productivity and high quality of the end result was
+astonishing.
+
+
+Function Closures
+=================
+
+Actor-oriented design becomes very much more expressive when functions
+become first-class objects that can be passed around as data. Xiaojun
+Liu and Steve Neuendorffer created a way to define function closures in
+the expression language. The resulting closures are wrapped in Tokens
+which can be sent from one actor to another. Steve used this to create
+a very elegant automotive application, showing a parameterizable
+transmission system. A function is defined as in the following example:
+
+   function(x:int) x+1
+
+This function has type int -> int.  A polymorphic version is
+
+  function(x) x+1
+
+which has type general -> general.
+
+
+Code Generation
+===============
+
+Shuvra Bhattacharyya (under subcontract at the University of Maryland)
+reports on enhancements to the C code generation back-end as follows:
+
+- Much progress was made on the InvokeGraph pruning strategy.
+  Compilation was first speeded up by incrementally building an
+  invokegraph in soot. This approach resulted in a great reduction in
+  compilation speed for small tests, but it did not scale well for
+  large programs. This approach was succeeded by a fast pruning
+  strategy that cached the dependencies between the Java System
+  classes. This approach speeded up compilation time, and scaled very
+  well to large tests too. Only those methods, fields, and classes are
+  generated that are required. Additionally, the accurate Variable Type
+  Analysis (VTA) is applied to efficiently prune the invoke graph.
+
+- Support for interfaces was provided. Interfaces involve a
+  compile-time ambiguity in the target of a procedure call; therefore,
+  interface calls are resolved at runtime by a fast lookup to a
+  function pointer.
+
+- Support was provided to resolve the "instanceof" expression.
+
+- The Hans Boehm conservative incremental/generational garbage
+  collector was integrated with the code generation infrastructure to
+  provide fast automatic garbage collection.
+  
+- Common data types like LinkedList, Iterator, HashSet, String,
+  StringBuffer, Arrays etc. were tested and found to run correctly.
+
+- Benchmarks such as Linpack and EmbeddedCaffeineMark were tested and
+  found to run. Accurate benchmarking will be done after more runtime
+  support is built.
+
+- Support for a number of native methods: cloning, array copying,
+  looking up time, exp, log etc. was provided.
+
+Other functionality added includes support for:
+
+- Nested Exceptions
+- Global Exceptions (exceptions that are thrown in one method but have a
+  try-catch block in another)
+- Inherited Exceptions
+- Inner Classes
+- Arrays of Objects
+- Multi-dimensional arrays
+- Unsigned Right Shift operator (>>>)
+- Command-line arguments
+- Switch statements
+
+- To speed up compilation, a static library consisting of the runtime
+  code is automatically generated if none exists. This causes the
+  testing time to fall from 15-20 minutes per test earlier, to a total
+  of 14 minutes altogether now, because only the first test needs to
+  re-generate the library.
+
+- Updating to JDK1.4.1 caused incompatibilities with Soot1.2.3.
+  Workarounds were generated for these. These were also individually
+  removed and checked when Soot-1.2.4(which is compatible with JDK1.4.1
+  bytecode) was released.
+
+- All local variables are now auto-initialized. Primitives are
+  auto-initialized to 0, and objects to a NULL pointer.
+
+- Generated code is "gcc -O2" compliant. The -O2 flag runs a number of
+  additional checks during optimization, and all of these are also passed
+  now.
+
+- Revisions were made to ensure compatibility with Solaris.
+
+- New custom soot-based pruning algorithm was developed to give very
+  tight results. This brings the size of typical executable from ~7MB
+  to ~80KB. Presently working on ensuring correctness across a variety
+  of situations, and on further optimization.
+
+
+Distributed Models
+==================
+
+About a year ago, Xiaojun Liu and Yang Zhao developed a "component
+interaction" (CI) domain in Ptolemy II where concurrent components
+interact via messages with push or pull semantics. This is related to
+the semantics used in Eddie Kohler's Click Modular Router (from MIT),
+and the semantics of distributed objects in CORBA. Interest in this
+domain has increased, and we are exploring interesting ways in which it
+can model distributed embedded software, including particularly in
+sensor-net applications. We are refining the semantics of the domain.
+
+Xiaojun Liu and Yang Zhao have also developed a mechanism for Ptolemy
+users to discover and share new actors over the network. It is built on
+the JXTA peer-to-peer platform. There is no central repository to
+manage the actors to be shared. Each user can join the peer group for
+actor sharing and dynamically discover other peers and available new
+actors via advertisements. Actor classes can be shared or cached among
+peers.
+
+
+Giotto and the E Machine
+========================
+
+Steve Neuendorffer, Marco Sanvido, Christoph Kirsch were able to
+automatically generate code from a Giotto model in Ptolemy, and target
+the embedded machine. Task code is generated from SDF models, E machine
+drivers are generated from the connectivity in the model, and the
+Giotto compiler is used to generate the E machine code. This heavily
+leveraged Haiyang Zheng's previous work generating Giotto code from
+Ptolemy. Essentially they filled in the drivers and task code using
+code generated using Copernicus. Currently, only single mode systems
+are supported, and the Giotto model is assumed to be at the top level.
+
+
+Expressions With Record Types
+=============================
+
+HSIF and Ptolemy II both have expression languages that are essential
+to the specification of model components and guards for transitions.
+The Ptolemy II expression language supports record types, which are are
+data structures that mix other data types. They are an essential part
+of an expression language that is rich enough to do real work.
+
+We have overhauled the semantics of record types so that they are more
+amenable to code generation, and hence more useful for the
+specification of embedded software. The issues are fairly technical,
+and center around type system considerations.
+
+A record has a type, much like an object in C++ or Java has a class.
+Two such types may be related to one another, similar to subclassing in
+C++ or Java. The subclassing relation defines a partial order on types,
+where superclasses are "greater than" subclasses. In a well constructed
+type system, the set of types with this partial order relation is
+mathematically a lattice. A Hasse diagram showing the pertinent part of
+such a type lattice looks like this:
+
+            {b=int}
+              /\
+             /  \
+{a=int, b=int}  {b=int, c=int}
+             \  /
+              \/
+     {a=int, b=int, c=int}
+
+This shows that a record with a single integer field named "b" is a
+"superclass" of all records that contain this field, but also contain
+other fields. The most specific type (the one at the bottom) has the
+most fields.  A record may be "cast" to any type above it.  In our
+expression language, the function cast(a, b) casts b to the type of a.
+There are two possible interpretations for such a cast on records,
+illustrated by the following examples:
+
+Option 1: Precise typing. Discard irrelevant fields:
+
+>> cast({b=int}, {a=1, b=2, c=3})
+{b=2}
+>>
+
+Option 2: Superclass typing. Keep irrelevant fields:
+
+>> cast({b=int}, {a=1, b=2, c=3})
+{a=1, b=2, c=3}
+
+Option 2 is the mechanism used by most object oriented languages for
+classes. After much discussion, and after obtaining useful input from
+the international Ptolemy community, we have selected option 1. The key
+reason is that only with option 1 can we do efficient code generation
+of expressions with records. Option 1 is called "precise typing"
+because it implies that if we know that a record has type {b=int}, then
+it contains exactly one field, and the type of that field is int.
+Consequently, a code generator can allocate memory for it statically
+and operate on it statically.
+
+A key consequence of this decision is that arithmetic operations on
+records may discard information.  For instance,
+
+>> {a=1, b=2} + {b=2, c=3}
+{b=4}
+>>
+
+This is consistent with other uses in the expression language, where an
+operation between distinct types is performed using the semantics of the
+type that is the least upper bound of the disjoint types. For the above
+example, that type is {b=int}. Thus, each of the operands should be
+cast to {b=int} before the operation is performed. It also ensures that
+polymorphic actors in Ptolemy II (e.g. AddSubtract) will behave exactly
+like operators in the expression language (e.g. + or -).
+
+
+Improvements to Basic Modeling Infrastructure
+=============================================
+
+-- Christopher Hylands created a Perl script that creates a change log
+   from the CVS repository for Ptolemy II.
+
+-- Christopher Hylands and Haiyang Zheng created some XSLT utilities
+   to interface to the XSL facilities that are bundled with Java 1.4.
+   Haiyang converted his HSIF import tool to use these facilities rather
+   than a standalone Saxon jar file with XSLT.
+
+-- We have added a "trainingMode" parameter to key actors that are used
+   to construct regression tests, making it easier to create regression
+   tests that operate on large data sets. Steve Neuendorffer added a
+   safety check to ensure that the actors are not in training mode when
+   the regression tests are run.
+
+-- Adam Cataldo updated the _createModel() method of Cylinder3D in the
+   GR domain. Cylinder3D represents all cylinders as polyhedrons.
+   Before, the number of vertices _createModel() generated was
+   independent of the cylinder size. This was a problem for really big
+   cylinders. For such cylinders only a small part of the cylinder
+   appears on the screen at any time, and when he used the original
+   _createModel() method, it looked more like a polygonal prism than a
+   cylinder. Now, the _createModel() method uses more vertices to
+   represent cylinders larger than the default size.
+
+-- Paul Yang added a Joystick driver interface to Ptolemy II.
+
+-- Steve Neuendorffer added a script to run the JHDL code generator on
+   an XML file, which is used on the command line as follows:
+      copernicusjhdl FIR.xml
+   The file copernicus/jhdl/compileCommandTemplate.txt contains the
+   command that is used to invoke the code generator and the file
+   copernicus/jhdl/runCommandTemplate.txt contains the command that is
+   used to invoke the generated code. These templates include various
+   substitutions that come from the variables defined in an XML file:
+   copernicus/kernel/generator.xml.  This command successfully generates
+   a .dot file from the FIR example.
+
+-- Steve Neuendorffer corrected a concurrency problem that showed up
+   when actors with asynchronous threads need to tell the model that
+   the actor needs to be fired. The basic mechanism that is provided in
+   the Ptolemy abstract semantics is a "fire at" request that specifies
+   a time. In theory, the time could be the current time to request an
+   immediate firing. Unfortunately, is it not safe to call
+   fireAt(actor, getCurrentTime()), since the time may advance
+   asynchronously. Win Williams had added a fireAtCurrentTime() method
+   to deal with this problem, but the implementation in DEDirector
+   didn't work if the actor calling fireAtCurrentTime was deep in
+   hierarchy. The fix requires calling fireAtCurrentTime() on any
+   executive directors, which are the directors of the enclosing model.
+   Unfortunately, these directors might be processing events and
+   increasing time. To fix this, fireAtCurrentTime() now enqueues a
+   special pure event with time Double.NEGATIVE_INFINITY, which the
+   DEDirector interprets as "fireAsSoonAsPossible".
+
+-- Steve Neuendorffer modified the code generator so that it does a
+   fairly strong static analysis of the generated code to determine
+   reachable methods and classes. Possible uses include replacing tree
+   shaking to minimize jar file encapsulations of deployed code and
+   various possible uses in C code generation.
+
+-- We created an infrastructure for easily constructing interactive
+   shells that interact with Ptolemy II.  We added to the core system
+   an expression evaluator shell, a Python shell, a Tcl shell, and
+   a shell for executing underlying operating system commands.
+
+-- Steve Neuendorffer made some improvements to Vergil (the visual
+   editor) to get faster interactivity with large models.
+
+-- We made some changes to improve debugging of threaded domains
+   (PN and CSP):
+
+    * PtolemyThread now implements Debuggable. The subclass
+      ProcessThread registers the associated actor as a debug listener.
+
+    * NamedObj now implements DebugListener. When notified of a debug
+      event or message, NamedObj simply relays the message to any
+      registered debug listeners.
+
+    * CompositeActor: When it gets a Manager, it registers itself as a
+      debug listener for the Manager.
+
+    * Manager: Improved debug messages.
+
+    * Vergil: You can now listen to a composite actor by right clicking
+      on the background of its editor.
+
+   Net effect: PtolemyThread now reports debug messages through the
+   actor it is executing. Thus, if you listen to the actor, you will
+   get messages from the thread (when it starts, when it stops, when it
+   pauses to wait for something, etc). We could use the same mechanism
+   for Schedulers to report debug information through the associated
+   Director. Yang Zhao and Xiaojun Liu used this improved
+   infrastructure to track down some subtle bugs in our threaded
+   domains. You can now listen to the manager by right clicking on the
+   background of the top-level actor.
+
+-- Xiaojun Liu and Neil Turner overhauled the operators and functions
+   that perform remainder operations in the expression language, giving
+   them a consistent and complete semantics.
+
+-- We created two new actors, MatrixToSequence and SequenceToMatrix.
+   These make MatrixToDouble and DoubleToMatrix obsolete, and make it
+   possible to now get from a sequence to a matrix of any type.
+
+-- Steve Neuendorffer created a new class
+   ptolemy.data.type.MonotonicFunction that makes it easier to implement
+   type constraints with monotonic functions.
+
+-- We modified the way that functions that are registered with the
+   expression language are matched to their argument types so that now the
+   most specific matching function among all the registered ones is the
+   one used. This fixes the problem that max(1ub, 2ub) was returning the
+   int 2 instead of 2ub. More fundamentally, it makes it easier to
+   extend the set of registered functions without creating clashes.
+
+-- Steve Neuendorffer modified the UI so that the parameter editor can
+   show variables that are informative to the user but not editable.
+   Examples include: resolved types, buffer sizes, and computed port
+   rates.
+
+
+Study Group
+===========
+
+Our quasi-weekly study group examined the following topics:
+
+-- The Chandry & Misra approach to distributed discrete event simulation.
+-- Simulink semantics.
+-- KURT: Kansas University Real Time Linux
+-- NS, the network simulator
+-- Classic paper by Karp and Miller on vector addition systems
+-- Classic paper by Karp, Miller, and Winograd on reduced dependence graphs
+-- AsmL: A specification language based on abstract state machines
+
+2.  Interactions, Meetings, and Technology Transfer
+
+Presentations and Meetings
+==========================
+
+* "Process-Based Software Components," Edward Lee, Mobies PI meeting,
+  Chandler, AZ, January 29, 2003.
+
+* "HyVisual: Hybrid System Visual Modeler," Steve Neuendorffer, guest
+  lecture, Hybrid Systems class, Feb. 13, 2003. 
+
+* "HyVisual: Hybrid System Modeler," by Haiyang Zheng and Xiaojun Liu,
+  Chess seminar, February 25, 2003.
+
+Technology Transfer
+===================
+
+* Planning continues for the Ptolemy Miniconference, to be held in
+  Berkeley on May 9, 2003.
+
+* Wolfgang Pree, Professor of Computer Science at the University of
+  Salzburg, Austria, visited us and described " Model-Based Development
+  with Giotto and Simulink." He provided the following abstract:
+
+    "The talk presents how executable code for an embedded platform can
+    be automatically generated from a Simulink/Giotto model. The
+    approach relies on the following integration of Giotto and
+    Simulink: We provide a Giotto component library that allows us to
+    design Giotto programs within Simulink's visual development
+    environment. The full set of Simulink components is available for
+    implementing non-Giotto functionality within the Giotto components.
+    The Giotto components themselves are only syntactic to Simulink.
+    The S/G Translator tool automatically creates Giotto semantics by
+    transforming the syntactic Giotto components into standard blocks
+    provided by Simulink without modifying the non-Giotto
+    functionality. The translation results in a pure Simulink model
+    that resembles Giotto semantics which can be simulated as well as
+    executed with the Simulink tool and code generators.
+
+    The S/G Translator tool also generates an intermediate model from
+    which the glue code is generated for the integration of E-machine
+    code with code generated from the Real-Time-Workshop Embedded Coder
+    tool. Finally, the S/G Translator generates a Giotto program. By
+    means of the Giotto compiler, optimized code generation as well as
+    schedulability analysis are thus available.
+
+    We illustrate the model-based development and automatic code
+    generation by means of a throttle control system for the MPC555
+    platform."
+
+* We released snapshots of the current version of the Ptolemy II
+  software to the Technical University in Ilmenau, Germany, who has
+  contributed in major ways previously, and to Telcordia.  Ilemenau
+  was interested in building a mechanism for customizing run control
+  panels, and Telcordia with building a mechanism for rearranging
+  ports in the visual editor.
+
+* MLDesigner, from MLDesign Technologies (http://www.mldesigner.com),
+  is a new tool that is based on Ptolemy Classic, with elements of
+  Ptolemy II borrowed and translated to C++. MLDesigner includes
+  Synchronous Data Flow and Dynamic Data Flow domains, more than 500
+  primitives (actors), and has a utility to convert customer design
+  files developed with COSSAP, BONes, and Ptolemy Classic designs to
+  MLDesigner files. Colin  K. Mick of MLDesign Technologies says:
+
+     "Ptolemy provided a great starting point and MLDesigner has come a
+     long way since our first prototypes. We have rewritten much of the
+     original code, added a GUI and an XML file system, extensively
+     revised the DE and SDF domains, and added a new FSM domain and a
+     CT/DE domain. We've also added a link to SatLab or wireless design
+     environment.
+
+     Customers are using MLDesigner for a wide range of design
+     applications including processor design, wireless handset and
+     wireless system design, avionics, and mission analysis of large
+     complex military communications systems. (Customer applications
+     include the DARPA-sponsored TTNT project.)"
+
+* Horst Salzwedel, professor at Ilmenau Technical University in
+  Germany, sent us a paper by Infineon and his research group (Matthias
+  Zens) that uses mixed signal simulation with the Ptolemy derivative
+  MLDesigner. The paper was presented at the SAE conference in Detroit,
+  March 3-6. He says:
+
+     "MLDesigner includes some Ptolemy Classic features. However we had
+     to change the kernel structure, data transport and schedulers. The
+     models are stored in XML. For the CT domain we took a slight
+     different approach from the Ptolemy II project."
+
+* We have learned about Project VT11, which has used Ptolemy II for
+  teaching, developing and prototyping microcomputer interfacing labs
+  for courses in analog and digital electronics. See
+  http://www.vt11.sk/. Project VT11 is non-profit activity of
+  Department of Radiophysics of Comenius University, Bratislava,
+  Slovakia.  As part of this project, the researchers developed
+  a suite of interactive Ptolemy II actors and a set of experiments
+  that use these actors in models that control a microcomputer.
+
+* We learned about RSoft Design Group, which was created from the
+  merger of RSoft, Inc. and Network Design Tools, Inc. (NDTI), a
+  Telcordia Technologies spinout. LambdaSIM is a Ptolemy-based tool
+  that rapidly simulates networks with thousands of components. It has
+  been used in the designing and understanding of the Multiwavelength
+  Optical Network (MONET) project.
+
+* We learned about a paper from Kai Below and Ulrich Killat, in the
+  Department of Communication Networks, Technical University
+  Hamburg-Harburg (TUHH), Germany, that describes the use of Ptolemy
+  Classic in network simulation. See:
+
+    http://www.tu-harburg.de/et6/papers/documents/Below_Kai/below-ITC-SPEC-Seminar2002-c.pdf
+
+* Dominique RAGOT, of Thales Communications, tells us that they have
+  developed a "distributed process networks" (DPN) domain using Ptolemy
+  II. He says:
+
+    "PtolemyII is a very useful tool for experimenting our ideas and we
+    saved time and effort by using it rather than starting it all over
+    from scratch. In our developments we have tried to minimize the
+    modifications on the PtolemyII source tree by taking advantage of
+    object-oriented techniques."
+
+
+Other Interactions
+==================
+
+* Ernesto Wandeler, a student from ETH in Switzerland, completed a
+  Diploma Thesis in our group entitled "Static Analysis of Actor
+  Networks" [6]. This work provides automatic extraction of interface
+  automata form actors written in CAL, an experimental actor definition
+  language that we are working on with funding from GSRC. Ernesto and
+  Jorn Janneck have developed a new kind of interface automata, which
+  we call Counting Interface Automata (CIA) and which is a superset of
+  the original Interface Automata, enhanced with the ability to count.
+  Using CIA, they can express the ordinary interface automaton of an
+  actor as well as the token consumption and production rates of it.
+  They then developed software which extracts the CIA of actors written
+  in CAL. We also developed software for the composition of CIA. They
+  used XML to express all formats and XSLT for all implementations.
+
+* Vincent Arnould and colleagues from Thales, in France, contributed a
+  JNI-based mechanism for defining actor functionality in C. This
+  permits them to incorporate legacy code in Ptolemy II models. With
+  considerable effort, Christopher Hylands modified thier contributed
+  code to match our coding standards and merged it into our tree.
+
+* Douglas Niehaus from the University of Kansas visited us to discuss
+  the possibility of adapting KURT Linux (their real-time Linux) to
+  directly implement the embedded machine.  We are working on setting
+  up an arrangement where their key developer spends the summer with
+  us.
+
+* Zoltan Kemenczy of Research in Motion contributed improvements to
+  the Matlab interface of Ptolemy II.  Specifically:
+  - In the makefile:  add -fno-exceptions flag for compilation
+    with gcc-3.2 (in recent cygwins). This is backwards compatible
+    (works with 2.9x as well).
+  - In ptmatlab.cc:  add V5_COMPAT flag so that ptmatlab.cc would
+    compile with MATLAB R13 (6p5) engine interface files.  Matlab
+    made engGetArray() and others obsolete and replaced them with
+    engGetVariable() in the engine interface.  V5_COMPAT is a
+    Matlab engine interface API flag to redefine engGetArray
+    as engGetVariable.  Also backwards compatible (R12 and others
+    are oblivious to this flag).
+
+* Professor Kang G. Shin, of University of Michigan, visited and
+  gave a presentation, "A Small-Memory Real-Time Microkernel."
+
+* Frank Schilder of TU Ilmenau in Germany has contributed a tar file
+  that contains a time domain simulation of sigma delta A/D converters
+  using Ptolemy Classic. The tar file, the installation notes and the
+  documentation on the web at:
+
+    http://ptolemy.eecs.berkeley.edu/ptolemyclassic/pt0.7.1/adc/
+
+* We exchanged visits with the Sugar research group, which is constructing
+  a software modeling infrastructure for MEMS that shares some issues with
+  our continuous-time (CT) modeling in Ptolemy II.  "Sugar" is so named
+  to complement "Spice." They expect to become "the Spice of MEMS."
+
+
+4. Publications
+
+[1] Johan Eker, Jörn W. Janneck, Edward A. Lee, Jie Liu, Xiaojun Liu,
+    Jozsef Ludvig, Stephen Neuendorffer, Sonia Sachs, Yuhong Xiong, "Taming
+    Heterogeneity---the Ptolemy Approach," Proceedings of the IEEE, v.91,
+    No. 2, January 2003. 
+
+[2] Christopher Hylands, Edward A. Lee, Jie Liu, Xiaojun Liu, Stephen
+    Neuendorffer, Haiyang Zheng "HyVisual: A Hybrid System Visual Modeler,"
+    Technical Memorandum UCB/ERL M03/1, University of California, Berkeley,
+    CA 94720, January 28, 2003. 
+
+[3] Jie Liu, Johan Eker, Jörn W. Janneck, Xiaojun Liu, and Edward A.
+    Lee, "Actor-Oriented Control System Design: A Responsible Framework
+    Perspective," accepted to IEEE Transactions on Control System
+    Technology, March, 2003.
+
+[4] Elaine Cheong, Judy Liebman, Jie Liu, and Feng Zhao, "TinyGALS: A
+    Programming Model for Event-Driven Embedded Systems," Proceedings of
+    the 18th Annual ACM Symposium on Applied Computing (SAC'03), Melbourne,
+    FL, Mar. 9-12, 2003. 
+
+[5] Yan Jin, Robert Esser, Charles Lakos, Jörn W. Janneck, "Modular
+    Analysis of Dataflow Process Networks," Proceedings Fundamental
+    Approaches to Software Engineering (FASE) 2003.
+
+[6] Ernesto Wandeler, "Static Analysis of Actor Networks," Technical
+    Memorandum UCB/ERL M03/7, Swiss Federal Institute of Technology
+    (Diploma Thesis), Zurich, Switzerland, March 2003.
+
+[7] Jie Liu and Edward A. Lee,"On the Causality of Mixed-Signal and
+    Hybrid Models," accepted to the 6th International Workshop on Hybrid
+    Systems: Computation and Control (HSCC '03), April 3-5, 2003, Prague,
+    Czech Republic.
+
+5. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+
+Appendix
+========
+
+HyVisual 2.2-beta release announcement
+--------------------------------------
+
+HyVisual 2.2-beta is available for download from
+
+   http://ptolemy.eecs.berkeley.edu/hyvisual/
+
+HyVisual is a Hybrid System Visual Modeler.
+
+Hybrid systems are systems with continuous-time dynamics, discrete
+events, and discrete mode changes. This visual modeler supports
+construction of hierarchical hybrid systems. It uses a block-diagram
+representation of ordinary differential equations (ODEs) to define
+continuous dynamics. It uses a bubble-and-arc diagram representation of
+finite state machines to define discrete behavior.
+
+HyVisual includes a facility to translate Hybrid System Interchange
+Format (HSIF) files into MoML, the XML format used to represent Ptolemy
+II Models.
+
+HSIF, was developed by the Institute of Software Integrated Systems
+(ISIS) at Vanderbilt University as part of the ISIS MoBIES effort. The
+HSIF documentation states:
+
+  "The goal of HSIF is to define an interchange format for hybrid
+  system models that can be shared between modeling and analysis tools.
+  HSIF models represent dynamic systems, whose dynamics includes both
+  continuous and discrete behaviors."
+
+The HyVisual 2.2-beta is a runtime only release, our plan is to release
+the source code with the next release of Ptolemy II, due in May.
+
+HyVisual is built on top of Ptolemy II, a framework supporting the
+construction of such domain-specific tools.
+
+HyVisual is based on the work of many participants, but following
+people were instrumental in the creation of HyVisual:
+
+Jiu Liu (currently at Xerox Parc) developed the Continuous Time domain
+  while at UC Berkeley and continues to collaborate with the Ptolemy
+  group.
+
+Xiaojun Liu developed the Finite State Machine domain and has helped
+  support the the CT domain.
+
+Stephen Neuendorffer developed Vergil, the block diagram editor
+  and has help support the domains.
+
+Haiyang Zheng developed the HSIF translation capability and has
+  helped support the domains.
+
+Professor Edward A. Lee mentored all of us, developed many of the
+  features in Vergil and wrote the HyVisual documentation.
+
+Christopher Hylands built and tested the release and managed the
+  software development process.
