@@ -1,6 +1,6 @@
 # $Id$
 
-SOURCES = ptolemyII.sum
+SOURCES = ptolemyII.sum neuendor00.sum neuendor00b.sum
 
 index.html : $(SOURCES) sum2html
 	-chmod a+x sum2html

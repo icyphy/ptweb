@@ -1,0 +1,41 @@
+NAMES
+Stephen Neuendorffer
+
+EMAIL
+neuendor@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~neuendor
+
+PHONE
+
+TITLE
+A Graphical User Interface for Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+User interfaces for CAD tools are often cumbersome and complex.  In many 
+cases the learning curve for these tools are so steep that novice users
+cannot accomplish even the simplest of tasks without significant training.
+Experienced users are often frustrated by the subtleties of these 
+complex interfaces.  Furthermore, these user interfaces are often
+built around specific design flows and often do not work properly
+when the design flow is not followed exactly.
+<p>
+The goal of this work is to create a user interface for 
+Ptolemy II that is rich and powerful, yet also intuitive and 
+relatively simple to learn.  Keeping in line with our group's philosophy of
+software design, state of the art techniques will be used to evaluate and 
+improve the design.   For consistency and ease of implementation, the 
+GUI will be based on Java/Swing and the 
+<a href="http://gigascale.eecs.berkeley.edu/diva">DIVA</a> graphics framework.
+An XML file format will form the basis for persistent file storage.
+<p>
+Although this work will be an important part of Ptolemy II, simply by 
+making it easier to interact with the Ptolemy kernel, it could also form
+the basis for further research into visualization techniques and
+collaborative design tools.
+

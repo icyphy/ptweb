@@ -1,0 +1,47 @@
+NAMES
+Stephen Neuendorffer
+
+EMAIL
+neuendor@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~neuendor
+
+PHONE
+
+TITLE
+Real-time Embedded Control Systems and Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+Most of the domains that have been explored in conjunction with Ptolemy II
+have been <i>data driven</i>.  In a data driven domain, there is a certain
+amount of data in the system and every piece of data must be operated 
+on, regardless of how long it takes.  Such a domain usually has some 
+very nice properties.  Most importantly, they are <i>data deterministic</i>,
+meaning that their outputs are a strict function of their inputs.
+These domains are very useful for many applications, such as simulating 
+digital circuits, or the execution of a signal processing system.
+<p>
+Unfortunately in the case of real-time systems, especially systems
+involved with controlling physical objects, these domains are very
+inadequate.  In real-time control systems, data determinism is much 
+less important than <i>time determinism</i>.  In other words, the 
+control system must analyze its inputs and determine the future state 
+of the physical system within some amount of time.
+<p>
+In particular, this work is oriented around implementing the port-based objects
+model of computation as a domain within Ptolemy II.  The port-based object(PBO)
+domain has been shown to be an appropriate abstraction for designing 
+controllers for real-time systems.  Ptolemy II can be used to combine a
+PBO model of the system controller with a model of the system itself for 
+system simulation.  Other Ptolemy II domains could also be used to model 
+hardware components of an embedded system, enabling hardware-software 
+co-simulation. Furthermore, by using a microcontroller running an 
+Embedded Java Virtual Machine, the model of the system controller 
+in Ptolemy II can translate directly into an java-based controller 
+implementation.
+
