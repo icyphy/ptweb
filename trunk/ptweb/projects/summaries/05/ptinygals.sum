@@ -1,0 +1,48 @@
+NAMES
+Elaine Cheong
+
+EMAIL
+celaine@eecs.berkeley.edu
+
+HOMEPAGE
+http://galsc.sourceforge.net/
+
+PHONE
+
+TITLE
+PtinyOS and PtinyGALS: Simulating Event-Driven Embedded Systems in Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+<h3>PtinyOS</h3>
+<a href="http://webs.cs.berkeley.edu/tos" target="_top">TinyOS</a> [1] is an open-source operating system designed for wireless embedded sensor networks.  It has been ported to over a dozen platforms and numerous sensor boards, including the Berkeley/Crossbow Motes, which are based on the Atmel AVR 8-/16-bit microcontroller series.  TinyOS uses a component-based architecture which enables code reuse and minimizes code size.  It uses an event-driven execution model which allows it to respond to events from the wireless radio and sensor interfaces.  TinyOS applications are written in nesC, an extension of the C programming language that is designed to embody the structuring concepts and execution model of TinyOS.
+
+<p>
+TOSSIM [2] is a simulator for TinyOS.  TOSSIM compiles directly from nesC code for a TinyOS application, which allows users to run nesC code on the PC.  It supports discrete event simulation of TinyOS sensor networks and execution of nesC/TinyOS programs for the sensor nodes.
+
+<p>
+This project will study the strengths and weaknesses of this heterogeneous combination by integrating TOSSIM with <a href="http://ptolemy.eecs.berkeley.edu" target="_top">Ptolemy II</a> [3].  The preliminary version of the "ptinyos" domain in Ptolemy II can generate nesC code for very simple TinyOS programs.  This project will further develop this domain for simulation of nesC programs from within Ptolemy II while using the DE domain for discrete event simulation.
+
+<h3>PtinyGALS</h3>
+Long running concurrent tasks can be created within TinyOS components, but avoiding race conditions and ensuring that tasks do not starve other tasks is the responsibility of the programmer.  TinyGALS [4][5] is a model for programming event-driven systems that improves upon the TinyOS programming model by allowing software designers to create concurrent tasks without the burden of thinking about multiple threads. TinyGALS provides constructs to build concurrent tasks called actors. At the application level, actors communicate with each other asynchronously via message passing. Within each actor, components communicate synchronously via method calls, as in most imperative languages. In order to incorporate shared variable semantics where only the latest value matters, a set of guarded yet synchronous variables called TinyGUYS is provided at the system level for actors to exchange global information "lazily," without explicitly passing messages. Access to these variables is thread-safe, yet components can quickly read their values.  The TinyGALS programming model essentially provides an actor-oriented wrapper around traditional procedure-oriented code. The actor framework automatically handles concurrency and communication between tasks and enforces a consistent notion of state in the system.  <a href="http://galsc.sourceforge.net/" target="_top">galsC</a> [6] is the language and compiler that implements the TinyGALS programming model for the motes and is based on nesC.  Given a high level specification of a TinyGALS program, the galsC compiler will automatically generate the code for all inter-actor communication, actor triggering mechanisms, and access to guarded global variables.
+
+<p>
+Using the experience gained from extending the "ptinyos" domain, this project will also extend Ptolemy II with a TinyGALS domain so that it can simulate galsC programs as well. This will require defining and codifying the semantics of the interactions between TinyGALS and a discrete event model of computation.
+
+<DL COMPACT>
+<DT> [1]
+<DD> Jason Hill, Robert Szewczyk, Alec Woo, Seth Hollar, David Culler, Kristofer Pister, "System architecture directions for network sensors," ASPLOS 2000, Cambridge, November 2000.
+<DT> [2]
+<DD> Philip Levis, Nelson Lee, Matt Welsh, and David Culler, "TOSSIM: Accurate and Scalable Simulation of Entire TinyOS Applications", Proceedings of the First ACM Conference on Embedded Networked Sensor Systems (SenSys 2003).
+<DT> [3]
+<DD> The Ptolemy Project. <a href="http://ptolemy.eecs.berkeley.edu" target="_top">http://ptolemy.eecs.berkeley.edu</a>
+<DT> [4]
+<DD> Elaine Cheong, Judy Liebman, Jie Liu, and Feng Zhao, "TinyGALS: A Programming Model for Event-Driven Embedded Systems," Proceedings of the 18th Annual ACM Symposium on Applied Computing (SAC'03), Melbourne, FL, March 9-12, 2003.
+<DT> [5]
+<DD> Elaine Cheong, "Design and Implementation of TinyGALS: A Programming Model for Event-Driven Embedded Systems," Master's Report, Technical Memorandum UCB/ERL M03/14, University of California, Berkeley, CA, 94720, USA, May 23, 2003.
+<DT> [6]
+<DD> Elaine Cheong and Jie Liu, "galsC: A Language for Event-Driven Embedded Systems," Technical Memorandum UCB/ERL M04/7, University of California, Berkeley, CA 94720, USA, April 20, 2004.
+</DL>

@@ -7,7 +7,7 @@ SUM_SOURCES =  \
 	compositionalityAnalysis.sum \
         fsmExtension.sum \
         softDevel05.sum \
-	tinygals.sum \
+	ptinygals.sum \
 	softwalls.sum \
         ePtolemy05.sum \
         sensorNetworks.sum \
