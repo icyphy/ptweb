@@ -1,0 +1,54 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<center>
+<title>Preliminary Version of a Two-Dimensional Technical Specification for Softwalls</title>
+</center>
+</head>
+<body>
+<center>
+<h1>Preliminary Version of a Two-Dimensional<br>
+Technical Specification for Softwalls</h1>
+</center>
+<center>
+J. Adam Cataldo, Edward A. Lee, and Xiaojun Liu
+</center>
+<br>
+<center>
+Technical Memorandum UCB/ERL M02/9<br>
+University of California,
+<br>
+Berkeley, CA 94720, April 17, 2002.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="2Dsoftwalls.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+The terrorist attacks of September 11, 2001 proved that airplanes make
+deadly weapons.  In response to this attack-by-aircraft threat,
+Edward A. Lee proposed
+<a href="http://ptolemy.eecs.berkeley.edu/projects/softwalls/"><i>Soft Walls</i></a>,
+a flight control system that
+prevents aircrafts from entering <i>no-fly zones</i>.  These are
+restricted airspaces, such as those near major cities, government
+centers, military installations, chemical factories, and nuclear-power
+plants.  The major objective of this control scheme is to
+minimize the control imposed on pilots while protecting the no-fly
+zones.  This control scheme uses a map from the aircraft database
+together with position, velocity, and orientation information from
+onboard sensors to prevent no-fly zone entry.
+<p>
+This document describes our first approach at a Soft Walls control
+algorithm.  We assume the aircraft travels in a horizontal plane at a
+constant velocity and can only turn.  In this first approach, the
+no-fly zone is bounded by a line in the horizontal plane.  While these
+approximations are unrealistic, we chose a simple model, which we will
+later refine for accuracy.
+</body>
+</html>
+
