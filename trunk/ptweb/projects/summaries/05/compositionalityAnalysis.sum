@@ -1,0 +1,42 @@
+NAMES
+Haiyang Zheng, Stephen Neuendorffer 
+
+EMAIL
+hyzheng@eecs.berkeley.edu, neuendor@eecs.berkeley.edu 
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~hyzheng
+
+PHONE
+510-642-6899
+
+TITLE
+Compositionality Analysis
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+Component-based design is important for design of complex embedded software. By properly defining component interfaces, we can form new components by composing existing components.  The newly formed component may be further composed with other components.  The interface of a composite model should be indistinguishable from the interface of a primitive component.
+<p>
+Ptolemy II has a component architecture based on actor-oriented design. The components are actors with ports, and each actor implements a specific model of computation (MOC).  Connections between ports represent the <i>communication dependance</i> between an output port of one component and the input port of another component.  Unfortunately, the communication interface of a component (consisting of its ports) abstracts away the details of component.  In particular, information about the dependence between input values and output ports, which we call the <i>functional dependence</i>, is lost.  This tends to make further composition of hierarchical components more difficult.  We are experimenting with interface theories for exposing various types of functional dependence for components.
+<p>
+One example of one type of functional dependence that we are concerned with is time causality in continuous-time and disceret-event models. See figure 1.  In both the continuous and discrete models, zero-delay feedback loops are not allowed.  These models require that at least one component in every loop has a delay from its input ports to its output ports, i.e. it must be <i>strictly causal</i>.  We expose this causality information by annotating each component with an attribute declaring the communication dependence between individual input and output ports.  This causality information is composable and can be propagated across levels of hierarchy, allowing wider possibilities for semantically valid component composition.
+<p>
+<img src="CompositionalityAnalysis_1.GIF" alt="Causality hidden in Composite Actor">
+<p>
+Another difficulty is that the model of computation (MOC) of a composite model may be different from all individual components, even if the MOC's of the individual components are the same.  We want to build hierarchically heterogenous models, an example of which is shown in figure 2.  In one iteration, the composite actor first reacts to the second input and generates some output and then reacts to the first input.  In order to execute such models hierarchically, we apply the semantics of synchronous reactive systems to execute discrete-event models.  We call this extended discrete event model of computation <i>Timed SR</i>. The semantics of Timed SR defines the behavior of a model at a particular point in time as a fixed point computation.  Each component in the model reacts (possibly more than once) to available input events until no new events are generated at the same time.  The functional dependence analysis above gives exactly the information necessary to find an optimal schedule of component reactions.
+<p>
+<img src="CompositionalityAnalysis_2.GIF" alt="Multiple Runs of Composite Actor">
+<p>
+An even more challenging problem deals with the compositionality of distributed components. Normal SR models have difficulty representing the asynchrony of distributed systems, which are more easily represented in a discrete-event framework.  We think Timed SR provides a better semantics for representing distributed systems.
+<p>
+Reference:
+<p>
+1. Edward A. Lee, "Embedded Software," Advances in Computers (M. Zelkowitz, editor), Vol. 56, Academic Press, London, 2002.
+<p>
+2. Stephen A. Edwards and Edward A. Lee,"The Semantics and Execution of a Synchronous Block-Diagram Language," Science of Computer Programming, Vol. 48, no. 1, July 2003. 
+<p>
+3. A. Benveniste, B. Caillaud, P. Le Guernic, Compositionality in dataLow synchronous languages: specification & distributed code generation, Inform. Comput. 163 (2) (2000) 125-171.
+
