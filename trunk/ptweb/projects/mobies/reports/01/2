@@ -26,14 +26,44 @@ abstractions that we will develop. The purpose of the mechanisms we
 develop is to improve robustness and safety while promoting
 component-based design.
 
-This reporting period had a breakthrough in our process-level type
-system. In particular, we have developed a formalism that represents
-the notion of interfaces and refinement in process-level components. We
-are further developing this formalism, and expect to have more to
-report in the next period.
+This reporting period was quite busy, with progress on interaction with
+the automotive OEP, major progress in our process-level type system, a
+completely new code generator architecture, and improvements in the
+modeling of hybrid systems, modal modeling, and mixed rate systems.
 
 
 1.  Research Status
+
+Automotive OEP
+==============
+
+Paul Griffiths of the Berkeley Phase II project (the automotive OEP)
+provided us with a throttle controller model, and we worked with him to
+construct a Ptolemy II model from it. The model was nominally a
+Simulink model, although the entire controller and throttle model was
+implemented in Matlab as an M file, wrapped in a single Simulink block.
+In a couple of hours, with Paul sitting next to us, we were able to
+construct a functioning model using a combination of the CT domain
+(continuous time) and SDF (synchronous dataflow, which we used to model
+the discrete-time controller). We characterized the design pattern a
+simple mixed signal model.
+
+Johan Eker then elaborated the model by adding modal behavior, whereby
+a simpler control algorithm was used once the controller was tracking.
+This introduced the FSM (finite state machine) domain, and elaborated
+somewhat the design pattern to the point where it was almost as complex
+as the inverted pendulum controller that Johan Eker previously
+constructed. Johan's principle interest lies very much in distributed,
+networked (possibly wireless) control systems. He believes that
+implementation of a set of network actors that capture timely behavior,
+failures, etc. of a real network (CAN, Bluetooth) would be a good
+demonstration of Ptolemy features and at the same time a truly useful
+control tool.
+
+We hope that this throttle controller will serve as a starting point
+for more elaborate modeling of embedded software behavior, and as a
+test case for our evolving code generation framework.
+
 
 A polymorphic process-level type system
 =======================================
@@ -51,158 +81,51 @@ refinements of these interfaces is also valid.  This is a very strong
 result that we believe forms the first building blocks of a true
 systems theory for actor-oriented design.
 
+Yuhong Xiong has also made tremendous progress on system-level types
+using interface automata as a formalism. First, he and Xiaojun Liu
+implemented an interface automaton domain in Ptolemy II to facilitate
+experimentation. Their domain includes a composition mechanism that
+allows them to study system-level type definitions with a high level of
+confidence that the formal manipulations they are performing are
+correct. In addition, Yuhong showed how this infrastructure could be
+used to model the complex interactions of a concurrent Ptolemy II
+model. In particular, he modeled the components in the Dining
+Philosophers demo in the CSP domain, and, with some simplifications
+(two philosophers and simplified conditional send), he was able to
+detect the deadlock in the system. This particular example illustrates
+that the system-level types work might be extensible beyond type
+checking at the domain composition level to formal verification at the
+application level.
+
 
 Code Generation
 ===============
 
 We have gone through an extensive evaluation of our alternatives, and
 have decided to rearchitect the code generation framework in Ptolemy II
-using Soot, from McGill.  Part of the discussion follows:
+using Soot, from McGill. We will abandon our prototype based on our
+rewrite of the Titanium compiler from Berkeley (created by Jeff Tsay).
+Steve Neuendorffer made amazingly quick work of constructing the
+beginnings of a code generator with Soot, and then Steve, Christopher
+Hylands and Edward Lee spend a very productive couple of days with
+Michael Wirthlin (from BYU) experimenting with Steve's code. Michael is
+building a JHDL code generator with it, which will target configurable
+hardware. Soot appears to be a better platform for a "production"
+research framework.
 
-From Prof. Shuvra S. Bhattacharyya, of the University of Maryland, now
-under subcontract:
-
-  "I have been reading up on some of the alternative intermediate
-  formats, such as Soot and that provided by BECL. These offer
-  interesting possibilities for doing extensive, lower-level
-  optimizations, but it is not clear to me how these are essential to
-  our near-term concern of getting a robust, extensible code generation
-  infrastructure in place.
-
-  I think we might want to stick instead with the standard Java AST
-  representation we already have, but with a better implementation. The
-  current representation is suitable for all of the important
-  transformations that we need at this point (type specialization,
-  method devirtualization, certain forms of dead code elimination,
-  etc.). It is also very intuitive to work with due to its close match
-  to the Java language. This is an important consideration to
-  facilitate development of different back-ends. If we decide later
-  that we want a different representation to do more extensive analysis
-  and optimization, it should be easy to plug it in by transforming
-  from/to the existing representation.
-
-  We still have to work with bytecode when working with referenced
-  classes. But Christopher's ASTRefect already does a nice job of
-  extracting the essential information without dealing explicitly with
-  the bytecode representation. It should be straightforward to port
-  ASTReflect to an alternative implementation of the existing AST
-  representation. Porting the semantic analysis code will require more
-  work.
-
-  SableCC (http://www.sable.mcgill.ca/publications/#tools98) seems to
-  offer the key features that we want in the front end, ... and that
-  looks like a promising way to generate the AST implementation, along
-  with the lexical analyzer, parser, and AST walkers. JavaCC is an
-  alternative, but it suffers from some of the drawbacks of our
-  existing implementation (e.g., numbered references to a node's
-  children).
-
-
-Hybrid Systems and Modal Models
-===============================
-
-Jie Liu has identified a key flaw in the semantics of our finite
-state machine (FSM) hierarchical composition with other models to achieve
-hybrid systems and modal models.  His description:
-
-   "In FSM, there is no way to specify that if a guard is true, then
-   run a model (say a composite actor). ... Nonpreemptive transitions
-   will not work, since I don't want to generate the challenge if the
-   input packet is not a request. A preemptive transition, as it is
-   implemented now, takes one iteration by itself, without firing
-   either the refinement of the source state or the refinement of the
-   destination state. So, putting the generating challenge subsystem
-   inside the destination state won't do the job either."
-
-Jie and Xiaojun Liu proposed two possible solution:
-
-   "One is to extend the expression language, say with
-   execute(actorName), which fires the actor when the transition is
-   taken. The second is to modify the concept of preemptive transitions,
-   so that after the transition is taken, the refinement of the new
-   state is fired."
-
-A third possibility is to introduce a third type of transition that
-fires the destination state refinement. A fourth possibility is to
-introduce a new kind of state, called a "transient state," whose
-refinement fired immediately and whose outgoing transitions are taken
-immediately (if enabled). We have not yet decided which of these
-options to implement.
-
-
-Type System
-===========
-
-Jie Liu has also identified a flaw in the type system:
-
-   "TypeAttribute only takes BaseType as its value. I am using a
-   IntArray to represent a network packet. And a FSM actor will produce
-   IntArrays as its output. But it cannot pass type resolution, since
-   in general FSM actors need to specify their output types manually.
-   But I cannot specify an array type by adding a TypeAttribute."
-
-We have decided that the fix here is to modify TypeAttribute so that it
-takes a "prototype" as a type specification. A prototype is any
-expression that evaluates to the desired type. Any (concrete) type can
-be specified this way, since any (concrete) type can be represented by
-some expression in the expression language.
-
-We have begun to implement this. Yuhong Xiong changed the string
-representation for array and record types so that the new syntax for
-array types is {int} for int array, {double} for double array, etc. The
-old syntax was (int)array, (double)array). The new syntax for record
-types is {item=string, val=double}. The old syntax used : instead of =.
-This change is the first step to make TypeAttribute support structured
-types. Xiaojun Liu then added constants "int" and "double" to the
-expression language to give representative values for the base types.
-The only remaining step is to modify TypeAttribute to use prototypes.
-
-Yuhong Xiong has refined the mechanism for casting record types to more
-primitive record types. This change was suggested by Zoltan Kemenczy
-and Sean Simmons of Research in Motion, a Canadian company that is
-using Ptolemy II for modeling wireless communication systems. Yuhong
-has changed RecordToken.convert() to not chop off the extra fields in a
-lower record token when it is converted to a higher record. Related to
-this, he has also changed RecordToken.add() to pass through all the
-fields in the tokens to be added. For example, when adding a token with
-field "id" and another one with fields "id" and "val", the resulting
-token will have both the "id" and "val" fields. This change does not
-affect the result of any type resolution. For example, in the
-AddSubtract actor, the resolved output type is still the highest types
-of the ports connected to its input (or the least upper bound of those
-port types if they are incomparable). However, the token send out by
-AddSubtract may be a lower record type of the resolved type.
-
-Yuhong Xiong also demonstrated the power of our type system by showing
-how to construct an actor that multiplies both scalars and arrays and
-expresses its type constraints using a monotonic function f(inType,
-paramType) => outType, where inType and outType are the input and
-output types, respectively, and paramType is the type of the factor
-parameter. The value of the function is the least upper bound of inType
-and paramType if inType is a BaseType, or a new array type whose
-element type is f(elementTypeOfInType, paramType) if inType is an array
-type. Note that the function f() is recursive so the input can be an
-array of array, for example. The use of monotonic functions in the type
-system is extremely expressive, allowing very complicated type
-constaints to be expressed in a robust manner.
-
-
-Code Generation
-===============
-
-Christopher Hylands and Steve Neuendorffer began using Soot as a basis
-for code generation. Soot is a "Java Optimization Framework" from McGill
-that is written in Java and available from
+Soot is a "Java Optimization Framework" from McGill that is written in
+Java and available from:
 
    http://www.sable.mcgill.ca/soot/
 
 Soot handles byte code, so we will not have to do class resolution from
 short names to fully qualified names. This should speed up code
-generation quite a bit, and result in a smaller memory footprint for the
-code generator.  Nonetheless, we have had many internal discussions about
-the relative merits of using Soot vs. our current framework, and despite
-considerable obstacles, have decided to invest primarily in a Soot-based
-framework. Two key advantages of basing the generators on Soot are:
+generation quite a bit, and result in a smaller memory footprint for
+the code generator. Nonetheless, we have had many internal discussions
+about the relative merits of using Soot vs. our current framework, and
+despite considerable obstacles, have decided to invest primarily in a
+Soot-based framework. Two key advantages of basing the generators on
+Soot are:
 
  - Code generation will work on any actor you can run, regardless
    of whether source code is provided.  This could become key
@@ -213,7 +136,7 @@ framework. Two key advantages of basing the generators on Soot are:
    The Java language evolves more rapidly than the byte code definition.
 
 It remains to be seen, however, how easy it will be to do the
-transformations that Jeff did.  Steve has successfully gotten "shallow"
+transformations that Jeff did. Steve has successfully gotten "shallow"
 code generation working using Soot (where the simulation classes are
 used for execution), and has made progress on "deep" code generation
 (where the classes are transformed based on their context).
@@ -253,12 +176,160 @@ we have constructed 196 ASTs. Method bodies are excluded from these
 ASTs, so the memory consumption might not be that large ... but the
 run-time overhead of going through all those class files is quite high.
 
-Also, Christopher Hylands got arrays working with Jeff's deep code
-generation.  The difficulty of doing this was part of the impetus
-driving us towards using Soot.
+Steve has made considerable progress on both shallow and deep code
+generation; he is now able to produce code that in-lines the ports,
+parameters, and the schedule of an SDF (synchronous dataflow) model.
 
-Finally, Christopher Hylands built into the code generation framework
-the synthesis of makefiles to go with the generated code.
+We are referring to the new code generation framework under the name
+"Copernicus," because one perspective is that Copernicus just took
+Ptolemy's great models and made them more efficient. Copernicus is also
+a rather tortured acronym, due to Jie Liu, COdegeneration from Ptolemy
+to Embedded, Reconfigurable, and Network Integrated CompUting Systems.
+
+We have established a two-year subcontract with Prof. Shuvra S.
+Bhattacharyya, of the University of Maryland, now under subcontract,
+with the statement of work that attached as an appendix.  Shuvra has
+already made considerable progress on a C back end based on soot;
+he is able to generate C header files from Java classes.
+
+
+Hybrid Systems and Modal Models
+===============================
+
+Jie Liu has identified a key flaw in the semantics of our finite
+state machine (FSM) hierarchical composition with other models to achieve
+hybrid systems and modal models.  His description:
+
+   "In FSM, there is no way to specify that if a guard is true, then
+   run a model (say a composite actor). ... Nonpreemptive transitions
+   will not work, since I don't want to generate the challenge if the
+   input packet is not a request. A preemptive transition, as it is
+   implemented now, takes one iteration by itself, without firing
+   either the refinement of the source state or the refinement of the
+   destination state. So, putting the generating challenge subsystem
+   inside the destination state won't do the job either."
+
+Jie and Xiaojun Liu proposed two possible solution:
+
+   "One is to extend the expression language, say with
+   execute(actorName), which fires the actor when the transition is
+   taken. The second is to modify the concept of preemptive transitions,
+   so that after the transition is taken, the refinement of the new
+   state is fired."
+
+A third possibility is to introduce a third type of transition that
+fires the destination state refinement. A fourth possibility is to
+introduce a new kind of state, called a "transient state," whose
+refinement fired immediately and whose outgoing transitions are taken
+immediately (if enabled). We have not yet decided which of these
+options to implement.
+
+
+Mixed-Rate Modeling
+===================
+
+Mark Wilcuts from the automotive Phase I effort raised the observation
+that Simulink does not provide much help in creating discrete-time
+versions of continuous-time models because if you choose a fixed-step
+solver, then you have to pick one step size that will work everywhere.
+This limitation only really becomes important when you are discretizing
+continuous-time models by choosing a fixed-step solver, and expect to
+use real-time workshop to generate code.
+
+One possible solution to this is to use domain nesting, as in Ptolemy II.
+Jie Liu did an analysis of the issues, and raises the following points.
+
+  "There are additional subtleties when using different step sizes in
+  different parts of the system. For example, suppose system S has
+  subsystems S1 and S2, such that the output of S1 (call it u) connects
+  to the input of S2. Let's say S2 has a faster dynamics than S1, and
+  we choose step size h for S2 and 5*h for S1. Then, the problem is
+  that for the 4 additional integration steps of S2, what input value u
+  should be used. For explicit methods, like Forward Euler, one way to
+  do it is to hold the value of u and use it for five times. Then the
+  issue is whether this will affect the overall precision and stability
+  of the method.
+
+  Now suppose we close the loop so that the output of S2 also feeds
+  into the input of S1. Then for implicit method, like Backward Euler,
+  there are issues like how many fixed point iteration should S2
+  perform for each fixed point iteration of S. If we are not careful,
+  there could be an explosion of integration iterations.
+
+  Simulink avoids these problems by forcing the whole system to use the
+  smallest step size of all parts. We did the followings in Ptolemy II:
+
+  * We also use the smallest step size if the user simply nests CT
+    subsystems inside a CT system. This is implemented by the
+    CTEmbeddedDirector. The director propagates the local step size
+    control information to its outer director. All the hybrid system
+    demos are built in this way.
+
+  * If the user really wants different step sizes in different part of
+    the system, then the two CT subsystems must communicate discretely.
+    That is the outer model must be discrete (e.g. a discrete event
+    model). And the user must explicitly choose how the discrete events
+    are converted to continuous waveform. Like in our previous example,
+    S can have a DEDirector, and u must be explicitly convert to
+    continuous time waveform within S2 (for example, using the
+    ZeroOrderHold actor).
+
+
+Type System
+===========
+
+Jie Liu has also identified a flaw in the type system:
+
+   "TypeAttribute only takes BaseType as its value. I am using a
+   IntArray to represent a network packet. And a FSM actor will produce
+   IntArrays as its output. But it cannot pass type resolution, since
+   in general FSM actors need to specify their output types manually.
+   But I cannot specify an array type by adding a TypeAttribute."
+
+We have decided that the fix here is to modify TypeAttribute so that it
+takes a "prototype" as a type specification. A prototype is any
+expression that evaluates to the desired type. Any (concrete) type can
+be specified this way, since any (concrete) type can be represented by
+some expression in the expression language.
+
+We have begun to implement this. Yuhong Xiong changed the string
+representation for array and record types so that the new syntax for
+array types is {int} for int array, {double} for double array, etc. The
+old syntax was (int)array, (double)array). The new syntax for record
+types is {item=string, val=double}. The old syntax used : instead of =.
+This change is the first step to make TypeAttribute support structured
+types. Xiaojun Liu then added constants like "int" and "double" to the
+expression language to give representative values for the base types.
+The only remaining step is to modify TypeAttribute to use prototypes.
+
+Yuhong Xiong has refined the mechanism for casting record types to more
+primitive record types. This change was suggested by Zoltan Kemenczy
+and Sean Simmons of Research in Motion, a Canadian company that is
+using Ptolemy II for modeling wireless communication systems. Yuhong
+has changed RecordToken.convert() to not chop off the extra fields in a
+lower record token when it is converted to a higher record. Related to
+this, he has also changed RecordToken.add() to pass through all the
+fields in the tokens to be added. For example, when adding a token with
+field "id" and another one with fields "id" and "val", the resulting
+token will have both the "id" and "val" fields. This change does not
+affect the result of any type resolution. For example, in the
+AddSubtract actor, the resolved output type is still the highest types
+of the ports connected to its input (or the least upper bound of those
+port types if they are incomparable). However, the token send out by
+AddSubtract may be a lower record type of the resolved type.
+
+Yuhong Xiong also demonstrated the power of our type system by showing
+how to construct an actor that multiplies both scalars and arrays and
+expresses its type constraints using a monotonic function f(inType,
+paramType) => outType, where inType and outType are the input and
+output types, respectively, and paramType is the type of the factor
+parameter. The value of the function is the least upper bound of inType
+and paramType if inType is a BaseType, or a new array type whose
+element type is f(elementTypeOfInType, paramType) if inType is an array
+type. Note that the function f() is recursive so the input can be an
+array of array, for example. The use of monotonic functions in the type
+system is extremely expressive, allowing very complicated type
+constaints to be expressed in a robust manner.
 
 
 Modeling Strategies
@@ -292,19 +363,11 @@ Performance
 
 We have added a simple mechanism for measuring real-time performance of
 Ptolemy II models executing as simulations (vs. code generation), and
-the initial results show that there is a great deal of improvement
-needed in performance. The mechanism is a plotter that plots its input
-as a function of the real elapsed time in seconds. We have also added a
+the initial results show that there is room for improvement in
+performance. The mechanism is a plotter that plots its input as a
+function of the real elapsed time in seconds. We have also added a
 WallClockTime actor to the sources palette. This one outputs the
 current wall clock time elapsed since the initiation of the model.
-Preliminary results using this are fairly discouraging. All domains
-seem to operate at a rate of around 1000-1300 iterations per second,
-which is quite slow. Surprisingly, there is little difference between
-domains. SDF is slightly faster than DE, PN, and Giotto, but not much.
-Interesting, Giotto seems to be the slowest. This suggests that the
-slowness is due to artifacts in the Ptolemy kernel, and not to the
-properties of the domains. Also, there are often gaps of about 1/3
-second, presumably due to Java garbage collection.
 
 
 TTTech Cluster
@@ -318,7 +381,44 @@ ready for use without extensive participation from TTTech technicians.
 Several of the problems were packaging problems, including defective
 cables, incompatible software, and expired software licenses shipped
 with the product.  Each problem took considerable effort to diagnose
-and resolve.
+and resolve.  Here is, for example, one of his reports to TTTech:
+
+  "I have been working with Georg (and with Wind River folks) and have
+  gotten to the point where the software works! However, I am now
+  noticing some hardware problems.
+
+  It seems that the communications half of node3 is out to lunch. I am
+  able to load to the other half of node3 via the BDM interface, but
+  not to the communications half via the TTP/C interface. With the
+  other nodes (baring cable problems) everything works, so I believe
+  there is some special problem with node 3. Georg mentioned special
+  software to reset the node. I am willing to try that, but my patience
+  is limited. That software (unlike the Wind River BDM tool) needs to
+  work the first or second time. My first choice would be for you to
+  send me an different node 3.
+
+  Regarding the cables, I noticed an interesting thing. When attempting
+  to "reset" the cluster, I noticed that the cluster reset before I had
+  fully removed the 6-pin modular connector. On further
+  experimentation, I found that I could reset the cluster merely by
+  gently bending the modular cable!
+
+  I built a cable tester and discovered that 3 of the 9 modular cables
+  supplied with the evaluation cluster break a connection when bent. In
+  2 out of 3 cases, this breaking connection is at pin 2 (or 5) of the
+  connector. Usually connectors fail at the first or last pin. If you
+  have a more reliable cable available, it would be nice to have a set
+  of those.
+
+  There is something else going on with the cables that is
+  disconcerting. When downloading via the TTP/C interface, likelyhood
+  of a successful download depends on the number of junctiuons between
+  the node being programmed and the master node. With only 1 junction
+  (and a single terminator) download works almost every time. With all
+  5 junctions (and both terminators) download almost never succedes. In
+  the later case, only the one node is connected. This is because of
+  the difficulty of resetting the whole cluster vs the reletive ease of
+  restting a 1-node 1-master cluster.
 
 
 Design and Code Reviews
@@ -329,12 +429,15 @@ We performed the following design reviews:
 * SR (synchronous/reactive) domain kernel
 * Type package
 * ClassWrapper class
+* RTOS domain
 
 We performed the following code reviews:
 
 * Tue SDF Kernel
 * Type package
 * Conversion actors
+* Data package
+* Continuous-time solvers
 
 
 Personnel
@@ -349,12 +452,13 @@ Personnel
 Study Group
 ===========
 
-Our sort-of weekly study group examined the following topics:
+Our quasi-weekly study group examined the following topics:
 
 * Vanderbilt GME.
 * Classic Leslie Lamport paper on time and clocks.
 * Functional reactive programming, from Yale.
 * Protocol synthesis.
+* Aspect-oriented programming.
 
 
 2.  Interactions, Meetings, and Technology Transfer
@@ -363,7 +467,7 @@ Presentations
 =============
 
 -- "Synthesis of Embedded Software from Concurrent Component Models ---
-    The Ptolemy Approach," Edward A. Lee, Porgramming Systems Seminar,
+    The Ptolemy Approach," Edward A. Lee, Programming Systems Seminar,
     UC Berkeley, April 16, 2001.
 
 -- Steve Neuendorffer gave three talks at Vanderbilt, April 2-6:
@@ -379,12 +483,32 @@ Presentations
 -- Steve Neuendorffer attended the Design Automation Conference (DAC),
    and demonstrated Ptolemy II in the University Booth.
 
+-- "Model-Based Approaches toEmbedded Software Design," Edward A. Lee,
+   SRC ETAB Summer Study, Colorado Springs, June 25-26, 2001.
+
+-- "Embedded Software fromConcurrent Component Models," Edward A. Lee,
+   ACM SIGPLAN 2001 Workshop on Languages, Compilers, and Tools for
+   Embedded Systems (LCTES'2001) Jun 22-23, 2001, Snowbird, Utah, USA.
+
+-- "Computing for Embedded Systems," Edward A. Lee, State of the Art
+   Lecture IEEE Instrumentation and Measurement Technology Conference,
+   Budapest, Hungary, May 21-23, 2001.
+
+-- "Research in Embedded Software," Edward A. Lee, presentation for high-
+   level visitors from Volkswagen, AG, May 17, 2001.
+
+-- "Software for the Real World," Edward A. Lee, Software Design and
+   Productivity Workshop, NSF, April 17-18, 2001.
+
 
 Other Interactions
 ==================
 
 *  Weekly meetings with Mobies Phase II project at Berkeley,
    Mondays, 9-10am.
+
+*  Attended Mobies ESWG meeting, Richmond Field Station, California,
+   April 10-11, 2001.
 
 *  Numerous telecons with the Mobies Phase II project on various topics.
 
@@ -423,7 +547,7 @@ Other Interactions
    the group a tutorial on JHDL, his Java-based hardware description
    language.
 
-*  Dr. F. Arbab of CWI, the developer of the Manifold coordination
+*  Dr. Farhad Arbab of CWI, the developer of the Manifold coordination
    language, visited us Wednesday June 20. Manifold realizes a model of
    computation similar to process networks, but with nondeterministic
    merge. It has a clever mechanism supporting mutating models, whereby
@@ -434,7 +558,9 @@ Other Interactions
    source side and keep on the destination side, which means that any
    tokens that have already been produced on the channel will be
    processed by the destination actor. "States" are topologies. The
-   manager changes state by rewiring the graph.
+   manager changes state by rewiring the graph. CWI is the National
+   Research Institute for Mathematics and Computer Science in the
+   Netherlands.
 
 *  Seoul National University has released a GUI 'Hae' for the PeaCE
    environment (see http://peace.snu.ac.kr/research/peace), where PeaCE
@@ -469,12 +595,168 @@ Other Interactions
    has arranged a donation of Trimedia hardware and software to us,
    including an experimental Java environment for the system.
 
+*  Robert Kroeger of the University of Waterloo extended our plot
+   package with facilities for exporting Java images.  This makes it
+   easier to run Ptolemy II models in a servlet and serve the results
+   in images to make it appear as if the model is running locally.
+
+*  Prof. Yuke Wang, of the University of Texas at Dallas, joined our
+   group for the summer to work on general modeling questions. He is
+   particularly interested in building a Petri net domain in Ptolemy II
+   and in exploring hierarchical versions of Petri nets.
+
+*  Pierre Vande Vyvre, of CERN in Switzerland, wrote to inform us about
+   the "intensive usage that we are doing of Ptolemy. We are now having
+   a lot of benefits from the modeling and simulation work."  His details:
+
+   "A realistic model of the ALICE Trigger and Data Acquisition systems
+   has been developed by Giovanna DI MARZO SERUGENDO (fellow in the
+   CERN/IT division) and Tome ANTICIC (Ruder Boskovic Institute,
+   Zagreb).
+
+   A simulation based on this model has been implemented and can now be
+   used for making realistic simulations of the behavior of the Trigger
+   and Data Acquisition systems under different run conditions.
+
+   This simulation is based on a public domain generic tool (Ptolemy)
+   developed by the Department of Electrical Engineering and Computer
+   Sciences of the University of California at Berkeley. under the
+   direction of Prof. Edward Lee.
+
+   The adaptation of Ptolemy to model the ALICE Trigger and Data
+   Acquisition systems has been realized by Tome who will carry on
+   developing and supporting the model.
+
+   People interested to use this tool can contact directly Tome or
+   visit the web site established for this purpose:
+
+       http://trinity.irb.hr/alicedaq
+
+   All the people who want to follow the developments in this area can
+   ask the ALICE secretariat to be on the dedicated mailing list:
+   alice-daq-simulation. All the mails concerning Trigger and DAQ
+   simulation will now be sent only to this mailing list."
+
+*  Ecole Nationale Supirieure d'Inginieurs Electriciens de Grenoble
+   (Institut National Polytechnique de Grenoble, France) reports that
+   they are using Ptolemy for image processing. The project
+   participants are Benoit CHEVALIER, Guillaume CHAPUIS, Christophe
+   SIMON, Fridiric MAUSSANG, Pierre GACON, Jean-Frangois DEPREZ,
+   Olivier DEVELLE, Ludovic DROUINEAU, and Montserrat SALINAS. Contact
+   Montse Salinas G. (montse.salinas@usa.net).
+
+*  Gilles Guerasimoff, from INRIA in France, joined the group for
+   summer to work on building a dynamic dataflow domain in Ptolemy II.
+
 
 3.  Publications
 
-FIXME
+*  Johan Eker, Chamberlain Fong, Jorn W. Janneck, Edward A. Lee and Jie
+   Liu, "Design and simulation of heterogeneous control systems using
+   Ptolemy II," accepted for presentation at the IFAC Conference on New
+   Technologies for Computer Control (joint work with SEC).
+
+*  Edward A. Lee and Yuhong Xiong, "System-Level Types for
+   Component-Based Design," To appear in First Workshop on Embedded
+   Software, EMSOFT2001, Lake Tahoe, CA, USA, Oct. 8-10, 2001. 
+
+*  Edward A. Lee, "Embedded Systems" Technical Memorandum UCB/ERL
+   M01/26, University of California, Berkeley, CA 94720, July 12, 2001
+   (joint work with SEC).
+
+*  Xiaojun Liu, Yuhong Xiong, and Edward A. Lee, "The Ptolemy II
+   Framework for Visual Languages," poster paper, (To appear in)
+   Symposium on Visual Languages and Formal Methods, Stresa, Italy,
+   Sept. 5-7, 2001 (joint work with SEC). 
+
+*  Paul Whitaker, "The Simulation of Synchronous Reactive Systems In
+   Ptolemy II," Master's Report, Memorandum UCB/ERL M01/20, Electronics
+   Research Laboratory, University of California, Berkeley, May 2001.
+
+*  Edward A. Lee, "Computing for Embedded Systems," IEEE
+   Instrumentation and Measurement Technology Conference, Budapest,
+   Hungary, May 21-23, 2001.
 
 
 4. Financial Data
 
 Provided separately on a quarterly basis by the university.
+
+
+APPENDIX
+========
+
+Statement of Work for Maryland Subcontract
+------------------------------------------
+
+Task 1
+------
+
+The proposed project will involve three interrelated tasks in
+furthering the development of code generation in Ptolemy II. Tas k 1:
+Code generation infrastructure. In this task, we will improve the
+architecture and implementation of the ptolemy.lang and
+ptolemy.lang.java packages, which are central to the Ptolemy II code
+generation system. The present design contains a large amount of
+working code, but is lacking in efficiency, robustness, and
+documentation. To improve the efficiency, we will incorporate a
+streamlined approach to loading abstract syntax trees (ASTs) that uses
+a “shallow” loading convention to reduce the size and number of ASTs
+that are loaded. A “shallow” AST is a minimal representation of a class
+that contains just enough information to enable resolution of
+references to the class as a whole. Under our approach, ASTs are
+maintained “shallowly” whenever possible, and are converted to more
+detailed ASTs on a demand-driven basis during static resolution.
+Experiments with a preliminary implementation of shallow loading show
+factors of 10-20 reduction in the number of ASTs loaded, and even
+larger reductions in the sizes of the loaded ASTs. We will further
+develop this shallow loading concept, and integrate it into the larger
+code generation picture.
+
+The extensibility of the current Java language implementation is
+significantly limited by the design of the AST-related data structures.
+Most problematic are the use of hard-coded list indices to access
+components and subtrees within individual AST vertices, and the
+inappropriate use of miscellaneous constants in place of enumerated
+types. We will redesign and reimplement the the AST-related data
+structures for improved extensibility, along with necessary changes
+that are required to the Java front-end (compiler-compiler), semantic
+analysis code, and framework for autogeneration of specialized AST
+node types. One option that we are considering for this is a redesign
+based on an alternative compiler-compiler framework (the leading
+candidates are SableCC from McGill University, and JavaCC jointly from
+Metamata and Sun).
+
+Task 2
+------
+
+
+C code generation back-end. We will also build on our current
+preliminary implementation of a C code generation back-end (the
+ptolemy.lang.c package) to develop a more complete implementation that
+supports most major Java language features, including inheritance,
+array objects, import statements, and interfaces. We will also
+investigate support for native methods, reflection, threads, and
+garbage collection; however, support for these features may be
+limited, as they require large amounts of effort to support fully, and
+interesting demonstrations and experiments can be done without them. A
+major objective in this period will be to demonstrate the C back-end
+capability by integrating it with SDF code generation, and generating C
+code from models in the SDF domain.
+
+Task 3
+------
+
+Shallow code generation. Shallow code generation refers to the
+translation of Ptolemy models (e.g., specified via Vergil) into Ptolemy
+class definitions that implement the models. In this task, we will
+extend the shallow code generation approach to operate in conjunction
+with deep code generation (the standard Ptolemy II form of code
+generation that operates by parsing the Java code for each actor,
+performing type specialization, etc.). In particular, we will develop a
+hybrid code generation facility in which opaque composite actors in the
+SDF domain can be translated in deep mode while enclosing subsystems
+are translated in shallow mode. We will conduct experiments that
+quantify differences in target-code performance that result among
+shallow code generation, hybrid code generation, deep code generation
+using the Java back-end, and deep code generation using the C back-end.
