@@ -4,8 +4,6 @@ I copied the summaries over from laster year, they are visible at
 http://ptolemy.eecs.berkeley.edu/projects/summaries/03/index.html
 but there are no links from the website to them yet.
 
-We need someone to coordinate this.
-
 Each person should have a summary, so either create up or update your
 summary.
 
