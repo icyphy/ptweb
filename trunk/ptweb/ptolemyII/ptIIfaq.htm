@@ -456,6 +456,39 @@ for the nightly test suite.
   Use this method for running models as part of cron jobs etc.
   </dl>
 
+ <p>MoMLApplication supports setting top level parameters using
+command line arguments.
+
+ <p>The MoMLApplication docs say:
+
+<BLOCKQUOTE>
+   If a Ptolemy model is instantiated on the command line, either
+   by giving a MoML file or a -class argument, then parameters of that
+   model can be set on the command line.  The syntax is:
+   <pre>
+   ptolemy <i>modelFile.xml</i> -<i>parameterName</i> "<i>value</i>"
+   </pre>
+   where <i>parameterName</i> is the name of a parameter relative to
+   the top level of a model or the director of a model.  For instance,
+   if foo.xml defines a toplevel entity named "x" and x contains an
+   entity named "y" and a parameter named "a", and y contains a
+   parameter named "b", then:
+   <pre>
+   ptolemy foo.xml -a 5 -y.b 10
+   </pre>
+   would set the values of the two parameters.
+
+</BLOCKQUOTE>
+Toplevel parameters can be set by calling vergil with a similar syntax:
+<pre>
+$PTII/bin/vergil foo.xml -a 5 -y.b 10
+</pre>
+or
+<pre>
+$PTII/bin/ptexecute foo.xml -a 5 -y.b 10
+</pre>
+Note that MoMLSimpleApplication does not do this type of command line parsing.
+
  <p>If you want to start Vergil by hand, the answer depends on which
 version of Ptolemy II you are using.
 
@@ -511,17 +544,17 @@ java -classpath ".;./ptolemy/ptsupport.jar;\
 DoubleReader actor at
 <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/actor/lib/DoubleReader.html"><CODE>http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/actor/lib/DoubleReader.html</CODE></a>
 
- <p>Ptolemy II 3.0.2 includes
+ <p>Ptolemy II 3.0.2 and later includes
 <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/actor/lib/LineReader.html"><CODE>http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/actor/lib/LineReader.html</CODE></a> 
 - Reads a file or URL, one line at a time, and outputs each line as a String.
 
- <p>Ptolemy II 3.0.2 also includes
+ <p>Ptolemy II 3.0.2 and later also includes
 <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/actor/lib/ExpressionReader.html"><CODE>http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/actor/lib/ExpressionReader.html</CODE></a>
 - Reads a file or URL, one line at a time, evaluates each line as an expression and outputs the tokens resulting from the evaluation.
 
  <p> These actors use a
- <p><a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/kernel/attribute/FileAttribute.html">FileAttribute</a>
-to specifies a file or URL. (FileAttribute is new in Ptolemy II 3.0)
+ <p><a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/ptolemy/data/expr/FileParameter.html">FileParameter</a>
+to specifies a file or URL.
  <p>Actors that have Parameters may 
 read data using the <CODE>readFile</CODE>, <CODE>findFile</CODE> and
 <CODE>readMatrix</CODE> expression operators, see
@@ -611,7 +644,6 @@ Ptolemy II is written in Java, and Java has the Java Native Interface
 of an interface betwenn Ptolemy II actors and C code using the
 Java Native Interface (JNI), see
 <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/jni/package-summary.html"><CODE>http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/doc/codeDoc/jni/package-summary.html</CODE></a>
-(This work is present in Ptolemy II 3.0)
 
  <p>Zoltan Kemenczy and others at Research In Motion, Ltd. developed an
 interface to Matlab that uses JNI, see
