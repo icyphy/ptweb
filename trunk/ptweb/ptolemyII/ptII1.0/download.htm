@@ -1,0 +1,179 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II 1.0 beta</title>
+</head>
+<body>
+
+Below are instructions on how to install Ptolemy II 1.0 beta.
+ <p>There are two versions of Ptolemy II 1.0 beta
+<menu>
+<li> Ptolemy II 1.0ptiny beta - A small release that includes only
+what is necessary to build and run models in common domains (
+CT, DE, FSM, PN and SDF).  The Ptiny version is primarily for
+Windows 2000.
+<li> Ptolemy II 1.0 beta - The full version, which includes
+what is in the Ptiny version and what is necessary to create your own actors. 
+The full version also includes experimental domains.
+The full version is for Windows 2000 and various flavors of Unix.
+</menu>
+
+
+<h2>1. Install Java</h2>
+Ptolemy II requires JDK1.2 or later.
+<br>JDK1.3 is preferred.
+<br>The Ptolemy II 1.0 Windows installers require JDK1.3
+
+One way to determine what version of Java (if any) is installed 
+is to run our
+<a href="JavaVersionApplet.htm">Java Version Applet </a>, which
+uses the JDK1.3 plugin
+ <p>Another way is to runcommand below to see if you have Java installed and
+it is the proper version:
+<pre>
+java -version
+</pre>
+If the command cannot be found, or the version that is printed is
+less than 1.3, you should installing JRE 1.3 or JDK 1.3
+
+<p>JRE is the Java Runtime Environment, which does not include
+the compiler <code>javac</code>
+<p>JDK is the Java Development Kit, which does include
+<code>javac</code>.
+ <p>Ptolemy II 1.0ptiny does not require <CODE>javac</CODE>.
+
+However, if you plan on the full version of Ptolemy II (not yet released) and
+writing your own actors, then you will need the JDK to compile your actors.
+
+<p>We can make the JRE available for download, but to get the JDK,
+you need to go to
+<a href="http://java.sun.com/j2se/1.3/" target="_top"><CODE>http://java.sun.com/j2se/1.3/</CODE></a>
+
+
+<menu>
+
+<li> Windows: Download and install the JRE: 
+<a href="j2re-1_3_0_01-win.exe"><CODE>j2re-1_3_0_01-win.exe</CODE></a>
+
+<li> Other Platforms: Download and install the JRE or JDK:
+<a href="http://java.sun.com/j2se/1.3/" target="_top"><CODE>http://java.sun.com/j2se/1.3/</CODE></a>
+</menu>
+
+<h2>2. Install Ptolemy II</h2>
+Below are the instructions to install the two different versions of
+Ptolemy.
+
+<h3>2a. Ptolemy II Ptiny</h3>
+
+<menu>
+
+<li> There are two ways to install Ptolemy II ptiny on Windows machines:
+ 
+<menu>
+<li> Run the installer as an applet by clicking 
+<a href="setupPtiny.htm">here</a>.
+
+ <br>Note that while the installer permission request window states that
+the installer is from InstallShield, Ptolemy II itself is from UC Berkeley.
+</menu>
+
+ <B>or</B>
+<menu>
+<li> Download a 
+<a href="ptII1_0ptinybetasetup.exe">Windows executable</a>, and execute it.
+</menu>
+
+<li> Other Platforms: download the gzipped jar file:
+<a href="ptII1_0ptinybetasetup.jar.gz"><CODE>ptIIsetup.jar.gz</CODE></a>
+ <br>(Note that we have not tested this yet.)
+<ol>
+
+<li> Download <a href="ptII1_0ptinybetasetup.jar.gz"><CODE>ptII1_0ptinybetasetup.jar.gz</CODE></a>
+
+<li> Uncompress it with either <a href="http://www.winzip.com" target="_top">Winzip</a>
+or
+<a href="http://sources.redhat.com/cygwin/" target="_top">Cygwin</a>
+
+<li> Run
+<pre>
+java -jar ptII1_0ptinybetasetup.jar
+</pre>
+
+</ol>
+
+
+</menu>
+
+<h3>2b. Ptolemy II </h3>
+
+<menu>
+
+<li> There are two ways to install Ptolemy II on Windows machines:
+ 
+<menu>
+<li> Run the installer as an applet by clicking 
+<a href="setup.htm">here</a>.
+
+ <br>Note that while the installer permission request window states that
+the installer is from InstallShield, Ptolemy II itself is from UC Berkeley.
+</menu>
+
+ <B>or</B>
+<menu>
+<li> Download a 
+<a href="ptII1_0betasetup.exe">Windows executable</a>, and execute it.
+</menu>
+
+<li> Other Platforms: download the gzipped jar file:
+<a href="ptII1_0betasetup.jar.gz"><CODE>ptIIsetup.jar.gz</CODE></a>
+ <br>(Note that we have not tested this yet.)
+<ol>
+
+<li> Download <a href="ptII1_0betasetup.jar.gz"><CODE>ptII1_0betasetup.jar.gz</CODE></a>
+
+<li> Uncompress it with either <a href="http://www.winzip.com" target="_top">Winzip</a>
+or
+<a href="http://sources.redhat.com/cygwin/" target="_top">Cygwin</a>
+
+<li> Run
+<pre>
+java -jar ptII1_0betasetup.jar
+</pre>
+
+</ol>
+
+
+</menu>
+
+<h2>Bugs</h2>
+The Installshield Installer has a number of bugs:
+<menu>
+<li> The size of the install may be reported as 0kb.
+<li> The percent completed bars may not work.
+<li> You may see the word 'malformed' in the initial installer window.
+<li> Installing a bundled JRE does not work well so we don't use it.
+<li> Other installer bugs can be found in the
+<a href="http://support.installshield.com/download/ipmprelnotes.asp" target="_top">Installshield Multi-platform Release Notes</a>.
+
+</menu>
+
+Other bugs not listed on the limitations page inside Vergil:
+
+<menu>
+
+<li> The tutorials in doc/tutorial do not compile
+<li> We have only tested the installation procedure under Windows 2000 and Windows 98.
+<li> The javasound actor documentation is not included in the release.
+</menu>
+
+If you find bugs, check the limitations page inside Vergil, then
+check this page, and then send email to
+<a href="mailto:ptolemy@eecs.berkeley.edu"><CODE>ptolemy@eecs.berkeley.edu</CODE></a>
+
+
+
+
+</body>
+</html>
