@@ -142,10 +142,12 @@ together.
 
 2.  Equipment/Infrastructure Status:
 
-Christopher Hylands created a cvs/ssh package, which permits secure
-access (with encrypted passwords) to our cvs repository from laptops,
-wherever they might be. His work has broader utility than in just our
-group, and he has made the download available at:
+Christopher Hylands updated our CVS and SSH sources to the most recent
+releases and created a Windows installer. CVS/SSH permits secure access
+(with encrypted passwords) to our cvs repository from laptops,
+wherever they might be. Due to restrictions on releasing software that
+includes encyrption, his work is only accessible from within the UC
+Berkeley EECS Department via
 
    http://ptolemy.eecs.berkeley.edu/cvsdoc/windowsidx.htm
 
