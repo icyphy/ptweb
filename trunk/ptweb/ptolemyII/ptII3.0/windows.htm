@@ -9,6 +9,7 @@
 <h1><a name="Ptolemy II 3.0 Windows Installer">Ptolemy II 3.0 Windows Installer</a></h1>
 
 <h4>Downloads</h4>
+
 <menu>
 <li> 
 <a href="install.htm">Run the Ptolemy II installer as an applet</a>
@@ -16,7 +17,8 @@
 <B>or</B>
 <menu>
 <li> 
-<a href="InstData/Windows/VM/ptIIinst.exe">Download the Ptolemy II 17.4 Mb Windows executable file that includes a private copy of the Java Runtime Environment </a>
+<a href="InstData/Windows/VM/ptIIinst.exe">Download the Ptolemy II 17.4 Mb Windows executable file that includes a private copy of the Java Runtime Environment</a>  
+<B>Most Windows users will select this installer</B>
 </menu>
 <B>or</B>
 <menu>
@@ -45,32 +47,23 @@ instructions.
 </h3>
 
 <p>
-Ptolemy II requires Java 1.4 or later.
-Java 1.4.1_02 is preferred.
 
- <p>Under Windows, you may either download an installer that 
-includes the appropriate version of Java, or you may install Java
-by hand and then download an installer that does not include
-Java.
+<h4>Which Installer?</h4>
 
- <p> Note that under Java 1.4.1_02, viewing local applets that have
-spaces in the path name may fail if the applet tries to download a
-data file.  The workaround is to place the Ptplot distribution in a
-directory that does not have space in the pathname.  For details, see
-the <a href="ptII3.0/doc/troubleshooting.htm#spaces">Troubleshooting Guide</a>.
+ <p>Under Windows, there are two installers, one that includes
+a private copy of the Java Runtime Environment (JRE) and one that does not.
+ <p>The installer applet is merely a wrapper for these two installers.
 
-<p>
-One way to determine what version of Java (if any) is installed 
-is to run our
-<a href="JavaVersionApplet.htm">Java Version Applet </a>, which
-uses the Java 1.4 plug-in.
-Another way is to run the command below to see whether
-you have Java installed, and whether it is the proper version:
-<pre>
-java -version
-</pre>
-If the command cannot be found, or the version that is printed is
-less than 1.4, you should install the plug-in, JRE 1.4, or JDK 1.4
+ <p>Download the installer with the private copy of the JRE if you
+<B>do not</B> want to run the Ptolemy II demo applets and want
+to have a stable self contained Ptolemy II installation that does not
+rely on other versions of the JRE that might be on your machine.  Note
+that after installing with Ptolemy II with the private JRE you may
+later download another JRE later to view the applets.
+ <br><B>Most Windows users will use this installer.</B>
+
+ <p>Download the installer without the private copy of the JRE if you
+have either the JRE or the Java Development Kit (JDK) installed.
 
 <h4>JRE vs. JDK</h4>
 
@@ -89,14 +82,34 @@ If you want to extend Ptolemy II by writing your own actors, then
 <a href="download.htm">download the source and recompile</a>.
 
 
+<h4>Which Version of Java?</h4>
+
+Ptolemy II requires Java 1.4 or later Java 1.4.1_02 is preferred.
+ <br>Java 1.4.2-beta seemed buggy to us.
+
+<p>
+One way to determine what version of Java (if any) is installed 
+is to run our
+<a href="JavaVersionApplet.htm">Java Version Applet </a>, which
+uses the Java 1.4 plug-in.
+Another way is to run the command below to see whether
+you have Java installed, and whether it is the proper version:
+<pre>
+java -version
+</pre>
+If the command cannot be found, or the version that is printed is
+less than 1.4, you should install the plug-in, JRE 1.4, or JDK 1.4
+or use download the installer that includes a private copy of the JRE
+
+
 <h4>Java 3D</h4>
 Java 3D is necessary to run the GR domain.
  <br> See the 
 <a href="http://java.sun.com/products/java-media/3D/download.html">GR domain documentation</a> for details.
 
 
-<p>
-Downloads:
+<h4>Java Installers</h4>
+
 <menu>
 <li> Windows JRE: The Java runtime environment, JRE (no Java compiler), U.S. English only (5.4 Mb):
  <br><a href="j2re-1_4_1_02-windows-i586.exe"><CODE>j2re-1_4_1_02-windows-i586.exe</CODE></a> 
@@ -118,15 +131,26 @@ Downloads:
 
 <h3>2. Install Ptolemy II</h3>
 
+<h4>Where to install?</h4>
+
+Note that under Java 1.4.1_02, viewing local applets that have
+spaces in the path name may fail if the applet tries to download a
+data file.  The workaround is to place the Ptolemy II installatoin in a
+directory that does not have space in the pathname.  For details, see
+the <a href="ptII3.0/doc/troubleshooting.htm#spaces">Troubleshooting Guide</a>.
+
+<h4>Ptolemy II Installers</h4>
+
+Choose one of the Windows installers below
 <menu>
 <li> 
 <a href="install.htm">Run the installer as an applet</a>.
 This applet, built with a commercial product from Zero G Inc.,
 will install Ptolemy II, from Berkeley, on your machine.
- <br>If you choose to install via the applet, a dialog will pop
-up asking if you will grant permission to run software from 
-Zero G Software.  To continue with the installation process,
-click on the 'Grant' button.
+ <br>If you choose to install via the applet, a dialog will pop up
+asking if you will grant permission to run software from Zero G
+Software or University of California at Berkeley.  To continue with
+the installation process, click on the 'Grant' button.
 
 </menu>
 
