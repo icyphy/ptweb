@@ -1,0 +1,155 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Program Summary</title>
+</head>
+<body>
+<h1>Process-Based Software Components for Networked Embedded Systems</h1>.
+
+<p>
+<ul>
+<li><em>Principal Investigator</em>:
+	<a href="http://ptolemy.eecs.berkeley.edu/~eal/" target="_top">
+Edward A. Lee</a>
+<li><em>Co-Principal Investigator</em>:
+	<a href="http://www.eecs.berkeley.edu/~tah/" target="_top">
+Tom Henzinger</a>
+<li>
+	<em>Organization</em>:
+	<a href="http://www.berkeley.edu/" target="_top">University of California at Berkeley</a>
+<li> <em>Start date</em>: June 2000
+<li> <em>End date</em>: November 2004
+<li> <em>Contract number</em>: F33615-00-C-1703
+</ul>
+</p>
+<p>
+This project aims to develop
+technology for systematic composition of embedded software components.
+</p>
+<h2>Objectives</h2>
+<p>
+Strong type systems have done more than any other "formal method" to
+improve robustness and composability of software. However, type systems
+today (at least those in common usage) talk only about static
+properties of component interfaces. The type signature of functions,
+procedures, and methods defines the data layout of arguments and
+returned values, but fails to define calling conventions. Dynamic
+properties, such as calling conventions that state that one method must
+be called only if another method has been called, are not expressed in
+the interface definition of a component, except informally. And most
+system integration problems today arise because of incompatibilities in
+the dynamic properties of software components.
+</p>
+<p>
+While promising methods, such as design by contract, have been explored
+by the research community, our approach is to focus on those techniques
+that are formally manipulable, and those that embrace concurrency. Type
+systems are an example of formally manipulable models, and their formal
+properties account in no small part for their robustness in
+application.
+</p>
+<p>
+Our focus is on the design of process-oriented components.  Such
+components operate concurrently, and we are particularly concerned
+with the dynamics of their interaction, including for example the
+communication protocols that they use when exchanging data.
+Our approach is inspired by type systems, in that we propose to
+characterize such dynamics as part of the interface definition
+of a component.  The characterization itself will have enough in
+common with a classical "type" that mechanisms such as type
+consistency checks, type inference, and polymorphism can be applied.
+</p>
+<p>
+Our interest is in real-time applications, which implies that models of
+time are a critical part of the abstractions that we will develop. The
+purpose of the mechanisms we develop is to improve robustness and
+safety while promoting component-based design.
+</p>
+<h2>Approach</h2>
+<p>
+Our plan is to build on top of a Java infrastructure that we have been
+developing at Berkeley called Ptolemy II. We will augment component
+interfaces to capture dynamic properties, particularly concurrency,
+communication protocols, and real-time requirements and properties. We
+will define domains, which are models of computation (MoC) that govern
+the interactions of components, and we will define the MoCs as sets of
+compatible dynamic types. These MoCs will capture design patterns for
+component-based concurrent system designs. Finally, we will integrate
+modeling of physical and information processes, viewing the models as a
+form of reflection (where a system contains a model of itself).
+</p>
+<h2>Recent Accomplishments</h2>
+<p>
+Although the project has just started, we have made some progress on two
+fronts.  The first has been to determine that nondeterministic automata
+can be used to characterize dynamic interface properties of several
+models of computation (continuous-time, discrete-events, synchronous
+dataflow, process networks, and communicating sequential processes).
+Moreover, we have shown that the simulation relations among these
+automata form a lattice, and hence have the structure of a type system.
+The second front has been to build an architecture for model-based
+generators, which will use knowledge of the model of computation to
+synthesize efficient and reliable embedded software from models.
+The architecture uses a Java compiler to construct an abstract syntax
+tree for the components, and then uses model-based tree transformers
+to modify the AST using the properties of the model of computation.
+</p>
+<h2>Current Plan</h2>
+<p>
+We use the term "domain" for a software realizations of
+a model of computation.  We are specifying interface definitions
+for various domains that are relevant to model-based design of
+embedded software, particularly those with real-time quality-of-service
+properties.  We are working on abstraction of the real-time properties,
+requirements, and performance of components.
+We are evolving the generator infrastructure for synthesis of embedded
+software, with a particular goal in the near term of producing embedded Java
+that exploits features of nascent off-the-shelf real-time Java environments.
+</p>
+<h2>Technology Transfer Plan</h2>
+<p>
+U.C. Berkeley has a tradition of making software freely available in
+order to disseminate methodology. Our standard copyright agreement is
+very liberal, permitting commercialization of the software and
+derivative works. This mechanism has proved extremely effective at
+technology transfer. Within the university, distributing software is
+viewed as a form of publication, even within the tenure and promotion
+process.
+</p><p>
+Although technically we do not provide support for such software, we
+have in the past been able to provide some support through newsgroups,
+e-mail mailing lists, and the World Wide Web. We plan to continue this
+informal support network for software developed under this project, and
+to extend it with the use of applets for dissemination and education of
+potential users.
+</p><p>
+Previous software releases from the Ptolemy group have received quite a
+bit of attention in industry. They are openly acknowledged as the
+progenitors of the latest mixed signal design environment from Hewlett
+Packard’s EESoft division (now part of Agilent), called ADS, or
+advanced development system. Ptolemy software has also strongly
+influenced versions of the SPW and CONVERGENCE design environments from
+the industry leader in signal processing design software, Cadence
+Design Systems. More recent software from Cadence has been influenced
+indirectly through the Polis project, also at Berkeley, which built on
+top of Ptolemy group software a hardware/software codesign environment.
+Our work has also had considerable influence on the COSSAP system
+produced by Synopsys and its descendants. BNeD [http://www.BNeD.com]
+has commercialized a modeling environment for the design of optical
+fiber systems based on Ptolemy software. Structured Software Systems
+has constructed a financial modeling system and on-line trading system
+based on Ptolemy software. Technologies Lyre has interfaced Ptolemy
+software to hardware subsystems designed for rapid prototyping of
+signal processing systems. A number of companies have used and extended
+software from the Ptolemy group without turning it into commercial
+products. These include Lockheed Martin, Hughes Aircraft, Motorola,
+Berkeley Design Technology, DQDT (Dimensions in Quick Design
+Turnaround), White Eagle Systems Technology, Inc., LG Electronics, Data
+Flux Systems, Mitsubishi, and Thomson CSF. Ptolemy software has also
+been used at several universities, including the University of
+Pittsburgh, the University of Washington, and several in Europe.
+</p>
+</body>
+</html>
