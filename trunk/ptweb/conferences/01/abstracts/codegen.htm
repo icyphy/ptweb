@@ -7,14 +7,24 @@
 </head>
 <body>
 <b>Abstract of Code Generation in Ptolemy II</b>
-<br><I>Shuvra S. Bhattacharyya</I>, University of Maryland at College Park
+<br><I>Jeffrey Tsay, Shuvra S. Bhattacharyya<sup>1</sup>, Christopher Hylands<sup>2</sup>, Edward A. Lee<sup>2</sup> </I>, <sup>1</sup>University of Maryland at College Park
+<sup>2</sup>
 <br>ssb@eng.umd.edu
-<p> Code generation in Ptolemy II uses two styles: deep and shallow.
-Deep code generation is the approach used by Jeff Tsay to read
-in Java classes, generate an AST and output Java code that has
-few depencies on the Ptolemy classes.
-Shallow code generation reads in a model and generates Java code for
-a composite actors that implements that model.
-The poster will compare and contrast these two styles. 
+
+<p>In this poster, we describe a software architecture and
+associated infrastructure for developing component-based software and
+hardware synthesis tools in Ptolemy II. Previous related efforts on
+synthesis tools have maintained a high degree of separation between
+inter-component and intra-component compilation, which limits
+opportunities for effective optimization. The Ptolemy II synthesis
+infrastructure parses intra-component Java source code and integrates
+this source code analysis with analysis of the relevant
+inter-component model of computation. Customized code generators can
+then be invoked to synthesize code for arbitrary target languages from
+the Ptolemy II integrated intermediate representation. To provide
+further flexibility, Ptolemy II also provides a shallow code
+generation mode that reads in a model and generates Java code for a
+composite actors that implements that model.
+
 </body>
 </html>
