@@ -1,0 +1,65 @@
+<html>
+<!--$Id$ ->
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Ptolemy II Tool Evaluation Release</title>
+</head>
+<body>
+
+<h1>Ptolemy II Tool Evaluation Release</h1>
+<p>
+Per the request of the automotive OEP team, we are making available an
+evaluation release of Ptolemy II together with worked out examples
+of both the vehicle-to-vehicle (V2V) model (as a hybrid system) and
+the engine throttle control (ETC) (as a mixed continuous/Giotto/SDF model).
+The Ptolemy II release is a preliminary version of the 2.0 release.
+It is made available via an experimental web launching tool, which
+makes installation particularly simple.  The V2V and ETC models are
+posted on the web rather than bundled with the software distribution, in part
+to illustrate the ease with which Ptolemy II models can be shared via
+the web.  The steps are as follows:
+
+<ol>
+<li> <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/jnlp/index.htm" target="_top">Install or update Ptolemy II Web Edition</a>. This will
+result in Ptolemy II starting on your computer.  You should see the welcome
+screen, which includes several useful links (such as the "quick tour").
+If you have already installed Ptolemy II 2.0, Web Edition, then you can
+start Ptolemy II from your Start menu, and proceed to the next step.
+<p>
+<li> You can access the ETC model by opening
+the following URL using the Open URL command in the File menu:
+<pre>
+   http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/jnlp/etc.xml
+</pre>
+Hint: under Windows, highlight the above URL, right click and select copy
+and then go to the Ptolemy window, select 
+<code>File-&gt;Open URL</code>, highlight the text with the mouse
+and then use Control-V to paste the contents of the clipboard 
+into the Open URL text entry.
+
+<br>To run the model, select <code>View -&gt; Run</code>.
+<br>To explore the model, right click on icons with a red border, and
+select <code>Look inside</code>.
+<p>
+<li> The V2V model can be accessed with the following URL:
+<pre>
+   http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/jnlp/V2V.xml
+</pre>
+Note that opening this model will cause two warning windows to
+pop up that state that Ptolemy is reading MoML from the Ptolemy
+website.  This is because the V2V model uses a composite actor
+that is being searched for on the Ptolemy website.
+<br>Hit <code>OK</code> to proceed.
+<br>To run the model, select <code>View -&gt; Run</code>. Note that this
+model, developed by the U. Penn. Mobies project, is a hybrid system.
+<br>To explore the model, right click on icons with a red border, and
+select <code>Look inside</code>.
+<p>
+<li>
+Read the Ptolemy II tutorial (FIXME: provide), and experiment with
+constructing your own models.
+</ol>
+
+</body>
+</html>
