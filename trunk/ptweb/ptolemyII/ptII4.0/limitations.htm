@@ -3,12 +3,12 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <link href="../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
-<title>Ptolemy II 4.0-beta Limitations</title>
+<title>Ptolemy II 4.0 Limitations</title>
 </head>
 <body>
-<h2>Ptolemy II 4.0-beta Limitations</h2>
+<h2>Ptolemy II 4.0 Limitations</h2>
 
-The <a href="ptII4.0-beta/doc/ptII4.0.release.htm">Ptolemy II 4.0-beta Release notes</a>
+The <a href="ptII4.0/doc/ptII4.0.release.htm">Ptolemy II 4.0 Release notes</a>
 list limitations.  The Vergil welcome window has a link to
 a similar list.
 
@@ -28,18 +28,102 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 	<menu>
 	<li> Vergil
 	<li> The local version of the web pages
-	<li> The <a href="ptII4.0-beta/doc/index.htm" target="_top">PtolemyII 4.0-beta website version of the web pages</a>
+	<li> The <a href="ptII4.0/doc/index.htm" target="_top">PtolemyII 4.0 website version of the web pages</a>
 	<li> The Web Start version
 	</menu>
 </menu>
 
 <h2>Places to go</h2>
 <menu>
-<li><a href="ptII4.0-beta/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
-<li> <a href="ptII4.0-beta/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
+<li><a href="ptII4.0/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
+<li> <a href="ptII4.0/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
 </menu>
 
-<h2>Changed between 4.0-alpha and 4.0-beta</h2>
+<h2>Changed between 4.0 and 4.0</h2>
+<menu>
+
+<li> Support for the Macintosh is greatly improved.
+
+<li> Added a "save submodel only" option to Save As when inside a submodel.
+
+
+<li> Enabled editing top-level icons associated with source files.
+
+
+<li> Fixed a bug in ImageAttribute that made it fail when used in the custom
+icon of a class definition.
+
+
+<li> Improved the terrain model demo in the wireless domain and VisualSense
+and included it in the VisualSense quick tour.
+
+
+<li> Fixed propagation of parameter value changes to instances and subclasses
+so that changes that are more local override changes that are more global.
+
+
+<li> Design and code reviewed kernel and kernel.util classes that dealt with
+the class and inheritance mechanism. This resulted in many changes to the
+documentation and some changes to the APIs.
+
+
+<li> Added "Restore Defaults" button to parameter dialog, which permits
+reversing an override of parameter values in an instance or subclass.
+Also, colored the text in expressions to indicate visually whether
+parameter values are overridden.
+
+
+<li> Configuration: Open the instance rather than the class definition
+if the instance contains an instance of TableauFactory. This fixes
+a bug where .vergil.toolbox.FileEditorTableauFactory did not work when it
+was placed in an instance of a class.
+
+
+<li> Fixed a bug where cloning would not reset value listeners lists
+of Variable and ConfigurableAttribute. This caused a memory leak
+(and probably a performance hit) when using actor-oriented classes
+and when using the MultiInstanceComposite actor.
+
+
+<li> StringUtilities: Fixed a bug where sanitizeName() would fail if
+given an empty string.
+
+
+<li> Fixed a long-standing bug where could not undo a link to the
+inside of a port.
+
+
+<li> Fixed a bug where an exception during execution of a change
+could prevent subsequent changes (deletion of links and
+entities) from completing.
+
+<li> Jar URLs that have fragments are now properly handled.
+For example, "doc/codeDoc/ptolemy/actor/lib/comm/package-summary.html#package_description" is now properly found in the doc/codeDoc.jar file.
+
+
+<li> We now properly find the javadoc HTML pages if the 
+location of the Ptolemy II release is in a directory that has
+spaces in the path name.
+
+
+<li> We print a warning message if the ptolemy.ptII.dir property
+contains "cygdrive".  This sort of problem occurs under Cygwin when
+the user incorrect does
+<pre>
+PTII=`pwd`
+</pre>
+instead of
+<pre>
+PTII=c:/Ptolemy/ptII
+</pre>
+
+
+<li> Various junk files have been excluded from the release.
+
+</menu>
+
+
+<h2>Changed between 4.0-alpha and 4.0</h2>
 
 <h3>Feature enhancements</h3>
 
@@ -148,14 +232,26 @@ for use by Eclipse
 
 <h3>Know Limitations</h4>
 
+<h4>Web Start</h4>
+
 <menu>
 
+<li> The PSDF Blind Communication demo does not run under Web Start,
+the message is:
+<pre>
+ptolemy.kernel.util.IllegalActionException: The number of elements in the
+input ArrayToken (2047) is not the same as the arrayLength parameter (2048).
+</pre>
+
+<li> The JAIImageReader actor does not work under WebStart.
+The problem is that JAIImageReader cannot read from a URL.
+
+</menu>
+
+
 <li>See the
-<a href="ptII4.0-beta/doc/ptII4.0.release.htm#limitations">Ptolemy II 4.0-beta Release notes</a>
+<a href="ptII4.0/doc/ptII4.0.release.htm#limitations">Ptolemy II 4.0 Release notes</a>
 for known limitations.
-<li>Ptolemy II 4.0-beta does not work very well at all under Mac OS X.
-See the <a href="mac.htm">Ptolemy II 4.0-beta Notes for Mac OS X</a> page for
-details.
 
 
 <li> If an icon file is not present, then a Vergil applet might
