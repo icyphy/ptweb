@@ -1,0 +1,623 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-11/1/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        10/1/01 - 12/31/01
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Dale Vancleave
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our focus is on component-based design using principled models of
+computation and their runtime environments for embedded systems. The
+emphasis of this project is on the dynamics of the components,
+including the communication protocols that they use to interface with
+other components, the modeling of their state, and their flow of
+control. The objective is to provide mechanisms for introspection,
+supporting both the ability of the run-time environment to safely
+dispatch tasks and the ability of components to adapt their interfaces
+using polymorphism. The focus is on real-time applications, which
+implies that models of time are a critical part of the abstractions
+that we are developing. The purpose of the mechanisms we develop is to
+improve robustness and safety while promoting component-based design.
+
+This reporting period was quite busy. We organized and held an
+extremely successful First International Workshop on Embedded Software,
+EMSOFT 2001. We have made progress on code generation, Giotto modeling,
+unit systems, type systems, the TM multitasking model of computation,
+and specification and modeling of actors in component-based design. We
+have also improved the web integration of our software infrastructure
+by making it possible to run "sandbox" versions that can safely execute
+models that are obtained over the web. We have made numerous other
+improvements to the software infrastructure and integration with
+MathWorks tools.
+
+
+1.  Research Status
+
+EMSOFT Workshop
+===============
+
+We (primarily Tom Henzinger and Christoph Kirsch) organized EMSOFT
+2001, the First International Workshop on Embedded Software, which was
+held on October 8-10, 2001, Tahoe City, California.  The all-star
+program is summarized below:
+
+ -- N. Wirth: Embedded systems and real-time programming
+ -- J. Sztipanovits: Embedded software--challenges and opportunities
+ -- J. Stankovic: VEST--a toolset for constructing and analyzing 
+           component-based embedded systems
+ -- R. Rajkumar: An end-to-end methodology for building embedded systems
+ -- P. Cousot: Verification of embedded software--problems and perspectives
+ -- M. Broy: From requirements to validated embedded systems
+ -- J. Sifakis: Modeling real-time systems--challenges and work directions
+
+ -- S. Sastry: Hierarchical approach for design of multi-vehicle 
+           multi-modal embedded software
+ -- W. Wolf: Embedded software for video
+ -- K. Butts: Usage scenarios for an automated model compiler
+ -- G. Berry: Synchronous programming techniques for embedded 
+           systems--present and future
+ -- P. Caspi: Embedded control--from asynchrony to synchrony and back
+ -- A. Benveniste: Some synchronization issues when designing 
+           embedded systems from components
+ -- D. Schmidt: Adaptive and reflective middleware for 
+           distributed real-time and embedded systems
+ -- W. Pree: Embedded software market transformation through 
+           reusable frameworks
+ -- P. Hudak: Directions in functional programming for 
+           real(-time) applications
+
+ -- H. Kopetz: The temporal specification of interfaces in 
+           distributed real-time systems
+ -- E. Lee: System-level types for component-based design
+ -- L. de Alfaro: Interface theories for component-based design
+ -- S. Malik: Embedded software implementation tools for fully 
+           programmable application-specific systems
+ -- K. Palem: Compiler optimizations for adaptive EPIC processors
+ -- R. Wilhelm: Reliable and precise WCET determination for a 
+           real-life processor
+ -- A. Sangiovanni-Vincentelli: Using multiple levels of 
+           abstractions in embedded software design
+ -- R. Alur: Hierarchical hybrid modeling of embedded systems
+ -- P. Alexander: Heterogeneous modeling support for embedded systems design
+ -- K. Jeffay: Rate-based resource allocation models for embedded systems
+ -- M. Rinard: An implementation of scoped memory for Real-Time Java
+ -- R. Cytron: Storage allocation for real-time, embedded systems
+ -- D. Culler: A network-centric approach to embedded software 
+           for tiny devices
+ -- L. Thiele: Embedded software in network processors--models and algorithms
+ -- J. Rushby: Bus architectures for safety-critical embedded systems
+ -- P. Varaiya: Design of autonomous, distributed systems
+ -- S. Vestal: Formalizing software architectures for embedded systems
+ -- T. Henzinger: Giotto--a time-triggered language for embedded programming
+
+
+Automotive OEP
+==============
+
+Our interaction with the automotive Phase II researchers at Berkeley,
+Ford, and GM, continues. The interest in using Giotto for constructing
+at least the ETC model has increased. To better support Giotto,
+Christopher Hylands ported giottoc-0.1 to Windows by using Mingw32 (it
+was originally written for Linux). Haiyang Zheng made a number of
+improvements to the Giotto domain in Ptolemy II, making it fully
+usable, and more importantly, fully interoperable with other domains.
+
+Christoph Kirsch, Haiyang Zheng, Yang Zhao, Yuke Wang, and Edward Lee
+worked together to build a preliminary Giotto code generator. This
+produces Giotto code from a Ptolemy II model in the Giotto domain. The
+first version of this code generator was built in two days.
+
+Christoph Kirsch was able to get Giotto and, in particular, the
+embedded machine, to run on OSEK. He can run a demo example with all
+features on the MPC 555 board, even user-activated mode switching,
+which works by reading the host keyboard through the serial line.
+Unfortunately, the DIAB linker from Wind River is buggy. Resizing some
+of his data structures appears to work around the problems.
+
+
+Code Generation
+===============
+
+Steve Neuendorffer continues to build the generic Soot-based code
+generation framework for Ptolemy II. Together with Christopher Hylands,
+he has built a regression test mechanism that leverages the existing
+regression tests for the Ptolemy II framework by running these models
+through successive stages of code generator optimizations and checking
+that the generated code passes the regression test.
+
+We can generate valid shallow code for 137 out of 161 of the auto
+tests. Christopher Hylands has also provided a user interface for
+invoking code generation from within Vergil. Most of the test failures
+are due to lack of adequate support for hierarchical models.
+
+Steve Neuendorffer has done some preliminary performance measurements
+on the deep code generator. The measurements were generated by writing
+out class files at various stages of execution using the ClassWriter
+and JimpleWriter transformers. He then ran the code manually (although
+he is working on a script). For an orthogonal communication system
+example, running 50,000 samples takes the following times:
+
+  No code generation: 23 seconds.
+  Shallow code generation: 21 seconds.
+  Deep codegen: 7 seconds
+
+Steve determined (surprisingly) that inlining parameters has a marginal
+effect on speed. Most of the improvement comes from inlining the SDF
+schedule and inlining the SDF communication. These numbers do not
+include token unboxing (replacing tokens with their native equivalents)
+or cross-actor optimization, neither of which have been implemented
+yet. These numbers also do not reflect codesize differences or indirect
+tree shaking. Minimal codesize is critical for embedded code.
+
+Shuvra Bhattacharyya (under subcontract from Univ. of Maryland) reports:
+
+  At Maryland, we are working on a C code generation back-end to the
+  Ptolemy II code generation infrastructure. This will allow for code
+  generation from Ptolemy II models directly to C without requiring
+  separate domains or actor libraries for C code generation. This C
+  generation capability will be made available publicly once it is
+  completed.
+
+  We (I now have a student working on this too) have been making
+  further progress with our Soot based back-end, and are now tackling
+  some of the more tricky aspects, like exceptions, interfaces, and
+  arrays. Working with Soot has been going quite smoothly.
+
+
+Code Generation of Circuits
+===========================
+
+Steve Neuendorffer and Ben Warlick have managed to generate some simple
+hardware circuits (described in JHDL) from Ptolemy II synchronous
+dataflow models. The idea is to use many of the same code generation
+techniques, up to the point of replacing parameter values. At that
+point, instead of replacing the ports, they analyze the actor code to
+extract a data dependency graph. The nodes of the graph are roughly the
+token operations that the actor performs (addition, subtraction, get,
+send, etc...) and the edges are the data dependencies between those
+operations. A key aspect that differentiates this graph from data
+dependance graphs that are commonly used in programming languages is
+that some nodes in the graph represent delays. The data dependence
+graph does not represent the data dependencies for all firings of tha
+actor, but only for a single firing. Put another way, the delays make
+explicit the implicit state that an actor stores from one firing to the
+next. As such, the graph is almost exactly an SDF graph with rates of
+one.
+
+To generate a circuit for the entire model, they take the dataflow
+graphs extracted from each actor, and splice them together according to
+the connectivity in the ptolemy model, matching the gets and sends as
+appropriate. At this point, they also add in delay nodes (that are
+identical to the delay nodes above) for the SDF delays that are
+annotated in the model. The result is a dataflow graph that merges
+information analyzed from the actors, with information explicitly
+specified in the ptolemy model. At this point it is a simple matter to
+traverse the combined graph and write JHDL. Edges become wires, delays
+become registers, and primitive token operations become synthesized
+logic.
+
+There are currently quite a few limitations. It only handles homogenous
+SDF (but Mike Williamson's PhD thesis tells us how to extend this, now
+that we have the actor information), it only handles integers (but
+doubles and fixed point should be simple matters), it doesn't handle
+loops in the actor code (these will probably be unrolled, or we can use
+known compiler techniques for nested loop analysis), and it doesn't
+handle multiports (for simplicity of the dataflow representation, but
+this is not fundamentally hard).  Thus, it is really at the point of
+a concept demonstration.
+
+
+Timed Multitasking
+==================
+
+The timed multitasking (TM) domain, created originally by Jie Liu for
+the DARPA/SEC project to address the precise mode change problem,
+offers a model of computation based on priority-driven multitasking, as
+common in real-time operating systems (RTOSs), but with more
+deterministic behavior. We are improving our understanding of its
+semantics and how it interacts with other domains, and how it relates
+to the Giotto and discrete event models of computation.
+
+In TM, actors (conceptually) execute as concurrent threads in reaction
+to inputs. The domain provides an event dispatcher, which maintains a
+prioritized event queue. The execution of an actor is triggered by the
+event dispatcher by invoking first its prefire() method. The actor may
+begin execution of a concurrent thread at this time. Some time later,
+the dispatcher will invoke the fire() and postfire() methods of the
+actor (unless prefire() returns false).
+
+The amount of time that elapses between the invocation of prefire() and
+fire() depends on the declared executionTime and priority of the actor
+(or more specifically, of the port of the port receiving the triggering
+event). The domain assumes there is a single resource, the CPU, shared
+by the execution of all actors. At one particular time, only one of the
+actors can get the resource and execute. Execution of one actor may be
+preempted by another eligible actor with a higher priority input event.
+If an actor is not preempted, then the amount of time that elapses
+between prefire() and fire() equals the declared. executionTime. If it
+is preempted, then it equals the sum of the executionTime and the
+execution times of the actors that preempt it. The model of computation
+is more deterministic than the usual priority-driven multitasking
+because the actor produces outputs (in its fire() method) only after it
+has been assured access to the CPU for its declared executionTime. In
+this domain, the model time may be synchronized to real time or not.
+
+There are a number of ways in which this domain addresses the priority
+inversion problem:
+
+* Tasks can either be nonpreemptable or arbitrarily preemptable. They can
+  not be partially preemptable (i.e. by grabbing a lock and blocks a high
+  priority task, while being preempted by a mid-priority task). Partially
+  preemptable tasks are the major source for priority inversion.
+
+* A nonpreemptable task is essentially a highest priority task once it
+  is started. Scheduling theories called "variable priority scheduling"
+  do response time analysis in this scenario. But designers will
+  generally find it more convenient to make tasks arbitrarily
+  preemptable.
+
+* Resource management should be made explicit. If there is a resource,
+  say the disk, which may be written by several actors, then a correct
+  design should use one actor to manage the disk and make other actors
+  talk to this actor through ports. This will make the communication
+  and concurrency among multiple writers explicit. And the actor that
+  manages the disk can be arbitrarily preempted, since no other actors
+  will disturb its task.
+
+
+Caltrop - An Actor Language
+===========================
+
+Johan Eker, Jorn Janneck, and Chris Chang have been working on the
+design of a language for specifying actors in an actor-oriented design.
+They are addressing the issue that to design actors today, system
+builders have to understand many subtleties about Ptolemy II. In
+particular, they have to understand the abstract semantics. The
+objective of the actor design language is to insulate the system
+builder from many of these subtleties by offering an actor language
+with semantics that lends itself to automatically extracting the actor
+structure.
+
+The language, tentatively called Caltrop, is a small domain-specific
+language for writing down the functionality of (atomic, as a first
+step) actors -- including specifically their ports, their parameters,
+typing constraints, and preconditions for firing. The idea is to make
+producing an atomic actor more accessible to users, and at the same
+time provide a somewhat higher-level description of actor
+functionality, which may be helpful in generating code. As a side
+effect, atomic actors in this language are insulated against API
+changes. Progress on Caltrop continues.
+
+
+Calif - An abstract intermediate form 
+=====================================
+
+John Reekie has been developing Calif - An abstract intermediate form
+for reasoning about actors and computation. Unlike, for example, the
+higher-level language Caltrop, Calif includes information about
+execution that limits the compatibility of a Calif actor to one or a
+few models of computation. This makes Calif useful for exploring the
+behavior of actors within and across different models of computation.
+The context in which this work takes place is that of component-based
+design. A component is an entity that has a number of ports, usually
+designated as input and output, through which it communicates with
+other components. A class of components and their allowed compositions
+can be formalized into a component algebra. A model of computation is
+formulated here as a pair: a component algebra, and an environment in
+which models execute. There are therefore two levels at which to think
+about Calif. The first is the component level. At this level, we can
+examine the behavior of an actor, without regard for other components
+that it might interact with. At the second level, we can examine the
+behavior of an actor in conjunction with other actors and an
+environment within which they execute.
+
+
+Unit Systems
+============
+
+A major source of errors in embedded software is incorrect application
+of units. Yuhong Xiong and Xiaojun Liu have created a unit system for
+Ptolemy II that is quite clever. A suite of constants are defined, with
+names such as "meter", "cm", "feet", "miles", "seconds", "hours", and
+"days". In each unit category ("length" or "time" for example), there
+is a primary unit with respect to which all the others are specified.
+Thus, for example, if the primary unit of length is meters, then the
+expression "1.0 * cm" will have an internal value of 0.01 * meters.
+Compound units are specified by just multiplying and dividing, as in
+for example "1.0 * cm/second".
+
+The way this is realized is that these unit constants are tokens just
+like other Ptolemy II data, and multiplication and division are
+overloaded in the base classes for numeric valued tokens.  We continue
+to work on this architecture to enable users to customize the unit
+system on a per-model basis.
+
+
+Type System
+===========
+
+An issue that has come up repeatedly is that frequently one would like
+to apply an actor designed to operate on scalar types to composite
+types such as arrays, records, and matrices. Although in principle the
+Ptolemy II type could support this, Yuhong Xiong has suggested that
+there is a more elegant solution based on the concept of higher-order
+components.  He calls the concept an "iteration map," where the
+mapping of a scalar operator over a composite type would be implied
+by the resolved types.
+
+
+I/O Actors
+==========
+
+Winthrop Williams has continued a project to systematically add
+sophisticated I/O capabilities to Ptolemy II. Using his infrastructure,
+he created a demonstration that links two motors controlled by two
+computers separated on the network so that turning one of the motors
+results in the other motor turning, and if both motors are turned at
+the same time, force feedback results. This application uses serial
+port actors to communicate with the motor controllers and UDP actors to
+communicate over the network. The application runs at 125 +/- 10 Hz.
+This means it completes 125 cycles per second, where each cycle
+involves two ethernet communications and four serial communications.
+This was done with the two Sony Vaio laptops, and with 115200 baud on
+the serial links.
+
+
+Software Distribution Mechanisms
+================================
+
+A major issue with network-enabled software such as Ptolemy II is the
+ability to distribute models that can be run with confidence, like
+applets, without concerns about risk of viruses and malicious damage to
+one's computer. Christopher Hylands began an effort to leverage Java's
+sandbox security system to make it safer to run models, and to use
+components from the web.
+
+His first option is to use Web Start, a product from Sun Microsystems.
+Web Start has two modes, sandbox mode and all-permissions mode. To run
+in all-permissions mode, all the jar files must be signed. He was able
+to build a sandbox mode Web Start download that would allow the user to
+download a model from the server and run it in the sandbox. Note that
+it is not possible to run in sandbox mode and download models from any
+host other than the host where the application was downloaded from -
+this is a limitation of the sandbox mode.
+
+His second option is to provide a -sandbox argument for the startup
+command for the Ptolemy II user interface. If we call
+
+  vergil -sandbox foo.xml
+
+then we invoke java with a restrictive security policy that limits
+access to the local disk.
+
+
+Miscellaneous Software Infrastructure Improvements
+==================================================
+
+* Christopher Hylands created a Tcl shell in Ptolemy II, making
+  available an integrated scripting language.
+
+* Win Williams and Jorn Janneck fixed in a subtle sycnhronization
+  problem in the discrete-event domain that occurred when executing
+  actors that have their own thread of control.
+
+* Christopher Hylands created a makefile rule that checks spelling
+  and Java code style on source code files.
+
+* Elaine Cheong checked in code for finding class dependencies that is
+  a modified version of code distributed by Sun.
+
+* Elaine Cheong checked in some Ptolemy actors that act as device
+  drivers for generic motor and sensor on lejos platform.
+
+* Elaine Cheong checked in a tool that takes a .class file and changes
+  all references to a particular class to another class.
+
+* Elaine Cheong checked in a tool that merges class libraries together,
+  and another that removes unused methods and classes from .class files
+  for an application.
+
+* Steve Neuendorffer made some improvements in the SDF (synchronous
+  dataflow) scheduler that result in much faster scheduling times for
+  models with large changes in sample rates.
+
+* Christopher Hylands created a mechanism for keeping track of
+  cascaded exceptions.  This improves the ability to track the original
+  source of an error when one exception masks another.
+
+* Based on problem reports from Zoltan Kemenczy of Research In Motion,
+  Ltd., Steve Neuendorffer modified the way tokens are exchanged across
+  the boundary between distinct models of computation. 
+
+* Christopher Hylands added methods to the Token classes (which
+  encapsulate user data) to determine when the values of two distinct
+  tokens are close to one another.
+
+* Elaine Cheong investigated the use of the Jikes Java compiler from
+  the Jalapeno Project at IBM on Ptolemy II.  The main advantage would
+  be (apparently) that the compiler is much faster than javac from Sun.
+
+* Win Williams has created a ByteToken class to support his I/O actors,
+  but support is still far from complete.
+
+* Christopher Hylands created an applet code generator that will
+  generate the HTML files necessary to run a Ptolemy II model as an
+  applet.  This makes it extremely easy to create an applet once
+  you have a Ptolemy II model.
+
+* We have added a debug facility that animates the execution of
+  a model by highlighting actors that fire and states that are entered.
+
+* We have modified our XML parser to do better error handling. When
+  errors are encountered parsing well-formed XML (e.g. can't find
+  classes), the parser now offers the option of skipping the MoML
+  element and continuing the parse. In the Ptolemy II user interface,
+  this offer is presented via a dialog, which also offers the option of
+  skipping all remaining errors. This is implemented via an error
+  handler that can be registered with the parser. To support the
+  regression tests, we have also implemented a non-graphical error
+  handler (no dialog) so that tests can be run without requiring a UI.
+
+* We have added a visible "parameter icon" that you can drag onto the
+  design. It shows the parameter name and current value. You can edit
+  the parameter value either by double clicking on it or by the usual
+  manner of editing parameters.
+
+* We have added a "requireVersion" object that you drag onto your
+  design and enter a version number. If someone tries to run open this
+  XML file using an older version of Ptolemy II than the specified
+  version, they will get an exception.  This should facilitate
+  distribution of models on the web.
+
+* We have improved the icon infrastructure in Ptolemy II so that
+  icons can visibly display parameter values.
+
+* Steve Neuendorffer rearchitected the panner in the Ptolemy II user
+  interface (Vergil) so that the design canvas becomes effectively
+  infinite (supporting large designs), and zooming and panning always
+  works in a reasonable manner.
+
+* Christopher Hylands reorganized the vergil packages in Ptolemy II,
+  which use diva to provide a graphical user interface.
+
+
+Personnel
+=========
+
+John Reekie, who has a great deal of experience in visual programming,
+software engineering, and models of computation, has joined the project
+as research staff.
+
+Haiyang Zheng joined the group to work on automotive applications.
+He is a graduate student in mechanical engineering.
+
+Farhana Sheikh has left the project to pursue more hardware-oriented
+work.
+
+Lars Wernli, a student from ETH, began a four-month sojourn in our
+group.
+
+
+Study Group
+===========
+
+Our quasi-weekly study group examined the following topics:
+
+-- Vanderbilt's GME
+-- Java Optimizations at Microsoft and IBM
+-- Localization
+-- Alloy
+-- Localization
+-- Scoped memory for real-time Java
+-- Network sensors
+
+
+2.  Interactions, Meetings, and Technology Transfer
+
+Presentations
+=============
+
+* Edward Lee and Yuhong Xiong, "System-Level Types for Component-Based
+  Design," EMSOFT, Lake Tahoe, October 2001.
+
+* Tom Henzinger, "Giotto--a time-triggered language for embedded
+  programming," EMSOFT, Lake Tahoe, October 2001.
+
+* T. John Koo, "Hierarchical Approach for Design of Multi-Vehicle
+  Multi-Modal Embedded Software," Embedded Software Seminar, 10/2/01. 
+
+* Christoph Kirsch, "Embedded Programming with Giottoc 0.1," Embedded
+  Software Seminar, 10/16/01.
+
+* Tom Henzinger, "Interface Theories for Component-based Design,"
+  Embedded Software Seminar, 11/6/01.
+
+* Edward Lee and Yuhong Xiong, "Concurrent Component Patterns, Models
+  of Computation, and Types," Fourth Annual Workshop on New Directions
+  in Software Technology (NDIST’01), St. John, US Virgin Islands,
+  December 2001. 
+
+
+Other Interactions
+==================
+
+* Jozsef Ludvig of the Lawrence Berkeley Labs (LBL) visited our group
+  and presented "Neutrinos from the South Pole to the Deep Blue sea and
+  how Ptolemy can help to find them!"  He described the use of Ptolemy II
+  to model fields of sub-ice neutrino detectors being deployed in
+  Antartica.
+
+* Elaine Cheong attended the TinyOS programming workshop in October and,
+  together with Yang Zhao, has begun modeling the TinyOS semantics in
+  Ptolemy II.  TinyOS is the operating system used in the DARPA NEST
+  project.
+
+* John Rushby, from SRI International visited us and presented a talk,
+  "Assurance for Dependable Systems (From Refutation to Verification
+  to Certification)" in the Embedded Software Seminar , 10/23/01.
+
+* Zoltan Kemenczy of Research In Motion, Ltd., contributed a number of
+  bug fixes and extensions to the Matlab interface that he had previously
+  contributed to Ptolemy II.
+
+* Jozsef Ludvig of Lawrence Berkeley Labs (Ice Cube Project) contributed
+  a number of comments and suggestions on the design of Ptolemy II, and
+  developed an elaborate model of the Ice Cube neutrino detectors to be
+  deployed under Antarctic ice.
+
+* Michael Wirthlin of Brigham Young University is working on a "code
+  generation" environment for FPGAs based on our JHDL hardware design
+  environment (see www.jhdl.org). JHDL is a nice companion to Ptolemy
+  II as it is also written in Java. This allows you to co-simulate your
+  Ptolemy model with the actual JHDL circuit.
+
+* Yuke Wang from Univ. Texas at Dallas visited us for two days to
+  interact on Giotto and on code generation.
+
+* VPIsystems makes enterprise-class software systems that support
+  technical workforces across the communications industry: service
+  providers, network operators, equipment vendors and component and
+  system manufacturers.  Some of their software is based on Ptolemy
+  Classic.  Their marketting department says:
+
+     VPI's software provides all necessary tools and project management
+     systems for photonic design automation. The platform delivers a
+     complete range of interoperable design and simulation tools that
+     investigate and capture component and system innovations to
+     explore their impact on the network. Technologies include a
+     comprehensive range of models for lasers, SOAs, Raman amplifiers,
+     PMD mitigation and WDM, CATV and HFC systems.
+
+     VPI is a privately held company with headquarters in New Jersey.
+     Sales and support centers are located in New Jersey, Texas,
+     Germany, Australia, and Singapore. The company was incorporated in
+     1998.
+ 
+
+4. Publications
+
+[1] Stephen A. Edwards and Edward A. Lee, "The Semantics and Execution
+    of a Synchronous Block-Diagram Language," Technical Memorandum UCB/ERL
+    M01/33, University of California, Berkeley, CA 94720, October 25, 2001.
+ 
+[2] Edward A. Lee and Yuhong Xiong, "System-Level Types for
+    Component-Based Design," First Workshop on Embedded Software,
+    EMSOFT2001, Lake Tahoe, CA, USA, Oct. 8-10, 2001.
+
+[3] Jie Liu, Johan Eker, Jorn W. Janneck, Edward A. Lee, "Realistic
+    Simulations Of Embedded Control Systems," accepted for presentation at
+    the 15th IFAC World Congress '02.
+
+
+5. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
