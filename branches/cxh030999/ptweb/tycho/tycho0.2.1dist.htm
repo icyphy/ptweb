@@ -1,0 +1,213 @@
+<!-- $Id$ -->
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>Tycho 0.2.1 Distribution</title>
+</head>
+<body>
+<h1>Tycho 0.2.1 Distribution</h1>
+This page contains links to the Tycho0.2.1 distribution.
+
+<h2>Files to download</h2>
+
+ <p>Tycho0.2.1 is also shipped as part of of Ptolemy0.7.1.  (Ptolemy is a
+heterogenous design environment that provides simulation and code
+generation capabilities. See the 
+<a href="http://ptolemy.eecs.berkeley.edu/pt0.7.1" target="_top">Ptolemy 0.7.1 Distribution</A> page for more information).
+
+ <p> Note that the toplevel directory of the tycho0.2.1 distribution is
+<code>tycho0.2.1</code>, whereas the Tycho0.2.1 shipped with Ptolemy0.7.1
+has a top level directory of <code>tycho</code>.
+
+ <p>We provide two different formats of the Tycho0.2.1 distribution, pick
+the one that suits your needs.  Both files contain the same information.
+<menu>
+
+<li> <a href="tycho0.2.1/tycho0.2.1.src.tar.gz">Tycho0.2.1</A> gzipped
+	tar file (2.40Mb compressed)
+<li> <a href="tycho0.2.1/tycho0.2.1.src.zip">Tycho0.2.1</A> zipped
+	file (3.35Mb)
+</menu>
+
+<code>tydoc</code> is a standalone package that generates html
+documentation from Itcl files.  For more information, see the 
+<a href="tycho0.2.1/tycho0.2.1/util/tydoc/doc/index.html"><code>tydoc</code> documentation</a>
+<menu>
+ <li><a href="tycho0.2.1/tydoc2.0.src.tar.gz"><code>tydoc2.0.src.tar.gz</code></a>
+</menu>
+
+ <p>Various support programs are available on the 
+<a href="tychoTools/tychoTools.html">Tycho Tools page</a>.
+</dl>
+
+ <hr>
+<h3>Itcl</h3>
+
+To run Tycho0.2.1, you will need Itcl2.2. 
+If you have installed Ptolemy0.7.1, note that it includes Itcl2.2.
+Itcl2.0, which was shipped with Ptolemy0.6 will not work with Tycho0.2.1.
+
+<h3>Itcl2.2 Downloads</h3>
+
+The following files are local copies of files from
+<a href="http://www.tcltk.com" target="_top"><code>www.tcltk.com</code></A>
+<menu>
+
+<li> <a href="http://www.tcltk.com/itcl/doc/itcl-intro.tar.gz" target="_top">Itcl Tutorial</A> (gzipped PostScript tar, 820K compressed) (Original tar file from Lucent)
+
+<li> Itcl2.2 sources <a href="tycho0.2.1/itcl2.2.tar.gz">itcl2.2.tar.gz</A>
+which includes Tcl7.5 and Tk4.1 (Original tar file from Lucent)
+
+<li> Itcl2.2 Windows binaries
+<a href="tycho0.2.1/itcl22.exe">itcl22.exe</A> (1.9Mb)
+(Original tar file from Lucent)
+
+
+</menu>
+
+The following files were produced locally
+<menu>
+<li> <a href="tycho0.2.1/itcl2.2.hppa.tar.gz">Itcl2.2 prebuilt HPUX10.2.10</A> files (5.2Mb compressed)
+
+<li> <a href="tycho0.2.1/itcl2.2.sol2.5.tar.gz">Itcl2.2 prebuilt Solaris2.5.1</A> files (4.9Mb compressed)
+
+<li> <a href="tycho0.2.1/itcl2.2.sun4.tar.gz">Itcl2.2 prebuilt SunOS4.1.3</A> files (4.9Mb compressed)
+
+</menu>
+
+
+ 
+<h3>Itcl2.2 Windows Installation instructions</h3>
+<OL>
+<li> Download the Itcl2.2 Windows binary.
+
+<li> Execute <code>itcl22</code>, which will start the installation
+procedure.  It is best if you install Itcl2.2 in a directory
+that does not have spaces in the pathname.
+
+
+<li> Download
+<a href="tycho0.2.1/tycho0.2.1.src.zip">Tycho0.2.1</A> zipped
+file (1.89Mb).  It is best if you install it in <code>c:\tycho0.2.1</code>
+
+<li> See the <a href="tycho0.2.1/tycho0.2.1/doc/tynt.html">Tycho under NT</A>
+page for further instructions.
+
+
+</OL>
+
+ 
+<h3>Itcl2.2 Unix Installation instructions</h3>
+We provide binaries for HPUX10.2.10, Solaris2.5.1 and SunOS4.1.3.
+
+ <br>There are three different scenarios:
+<OL>
+
+ <li> If you are running an OS other than the three listed above, you
+will have to compile Itcl2.2 from source by downloading the Itcl source file
+and following the instructions.
+
+ <li> If you are running an OS that we provide binaries for then
+you can download the prebuilt binaries.
+ <br>The prebuilt Itcl2.2 Unix binaries have the pathname
+<code>/users/ptolemy/tcltk</code> hardcoded into them.  If you
+download the binaries and place them at that location, then Itcl is
+more likely to work for you.
+
+	<OL>
+	
+	<li> Download the appropriate Unix Itcl2.2 binary to <code>/tmp</code>
+	<li> As root, make the following directory, and cd to it:
+	<pre>
+	mkdir -p /users/ptolemy/
+	cd /users/ptolemy/
+	</pre>
+
+	<li> Then untar the GNU gzipped files, for example for Solaris2:
+	<pre>
+	gunzip /tmp/itcl2.2.sol2.5.tar.gz | tar -xf -
+	</pre>
+	For hppa or sun4, use the appropriate file.
+
+	<li> Set your  <code>TYCHO</code>
+	variable, your path and start Tycho.  Under csh, do:
+	<pre>
+	setenv TYCHO /users/ptolemy/tycho0.2.1
+	set path = ($TYCHO/bin $path)
+	tycho
+	</pre>
+	</OL>
+
+<li>If you are running and OS that we provide binaries for but
+ you cannot place the Itcl prebuilt binaries at 
+<code>/users/ptolemy/tcltk</code>, then you can try using
+<code>$TYCHO/bin/itkwish</code> to start up Tycho.  This C-shell script
+version of <code>itkwish</code> reads the <code>ITCLDIR</code>
+environment variable, sets some environment variables accordingly and
+then starts the real <code>itkwish</code>.
+	<OL>
+	<li> Download the appropriate Unix Itcl2.2 binary to <code>/tmp</code>.
+	Download the Tycho sources.
+	<li> Ungzip and untar the file where ever you feel like:
+	<pre>
+	cd /usr/local
+	gunzip /tmp/itcl2.2.sol2.5.tar.gz | tar -xf -
+	gunzip /tmp/tycho0.2.1.tar.gz | tar -xf -
+	</pre>
+
+	<li> Set your <code>ITCLDIR</code> to the directory
+	that includes the Itcl prebuilt distribution.
+	Set the <code>TYCHO</code>
+	variable, your path and start Tycho.  Under csh, do:
+	<pre>
+	setenv ITCLDIR /usr/local/tcltk
+	setenv TYCHO /usr/local/tycho0.2.1
+	set path = ($TYCHO/bin $path)
+	tycho
+	</pre>
+
+	
+	</OL>
+
+</OL>
+
+ See the
+<a href="tycho0.2.1/tycho0.2.1/doc/tyunix.html">Tycho under Unix</A> page 
+<code>$TYCHO/doc/tyunix.html</code> for further instructions.
+
+
+<h4>itkwish details</h4>
+If you are interested in using Itcl, but don't want to download Tycho, 
+then note that the unix prebuilt binaries include
+ <br><code>tcltk/itcl/bin</code> contains the following scripts:
+<DL>
+<DT> <code>itkwish</code>
+<DD> This file is a copy of <code>$TYCHO/bin/itkwish</code>.
+
+<DT> <code>itclsh</code> 
+<DD> This file is a hard link to <code>itkwish</code>.
+
+
+<DT> <code>ptarch</code>
+<DD> This is a script that returns a value
+to identify the current architecture.  For instance, under
+Solaris2.5.1, <code>ptarch</code> will return <code>sol2.5</code>.
+If the <code>PTARCH</code> variable is not set, then the
+<code>itkwish</code> script uses this value to set up the architecture
+dependent paths.
+</DL>
+To use the prebuild Itcl binaries without downloading Tycho:
+<OL>
+<li> Download, ungzip and untar the appropriate file.
+
+<li> Set your ITCLDIR variable to the <code>tcltk</code> directory.
+
+<li> Set your path to include the scripts:
+<pre>
+set path = ($ITCLDIR/itcl/bin $path)
+</pre>
+
+</OL>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!-- $Id$ -->
+<!-- Version @(#)kern.html	1.12 02/06/98 -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>The Almagest: Vol. III - Ptolemy 0.7 Kernel Manual</title>
+</head>
+
+<body>
+
+<TABLE WIDTH=100%>
+<TR><TD ALIGN=CENTER VALIGN=CENTER><img width=71 height=100
+    alt="Astro" src="../../image/astrolabeTiny.gif">
+    <TD ALIGN=CENTER VALIGN=CENTER><h1>The Almagest - Volume III<br>
+    Ptolemy 0.7 Kernel Manual</h1>
+</TABLE>
+
+<p>
+<TABLE BORDER>
+<TR><TD ALIGN=CENTER COLSPAN=2><h3>Viewing the manual using your WWW browser</h3>
+<TR>
+  <TD><a href="http://ptolemy.eecs.berkeley.edu/papers/almagest/docs/kern/kernel_man0.7.pdf" target="_top"><IMG HSPACE=0 src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <TD> Adobe acrobate pdf file with bookmarks and hyperlinks (1.1Mb)
+
+<TR>
+  <TD><a href="docs/kern/html/title.fm.html"><IMG HSPACE=0 src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>In hypertext form and with a
+      <a href="docs/kern/html/search.html">searchable index</A>.
+</TABLE><p>
+
+<TABLE BORDER>
+<TR><TD COLSPAN=3 ALIGN=CENTER>
+<h3>Downloading all of the manual</h3>
+<TR>
+  <TH>
+  <TH>Size
+  <TH>Description
+<TR>
+  <TD><a href="docs/kern/kernel_man0.7.pdf"><IMG HSPACE=0
+      src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <TD>1.1Mb
+  <TD>Adobe acrobat pdf file with bookmarks and hyperlinks (same as above)
+<TR>
+  <TD><a href="docs/kern/kernel_man0.7.tar.gz"><IMG HSPACE=0
+      src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[Postscript]"></A>
+  <TD>1.63Mb compressed
+  <TD>Gzip tar file containing  postscript files of each chapter
+      suitable for printing on a postscript printer
+<TR>
+  <TD><a href="docs/kern/kernel_man0.7.html.tar.gz"><IMG HSPACE=0
+      src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>187k compressed
+  <TD>Gzip tar file containing html files
+</TABLE><p>
+
+
+<TABLE BORDER>
+<TR><TD COLSPAN=2><CENTER>
+<h3>Downloading individual chapters</h3></CENTER>
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/title.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/title.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/title.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>Title page and Copyright information for this manual. 
+      You must print this file out and include it if you plan 
+      to redistribute the printed manual.
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+<a href="docs/kern/pdf/title_small.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/title_small.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/title.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>Title page and Copyright information for this manual, without the
+      large Mr. Ptolemy image.
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/kernel_manTOC.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/kernel_manTOC.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/content.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>Table of Contents for the Ptolemy Kernel Manual
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/intro.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/intro.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/intro.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>Introduction
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/basic.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/basic.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/basic.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>1. Basic concepts, classes, and facilities 
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/threads.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/threads.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/threads.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>2. Support for multithreading
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/block.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/block.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/block.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>3. Block and related classes
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/exec.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/exec.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/exec.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>4. Control of Execution and Error Reporting
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/wormhole.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/wormhole.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/wormhole.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>5. Interfacing domains - wormholes and related classes
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/connections.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/connections.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/connections.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>6. Classes for connections between blocks 
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/particles.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/particles.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/particles.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>7. Particles and Messages
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/linker.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/linker.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/linker.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>8. The incremental linker
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/params.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/params.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/params.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>9. Parameters and States
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/lists.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/lists.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/lists.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>10. Support for known lists and such
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/io.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/io.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/io.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>11. I/O Classes
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/misc.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/misc.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/misc.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>12. Miscellaneous classes
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/parallelcg.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/parallelcg.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/parallelcg.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>13. Overview of Parallel Code Generation 
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/apeg.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/apeg.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/apeg.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>14. APEG generation
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/parsched.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/parsched.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/parsched.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>15. Parallel Schedulers
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/cg.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/cg.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/cg.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>16. Base Code Generation Domain and Supporting Classes 
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/target.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/target.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/target.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>17. Target
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/cgc.fm.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/cgc.fm.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/cgc.fm.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>18. CGC Domain
+
+<TR>
+  <TD WIDTH=170 ALIGN=CENTER VALIGN=CENTER>
+  <a href="docs/kern/pdf/kernel_manIX.pdf"><IMG HSPACE=0
+  src=../../image/PDF.gif WIDTH=29 HEIGHT=32 BORDER=0 ALT="[PDF]"></A>
+  <a href="docs/kern/ps/kernel_manIX.ps.gz"><IMG HSPACE=0
+  src=../../image/PS.gif WIDTH=30 HEIGHT=32 BORDER=0
+  ALT="[Postscript]"></A>
+  <a href="docs/kern/html/kernel_manIX.doc.html"><IMG HSPACE=0
+  src=../../image/HTML.gif WIDTH=30 HEIGHT=32 BORDER=0 ALT="[HTML]"></A>
+  <TD>Index
+
+
+</TABLE><p>
+
+</body>
+</html>

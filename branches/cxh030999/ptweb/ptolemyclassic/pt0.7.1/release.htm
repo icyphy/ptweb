@@ -1,0 +1,227 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy 0.7.1 Release Notes</title>
+</head>
+<body>
+<h1>Ptolemy 0.7.1 Release Notes</h1>
+
+Below are some common problems that you might run across with 0.7.1.
+
+<menu>
+<li> <a href="#compatibility">0.7 and 0.7.1 Compatbility</a>
+<li> <a href="#egcs">EGCS and GCC-2.8</a>
+<li> <a href="#pxgraph">Pxgraph</a>
+<li> <a href="#vem">Vem</a>
+<li> <a href="#knownproblems">Known problems in 0.7.1</a>
+</menu>
+
+<h3><a name="compatibility">0.7 and 0.7.1 Compatibility</a></h3>
+<menu>
+<li> A Ptolemy 0.7 vem will not work with a Ptolemy 0.7.1 pigiRpc.
+The reason is because of a fix to a long standing vem bug.
+
+<li> In theory, the Itcl2.2 binaries from Ptolemy 0.7 should work
+with Ptolemy 0.7.1.  However, if you are upgrading the compiler,
+you should probably recompile Itcl.
+
+<li> The SDF Loop Scheduler library has been renamed from
+<code>libLS</code> to <code>libls</code>.  The reason is that case
+sensitivity issues with Samba were causing problems with the NT port.
+
+
+<li> It is best if you have <code>$PTOLEMY/bin</code> in your path
+before <code>$PTOLEMY/bin.$PTARCH</code>.  <code>pxgraph</code>
+and <code>itkwish</code> are scripts located in <code>$PTOLEMY/bin</code>
+that try to set your environment properly before calling executables in
+<code>$PTOLEMY/bin.$PTARCH</code>.
+
+<li> In general, <code>.o</code> files built under Ptolemy 0.7
+will need to be recompiled for use with Ptolemy 0.7.1
+</menu>
+
+<h3><a name="egcs">EGCS and GCC-2.8</a></h3>
+
+Ptolemy 0.7.1 should compile with gcc-2.7.2.2, but the default
+compiler we build the binaries with is egcs-1.0.2.  egcs is a new
+compiler effort that builds on the gcc compiler.  The egcs sources are
+made available to the gcc maintainers, so egcs changes eventually
+should be in egcs.  It seems like egcs is much more active than gcc,
+and that egcs-1.0.2 is more stable than gcc-2.8.2.  Under gcc-2.8.2,
+compiling with -O -fPIC causes an internal compiler error when
+compiling <code>Block.cc</code>, so we are shipping with egcs.
+
+ <p>For more information about egcs, see
+<a href="http://www.cygnus.com/egcs/" target="_top"><code>http://www.cygnus.com</code></A>.
+
+ <p> EGCS has a few mailing lists, <code>egcs-bugs</code> is
+archived at:
+<a href="http://www.findmail.com/listsaver/egcs-bugs" target="_top"><code>http://www.findmail.com/listsaver/egcs-bugs</code></a>
+
+ <p>The most common problem with using egcs is that
+<code>libg++</code> is no longer used, so certain include files, such
+as <code>std.h</code> are not found at compile time 
+and certain symbols, such as
+<code>ACG::ACG(unsigned int, int)</code> are missing at link time.
+ <p>Usually, doing a <code>make clean; make install</code> 
+will solve the problem. 
+ <p>The way we work around this is by defining <code>-DPT_EGCS</code>
+in <code>config-egcs.mk</code> and then including that makefile
+in the <code>config-<I>$PTARCH</I>.mk</code> file instead of
+<code>config-g++.mk</code>.
+
+ <p>Note that egcs does not need <code>libg++</code>, so the
+<code>SYSLIBS</code> makefile variable is set to not include
+<code>-lg++</code>
+
+ <p>To build under egcs and under Microsoft Visual C++, it was
+necessary to modify many files.  In Ptolemy 0.7, 
+The g++ <code>-fno-for-scope</code> command line argument was
+necessary.  In Ptolemy 0.7.1, this argument is no longer necessary, even
+under gcc-2.7.2.
+
+<h3><a name="pxgraph">Pxgraph</a></h3>
+Pxgraph has been converted to Java.  See
+the troubleshooting guide at.
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptplot/doc/internals/troubleshooting.html" target="_top"><code>$PTOLEMY/tycho/java/ptplot/doc/internals/troubleshooting.html</code></a>
+
+If you don't have Java, see
+<a href="ftp://ptolemy.eecs.berkeley.edu/pub/misc/xgraph/index.html"><code>ftp://ptolemy.eecs.berkeley.edu/pub/misc/xgraph/index.html</code></a>
+for pxgraph X11 binaries and sources.  See
+<a href="pxgraph.README.txt"><code>$PTOLEMY/src/pxgraph/README.txt</code></a> for details
+
+ <p>To run the Java version of pxgraph, you must do one of the following:
+<ol>
+<li> Set the <code>JAVAHOME</code> environment variable to point
+to the directory where the Java Development Kit is installed.
+For example, your <code>.cshrc</code> might contain
+<pre>
+setenv JAVAHOME /opt/jdk1.1.5
+</pre>
+
+<li> If you do not set <code>JAVAHOME</code>, then the pxgraph
+script will search your path for the <code>javac</code> binary.
+If <code>javac</code> is found, then the directory above it
+is used for the value of <code>JAVAHOME</code>
+
+<li> You can also edit <code>$PTOLEMY/bin/pxgraph</code> directly
+and adjust the <code>JAVADEFAULT</code> variable.
+</ol>
+
+
+<h3><a name="vem">Vem</a></h3>
+The <code>vem</code> binary shipped with Ptolemy 0.7 <B>will not</B>
+work with Ptolemy 0.7.1.  The reason is that Tom Lane fixed a long
+standing vem bug that occured when pigiRpc and vem try to send
+each other commands at the same time.  For example, the bug appears
+when the user does a 'edit paramters' or 'look inside' in a vem window
+while pigiRpc is compiling a facet.
+ <p>If you do not upgrade vem to the version shipped with 0.7.1,
+then the error message you will see is:
+<pre>
+    vem> illegal VEM function number (4)
+        RPC Error: server: bad VEM request
+</pre>
+The number '4' in the error message is a dead giveaway, the patch
+says <code>rcpInternal.h</code> had the following <code>#define</code>
+added:
+<pre>
+#define VEM_LOCKING_FUNCTION                    (long) 4
+</pre>
+If you get this error message, get the <code>other.src</code> tar file
+and octtools.
+
+<h2><a href="#knownproblems">Known problems in 0.7.1</a></h2>
+
+
+<h3>Missing features</h3>
+<menu>
+<li> PTARCH== nt4.vc has not been tested
+<li> dsp/stars/SDFNdftVarD does not have an example universe
+</menu>
+	
+<h3>General Problems</h3>
+
+<menu>
+<li> matlab interface does not work well with statically linked
+binaries, such as nt4, alpha4 or linux.static
+
+<li> parameter expressions that use tcl do not work in statically linked
+binaries.
+
+<li> The Almagest has not been updated, so the installation instructions
+in <code>$PTOLEMY/doc/html/install</code> are out of date.
+
+<li> ch4_a56_sVHDL_dSDF demo in vhdl/demo/cgc_s56x_vhdl/init.pal
+crashes pigi
+
+</menu>
+
+<h3>CG56</h3>
+<menu>
+<li> Bad master:
+<pre>
+Examining $PTOLEMY/src/domains/cg56/demo/cgcs56x/test/modem/matchedFilter/topMatch:schematic:contents 
+	Bad master: 
+	Invalid facet(OCT): $PTOLEMY/src/domains/cg56/demo/cgcs56x/test/modem/matchedFilter/dspMatchedFilter:schematic:interface 
+	(cellPath /users/ptolemy/src/domains/cg56/demo/cgcs56x/test/modem/matchedFilter/dspMatchedFilter) 
+
+</pre>
+ 
+
+
+	<li> The following s-56x demos fail
+<pre>
+ADPCM 
+amtx
+echo canceling
+reverb
+</pre>
+
+
+	The code compiles and runs:
+<pre>
+rshCommand: cd /users/cxh/PTOLEMY_SYSTEMS/CG56;./echocanceling &
+</pre>
+	The qdm window comes up and then disappears.
+	The message is
+<pre>
+boot:  qckHostIntr: ioctl DspHost
+pIntr: Invalid argument\n
+</pre>
+	
+	The only one the worked was cdVolume
+	
+<li> CG56 BPSK modem fails with:
+<pre>
+vem> Debug: CompileUniv: facet = bpskTop, CGC universe
+Error: TclTk_Target.Send_Link_2:  not supported
+</pre>
+CG56 QPSK fails with a similar message.
+
+<li> CG56 dtmfSpectrum starts up, but pressing the buttons does
+not change the plots.  The CG56 Synth demo has the same problem.
+I think I need to cable the external box up properly
+	
+<li> SDF/CG56X Wormhole demo fails with
+<pre>
+Error: wormHoleIO.S56XIO1.oDown: not enough output tokens at SDF
+wormhole boundary
+points(1) Error: wormHoleIO.S56XIO1.oGain: not enough output
+tokens at SDF wormhole boundary
+Error: wormHoleIO.FixToFloat1.input: Attempt to read from empty
+geodesic in PortHole::getParticle()
+</pre>
+
+</menu>
+
+<h3>Tycho</h3>
+<menu>
+<li> For Tycho bugs, see
+<a href="../../tycho/tycho0.2.1/tycho0.2.1/doc/bugs.html"><code>$PTOLEMY/tycho/doc/bugs.html</code></a>
+</menu>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>Site Search</title>
+</head>
+<h1>Ptolemy Website Search</h1>
+<p>
+<form method="post" action="/cgi-bin/htsearch">
+<input type="text" size="40" name="words" value="">
+<input type="submit" value="Search">
+<p>
+Match: <select name=method>
+<option value=and>All
+<option value=or>Any
+</select>
+Output Format: <select name=format>
+<option value=builtin-long>Long
+<option value=builtin-short>Short
+</select>
+</font>
+<input type=hidden name=config value=htdigpub>
+<input type=hidden name=restrict value="">
+<input type=hidden name=exclude value="">
+</form>
+
+<p>
+<h1>Other Ptolemy-Related Search</h1>
+<menu>
+<li> <a href="wais.htm#Searching">
+Ptolemy Hackers mailing list</A>
+<li> <a href="../publications/index.htm" target="_top">
+Ptolemy Project Publications</A>
+<!-- FIXME: can these be in-lined? -->
+<li> Almagest: 
+<a href="http://ptolemy.eecs.berkeley.edu/cgi-bin/users_man-wais.pl" target="_top">User's Manual</A> -
+<a href="http://ptolemy.eecs.berkeley.edu/cgi-bin/prog_man-wais.pl" target="_top">Programmer's Manual</A> -
+<a href="http://ptolemy.eecs.berkeley.edu/cgi-bin/kernel_man-wais.pl" target="_top">Kernel Manual</A> 
+</menu>
+
+<a href="http://htdig.sdsu.edu" target="_top">
+<IMG SRC="../image/htdig.gif" align=bottom alt="ht://Dig" border=0>
+This search engine uses ht://dig from San Diego State University.</a>
+
+</body>
+</html>
+

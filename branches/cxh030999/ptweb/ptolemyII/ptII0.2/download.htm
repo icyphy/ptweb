@@ -1,0 +1,85 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II Snapshot Download</title>
+</head>
+<body>
+<img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet">
+<h1>Ptolemy II Snapshot Download</h1>
+
+ <p>There are a number of caveats with that go along with this snapshot.
+
+<ul>
+
+<li> This release is intended for software developers who have
+experience with both Java and Ptolemy.
+<li> Many of the files in this release have not been design reviewed,
+code reviewed, or thorough tested.  
+<li> The code in the snapshot is already changing.  In particular,
+	<menu>
+	<li> All the demos are moving into their own subdirectories
+	<li> The Ordered Dataflow domain (OD) is moving from
+	<code>ptolemy/domains/od</code> to
+	<code>ptolemy/domains/odf</code>
+	</menu>
+
+<li> Many of the demos were created on an ad hoc basis, and should
+not be viewed as templates for future demos.
+
+<li> The primary difference between this release and the Ptolemy II 0.1
+release is that we are including code for the domains.
+
+<li> The <a href="ptII0.2devel/doc/design/design.pdf">Ptolemy II Design Document</a>
+has not yet been updated to reflect changes between 0.1 and 0.2
+
+</ul>
+
+On the positive side
+<ul>
+<li> For the most part, the demonstrations work.  If you run into
+problems, try reloading the jar and class files with
+Shift-Reload or Control-Reload.
+
+<li> You can get a better feel for how data is transmitted
+between actors by looking at some of the actor code.
+
+<li> We have made a few passes over much of the code and
+fixed some of the glaring problems.
+</ul>
+
+<h2>Download</h2>
+
+<menu>
+<li> Gzipped Tar file: <a href="ptII0.2devel.tar.gz"><code>ptII0.2devel.tar.gz</code></a> (12.8Mb)
+</menu>
+
+The tar files include all the <code>.class</code>, <CODE>.jar</CODE> 
+and javadoc html documentation, so you need not recompile to use Ptolemy II.
+
+This release was compiled with JDK1.2,
+but most of the demos will run under JDK1.1.  The demos in
+the guidemo directories all use Diva, which requires JDK1.2
+
+ <p>For further information about rebuilding Ptolemy II, see
+<a href="ptII0.2devel/doc/install.html"><code>ptII0.2devel/doc/install.html</code></a>
+
+<h2>Future plans</h2>
+Currently, we are planning on shipping Ptolemy II 1.0 in May, 1999.
+Between Ptolemy II 0.2 and Ptolemy II 1.0, we plan on: 
+<menu>
+<li> Design and code reviewing most of the code
+<li> Writing lots of tests
+<li> Adding to the design doc
+</menu>
+Ptolemy II 1.0 is not likely to include a block editor
+
+<h2>Feedback</h2>
+
+ Please send any feedback to
+<a href="mailto:ptII@eecs.berkeley.edu"><code>ptII@eecs.berkeley.edu</code></a>.
+
+
+</body>
+</html>

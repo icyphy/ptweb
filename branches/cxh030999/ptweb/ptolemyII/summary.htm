@@ -1,0 +1,153 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<title>Ptolemy II</title>
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Ptolemy II</h1>
+<table>
+<tr>
+<td> <td>  <a href="../people/ptolemyII.htm"><img alt="Ptolemy II Coin" src="../image/ptIIcoin.gif"></a>
+<td>
+
+ <p>Ptolemy II is named after the 
+<a href="../people/ptolemyII.htm">Ptolemy II</a>, the Egyptian King.  
+</table>
+
+<h2>Ptolemy II Overview</h2>
+
+Ptolemy II is a set of Java packages supporting heterogeneous,
+concurrent modeling and design.  Its <code>kernel</code> package
+supports clustered hierarchical graphs, which are collections of
+<I>entities</I> and <I>relations</I> between those entities.  Its
+<code>actor</code> package extends the kernel so that entities have
+functionality and can communicate via the relations.  Its
+<I>domains</I> extend the actor package by imposing <I>models of
+computation</I> on the interaction between entities.  Examples of
+models of computation include discrete-event systems, dataflow,
+process networks, synchronous/reactive systems, and communicating
+sequential processes.
+
+Ptolemy II includes a number of support packages, such as 
+<code>graph</code>, providing graph-theoretic manipulations,
+
+<code>math</code>, providing matrix and vector math and signal
+processing functions,
+
+<code>plot</code>, providing visual display of data,
+
+<code>data</code>, providing a type system, data encapsulation and an
+expression parser, etc.
+
+
+<h2>Ptolemy II Features</h2>
+
+<dl>
+<dt> <B>Java</B>
+<dd> Ptolemy II is implemented in Java, which allows Ptolemy II to be:
+<menu>
+<li> Platform independent - Today, Ptolemy II runs under Solaris
+and Windows NT.
+<li> Threaded - Ptolemy II builds on the threading primitives in
+Java.
+<li> Network aware
+</menu>
+
+
+
+<dt> <B>Modularity</B>
+<dd> 
+Ptolemy II consists of software packages that can be used independently. 
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptplot" target="_top">Ptplot</a> is
+the first Ptolemy II package that has been released.
+
+
+<dt> <B>Separation of Abstract Syntax and Semantics</B>
+<dd> In Ptolemy 0.x, we found that it was sometimes difficult to support 
+non-dataflow semantics such as the Synchronous/Reactive domain. 
+
+ <br>Ptolemy II defines a software kernel that consists of classes that
+build up a hierarchical graph.  Other packages define semantics such as
+Process Networks and Continuous Time.
+
+
+<dt> <B>Improved heterogeneity</B>
+<dd> Ptolemy II improves on the Ptolemy 0.x wormhole mechanism so that
+combining dataflow and non-dataflow domains is easier.
+
+
+<dt> <B>Mutatable Systems</B>
+<dd>Ptolemy II allows the a design to be modified as it is running.
+Consistency is maintains through the use of monitors build upon
+the lower level synchronization primitives in Java.
+
+
+<dt> <B>Software Architecture</B>
+<dd> Ptolemy II was designed with object modeling and design patterns in mind.
+
+ <br>Ptolemy II includes a test suite implemented in
+<a href="http://ptolemy.eecs.berkeley.edu/~cxh/java/tclblend/index.html" target="_top">Tcl Blend</a> the Tcl/Java interface.
+
+
+<dt> <B>Polymorphic Type System</B>
+
+<dd> Ptolemy II uses a new algorithm to determine the types of ports
+in a system.  The algorithm uses a partial order of types and
+monotonic type refinement.
+
+<dt> <B>User Interface</B>
+<dd> Eventually, Ptolemy II may include a moder interface using
+<a href="http://www-cad.eecs.berkeley.edu/diva/" target="_top">Diva</a>
+
+<dt> <B>Improved Design Refinement</B>
+<dd> In Ptolemy 0.x, migrating a design from simulation to code generation
+is sometimes difficult because of trivial differences in the blocks
+in each domain.
+ <br>Ptolemy II will separate the interface definition of a block from
+the implementation, so that each different implementation will have
+a common interface.  
+
+</dl>
+ <p>
+A <B>draft</B> of the 
+<a href="designdoc.htm">Ptolemy II Design Document</a> is available.
+
+ 
+<h2>Release Plans</h2>
+See the <a href="announce.htm">Ptolemy II Release Plans</a> page
+for the release schedule.
+
+ <hr>
+<h2>Ptolemy 0.x and Ptolemy II compatibility</h2>
+Ptolemy II and Ptolemy 0.x are two very different software systems.
+
+ <p>Ptolemy 0.x is fairly mature software in that the design is stable
+and mostly unchanging.  The Ptolemy II software system is still in the
+early stages of its life cycle, so the design is changing.  
+
+<menu>
+<li> They are written in different languages (Java vs. C++)
+<li> They have different file formats.  Ptolemy 0.x uses Octtools, Ptolemy II
+uses the Tycho Interchange Manager (TIM).
+<li> They have different user interfaces.
+</menu>
+
+However, all is not lost for Ptolemy 0.x users.  We are considering
+various compatibility issues:
+<menu>
+
+<li> Once the Ptolemy II User Interface is mostly complete, it may
+be possible to modify it so that it can be used with Ptolemy 0.x.
+
+<li> We may develop file translators to help convert icon images and
+design layouts.
+
+<li> It may be possible to develop wrappers that run Ptolemy 0.x stars.
+This would be fairly tricky to do.
+</menu>
+
+
+</body>
+</html>
