@@ -1,0 +1,266 @@
+#!/bin/sh
+
+# @Authors: Christopher Hylands
+#
+# @Version: $Id$
+#
+# @Copyright (c) 1999 The Regents of the University of California.
+# All rights reserved.
+# 
+# Permission is hereby granted, without written agreement and without
+# license or royalty fees, to use, copy, modify, and distribute this
+# software and its documentation for any purpose, provided that the
+# above copyright notice and the following two paragraphs appear in all
+# copies of this software.
+# 
+# IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY
+# FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES
+# ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF
+# THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+# 
+# THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,
+# INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE
+# PROVIDED HEREUNDER IS ON AN "AS IS" BASIS, AND THE UNIVERSITY OF
+# CALIFORNIA HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
+# ENHANCEMENTS, OR MODIFICATIONS.
+# 
+# 						PT_COPYRIGHT_VERSION_2
+# 						COPYRIGHTENDKEY
+
+# ptwebfix - Fix common problems in web pages
+# Usage: ptwebfix [-n|-d] files
+#	-n don't actually do anything
+#	-d turn on debugging
+
+
+
+# 0.5) <A HREF -> <a href, <LI> -> <li> etc
+# 1) bgcolor="#faf0e6" should be removed
+# 2) </LI> should not be present
+# 3) links that go to pages outside our page should target _top
+# 4) Convert @(#) to $Id$ '
+# 5) Add <!-- $Id$ -->
+# 6) If there is no default.css, toc.css or frameset, add default.css'
+
+
+printonly=no
+
+while getopts nd-- opt
+do
+	case $opt in
+		d) 	set -x;;
+		n) 	printonly=yes;;
+	   \?)	echo "$0: Usage: $0 [-n] [-x] [filenames . . .]"
+			echo " -n  Print only, do not actually do anything"
+			echo " -d  debug"
+			exit 3;;
+	esac
+done
+shift `expr $OPTIND - 1`
+
+
+SCCS=/usr/ccs/bin/sccs
+files=$@
+
+toptop=`pwd`
+useegrep=yes
+# Shell function that actually does the fixing
+fixit() { 
+    files=$files
+    for fullfile in $files
+    do
+	cd $toptop
+	echo "Now processing: $fullfile"
+	if [ "$useegrep" = "yes" ]; then
+	    egrep -s -e  "$EGREPMATCH" $fullfile
+	else
+	    searchit $fullfile
+	fi    
+	retval=$?
+	if [ $retval = 0 ]; then
+		# There was a difference, so we might want to check this sucker out
+		file=`basename $fullfile`
+		dirname=`dirname $fullfile`
+		cd $dirname
+
+		retval=0
+
+		if [ "$printonly" = "no" ]; then
+			if [ -d SCCS ]; then
+			    $SCCS edit $file
+			    retval=$?
+			fi    
+			#co -q -l $file
+
+		else
+			if [ -d SCCS ]; then
+			   $SCCS info | awk '{print $1}' | grep "$file"
+			    #rlog -R -L $file
+			    retval=$?
+			    if [ $retval = 1 ]; then
+				echo "	Would be checked out. "
+			    else
+				echo "	Some sort of rlog problem. "
+			    fi
+			    doit
+			else   
+			    doit
+			fi    
+		fi
+		if [ "$printonly" = "no" ]; then
+			if [ $retval != 0 ]; then
+				echo "	Could not check out $1. Skipping"
+				continue
+			else
+				doit
+				cp -f /tmp/fix-files.tmp  $file
+				if [ -d SCCS ]; then
+				    $SCCS delget -y"$LOGMESSAGE" $file
+				else    
+				    if [ -d CVS ]; then
+					cvs commit -m "$LOGMESSAGE" $file 
+				    fi	
+				fi
+				#/users/ptdesign/adm/bin/sccsadmin $file
+    				#grep Copyright $file
+			fi
+		fi	
+	else
+	   echo "	No difference, so no checkout"
+	fi
+    done
+}
+
+
+echo "###################################################"
+echo " 0.5) <A HREF -> <a href, <LI> -> <li> etc"
+
+doit() {
+	sed -e 's@<A HREF@<a href@g' \
+	    -e 's@<A NAME@<a name@g' \
+	    -e 's@<BR>@<br>@' \
+	    -e 's@<CODE>@<code>@' \
+	    -e 's@</CODE>@</code>@' \
+	    -e 's@<H\([1-9]\)>@<h\1>@' \
+	    -e 's@</H\([1-9]\)>@</h\1>@' \
+	    -e 's@<HEAD>@<head>@' \
+	    -e 's@</HEAD>@</head>@' \
+	    -e 's@<LI>@<li>@' \
+	    -e 's@<MENU>@<menu>@' \
+	    -e 's@</MENU>@</menu>@' \
+	    -e 's@<P>@<p>@' \
+	    -e 's@<PRE>@<pre>@' \
+	    -e 's@</PRE>@</pre>@' \
+	    -e 's@<TITLE>@<title>@' \
+	    -e 's@</TITLE>@</title>@' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='<A HREF|<A NAME|<BR>|<CODE>|<H[1-9]>|<HEAD>|<LI>|<MENU>|<P>|<TITLE>|<PRE>'
+LOGMESSAGE="Downcased HTML tags"
+
+fixit
+
+echo "###################################################"
+echo " 1) bgcolor="#faf0e6" should be removed"
+doit() {
+	sed 's/<body bgcolor=.*>/<body>/' \
+	$file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='<body bgcolor="#faf0e6">'
+LOGMESSAGE="Removed bgcolor from body"
+
+fixit
+
+
+echo "###################################################"
+echo " 2) </LI> and <HR> should not be present"
+doit() {
+	sed -e 's@</LI>@@' \
+	    -e 's@<HR>@@' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='</LI>|<HR>'
+LOGMESSAGE="Removed </LI> and/or <HR>"
+
+fixit
+
+
+echo "###################################################"
+echo " 3) links that go to pages outside our page should target _top"
+doit() {
+	sed 's@\(href="http://[^"]*\)">@\1" target="_top">@' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='href="http://[^"]*">'
+LOGMESSAGE="Added target="_top" to http:// link"
+
+fixit
+
+
+echo "###################################################"
+echo ' 4) Convert @(#) to $Id$ '
+
+doit() {
+    sed 's/<!-- @(#).*>/<!-- \$Id\$ -->/' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='<!-- @\(#\).*>'
+LOGMESSAGE="Converted @(#) into $Id"
+fixit
+
+echo "###################################################"
+echo ' 5) Add <!-- $Id$ -->'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    awk '$0 ~ /<!-- \$Id/ { exit 1}' $1
+}
+
+doit() {
+    awk 'BEGIN { print "<!-- $Id$ -->"}
+    	{print $0}' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+LOGMESSAGE="Added $Id"
+
+fixit
+useegrep=yes
+
+
+echo "###################################################"
+echo ' 6) If there is no default.css, toc.css or frameset, add default.css'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    awk '$0 ~ /default.css/ { exit 1}
+	$0 ~ /toc.css/ { exit 1}
+	$0 ~ /frameset/ { exit 1}
+	$0 ~ /META HTTP-EQUIV/ { exit 1}' \
+    $1
+}
+
+doit() {
+    awk '$0 ~ /<head>/ {
+	    print "<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=iso-8859-1\">"
+	    print "<link href=\"../lib/default.css\" rel=\"stylesheet\" type=\"text/css\">"
+	}
+    	{print $0}' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='href="http://[^"]*">'
+LOGMESSAGE="Added META tag and link default.css"
+
+fixit
+useegrep=yes
+
