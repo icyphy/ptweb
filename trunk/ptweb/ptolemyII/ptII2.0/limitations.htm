@@ -38,11 +38,31 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 <menu>
 <li><a href="ptII2.0.1/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
 <li> <a href="ptII2.0.1/doc/design/design.pdf" target="_top">Ptolemy II Design Document</a> 
-<li><a href="limitations.htm">Limitations</a> - Late breaking Limitations.
 </menu>
 
-<h3>Actor Limitations</h3>
-<h4>Dragging AudioReader into the canvas results in an error (8/26/02)</h4>
+<h4>Contents</h4>
+<menu>
+<li> <a href="#actor">Actor Limitations</a>
+	<menu>
+	<li> <a href="#AudioReader">AudioReader</a>
+	</menu>
+
+<li> <a href="#ui">User Interface Limitations</a>
+	<menu>
+	<li> <a href="#RenamingPorts">Renaming Ports</a></h4>
+	</menu>
+<li> <a href="#mac">MacOS X Limitations</a>
+	<menu>
+	<li> <a href="#CT"> CT tree widget</a>
+	</menu>
+</menu>
+ <p>
+ <p>
+
+<h3><a name="actor">Actor Limitations</a></h3>
+
+<h4><a name="AudioReader">Dragging AudioReader</a>
+into the canvas results in an error (8/26/02)</h4>
 
 If you drag the AudioReader actor into the canvas, you will get
 
@@ -189,11 +209,94 @@ cxh@cooley 153%
 </pre>
 
 
-</dl>
+<h3><a name="ui">User Interface Limitations</a></h3>
 
-<h3>MacOS X Limitations</h3>
+<h4><a name="RenamingPorts">Renaming Ports</a></h4>
+
+On 9/11/02, in comp.soft-sys.ptolemy, Devin Baker Pratt from BYU writes:
+<BLOCKQUOTE>
+I've been consistently having problems renaming ports from Vergil.  When 
+I click on a port and try to rename it I always get this stack trace 
+(note it only shows up in my terminal, Vergil doesn't tell me anything):
+ 
+<pre>
+Exception occurred during event dispatching:
+ java.util.NoSuchElementException: No item named "Show name" in the query box.
+     at ptolemy.gui.Query.booleanValue(Query.java:409)
+     at ptolemy.actor.gui.RenameConfigurer.apply(RenameConfigurer.java:128)
+     at ptolemy.actor.gui.RenameDialog._handleClosing(RenameDialog.java:71)
+     at ptolemy.gui.ComponentDialog$1.propertyChange(ComponentDialog.java:200)
+     at  javax.swing.event.SwingPropertyChangeSupport.firePropertyChange(SwingPropertyChangeSupport.java:156)
+</pre>
+
+The name of the port remains unchanged.  This error occurred in 2.0beta 
+and 2.0.1.
+
+ <p>Is there something I'm doing wrong?  So far the only way I've come 
+across to rename a port is to edit the xml.
+</BLOCKQUOTE>
+
+
+ <p>Yep, this is a bug, below is a patch to PtolemyII2.0.1
+
+Basically, what happened is that in the devel tree, there is a
+facility that allows the user to show the name of the port by 
+right clicking on a port and selecting 'Customize Name'
+The Rename port window has a 'Show Name' check box for whether the name is
+displayed.  Unfortunately, at the time we did the code split, there
+was a problem where the name was displayed twice, so we removed this
+facility from the release branch.  (I think the problem is now fixed in
+the devel tree, but folding that change into the release tree would be
+very difficult.) When we pulled out the 'Show Name' facility we
+introduced this bug that you are seeing now.
+
+
+<pre>
+cxh@DOPLAP03 /cygdrive/c/ptII2.0.2/ptolemy/actor/gui
+$ cvs diff -c RenameConfigurer.java
+Index: RenameConfigurer.java
+===================================================================
+RCS file: /home/cvs/ptII/ptolemy/actor/gui/RenameConfigurer.java,v
+retrieving revision 1.10.2.1
+diff -c -r1.10.2.1 RenameConfigurer.java
+*** RenameConfigurer.java       2002/04/08 16:49:17     1.10.2.1
+--- RenameConfigurer.java       2002/09/11 15:42:29
+***************
+*** 125,131 ****
+              moml.append(newName);
+              moml.append("\"/>");
+              // Remove or show name.
+!             boolean showName = booleanValue("Show name");
+              if (_object instanceof Port) {
+                  if (showName) {
+                      moml.append("<property name=\"_showName\" "
+--- 125,140 ----
+              moml.append(newName);
+              moml.append("\"/>");
+              // Remove or show name.
+!             boolean showName = false;
+!             if (!(_object instanceof Port)) {
+!                 // FIXME: There is a bug in diva that results in the
+!                 // port name being displayed twice if Show Name is selected.
+!                 // John Reekie thinks it is because there is one too many
+!                 // Listeners.  So for Ptolemy II 2.0.2, we comment
+!                 // this out so that if the object is a port, we
+!                 // do not show the name.
+!                 showName = booleanValue("Show name");
+!             }
+              if (_object instanceof Port) {
+                  if (showName) {
+                      moml.append("<property name=\"_showName\" "
+
+cxh@DOPLAP03 /cygdrive/c/ptII2.0.2/ptolemy/actor/gui
+$
+
+</pre>
+
+
+<h3><a name="mac">MacOS X Limitations</a></h3>
 <dl>
-<dt> The CT specific actors tree widget fails to open
+<dt> <a name="CT">The CT specific actors tree widget fails to open</a>
 <dd> 
 <pre>
 Exception occurred during event dispatching
