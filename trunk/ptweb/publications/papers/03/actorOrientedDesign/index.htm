@@ -1,0 +1,67 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Actor-Oriented Design of Embedded Hardware and Software Systems</title>
+</head>
+<body>
+<center>
+<h1>Actor-Oriented Design of Embedded Hardware and Software Systems</h1>
+</center>
+<center>
+Edward A. Lee, Stephen Neuendorffer and Michael J. Wirthlin
+</center>
+<br>
+<center>
+Invited paper, <i>Journal of Circuits, Systems, and Computers</i>,
+Vol. 12, No. 3 pp. 231-260, 2003.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="JCircuitsSystemsComputers.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> published version<br>
+
+<p>
+<a href="actorOrientedDesign.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.
+berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> earlier version<br>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+
+In this paper, we argue that model-based design and platform-based
+design are two views of the same thing. A platform is an abstraction
+layer in the design flow. For example, a core-based architecture and an
+instruction set architecture are platforms. We focus on the set of
+designs induced by this abstraction layer. For example, the set of all
+ASICs based on a particular core-based architecture and the set of all
+x86 programs are induced sets. Hence, a platform is equivalently a set
+of designs. Model-based design is about using platforms with useful
+modeling properties to specify designs, and then synthesizing
+implementations from these specifications. Hence model-based design is
+the view from above (more abstract, closer to the problem domain) and
+platform-based design is the view from below (less abstract, closer to
+the implementation technology).
+
+<p>
+
+One way to define a platform is to provide a design language. Any valid
+expression in the language is an element of the set. A platform
+provides a set of constraints together with known tradeoffs that flow
+from those constraints. Actor-oriented platforms, such as Simulink,
+abstract aspects of program-level platforms, such as Java, C++, and
+VHDL. Actor-oriented platforms orthogonalize the actor definition
+language and the actor composition language, enabling highly
+polymorphic actor definitions and design using multiple models of
+computation. In particular, we concentrate on the use of constrained
+models of computation in design. The modeling properties implied by
+well chosen constraints allow more easily understood designs and are
+preserved during synthesis into program-level descriptions. We
+illustrate these concepts by describing a design framework built on
+Ptolemy II.
+
+<p> Keywords: Actor-oriented design; embedded systems;
+model-based design; models of computation; platform-based design;
+synthesis; Ptolemy II; JHDL. <p>
+</body> </html>
+
