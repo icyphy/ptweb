@@ -168,6 +168,20 @@ $PTII/ptolemy/actor/lib/BooleanSwitch.java
  	then the applet may go back to the server multiple times looking
  	for the icon. 
 
+<li>Matlab interface has problems work with gcc-3.3
+ Under Windows, the Matlab interface has problems at runtime with gcc-3.3.
+<br>Under Windows, we recommend using gcc-3.2.
+
+ <li> Plot windows don't resize when control panel is resized
+  <br>If a model with plotters
+ is executed using the run button on the toolbar, and
+ then re-executed using the run control panel accessed through
+ the View menu, then resizing the run control panel does not
+ cause the plots to resize to fit.
+ <br>Workaround:
+ Close the model and re-open it, and then run first using the
+ run control panel.
+
 <li> Printing a model that contains transparent objects can result
 in problems when printing to Encapsulated Postscript (EPS).
 
