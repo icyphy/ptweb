@@ -31,7 +31,7 @@ relatively simple to learn.  Keeping in line with our group's philosophy of
 software design, state of the art techniques will be used to evaluate and 
 improve the design.   For consistency and ease of implementation, the 
 GUI will be based on Java/Swing and the 
-<a href="http://gigascale.eecs.berkeley.edu/diva">DIVA</a> graphics framework.
+<a href="http://www.gigascale.org/diva">DIVA</a> graphics framework.
 An XML file format will form the basis for persistent file storage.
 <p>
 Although this work will be an important part of Ptolemy II, simply by 
