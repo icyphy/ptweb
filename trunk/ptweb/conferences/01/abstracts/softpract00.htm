@@ -1,0 +1,84 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Abstract</title>
+</head>
+<body>
+<b>Software Engineering Practices in an Academic Setting</b>
+<br><i>John Reekie, Christopher Hylands, Edward A. Lee</i>, UC Berkeley
+<br>
+johnr@eecs.berkeley.edu, cxh@eecs.berkeley.edu, eal@eecs.berkeley.edu
+<p> The academic culture makes it hard to produce high-quality software
+with a team of people. First, academia emphasizes individual
+contributions. Contributions as part of a team are deeply discounted.
+Second, academia prefers novelty over quality. Very poor quality
+software is masked by a highly polished paper under the assumption that
+only the paper, and never the software, will be read.  The validity
+of that assumption has been steadily declining.  When high-quality
+software is produced in academia, it is usually the result only of the
+super-human effort of a 'hero programmer.'
+ 
+<p> The culture is changing.  First, many academics recognize the
+inadequacy of natural language for conveying with precision many of the
+most interesting complex research results.  Academic papers make heavy
+use of formal mathematical languages in an effort to improve precision.
+But not all research is amenable to such languages.  Algorithms,
+design methodologies, and innovative designs are often best conveyed
+in software.  Software becomes the medium for human communication.
+But unlike published papers, there is no peer-review mechanism for
+software, so embarrassingly poor software gets "published."
+ 
+<p>The Ptolemy project has a long history of making research results
+available in the form of controlled releases of software for the
+general research community. In the past, software development efforts
+in this project relied upon the personal quality standards of a few
+individuals. We have been systematizing the process with an eye towards
+producing publishable-quality software without stifling innovation. A
+key part of the process is a set of methods for teaching new software
+developers to recognize quality in design. Another key objective is to
+use software reviews to promote good software practices and
+collaboration as a team.
+ 
+<p>Our primary tool is to have regularly scheduled study groups where we
+cover new areas in topics such as software engineering.  Our early
+study groups covered design patterns and the unified modeling language
+(UML).  As we started to apply what we learned, we started having
+regular design and code reviews of software under development.
+ 
+<p>One outgrowth of the design and review system was to implement a
+code rating system, where code that is less stable is red, code that
+has been design reviewed is yellow, and code that has been design and
+code reviewed is green. This made the design of the code a subject that
+can be explicitly discussed in the team and has also increased the
+overall quality of the results. More importantly, the reviews are
+conducted by team members, who benefit by learning to critically
+evaluate design, as well as by learning in some depth what their
+colleagues are up to.
+ 
+<p> The Ptolemy project uses a common code repository supporting
+concurrent development (based on CVS), and uses automated nightly
+builds where the results are emailed to all team members. This creates
+a culture where "breaking the build" is highly deprecated. In addition
+to the build, scripted test suites are run every night. The status
+(red, yellow, ...) of all software in the repository is displayed on a
+web page, together with code coverage metrics and test suite results.
+ 
+<p>Our initial work is documented in [1].
+We are starting to transfer some of our tools to other groups in
+academia and in industry.
+ 
+<DL COMPACT>
+<DT> [1]
+<DD>
+J. Reekie, S. Neuendorffer, C. Hylands and E.A. Lee,
+"<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/sftwareprac/">
+Software Practice in the Ptolemy Project</a>",
+Technical Report Series GSRC-TR-1999-01,
+Gigascale Semiconductor Research Center,
+University of California, Berkeley, CA, USA 94720, April 1999.
+</DL>
+
+</body>
+</html>
