@@ -6,9 +6,9 @@
 <title>Ptolemy II 1.0 beta Downloads</title>
 </head>
 <body>
-<h2>Ptolemy II 1.0 beta Downloads</h2>
-Below are instructions on how to install Ptolemy II 1.0 beta.
- <p>There are two versions of Ptolemy II 1.0 beta
+<h1>Ptolemy II 1.0 beta Downloads</h1>
+<p>
+<p>There are two versions of Ptolemy II 1.0 beta:
 <menu>
 <li> Ptolemy II 1.0ptiny beta - A small release that includes only
 what is necessary to build and run models in common domains (
@@ -21,75 +21,65 @@ The full version is for Windows 2000 and various flavors of Unix and
 the download is roughly 20Mb in size.
 </menu>
 
-
-<h2>1. Install Java</h2>
-All versions of Ptolemy II 1.0 require JDK1.2 or later.
-<br>JDK1.3 is preferred.
-<br>The Ptolemy II 1.0 Windows installers require JDK1.3
-
+<h2>1. Install Java, if necessary</h2>
+<p>
+All versions of Ptolemy II 1.0 require Java 1.2 or later.
+Java 1.3 is preferred, and for some of the demos, required.
+The Ptolemy II 1.0 Windows installers require Java 1.3.
+To run Ptolemy II, the Java runtime environment (JRE) is sufficient.
+To run the applets in a browser, the Java plug-in is required.
+The JRE is bundled with the plug-in, so downloading the plug-in
+is sufficient.  To extend Ptolemy II with your own
+Java code, the Java development kit (JDK)
+or an equivalent Java development environment is required.
+The JDK includes a Java compiler.
+<p>
 One way to determine what version of Java (if any) is installed 
 is to run our
 <a href="JavaVersionApplet.htm">Java Version Applet </a>, which
-uses the JDK1.3 plugin.
- <p>Another way is to runcommand below to see if you have Java installed and
-it is the proper version:
+uses the Java 1.3 plug-in.
+Another way is to run the command below to see whether
+you have Java installed, and whether it is the proper version:
 <pre>
 java -version
 </pre>
 If the command cannot be found, or the version that is printed is
-less than 1.3, you should installing JRE 1.3 or JDK 1.3
-
-<p>JRE is the Java Runtime Environment, which does not include
-the compiler <code>javac</code>
-<p>JDK is the Java Development Kit, which does include
-<code>javac</code>.
- <p>Ptolemy II 1.0ptiny does not require <CODE>javac</CODE>.
-
-However, if you plan on the full version of Ptolemy II (not yet released) and
-writing your own actors, then you will need the JDK to compile your actors.
-
-<p>We can make the JRE available for download, but to get the JDK,
-you need to go to
-<a href="http://java.sun.com/j2se/1.3/" target="_top"><CODE>http://java.sun.com/j2se/1.3/</CODE></a>
-
-
+less than 1.3, you should install the plug-in, JRE 1.3, or JDK 1.3
+<p>
+Downloads:
 <menu>
-
-<li> Windows: Download and install the JRE: 
+<li> Windows JRE: The Java runtime environment, JRE (no Java compiler): 
 <a href="j2re-1_3_0_01-win.exe"><CODE>j2re-1_3_0_01-win.exe</CODE></a> (5.1Mb)
 
-<li> Other Platforms: Download and install the JRE or JDK:
-<a href="http://java.sun.com/j2se/1.3/" target="_top"><CODE>http://java.sun.com/j2se/1.3/</CODE></a>
+<li> Full JDK, or other Platforms:
+<a href="http://java.sun.com/j2se/1.3/" target="_top">
+<CODE>http://java.sun.com/j2se/1.3/</CODE></a>
 </menu>
 
 <h2>2. Install Ptolemy II</h2>
-Below are the instructions to install the two different versions of
-Ptolemy.
 
 <h3>2a. Ptolemy II Ptiny</h3>
 
 <menu>
 
-<li> There are two ways to install Ptolemy II ptiny on Windows machines:
+<li> There are two ways to install Ptolemy II Ptiny on Windows machines:
  
 <menu>
-<li> Run the installer as an applet by clicking 
-<a href="setupPtiny.htm">here</a>.
-
- <br>Note that while the installer permission request window states that
-the installer is from InstallShield, Ptolemy II itself is from UC Berkeley.
+<li> <a href="setupPtiny.htm">Run the installer as an applet</a>.
+This applet, from
+InstallShield, will install Ptolemy II, from Berkeley, on your machine.
 </menu>
-
  <B>or</B>
 <menu>
 <li> Download a 
 <a href="ptII1_0ptinybetasetup.exe">Windows executable</a>,
 (6Mb), and execute it.
 </menu>
+<p>
 
 <li> Other Platforms: download the gzipped jar file:
-
- <br>(Note that we have not tested this yet.)
+<br>(Note that we have not tested this yet. Please let us know whether it
+works or not by sending email to ptII@ptolemy.eecs.berkeley.edu.)
 <ol>
 
 <li> Download 
@@ -99,46 +89,37 @@ the installer is from InstallShield, Ptolemy II itself is from UC Berkeley.
 or
 <a href="http://sources.redhat.com/cygwin/" target="_top">Cygwin</a>
 
-<li> Run
-<pre>
+<li> Run on the command line:
+<code>
 java -jar ptII1_0ptinybetasetup.jar
-</pre>
+</code>
 
 </ol>
 
 
 </menu>
 
-<h3>2b. Ptolemy II </h3>
+<h3>2b. Ptolemy II, full version </h3>
 
 <menu>
 
 <li> There are two ways to install Ptolemy II on Windows machines:
  
 <menu>
-<li> Run the installer as an applet by clicking 
-<a href="setup.htm">here</a>.
-
- <br>Note that while the installer permission request window states that
-the installer is from InstallShield, Ptolemy II itself is from UC Berkeley.
+<li> <a href="setup.htm">Run the installer as an applet</a>.
+This applet, from
+InstallShield, will install Ptolemy II, from Berkeley, on your machine.
 </menu>
-
  <B>or</B>
 <menu>
 <li> Download a 
 <a href="ptII1_0betasetup.exe">Windows executable</a>, (25Mb) and execute it.
 </menu>
-
-
+<p>
 <li> Other Platforms: 
- <p>There are two installation methods here:
-<ol>
-<li> The standard tar file and configure method
-<li> The Installshield installer method.
-</ol>
-
+ <p>There are two installation methods available:
 <menu>
-<li> Standard tar file:
+<li> Standard tar file and configure method:
   <ol>
   <li> Download <a href="ptII1.0beta.src.tar.gz"><CODE>ptII1.0beta.src.tar.gz</CODE></a> (17Mb) 
 
@@ -148,7 +129,8 @@ the installer is from InstallShield, Ptolemy II itself is from UC Berkeley.
 <B>or</B>
 <menu>
 <li> Installshield installer:
- <br>(Note that we have not tested this yet.)
+<br>(Note that we have not tested this yet. Please let us know whether it
+works or not by sending email to ptolemy@ptolemy.eecs.berkeley.edu.)
 <ol>
 
 <li> Download <a href="ptII1_0betasetup.jar.gz"><CODE>ptII1_0betasetup.jar.gz</CODE></a> (24.7Mb)
@@ -157,13 +139,14 @@ the installer is from InstallShield, Ptolemy II itself is from UC Berkeley.
 or
 <a href="http://sources.redhat.com/cygwin/" target="_top">Cygwin</a>
 
-<li> Run
-<pre>
+<li> Run on the command line:
+<code>
 java -jar ptII1_0betasetup.jar
-</pre>
+</code>
 
 </ol>
 
+</menu>
 </menu>
 
 <h2>Bugs</h2>
@@ -177,7 +160,7 @@ The Installshield Installer has a number of bugs:
 <a href="http://support.installshield.com/download/ipmprelnotes.asp" target="_top">Installshield Multi-platform Release Notes</a>.
 
 </menu>
-
+<!--
 Other bugs not listed on the limitations page inside Vergil:
 
 <menu>
@@ -191,8 +174,8 @@ If you find bugs, check the limitations page inside Vergil, then
 check this page, and then send email to
 <a href="mailto:ptolemy@eecs.berkeley.edu"><CODE>ptolemy@eecs.berkeley.edu</CODE></a>
 
+-->
 
-
-
+<p>
 </body>
 </html>
