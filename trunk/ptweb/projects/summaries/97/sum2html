@@ -127,7 +127,6 @@ proc htmlTrailer {} {
 <HR>
 $abstract
 
-<p><font size=\"2\" color=\"#cc0000\">Last updated [clock format [clock seconds] -format %D]</font>
 </body>
 </html>"
     close $h

@@ -127,7 +127,6 @@ proc htmlTrailer {} {
 <HR>
 $abstract
 
-<p><font size=\"2\" color=\"#cc0000\">Last updated [clock format [clock seconds] -format %D]</font>
 </body>
 </html>"
     close $h
@@ -197,7 +196,6 @@ The Industrial Liaison Program office can be reached at +1-510-643-6691 or
     }
     puts $h "</TABLE>
 
-<p><font size=\"2\" color=\"#cc0000\">Last updated [clock format [clock seconds] -format %D]</font>
 </body>
 </html>"
     close $h    
