@@ -1,15 +1,15 @@
 # $Id$
 
 SOURCES = ptolemyII.sum \
-	  celaine.sum \
 	  chf.sum \
 	  cont_and_disc.sum \
 	  e_Ptolemy.sum \
 	  nest.sum \
 	  pwhitake.sum \
-	  startcharts.sum \
+	  starcharts.sum \
 	  vergil01.sum \
 	  vogel01.sum \
+	  vthreads.sum \
 	  yuhong01.sum
 
 
