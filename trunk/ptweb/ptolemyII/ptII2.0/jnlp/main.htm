@@ -18,7 +18,7 @@
         function insertLink(url, name) { 
         	if (javawsInstalled) { 
                 	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
-                	document.write("<li> <a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh? target=_top>Install Web Start from Sun (~5.3Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
+                	document.write("<li> <a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?" target=_top>Install Web Start from Sun (~5.3Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
   
               } 
         } 
@@ -44,8 +44,18 @@
   <img src="../../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
   </td>
 
-  <td>
-  This is a demonstration release of Ptolemy II. 
+ <td>
+       This is a demonstration release of Ptolemy II.
+       It is a preliminary version of the 2.0 release, and does not
+       include source code.  It uses an experimental web launching tool
+       called WebStart that makes installation and updates particularly
+       simple.  You will get security warnings when performing this
+       installation because we have not yet obtained a validated
+       certificate.  Those warnings will disappear soon.
+       This release is being made available for use by the Mobies
+       project participants.  Other uses are not encouraged at this time.
+ 
+
   <h2>Quick Start</h2>
     <ol>  <SCRIPT LANGUAGE="Javascript"> 
 
