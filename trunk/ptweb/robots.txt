@@ -1,0 +1,71 @@
+# robots.txt for http://ptolemy.eecs.berkeley.edu
+# See http://info.webcrawler.com/mak/projects/robots/norobots.html
+User-agent: *
+Disallow: /~cxh/faq
+Disallow: /~cxh/lprng
+Disallow: /~cxh/private
+Disallow: /~cxh/sapub/AudioFile
+Disallow: /~cxh/sa/amanda
+Disallow: /~cxh/sa/mhonarc
+Disallow: /~cxh/sapub/spamlib/old
+Disallow: /~johnr/norobots
+Disallow: /~johnr/local/nt/bulk/ibm/OLD
+Disallow: /~ptdesign/Ptolemy
+Disallow: /~ptdesign/java/JavaScope
+Disallow: /~ptdesign/java/JavaClassLibExamples
+Disallow: /~ptdesign/java/ifc11
+Disallow: /~ptdesign/java/jdk1.0.2
+Disallow: /~ptdesign/java/jdk1.1.4
+Disallow: /~ptdesign/java/jdk1.1.6
+Disallow: /~ptdesign/java/js
+Disallow: /~ptdesign/java/jwalk
+Disallow: /~ptdesign/java/opt
+Disallow: /~ptdesign/java/ptdesign-java
+Disallow: /~ptdesign/java/ptII
+Disallow: /~ptdesign/java/pure
+Disallow: /~ptdesign/java/swing
+# Don't search in the star-demo directory, the URLS have $PTOLEMY in them
+Disallow: /~ptdesign/star-demo-index
+Disallow: /~ptdesign/tycho/ptdesign-tycho
+Disallow: /~ptdesign/tycho/tcldp
+Disallow: /ptolemyII/ptII0.1alpha
+Disallow: /~pino/DS
+Disallow: /~pino/Ptolemy
+Disallow: /~pino/Ptolemy/tycho
+
+# This causes a loop in htdig
+Disallow: /papers/almagest/docs/user/html/troubleshooting.doc1.html
+
+# The html versions of the almagest are found via papers/almagest
+Disallow: /kernel_man0.5.2.html/
+Disallow: /kernel_man.0.5.2.html/
+Disallow: /kernel_man0.7.html/
+Disallow: /prog_man0.5.2.html/
+Disallow: /prog_man.0.5.2.html/
+Disallow: /prog_man.0.6.html/
+Disallow: /prog_man0.6.html/
+Disallow: /prog_man0.7.html/
+Disallow: /users_man.0.5.2.html/
+Disallow: /users_man0.5.2.html/
+Disallow: /users_man.0.5.2/
+Disallow: /users_man0.6.html/
+Disallow: /users_man0.7.html/
+
+# Everything else
+Disallow: /bak/
+Disallow: /tmp/
+Disallow: /java/old
+Disallow: /oldwww/
+Disallow: /opt/
+Disallow: /papers/publications.html/tycho.latest
+Disallow: /private/
+Disallow: /ptolemy0.6/contrib
+Disallow: /ptolemy0.6/gnu
+Disallow: /ptolemy0.7/contrib
+Disallow: /ptolemy0.7/gnu
+Disallow: /tycho/tycho0.1
+Disallow: /tycho/tycho0.1.1
+Disallow: /tycho/tycho0.2beta
+Disallow: /tycho/tycho0.2/
+Disallow: /tycho/tycho0.2
+Disallow: /SCCS/
