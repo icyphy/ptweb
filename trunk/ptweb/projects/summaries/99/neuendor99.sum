@@ -1,0 +1,64 @@
+NAMES
+Stephen Neuendorffer
+
+EMAIL
+neuendor@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~neuendor
+
+PHONE
+642-8884
+
+TITLE
+Abstract Domain Interaction and Communication in Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+Many models of computation have been designed to allow the description of 
+different kinds of systems.
+For example, Synchronous/Reactive and Finite State Machine 
+models have been shown to be appropriate for control-oriented problems, 
+while Dataflow models work well for modeling signal processing systems. 
+Furthermore, certain dataflow models of computation can be shown to have
+nice properties, such as Turing decidability, determinacy, and
+schedulability.  However, few systems are easily described using only one 
+model of computation.   The principle of "the right tool for the right 
+job" suggests that different parts of the system should be described using
+the most appropriate model of computation.   Such systems are called 
+<i>heterogenous</i> systems. 
+This research is focused on extracting the basic semantics of different
+models of computation in order to provide mechanisms within Ptolemy II 
+for simulating heterogenous systems.    
+<P>
+Much research has been involved with extending one model of computation 
+to handle a broad range of problems.   However, this approach tends to 
+run into problems, since broadening the scope of a model of computation 
+generally sacrifices the useful properties that can be proved about a more 
+limited model.   Ptolemy II aims to provide an architecture which is 
+capable of modeling a wide range of problems, by allowing different 
+domains (which encapsulate a model of computation within an abstract 
+interface) to interact.   This interaction is restricted to a clustered 
+graph syntax, where the entities within a domain interact according to 
+the semantics of that domain, but each entity may contain a domain of 
+its own that operates under completely independant semantics.
+<p>
+In Ptolemy 0.7.1, many assumptions were made in the kernel that were 
+specific to dataflow oriented domains.   This fact made the implementation 
+of some domains, such as Finite State Machines, very difficult.   
+In Ptolemy II, a great effort has been made to abstract the kernel so 
+that no assumptions are made that may dictate a particular model of 
+computation.   Several domains have already been implemented within 
+this framework, which appears to work well as an abstract basis for a wide 
+range of models of computation.   This research is intended to explore 
+the interactions between domains and to discover an abstract model of 
+communication between domains that preserves the properties of each 
+domain.   If successful, this will allow Ptolemy II to specify intuitive 
+semantics of systems described using multiple domains, and allow more 
+complete representations of problems.
+<br>
+
+

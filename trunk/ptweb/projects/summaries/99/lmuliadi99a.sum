@@ -1,0 +1,49 @@
+NAMES
+Lukito Muliadi
+
+EMAIL
+lmuliadi@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~lmuliadi/
+
+PHONE
+642-0395
+
+TITLE
+Discrete Event Modeling and Simulation
+
+CHAPTER
+FIXME: 02.cad
+
+ABSTRACT
+
+The discrete event (DE) domain provides a general framework for time-oriented
+simulations of systems such as queueing networks, communication networks,
+and high-level models of computer architectures. In this domain, events
+happen at discrete points on the real time line. Each event corresponds to
+a change of the system state. Each event also has an associated time stamp, 
+which results in a totally ordered set.
+<p>
+In general, a DE scheduler processes events in chronological order. Therefore,
+a good DE scheduler needs a fast implementation of the global sorted 
+event queue. The currently implemented DE scheduler uses a calendar queue 
+data structure to sort events. This data structure provides an efficient 
+priority queue implementation. The complexity is O(1) in both enqueue 
+and dequeue operations). When events are produced, they are enqueued into 
+the queue. At each iteration, events with
+oldest time stamp are dequeued and the current time of the simulation is
+advanced. The actor that consumes these events may produce additional events
+with time stamp greater than or equal to the current time (i.e. causality 
+constraint).
+<p>
+Much of the sophistication in the scheduling implementation of this domain
+is on how we handle simultaneous events properly. The chosen approach is
+to assign priorities to input ports. Input ports that are more 'up-stream' 
+with respect to the 'data flow' have higher priority. More specifically,
+a partial order relation graph is created with respect to the 'data flow' and
+the Ptolemy II graph package is used to perform topological sort on it.
+<p>
+For future work, since Ptolemy also emphasizes on heterogeneity, 
+it is interesting to investigate the interaction between DE and other 
+domains in Ptolemy II. Performance issues will also be investigated.

@@ -1,0 +1,34 @@
+NAMES
+Jie Liu
+
+EMAIL
+liuj@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~liuj/
+
+PHONE
+642-0395
+
+TITLE
+System Level Mixed-Signal Modeling in Ptolemy II
+
+CHAPTER
+FIXME: 02.cad
+
+ABSTRACT
+
+This work studies and implements continuous time system modeling and 
+simulation in Ptolemy II. In the continuous time model, a system is described in 
+a set of ordinary differential equations (ODE). Differing from the nodal 
+analysis representation in circuit simulation tools like SPICE, the ODEs are 
+represented in Ptolemy II as integrators with feedback loops. This 
+representation is close to the mathematical formulation, thus is suitable for 
+problem level specifications. Various numerical ODE solving methods are studied 
+and implemented, including the Forward Euler, Backward Euler, Trapezoidal Rule, 
+and the Runge-Kutta methods. The formal semantics and the interaction with other 
+models of computation are the central parts of this work. The models of 
+computation of special interests to interact with are the discrete event models, 
+the dataflow models and the finite state machine models. Typical applications 
+are mixed-signal electronic systems, microelectromechanical systems, real-time 
+control systems, and hybrid systems. 

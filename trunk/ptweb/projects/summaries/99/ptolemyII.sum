@@ -1,0 +1,44 @@
+NAMES
+Edward A. Lee and group
+
+EMAIL
+eal@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~eal
+
+PHONE
+
+TITLE
+Ptolemy II- Heterogeneous Concurrent Modeling and Design in Java
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII">Ptolemy II</a>
+is a set of Java packages supporting heterogeneous,
+concurrent modeling and design.  Its <CODE>kernel</CODE> package
+supports clustered hierarchical graphs, which are collections of
+<I>entities</I> and <I>relations</I> between those entities.  Its
+<CODE>actor</CODE> package extends the kernel so that entities have
+functionality and can communicate via the relations.  Its
+<I>domains</I> extend the actor package by imposing <I>models of
+computation</I> on the interaction between entities.  Examples of
+models of computation include discrete-event systems, dataflow,
+process networks, synchronous/reactive systems, and communicating
+sequential processes.
+
+Ptolemy II includes a number of support packages, such as 
+<CODE>graph</CODE>, providing graph-theoretic manipulations,
+
+<CODE>math</CODE>, providing matrix and vector math and signal
+processing functions,
+
+<CODE>plot</CODE>, providing visual display of data,
+
+<CODE>data</CODE>, providing a type system, data encapsulation and an
+expression parser.
+
+
