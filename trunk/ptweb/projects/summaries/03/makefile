@@ -7,7 +7,8 @@ SUM_SOURCES =  \
 	hyzheng03.sum \
 	ndest.sum \
 	starcharts.sum \
-	vergil03.sum 
+	vergil03.sum \
+	ptplot03.sum
 
 # other sources that are not .sum files 
 OTHER_SRCS =
