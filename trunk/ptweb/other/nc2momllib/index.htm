@@ -3,10 +3,10 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <title>nc2momllib</title>
-<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>nc2momlib</h1> 
+<h1>nc2momllib</h1> 
 
 
 <p> This tool is an extension of the <a
@@ -16,7 +16,7 @@ embody the structuring concepts and execution model of TinyOS. TinyOS
 is an event-driven operating system designed for sensor network nodes
 that have very limited resources (e.g., 8K bytes of program memory,
 512 bytes of RAM).&quot; TinyOS, described at <a
-href="http://webs.cs.berkeley.edu/tos/">http://webs.cs.berkeley.edu/tos/</a>,
+href="http://webs.cs.berkeley.edu/tos/" target="_top">http://webs.cs.berkeley.edu/tos/</a>,
 is used, for example, on the Berkeley MICA &quot;motes,&quot; which
 are small wireless sensor nodes.</p>
 
@@ -50,11 +50,23 @@ find it and automatically make the TinyOS libraries available.</p>
         <ul>
           <li> If you are running Windows XP or Windows 2000, you can either:
             <ul>
+              <li> Download WinAVR
+   	       <ol> 
+                  <li>Go to 
+                    <a href="http://winavr.sourceforge.net/" target="_top"><code>http://winavr.sourceforge.net/</code></a>              
+                  <li>Click on "Package"
+                  <li>Download the latest release
+                    <br> The link should be at the top of the page 
+                    and have a name like "WinAVR 20040404"
+                  <li>Install Winavr in any directory 
+                    <i>Directories with spaces in the pathname might not work?</i>
+                </ol>
               
-              <li> Download the <a
+              <li> <b>Or</b>
+              <br>Download the <a
               href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
               Installshield Wizard</a>.  Run the wizard, and choose
-              "Custom" install.  Install only the AVR tools.  <b>Do
+              "Custom" install.  Install only the AVR tools.  This will install all of the rpms below for you.  <b>Do
               not choose the "cygwin" install option (it will
               overwrite and corrupt your current cygwin installation)
               or the "TinyOS" install option (you will install this
@@ -63,8 +75,15 @@ find it and automatically make the TinyOS libraries available.</p>
               already have them installed on your system. The wizard
               will install all of the selected rpms for you.
 
-              <li> Or you can download the rpms separately from <a
-              href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/">here</a>.  More convenient links are included here:
+              <li> <b>Or</b>
+	      <br><b>If your Cygwin is installed so your 'Default Text
+	      File Type' is Unix, you can use these rpms</b>
+	      <br><b>Note</b>: If you select 'Default Text File Type' of 
+	      Unix instead of DOS, then you will likely have
+	      <a href="http://www.gigascale.org/softdevel/faq/23.html" target="_top">Cygwin CR/NL problems</a> with CVS.
+	      <br>So, if your 'Default Text File Type' is Unix,
+	      you can download the rpms separately from
+	      <a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/" target="_top">here</a>.  More convenient links are included here:
                 <ul>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm</a>
@@ -79,7 +98,7 @@ find it and automatically make the TinyOS libraries available.</p>
 
           <li> If you are running Linux (Redhat 9), download the rpms from
           <a
-          href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tools/linux">here</a>.  More convenient links are included here:
+          href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tools/linux" target="_top">here</a>.  More convenient links are included here:
             <ul>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avarice-2.0.20030825cvs-1.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avarice-2.0.20030825cvs-1.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avr-binutils-2.13.2.1-1.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avr-binutils-2.13.2.1-1.i386.rpm</a>
@@ -91,7 +110,7 @@ find it and automatically make the TinyOS libraries available.</p>
           directory where you saved the files.
         </ul>
 
-        (The directions above were modified from the <a href="http://webs.cs.berkeley.edu/tos/download.html">original TinyOS installation directions</a>).
+        (The directions above were modified from the <a href="http://webs.cs.berkeley.edu/tos/download.html" target="_top">original TinyOS installation directions</a>).
 
       <li>Make a directory into which to store the source code, for
       example:
@@ -126,8 +145,7 @@ export TOSDIR=$TOSROOT/tos
 
           <li>Under Windows with Cygwin, you can permanently set
           environment variables from the System control panel. For
-          details, see <a
-          href="../../../../doc/install.htm#settingptII">Set the value of
+          details, see <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII4.0/ptII/doc/install.htm#settingptII">Set the value of
           the PTII environment variable</a>. While you are setting
           environment variables in Windows, you may want to set <a
           href="#NC2MOMLLIB_NESC_dist">NC2MOMLLIB_NESC</a>.
@@ -241,6 +259,17 @@ make momllib mica
         <ul>
           <li> If you are running Windows XP or Windows 2000, you can either:
             <ul>
+              <li> Download WinAVR
+   	       <ol> 
+                  <li>Go to 
+                    <a href="http://winavr.sourceforge.net/" target="_top"><code>http://winavr.sourceforge.net/</code></a>              
+                  <li>Click on "Package"
+                  <li>Download the latest release
+                    <br> The link should be at the top of the page 
+                    and have a name like "WinAVR 20040404"
+                  <li>Install Winavr in any directory 
+                    <i>Directories with spaces in the pathname might not work?</i>
+                </ol>
               
               <li> Download the <a
               href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
@@ -278,11 +307,12 @@ make momllib mica
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avr-insight-pre6.0cvs.tinyos-1.3.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avr-insight-pre6.0cvs.tinyos-1.3.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avr-libc-20030512cvs-1.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/linux/avr-libc-20030512cvs-1.i386.rpm</a>
             </ul>
-          and install them with <pre>rpm -ivh *.rpm</pre> in the
-          directory where you saved the files.
+            and install them on the cygwin command line with 
+            <pre>rpm -ivh *.rpm</pre> 
+            in the directory where you saved the files.
         </ul>
 
-        (The directions above were modified from the <a href="http://webs.cs.berkeley.edu/tos/download.html">original TinyOS installation directions</a>).
+        (The directions above were modified from the <a href="http://webs.cs.berkeley.edu/tos/download.html" target="_top">original TinyOS installation directions</a>).
 
       <li>Make a directory into which to store the source code, for
       example:
@@ -317,8 +347,7 @@ export TOSDIR=$TOSROOT/tos
 
           <li>Under Windows with Cygwin, you can permanently set
           environment variables from the System control panel. For
-          details, see <a
-          href="../../../../doc/install.htm#settingptII">Set the value of
+          details, see <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII4.0/ptII/doc/install.htm#settingptII">Set the value of
           the PTII environment variable</a>. While you are setting
           environment variables in Windows, you may want to set <a
           href="#NC2MOMLLIB_NESC_source">NC2MOMLLIB_NESC</a>. 
