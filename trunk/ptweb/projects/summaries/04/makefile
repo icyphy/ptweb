@@ -17,7 +17,8 @@ SUM_SOURCES =  \
 	cacheAwareScheduling.sum \
 	structuredIA.sum \
 	smachine.sum \
-      DDF_BDF.sum  
+      DDF_BDF.sum \
+	  simTimedMoCs.sum
 
 # other sources that are not .sum files 
 OTHER_SRCS =
