@@ -1,0 +1,214 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Cygwin Installation</title>
+</head>
+<body>
+<h1>Cygwin Installation</h1>
+The Cygwin toolkit provides Unix tools on the Windows platform.
+You need only install the Cygwin toolkit if you are rebuilding
+from source and intend to develop your own actors using Java.
+
+ <p>Note that compile your own actors, you will also need the 
+<CODE>javac</CODE> compiler.  The <CODE>javac</CODE> compiler
+is part of the JDK, which is available at:
+
+<a href="http://java.sun.com/j2se/1.3/" target="_top"><CODE>http://java.sun.com/j2se/1.3/</CODE></a>.
+The <CODE>javac</CODE> compiler is <B>not</B> present in the 
+Java Runtime Environment (JRE)
+
+
+ <p>The Cygwin home page is at
+<a href="http://sources.redhat.com/cygwin/" target="_top"><CODE>http://sources.redhat.com/cygwin/</CODE></a>
+ <p>Complete installation instructions can be found at
+<a href="http://sources.redhat.com/cygwin/faq" target="_top"><CODE>http://sources.redhat.com/cygwin/faq</CODE></a>.
+
+<h2>Installing Cygwin from the self-extracting executable</h2>
+
+ <p>The Ptolemy II Matlab interface use the GNU gcc compiler and requires
+that Matlab be installed on the local machine.  The gcc compiler is
+fairly large, so we provide three separate self-extracting downloads
+of the cygwin tools
+<ol>
+<li> <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a>
+(9.8 Mb) - The tools necessary to compile and configure Ptolemy II
+except for the Matlab interface.
+
+<li> <a href="cygwinDevel.exe"><CODE>cygwingDevel.exe</CODE></a>
+(16.7 Mb) - The tools necessary to compile and configure Ptolemy II
+including the Matlab interface.  This download includes
+everything in <CODE>cygwinBasic.exe</CODE> above.
+</ol>
+
+ <p>The sources for the above downloadables can be found in
+<a href="cygwinDevelSrc.exe"><CODE>cygwingDevelSrc.exe</CODE></a> (56.1 Mb)
+
+ <p>We provide a self-extracting .exe file that contains the
+the set of tools necessary to configure and compile Ptolemy II.  
+
+
+ <p>The download of basic cygwin tools includes:
+<pre>
+ash-20020131-1
+bash-2.05a-3
+cygwin-1.3.10-1
+fileutils-4.1-1
+findutils-4.1
+gdbm-1.8.0-4
+grep-2.5-1
+gzip-1.3.2-1
+less-374-1
+libintl-0.10.38-3
+libintl1-0.10.40-1
+libncurses5-5.2-1
+libncurses6-5.2-8
+libreadline4-4.1-2
+libreadline5-4.2a-1
+login-1.4-3
+make-3.79.1-5
+ncurses-5.2-8
+openssh-3.1p1-1
+openssl-0.9.6c-3
+pcre-3.7-1
+readline-4.2a-1
+termcap-20020403-1
+terminfo-5.2-1
+textutils-2.0.21-1
+w32api-1.3-2
+which-1.5-1
+zlib-1.1.4-1
+</pre>
+
+
+ <p>The download of devel cygwin tools includes all the tools
+from the basic cygwin download listed above and
+<pre>
+autoconf-stable-2.13-4
+autoconf-2.53-1
+binutils-20011002-1
+gcc-2.95.3-5
+mingw-runtime-1.3-2
+mktemp-1.4-1
+</pre>
+
+<ol>
+
+<li> Most users will
+<br> Download and execute <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a> (9.8 Mb).
+ <br> If you are running under Windows and 
+have Matlab installed on your local machine, then 
+<br> Download and execute <a href="cygwinDevel.exe"><CODE>cygwinDevel.exe</CODE></a> (16.7 Mb).
+
+ <br>The files will be extracted to an seemingly arbitrary directory.
+You may find it easier to change the directory to something short, like
+<CODE>c:\temp\cygwin</CODE>. 
+
+<li> Run <CODE>setup.exe</CODE>
+<li> Click on  <CODE>Next</CODE>
+<li> Select <CODE>Install from Local Directory</CODE> and click on <CODE>Next</CODE>.
+
+<li> Keep the default of <CODE>C:\cygwin</CODE> for the <CODE>Select Root Install Directory</CODE>.  
+ <br>Keep the default <CODE>All Users</CODE>,
+ <br>Change the <CODE>Default Text File Type</CODE> to <CODE>DOS</CODE>
+ <br>(If you select Unix instead of DOS, then you will likely have
+ <a href="http://www.gigascale.org/softdevel/faq/23.html">Cygwin CR/NL problems</a> with CVS)
+
+ <br> and then click on <CODE>Next</CODE>.
+
+<li> Keep the default for <CODE>Local Package Directory</CODE>
+and click on <CODE>Next</CODE>.
+
+
+<li> The <CODE>Select packages to install</CODE> window will come
+up with the default settings, we need to change from
+<CODE>default</CODE> to <CODE>install</CODE>
+click on
+the word <CODE>default</CODE> that is to the right of <CODE>All</CODE>.
+The subpages should then change from <CODE>default</CODE> to
+<CODE>Install</CODE>.  In the screen shot below, we have just
+clicked on <CODE>default</CODE>:
+<img src="../../image/cygwinSetup.gif" alt="Cygwin Setup">
+ <br>
+<li> Select <CODE>Next</CODE>, which will install all the packages.
+
+
+<li> Select <CODE>Create Desktop Icon</CODE> and <CODE>Add to Start Menu</CODE>
+according to your preferences.
+
+<li> Remove the temporary directory where you extracted the files.
+
+
+<li> <CODE>c:/cygwin/etc/passwd</CODE> is created during the 
+Cygwin installation.  If your Windows account is a domain account
+and not a local account, then you may need to add an entry
+to <CODE>c:/cygwin/etc/passwd</CODE> by hand.
+ <br>To do this, start up the Cygwin bash shell with
+Start -&gt;?Cygwin
+ <br>Then use the <CODE>mkpasswd</CODE> command to append
+a line with your login information, for example, I used:
+
+<pre>
+ mkpasswd -d -u cxh --path-to-home=/cygdrive/c/users &gt;&gt; /etc/passwd
+</pre>
+<CODE>mkpasswd -h</CODE> will print out help for the <CODE>mkpasswd</CODE>
+command
+
+<li> Follow the instructions in the
+<a href="ptII2.0.1/doc/install.htm#settingptII">Set the value of the <CODE>PTII</CODE> environment variable</a> section
+</ol>
+
+<h2>Installing Cygwin from the Web</h2>
+We provide prebuilt downloads of the subset of Cygwin tools needed to
+recompile Ptolemy II.  The Cygwin tools are constantly being updated, for
+the latest versions, see the Cygwin website.
+
+ <p>Instructions for installing Cygwin from the Cygwin website
+can be found on the 
+for <a href="ptII2.0.1/doc/install.htm#cygwin">Ptolemy II Installation Page</a>
+
+<h2>Enabling Copy in Cygwin Bash under XP</h2>
+You may need to enable copy and paste in the bash shell window.
+
+ <p>If copy and paste are working properly, then you should be able to
+highlight text by left clicking and dragging the mouse over the text
+and then hitting the Enter key to copy the highlighted text.
+ <p>
+The Cygwin faq at
+<a href="http://www.cygwin.com/faq/faq.html#SEC54" target="_top"><CODE>http://www.cygwin.com/faq/faq.html#SEC54</CODE></a>
+says:
+<BLOCKQUOTE>
+How can I copy and paste into Cygwin console windows?
+
+ <p>Under Windows NT, open the properties dialog of the console
+window. The options contain a toggle button, named "Quick edit
+mode". It must be ON. Save the properties.
+
+ <p>Under Windows 9x, open the properties dialog of the console
+window. Select the Misc tab. Uncheck Fast Pasting. Check QuickEdit.
+
+ <p>You can also bind the insert key to paste from the clipboard by adding
+the following line to your .inputrc file:
+
+<pre>
+    "\e[2~": paste-from-clipboard 
+</pre>
+
+</BLOCKQUOTE>
+
+
+More precisely:
+<ol>
+<li> Start up bash by doing Start -&gt; Programs -&gt; Cygwin -&gt; Cygwin Bash Shell.
+
+<li> Right click on the icon in the upper left of the title bar and select
+properties
+
+<li> Under Options, select 'QuickEdit Mode', hit ok
+
+<li> Select 'Modify shortcut that started this window', hit ok
+</ol>
+
+</body>
+</html>
