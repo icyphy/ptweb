@@ -1,20 +1,15 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
     "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
-<class name="Sinewave" extends="ptolemy.actor.TypedCompositeActor">
-    <doc>This composite actor generates a sine wave.</doc>
+<class name="Waveform" extends="ptolemy.actor.TypedCompositeActor">
     <property name="samplingFrequency" class="ptolemy.data.expr.Parameter" value="8000.0">
-        <doc>The sampling frequency, in the same units as the frequency.</doc>
     </property>
     <property name="frequency" class="ptolemy.data.expr.Parameter" value="440.0">
-        <doc>The frequency of the sinusoid, in the same units as the sampling frequency.</doc>
     </property>
     <property name="phase" class="ptolemy.data.expr.Parameter" value="0.0">
-        <doc>The phase, in radians.</doc>
     </property>
     <port name="output" class="ptolemy.actor.TypedIOPort">
         <property name="output"/>
-        <doc>Sinusoidal waveform output.</doc>
         <property name="_location" class="ptolemy.moml.Location" value="496.00001525878906, 120.00000381469727">
         </property>
     </port>
