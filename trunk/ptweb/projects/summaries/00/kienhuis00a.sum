@@ -77,11 +77,17 @@ systems. Also, by attributing the process network model with power and
 latency numbers, various kinds of design space exploration can be
 done.
 
+<p>
+
 [1] P. Feautrier, "Dataflow Analysis of Arrays and Scalar Reference"
 Recherche Operationelle; Operations Research. 1991
 
+<p>
+
 [2] Ph. Clauss and V. Loechner, "Parametric Analysis of Polyhedral
 Iteration Spaces". Journal of VLSI Signal Processing. 1998
+
+<p>
 
 [3] Patrice Quinton, Sanjay Rajopadhye, and Tanguy Risset, "On
 Manipulating Z-polyhedra", Tech. Rep., Institut de Recherche en

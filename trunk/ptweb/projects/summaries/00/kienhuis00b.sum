@@ -52,6 +52,8 @@ domain such that the overall system is robust, and has multi-user and
 multi-site capabilities. The later two issues are important as more
 and more designs happen in teams at various places at the same time.
 
+<p>
+
 [1] K.O. ten Bosch, P. Bingley, P. van der Wolf. 
 "Design Flow Management in the Nelsis CAD Framework", 
 Proc. 28th ACM/IEEE Design Automation Conference. 1991. 
