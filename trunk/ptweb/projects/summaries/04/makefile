@@ -12,7 +12,8 @@ SUM_SOURCES =  \
 	ePtolemy04.sum \
 	cal04.sum \
 	softwalls.sum \
-	wireless.sum
+	wireless.sum \
+	cacheAwareScheduling.sum 
 
 # other sources that are not .sum files 
 OTHER_SRCS =
