@@ -1,0 +1,47 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Behavioral Types for Component-Based Design</title>
+</head>
+<body>
+<center>
+<h1>Behavioral Types for Component-Based Design</h1>
+</center>
+<center>
+Edward A. Lee and Yuhong Xiong 
+<p>
+Memorandum UCB/ERL M02/29,
+<br> EECS, University of California, Berkeley, CA 94720, USA
+<BR>
+September 27, 2002
+</CENTER>
+<p>
+<CENTER>
+<a href="behavioralType.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+We present a framework to extend the concept of type systems in programming
+languages to capture the dynamic interaction in component-based design,
+including the communication protocols between components. Our system is based
+on a light-weight formalism - interface automata. We first propose some
+extensions to the theory of interface automata to make them more powerful,
+then use the extended theory to establish a behavioral-level type system.
+In our system, the interaction types and the dynamic behavior of components
+are defined using interface automata, and type checking, which checks the
+compatibility of a component with a certain interaction type, is conducted
+through automata composition. Our type system is polymorphic in that a
+component may be compatible with more than one interaction type. We show that
+a subtyping relation exists among various interaction types and that this
+relation can be described using a partial order. This behavioral type order
+can be used to facilitate the design of polymorphic components and simplify
+type checking. In addition to static type checking, we also propose to extend
+the use of interface automata to the on-line reflection of component states
+and to run-time type checking. We illustrate our framework using a
+component-based design environment, Ptolemy II, and discuss the trade-offs in
+the design of behavioral type systems.
+</body>
+</html>
+
