@@ -1,0 +1,156 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>Adding Publications</title>
+</head>
+<body>
+<h1>Adding Publications</h1>
+With the introduction of the new website, 
+the instructions for adding new publications have changed.
+
+
+
+ <p> The papers directory is available on the web as
+<a href="http://ptolemy.eecs.berkeley.edu/publications"><CODE>http://ptolemy.eecs.berkeley.edu/publications</CODE></a>
+
+ <p> The website is actually located on messier in
+<CODE>/vol/ptolemy/pt0/ptweb</CODE>.  The <CODE>ptII</CODE>
+user has write privileges to that directory.
+
+ <p>If you want to add a paper to the website, please follow the 
+instructions below
+
+<ol>
+
+<li> Be sure that you have the proper acknowledgement of support in your paper.
+As of 10/97, the text was:
+<BLOCKQUOTE>
+This research is part of the Ptolemy project, which is supported
+by the Defense Advanced Research Projects Agency (DARPA), the State of
+California MICRO program, and the following companies: The Alta Group
+of Cadence Design Systems, Hewlett Packard, Hitachi,
+Hughes Space and Communications, NEC, Philips, and Rockwell.
+</BLOCKQUOTE>
+
+
+<li> Ideally your paper should include the ERL memo number in the paper.
+At the minimum, the abstract should include the ERL memo number.
+ERL memo numbers can be had by emailing Tito.
+ <br><a href="http://diva.eecs.berkeley.edu/~erl/publication.html" target="_top">ERL Research Publications</a>
+website lists current publications
+
+ <br>FIXME: we need more info here.
+
+
+<li> Create a PDF version of your paper.  If you only have PostScript,
+you can convert it under Unix with:
+<pre>
+distill your_paper_name.ps
+</pre>
+
+<li> The website is now under cvs control.  However, because of
+size constraints, the directories that contain the papers are not
+under CVS control
+
+To add a publication, you
+should check out the website with:
+<pre>
+cvs checkout ptweb
+</pre>
+
+<li> The publications are organized by year in the
+<CODE>ptweb/publications/<I>twodigityear</I></CODE> directory.
+
+ <br>For example, the directories that contain the
+papers for 1999 would all be in
+<a href="../publications/papers/99"><CODE>ptweb/publications/papers/99</CODE></a>
+
+<li> In the yearly publications directory, 
+   create a directory for the html file that includes your abstract
+   and the pdf file.  For example, I might create
+   <CODE>ptweb/publications/papers/99/loopedSchedules</CODE>	
+
+<P> Make sure that your directory name makes sense and is informative.  For 
+example, "masters" is not a good choice, while the name 
+"loopedSchedules" is a much better one.  Also make sure that 
+your directory name is different from that of any of the other files 
+in the yearly publications directory 
+
+<p>Note that the directory that contains the abstract and pdf
+file are <B>not</B> under CVS.  
+
+<li> Copy your pdf file to the directory.
+Again, the names of the files should be informative	
+
+
+<LI> Create an <CODE>index.htm</CODE> file in the directory  you
+just created, using a recent index.htm file as a sample.
+Don't deviate from the standard.
+	<menu>
+	<li> Be sure to link to the style sheet
+	<li> Have a link to the PDF at the top, before the abstract
+	<li> Include an abstract
+        <br>To get the abstract where only have PostScript and PDF, use
+	acroread to grab the text from the pdf file.	
+<PRE>
+acroread your_paper_name.pdf
+</PRE>
+
+
+	Use 'select text' under the tools menu to highlight the text for
+	the abstract and then copy it to your index.html file.  You will need
+	to polish the formatting a little after making the copy (eliminate
+	inappropriately hyphenated words, fill in dropped letters, e.g.,
+	occurrences of "fl" or "ff").
+
+	<li> Include the ERL Memo number
+	</menu>
+Note that the <CODE>index.htm</CODE> file for the paper is
+<B>not</B> under CVS
+
+<li> The yearly publications directory contains a <CODE>index.htm</CODE> file, which is where you should add a reference to your paper.
+For example, the papers for 1999 would all be listed
+<a href="../publications/papers/99/index.htm"><CODE>ptweb/publications/papers/99/index.htm</CODE></a>
+ <br>The papers are listed chronologically, add your paper to the top.
+Use the previous paper as an example.
+ <br>Please don't deviate from the standard, this is not place to
+exercise artistic license :-)
+ <br>This file is under CVS version control, when you are done, check
+the file in with <CODE>cvs commit -m "<I>added foo paper</I>" index.htm </CODE>
+
+<li> Check that your links are ok by point a browser to your
+copy of the website
+
+
+<li> The next step is to update the website.
+Become the ptII user on messier:
+<pre>
+rlogin -8x messier ptII
+</pre>
+
+<li> Go to <CODE>/vol/ptolemy/pt0/ptweb/publications/papers/<I>year</I></CODE> and
+copy the directory that contains your <CODE>.pdf</CODE> file
+and the <CODE>index.htm</CODE> file you created.  Note that these
+file are <B>not</B> under CVS.
+<pre>
+cd /vol/ptolemy/pt0/ptweb/publications/papers/99
+cp -r ~/src/ptweb/publications/papers/99/loopedSchedules .
+</pre>
+
+<li> Get the latest version of the <CODE>index.htm</CODE> file
+<pre>
+cvs update
+</pre>
+
+<li> Check your changes by going to:
+<a href="http://ptolemy.eecs.berkeley.edu/publications"><CODE>http://ptolemy.eecs.berkeley.edu/publications</CODE></a>
+ <br> Note that you might have to click reload in your browser
+to see the changes.
+</ol>
+
+
+
+</body>
+</html>
