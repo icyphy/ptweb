@@ -21,9 +21,9 @@ ABSTRACT
 <P>
 In this project, we are trying to provide a solution to support different cellular-network standards, namely GSM, and 3G standards of WCDMA, TD-SCDMA and CDMA2000. Our approach is to use an actor-oriented System-on-Chip (SoC) architecture, where a number of small DSP cores are developed to support various programmable functions. The idea behind is to develop a hardware platform for wireless communications which can be used to derive various SoC products by changing software only.
 <P>
-We begin with focusing on the compatibility between 2 standards - WCDMA and TD-SCDMA, due to their popularity and promising perspectives in research and market. Rake receiver is set as the first object (function block) to look at, since it is the most important part in CDMA system.
+The first object (function block) for case study is the Rake receiver, as it is the key part of CDMA systems. We also focus on the shared features and compatibility between WCDMA and TD-SCDMA, due to their popularity and promising perspective in research and market.
 <P>
-The plan is to start with system functional analysis, in which we explore a shared block-diagram between the 2 standards. Further work will be complexity analysis, cross-standard adaptive algorithm, etc. Simulations at various levels are involved. Eventually, the architecture is designed to set at a fairly optimal point, considering the trade-off among factors such as power, speed, flexibility, etc.
+The study starts with system functional analysis, in which we explore a shared block-diagram for the 2 standards. Further work will be complexity analysis, cross-standard adaptive algorithm, etc. Simulations at various levels are involved. Eventually, the architecture is designed to be set at a fairly optimal point, considering the trade-off among factors such as power, speed, flexibility, etc.
 <P>
 This wireless communications project is conducted in cooperation with National Semiconductor.
 
