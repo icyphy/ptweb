@@ -3,7 +3,6 @@
 User-agent: *
 Disallow: /~cxh/faq
 Disallow: /~cxh/lprng
-Disallow: /~cxh/private
 Disallow: /~cxh/sapub/AudioFile
 Disallow: /~cxh/sa/amanda
 Disallow: /~cxh/sa/mhonarc
