@@ -9,6 +9,7 @@ Disallow: /~cxh/sa/amanda
 Disallow: /~cxh/sa/mhonarc
 Disallow: /~cxh/sa/nt/dists
 Disallow: /~cxh/sapub/spamlib/old
+Disallow: /~cxh/sapub/SSH
 Disallow: /~cxh/tmp
 Disallow: /~johnr/norobots
 Disallow: /~johnr/local/nt/bulk/ibm/OLD
@@ -34,6 +35,7 @@ Disallow: /~ptdesign/star-demo-index
 Disallow: /~ptdesign/tycho/ptdesign-tycho
 Disallow: /~ptdesign/tycho/tcldp
 Disallow: /~ptdesign/ptweb
+Disallow: /java/ptplot3.1
 Disallow: /ptolemyII/ptII0.1alpha
 Disallow: /ptolemyII/ptII0.2
 Disallow: /ptolemyII/ptII0.2/ptII0.2devel
