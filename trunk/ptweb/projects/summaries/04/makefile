@@ -15,7 +15,8 @@ SUM_SOURCES =  \
         sensorNetworks.sum \
 	wireless.sum \
 	cacheAwareScheduling.sum \
-	structuredIA.sum  
+	structuredIA.sum \
+      DDF_BDF.sum  
 
 # other sources that are not .sum files 
 OTHER_SRCS =

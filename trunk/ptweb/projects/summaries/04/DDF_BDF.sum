@@ -1,0 +1,19 @@
+NAMES
+Gang Zhou
+
+EMAIL
+zgang@eecs.berkeley.edu
+
+PHONE
+510-642-2718
+
+TITLE
+Dynamic Dataflow and Boolean Dataflow in Ptolemy II
+
+ABSTRACT 
+<p>Synchronous dataflow (SDF) is the most special case of the dataflow models where the number of tokens produced and consumed by each actor is specified a priori and hence a static schedule can be calculated at compile time. On the other hand, process network (PN) is a superset of all dataflow models, where concurrent processes consume and produce (possibly infinite) streams of tokens and communicate through unidirectional first-in first-out channels. Dynamic dataflow (DDF) and Boolean dataflow (BDF) sit in between SDF and PN, where data-dependent and variable production and consumption are allowed.
+ 
+<p>Previously, DDF and BDF have been realized and several schedules have been constructed in Ptolemy Classic. Ideally, a schedule should be able to execute a graph forever if it is possible to execute forever and should be able to execute a graph forever in bounded memory if it is possible to execute forever in bounded memory and should execute the graph in a sequence of well-defined and determinate iterations so that the user can control the length of an execution by specifying the number of iterations to execute. In this project, we will build on the previous effort and realize both domains in Ptolemy II. We will further explore various optimization scheduling algorithms. We will also study the semantics of composing DDF/BDF with other Ptolemy II domains.
+
+ 
+
