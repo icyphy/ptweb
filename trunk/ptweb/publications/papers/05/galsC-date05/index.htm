@@ -1,0 +1,45 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>galsC: A Language for Event-Driven Embedded Systems</title>
+</head>
+<body>
+<center>
+  <h1>galsC: A Language for Event-Driven Embedded Systems</h1>
+</center>
+<center>
+<p>Elaine Cheong and Jie Liu</p>
+<p>in Proceedings of Design, Automation and Test in Europe (DATE)<br>
+March 7-11, 2005<br>
+Munich, Germany
+</p>
+<br>
+<p> <a href="galsC-date05.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+
+We introduce galsC, a language designed for programming event-driven
+embedded systems such as sensor networks. galsC implements the
+TinyGALS programming model.  At the local level, software components
+are linked via synchronous method calls to form actors.  At the global
+level, actors communicate with each other asynchronously via message
+passing, which separates the flow of control between actors.  A
+complementary model called TinyGUYS is a guarded yet synchronous model
+designed to allow thread-safe sharing of global state between actors
+via parameters without explicitly passing messages.  The galsC
+compiler extends the nesC compiler, which allows for better type
+checking and code generation.  Having a well-structured concurrency
+model at the application level greatly reduces the risk of concurrency
+errors, such as deadlock and race conditions. The galsC language is
+implemented on the Berkeley motes and is compatible with the
+TinyOS/nesC component library. We use a multi-hop wireless sensor
+network as an example to illustrate the effectiveness of the language.
+
+<p>
+</body>
+</html>
+
