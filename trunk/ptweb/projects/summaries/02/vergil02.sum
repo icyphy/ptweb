@@ -1,5 +1,5 @@
 NAMES
-Stephen Neuendorffer
+Stephen Neuendorffer and Edward Lee
 
 EMAIL
 neuendor@eecs.berkeley.edu
@@ -8,7 +8,7 @@ HOMEPAGE
 http://ptolemy.eecs.berkeley.edu/~neuendor
 
 PHONE
-510-642-8884
+510-642-6817
 
 TITLE
 Vergil: User interface for Ptolemy II
@@ -21,7 +21,7 @@ ABSTRACT
 <p> This work is focused on the design of a modular and extensible 
 user interface toolkit for Ptolemy II that is rich and powerful, 
 yet also intuitive and relatively simple to learn.  
-<a href="http://ptolemy.eecs.berkeley.edu/java/vergil/body.htm>Vergil</a> 
+<a href="http://ptolemy.eecs.berkeley.edu/java/vergil>Vergil</a> 
 uses an interactively editable block diagram to represent a Ptolemy II model.
 The block diagram
 editor can be used to construct and configure the model prior to execution
@@ -29,7 +29,9 @@ and to directly manipulate a model while it is being executed.  The basic
 block diagram editor directly represents the components, ports, relations, 
 and links at the level that they exists in the Ptolemy II kernel.  A similar 
 editor allows a state machine model to be edited directly as a bubble and 
-arc diagram.  Models are stored persistently using the MoML XML schema.
+arc diagram.  Yet another editor allows modal models to be built where each 
+mode has a refining block diagram.  Models are stored persistently using 
+the MoML XML schema.
 <p>
 The Vergil application itself is architected with software components built 
 using the Ptolemy II kernel.  This architecture allows it to be easily 
@@ -48,7 +50,8 @@ manipulating figures.
 <p> Although this work is an important part of Ptolemy II, it is
 intended to be sufficiently general to be applicable to other design
 tools, and to enable further research into visualization and
-design of component-based models.
+design of component-based models.  It is currently being used extensively 
+in the MESCAL research project and in several companies.
 
 
 
