@@ -12,6 +12,7 @@ SUM_SOURCES =  \
 	vergil05.sum \
 	ptplot05.sum \
 	softwalls.sum \
+        ePtolemy05.sum \
         sensorNetworks.sum \
 	structuredIA.sum \
         DDF_BDF.sum \
