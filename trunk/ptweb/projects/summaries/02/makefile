@@ -8,6 +8,7 @@ SOURCES = ptolemyII.sum \
 	  vergil02.sum \
 	  vogel02.sum \
 	  vthreads.sum \
+	  winthrop02.sum \
 	  yuhong02.sum
 
 
