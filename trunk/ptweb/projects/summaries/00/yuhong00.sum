@@ -30,19 +30,19 @@ This type system increases the safety and flexibility of the design
 environment, promotes component reuse, and helps simplify component 
 development and optimization. The infrastructure we have built is generic 
 in that it is not bound to one particular type lattice. So it can be used
-to experiment with extended type systems.
+to experiment with extended type systems.<p>
 
 One extension to this type system is to add support for structured types 
 such as array and record types. The goal is to allow the elements of arrays 
 and records to contain data tokens of arbitrary types, including structured 
 types, and be able to specify type constraints on them. One of the major 
 difficulty for this extension is that the type lattice will become infinite, 
-which raises questions on the convergence of type resolution.
+which raises questions on the convergence of type resolution.<p>
 
 A more significant extension is on system level types. We will try to
 characterize the communication protocols used between system components, 
 or some of the real-time properties of the system as types, and design 
 a process-level type system to facilitate heterogeneous real-time modeling. 
 This may potentially bring some of the benefit of data typing to the process 
-level.
+level.<p>
 
