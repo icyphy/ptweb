@@ -346,7 +346,7 @@ Type System
 An issue that has come up repeatedly is that frequently one would like
 to apply an actor designed to operate on scalar types to composite
 types such as arrays, records, and matrices. Although in principle the
-Ptolemy II type could support this, Yuhong Xiong has suggested that
+Ptolemy II type could support this, Xiaojun Liu has suggested that
 there is a more elegant solution based on the concept of higher-order
 components.  He calls the concept an "iteration map," where the
 mapping of a scalar operator over a composite type would be implied
