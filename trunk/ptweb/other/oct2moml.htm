@@ -15,13 +15,44 @@ for getting a start on converting Ptolemy Classic Octtools facets
 to MoML Files
 <h2>Limitations</h2>
 
-<ol>
+<ul>
+
+<li> oct2moml is a <B>hack</B>.  Don't use it if you are not comfortable
+with recompiling Ptolemy Classic.
+
+<li> oct2moml only translates the logical connections of a facet,
+it does not translate how the icons look, or where they are positioned.
+
 <li> Galaxies are not handled well
+
 <li> There is not necessarily a one-to-one translation
 between Ptolemy Classic Star names and their parameters and
 Ptolemy II Actor names and their parameters
-<li> 
-</ol>
+
+<li> oct2moml is based on oct2ptcl, so it has the following oct2ptcl bugs: 
+ <ul>
+oct2ptcl is too picky about some facets.  It thinks facets are
+corrupt, but the facet will work fine in Ptolemy.  oct2ptcl is
+technically correct here, but by not processing semi-corrupt facets,
+oct2ptcl is not very useful
+
+
+<li> oct2ptcl has not been extended to handle initializable delays.
+The mdsdf:test:IIRusingFIR demo uses initializable delays.
+If we run oct2ptcl on this facet, we get:
+<pre>
+    connect Fork.output=21 output#2 FIR1 input
+</pre>
+
+However, if we compile this facet with ptolemy, we get:
+<pre>
+    connect Fork.output=21 output#2 FIR1 input "0 1"
+</pre>
+
+
+ <li> 
+ </ul>
+</ul>
 <h2>Installation</h2>
 <ol>
 <li> Download the Ptolemy Classic src and other.src tar files
