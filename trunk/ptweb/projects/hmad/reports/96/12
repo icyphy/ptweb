@@ -1,0 +1,211 @@
+Monthly R&D Status Report
+Date: December 15, 1996
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+
+1. Tasks Performed
+
+The first month of the project was dominated by organizational issues
+and exploration of the concurrency model in Java as a candidate
+infrastructure for distributed adaptive signal processing systems. We
+have prepared a brief mission statement for the project, included as an
+appendix.  Background information about the Ptolemy project and Tycho
+can be obtained at:
+
+	http://ptolemy.eecs.berkeley.edu/
+	http://ptolemy.eecs.berkeley.edu/tycho/Tycho.html
+
+
+2. Significant Accomplishments
+
+2.1 Java Exploration
+
+The Java language offers a number of significant potential advantages
+for use in our context. Like Ada, it is much safer than C or C++
+because of its built-in memory management and it's lack of pointers.
+Also like Ada, it is a concurrent language, with a built-in thread
+library. It has also proven portable and distributable, with
+well-conceived and robust mechanisms for migrating code across
+platforms. Finally, a huge investment is being made in industry in
+software development environments, class libraries, and applications.
+We can leverage this investment.
+
+There are a number of key questions that need to be addressed. First,
+since the language is conceived around interpreted byte code, will it
+be capable of delivering the performance needed by signal processing
+applications? We have made some preliminary measurements, comparing
+interpreted Java code against compiled Java code using a just-in-time
+Java compiler, and found about a factor of 30 improvement in speed. The
+next step will be to compare against optimized C code. Of course, Java
+compilers and interpreters will improve over time, as there is a huge
+investment in them in industry. Moreover, aside from the memory
+management, there is no reason that compiled Java should be any slower
+than C or C++. The benefits of run-time memory management, however, are
+considerable, so a reasonable performance penalty will be an acceptable
+cost.
+
+A second key question is whether the Java thread library provides an
+adequate platform for constructing concurrent applications.  The basic
+mechanism, wait and notify, is too low level for most applications
+programming.  In particular, direct use of such low-level primitives
+makes validation of concurrent programs very difficult.  For example,
+there is no direct way of ensuring determinacy.
+
+We have completed two pilot projects that show that higher-level
+determinate mechanisms can be built on top of Java threads. In the
+first of these, Dick Stevens, a visiting scholar from the Naval
+Research Labs, together with two graduate students, Marlene Wan and
+Peggy Laramie, have designed a set of classes that implement Kahn
+process networks. KPNs have sequential processes that communicate via
+unidirectional FIFO queues. Based on previous work at Berkeley and at
+Lincoln Labs by Tom Parks, they were able to implement a simple
+algorithm that ensures that the size of the FIFO queues will not grow
+unbounded unless the program requires them to grow unbounded.
+
+The second project, completed by Jim Young of the CAD group at Berkeley,
+implements a barrier synchronization mechanism on top of Java threads.
+
+These two pilot projects are very encouraging because the two concurrency
+models are very different from one another, and yet both appear to be
+efficiently implementable on top of Java threads.  The next step, of
+course, is to quantify the efficiency.
+
+If this initial exploration continues encouraging, our plan is to model
+a Java class library after key elements of the Ptolemy kernel. This
+will enable construction of lightweight, distributable applications
+that use the style of Ptolemy, and will enable leveraging the Ptolemy
+infrastructure (schedulers, user interfaces, etc).
+
+
+2.2 An Object-Oriented and Scripted Interface to Ptolemy
+
+We are designing a class hierarchy in Itcl (an object-oriented
+extension of the Tcl scripting language) that we expect will eventually
+replace ptcl as the main interface to the Ptolemy kernel. Its key
+features are that it will provide essentially full access to kernel
+functionality from Tcl (unlike ptcl's rather more limited access) and
+that it will be object-oriented.  By building this scripted layer of
+abstraction, we expect to be able to perform much more sophisticated
+experiments with dynamic reconfiguration of Ptolemy applications.
+
+
+2.3 Process-Level Type System
+
+Rajagopal Nagarajan, from Imperial College in England, visited our
+group for one week of intensive collaboration on formalisms that might
+be applicable to our notion of process-level type systems.  He
+introduced us to Interaction Categories, an approach to classifying
+process types in terms of histories of events.  We have compared the
+IC formalism against our own tagged signal model, and have written a
+paper to be submitted to the IEEE Transactions on CAD.  We are working
+on arranging for Raja to join our group as a postdoc.
+
+
+2.4 Infrastructure Improvements
+
+Christopher Hylands built a simple syntax-sensitive Java editor in Tycho
+and an interface between Tycho and a Java applet viewer.  Tycho is an
+extensible user-interface toolkit designed as part of the Ptolemy project.
+
+
+2.5 Multidimensional Signal Processing (contract Option, Questech, Inc)
+
+We are completing negotiations with Thomson CSF and Questech to get
+this part of the project under way.  Praveen Murthy has joined our
+group as a postdoc, and he will be locally in charge of the project.
+
+
+3. Publications and Presentations
+
+3.1 Presentations
+
+* "A Typed Framework for Semantics of Dataflow Networks," Rajagopal
+   Nagarajan, Visiting Scholar, Dept. of Electrical Engineering and
+   Computer Science, UC Berkeley, Nov. 20, 1996.
+
+* "Java Threads and Exceptions," Dick Stevens, Visiting Scholar (NRL),
+   Ptolemy project group meeting, UC Berkeley, Nov. 26, 1996.
+
+
+APPENDIX -- BRIEF MISSION STATEMENT
+
+University of California at Berkeley
+Principal Investigator: Edward A. Lee
+Telephone: (510) 642-0455
+Fax: (510) 642-2739
+E-Mail: eal@eecs.Berkeley.EDU
+Address: Department of EECS Berkeley, CA 94720
+Performance Period: November 1996 - November 1999
+Subcontractor(s) and POC: None
+
+Task Description
+
+Formal models, design methodology, and a suite of software tools are
+being developed to support the design of distributed adaptive signal
+processing systems. Such systems in defense applications will be
+primarily reactive. These systems react continuously to their
+environment at the speed of the environment. They have hard real-time
+constraints, and are frequently safety-critical, to the point that
+failures could result in loss of human life. Reactive systems may need
+to be distributed for several reasons. First, such systems usually
+include sensors and actuators as an integral part, and these sensors
+and actuators cannot be arbitrarily co-located. Second, systems can be
+made more survivable and robust if they are distributed. Third, such
+systems are often used in command, control, and communication, where
+the people involved are geographically dispersed. Fourth, meeting the
+real-time constraints may require parallel processing. Finally, power
+and size constraints limit the processing on mobile and remote-sensing
+platforms.
+
+Robust distributed reactive systems must be capable of adapting to
+changing conditions. Computing resources and sensors may appear and
+disappear from the network. Quality of service demands may change as
+conditions change. Even the list of required services may change over
+time. The system is therefore continuously being redesigned while it
+operates, and all the while it must not fail.
+
+This project aims to adapt systematic and formal approaches that have
+proven effective for small-scale systems to large-scale systems. This
+will be accomplished by using hierarchy and information hiding to make
+the large scale systems appear to be small at any given level of the
+hierarchy. Standard languages such as C, C++, and Java will be used at
+the detail level. The software tools will be built in a modular way so
+that critical components (such as scheduling and verification tools
+necessary to support safety-critical design) can accompany the deployed
+system into the field. This will enable adaptation and robustness.
+
+The specific objectives are:
+
+ - Software architecture for modular deployable design tools.
+ - Domain-specific tools for distributed adaptive signal processing.
+ - Models of computation for dynamically configured systems.
+ - Theory and implementation of a process-level type system.
+ - Methodologies for formal analysis and testing of dynamic systems.
+ - System-level visualization.
+ - Array-based design of multidimensional signal processing.
+
+Major Deliverables Over the Life of the Contract
+
+ - Software with source code in freely redistributable form.
+ - Methodology and software supporting adaptive algorithm design.
+ - Software demonstrating modular deployable design tool components.
+ - Theory and implementation of robust mutable models of computation.
+ - Theory and implementation of a system-level type system.
+ - Design visualization tools supporting distributed adaptive systems.
+ - Methods for validating distributed adaptive systems.
+ - Software supporting multidimensional signal processing design.
+
+Plans for November 1996 - May 1997
+
+- Evaluation of the Java thread mechanism as a possible foundation on
+  which to build reconfigurable distributed systems.
+- Methodology for multithreaded design based on the process networks
+  model of computation.
+- Implementation methodology for distributable signal processing modules
+  based on the dataflow model of computation.
+- A concurrent finite-state machine control specification that can
+  cooperate with dataflow specifications of signal processing components.

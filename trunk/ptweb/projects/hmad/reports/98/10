@@ -1,0 +1,347 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Nov. 18, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        9/15/98 - 10/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Ptolemy II has reached a threshold where serious modeling is possible.
+The discrete-event (DE) domain has matured sufficiently that the
+research group of Prof. Kris Pister is using it to model multiple
+distributed microrobots. A synchronous dataflow (SDF) domain has
+come on line, as has a communicating sequential processes (CSP) domain.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Actor Package
+-------------
+
+As the domains continue to develop, the actor package, which provides
+basic support for flow of control and message passing, continues to
+mature. Steve Neuendorffer reworked the Director class to separate the
+functionality of a top-level execution manager from that of
+domain-specific directors. Part of this work involved developing a
+mechanism for multi-threaded models to be controlled systematically
+from a central controller. The design review of the result has been
+completed. The resulting design is much cleaner.
+
+Lukito Muliadi has improved the exception handling and has adapted the
+actor package to the change in the data package that makes tokens
+immutable (see below).
+
+
+Data Package
+------------
+
+Neil Smyth, in response to a design review of the data package
+has made a number of key improvements:
+
+   - Tokens are now immutable. They are thus no longer Observable.
+     This is a fairly key change.  It means that the value of a token
+     cannot be changed after the token is created.  This brings tokens
+     more in line with the basic data classes in Java, such as Double and
+     Boolean, and simplifies quite a bit of code.
+
+   - Neil created a new ParameterListener class that anyone who wants
+     to be informed of changes in a Parameter must implement.
+
+   - Parameters are now set from expressions in two steps. First the
+     expression is placed in the Parameter, then it is evaluated.
+
+Recall that tokens are the encapsulated data communicated between
+modules in a Ptolemy II model, and parameters are used to configure the
+modules.
+
+
+Type System
+-----------
+
+We have had a design review of the Type system built by Yuhong Xiong, and
+have started to use it in the DE domain.  This is a very sophisticated
+type system based on modern concepts first embodied in the ML language.
+
+
+Kernel Package
+--------------
+
+Xiaojun Liu discovered a bug in the kernel package concerning circular
+links, and together with Jie Liu, found a fix. We consider it very
+encouraging, and indicative of the efficacy of our software practice,
+that discovery of bugs in the kernel has become a very rare event.
+
+
+User Interface
+--------------
+
+The interface that Ptolemy II presents to external tools such as user
+interfaces is continuing to mature, under the direction of John Reekie.
+The intent is develop a system that we are calling "Visual Ptolemy"
+that will unify the GUI and the underlying Java engine without
+compromising the autonomy of the Java engine (which is needed for
+network-integrated modeling).  Here is a summary of the components:
+
+System API 
+     Purpose: Allow Tycho to start up and "connect" to Ptolemy II 
+     Functionality: Is Ptolemy installed; query Ptolemy II version;
+        query available domains; query actors fitting a given domain
+        and name; ... 
+
+Execution API 
+     Purpose: Allow Tycho to control a running simulation 
+     Functionality: Start, pause, stop a simulation; notify on all
+        execution events 
+
+Icon Library API 
+     Purpose: Allow Tycho to locate icons and related definitions 
+     Functionality: What paths are searched; modify the search path;
+        return top-level library names; return sub-library names;
+        return file path of any library;... 
+
+Domain API 
+     Purpose: Allow Tycho to query a domain for parameters, display
+        important run-time information (current time etc) 
+     Functionality: What directors can be used; what information needs
+        to be shown in the control panel; notify on time advanced; ... 
+
+Animation  & Parameter APIs 
+     Purpose: Allow Tycho to animate and display parameter of a running
+        simulation 
+     Functionality: Notify on: actor ready to fire; actor fired; actor
+        blocked; token transmitted; token read; ... 
+
+Christopher Hylands has defined a preliminary specification for the
+management of icons that a GUI will use to represent models. One of the
+key problems to deal with is that domain-polymorphic actors (which can
+operate in several domains) need to have their visual representation
+managed in a domain-independent way.
+
+Neil Smyth has developed a specification of what events/listeners we
+need to keep the GUI informed about the state of the java engine below
+it.
+
+
+Math Package
+------------
+
+Jeff Tsay did a performance comparison on immutable and mutable
+versions of the Complex class, using the FFT as a test case. He made
+some optimizations to both the immutable and mutable versions, and then
+did performance testing.  Part of the objective was to help us decide
+whether the Complex class should follow the lead of the Token classes
+in becoming immutable (meaning that the value of an instance cannot
+be changed after the instance is constructed).  The results of the test
+are instructive:
+
+  Case 1:
+
+  Machine               : SPARCstation 10
+  OS                    : SunOS
+  Compiler flags        : -O (optimized)
+  FFT data              : 1024 point real
+  Iterations            : 32 each
+  Cache info            : Warm cache (only 1 set of input data)
+  Methodology           : Quantify for Java
+
+  _fft(Complex[], int, bool) function times :
+       Using immutable Complex class : 4349.16 ms
+       Using mutable   Complex class : 2926.76 ms
+
+  % Speedup using mutable : 48.6%
+
+  Case 2:
+ 
+  Machine               : Intel Celeron 333 (eq. to Pentium-II basically)
+  OS                    : Windoze 98 
+  javac/java version    : 1.1.7
+  Compiler flags        : -g (debug) and also -O (optimized)
+  FFT data              : 1024 point Complex
+  Iterations            : 64 each
+  Cache info            : Warm cache (only 1 set of input data)
+  Methodology           : System timer
+ 
+  Debug build (-g) :
+ 
+  _fft(Complex[], int, bool) function times :
+       Using immutable Complex class : 9010 ms
+       Using mutable   Complex class : 6370 ms
+              
+  % Speedup using mutable : 41.4%
+
+In the latter test, using optimized compilation actually decreased
+performance (strangely). Overall, these results indicate first that our
+code and Java in general are still far from impressive performance. We
+contrast these results to advertised performance of the Texas
+Instruments C67x (floating point), which does a 1024 FFT in 0.124 ms.
+Our implementation on Solaris does it in 91.46 ms (mutable). Our
+implementation on Windows does it in 98.75 ms (mutable). We are off by
+about 3 orders of magnitude compared to the best performing programmable
+DSP today.  Relative performance indicates that there is a significant
+cost to making basic classes immutable (about 40% in performance of a
+real use).  We are continuing to evaluate this to understand where this
+cost is coming from.
+
+
+Other Software
+--------------
+
+We completed a code review of the FIFOQueue class, and Xiaojun Liu
+implemented the requisite changes. This class is used for asynchronous
+communication between actors.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Synchronous Dataflow (SDF)
+--------------------------
+
+Steve Neuendorffer has prototyped a preliminary synchronous dataflow
+(SDF) domain in Ptolemy II. This domain underlies our approach to
+discrete-time modeling. In Ptolemy 0.x, the corresponding domain is by
+far the most heavily used part of the system, since it provides the
+simplest computational infrastructure.
+
+
+Software Practice
+-----------------
+
+Our experiment into applying software engineering practice in the
+academic environment continues. John Reekie, who has masterminded the
+experiment, conducted a design review of our review process. This
+"meta-review" or "review review" yielded some interesting insights.
+Although we do not usually include review results in the monthly
+reports, we include these because (a) they are illustrative of the sort
+of results we get from these reviews and (b) they lend insight into the
+efficacy of the review process itself. Many of these issues have been
+thoroughly addressed by revisions in our process (particularly the
+scheduling issues).
+
+Issues raised:
+
+  1. Who makes the review page?
+  2. When does the file get created? What name?
+  3. Where does email to announce go?
+  4. Who should reviewers reply to?
+  5. Does the moderator set time first or ask?
+  6. What if a reviewer really wants to attend but has a time conflict?
+  7. How does the moderator get the review started on time?
+  8. How much advance notice is required? Does it depend on the material?
+  9. Need everybody's schedule on the web?
+  10. Need reminder the day before.
+  11. Should we copy review material into the review directory?
+  12. Don't use local file references on review page.
+  13. What if there are external reviewers -- how do they get to the files?
+  14. The reader is uncertain of what and how to read.
+  15. Better if moderator is the reader.
+  16. Moderator needs to explicitly state focus , purpose and duration of
+      the meeting.
+  17. How does moderator know when to cut off discussion?
+      Or how much to allow?
+  18. Sometimes reviewers are not ready for the meeting, and try
+      to understand the material in the meeting.
+  19. Sometimes someone wants to be an observer -- interested
+      in learning but short on time.
+  20. Do we need another forum for overview/tutorial of packages?
+  21. Sometimes scribe doesn't produce notes in timely manner.
+  22. How to know when to schedule another meeting or press on?
+      What to do when we run out of time?
+  23. Should author be responsible for quantity of material?
+  24. Who puts notes on web page? Who announces?
+  25. Moderator should put names of reviewers on web page immediately.
+  26. Scribe needs to be decided _before_ the review.
+  27. Where does rework go?
+  28. Format of author responses?
+  29. Who announces rework?
+  30. Who updates doctags?
+  31. How does rework get accepted?
+  32. How do we know if another review is needed?
+  33. What happens when we find a defect in code or designs that have
+      already been reviewed?
+  34. What is the process for a "mini-review"?
+  35. To what extend is the author bound to the reviewed design? i..e.
+      when is rereview needed?
+  36. What is the role of professor-author? [Reviewers commented: the 
+      reviews with the professor-author present worked very well.
+      Reviews with a proxy author did not work so well -- the proxy is
+      unable to explain subtle design decisions; the author does not
+      understand the reasons for or context of some of the issues raised.
+      The presence of the author is more critical for design reviews
+      than for code reviews.]
+  37. How do we improve the visibility of review status?
+  38. How much of the code should we review? Is the size of code deterring
+      effective code reviews?
+  39. Reviews are effective in raising important issues!
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+We have defined an API for handling of time in a unified way across
+domains, including those that do not have explicit notions of time in
+their semantics. This model permits a director in a domain to suspend
+execution while requesting re-invocation at a specified time in the
+future. Even if the parent domain does not include time in its
+semantics, as long as some domain above it in the hierarchy does then
+the director will be re-invoked as requested. The notion of time is
+kept consistent across all timed domains without requiring untimed
+domains to explicitly manage it.
+
+
+2.  Equipment/Infrastructure Status:
+
+We have purchased and installed three more IBM Thinkpad notebook computers.
+
+
+3.  Interactions and Technology Transfer
+
+-- Allen Miu, in the group of Prof. Kris Pister, has completed a
+   preliminary prototype of a simulator that models multiple
+   semi-autonomous microrobotic agents and their interaction using
+   the discrete-event (DE) domain in Ptolemy II.
+
+-- Kees Vissers of Philips Research Labs in Eindhoven, The Netherlands,
+   visited our group on Oct. 2 and gave a presentation on system-level
+   design methodology at Philips.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+*  "Block Diagrams in Modeling and Design," Edward A. Lee, invited talk
+   at Hewlett-Packard Research Labs, Palo Alto, CA, 9/22/98.
+
+
+Publications
+------------
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We need to put considerable effort into bringing up-to-date our design
+document, and to work towards releasing Ptolemy II.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.

@@ -1,0 +1,573 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Oct. 21, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        8/15/98 - 9/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Progress on Ptolemy II continues. Overall, our software engineering
+process, led by John Reekie, has been proving extremely effective in
+ensuring the very highest quality software, good visibility across
+parts of the project, and extensive discussion of all critical
+interfaces. We have also been gaining new insights on heterogeneous,
+inter-domain interoperability, primarily because Ptolemy II has finally
+reached the point where it can support multi-domain execution. Also,
+our external interactions and technology transfer activities continue
+at a feverish pace (see details below).
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Actor Package
+-------------
+
+Most of the actor package has advanced to "yellow" status, and is
+providing effective support for all domains under development. We have
+also performed the code review for promotion to "green," but not all
+changes have yet been implemented, so the code is still at "yellow."
+
+
+Math Package
+------------
+
+We have developed a math package, which includes the following classes:
+
+ -- Complex: general support for complex numbers.  We had been using a
+    a rather poorly written class found on the net, and have now replaced
+    that with our own class.
+
+ -- SignalProcessing: Functions such as FFT, filter synthesis, waveform
+    generation, waveform analysis.
+
+ -- ExtendedMath: Methods that are similar in spirit to those of
+    java.lang.Math, but which for one reason or another are missing.
+
+ -- ArrayMath: Operations on arrays representing both vectors and matrix.
+    The current state of this class is barely a beginning.
+
+We have conducted a design review of all but the Complex class.
+
+
+Graph Package
+-------------
+
+The graph package, which provides basic graph-theoretic operations, has
+undergone a design review and reached "yellow" status. This package
+includes critical support for the type system, in the form of a set of
+utilities for operating on lattices and complete partial orders (CPOs).
+
+
+Mutations
+---------
+
+John Reekie has overhauled the mechanism we had developed for managing
+mutations (run-time changes in the relationships between components in
+the system). This overhaul brings the mutation package into conformance
+with the design of JDK 1.1 and Swing, and thus will be more familiar to
+most Java programmers.
+
+
+User Interface
+--------------
+
+We have begun the process of designing the detailed specification for
+the API that the Tycho-based GUI will use to control Ptolemy II models.
+This specification includes the following:
+
+System API 
+     Purpose: Allow Tycho to start up and connect to Ptolemy II.
+     Functionality: Is Ptolemy installed; query Ptolemy II version;
+                    query available domains; query actors fitting a
+                    given domain and name.
+
+Execution API 
+     Purpose: Allow Tycho to control a running simulation.
+     Functionality: Start, pause, stop a simulation; notify on
+                    all execution events .
+
+Icon Library API 
+     Purpose: Allow Tycho to locate icons and related definitions.
+     Functionality: What paths are searched; modify the search path;
+                    return top-level library names; return sub-library
+                    names; return file path of any library;... 
+
+Domain API 
+     Purpose: Allow Tycho to query a domain for parameters, display
+              important run-time information (current time etc).
+     Functionality: What directors can be used; what information
+                    needs to be shown in the control panel;notify
+                    on time advanced.
+
+Animation  & Parameter APIs 
+     Purpose: Allow Tycho to animate and display parameter of a running
+              simulation.
+     Functionality: Notify on: actor ready to fire; actor fired;
+                    actor blocked; token transmitted; token read.
+
+Debug API 
+     Purpose: Allow Tycho to act as a graphical "debugger" on a simulation 
+     Functionality: Step the simulation; set a firing breakpoint; set
+                    a value breakpoint; run to breakpoint; notify on
+                    breakpoint.
+
+Logging API 
+     Purpose: Allow logging and log-style debugging, with or without Tycho 
+     Functionality: Notify on log message generated. 
+
+
+Control Logic
+-------------
+
+Xiaojun Liu has made progress in specifying the architecture of the FSM
+(finite-state machine) domain in Ptolemy II. This architecture has
+stimulated a good bit of discussion in the group about inter-domain
+interoperability.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Communicating Sequential Processes (CSP)
+----------------------------------------
+
+Neil Smyth has created prototypes of most of the classes required to
+implement the rendezvous and conditional rendezvous required by a
+communicating sequential processes (CSP) domain in Ptolemy II. The main
+anticipated application of this domain is for modeling resource
+management problems, such as embedded software multitasking and
+real-time scheduling.
+
+
+Discrete-Event Modeling
+-----------------------
+
+Lukito Muliadi has completed a prototype of the discrete-event domain
+in Ptolemy II. This domain uses a sophisticated calendar-queue
+scheduler to sort events, and is expected to play a major role in mixed
+signal design. Using this prototype domain, we have experimented with
+the first applet that intensively uses Ptolemy II infrastructure, a
+simple DE simulation that demonstrates the inspection paradox. This
+exercise help us verify that Ptolemy II infrastructure can be used
+effectively in applets.
+
+
+Design Flow Management
+----------------------
+
+William Wu created an exploratory demo of a mechanism in Ptolemy II for
+managing design flows at a high level of abstraction. The purpose of
+this demo is to study the interaction between tools and block diagram
+semantics of Ptolemy.  The scheduler in this demo is static, since
+scheduling is still an open issue.  This work is not intended to turn
+directly into releasable code.
+ 
+The flow in the demo performs the follow tasks
+  
+ a) Design a IIR Butterworth filter.
+ b) Compute its frequency response and get postscript version of the plot.
+ c) Filter a sample audio file through it.
+ d) Compute the spectrogram of the original audio signal, and filtered
+    signal and print postscript version of both spectrograms.
+ e) Synthesize a Xilinx X4000 FPGA netlist.
+ f) Display all three postscript plots in ghostview.
+ g) Display the netlist in emacs.
+ 
+These tasks mix Ptolemy package libraries with external tools, such as
+Matlab, ghostview, emacs, and the BOOM IIR generator for FPGAs from the
+BRASS project. The latter was wrapped in a CORBA wrapper.
+
+William, together with Jie Liu, writes this summary of the DFM effort:
+
+   "Traditional system-level design techniques usually rely on one
+   particular well-defined model of computation (MoC) and try to map the
+   application onto that model. As the size and scope of the system
+   increase, no single MoC alone can manage the complexity. This forces
+   the designer to leverage on the integration of multiple CAD tools.
+   Incorporating different tools with simple scripts has become too
+   difficult and unmanageable, since there is no standard defined
+   interface between the tools. Ptolemy manages the interaction among
+   different MoCs, and is capable of interoperating with external tools.
+   Thus a design can be described by the MoCs supported within Ptolemy,
+   and those used by external tools. For example, a system can be
+   modeled partly in abstract block diagram using data flow model and
+   partly in SPICE circuits. This heterogeneity exists not only in
+   different MoCs, but also in different levels of abstractions of the
+   design flow. The key is to manage the tools in the design flow and
+   classify the tools by their semantics and their level of abstraction.
+   Then the interoperability of the tools becomes the interoperability
+   of the semantics. Ptolemy can act as the standard interface among
+   different tools to achieve the overall design requirements. Three
+   types of semantics/tools interaction are studied. They are domains
+   within Ptolemy, local interprocess communication, and global object
+   retrieve and invocation through CORBA."
+
+
+Hardware Design Languages
+-------------------------
+
+Under the leadership of James Lundblad and Ron Galicia, our regular
+Friday afternoon study group has turned its attention to hardware
+design language, specifically VHDL and Verilog. One objective is to
+bring everyone in the group up-to-speed with these languages, and to
+learn to critically evaluate their role in electronic design.
+
+
+General Software Issues
+-----------------------
+
+We have renamed the Ptolemy package root from "pt" to "ptolemy", in
+part to capitalize on the name recognition the project has earned.
+
+We have upgraded to itcl3.0/tcl8.0.3, which finally brings our Tycho
+system the capability of interoperating directly with Ptolemy II.
+John Reekie completed the port of Tycho.
+
+Christopher Hylands installed jwalk, a tool that checks for various
+coding standards problems. Interestingly, jwalk uses Tcl and a Tcl
+extension written in C to check the Java syntax.
+
+Christopher Hylands has also made the entire Ptolemy II tree operate
+under JDK 1.2beta4, including the test suites. Only minor changes were
+required in the software.
+
+Christopher Hylands and John Reekie are working with Mo DeJong 
+(University of Minnesota) and Bryan Surles (Scriptics Inc.)
+on the next release of Tcl Blend and Jacl.  Tcl Blend
+is the Tcl/Java interface that we use to communicate
+between the Tcl graphical front end and the Java Ptolemy II
+back end.  The next release of Tcl Blend and Jacl includes
+support for JDK1.2beta4 and better handling of overloaded
+methods.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+We are gaining a much better understanding of the role of time in
+binding heterogeneous semantics. We have determined that
+continuous-time modeling fundamentally requires that either the
+discrete environment or the continuous-time modeling environment itself
+must be capable of rolling back a simulation. We are developing a
+framework in which it is sufficient for only the CT modeling
+environment to have this capability. This greatly simplifies the other
+modeling environments.
+
+
+2.  Equipment/Infrastructure Status:
+
+No changes.
+
+
+3.  Interactions and Technology Transfer
+
+-- We have begun a collaboration with the group of Prof. Kris Pister, who
+   have agreed to attempt to use Ptolemy II, primarily the discrete-event
+   domain, to model multiple semi-autonomous microrobotic agents and their
+   interaction.
+
+-- We have installed the Saber tools from Analogy, and two group members
+   took the training course.
+
+-- BNeD has announced the next generation product line, the "Photonic
+   Transmission Design Suite" (PTDS), which is partly based on Ptolemy.
+   They say, " The PTDS features a modular approach to optics and
+   photonics simulation y offering distinct libraries for component,
+   system and network design together with a unique and innovative
+   simulation architecture."
+
+   In related news, we received the following from one of the principals
+   at BNeD:
+
+   "I'm very pleased to announce that the two most important vendors of
+   photonic design tools have agreed to merge: BNeD and Virtual
+   Photonics have signed an agreement stating their intention to form
+   together the next generation Photonic Design Automation (PDA)
+   company. The merger will the new company to offer the combination of
+   the best of BNeD's and Virtual Photonics' products to our customers.
+   Details can be found in the press announcement in the world wide web
+   at http://www.bned.com/company/press/sep7_98.pdf."
+
+-- David V. Anderson (dva@ee.gatech.edu), of the Center for Signal &
+   Image Processing at the Georgia Institute of Technology has informed us
+   of plans to significantly extend our Ptolemy signal plotter. We are
+   remaining in touch, and providing support as needed.
+
+-- Christopher Hylands and John Reekie presented a tutorial, "Tcl and
+   Java Programming: Practice and Pitfalls," on September 15th, 1998 at
+   the 1998 Tcl/Tk workshop, San Diego. There were about 45 attendees.
+   Tutorial notes including slides are at:
+
+      http://ptolemy.eecs.berkeley.edu/~johnr/tutorials/tcljava98/
+
+   John Reekie reports:
+
+          "Christopher and I presented our Tcl and Java Programming
+          tutorial on Tuesday, which was well-attended, with about 45
+          people. This was our first, and I was concerned that it was
+          all a bit slow and dull, but several people remarked to me
+          that they thought it interesting and well-paced, which is
+          very pleasing.
+
+          Brian Surles of Scriptics ran the Tcl-Java BOF. Ray Johnson
+          and Scott Stanton of Scriptics were also there and fielded a
+          lot of the questions. A lot of people are still trying to
+          understand what they can and can't do with Tcl and Java, and
+          in particular are interested in mixing them in a browser
+          environment. We didn't have any particularly good answers to
+          these issues, partly because the technology is quite young
+          and partly because the security needs of the browser
+          environment make these kinds of things a lot more difficult.
+          Still, I feel that a lot of good ideas and questions were
+          generated, and hopefully the next year will see good progress
+          and more clarity in the general area of Tcl and Java
+          inter-operability. 
+
+          Brian is setting up a CVS read-only repository on the
+          Scriptics site and will probably be able to make write access
+          available to selected developers. In my view this is an
+          opportunity for those who care about the Java issue to
+          positively influence the directions of Tcl Blend, Jacl, and
+          the whole Java issue in general. I doubt there will be any
+          major new projects or announcements, but now is an excellent
+          time to explore the use of Tcl and Java and contribute code
+          and/or experience reports."
+
+
+-- Neil Smyth spent one month at Delft University in The Netherlands.
+   He was working closely with Bart Kienhuis on his simulator for
+   stream based function(SBF) objects. In particular Neil added the
+   notion of time to his simulator, with the intent of giving feedback
+   earlier in the design cycle to the designer on issues such as
+   processor utilization and bottlenecks. Neil says, "One of the main
+   advantages for me of my stay at Delft University was seeing the
+   application of much of the theory I have read about to practical
+   problems."
+
+-- Mudit Goel spent the summer at Philips Research Labs in Eindhoven.
+   The appendix includes a report from Pieter van der Wolf of Philips.
+   Mudit was working on embedded system design methodologies, including
+   the modeling of applications and programmable architectures for
+   real-time video.
+
+-- The group of Prof. Dave Messerschmitt at Berkeley has developed
+   the SiP Protocol Modeling tool that uses SPIN and the DE domain of
+   Ptolemy 0.7.1.  The web page at
+
+      http://ptolemy.berkeley.edu/dgm/protocol/index.html
+
+   Here is a summary:
+
+   We investigated a widely distributed software package, SPIN, that
+   supports the formal verification of distributed systems. PROMELA
+   (Process Meta Language) is the input language of SPIN, which has been
+   used to trace logical design errors in distributed systems design,
+   such as operating systems, data communications protocols, switching
+   systems, concurrent algorithms. SPIN checks for the logical
+   consistency of a specification, deadlocks, race conditions, etc.
+
+-- The Universitat de Girona is studying the Ptolemy environment, and
+   using it to make significant steps into DSP development. Below is their
+   description of this effort:
+
+   "Following our developing line of projects on the EVM56002
+   evaluation board, we're pleased to send you a briefing of a work
+   started from Jordi Blanch's graduation project and completed by
+   Jordi Fabregas, about using the EVM56002 board under the Ptolemy
+   environment.
+
+	...
+
+   As you know, the Ptolemy environment, has included in his
+   computation models a domain called CG56 to generate source code for
+   the DSP56000 family.
+
+   The project was initially started to communicate the EVM56002 board
+   with the serial port under Linux.
+
+   The most important fact of this application is the easy way in which
+   you could create, load, and execute code, combining the different
+   stars of the CG56 domain in Ptolemy.
+
+   We have created two stars, called 'entrada' (input) and 'sortida'
+   (output), which take care of receiving data from the A/D converter
+   in the EVM board and sending data to the D/A.
+
+   In the sortida star we could alter parameters such as the sampling
+   rate or the output attenuation. The actual implementation makes
+   necessary for any design to include at least the sortida star, cause
+   the sample rate of the input is controlled by the output one.
+
+   By the way we have developed a target called EVM56, included in the
+   domain CG56 (Motorola's 56000 family), that once the code has been
+   generated and compiled, loads it into the board through the serial
+   port of the EVM56002. This target let's us load the code in a local
+   serial port (in the machine ptolemy is running), or in the serial
+   port of any remote machine with some auxiliar programs such as
+   netpipes. The application has been developed this way cause actually
+   we haven't the asm56000 assembler for Linux platform. The only port
+   we have for Unix machines is for the Sun family.
+
+   Having this target, different users working on linux workstations
+   with a EVM board connected to each one, had been working using
+   Ptolemy, which was running on one remote SparcStation, and then the
+   code was loaded in the board of the specified machine.
+
+   The files could be found at:
+
+	ftp://eia.udg.es/pub/marti/EVM56002/PtolemyEvm.tgz
+
+
+   ...
+
+   For any comments, questions or anything else about the realized work
+   or his continuity please contact:
+
+	Marti Fabregas: E-mail: marti@eia.udg.es
+	Jordi Fabregas:	E-mail: jordifab@songoku.udg.es"
+	
+
+4.  Personnel Status
+
+Two new graduate students have joined the group: Steve Neuendorffer and
+Jeffrey Tsay. Steve comes from the University of Maryland, and brings
+first-hand experience from working at Microsoft. Jeff was working for
+Texas Instruments in Japan before deciding to return to school, and
+brings first-hand experience with embedded systems that use
+programmable DSPs.
+
+One new undergraduate student, David Teng, has joined the group. He is
+working with William Wu on filter design and implementation.
+
+
+5.  Talks/Presentations/Publications:
+
+-- "Performance Analysis of SBF Networks", Neil Smyth, Bart Kienhuis,July 24th,
+   Philips Research Labs, Eindhoven, The Netherlands.
+
+-- "Tcl and Java Programming: Practice and Pitfalls," John Reekie and
+   Christopher Hylands, tutorial Presented September 15th, 1998 at the
+   1998 Tcl/Tk workshop, San Diego.
+
+
+Publications
+------------
+
+[1] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP systems - part 2: Latency-constrained
+    resynchronization." IEEE Transactions on Circuits and Systems - I:
+    Fundamental Theory and Applications, 1998. submitted for publication.
+
+[2] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP systems - part 1: Maximum throughput
+    resynchronization." IEEE Transactions on Circuits and Systems - I:
+    Fundamental Theory and Applications, 1998. submitted for publication.
+
+[3] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP implementation - part 1: Maximum-throughput
+    resynchronization." Tech. Rep., Digital Signal Processing Laboratory,
+    University of Maryland, College Park, July 1998.  Revised from Memorandum
+    UCB/ERL 96/55, Electronics Research Laboratory, University of California
+    at Berkeley, October, 1996.
+    
+[4] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP implementation - part 2: Latency-constrained
+    resynchronization." Tech. Rep., Digital Signal Processing Laboratory,
+    University of Maryland, College Park, July 1998.  Revised from Memorandum
+    UCB/ERL 96/56, Electronics Research Laboratory, University of California
+    at Berkeley, October, 1996.
+
+[5] H. J. Reekie and E. A. Lee, ``The Tycho Slate: Complex Drawing and
+    Editing in Tcl/Tk,'' April 27, 1998. Submitted to the Sixth Annual
+    Tcl/Tk Conference, September 14-18, 1998, San Diego, California.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to finalize the GUI-related APIs, finish the actor package,
+extend the math package, build a dataflow domain, and begin building
+actor libraries.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+APPENDIX
+========
+
+From Pieter van der Wolf of Philips, regarding the summer activities
+of Mudit Goel:
+
+   "During his visit Mudit has primarily been executing a case study
+   with the Pamela-TSS Y-chart method that we discussed with you during
+   out visit to Berkeley in March. The case study involved the mapping
+   and performance analysis of a MPEG-2 video decoder application on a
+   model of the TM-2000 MPEG decoder architecture that is currently
+   being implemented by our people in Sunnyvale.
+
+   Mudit performed the following activities:
+
+   - Extend the API for application modeling to collect statistics
+     on both the communication and computation workload (number
+     of tokens communicated over channels, number of operations
+     performed by tasks).
+
+   - Abstract from the TM-2000 databook a specification of the
+     architecture that is to be used in the case study.  This involved
+     extensive reading and discussions on which aspects of the
+     architecture were relevant to our case study.  White spaces
+     had to be filled in with intelligent guesses (e.g. undocumented
+     delay counts).
+
+   - Define a model of the specified architecture.  This model
+     takes the form of a netlist that wires together generic
+     architecture building blocks from the TSS library that we
+     are implementing.     TSS is the simulation tool that we use for
+     architecture simulations.
+
+   - Define the mapping and generate the mapping file.
+
+   - Build TCL scripts to let the architecture simulator produce
+     data for relevant performance metrics (utilization of processors,
+     stall cycles upon reads / writes, bus load and bus arbitration
+     statistics, etc).
+
+   - Run simulations and interpret results.
+     Observe interesting phenomena in simulations and explain them.
+     This enhances the understanding on the ability of the architecture
+     to efficiently execute the application.
+
+   As already expressed by Kees, we feel that the visit of Mudit has
+   been beneficial to all of us.
+
+   We are currently in the process of delivering a proof of concept for
+   the Pamela-TSS Y-chart method. The case study performed by Mudit has
+   helped us a great deal in moving ahead on this.
+
+   Mudit has basically traversed a complete Y-chart trajectory,
+   starting from the MPEG-2 video decoder application. We all agreed
+   that Mudit has gained a lot of knowledge and experience on a variety
+   of topics, including applications (MPEG-2 video decoding),
+   architectures (TM-2000 MPEG decoder) and the methodological aspects
+   of our Pamela-TSS Y-chart method (application modeling, architecture
+   modeling, mapping, performance analysis).
+
+   We cooperated with Mudit in an open atmosphere and it was a pleasure
+   to work with him. I hereby would like to thank you for helping
+   create this opportunity to work together.

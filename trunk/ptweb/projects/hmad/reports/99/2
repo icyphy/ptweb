@@ -1,0 +1,280 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Feb. 27, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        1/15/99 - 2/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Ptolemy II matured dramatically in this time period, with the type
+system coming fully on line and several domains acquiring applets that
+demonstrate their capabilities. Ptolemy II was also interfaced to both
+Saber and the Synopsys VHDL simulator, thereby providing a backplane
+for interoperatibility of these tools with clean interaction semantics.
+Much of this work was preparation for the Ptolemy Miniconference held
+at Berkeley on Friday, February 19. Information about the
+miniconference can be found at:
+
+http://ptolemy.eecs.berkeley.edu/papers/viewgraphs/miniconf99/
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Type System
+-----------
+
+Yuhong Xiong, with help from the various domain authors, integrated the
+Ptolemy II type system with various domains.  The type system uses a
+sophisticated algorithm to converge on a fixed point that satisfies all
+type constraints imposed by the actors and their interconnections.
+He created a demonstration that uses several polymorphic actors
+together with an extremely versatile expression actor (see below)
+and animates the type resolution process using Diva, John Reekie's
+visualization architecture.
+
+
+Domain Polymorphic Actor Library
+--------------------------------
+
+We have begun building a domain-polymorphic actor library, which is a
+collection of actors designed to operate in any domain. That is, these
+actors make minimal assumptions about the communication style being
+used to provide them with input data or to consume their output data.
+Most of these are also data polymorphic, in that they can operate on
+any data type. For example, a domain and data-polymorphic adder simply
+adds whatever data is available on its inputs using the
+data-polymorphic add method of the Token class.
+
+A domain-polymorphic actor library makes the construction of new
+domains much easier because a domain immediately acquires a large
+library of functional actors.
+
+
+Expression Evaluation
+---------------------
+
+Xiaojun Liu and Edward Lee created an Expression actor that uses the
+expression language, parser, and evaluator created by Neil Smyth. The
+behavior of this actor is given by a parameter whose value is an
+arbitrary expression that can reference the inputs of the actor, its
+parameters, the parameters of its container, and the current time. This
+actor is both domain polymorphic (can operate in any domain) and data
+polymorphic (can operate on any data type), and hence greatly stresses
+both the type system infrastructure and the domain architecture of
+Ptolemy II.
+
+One weakness revealed by this effort is that type dependencies
+embodied in the expression are not easily extracted from the
+expression parser. Thus, type inference cannot be completely automatic
+in models that use this actor. For example, if the output type is
+known, the input type will usually be constrained by the expression,
+but the constraints cannot currently be extracted. We are planning to
+modify the expression parser so that the resulting parse tree contains
+at each node the type constraints implied by the node. This will lead
+to a complete and seamless integration of actors and expressions in
+Ptolemy II.
+
+
+Plot Package
+------------
+
+We have updated the Plot package to support oscilloscope-style animated
+plots.
+
+
+Other Software
+--------------
+
+Christopher Hylands improved the port of Ptolemy 0.7.2 to Windows NT by
+changing several filenames in the system to make them compatible. He
+also constructed a script that will make these filename changes for
+users automatically, in order to get a certain measure of backward
+compatibility.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Synchronous Dataflow
+--------------------
+
+Steve Neuendorffer has greatly improved the performance of multirate
+dataflow models in the SDF (synchronous dataflow) domain by modifying
+the mechanism for consuming and producing multiple tokens
+simultaneously. To demonstrate the improvements, he created an
+application that performs vector quantization on a video sequence in
+real time and displays the result 
+
+The SDF domain has also acquired a number of applets that demonstrate
+its capabilities, and an applet infrastructure that makes it very easy
+to create new applets.
+
+
+Communicating Sequential Processes
+----------------------------------
+
+John Davis created an applet for Neil Smyth's CSP domain (communicating
+sequential processes) that models processors contending for a shared
+memory with priorities. This example uses several features of CSP,
+including nondeterminstic multi-way rendezvous and Neil Smyth's timed
+extensions of CSP.
+
+
+Process Networks
+----------------
+
+Mudit Goel and John Reekie have created an animation of a process
+networks (PN) model using Diva for the graphics.  The animation shows
+processes that are blocked on reads and writes in different from
+colors.  This mechanism could prove valuable to help in debugging
+concurrent models.
+
+
+Media Package
+-------------
+
+We have created a class called Picture that makes it quite easy to put
+images and video on the screen in an applet or an application. We plan
+to interface this class to Sun's new Advanced Imaging API.  This class
+is used in Steve Neuendorffer's video coding applet (see above).
+
+
+Ptolemy II Architecture
+-----------------------
+
+Christopher Hylands modified all the makefiles in Ptolemy II to create
+a number of jar files that include various subsets of the system.  This
+makes it much easier to create applets that download only a portion
+of Ptolemy II.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Multi-Tool Modeling
+-------------------
+
+William Wu and Jie Liu completed a Java interface to the Saber analog
+simulation tool and a similar interface to the VHDL simulator from
+Synopsys. In the first case, the tool interfaces to the CT
+(continuous-time) domain, which has very similar semantics to Saber. In
+the second case, the tool interfaces to the DE (discrete-event) domain,
+which has similar semantics to VHDL.  Saber and VHDL then automatically
+acquire the ability to work together through Ptolemy II.
+
+The main objective is to demonstrate that tools can interface fairly
+easily to domains in Ptolemy II with comparable semantics, and by so
+doing, transparently acquire the ability to interoperate with tools that
+have very different semantics.
+
+Process-Level Type System
+-------------------------
+
+Yuhong Xiong has constructed a preliminary taxonomy of domain and
+actor properties in preparation for formally defining the assumptions
+about their environment made by polymorphic actors and the assumptions
+made by domains about the actors under their control.
+
+Assumptions that a domain may make about an actor:
+
+(1) The actor calls get() once on each input channel that has at least one
+    token.  In most domains, this consumes the token.
+
+(2) The actor updates its state only in the postfire() method. This
+    permits the domain to repeatedly invoke the fire() method (for example,
+    to seek a fixed point) during a single logical iteration.
+
+(3) The actor produces exactly one token on each output channel at
+    each firing if there is at least on input token available at the
+    inputs.
+
+(4) The behavior of an actor does not depends on current time.
+
+(5) The actor tolerates changes in parameter values during execution.
+    It either uses the new parameter value immediately (on the next
+    invocation of the fire() method after the parameter changes), or it
+    documents clearly that it ignores parameter changes during execution.
+
+(6) Computations done in the fire() method are finite (the fire() method
+    returns).
+
+Currently, all our domain-polymorphic actors satisfy these properties.
+
+Assumption that an actor may make about the domain:
+
+(1) The domain provides at least 1 token on all input channels before
+    firing the actor.
+
+Currently none of our domain-polymorphic actors make such an
+assumption.
+
+
+2.  Equipment/Infrastructure Status:
+
+We acquired two new Tektronics color printers, just in time for the
+miniconference.
+
+
+3.  Interactions and Technology Transfer
+
+-- We have had discussions with Stan Pekata, who is involved in a new
+   program that is tasked with modeling battlefield systems (specifically
+   power usage in equipment) for the US Army at Ft. Monmouth, NJ. He is
+   evaluating Ptolemy software for possible use.
+
+-- John R. Gilbert of Microcosm Technologies contacted us to determine
+   the rules for getting Ptolemy for commercial use. His company may be
+   interested in building some tools for MEMS design over Ptolemy.
+   We informed him that he can do this with no restrictions from us.
+
+-- Olaf Lenzmann of Virtual Photonics has announced that they have
+   constructed a Java-based block-diagram editor for Ptolemy that they
+   plan to release as open source.  This is a very positive development.
+
+-- Edward Lee meet with three group leaders at Sun Microsystems (those
+   responsible for the audio API, advanced imaging API, and thin client
+   projects).  He briefed them on the objectives of the Ptolemy project.
+   This was Feb. 4.
+
+
+4.  Personnel Status
+
+Michael Leung, an undergraduate student, joined the group to do an
+independent study project.
+
+
+5.  Talks/Presentations/Publications:
+
+-- On Feb. 12, Edward Lee briefed members of the new GSRC (Gigascale
+   Semiconductor Research Center), a multi-university MARCO-funded
+   research project, on the objectives of the Ptolemy project.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are preparing for the Ptolemy Miniconference on February 19, where
+we plan to give the first public demonstrations of Ptolemy II. This
+preparation will involve consolidations of progress in various software
+packages and conversion of many test cases into demonstratable applets.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+

@@ -1,0 +1,220 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Feb. 23, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        12/15/98 - 1/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Technology transfer continues unabated, with a new product based on
+Ptolemy software by Virtual Photonics, and reports of use of our
+software in products by LavaLogic and Thomson CSF. We also filed four
+masters reports in this period, covering continuous-time modeling,
+communicating sequential processes with a timed extension,
+process-network modeling, and protocol modeling. All four reports are
+available on the Ptolemy web site. We have also scheduled a Ptolemy
+Miniconference to be held at Berkeley on Friday, February 19.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Plot package
+------------
+
+The plot package has been upgraded to use double buffering for
+graphics display so that animated plots that are built by doing
+"clear()" between data sets are displayed smoothly, rather than
+flashing. Also, it now has an "export" facility that produces an
+encapsulated postscript rendition of the plot.
+
+
+Other Software
+--------------
+
+Christopher Hylands fixed a number of bugs in Tycho that date back to
+the upgrade to Itcl 3.0. He also made a number of changed to Ptolemy
+0.7.2 so that it builds under Cygwin b20.1 and under Microsoft Visual
+C++ 6.0. This shows that Ptolemy 0.x is portable and it can be used
+(with some effort) on a non-Unix platform. He also began experimenting
+with using InstallWizard to wrap Ptolemy software distributions, but
+ran into difficulties probably due to the very large size of Ptolemy
+0.x. He experimented with using JShield, InstallWizard's Java
+installation tool to build a self extracting Java installer for ptplot.
+This effort should lead to a very easily installed Ptolemy II.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Math Package
+------------
+
+Jeff Tsay has dramatically improved the speed of the FFT implemented in
+the SignalProcessing class of the math package. He has also constructed
+thorough regression tests for it.
+
+
+Software Practice
+-----------------
+
+Design reviews:
+  - ct kernel package
+  - pn kernel package
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+SDL
+---
+
+Our regular Friday studygroup is studying SDL (Specification and
+Description Language), a popular modeling language in
+telecommunications.
+
+
+Multi-Tool Modeling
+-------------------
+
+William Wu and Jie Liu have implemented a Java interface to the Saber
+analog simulation tool.  Jie is in the process of making a CT Actor
+with it so that Saber simulations can be included as components in the
+CT (continuous-time) domain.
+
+
+2.  Equipment/Infrastructure Status:
+
+We have ordered four new Sun UltraSparc machines.
+
+
+3.  Interactions and Technology Transfer
+
+-- Harald Hamster of Virtual Photonics sent us an announcement of the
+   Photonics Transmission Design Suite - PTDS
+   (http://www.virtualphotonics.com/products/ptds/ptds.html), which is
+   based on Ptolemy 0.7.  He provided the following background:
+
+   "In the early 1990s, device performance constrained system
+   capabilities. Beam Propagation Modeling emerged to advance
+   integrated optics performance. By 1996, transmission speed had grown
+   to the point where non linearities in the fiber channel emerged as
+   the critical performance factor. A second generation of tools was
+   developed with symbolic editors and sophisticated fiber models. Now,
+   the aggressive use of fiber bandwidth in systems with 80 WDM
+   channels (and more) is creating new hurdles for design tools, while
+   the first optical metro networks with OADMs and OXCs bring further
+   challenges in system and subsystem complexity.
+
+   Virtual Photonics Incorporated (formerly BNeD and Virtual Photonics)
+   was created to provide the vision, focus, expertise and resources
+   needed to create the third generation of design tools. Since March
+   1998, we have invested the best efforts of a twenty strong, design
+   team of simulation and photonics experts to ramp the PTDS to market.
+
+   This development work was driven by five pressing needs:
+
+   1. Huge bandwidth, which PTDS manages with effective new signal
+      approximations
+
+   2. Complex ring and interconnected ring networks which PTDS manages with
+      sophisticated schedulers
+
+   3. Complex components and subsystems such as OADMs, OXCs and EDFAs,
+      which PTDS manages with hierarchical design capability
+
+   4. Codesign of components and systems, which PTDS handles by mixing
+      simulation paradigms
+
+   5. Use of in house tools and models, often built with standard tools
+      like Matlab, which PTDS facilitates with a special interface and general
+      data formats via TCP/IP.
+
+   Since November 1998, a beta test of the LINUX and SUN Solaris
+   versions of PTDS has been underway in 40 companies. During the test
+   period, we have focused development on a new GUI and speed. And we
+   have established a training programs at the Universities of Southern
+   California and Aston to make sure PTDS users get an early and
+   competitive return on the design tool investment."
+
+-- Thomson CSF has contributed C code generation domains with both
+   SR (synchronous/reactive) and FSM (finite-state machine) domains.
+
+-- Toby Bennett, vice-president and general manager of LavaLogic, of
+   Columbia, Maryland, informs us that they are using Diva in their
+   product.
+
+-- Andrew Wendelborn of the University of Adelaide visited our group
+   and gave a talk entitled "Process networks as a high-level notation
+   for meta-computing."
+
+-- Paul Caspi, from IRISA, Grenoble, France, visited our group and
+   discussed synchronous languages, clock calculi, and dataflow modeling.
+
+
+4.  Personnel Status
+
+John Reekie is leaving the group to join the new GSRC, Gigascale
+Silicon Research Center, at Berkeley.  Will will continue to work
+with him intensively, but his charter is now broader.
+
+
+5.  Talks/Presentations/Publications:
+
+Publications
+------------
+
+[1] Jie Liu, Bicheng Wu, Xiaojun Liu, and Edward A. Lee,
+    "Interoperation of Heterogeneous CAD Tools in Ptolemy II," Accepted to
+    Symposium on Design, Test, and Microfabrication of MEMS/MOEMs, March
+    1999, Paris, France.
+
+[2] Edward A. Lee, "Modeling Concurrent Real-time Processes Using
+    Discrete Events," accepted for publication in the Annals of
+    Software Engineering special volume on Real-Time Software
+    Engineering.
+
+[3] Neil Smyth, 'Communicating Sequential ProcessesDomain in Ptolemy
+    II," MS Report, UCB/ERL Memorandum M98/70, Dept. of EECS, University of
+    California, Berkeley, CA 94720, December 1998.
+
+[4] Jie Liu, "Continuous Time and Mixed-Signal Simulation in Ptolemy
+    II," MS Report, UCB/ERL Memorandum M98/74, Dept. of EECS, University of
+    California, Berkeley, CA 94720, December 1998.
+
+[5] Shang-Pin Chang, "System-Level Modeling and Evaluation of Network
+    Protocols," MS Report, UCB/ERL Memorandum M98/73, University of
+    California, Berkeley, CA 94710, December 16, 1998.
+
+[6] M. Goel, "Process Networks in Ptolemy II" MS Report, ERL Technical
+    Report UCB/ERL No. M98/69, University of California, Berkeley, CA
+    94720, December 16, 1998.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are preparing for the Ptolemy Miniconference on February 19, where
+we plan to give the first public demonstrations of Ptolemy II. This
+preparation will involve consolidation of various software packages and
+conversion of many test cases into demonstratable applets.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+

@@ -1,0 +1,231 @@
+Monthly R&D Status Report
+Date: January 15, 1996
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+1. Tasks Performed
+
+During this period, we looked into fundamental Java/Tcl Interface
+Issues.
+
+2. Significant Accomplishments
+
+2.1 Itcl/Java Exploration
+
+In the previous monthly report, we discussed the possible advantages
+that the Java language offers for use in our context, particularly as a
+replacement for C++. Based on that analysis, we are exploring using a
+combination of the Itcl scripting language and Java. Both are portable,
+network-savvy, and object-oriented. Java is about 10 times faster that
+Itcl, so for computationally intensive applications, calling Java
+methods makes a lot of sense. For high-level control and dynamic
+reconfiguration, Itcl offers a higher-level interface.
+
+Sun's Tcl/Java interface, available at
+ftp://ftp.sunlabs.com/pub/tcl/tcljava0.4.tar.gz, can be used to create
+a shared library that is loaded by the Java byte interpreter. This
+shared library has Java classes that allow the user to evaluate Tcl
+commands. Since Itcl is an extension of Tcl, this provides a platform
+for building an interface between classes in Itcl and classes in Java.
+Christopher Hylands created a GNU autoconf file that allows
+tcljava to be easily configured and installed from within Tycho.
+
+Christopher Hylands also extended the tycho script extended so that if
+it is passed a -java command line argument, then the java program is
+called, the tcljava interface is started, the Itcl, Itk and Iwidgets
+libraries are loaded and Tycho is started. The main difference between
+calling tycho -java and just tycho is that with tycho -java the java
+program is the executable that is running, whereas with tycho (with no
+-java), the itkwish program is the executable that is running.
+
+2.1.1 Java/Tcl performance
+
+Sun's Tcl/Java interface allows us to call Tcl commands from within
+Java and to call Java functions from within Tcl. In a simple test
+using the factorial function, we found that using Java to compute the
+factorial of 1 was about half the speed of using Tcl. However, Java
+was about 1.76 times faster than Tcl in computing the factorial of
+2. The performance of Java increases as we compute the factorial of
+higher numbers. This indicates that there is overhead in calling just
+one Java method, but Java is faster if recursion is involved.
+
+In the table below
+
+   * The N column is the factorial we are computing
+   * The java time and tcl time columns are the amount of time in
+     microseconds that the calculation took on a Sparc20.
+   * tcl time / java time column is the ratio of the two times.
+
+These times are somewhat rough, this benchmark is not that rigorous.
+
+N    java time   tcl time    tcl time / java time
+ 1   996          583        0.585341
+ 2   947         1670        1.763460
+ 3   968         2662        2.750000
+ 4  1042         3709        3.559500
+ 5  1093         4658        4.261670
+ 6  1089         5632        5.171720
+ 7  1164         6677        5.736250
+ 8  1225         7583        6.190200
+ 9  1380         8515        6.170290
+10  1375         9630        7.003640
+11  1443        10921        7.568260
+12  1502        11679        7.775630
+13  1581        12982        8.211260
+14  1582        13746        8.689000
+15  1679        14793        8.810600
+
+According to a performance benchmark test by Pendragon Software Corp.
+(http://www.webfayre.com/battle.html), just-in-time compilation is very
+effective in optimizing mathematical operations, and is so-so for
+speeding up memory management and thread synchronization. In our
+opinion, this is an encouraging finding for doing DSP in Java.
+
+
+2.1.2 TclJava limitations
+
+  1. We need a way to compile and load Java classes on the fly from within
+     Tycho.
+  2. Tcljava has does not fully implement the Tcl exec or after commands.
+     This will probably change over time.
+  3. Tcljava currently works only under Unix. This too will probably change
+     with later releases of the tcljava interface.
+  4. The Sieve demo is hardwired together, rather than being built from
+     functional blocks by the user. However, this demo does prove that it is
+     possible to use Java threads from within Tycho. The Ptolemy group is
+     meeting regularly to discuss further implementation of the PN domain
+     within Tycho and Java.
+
+
+2.1.3 Process Network Domain in Java and Tycho
+
+Tom Park's Process Network (PN) domain uses threads via C++. Tom has
+written a Sieve of Eratosthenes demo in Java that uses the Java threads
+to compute the first N prime numbers. Extending Tycho to generate Java
+code for the PN domain would allow PN domain demos to run on many
+different platforms.
+
+In the ideal world, we would have a PN domain code generated that was
+itself written in Java. The generated code would run standalone outside
+of Tycho using Java classes from a small library.
+
+Once we have a PN domain working, we could start on DDF and SDF
+(dynamic dataflow and synchronous dataflow). One end result could be a
+Java application building tool.
+
+Since we can call Java functions from within Tcl, it is fairly easy to
+write a Java class that calls Tom Park's Sieve of Eratosthenes Process
+Network (PN) Java code and then return a Tcl list containing the first N
+primes.
+
+
+2.1.4 Using the Java appletviewer within Tycho
+
+The Java appletviewer may be faster than the Tk canvas for certain
+operations. We would like to be able to use the appletviewer as a Tk
+widget to display Java graphical code. However, rewriting the
+appletviewer in either Tk or C code would be a fairly large task.
+Instead, we would like to reparent the appletviewer X window inside our
+Tk application.
+
+The TkSteal Tcl/Tk extension, written by Sven Delmas allows us to
+reparent X windows such as the appletviewer. TkSteal is available at
+http://www.cimetrix.com/sven/tksteal.html.
+
+Christopher Hylands used TkSteal to reparent the appletviewer inside a
+wish. There are a number of rough edges to be worked out here, but the
+technique shows some promise.
+
+2.1.5 TkSteal/appletviewer limitations
+
+TkSteal and the appletviewer have the following limitations.
+
+  1. The appletviewer flashes up on the screen before getting remapped into
+     the Itcl wish application. TkSteal suggests a few ways around this:
+        o Use the -iconic option to start up the application iconified.
+          Unfortunately, appletviewer does not have this option.
+        o Use the -geometry option to start the application up off the
+          screen. Unfortunately, appletviewer does not have this option
+          either.
+     It might be possible to add these options by deriving a class from the
+     sun.applet.AppletViewer Java class.
+  2. The appletviewer does not take a -name option so we can't hardwire in
+     the window name and then pass that name to TkSteal. However,
+     appletviewer does use the filename it was passed to create the window
+     name. For example, if appletviewer Blink.html is called, then the
+     window will be named Applet Viewer: Blink. We pass this name to
+     TkSteal.
+  3. We have not been able to reparent appletviewer inside Tycho. This is
+     probably a minor namespace issue.
+  4. Creating an Itcl class to handle the details of using the appletviewer
+     would help greatly.
+
+
+2.2 Modular Tools
+
+John Reekie has added a package to Tycho that implements an event loop
+for C programs.  We will be using this for running programs generated
+by Ptolemy within Tycho.  Christopher Hylands has developed an
+infrastructure that makes adding new packages such as this event loop
+painless.
+
+
+2.3 Mutable Systems
+
+Ron Galicia has worked out a proposal to modify static
+hardware/software partitioning techniques (some of which come from our
+group) to support mutable systems, or systems whose configuration and
+functionality changes dynamically during operation.
+
+The extension he proposes would generate an architecture for a family
+of specifications instead of a single specification.  It would address
+manufacturing issues ("What target should I choose to minimize
+retooling between these different applications and/or versions?") and
+adaptable or mutable computing ("What minimum target can support these
+different applications and on-the-fly switching between them?").  The
+central research question is: What is the impact of a family of
+specifications (FOS) on existing codesign methodologies?  More
+specific issues include:
+
+1) What should the input to an FOS codesign flow be?
+   a) How should the specifications/FOS be represented?
+   b) How should the libraries be represented?
+
+2) How much better is an FOS methodology at addressing manufacturing
+   flexibility/reuse and mutability than existing design flows?
+
+3) What changes must be made to existing codesign algorithms to
+   accommodate FOS?
+
+4) What tools are needed to design with FOS in mind?
+
+We expect that 1a will leverage off of the current and future work in
+control and dataflow semantics and that 1b will differ from typical
+library representations because it will include multiprocessor
+components (such as those in the Mercury RACEway). Item 2 would require
+the entry of some representative demos and the creation of the
+necessary component libraries to determine quality of the
+implementations. Item 3 would be along the lines incorporating FOS into
+existing heuristic objectives. Item 4 would leverage use Tycho.
+
+
+2.4 Multidimensional Signal Processing (contract Option, Questech, Inc)
+
+We are completing negotiations with Thomson CSF and Questech to get
+this part of the project under way.  Praveen Murthy has joined our
+group as a postdoc, and he will be locally in charge of the project.
+Jean-Luis Marro from Thomson is expected to join our group within the
+next month.
+
+
+3. Publications and Presentations
+
+3.1 Presentations
+
+* "The Tycho Java Interface," Christopher Hylands, UC Berkeley
+   Ptolemy project group meeting, UC Berkeley, Jan 6, 1997
+
+

@@ -1,0 +1,484 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 November 30, 1997
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        10/15/97 - 11/15/97
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+1.  Research Status
+
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Java Signal Plotter
+-------------------
+
+We have released on the net a new version (1.1) of our first Java module, a
+versatile signal plotter. See the web page, which contains a number of
+demonstrations:
+
+    http://ptolemy.eecs.berkeley.edu/java/ptplot
+
+The 1.0 release achieved a rating in the top 5% of JARS - The Java
+Applet Rating Service - http://jars.developer.com/.
+
+The relative ease of updating this module indicates that we are gaining
+the requisite experience with small modular releases. The changes
+between ptplot1.0 and ptplot1.1:
+
+* In 1.1, PlotBox extends Panel. In 1.0 PlotBox extended Applet. This
+  makes it much easier to use Plot as an component in either an
+  application or an applet that contains other components
+
+* The PlotApplet class is new in 1.1. PlotApplet can be used for
+  applets that use the Plot class, or the PlotLive class. As a result,
+  the HTML applet tags for the demos now use code="ptplot.PlotApplet".
+  Formerly, they used code="ptplot.Plot".
+
+* The directory structure has been reorganized so that the plot classes
+  are in ptplot, and the demo classes are in ptplot/demo. This means that
+  the ptplot.zip does not contain the demo classes, which is better if
+  anyone actually wants to _use_ the plotter instead of just running the
+  demos.
+
+* There is a new demo that uses real time audio. 
+
+* Fixed a bar graph label bug reported by Marc Ellis.
+
+* A few other minor bugs were fixed.  
+
+
+Java/Tcl interaction
+--------------------
+
+Sun Microsystems has released TclBlend1.0a1, and Christopher Hylands
+has been working closely with the SunScript group in configuration
+management and porting issues. TclBlend is a Tcl/Java interface that
+uses C code that calls the Java Native Invocation (JNI) module in
+JDK1.1. Christopher has reported problems, for example, with
+multiprocessor platforms (where SunScript's own test suites fail). We
+plan on using the Tcl/Java interface to provide a flexible scripting
+interface to software modules like Ptplot and the new Java Ptolemy
+kernel. Our first use is to construct a scripted test suite for the new
+Java Ptolemy kernel that we are building.
+
+Sun has also released Jacl 1.0, which is a "100% pure Java"
+implementation of a subset of Tcl. Unfortunately, Jacl cannot currently
+be used to construct scripted applets, and it throws security
+exceptions on any attempt. We are not exactly sure what this is trying
+to accomplish, but have been experimenting with it nonetheless.
+
+Christopher has also constructed a test suite currently consisting
+of approximately 100 tests of the Java Ptolemy kernel.
+
+
+Software Engineering
+--------------------
+
+Christopher Hylands has been exploring using JavaScope, a code coverage
+tool.  Unfortunately, it fails to work with TclBlend, which we are using
+to construct the test suite.  Thus, we cannot perform code coverage tests
+on the test suite for the Java Ptolemy kernel.  We have submitted detailed
+bug reports.
+
+We downloaded and tested a beta of Parasoft's CodeWizard for Java.
+The web site, www.parasoft.com says:
+
+  CodeWizard - Prevent bugs automatically with this easy-to-use source
+  code analysis tool. CodeWizard can help you correct poor design
+  strategies, improve software reliability, and enforce coding
+  standards. Available now for C++ and for Java!
+
+Unfortunately, CodeWizard for Java did not install properly, and it
+cannot deal with Java packages.  Christopher Hylands has submitted a
+bug report.
+
+
+Object Modeling
+---------------
+
+The object modeling study group, headed by John Reekie, has completed a
+study of interfaces, a central capability in the Java language. The
+different purposes for interfaces that we identified are: 
+
+Role in a collaboration 
+      An interface provides the syntactic declaration of a role in a
+      collaboration between objects. Design patterns typically contain
+      collaborations suitable for interfaces -- for example, Strategy,
+      Observer, Iterator. Classes can participate in multiple
+      collaborations by implementing multiple interfaces. 
+
+Multiple classification 
+      Aka the Java version of multiple inheritance. A class may
+      naturally be classified in two different ways, and
+      implementing multiple interfaces (or inheriting from one
+      superclass and implementing interfaces as the others) is the
+      only way in Java to directly express this. 
+
+Separate interface from implementation 
+      Because interfaces do not have any implementation, interfaces
+      can be used to separate the interface presented by objects (aka
+      its type) from the implementation. Some people even advise
+      that every class should be split into an interface and a class.
+      Doug Lea's Collections classes use this a lot. 
+
+Marker interface 
+      Some interfaces are empty -- their sole purpose is as a
+      "marker" that declares that classes that implement it have a
+      certain function. The Java classes Cloneable, Serializable, and
+      Remote are marker interfaces. 
+
+In view of these classifications, we studied the details of a number of
+built-in Java interfaces, including java.lang.Runnable,
+java.lang.Cloneable, java.rmi.registry.Registry, and a number of
+interfaces in Doug Lea's Collections classes. The current prototype of
+Java Ptolemy contains interfaces for tags and values, both of which
+must be implemented by Particle classes. Subclasses of Particle can
+implement more specific sub-interfaces of Tag and Value, thus providing
+compile-time type checking on particle usage.  We are re-examining this
+design in view of what we've learned.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Real-Time Sonar Beamforming using Process Network Models (UT Austin)
+--------------------------------------------------------------------
+
+Sonar beamforming algorithms, which require on the order of one
+billion operations per second, have traditionally been limited to
+custom hardware implementations to meet real-time requirements.
+Real-time sonar beamformers in the field today are based on custom
+application-specific integrated circuits (ASICs).  A typical sonar
+beamformer processor costs $1 million.  At present, only one company
+manufacturers real-time sonar beamformer processors.  However, recent
+developments in both hardware and software present the possibility
+of accomplishing real-time beamforming on UNIX workstations at a
+fraction of the cost of a custom hardware solution.
+ 
+Prof. Brian Evans (on a subcontract to UT Austin) and Mr. Gregory
+Allen (Advanced Sonar Group, Applied Research Laboratories,
+UT Austin) have been developing scalable software to implement real-time
+sonar beamformers on UltraSparc workstations using the Solaris
+operating system [1].  They have been implementing digital interpolation
+beamforming algorithms specified using the Process Network computation
+model [2] and implemented using POSIX threads.  Being a superset of
+dataflow models, the process network model captures the parallelism
+in data-intensive digital signal processing algorithms such as sonar
+beamformers.
+
+The software beamformer gained near linear speedup over one, two, and
+four processors.  On two processors, the processor utilization was
+over 95%.  At the present time, real-time sonar beamforming is feasible
+on a workstation containing 12 high-end UltraSPARC-II processors. 
+Such as workstation costs on the order of $250,000, which is one-fourth
+the cost of the ASIC sonar beamformer.
+
+
+Real-Time Smart Antennas for Wireless Communications (UT Austin)
+----------------------------------------------------------------
+
+The proliferation of wireless communication services have been
+stimulating unprecedented demands for scarce radio spectrum.
+A key emerging technique for increasing the number of users in
+a cell site is to add spatial diversity to existing standards,
+such as the IS-95 CDMA standard.  Spatial diversity among the
+users is incorporated by means of an antenna array with embedded
+processing.  As the number of standards continue to increase, 
+a significant need is arising for software base stations that
+can support multiple standards by means of deployable, configurable
+software.  The reason is that base stations cost on the order
+of $150,000 to build, and it is becoming more cost effective to
+reuse the existing stations than to build new ones for each new
+standard.
+
+Prof. Brian Evans research team at UT Austin (under subcontract)
+has developed three new approaches for implementing smart antenna
+systems in real-time:
+
+1. optimal weight vectors for spatial broadcast channels [3,4]
+2. blind estimation of FIR channels in CDMA systems [5]
+3. modified constant modulus antenna arrays [6]
+
+The first two approaches can be modeled using a mixture of Boolean
+Dataflow and Synchronous Dataflow, and the third approach is
+completely Synchronous Dataflow.  All three approaches lead
+to statically scheduled implementations.  The first two approaches
+have been implemented in the Real-time Wireless Communications
+Testbed run by Prof. Guanghan Xu (UT Austin).  Ptolemy demonstrations
+and real-time implementations of the third approach are forthcoming.
+
+In the first approach, we improve capacity of broadcast channels by
+employing multiple transmitters and exploiting the spatial diversity
+among the users.  We derive fast algorithms to compute orthogonal,
+near-optimal, and optimal weight vectors for broadcasting message
+signals to two and three users.  The key innovation is that we decouple
+the weight vectors in the measure of channel capacity to (1) simplify
+the optimization problem to a search for the maxima of a smooth
+multidimensional function and (2) derive closed-form expressions for
+the orthogonal and near-optimal algorithms.  All three methods are
+well-suited for implementations on embedded digital signal processors
+or workstations.
+
+The second approach takes advantage of the structure in CDMA signals.
+CDMA systems commonly use aperiodic spreading codes to distribute a
+signal spectrum uniformly over the channel bandwidth and differentiate
+neighboring cell sites.  CDMA receivers often suffer from interference
+due to multipath fading.  Blind signal estimation schemes cannot be
+used because they require access to one or more periods of the
+spreading sequences, and the period of aperiodic spreading codes in
+the IS-95 standard is on the order of 1800 days.  RAKE receivers are
+often used, but they cannot fully exploit the rich structure of CDMA
+signals to minimize interference. This work uses an iterative
+technique to estimate multipath parameters which can serve as a
+preprocessing step in a receiver to increase signal-to-interference
+ratio. We have investigated the performance of the proposed method
+using computer simulations.  Preliminary simulation results show an
+average of 10 dB gain on channel parameter estimation.
+
+The third approach takes advantage of those digital modulation schemes
+whose constellation either has constant amplitude (such as BPSK) or is
+composed of a union of constant amplitude codes (such as QAM).  The
+multistage constant modulus array is capable of separating interference
+from other users (known as cochannel signals) [7].  We convert a constant
+modulus (CM) array into a robust smart antenna by modifying the error
+criterion to be a weighted sum of conventional CM array error and
+decision-directed equalization error. The new error criterion enables
+the CM array to (1) separate digital cochannel signals with multipath
+and inter-symbol interference and (2) track fading signals. Fading
+signals result from the regions of high and low amplitudes of the
+standing waves caused by the Doppler shift in received frequencies from
+a moving transmitter.  The key contribution is that the modified error
+criterion adds phase sensitivity to the otherwise phase insensitive CM
+error criterion. We present computer simulations to show the signal
+tracking properties of the CM array using the modified error criterion
+in a fading environment. 
+
+
+Filter Design
+-------------
+
+William Wu is working on the basic skeleton of a software architecture
+for interactive filter design. The idea is that, like PtPlot, this will
+form another of the modular pieces of Ptolemy software in Java. In the
+current design conception, a filter is a model (or subject), extending
+a Java Observable class. Its pole/zero plot, frequency response plot,
+impulse response plot, and other dependent data will extend the Java
+Observer class, implementing a view in a model-view paradigm. There
+will be a object called Manager that creates the plots (observers) and
+filter (subject). The Manager also handles the initial setup for the
+filter from the user. However all the changes of the filter data is
+handled between filter and plots, using the notify and update functions
+that are built in to the Java base classes.
+
+William also plans to construct a static library in that has many
+useful math functions needed in filter design computations, like an
+FFT, polynomial expansion, roots finding etc. Eventually this will
+expand beyond this class of applications.  It will for another modular
+package in the Java Ptolemy ensemble.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+There is nothing specific to report on this task in this period.
+(Note that this task is largely theoretical, so reportable progress will
+be more sporadic than the others).
+
+
+2.  Equipment/Infrastructure Status:
+
+We completed a cutover of our network to use a new wiring infrastructure
+in Cory Hall.  This new infrastructure consists of an ATM backbone with
+switch 100 and 10Mbit ethernet to the desktop.  Since we were already
+using 100Mbit switched ethernet within our cluster, the impact of the
+change was fairly minimal.  Connectivity with our software warehouse,
+however, and other departmental infrastructure has improved.
+
+
+3.  Interactions
+
+Hewlett-Packard
+---------------
+
+Information continues to trickle in from Hewlett-Packard on their
+forthcoming release of design software that includes their adaptations
+of the SDF domain in Ptolemy. They are now conducting seminars to which
+outsiders are invited. Some of the major additions to UCB Ptolemy are:
+
+* Runs On NT 4.0, NT 3.51 and Win 95
+* Added time and frequency simulation and modeling
+* Added DSP filter tool
+* Added VHDL modeling and simulation
+* Added Verilog modeling and simulation
+* Added 300-400 time and frequency models
+* Added Spice and Harmonic Balance cosimulation....
+ 
+HP has integrated their HF Spice, Harmonic Balance and Circuit Envelope
+simulators into HP Ptolemy. Their simulation executable links two
+distinct simulator software architectures: one based on UCB Ptolemy (HP
+Ptolemy) and the other incorporating the HP EEsof analog simulators
+(Gemini). In HP Ptolemy there currently are two simulation domains: SDF
+and TSDF. In TSDF, HP has modified the semantics of SDF to introduce a
+notion of time to apparently make it easier to combine DSP simulations
+with analog simulations. Using the TSDF domain a user can embed a
+circuit simulator into a dataflow simulation using an interface very
+similar to a Ptolemy WormHole.
+
+
+POLIS (Berkeley and Cadence)
+---------------------------
+
+The POLIS team at Berkeley and Cadence (headed by Professor Alberto
+Sangionvanni-Vincentelli) announced the public availability of the
+POLIS-0.3 co-design environment for control-dominated embedded systems.
+POLIS, which is based on Ptolemy, offers an integrated interactive
+environment for specification, co-simulation, formal verification, and
+synthesis of embedded systems implemented as a mix of hardware and
+software components.
+
+Most of the information about POLIS, including pointers to source and
+object code (for various CPUs and OSes) is available at the WEB site:
+
+ 	http://www-cad.eecs.berkeley.edu/~polis
+
+The POLIS team consists of Felice Balarin, Massimiliano Chiodo, Alberto
+Ferrari, Paolo Giusto, Harry Hsieh, Attila Jurecska, Marcello Lajolo,
+Luciano Lavagno, Claudio Passerone, Claudio Sansoe', Ellen Sentovich,
+Marco Sgroi, Kei Suzuki, Bassam Tabbara, Reinhard von Hanxleden, and
+Alberto Sangiovanni-Vincentelli.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Talks by Group Members
+----------------------
+
+* Prof Edward Lee, "Block Diagrams for Modeling and Design," UC
+  Berkeley Design Seminar, October 24th.
+
+* Praveen Murthy, "Ptolemy Project Overview", Lockheed-Sanders, Nashua,
+  NH, Oct. 24, 1997.
+
+* Praveen Murthy, All day Ptolemy tutorial, Sanders, Signal
+  processing--advanced technology group, Oct. 24, 1997.
+
+* Praveen Murthy, "Scheduling for DSP systems", guest lecture in EE290a
+  class, Design of embedded systems: models, validation, and synthesis,
+  EECS Dept., UC Berkeley, Oct. 29, 1997.
+
+* Christopher Hylands, "Java Thread Pitfalls," October 31, 1997, in the
+  Ptolemy Group Meeting. See:
+  http://ptolemy.eecs.berkeley.edu/~cxh/java/threads
+
+
+Key Talks by Others
+-------------------
+
+* Jeff Bier (BDTI), "Processors for DSP-intensive Applications: The
+  Options Multiply" October 31, 1997, UC Berkeley Design Seminar. Hogan
+  Room, 531 Cory Hall
+
+* Prof. Tom Henzinger "Concurrency Models: The State View," UC
+  Berkeley Design Seminar, Friday, November 14th, 1997 
+  (response to the seminar "Block Diagrams for Modeling and
+  Design," presented by Prof. Edward Lee on October 24th.
+
+
+Publications
+------------
+
+1. "Scheduling for Embedded Real-time systems", F. Balarin, L. Lavagno,
+   P. K. Murthy, A. S. Vincentelli, accepted for publication in IEEE
+   Design and Test magazine.
+
+2. G. E. Allen, D. C. Schanbacher, and B. L. Evans, "Real-Time Sonar
+   Beamforming on a Unix workstation Using Process Networks and
+   Pthreads", Proc. IEEE Int. Conf. on Acoustics, Speech, and Signal
+   Proc., submitted.
+
+3. M. Torlak, G. Xu, B. L. Evans, and H. Liu, "Fast Estimation of Weight
+   Vectors to Optimize Multi-Transmitter Broadcast Channel Capacity,"
+   IEEE Transactions on Signal Processing, Jan. 1998.
+
+4. M. Torlak, G. Xu, B. L. Evans, and H. Liu, "Estimation of Optimal
+   Weight Vectors for Broadcast Channels", Proc. IEEE Int. Conf. on
+   Acoustics, Speech, and Signal Proc., Apr. 17-20, 1997, Munich,
+   Germany.
+
+5. M. Torlak, B. L. Evans, and G. Xu, "Blind Channel Estimation in
+   CDMA Systems with Aperiodic Spreading Sequences," Proc. IEEE
+   Asilomar Conf. on Signals, Systems, and Computers, Nov. 3-5, 1997.
+
+6. S. Gummadi and B. L. Evans, "Cochannel Signal Separation in Fading
+   Channels Using a Modified Constant Modulus Array", Proc. IEEE Int.
+   Conf. on Acoustics, Speech, and Signal Proc., submitted.
+
+
+6.  Difficulties/Problems
+
+We seem to have become the conduit of information between the Java team
+at Sun Micrcosystems and the Tcl team at Sun Microsystems. This is not
+a good sign. The latest manifestation of this is that a patch to Tcl,
+Tcl8.0p1, breaks TclBlend1.0a1.
+
+
+7.  Next Quarter Plans
+
+We continue to work on a Java realization of the core classes of a
+rearchitected Ptolemy kernel. We have also undertaken to make Tycho
+(our design data manager and user interface toolkit) much more "Windows
+friendly" by creating a set of keyboard shortcuts that conform with
+Microsoft's recommendations.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+
+References
+
+[1] G. E. Allen, D. C. Schanbacher, and B. L. Evans, "Real-Time Sonar
+    Beamforming on a Unix workstation Using Process Networks and
+    Pthreads", Proc. IEEE Int. Conf. on Acoustics, Speech, and Signal
+    Proc., submitted.
+
+[2] T. M. Parks, "Bounded Scheduling of Process Networks," Technical
+    Report UCB/ERL-95-105, Ph.D. Dissertation, EECS Department,
+    University of California, Berkeley, CA 94720, Dec. 1995.
+
+[3] M. Torlak, G. Xu, B. L. Evans, and H. Liu, "Fast Estimation of Weight
+    Vectors to Optimize Multi-Transmitter Broadcast Channel Capacity,"
+    IEEE Transactions on Signal Processing, Jan. 1998.
+
+[4] M. Torlak, G. Xu, B. L. Evans, and H. Liu, "Estimation of Optimal
+    Weight Vectors for Broadcast Channels", Proc. IEEE Int. Conf. on
+    Acoustics, Speech, and Signal Proc., Apr. 17-20, 1997, Munich,
+    Germany.
+
+[5] M. Torlak, B. L. Evans, and G. Xu, "Blind Channel Estimation in
+    CDMA Systems with Aperiodic Spreading Sequences," Proc. IEEE
+    Asilomar Conf. on Signals, Systems, and Computers, Nov. 3-5, 1997.
+
+[6] S. Gummadi and B. L. Evans, "Cochannel Signal Separation in Fading
+    Channels Using a Modified Constant Modulus Array", Proc. IEEE Int.
+    Conf. on Acoustics, Speech, and Signal Proc., submitted.
+
+[7] J. J. Shynk, A. V. Keerthi, and A. Mathur, "Steady state analysis
+    of the multistage CM array," IEEE Trans. on Signal Processing,
+    vol. 44, pp. 948-962, 1996.
+

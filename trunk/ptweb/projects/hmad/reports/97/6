@@ -1,0 +1,482 @@
+Monthly R&D Status Report
+Date: June 15, 1997
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+1. Tasks Performed
+
+We have two significant breakthroughs to report in this period.  First,
+we have made the Tycho system network aware by integrating into it
+HTTP capability and an interface to electronic mail.  Second, we have
+conceptualized a formal approach to type systems for system-level
+design that we believe will solve many of the difficult problems we have
+encountered in the past, and also will scale up to encompass semantic
+as well as syntactic issues in heterogeneous systems.
+
+
+2. Significant Accomplishments
+
+2.1 Network Integrated Design
+
+John Reekie and Kevin Chang have made Tycho internet aware.  Their
+software architecture supports transparent access to URLs, as if they
+were local files.  Every place where Tycho has been able to reference
+a local file it can now reference a URL.  This is done by using Tcl's
+built in socket mechanism to connect directly to HTTP servers through
+the network.  This mechanism is portable (it will work under NT) and
+robust.
+
+Kevin Chang has also created a portable interface to electronic mail within 
+Tycho.  Thus, tycho scripts can now be easily written that will send 
+electronic mail, and hyperlink references now support the "mailto:" 
+protocol.  The EditMail editor uses the ResourceMail class to contact the 
+mail server on socket port 25.  Using socket instead of UNIX's mail, 
+ResourceMail is platform independent.
+
+
+2.2 Type Systems
+
+We have conceptualized a formal approach to type systems for system-level 
+design that we believe will solve many of the problems we have encountered 
+in the past, and also will scale up to encompass semantic as well as 
+syntactic issues in heterogeneous sytems.
+
+The problem we are addressing is that modular system components expose 
+interfaces of different types, and interconnecting such components requires 
+resolving the type differences.  In classical programming languages, these 
+types define the layout of data in memory (a syntactic issue), and to a 
+more limited degree, its semantic interpretation (e.g.  a double precision 
+IEEE floating point number versus a long integer).  In modern 
+object-oriented systems, type issues become somewhat more complex because 
+of polymorphism, where objects of fundamentally different types expose the 
+same interface.  In system-level design, the issue becomes still more 
+complicated because the semantic interpretations get considerably richer.  
+For example, two lists of numbers may be syntactically identical, but one 
+may represent a time-domain signal while the other represents a 
+frequency-domain signal.
+
+In the early 1970s, Dana Scott proposed the use of partial orders for 
+representing and analyzing type systems.  We have realized that this is 
+exactly the approach we need.  In this approach, an "information order" is 
+used, where a type is "less than" another type if it is less specific.  
+Thus, for example, type "Number" is "less than" type "Double" in Java.  The 
+least type in a scalar type system would be the Ptolemy "Anytype" (this is 
+called the "bottom" of the partial order).  The partial order can be given 
+a "top" as well, where "top" represents a type conflict, i.e.  an 
+unresolvable type.  Such an order will (usually) be finite, and therefore 
+the mathematical structure of the type system becomes a lattice.
+
+The type signature of a module (corresponding to a C++ template, for 
+example) will be given by a function that given some guess about the type 
+of the interface ports returns a new guess that is at least as specific.  
+In terms of the partial order, such a function is monotonic.  Moreover, any 
+composition of such functions is monotonic.  Resolving the type of an 
+interconnection of modules becomes a matter of iteratively applying these 
+monotonic functions until they converge on a resolved type for every signal 
+interfacing two modules.  This convergence point is called a "fixed point." 
+The well-known Knaster-Tarsky fixed point theorem states that any monotonic 
+function over a lattice has a least fixed point.  "Least" in this case 
+means least specific, thus leaving maximum room for polymorphism.
+
+To practically apply this theory, we can use the scheduler developed
+by Stephen Edwards for the SR (synchronous/reactive) domain in Ptolemy.
+That scheduler finds an efficient order in which to evaluate monotonic
+functions in a finite complete partial order (CPO).  A lattice is a CPO,
+so the result can be used directly, despite the fact that the context
+for which Edwards developed it was radically different.
+
+This idea for a type system may scale very well up to the process level.  
+One could, for instance, consider as part of the type whether a signal is 
+in the frequency domain or the time domain.  Fixed-point data types could 
+also be ordered (more precise is more specific).  Moreover, approximate 
+signals could perhaps be ordered by type much like fixed-point signals.  
+The semantics of signals (discrete-event, dataflow, synchronous/reactive) 
+might also be amenable to ordering, allowing inference of interaction 
+semantics between modules in addition to resolution of syntactic types.
+
+We believe that this is a very exciting development, and may prove
+to be one of the major contributions of this project.
+
+
+2.3 Tcl/Java Interface
+
+Christopher Hylands has performed an in-depth analysis of the available 
+options for interfacing Tcl (scripting and advanced user interfaces) with 
+Java (system programming and multithreading).  One way is to use Sun's 
+TclJava interface to load the Tcl/Tk shared libraries into a Java 
+interpreter.  This is the mechanism we are currently using.  Another way is 
+to exploit a new capability in JDK1.1, where apparently it is possible to 
+call the Java Virtual Machine from C code.  We would like to be able to 
+load a shared object into Tcl that could then invoke Java methods.  We have 
+not yet had any success with this approach.
+
+A key part of the problem appears to be that there are a number of 
+limitations of the invocation API implementation in JDK1.1.  Quoting from 
+the Sun documentation:
+
+   "The user-level Java thread implementation on Solaris requires the Java VM
+    to redirect certain Solaris system calls.  The set of redirected system 
+    calls currently includes read, readv, write, writev, getmsg, putmsg, poll, 
+    open, close, pipe, fcntl, dup, create, accept, recv, send, and so on.  This 
+    may cause undesirable effects on a hosting native application that also 
+    depends on these system calls."
+
+We believe that the JDK1.1.1 JNI cannot work with Tcl because Tcl
+calls read and write, and will continue to explore alternatives.
+
+
+2.4 Integrated Documentation
+
+Cliff Cordeiro has developed a tool for generating and browsing 
+documentation for object-oriented languages, and has built implementations 
+for Itcl and Java.  The tool analyzes the source code syntax and 
+relationships between classes and constructs a Tycho information model 
+(TIM) that represents the components and their interrelationships.  A 
+viewer compactly displays these relationships, allowing simultaneous 
+multi-resolution views of a set of classes.
+
+
+2.5 Java Plotting Tool
+
+We have designed and implemented a preliminary Java applet for plotting
+signals.  It consists of the following core classes:
+
+   PlotBox -- Creates labeled axes for two dimensional data plots
+   Plot -- Generates plots from a file at a URL or from method calls
+   PlotLive -- Generates an animated plot: method calls in seperate thread
+
+When these have matured a bit more, we will put examples on the web.
+Through this excercise, we learned a few lessons about Java:
+
+1) The AWT is not very good.  It is a step backwards in user
+   interface toolkits.  We hope that the forthcoming Java Foundation
+   Classes from Sun will be better, and in the meantime, will continue
+   to rely on Tk as our main user interface design environment.
+
+2) The software configuration issues with Java need a lot of work.
+   Dependence on JAVA_HOME and CLASSPATH environment variables, and
+   ideosynchratic interpretation of the "codebase" option in the html
+   "applet" tag make it difficult to configure a Java source tree to
+   work as-is on all platforms.
+
+3) Applets with threads do not currently work reliably.  One thread
+   can unpredictably block all others, and explict calls to Thread.yield()
+   do not appear to help.  Netscape 3.0 fails unpredictably when running
+   multiple applets simultaneously. 
+
+
+2.5 Software Improvements
+
+John Reekie has added a progress indicator to the status bar in Tycho
+to help manage the increasing use of concurrency.  This progress indicator
+gives visual feedback during the execution of large tasks in the background,
+such as downloading large internet files.
+
+Christopher Hylands has developed support for embedded Tcl/Java code in
+HTML documents.
+
+John Reekie made significant improvements in the file system interface of
+Tycho, in part to support HTTP access, and wrote an extensive test suite.
+
+Christopher Hylands fixed a number of portability problems in Tycho so
+that it now runs reliably on NT machines and some Macintoshes.
+
+Cliff Cordeiro has made a number of improvements to the displayer/view
+architecture in Tycho.
+
+Christopher Hylands wrote oct2tim, a tool for converting the old-style
+Oct database information for Ptolemy designs into Tycho Information Model
+(TIM) for use in Tycho.  This is a first step in porting existing
+Ptolemy applications to the new infrastructure.
+
+
+3.0 Infrastructure
+
+3.1 Personnel
+
+Neil Smyth has joined the group as a graduate student.  Marlene Ade, from 
+Belgium, has joined the group as postdoc for a couple of months.  Yosuke 
+Inoue, an undergraduate at RPI, has joined the group to work for the 
+summer.  Yuhong Xiong is organizing regular meetings for the now numerous 
+new group members to leverage their learning process.
+
+
+3.2 Software Infrastructure
+
+We have installed the Netscape Java Internet Foundation Classes and are
+investigating their suitability for our purposes.
+
+We have installed Tcl 8.0, although we are not yet using it since
+it has not yet been integrated with Itcl.
+
+
+3.0 Publications and Presentations
+
+3.1 Publications
+
+[1] C. Hylands, E. A. Lee, and H. J. Reekie, "The Tycho User Interface
+    System," to appear in the 1997 Tcl/Tk workshop, to be held in July,
+    1997, in Boston. http://ptolemy.eecs.berkeley.edu/papers/97/tcltk-97/
+
+[2] Rajagopal Nagarajan, "A Type-theoretic Approach to Deadlock-freedom
+    in Asynchronous Systems," accepted to the Third International Conference
+    on Theoretical Aspects of Computer Software (TACS) to be held in Sendai,
+    Japan in September. http://theory.doc.ic.ac.uk/~raja/publ.html
+
+[3] Richard S, Stevens (Naval Research Laboratory), Marlene Wan (UCB),
+    Peggy Laramie (UCB), Thomas M. Parks (MIT Lincoln Labs), and
+    Edward A. Lee (UCB), "Implementation of Process Networks in Java,"
+    submitted to Conference on Domain-Specific Languages.
+
+    Abstract: 
+    A process network, as described by G.  Kahn, is a network of 
+    sequential processes con nected by FIFO queues.  Process networks, a 
+    generalization of dataflow graphs, are used extensively for representing 
+    signal processing algorithms.  The requirement to run for long times with 
+    limited memory raises concerns about deadlocking and memory requirements.  
+    T.  Parks gives an algorithm for executing a given process network forever 
+    in bounded memory, whenever possible.  This algorithm depends on 
+    recognition of and response to deadlock conditions.  We implemented this 
+    algorithm in Java and devised a new robust method for detecting deadlocks.
+
+
+3.2 Talks by group members
+
+-  E. A. Lee, "The Ptolemy Project," DARPA PI meeting, Palo Alto, CA, 
+   May 29, 1997, http://ptolemy.eecs.berkeley.edu/~eal/talks/pimeeting.pdf
+
+
+3.3 Technology Transfer
+
+In a development that may be of particular interest to other participants 
+in the DARPA Composite CAD program, Hewlett Packard has integrated its 
+highly regarded RF and analog circuit simulation technology with Ptolemy.  
+Although this is effectively a commercialization of software developed 
+prior to the commencement of this project, we include information about it 
+because we expect the relationship with HP to be ongoing and expect future 
+results to be similarly incorporated.  A press release from HP is enclosed 
+as an appendix.
+
+
+APPENDIX - HP PRESS RELEASE
+===========================
+
+HP ROLLS OUT NEW DIGITAL SIGNAL PROCESSING SOFTWARE TO PROVIDE THE
+INDUSTRY'S MOST COMPREHENSIVE DESIGN SOLUTION
+
+HP Design and Synthesis Software Tools Help Speed up Time to Market
+and Reduce Development Costs for Communication Products
+
+        PALO ALTO, Calif. June 2, 1997--To help communication product
+designers reduce time to market and development costs, Hewlett-Packard
+Company today announces plans to deliver the industry's most
+comprehensive digital signal processsing (DSP) design system as part
+of its effort to broaden its solutions for the electronic design
+automation (EDA) industry.  The software is comprised of two new DSP
+tools - DSP Designer and DSP Synthesis- that work together to help DSP
+and integrated circuit (IC) designers significantly improve
+productivity and reduce development costs.
+
+        "For the first time, DSP designs can be co-developed with
+analog, digital and RFIC circuits, allowing design verification of the
+DSP portion of the circuit with the target RF circuitry," said Jacob
+Egbert, general manager of the HP EEsof Division. "This provides
+greater time efficiencies because the DSP algorithms needed to
+overcome the imperfections that the RF channel produces can now be
+developed simultaneously within the same environment.  HP is currently
+the only EDA company to deliver RF/DSP cosimulation capability within
+a single design environment."
+
+Increased Productivity
+
+        The HP DSP Designer software, developed by the HP EEsof
+Division as part of its newly introduced HP Advanced Design System
+(see related announcement: HP's New Advanced Design System Offers
+Industry's First Integrated Solution for End-to-End Signal Path
+Design), includes a block diagram algorithm development environment, a
+DSP filter tool, a measurement instrumentation controller, and a
+powerful data post-processing capability.
+
+        The HP DSP Designer's built-in instrument controller provides
+extensive links to measurement instrumentation. It helps design
+engineers avoid time-consuming and non-portable methods of hand-coding
+scripts by allowing them to interact with a user-friendly dialog box
+to connect to instruments and collect data for use as a source in
+their design.
+
+        Built into the HP DSP Designer software is a new simulation
+technology developed by merging HP research and technology with the
+University of California at Berkeley Ptolemy project. This new
+simulation engine facilitates co-simulation of time, frequency and
+data flow technologies and significantly expands the DSP development
+capability for mixed RF/analog/DSP communications projects.
+
+        "Achieving a milestone in design technology, HP EEsof has
+integrated Ptolemy signal processing technology with their highly
+regarded analog, RF, and microwave design software, producing an
+extremely attractive multi-level, mixed-signal simulation system,"
+said Dr. Edward Lee, professor at U.C. Berkeley and founder of the
+Ptolemy project. "For today's complex designs in communications and
+multimedia applications, it is crucial to validate designs at multiple
+levels of abstraction.  The combination of Ptolemy dataflow technology
+with SPICE-level modeling and simulation enables such multi-level
+validation in a truly integrated environment."
+
+Reduced Development Costs
+
+        HP DSP Synthesis software works together with HP DSP Designer
+to help product developers speed their ideas from design to
+manufacturing. It is the only behavioral synthesis product targeted
+specifically for the communications product market that provides an
+effective tool for optimizing and implementing high-level DSP designs
+into application-specific integrated circuits (ASICs) and field
+programmable gate arrays (FPGAs). Additionally, HP DSP synthesis is
+the only product that includes both behavioral and register transfer
+level (RTL) VHDL/verilog code generation, simulation and synthesis
+capability. The software outputs the hardware description language
+(HDL) in industry-standard formats for logic-synthesis tools.
+
+        This helps remove the wall between DSP designers and IC
+designers to better facilitate design team integration and promote
+speedy, error-free implementation of DSP designs. DSP engineers can
+now develop leading-edge designs optimized for resource sharing,
+scheduling and binding in the earliest stages of the development
+cycle.
+
+U.S. Price and Availability
+
+        HP DSP Designer and HP DSP Synthesis software are expected to
+be available in the Fall at prices starting at $15,000 each.
+
+        Hewlett-Packard Company is a leading global provider of
+computing, Internet and Intranet solutions, services, communications
+products and measurement solutions, all of which are recognized for
+excellence in quality and support.  HP has 114,600 employees and had
+revenue of $38.4 billion in its 1996 fiscal year.
+
+        Information about products from HP's Test and Measurement
+Organization can be obtained on the World Wide Web via
+http://www.hp.com/go/tmnews. Additionally, information about HP EEsof
+can be obtained via http://www.hp.com/go/hpeesof.
+
+
+#   # #
+
+
+UNIX is a registered trademark in the United States and other
+countries, licensed exclusively through X/OpenT Company Limited.
+
+----------------------------------------------------------------------------
+
+HP'S NEW ADVANCED DESIGN SYSTEM OFFERS INDUSTRY'S FIRST INTEGRATED
+SOLUTION FOR END-TO-END  SIGNAL PATH DESIGN
+
+New EDA Software System to Help Increase Designer Productivity 
+and Speed Time to Market for Communication Products
+
+        PALO ALTO, Calif., June 2, 1997-- Hewlett-Packard Company
+today announces the HP Advanced Design System, a new electronic design
+automation (EDA) software system that offers the industry's first
+integrated, end-to-end signal path design solution for developers of
+communications products.  With this system, HP now provides a full
+range of communications systems design technologies--from circuit and
+electromagnetic simulation to digital signal processing (DSP)
+synthesis and physical design--all in a single environment.  The
+software is developed and marketed by the HP EEsof Division, an
+industry leader in the radio frequency (RF) and microwave design
+software field.
+
+
+        The HP system provides new DSP design and synthesis software
+in addition to significant new design capabilities for microwave and
+radio-frequency integrated circuit (RFIC) design. The integration and
+co-simulation of RF and DSP analysis is unique in the EDA industry, as
+is the software's availability on both UNIX and PC platforms.
+
+        "The HP Advanced Design System achieves our vision of
+providing a single software environment for the design of the
+communications signal path," said Jacob Egbert, general manager of the
+HP EEsof Division..  "We believe this integrated environment will
+enable our customers to eliminate design errors resulting from
+disconnects found today between RF/analog and DSP design teams and
+improve their productivity and time-to-market for their communication
+products."
+
+Increased Productivity
+
+        The HP Advanced Design System uses a top-level simulation tool
+to offer unprecedented speed and accuracy in RF system simulation. The
+system simulation capability of HP OmniSys, HP's previous system
+design solution, has been enhanced with the use of an extremely fast
+harmonic balance simulator that allows engineers to compute
+full-budget simulations on any RF topology.  This provides engineers
+with the freedom to experiment with innovative approaches to their
+designs.
+
+        Circuit simulation technology in the HP Advanced Design System
+features patent-pending new technologies, including new HP
+high-frequency SPICE, harmonic balance and HP Circuit Envelope
+simulation technologies. HP tests on the patented new harmonic balance
+simulation technique have shown speed enhancements up to 100 times
+faster than comparable solutions available today with a reduction in
+memory usage by up to 15 times. These speed and memory advancements
+enable designers to increase productivity by speeding up simulations
+of the very large RFIC circuits essential in today's complex
+communications systems.
+
+Reduced Time to Market
+
+        Digital signal processing is a vital part of many
+communication designs.To address this need, the HP Advanced Design
+System offers two new DSP tools--HP DSP Designer and HP DSP Synthesis
+--developed to help design engineers take their ideas from design to
+manufacturing quickly and efficiently.
+   
+        HP Ptolemy technology, which is built into the HP designer
+software, is a new simulation engine that facilitates co-simulation of
+time, frequency and data flow technologies and significantly expands
+the DSP development capability for mixed RF/analog/DSP communications
+projects. HP currently is the only EDA vendor to deliver RF/DSP
+co-simulation capability within one design environment.
+
+        HP DSP Synthesis software includes both behavioral and
+register transfer level (RTL) VHSIC hardware description language
+(VHDL)/Verilog code generation and simulation capability. The software
+outputs the hardware description language (HDL) in industry-standard
+formats for logic synthesis tools.
+
+        For traditional RF board-level design, the microwave/RF
+circuit designer benefits from the integration of system, circuit and
+electromagnetic simulation, as well as full schematic and layout with
+library linkages to enterprise-wide printed-circuit board (PCB)
+systems such as the Mentor Board Station.
+
+U.S. Price and Availability
+
+        The HP Advanced Design System, which comes with the HP DSP
+Designer and HP Synthesis software built-in, offers solutions starting
+at $8,000 and is expected to be available in the fall.
+
+        Hewlett-Packard Company is a leading global provider of
+computing, Internet and Intranet solutions, services, communications
+products and measurement solutions, all of which are recognized for
+excellence in quality and support.  HP has 114,600 employees and had
+revenue of $38.4 billion in its 1996 fiscal year.
+
+        Information about products from HP's Test and Measurement
+Organization can be obtained on the World Wide Web via
+http://www.hp.com/go/tmnews. Additionally, information about HP EEsof
+can be obtained via http:/www.hp.com/go/hpeesof.
+
+
+#   # #
+
+UNIX is a registered trademark in the United States and other
+countries, licensed exclusively through X/OpenT Company Limited.
+
+Mentor Board Station is a registered trademark of Mentor Corporation.
+
+

@@ -1,0 +1,483 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 April 21, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        3/15/98 - 4/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our technology transfer progress continues unabated with the
+announcement on April 13 of Hewlett-Packard's HP W-CDMA Design Library
+based on HP Ptolemy. This library is intended for designing wireless
+communication systems. We have also reached convergence on our "CORBA
+strategy," have begun an interoperability interaction with Coyote
+Systems, and have made significant progress on Ptolemy II. The Ptolemy
+0.7.1 release is on schedule, and unexpected progress with a port of
+that system to NT promises the possibility of a PC-enabled system long
+before Ptolemy II is ready. Finally, our understanding of type-system
+fundamentals continues to improve, and we have begun to design the type
+system for Ptolemy II.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Interoperability
+----------------
+
+The CORBA/RMI study group led by John Reekie has concluded its work.
+Mudit Goel created a CORBA interface for his Ptolemy II PN (process
+networks) domain.  This interface allows the functionality of a PN
+actor to be specified remotely by a CORBA-compliant object.
+
+Our tentative conclusion is that CORBA is the right interface for us to
+use when interacting with foreign software. The two key alternatives,
+Microsoft's COM and Java's RMI are too limiting, the former because it
+depends so much on a Microsoft environment, and the second because it
+constrains us to an all-Java environment. Java IDL (Sun's implementation
+of CORBA in Java) is about as easy to use as RMI, but because it is
+CORBA, it can interface to foreign tools that are not written in Java.
+
+Here are the key differences between RMI and Java IDL:
+
+* RMI has pass-by-value only; Java IDL has pass-by-reference (for
+  objects) only. Pass-by-reference is probably better for distributed
+  programming.
+
+* Java IDL has a distributed naming service; RMI has a local naming
+  service only -- if you want to find an object, you have to know
+  which machine it is on.
+
+* Java IDL has static and dynamic invocation; RMI has static only.
+  We do not know whether dynamic invocation is really useful.
+
+
+Ptolemy II
+----------
+
+We discovered a significant flaw in our first design of the actors
+package, which provides the infrastructure supporting data transfer
+between entities in Java. This infrastructure provides the base classes
+for modules in the CT (continuous-time simulation) domain as well as
+all other flow-oriented domains (dataflow, process networks, and
+discrete events). The flaw limited the modularity of the model by
+restricting connects that combine broadcast of identical information
+with multicast of distinct information. We are developing a modified
+design that retains mostly the same interface and will correct the
+problem. The (relatively) late discovery of this flaw, however,
+underscores the need for a formalism that can describe our hierarchical
+graph abstract syntax. Such a formalism could in principle have enabled
+a design that was more deductive, and hence more likely to be correct.
+
+On a more positive note, Mudit Goel implemented a cooperatively designed
+"Director" class that is the replacement for the Ptolemy 0.x "Target."
+This class supervises the execution of a simulation and/or the synthesis
+of an implementation.  The flow of control in this class is designed to
+overcome much of the awkwardness that we have encountered in the targets
+of Ptolemy 0.x.
+
+
+User Interface
+--------------
+
+John Reekie has made progress on porting Tycho to the Tcl++ package.
+tcl++ is a pure Tcl (8.0) package that simulates [incr Tcl] 2.2. Tycho
+is now able to start up in Tcl 8.0, and a reasonable portion of it is
+functioning, including the block diagram editor. There are still some
+serious lurking problems caused by incompatibilities in namespace
+handling and scoping differences between [incr Tcl] and Tcl 8.0 -- the
+stylesheets mechanism, for example, is largely broken. These and some
+other porting problems would have arisen with [incr Tcl] 3.0 anyway, so
+this exercise gives us some advance preparation for when [incr Tcl] 3.0
+becomes available.
+
+Performance of Tycho running under tcl++ is slow to dismal.
+Nonetheless, the port gives us a migration path should [incr Tcl] 3.0
+never materialize, allows us to advance-release Tycho packages as Tcl
+8.0 compatible, and allows us to experiment further with communicating
+with Ptolemy II through Tcl Blend.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Graph Package
+-------------
+
+Jie Liu checked in a preliminary version of the static graph package.
+The first use will be in the CT (continuous-time simulation) domain,
+which will use a generic topological sort routine for scheduling.
+
+
+Ptolemy 0.7.1 Release
+---------------------
+
+The Ptolemy 0.7.1 prerelease was shipped on March 30 to the following
+offsite developers:
+
+      - Tom Lane (Structured Software Systems): HPUX 9.x 
+      - Peter Dufault (HD Associates, Inc.): FreeBSD 
+      - Guy Maor (University of Texas, Austin): Debian GNU/Linux 2.0. 
+      - Jens Voigt (Dresden University of Technology Communications
+	Laboratory): Solaris 2.6 
+      - Wolfgang Reimer (Technical University of Ilmenau, Germany):
+	RedHat 5.0 Linux 
+      - Frederic Boulanger (Supelec, France: Digital Unix 4.0 
+      - Wan-Teh Chang (Netscape): Irix2.6
+
+The purpose of the prerelease is to allow users of other platforms
+to port to the release.   The offsite developers returned their
+comments by April 17.  The prerelease seems fairly stable, the only
+major problems involved the FreeBSD port.  There were minor problems
+with the Java version of pxgraph that involve binary data.
+
+Our current schedule for release is:
+
+    Friday, Apr 24, 1998 - Code Freeze until May 1.
+    Friday, May 15, 1998 - Ptolemy0.7.1alpha Release 
+    Friday, May 29, 1998 - Ptolemy0.7.1beta Release 
+    Friday, June 12, 1998 - Ptolemy0.7.1 final Release 
+
+In a change from past releases, we hope to make the Ptolemy0.7.1alpha
+release publically available.
+
+A summary of the 0.7.1 release can by found at
+http://ptolemy.eecs.berkeley.edu/ptolemy0.7.1.html
+
+
+NT port of Ptolemy
+------------------
+
+The NT port of Ptolemy can now start up vem (the schematic editor) and
+pigiRpc (the Ptolemy kernel process). This is a major milestone in the
+NT port.
+
+The NT port makes heavy use of the Cygwin32 toolset, which is a port
+of the GNU tools to Windows.  (For details about Cygwin32, see
+http://www.cygnus.com/misc/gnu-win32/).
+
+Vem runs under native X11 on the NT platform by using a set of X11R6.3
+libraries compiled for Cygwin32.  Our development environment uses
+Samba to mount the Ptolemy sources from a Unix machine.  This allows
+us to share the same source tree between Unix and NT, which makes
+porting much less complicated.
+
+Currently, the NT port has problems with octtools facets.  We believe
+that these problems are caused by big-endian vs. little-endian binary
+representation issues and issues involving text files vs. binary files
+under Windows.
+
+The NT ptcl.ptiny binary passes the SDF and DE tests today, so we will
+include some support for the NT platform in the Ptolemy 0.7.1 release.
+
+It is unclear whether the NT vem port will be usable in time for the
+0.7.1 release.  If the NT vem port misses the 0.7.1 release, then
+it should be fairly easy to release a patch after the 0.7.1 release.
+
+Notes about the NT port can be found at
+http://ptolemy.eecs.berkeley.edu/~cxh/nt-ptolemy.html
+
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Concurrency
+-----------
+
+Our Friday afternoon study group has turned its attention to
+Andrews, "Concurrent Programming, Principles & Practice," under the
+leadership of Niel Smyth.
+
+
+Type Resolution
+---------------
+
+We have had extensive discussions about the type resolution system
+for Ptolemy II.  The following comments are adapted from Yuhong Xiong.
+
+The type inference algorithm developed by Robin Milner for ML is a key
+reference. Milner's algorithm sets up a system of type constraints,
+using type variables to represent the unknown type of expressions, and
+solve the constraints using an unification algorithm. For example, if
+a,b,c are type variables, and the constraints are:
+
+	a = b->c
+	a = c->b
+	b = int
+
+Then a solution is a = int->int, b = int, c = int.
+
+In our system, we order the types as a CPO (complete partial order),
+such as:
+
+                          anytype
+                        /         \
+                       /           \
+		(double complex)   ...
+		  /	 \
+		double   complex
+		 / \
+	    float   int
+
+Lower types can be converted to higher types without loss of
+information.  We extend this partial order with a bottom element
+called "not a type" (NaT), which is used to detect irrecconcilable
+type conflicts.  This extension converts the CPO into a lattice.
+
+To support this lossless conversion, we can set up the constraints as a
+set of inequalities with respect to this partial order, based on some
+rules. For example:
+
+(1) when an output port is connected to an input port, the type on the
+    output port must be less or equal than the type of the input port.
+
+(2) For polymorphic actor, the output types must be greater or equal
+    than the input type.
+
+The inequalities give us a compact representation of a type refinement
+function for each actor that is monotonic with respect to the lattice.
+This set of functions has a unique greatest fixed point, which we
+define to be the resolved type. While iterating to find the fixed
+point, we can easily coerce types in a lossless fashion where
+appropriate, although we have not yet decided whether it is desirable
+to do so.
+
+Here is an example. Notationally, write a(ANYTYPE) or a(double) for type
+variable a where ANYTYPE or double is our latest guess about its value.
+Assume as a starting point the constraints:
+
+    a(anytype) <= b(anytype)
+    b(anytype) <= d(double)
+    d(double) <= c(anytype)
+    c(anytype) <= a(anytype)
+
+Then we iterate:
+
+First iteration:
+   a(anytype) <= b(anytype)     --- no change
+   b(anytype) <= d(double)      ==> b(double)
+   d(double) <= c(anytype)      --- no change
+   c(anytype) <= a(anytype)     --- no change
+
+Second iteration:
+   a(anytype) <= b(double)      ==> a(double)
+   b(double) <= d(double)       --- no change
+   d(double) <= c(anytype)      --- no change
+   c(anytype) <= a(anytype)     --- no change
+
+Third iteration:
+   a(double) <= b(double)       --- no change
+   b(double) <= d(double)       --- no change
+   d(double) <= c(anytype)      --- no change
+   c(anytype) <= a(double)      ==> c(double)
+
+Fourth iteration:
+   a(double) <= b(double)       --- no change
+   b(double) <= d(double)       --- no change
+   d(double) <= c(double)       --- no change
+   c(double) <= a(double)       --- no change
+
+Convergence! This particular procedure took perhaps the worst possible
+execution sequence, but still converged. Stephen Edwards' PhD thesis (a
+prior Ptolemy project result) suggests how to find better evaluation
+sequences. If we have a type conflict, then we converge to NaT.
+
+
+2.  Equipment/Infrastructure Status:
+
+All group members have now been equipped with notebook computers running
+Windows NT.
+
+
+3.  Interactions
+
+-- At the DSP Spring conference in Santa Clara on April 13, Hewlett
+   Packard a complete HP W-CDMA Design Library based on HP Ptolemy.
+   According to Paul Washkewicz of HP,
+
+     "This is one of the hottest technologies to hit the streets
+     recently, and our ability to get this product into the industry is
+     directly related to our adoption of UCB Ptolemy.
+
+   Paul also told us privately that
+
+     "With HP Ptolemy as our framework, we fully expect to deliver
+     almost a new product every month for the next 6 months. This is
+     the real value in HP Ptolemy. "
+
+-- Edward Lee participated in an ISAT study group meeting on March 18.
+   The study group is "C3 for Distributed Micro Sensors & Actuators."
+
+-- We met on March 20 with Per Ljung of Coyote Systems. We developed a
+   strategy to explore interoperability in the near term. It's a
+   three-phase strategy:
+
+     1) Macromodel integration with Ptolemy's CT domain
+     2) Socket-based "simulation on demand"
+     3) CORBA-based "simulation on demand"
+
+   The first of these is not fundamentally any different from what
+   Coyote Systems has already done with Simulink. The only real reason
+   for doing it is to get the interoperability with Ptolemy, which will
+   connect the physical layer modeling with a richer suite of
+   simulation and synthesis tools. The idea is that simplified models
+   arising out of the static analysis tools of Coyote could be embedded
+   in a dynamic system-level model.
+
+   The second of these would leverage an existing Tcl-based socket
+   interface to Coyote's tools. This gives a quick an easy interface to
+   a remote simulator (anywhere on the network) that performs static
+   analysis "on demand." This means that dynamics are modeled by
+   repeatedly performing static analysis. Unless fairly crude
+   approximations are used, we expect that this may prove too slow to
+   be useful. Thus, the outcome of (2) may make 3 unnecessary, e.g. by
+   showing that simulation-on-demand is hopelessly impractical.
+   Nonetheless, it is simple-enough to try, and we can get a feel for
+   how far off the technology is.
+
+   We plan to purse (3) anyway to be able to interface to generic
+   tools, such as Matlab. We believe that a CORBA-based interface will
+   give us more leverage than the customized, tool-by-tool interfaces
+   we have used in the past. Currently, Matlab does not provide a CORBA
+   interface, but we believe we can implement one fairly easily.
+
+-- Arnaud Laprevote Free&ALter Soft, in France, contributed a change to
+   the Compile-SDF target of Ptolemy 0.7 so that it can include
+   user-defined stars. The company provides training, setup and updates,
+   support for free software, including Ptolemy.
+
+-- Wolfgang Reimer (Dr.-Ing.) of TUI (Technical University of Ilmenau,
+   Germany) contributed a large number of patches for the Ptolemy 0.7.1
+   release that correct several long-standing bugs and annoyances.
+
+-- Universidad de Vigo, Spain, created BerbeX, a COFDM-based digital TV
+   transmission systems simulator, which uses Ptolemy. Their web site is:
+
+     http://www.tsc.uvigo.es/GTS/BerbeX/
+
+
+
+4.  Personnel Status
+
+We have made commitments to two incoming graduate students for support
+starting in the Fall, and to a first year graduate student, Lukito
+Muliadi, for support starting in the summer.
+
+
+5.  Talks/Presentations/Publications:
+
+-- "Block Diagrams for Modeling and Design," Edward A. Lee, 
+   New Frontiers in Research Colloquia Series, Synopsys, March 17, 1998.
+
+   Abstract:
+   Visual depictions of electronic systems have always held a strong
+   human appeal, making them extremely effective in conveying
+   information about a design. A few attempts to use such depictions to
+   completely and formally specify systems have succeeded, most notably
+   in circuit design, where schematic diagrams can capture all of the
+   essential information needed to implement some systems. Others have
+   failed dramatically, for example flowcharts for capturing the
+   behavior of software. Recently, a number of innovative visual
+   formalisms have been garnering support, including visual dataflow,
+   hierarchical concurrent finite state machines, and object models.
+   This talk focuses on the subset of these that are recognizable as
+   "block diagrams." Such diagrams represent concurrent systems, but
+   there are many possible concurrency semantics. Formalizing the
+   semantics is essential if these diagrams are to be used for system
+   specification and design. This talk explores some of the possible
+   concurrency semantics, arguing that their strengths and weaknesses
+   make them complementary rather than competitive, so that no single
+   model is likely to emerge as a universally useful model. I will also
+   describe some recent innovations where concurrency models are
+   combined with automata for sequential control. So-called hybrid
+   systems are a special case of such combinations.
+
+-- Edward A. Lee participated in a panel "What Will It Take To Capture
+   Designs Of The Future? What Do We Plan To Do About It?," at the
+   IVC/VIUF conference (a joint Int. Verilog Conf. and Int. VHDL Users'
+   Forum) on March 18, 1998. The slides he used are available at:
+
+     http://ptolemy.eecs.berkeley.edu/~eal/talks/ivcpanel.pdf
+
+-- Jie Liu presented a talk "Software Timing Analysis Using HW/SW
+   Cosimulation and Instruction Set Simulator" at the 6th International
+   Workshop on Hardware/Software Co-Design( CODES/CASHE'98 ), Seattle,
+   Washington, March 15-18, 1998
+
+-- Bilung Lee, "Hierarchical Concurrent Finite State Machines in
+   Ptolemy," International Conference on Application of Concurrency to
+   System Design, Aizu-Wakamatsu City, Japan, March 24 1998.
+
+-- Edward A. Lee, "A View Of Hybrid Systems: Automata +  Concurrency,"
+   Hybrid Systems Workshop, Invited Talk, April 15, 1998, Berkeley, CA.
+   The slides he used are available at:
+
+     http://ptolemy.eecs.berkeley.edu/~eal/talks/hybrid.pdf
+
+
+Publications
+------------
+
+[1] Bilung Lee and Edward A. Lee, "Hierarchical Concurrent Finite State
+    Machines in Ptolemy," Proc. of International Conference on Application
+    of Concurrency to System Design, p. 34-40, Aizu-Wakamatsu City, Japan,
+    March 1998.
+
+[2] Jie Liu, Macerllo Lajolo and Alberto Sangiovanni-Vincentelli,
+    "Software Timing Analysis Using HW/SW Cosimulation and Instruction Set
+    Simulator," Proc. of CODES/CASHE 98, Seattle, March 1998.
+
+[3] H. J. Reekie and E. A. Lee, "The Tycho Slate: Complex Drawing
+    and Editing in Tcl/Tk," April 27, 1998. Submitted to the Sixth
+    Annual Tcl/Tk Conference, September 14-18, 1998, San Diego,
+    California.
+
+
+6.  Difficulties/Problems
+
+TclBlend is reported not to work with JDK1.2beta2. From the Sun web
+site, http://sunscript.sun.com/java/faq.html#Q3:
+
+   3. Does Jacl or Tcl Blend work with the JDK1.2beta2? 
+
+   Jacl passes the entire test suite when built and run with the
+   JDK1.2, and is assumed to work OK. Tcl Blend will load and execute
+   commands, however there are threading issues causing random tests to
+   fail. Because the JDK1.2 is only a beta release, we have decided to
+   postpone supporting Tcl Blend on JDK1.2.
+
+   4. Does Tcl Blend work with the alpha release of Tcl8.1? 
+
+   No, Tcl Blend requires Tcl8.0. To get Java Threads to work with Tcl,
+   a special interface was created that depends on the API defined in
+   Tcl8.0. We are currently working on making Tcl8.1 thread safe. When
+   this becomes a reality, we will update the Tcl Blend to work with
+   Tcl8.1.
+
+We are guessing that there are serious implementation flaws that will
+need to be fixed before Tcl Blend will work under JDK1.2beta2 or
+Tcl8.1.  This is yet another blow to our strategy to use Tcl + Java.
+
+
+7.  Next Quarter Plans
+
+We plan to continue design and implementation of the actors, graph,
+math, pn, and ct packages in Ptolemy II. In addition, we hope to start
+on the FSM package, which will support finite state machines in hybrid
+combinations with the other (concurrent) domains.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+

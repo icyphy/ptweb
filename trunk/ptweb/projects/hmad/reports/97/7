@@ -1,0 +1,433 @@
+monthly R&D Status Report
+Date: July 15, 1997
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+1. Tasks Performed
+
+This period reflects the significantly greater productivity that
+typically accompanies the summer months. We have made considerable
+progress in particular on software architecture for modular
+distributable tools, notably a demonstration of an integration with
+WELD (Web-Based Electronic Design), a Ptolemy/Java integration
+demonstration, and major headway on the Tcl/Java front.  External
+interactions were also particularly intensive.
+
+
+2. Significant Accomplishments
+
+2.1 Tcl/Java Interface
+
+John Reekie has written an interface between Tcl and Java that uses
+the Java Reflect class.  This interface is considerably easier to use
+than Sun's TclJava0.4 interface, making the integration more transparent.
+However, measurements indicate that the interface is 2-3 times slower.
+Fortunately, discussions with Sun (at the Tcl/Tk conference in Boston)
+indicate that Sun is seriously committed to improving their interface.
+
+John and Christopher Hylands have been using this experience to design
+the next generation Tcl/Java interface, which will use the JNI (Java
+Native Interface). They decided to work with Tcl8 so that when Itcl3.0
+comes out, we can just drop in the interface. One of the key problems
+in such an interface is that Tcl has no types, while Java is strongly
+typed. A consequence is that method names are not always sufficient in
+Tcl for identifying a corresponding Java method. The types of the
+arguments may also need to be known. For a first cut solution, they are
+planning on requiring the user to have the type signature in the method
+call. The calls would look like:
+
+::java::new foo .foo
+.foo bar {int int object} 4 myobject
+
+for a Java class foo that has a .bar method that takes an int and an
+object and returns an int.  An alternative that is not as readable
+but would be more efficient would look like:
+
+.foo bar (IL/pt/kernel/Foo;)I 4 myobject
+
+This uses the standard encoding from the Java virtual machine.
+
+
+2.2 Tycho/WELD Integration
+
+Collaboration with the WELD project (Web-Based Electronic Design),
+headed by Richard Newton, continues. John Reekie has built into Tycho a
+number of features to support access to WELD databases and
+applications. The intent of the integration is to use Tycho to provide
+more complex user interfaces to WELD design tools that are operated
+over the network. Tycho provides a significantly higher-level platform
+for user interface design than Java, on which WELD is based.
+
+John Reekie has constructed a demo using Ptolemy remotely via the WELD
+protocol with Tycho providing the user interface.  He gave the demo
+at DAC (the Design Automation Conference).  We have learned from
+this that some refinement of the WELD protocol is needed to support
+more dynamic simulations. Using the WELD protocol would have a number
+of advantages like independence from the user interface, ability to
+monitor just the data of interest from various simulations, perhaps a
+workflow application that supports dynamic monitoring, and control of
+any simulation.
+
+This work has contributed some infrastructure to Tycho, including
+persistent object support classes, which Tycho uses to access the WELD
+database (written in Java), a client-side interface to a WELD server
+(Java), and a simple server process that runs Ptolemy under the control
+of Tycho. This is perhaps the first client-server implementation of
+Ptolemy.
+
+To make Tycho "WELD-aware", John Reekie wrote a subclass of the
+Resource class, called ResourceWELD, and added the protocol name "weld"
+to the existing list ("http", "mailto", "file"). Because of this
+approach, access to the WELD server is transparent: if you open a file
+browser (in tycho -java) and enter weld://machinename, you will get a
+listing of the contents of the WELD server on that machine. John has
+installed on the main WELD server machine (called
+"yoyodyne.eecs.berkeley.edu") a graph editor with a simple dataflow
+graph. There is a menu entry on the graph editor called "Run Remote
+Ptolemy", which will generate a set of textual commands to Ptolemy and
+send them to a Tycho server. The Tycho server can also be run from the
+WELD workflow applet.
+
+How it works: The ResourceWELD class creates a single instance of the
+Java class weld.persistent.TclWeldDirectory. This class, which uses the
+Tycho-Java interface, creates and manipulates various kinds of Java
+objects provided by the WELD group, which know how to access the
+database running on their server. The database is completely general,
+but they have built DirObject and DataObject classes to allow clients
+to build a simple file-system-like structure on it. The
+TclWeldDirectory class makes some effort to cache information about the
+database locally, as Tycho tends to make a lot of calls to check for
+file existence, whether it's a directory, and so on.  This is similar
+to the caching of http accesses that Tycho does.
+
+To execute commands in a remote Ptolemy, the graph editor creates an
+instance of the Java object weld.client.TclClient. This class is
+basically just a Tcl-interface wrapper around one of the Weld Java
+classes, which implements their server protocol. The editor generates
+the textual command that describe the the graph, and gives it to its
+TclClient Java object, which in turn creates a WELD CS_Client object
+that transmits the graph description to the Tycho "server". The server
+is a C++ program waiting on a socket that places the data into a file,
+and execs a script, which in turn execs tycho -ptiny (which runs
+ptolemy with textual interface). When this is done, the server takes
+the data from the output file generated by Ptolemy (see below) and
+returns it to the client object; eventually, a Tycho editor pops up
+with the returned data in it.
+
+Lessons learned: First, running Ptolemy in client server mode is pretty
+easy because of its Tcl-based textual command interface. Second,
+security is a big problem with this setup, since the server is
+executing an arbitrary Tcl script. This requires further work. Third,
+most Ptolemy applications need to be modified to work this way -- to
+produce the output file. Fourth, the relative ease with which John was
+able to get Tycho talking to WELD indicates that we're on the right
+track with our Tycho-java interface. Finally, this is interesting but a
+lot more development would be needed to fully realize interactive
+executions, as opposed to executions that put their results in a file.
+The WELD people seem interested in talking about extending their
+protocol to better support Ptolemy-style interactive simulations.
+
+
+2.3 Java Performance
+
+Dick Stevens (on sabbatical in our group from the Naval Research Labs)
+designed an experiment to monitor the details of Java garbage collection.
+The results indicate that current implementations of Java rely very
+heavily on garbage collection, including the management of automatic
+variables and other temporaries that would normally be managed on a stack.
+In view of this, there seems to be little point in trying to design code
+to minimize garbage collection.  Instead, performance will depend on the
+quality and granularity of the garbage collection itself.
+
+
+2.4 Software Improvements
+
+John Reekie improved the menu mechanism in Tycho to identify menu entries
+with tags rather than by their label.  This allows more flexibility in
+dynamically modifying menus.
+
+Tom Lane (of Structured Software Systems) completed a major redesign of
+the higher-order functions (HOF) mechanism in Ptolemy.  This mechanism is
+central the ability to specify scalable applications compactly, and may
+turn out to be central to supporting mutable systems in the future.
+The previous mechanism was full of bugs concerning its interaction with
+hierarchy and with the notion of delays on arcs.
+
+John Reekie added a simple animation facility to the Slate, one that
+supports linear moving and reshaping of graphical items. The idea is to
+use this infrastructure in design visualization. An animation is driven
+by an instance of a new class called Animator; Animator is a sub-class
+of Interactor, but generates interaction events by itself instead of in
+response to mouse events. The animate{} method of the Slate class
+provides a simple interface to objects of this class. For example, to
+move an object 50 pixels south-east, execute:
+
+  $slate animate move $id 50 50 -duration 2000
+
+The -duration argument is the approximate time to complete the
+animation, in "Tcl time." To reshape an object, execute something like: 
+
+  $slate animate reshape $id 50 50 -aspects vertex-1
+
+Animation is asynchronous, so multiple animation calls overlap in
+effect. To synchronize a series of animation sequences, inserts calls
+like this:
+
+  $slate animate wait
+
+Christopher Hylands added keyboard accelerators to the Tycho HTML editor
+fashioned after those in the HTML mode of emacs.
+
+Seehyun Kim has created a flexible facility for synthesizing fixed-point
+implementations of blocks that are specified more generically.  This will
+support more intensive exploration of fixed point designs.
+
+John Davis has created Itcl classes to mirror the Java classes in the
+Ptolemy kernel redesign.  These classes will be used by a user interface
+and also as the basis for a complete test suite.
+
+James Lundblad of Faroudja Corp. contributed modifications to the Ptolemy
+C code generation domain that achieve significant speedups in simple cases.
+These modifications avoid unnecessary modulo arithmetic and function call
+overhead when the data buffering is simple enough to allow this. Mike
+Williamson evaluated the changes and incorporated them into Ptolemy.
+
+Christopher Hylands modified the HTML browser in Tycho so that if it is
+running within Java and the HTML file it is parsing contains an applet,
+then the applet is displayed.  This is done in a separate window because
+we do not yet know how to map Java frames into Tk windows in a portable
+way.  However, it is done within a single process, not with an external
+invocation of an appletviewer, and so it provides most of the infrastructure
+for a tighter integration.
+
+Brian Evans (on subcontract at UT Austin) installed a new interface between
+Ptolemy and Matlab 5.0.  This interface exploits shared libraries.
+He also installed a new interface to Mathematica 3.0, although this
+interface does not support shared libraries.
+
+John Reekie made some changes that affect the way Tycho manages the
+Window and Help menus. In a nutshell, all "register" commands, which
+associate editors file templates, have been consolidated a new class
+called Registry, and the mechanism has been made more flexible. Most
+notably, instead of relying exclusively on filename extensions, if the
+first non-blank line of a file contains an emacs-style header string,
+tycho uses that to override the default mode in which a file is opened.
+An example first line:
+
+# -*- c++ -*-
+
+
+2.5 Multidimensional Signal Processing Option--Questech
+
+The main activity during this period has been an ongoing investigation
+into a dataflow model called Regular Dataflow graphs (RDFGs).
+RDFGs compactly represent multidimensional algorithms with regular
+control and data flow, and thus match multidimensional signal processing
+applications well. We hope to use them to improve the ability of
+multidimensional dataflow representations in Ptolemy to exploit
+parallel signal processing hardware.
+
+RDFGs have been studied before, although unsatisfactorily, in the context
+of wavefront array processors.  RDFGs are distuinguished by their highly
+regular structure; this regularity leads to descriptions that are
+exponentially more compact than descriptions of normal graphs.  Hence,
+very large graphs can be described using very little space, and infinite
+graphs can be described using finite space (infinite graphs arise as
+precedence graphs in signal processing where the time dimension is
+infinite).  RDFGs can model algorithms where the structure of the
+algorithm leads to highly homogenous processing elements and activities,
+like matrix multiplication.  RDFGs can also be used to model the
+precedence graphs of multidimensional data flow graphs (MD DFG), which is
+our practical motivation for studying them. 
+
+We have been interested in designing certain graph-theoretic algorithms
+for RDFGs that arise commonly in design prototyping environments.  The
+goal is to have algorithms that work on the compact description, and hence
+take much less time than conventional algorithms that work on traditional
+graph descriptions (like incidence matrices and adjacency lists).  Our
+first results in this area are discouraging in the sense that problems
+such as cycle detection and deadlock detection turn out to be NP-complete
+(proven in a forthcoming technical report).  However, the NP-completeness
+arises when the size of the problem increases in certain dimensions;
+practically, the increase in these dimensions does not occur much.  Hence,
+we have been pursuing heuristics, and the possibility of polynomial time
+algorithms when the particular dimensions that cause NP-completeness are
+assumed to be non-increasing (usually true in practice).  A concrete
+example of such a "dimension" is the number of arcs that each node has in
+an RDFG.  Usually, this is a fixed small number such as 4 or 5, and does
+not increase even if the number of nodes is very large. 
+
+Another problem of interest is the computation of the maximum cycle mean; 
+this quantity determines the maximum rate at which the graph can be
+executed and is thus metric used for designing and evaluating
+multiprocessor schedulers.
+
+Ultimately, having such algorithms will enable us to better analyze the
+(infinite) precedence graphs that arise in MD DFGs.  This in turn, will
+allow us to develop good multiprocessor schedulers for multidimensional
+dataflow in Ptolemy, something that is currently not there. 
+
+Since RDFGs are described using integer matrices, and cycles can be
+described using non-negative, integral vectors in the null space of these
+matrices, the theory of lattices and integer linear algebra is relevant
+here.  We are engaged in deciphering the useful aspects of this theory, to
+see how it can be applied in our context.  An example of integer linear
+algebra is the problem of computing linear dependence or independence of a
+set of integral vectors by *non-negative integral* coefficients
+(contrasted with linear algebra where the coefficients can be real
+numbers).  This naturally requires the use of results from the study of
+Diophantine equations and geometric lattices. 
+
+
+3.0 Infrastructure
+
+3.1 Subcontracts
+
+The subcontract with the University of Texas, Prof. Brian Evans,
+has finally made its way through the University bureaucracies.
+
+
+3.2 Software Infrastructure
+
+We are investigating a package from Bell Labs that might help maintain
+security in distributed Tycho and Ptolemy applications.  Here is some
+information about it:
+
+   The first internet release of NSBD, Not-So-Bad Distribution is now
+   available.
+
+   NSBD is an open WWW-based authenticating software distribution
+   system. NSBD adds two basic things to simple web downloads: it
+   authenticates maintainers of packages with digital signatures so
+   users can trust where the packages come from, and it supplies a
+   means of checking for updates to the packages and automatically
+   downloading and installing the updates. NSBD uses "Pretty Good(Tm)
+   Privacy" (PGP(Tm)) for authentication. NSBD's focus is on security,
+   leaving as much control as practical in the users' hands. The single
+   NSBD program handles the operations done by both maintainers of
+   packages and users of packages.
+
+   NSBD is free software, released under the terms of the GNU General
+   Public License. At this point it is a beta release, until enough
+   time has elapsed to allow feedback from more users. Binaries are
+   available for a variety of Unix platforms, and the source code is
+   also available. It is written in C and TCL/TK. It is portable to
+   most Unix platforms, and it shouldn't be too difficult to port it to
+   PC-Windows (any volunteers to help?).
+
+   The home page of NSBD is
+       http://www.bell-labs.com/nsbd
+
+
+4.0 Publications, Presentations, and External Interactions
+
+4.1 Publications
+
+[1] C. Hylands, E. A. Lee, and H. J. Reekie, "The Tycho User Interface
+    System," the 1997 Tcl/Tk workshop, July,
+    1997, Boston. http://ptolemy.eecs.berkeley.edu/papers/97/tcltk-97/
+
+
+4.2 Talks and demos by group members
+
+- "Tycho/WELD/Ptolemy Integration," John Reekie, demonstration at the
+  Design Automation Conference, Anaheim, CA, June, 1997.
+
+- "The Tycho User Interface System," John Reekie and Christopher
+  Hylands, demonstration and talk at the Tcl/Tk conference in Boston,
+  July, 1997.
+
+- Praveen Murthy, a postdoc in the Ptolemy group, gave two informal
+  talks to the new students in the group, providing an overview of most
+  of the research work done in the group on dataflow scheduling
+  techniques (loop scheduling, multiprocessor scheduling etc.) and also
+  gave a big picture of models of computation, and heterogeneity in
+  Ptolemy.
+
+- Marlen Ade, a visiting postdoc in the Ptolemy group, gave a presentation
+  about GRAPE, a block diagram signal processing environment from the
+  University of Leuven in Belgium.  She described the targeting of FPGAs
+  and buffer minimization techniques.
+
+
+4.3 External Interactions
+
+- Jim Hilger, the project contract manager, from the US Army 
+  Night Vision and Electronic Sensors Directorate, visited on June 25
+  and was given an overview of various parts of the project.
+
+- Jens Voigt, from the Technical University of Dresden, Germany, visited
+  our group to explore collaborative work.  He is working on a very relevant
+  project described below:
+
+  "The project is called WiNeS, for Wireless Network Simulator. One of
+  the main motivations is to model channel capacity. Issues such as
+  user's movement (160mph autobahn speeds) and bandwith are of
+  interest. People driving at 160mph are not usually viewing movies
+  etc."
+
+  Jens demonstrated a Ptolemy-based discrete-event simulation that
+  modeled mobile users moving around in an office space with 60gHz
+  basestations. The problem is that there can be interference between
+  basestations if doors are open etc. The output was an animated Tcl
+  plot of the office space showing the connections.  
+
+  During his visit, Jens created an interface between Ptolemy and Java
+  and used it to write discrete-event modules in Java. His
+  implementation dynamically loads the Java virtual machine when
+  needed, thus providing a modular design that does not include Java if
+  not needed. His Ptolemy/Java Interface uses the Java Native Interface
+  first introduced in JDK1.1. The JDK1.1.1 JNI has lots of limitations,
+  but we now have an effective proof of concept that demonstrates mixed
+  C++/Java design.
+
+- Bilung Lee attended a seminar on Stateflow, a new product of the
+  MathWorks, Inc. who owns MATLAB, Simulink and Real-Time Workshop.
+
+  Stateflow is based on the Statecharts formalism. The graphical editor
+  of Stateflow allows users to draw the FSM by state transition
+  diagram. Moreover, FSMs can be hierarchical or parallel combinations
+  in the similar way as in Statecharts. The conditions (guards) are
+  Boolean expressions, and the actions associated with a transition can
+  be a function call, an event to be broadcast, or a variable to be
+  assigned a value. Stateflow also has the option of initial entry or
+  history entry for a hierarchical state. However, they don't have the
+  option of preemptive or non-preemptive transitions. Stateflow keeps
+  non-compositional constructs, like inter-level transitions and state
+  reference, as in Statecharts. A new added graphical syntax is called
+  "Junction". A "Junction" provides a decision point in the FSM, where
+  one of several transition can be followed. This achieves the same
+  effect as allowing more than one transition to be executed in one
+  reaction. For example,
+
+                        t2
+        t1          |--------> State
+State -----> Junction 
+                    |--------> State
+                        t3    
+
+  Thus, "t1 and t2" or "t1 and t3" will be executed in one reaction. 
+  In addition to the graphical editor, Stateflow has other build-in tools:
+      - Explorer: Browse, define and modify non-graphical objects in
+        Stateflow diagram.
+      - Finder: Search a list of objects.
+      - Debugger: Debug and animate the Stateflow diagram.
+
+  Stateflow has been integrated with Simulink, i.e. a Stateflow diagram
+  can be used as a module inside the Simulink. Simulink is a block
+  diagram environment for modeling and simulating a system.
+
+  The Stateflow Coder allows users to generate C code for a particular
+  target processor. Code generated by Stateflow Coder can be
+  incorporated into code generated by Real-Time Workshop which is the
+  code generation machine for Simulink.
+
+- Mudit Goel met with Jim Rowson of the Alta Group at Cadence to discuss
+  Cadence's recent experience implementing a voice-mail pager using Cadence's
+  signal processing tools.
+
+
+

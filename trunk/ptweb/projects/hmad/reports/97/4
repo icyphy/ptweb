@@ -1,0 +1,249 @@
+Monthly R&D Status Report
+Date: April 15, 1997
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+1. Tasks Performed
+
+Work continues on modularizing design tools and data, on models
+for integrating control with signal processing, and on mutable systems.
+In addition, the Tycho/Java infrastructure continues to progress.
+
+
+2. Significant Accomplishments
+
+2.1 Modular design tools
+
+John Reekie and Sunil Bhahe have constructed a "target" in Ptolemy that
+generates standalone applications that leverage the Tycho user interface
+infrastructure.  The objective is to be able to collect parts of the
+design infrastructure to create a customized deployed system that includes
+part of the design software.  In the current implementation, a shared
+library file is created that encapsulates the signal processing part
+of the system, and the shared library is dynamically linked to running
+Tycho executable, which then provides the user interface infrastructure.
+We are working next on mechanisms for extracting the relevant parts of
+Tycho to provide a minimal, deployable user interface containing exactly
+what is needed and no more.
+
+
+2.2 Control and Signal Processing
+
+Steven Edwards and Bilung Lee have worked out a mechanism for integrating 
+FSM (finite-state machine) and SR (synchronous-reactive) styles of control.  
+Modules defined by strict functions, those that must have all their 
+arguments before they can do anything, are easy: evaluate the function when 
+the arguments are available, and advance the state of the module.  
+Non-strict functions are more difficult.  They consider the firing of a 
+non-strict modules into two phases:
+ 
+   (1) Perform a partial evaluation and send outputs that are computed, and
+   (2) Change state.
+   
+The first phase may be repeated some number of times while the
+SR system converges.  The second will be executed exactly once per
+"tick" of the SR system.  They are developing a prototype implementation
+in Ptolemy.
+
+
+2.3 Mutable Systems
+
+We have had extensive discussions within the group about the implications 
+of dynamically modifying the topology of applications that are specified
+using the various models of computation that we use that are based on
+graphs representing the interconnection of modules.  The cost of such
+mutations depends on the amount of static analysis done prior to 
+execution of the application.  Thus, the cost savings (in overhead) of
+static analysis are offset by the cost of mutations for dynamically
+changing topologies.  There are, however, mechanisms for supporting
+limited graph mutations without incurring extensive run-time cost.
+Hierarchically combining FSMs (finite-state machines) with synchronous
+dataflow can (usually) be done in such a way that the FSMs effect
+mutations without demanding re-analysis of the dataflow graph.  We are
+further evaluating the expressiveness of this particular combination,
+since it seems to be a promising approach for adaptive signal processing
+applications.
+
+
+2.4 Distributed Design Data
+
+John Reekie has proposed a way to handle design data in which a design is 
+viewed not as a schematic, but as a program.  The problem of physical paths 
+can then be dealt with by a package system like that used commonly today.  
+Such a package system can be geographically distributed, as in Java applets 
+for example.  A design imports the modules it needs, giving a relative
+address or a URL.
+
+For designs specified visually (interconnections of icons), the master icon 
+for each module will have a version history.  Each program that imports the 
+module remembers the version number it used and the difference between its 
+instances (if any) and the master.  If a program is opened and an imported 
+module has a different version, then the program is updated with the new 
+master but with the differences preserved (where it makes sense).
+
+
+2.5 Software Improvements
+
+John Reekie has extended the Sun Tcl/Java interface so that Itcl classes
+can be created that directly expose a selected subset of the functionality
+of a Java class to the scripting interface.  For example, the following
+Java code is a method in a class called "math":
+
+    /** Sum a list of numbers */
+    public Double sum(Interp interp, TclDoubleArray data) {
+        double acc = 0;
+        for (int i = 0; i < data.data.length; i++ ) {
+	        acc = acc + data.data[i];
+        }
+        return new Double(acc);
+    }
+
+The following Tcl command will invoke it:
+
+    >  ::java::math sum {3 4 5}
+    12.0
+
+
+John Reekie and Christopher Hylands have interfaced Tycho to the Java
+debugger, jdb.
+
+Bilung Lee has modified Ptolemy to animate finite-state machines models.
+This should help with debugging and visualization.
+
+Kevin Chang has made a number of improvements to the Tycho interface to
+the version control system.
+
+Christopher Hylands has made several modifications to Tycho at its
+Java interface to improve their functionality under Windows NT and the
+Macintosh.
+
+Cliff Cordiero has been polishing the NT Tycho port.
+
+Kevin Chang added a 'diff' capability to Tycho, whereby files can be
+easily compared.   A major use for this is within the version control 
+system.
+
+The group worked on the compilation interface, whereby Tycho manages
+Java and C++ compilations.
+
+John Reekie reworked the ButtonBox/ToolBar/Query classes.
+
+Christopher Hylands completed the first cut at the Tycho test suite.
+It is now possible to run all the tests with one command.
+
+Christopher Hylands created mechanisms in Tycho for constructing a
+graph describing hyperlinks in HTML documents and for exporting postscript
+from HTML documents.  Tycho already has a mechanism for viewing such
+graphs and exporting gif images and imagemap files that can be used
+together to create navigation aids on the web.
+
+Christopher also documented our style and policy for writing Java code.
+
+
+3.0 Infrastructure
+
+3.1 Personnel
+
+Jie Liu has joined the group as a graduate student.
+
+
+3.2 Software Infrastructure
+
+We obtained an evaluation version of the ICEM CFD Tcl Lint program.  
+This is a modified version of the ICE Tcl compiler.  Instead of creating C 
+or bytecode the lint program checks for probable or possible errors in the 
+Tcl code and prints warning and error messages.  Unfortunately, this
+promising utility appears unable to test Tk, Itcl, or Itk code, greatly
+limiting its usefulness to us. 
+
+We have obtained and evaluated ssh (secure shell) for Windows NT, and
+believe that it provides adequate security for remote access to Windows NT
+systems.  This means that our Windows NT machines can now be safely 
+integrated into the cluster.
+
+Christopher Hylands has modified tcljava0.4, the Tcl/Java interface by 
+Scott Stanton and Ken Corey of Sun, and posted his modifications on the 
+web.  His version is called tcljava0.4a and has the following features:
+
+  1) Provides a GNU autoconf configure script (tested on Solaris and 
+     HPUX10.20)
+  2) Provides a makefile.vc file that will work with Microsoft Visual
+     C++ under NT4.0.
+  3) Ports tcljava0.4 to jdk1.1.  The problem here is that the 
+     zip classes are not present in jdk1.1.
+  4) Fixes a couple of minor bugs.
+  
+http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/tcljava.html
+contains the following tar files, and installation instructions:
+
+  - for a patch that should convert tcljava0.4 sources to tcljava0.4a.
+  - a gzipped tar file of tcljava0.4a sources.
+  - a gzipped tar file of the NT4.0 binaries necessary to run tcljava
+    and Itcl2.2.
+
+
+3.0 Publications and Presentations
+
+3.1 Papers accepted
+
+[1] C. Hylands, E. A. Lee, and H. J. Reekie, "The Tycho User Interface
+    System," accepted by the 1997 Tcl/Tk workshop, to be held in July,
+    1997, in Boston.
+
+3.2 Talks by group members
+
+- "Multidimensional Synchronous Dataflow", Praveen Murthy, UCB, at Texas 
+   Instruments, Dallas, March 31, 1997.
+
+- "Joint Optimization of Data and Program Size in Embedded Software," 
+   Praveen Murthy, UCB, at University of Texas at Austin, Digital Signal
+   Processing Seminar, April 1, 1997.
+
+- "Multidimensional Synchronous Dataflow for Modeling, Simulating, and
+   Synthesizing Image, Video, and Spatial Array Processing Systems,"
+   Praveen Murthy, UCB, at UT Austin, Embedded Systems Course, April 2, 1997. 
+
+- "Abstraction and Validation or Why a system-level design
+   language standard is a bad idea at this time," Edward A. Lee,
+   UCB, at the First Workshop on Systems Design Languages,
+   San Jose, CA, April 7-8, 1997.
+   
+
+3.3 Talks by others
+
+- "JavaTime: An environment for high-level design and specification," Jim 
+   Young, UC Berkeley, Design seminar, UCB, Thursday, April 10th, 1997.
+
+- "Processor/Compiler Co-Design of DSP and Embedded Systems: A Quantitative 
+   Approach," Vojin Zivojnovic, Institute for Integrated Systems in Signal 
+   Processing (ISS), Aachen University of Technology, Design seminar, UCB, 
+   Thursday, April 3rd, 1997.
+
+
+3.3 External interactions
+
+Xavier Warzee from Thompson-CSF in Paris gave an informal overview of 
+Ptolemy usage at Thomson-CSF on March 20, 1997, including simulating image 
+processing, FPGA, hardware-software co-design, and an approach to a 
+multi-paradigm environment for specifying and synthesizing embedded DSP 
+systems using VHDL.
+
+We have progressed on coordinating ideas with the WELD (Web-based
+electronic design) group at Berkeley with the following proposal,
+which provides a mechanism for web-based access to Ptolemy:
+
+Client side:
+ Tycho uses WELD Java network API to send a string to the
+ Ptolemy "server." There is no need for any special encoding or
+ translation, just the ability to send an arbitrary string
+ (of arbitrary length). We will also need to get a string
+ returned by Ptolemy.
+
+Server side:
+ A C++ wrapper for Ptolemy that will be able to wait for a
+ string and return a string.
+
+This is a small first step, but it is a step.

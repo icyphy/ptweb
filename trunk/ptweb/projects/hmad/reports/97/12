@@ -1,0 +1,685 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 January 24, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        11/15/97 - 12/15/97
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+1.  Research Status
+
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Software Components
+-------------------
+
+We are committed to the use of software component technology in future
+software development work, and have been evaluating the alternatives.
+Our current understanding is that there are three:
+
+1) CORBA.  This is the broadest solution, but also the most complex to
+   support.
+
+2) Java RMI and Java Beans.  This is a Java-only solution that appears
+   to match our code development plans.  Moreover, Sun has announced a
+   utility for wrapping Java Beans in CORBA-compliant wrappers, thus
+   offering compatibility with relatively little effort.
+
+3) DCOM and ActiveX.  This does not seem to be a viable option since
+   it is a single platform solution (Microsoft).
+
+We are strongly leaning towards option 2. Following is information from
+Sun about how this will lead to CORBA compliance:
+
+   "How does Enterprise JavaBeans relate to CORBA?
+
+    The Enterprise JavaBeans architecture is compatible with CORBA.
+    This means that Enterprise JavaBeans can easily be supported in
+    CORBA-based servers. Enterprise JavaBeans defines a standard
+    mapping of the protocols to CORBA that are required by EJB. This
+    mapping allows multi-vendor interoperability through standard CORBA
+    protocols. An EJB programmer sees only Java APIs, not CORBA APIs.
+    The EJB server implements the mapping."
+
+For more information, see
+http://www.javasoft.com/pr/1997/dec/pr971210-01.html
+
+
+Java Signal Plotter
+-------------------
+
+We have made the Java signal plotter, Ptplot, the default signal
+display mechanism in the development version of Ptolemy.  So far,
+it has worked flawlessly, although it introduces some extra delay
+in plotting signals (to start Java) and implies that Ptolemy cannot
+be used without Java.
+
+We continue to receive feedback (almost all very positive) from
+users of this package.  Notably:
+
+* Philips Research in the Netherlands asked permission to include
+  our Java code on a second edition of their "Wireless Communication
+  CD ROM," a superb tutorial exposition of the topic.  We granted
+  permission, of course.
+
+We have heard from users at the following companies:
+
+* Analog Devices in Limerick, Ireland
+* SAS, Cary, NC
+* Thomson Financial Services
+* Genome Sequencing Center, Washington University School of Medicine
+* University of Minnesota
+* Hoechst Marion Roussel
+* University of Southampton
+
+From 11/15 to 12/15, the top level ptplot web page was viewed by
+visitors from 838 different machines outside of Berkeley.  During that
+period, 261 visitors from different machines downloaded the sources.
+
+Christopher Hylands has also created a ptplot-announce mailing list. This
+moderated mailing list is for Ptplot announcements only. Thus, outsiders
+cannot post to this group. The amount of mail here is kept very light
+(a few messages a year).
+
+To subscribe to this group, send email to
+ptplot-announce-request@ptolemy.eecs.berkeley.edu with the word
+subscribe in the body, not the header.
+
+All messages to the list are archived.  The archives are available via
+Majordomo, our mailing list manager, using the "get" command.  Send
+"help" in the body of a message to: Majordomo@ptolemy.eecs.berkeley.edu
+for more information.  The archives are broken down by year and month,
+and are stored in files named "ptplot-announce.YYMM".
+
+
+Java/Tcl interaction
+--------------------
+
+We have performed further evaluation of Jacl, the 100% pure Java
+implementation of Tcl.  We are disappointed that attempts to use
+Jacl in an applet result in security violations.  Sun responded to
+our bug report by arguing that Jacl was not intended to be used
+in applets.  We are not entirely sure where it is intended to be
+used in this case.  If it is used in applications, it will have to
+demonstrate performance that is comparable to native Tcl (or at least
+not too far off).  We doubt it will, but plan to perform detailed
+performance measurements.
+
+
+Ptolemy II
+----------
+
+The Java redesign of Ptolemy, which we are now tentatively calling
+Ptolemy II, continues apace. Mudit Goel built a parameter handling
+mechanism for it, and constructed a fully functional prototype process
+networks (PN) domain. This domain invokes a Java thread in each
+functional block and manages the exchange of data and synchronization
+of the threads. This is a significant milestone, as it represents the
+first operational simulation in Ptolemy II. Christopher Hylands
+redesigned the exception classes we are using and improved the test
+suite (which uses Tcl Blend).
+
+
+Tycho
+-----
+
+On the user interface side, we completely redesigned the bindings
+in Tycho to make them platform specific.  Now, by default, if you run
+Tycho on a Windows machine, you get Microsoft-style bindings that closely
+emulate Microsoft Word.  If you run it under Unix, you get Motif-style
+bindings.  A preference is provided to override this, so for example
+you can get Microsoft-style bindings on Unix machines.  Also, better
+fonts are chosen by default on Windows machines, and more uniform
+window manipulation commands have been added to the menus.
+
+Also, Cliff Cordiero contributed code for Tycho implementing emacs-style
+incremental search and file opening from a minibuffer, rather than a file
+dialog.  We have integrated that code into Tycho and improved it somewhat.
+
+John Reekie reorganized the mechanism by which code is executed after
+constructors in Itcl classes have completed.  Previously, we had used the
+Tk "after idle" construct, which resulted in nondeterministic ordering
+of actions.  John has built into the base classes a method "whenMapped"
+that registers an action to execute when constructors are complete.
+
+
+Software Engineering
+--------------------
+
+John Reekie has developed a code rating system that we are applying to
+Java and Itcl code design. All code in Tycho and Ptolemy II is rated
+using a simple four-level system. The goal of the code rating system is
+to provide a platform with which we can assess and improve code quality
+and stability. 
+
+Each class is advanced through four levels of confidence by a
+light-weight review and testing process. There are two ratings for each
+class: that proposed by its author or maintainer, and that accepted by
+its tester and reviewers. This approach tries to maintain the accepted
+principles of code review and testing by people other than the author,
+while keeping overhead manageable for a research group. 
+
+The basic idea is that the author proposes that a class advance a
+level. The tester/reviewer is then responsible for examining the class
+(with the help of other reviewers, if necessary), writing test code for
+it, and either accepting or rejecting the proposed advancement. The
+tester/reviewer needs to provide specific and concrete reasons for
+rejection; the author is obliged to make needed modifications and
+re-submit the code. 
+
+The four levels of confidence are red, yellow, green, and blue. Each
+level has a well-defined meaning, which both the author and
+tester/reviewer are expected to satisfy before proposing or accepting
+advancement to that level. 
+
+There is room within the process for design reviews and code reviews,
+although the degree to which these are applied is up to the author and
+maintainer, and may vary according to the project or sub-project in
+which the class lies. 
+
+The four ratings are as follows: 
+
+Red 
+      All code starts here. Red code is in flux, and anyone that calls
+      red code should expect it to change without warning. Code that
+      calls red code does not need to be modified by the author if
+      changes in the red code break the calling code. Red code should
+      never be released. 
+
+Yellow 
+      The interface and overall design of the class is acceptable for
+      development purposes. Clients can code to this interface with
+      the expectation that further changes will be limited to revisions,
+      not major changes. Clients cannot expect that code that calls
+      yellow code will work at all. Yellow code should generally not be
+      released. 
+
+      Proposing advancement 
+            The author proposes advancement to yellow when he/she
+            is satisfied with the design of the class, and how it
+            collaborates with other classes. The author is responsible
+            for making sure that the class is adequately documented.
+            UML diagrams at the design level are appropriate here. 
+
+      Accepting advancement 
+            The tester/reviewer accepts advancement to yellow when
+            he/she is satisfied that the design of the class is
+            satisfactory in the context given by the author. The
+            tester/reviewer should evaluate the class solely on the
+            basis of the documented interface -- note that, in the
+            case of classes which are designed to be subclassed, this
+            includes the (protected) interface provided to subclasses.
+            The tester/reviewer is entitled to request UML diagrams
+            as an aid to understanding the purpose and function of
+            the class, and is entitled to organize a design review at
+            this time. The tester/reviewer is also entitled to require
+            changes to the interface in anticipation of testing needs. 
+
+      Acceptable changes 
+            Yellow code can have interface changes before advancing
+            to green, but the author should avoid making wholesale
+            changes. If wholesale changes are required, the author
+            should request that the class be taken back to red. If the
+            author changes the interface to yellow code, then he is
+            responsible for a) making sure that the calling code
+            compiles, and b) notifying the author of calling code
+            about the change. The author is not responsible for
+            making sure that the calling code works or passes its test
+            suites, as yellow code does not provide any assurance of
+            functionality. 
+
+Green 
+      The interface of the class has been finalized, and the
+      implementation is acceptable for development purposes. The
+      documentation of the interface is acceptable for development
+      purposes. Clients can code to green code in the expectation that
+      the interface will not change in such a way as to break
+      compilation, nor will the implementation change enough to
+      break the caller's test suite. Green code can be released.
+
+      Proposing advancement 
+            The author proposes advancement to green when he/she
+            is satisfied that the interface to the class will not need
+            further changes, except for relatively minor
+            enhancements and additions, and with the
+            implementation of the class. This could be considered
+            "beta" level code. The author is responsible for providing
+            the tester/reviewer with a test suite that he/she can use
+            as a starting point. This test suite should exercise and
+            illustrate the main uses of the class. 
+
+      Accepting advancement 
+            The tester/reviewer accepts advancement to green if
+            he/she is satisfied with the implementation of the class.
+            The tester/reviewer shall determine this by a) writing a
+            test suite, and b) reviewing the code. The test suite must
+            have at least 50% code coverage. The tester/reviewer is
+            entitled to organize a code review at this time. The author
+            is required to write example test code if requested by the
+            tester/reviewer. 
+
+      Acceptable changes 
+            The interface to green code can have interface changes,
+            but these should be minor or purely incremental (new
+            methods). If the changes break any test suites, the
+            author is required to fix the calling code. If a change will
+            require substantial fixes, then the class should probably
+            be taken back to yellow. 
+
+Blue 
+      The implementation of the class has been fully and completely
+      tested, and accepted as meeting all requirements. All
+      documentation, including external documentation if
+      appropriate, is complete. Blue code can be released.
+
+      Proposing advancement 
+            The author proposes advancement to blue when he/she is
+            satisfied that the class is finished, polished, flexible, and
+            robust. This applies to the documentation as well as the
+            code. This is, in other words, quality releasable code. In
+            general, code should not be advanced to blue until it has
+            been in use by other classes for some time. 
+
+      Accepting advancement 
+            The tester/reviewer accepts advancement to blue when
+            he/she is satisfied that the class is finished, polished,
+            flexible, and robust. The tester/reviewer determines this
+            by completing the test suite to get 100% coverage, or as
+            close as is reasonable given the way that the class
+            operates with other classes, and possibly also by writing
+            a test suite that tests this class working in collaboration
+            with other classes. 
+
+      Acceptable changes 
+            Blue code can have bug fixes, but changes to the external
+            interface, inherited interface, or observable behavior,
+            make the class a candidate for reversion to green or
+            yellow status. 
+
+John Reekie has also developed a set of code rating rules that are
+documented on our local web pages, and he has proposed a set of
+facilities to implement in Tycho to support the rating process.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Hardware-Software Codesign
+--------------------------
+
+Mudit Goel and Neil Smyth have completed a course project in EE290A,
+wherein they introduce resource contention in the discrete-event (DE)
+domain in Ptolemy. Postscript versions of their report can be found at:
+   
+    http://www.eecs.berkeley.edu/~mudit/PolisPresentation.ps
+    http://www.eecs.berkeley.edu/~mudit/PolisReport.ps
+
+Resource contention is necessary for adequately modeling architectural
+decisions in hardware/software codesign problems.
+
+Also as an EE290A course project, Jie Liu studied the integration of
+Ptolemy and an ST20 instruction set simulator. The idea is to use the
+instrution set simulator to measure the software module time delay in a
+co-simulation process. Based on the codesign FSM (CFSM) model of
+computation and the s-graph model of software modules, a cached timing
+refinement scheme is presented.  The report is listed below [2]. 
+
+
+Filter Design
+-------------
+
+William Wu has coded a prototype of a Java-based filter design package
+that leverages Ptplot. He has been rearchitecting the design to use
+"observer" or "model view" software structures. Following is a brief
+summary of these structures:
+
+* From [1]:
+
+There are two sets of objects, one containing "subjects" and the other
+containing "observers." A subject can have many observers, where each
+renders or uses part or all of the subject data. The subject creates
+observers, and passes the reference to the subject to the observer.
+Generally when there is a change in the data the following will occur:
+
+a) If the change occurs in an observer, then observer calls a function
+   in subject to notify the subject that some data has been changed. The 
+   subject then gets the new data from the observer, updates its internal 
+   state, and makes sure all internal data are consistent.  It then calls
+   notify() which lets all the observers know there are new data. Each
+   observer then can query the subject for the updated data.
+
+b) If the change occurs in subject, then it updates all its internal
+   state, then calls notify, the observers will query the subject for updated
+   data.
+
+* From [2]:
+
+This view is similar except there is a third type of object called a
+"controller" that handles the GUI events and creates observers and
+attaches them to the subject. When an change occurs, the updating
+scheme is much like the one described above. This view is closer to the
+original Model-View-Controller pattern from Smalltalk.
+
+Java provides an interface called Observable that supports the basic
+functions of an observer. Also java has an abstract class called
+Observer that has the update function that can be called by the
+Observable. In the filter design package, the filter is the subject, so
+it extends Observable. The pole/zero plot, frequency response plot,
+impulse response plot, etc. will extend Observer. An object called the
+Manager will create the plots (observers) and filter (subject) and link
+them. The Manager also handles the initial setup for the filter from
+the user.
+
+William is also creating a static library in filter package to contain
+useful math functions like a FFT, polynomial expansion, polynomial
+factorization, etc. One problem he has run into is the calculation of
+impulse response. In xpole, an older filter design package written by
+Kennard White, partial fraction expansion is used to find the impulse
+response. The PFE is implemented with Heavyside's Expansion Theorem.
+But it requires differentiating when the order of poles greater then 1.
+This introduces errors and complexity. We are looking for a simple and
+robust algorithm to handle both single order poles and multiple order
+poles.  He is considering using polynomial division rather than PFE.
+
+
+Fixed-Point design
+------------------
+
+James Lundblad of Faroudja Labs has contributed a fix to the overflow
+and saturation code in the CGC domain that ensures that the results of
+the domain match Verilog-HDL simulations.
+
+
+Adaptive Signal Models
+----------------------
+
+Michael Goodwin has filed his Ph.D. thesis, entitled "Adaptive Signal
+Models: Theory, Algorithms, and Audio Applications." This is the last
+of the adaptive signal processing work that we had started under the
+original form of this contract, when it was entitled "distributed
+adaptive signal processing." Below is the abstract of the thesis:
+
+"Mathematical models of natural signals have long been of interest in
+the scientific community. A primary example is the Fourier model, which
+was introduced to explain the properties of black body radiation and has
+since found countless applications. In this thesis, a variety of
+parametric models that are tailored for representing audio signals are
+discussed. These modeling approaches provide compact representations
+that are useful for signal analysis, compression, enhancement, and
+modification; compaction is achieved in a given model by constructing
+the model in a signal-adaptive fashion.
+
+The opening chapter of this thesis provides a review of background
+material related to audio signal modeling as well as an overview of
+current trends. Basis expansions and their shortcomings are discussed;
+these shortcomings motivate the use of overcomplete expansions, which
+can achieve improved compaction. Methods based on overcompleteness,
+e.g. best bases, adaptive wavelet packets, oversampled filter
+banks, and generalized time-frequency decompositions, have been
+receiving increased attention in the literature.
+
+The first signal representation discussed in detail in this thesis is
+the sinusoidal model, which has proven useful for speech coding and
+music analysis-synthesis. The model is developed as a parametric
+extension of the short-time Fourier transform (STFT); parametrization
+of the STFT in terms of sinusoidal partials leads to improved
+compaction for evolving signals and enables a wide range of meaningful
+modifications. Analysis methods for the sinusoidal model are explored,
+and time-domain and frequency-domain synthesis techniques are
+considered.
+
+In its standard form, the sinusoidal model has some difficulties
+representing nonstationary signals. For instance, a pre-echo artifact
+is introduced in the reconstruction of signal onsets. Such difficulties
+can be overcome by carrying out the sinusoidal model in a
+multiresolution framework. Two multiresolution approaches based
+respectively on filter banks and adaptive time segmentation are
+presented. A dynamic program for deriving pseudo-optimal
+signal-adaptive segmentations is discussed; it is shown to
+substantially mitigate pre-echo distortion.
+
+In parametric methods such as the sinusoidal model, perfect
+reconstruction is generally not achieved in the analysis-synthesis
+process; there is a nonzero difference between the original and the
+inexact reconstruction. For high-quality synthesis, it is important to
+model this residual and incorporate it in the signal reconstruction to
+account for salient features such as breath noise in a flute sound. A
+method for parameterizing the sinusoidal model residual based on a
+perceptually motivated filter bank is considered; analysis and
+synthesis techniques for this residual model are given.
+
+For pseudo-periodic signals, compaction can be achieved by
+incorporating the pitch in the signal model. It is shown that both the
+sinusoidal model and the wavelet transform can be improved by
+pitch-synchronous operation when the original signal is
+pseudo-periodic. Furthermore, approaches for representing dynamic
+signals having both periodic and aperiodic regions are discussed.
+
+Both the sinusoidal model and the various pitch-synchronous methods can
+be interpreted as signal-adaptive expansions whose components are
+time-frequency atoms constructed according to parameters extracted from
+the signal by an analysis process. An alternative approach to deriving
+a compact parametric atomic decomposition is to choose the atoms in a
+signal-adaptive fashion from an overcomplete dictionary of parametric
+time-frequency atoms. Such overcomplete expansions can be arrived at
+using the matching pursuit algorithm. Typically, the time-frequency
+dictionaries used in matching pursuit consist of Gabor atoms based on a
+symmetric prototype window. Such symmetric atoms, however, are not
+well-suited for representing transient behavior, so alternative
+dictionaries are considered, namely dictionaries of damped sinusoids as
+well as dictionaries of general asymmetric atoms constructed using
+underlying causal and anticausal damped sinusoids. It is shown that the
+matching pursuit computation for either type of atom can be carried out
+with low-cost recursive filter banks.
+
+In the closing chapter, the key points of the thesis are summarized.
+The conclusion also discusses extensions to audio coding and provides
+suggestions for further work related to overcomplete representations."
+
+
+Mutable Systems
+---------------
+
+Jens Voigt of the Technical University in Dresden, Germany, has
+contributed a new mechanism in the Ptolemy discrete-event (DE) domain
+that he calls "Dynamic Higher-Order Functions". This mechanism supports
+dynamically mutating topologies. Jens has applied this to the
+simulation of wireless radio applications. John Davis, in the Ptolemy
+group, has been working with Jens to integrate and extend his code.
+
+For example, included in his mechanism are "DEDynamicFork" and
+"DEDynamicMerge" stars, which can vary the number of portholes during
+runtime. Each time he instantiates one more block in the wireless radio
+simulation, he adds one porthole to a multiporthole in these dynamic
+stars. Ptolemy II will support such mutability in a robust and complete
+way.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+We have been studying the interaction model of Java Beans, which is
+event based, and the more dataflow-like implementation on top of Java
+Beans represented by Java Studio.  We have also been evaluating the
+PI calculus, a mutable version of CSP, as a basic mechanism for
+handling problems with resource management.
+
+
+2.  Equipment/Infrastructure Status:
+
+Christopher Hylands downloaded and tested a beta version of Parasoft's
+CodeWizard for Java. The web page http://www.parasoft.com says:
+
+  CodeWizard - Prevent bugs automatically with this easy-to-use source
+  code analysis tool. CodeWizard can help you correct poor design
+  strategies, improve software reliability, and enforce coding
+  standards. Available now for C++ and for Java!
+
+Unfortunately, CodeWizard for Java did not install properly, and it
+cannot deal with Java packages.  We have filed a bug report.
+
+Christopher Hylands put considerable effort into evaluating backup
+strategies for Windows NT laptops, concluding that Samba was the best
+available support software for our purposes.  He has installed the software.
+
+We have installed EGCS, the new Gnu C++ compiler that is much closer
+to the Microsoft and Cygwin32 C++ compilers available on NT.
+Christopher Hylands has been fixing problems in Ptolemy to make it
+compatible with the new compiler.
+
+
+3.  Interactions
+
+Interrim Ptolemy Release
+------------------------
+
+This period we packaged and shipped a release of the internal Ptolemy
+development tree for use by selected offsite developers.  The Ptolemy
+offsite development team consists of:
+
+	Neal Becker - Comsat Laboratories
+	Tom Lane - Structured Software Systems
+	Eric Pauer - Sanders, a Lockheed Martin Company
+	Jens Voigt - Dresden University of Technology
+
+The developer's release consisted of the following features not present
+in the previous public release of Ptolemy:
+
+	- Support for the next generation GNU gcc compiler (egcs)
+	- Jens Voigt's Dynamic Higher Order Function (HOF) DE stars
+	- Tom Lane's many fixes to HOF 
+	- Ptplot 1.1 - A java replacement for pxgraph
+
+The purpose of the developer's release is to synchronize sources among
+the offsite developers, in preparation for the release of Ptolemy
+0.7.1, scheduled for the summer of 1998.
+
+
+Hewlett-Packard
+---------------
+
+HP has released a beta version of HP Ptolemy, and we have obtained a
+copy that we are evaluating. Recall that some of the major additions
+over the Berkeley Ptolemy include:
+
+* Runs On NT 4.0, NT 3.51 and Win 95
+* Added time and frequency simulation and modeling
+* Added DSP filter tool
+* Added VHDL modeling and simulation
+* Added Verilog modeling and simulation
+* Added 300-400 time and frequency models
+* Added Spice and Harmonic Balance cosimulation....
+ 
+HP has integrated their HF Spice, Harmonic Balance and Circuit Envelope
+simulators into HP Ptolemy. Their simulation executable links two
+distinct simulator software architectures: one based on UCB Ptolemy (HP
+Ptolemy) and the other incorporating the HP EEsof analog simulators
+(Gemini). In HP Ptolemy there currently are two simulation domains: SDF
+and TSDF. In TSDF, HP has modified the semantics of SDF to introduce a
+notion of time to apparently make it easier to combine DSP simulations
+with analog simulations. Using the TSDF domain a user can embed a
+circuit simulator into a dataflow simulation using an interface very
+similar to a Ptolemy workmhole.
+
+For more information on this HP tool see
+http://www.tmo.hp.com/tmo/hpeesof/products/prod251.html.
+
+
+Cadence
+-------
+
+Praveen Murthy, a postdoc in the Ptolemy project, has completed his
+tour of duty and has joined the Alta Group at Cadence.  Mike Williamson,
+who is close to filing his thesis, has agreed to join the Alta Group
+at Cadence.
+
+
+4.  Personnel Status
+
+Praveen Murthy, a postdoc supported under the Questec Subcontract,
+has left to join the Alta Group at Cadence.
+
+Mike Goodwin has completed his Ph.D. in adaptive signal modeling
+and has joined Silicon Graphics.
+
+
+5.  Talks/Presentations/Publications:
+
+Talks by Group Members
+----------------------
+
+* "Heterogeneous Modeling and Design," Edward A. Lee, DARPA PI Meeting,
+   Huntsville, AL, December 2-3, 1997.
+
+* Edward A. Lee also contributed to the Interoperability Workshop for
+  the Composite CAD program, organized by Heather Dussault, in Huntsville
+  AL on December 4.
+
+
+Key Talks by Others
+-------------------
+
+* "Distributed High Performance Computing Infrastructure," Dr Andrew
+   Wendelborn, University of Adelaide, Monday, November 17st, 1997.
+
+* "Re-Use and Portability Issues for System On Chip Design," Howard Sachs
+   Fujitsu Microelectronics, Friday, November 21st, 1997.
+
+
+
+Publications
+------------
+
+[1] "Hierarchical Concurrent Finite State Machines in Ptolemy," Bilung Lee
+     and E. A. Lee, accepted for presentation at CSD98.
+
+[2] Jie Liu, Macerllo Lajolo and Alberto Sangiovanni-Vincentelli,
+    "Software Timing Analysis Using HW/SW Cosimulation and Instruction Set
+    Simulator," accepted to CODES/CASHE 98, Seattle, March 1998.
+
+
+6.  Difficulties/Problems
+
+We continue to have problems with Tcl software from Sun Microsystems.
+Tcl Blend, the interface between Tcl and Java, while proving extremely
+useful, does not work on two-processor machines.  This indicates that
+it is not thread safe.  Dialog with Sun revealed that, to our
+surprise, SunScript has no multi-processor Sun workstations.  We
+offered the SunScript developers accounts on our machines, but we have
+not yet heard back from them.
+
+A more alarming situation is that Itcl 3.0 still has not been released
+by Lucent Technologies.  It is now at least five months late, and
+projections have remained steady at "there are two weeks of work left."
+We need Itcl 3.0 in order to interface Tycho to Java using Tcl Blend.
+We are exploring alternatives.
+
+
+7.  Next Quarter Plans
+
+We continue to work on a Java realization of the core classes of a
+rearchitected Ptolemy kernel.  Work on modeling of analog systems
+and rendezvous-based concurrent systems also continues.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+
+References
+
+[1] E. Gamma, R. Helm, R. Johnson, and J. Vlissides, Design Patterns:
+    Elements of Reusable Object-Oriented Software, Addison-Wesley,
+    Reading MA, 1995.
+
+[2] J. Rumbaugh, OMT Insights, SIGS Books, 1996.
+

@@ -1,0 +1,542 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Aug. 15, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        7/15/98 - 8/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Progress on Ptolemy II continues. We have implemented the first version
+of the type system. We have also ported Tycho to use Itcl 3.0, and
+Tcl Blend to use JDK 1.2beta4. We have released a stand-alone version of
+the Tycho slate, the first major modular release of a Tycho component
+decoupled from the rest of Tycho. We have implemented a valued-FSM
+capability in Ptolemy 0.7.1, which significantly improves the
+expressiveness of our FSM (finite state machine) domain in combination
+with other domains.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Kernel Package
+--------------
+
+The last remaining class needing a code review in the kernel package,
+CrossRefList, has been reviewed.  The relatively minor ensuing changes
+are currently being implemented.
+
+
+Actor Package
+-------------
+
+We have conducted a design review of most of the key classes
+in the actor package, and are in the process of implementing the
+ensuing changes.
+
+Jie Liu has implemented a Scheduler and StaticSchedulingDirector class.
+The Scheduler implements the MutationListener interface and registers
+itself with the StaticSchedulingDirector so that it automatically
+recomputes the schedule when topology mutations occur. The schedule is
+cached, and any time it is requested, it is recomputed only if the
+cached schedule has become invalid through mutations.
+
+Lukito Muliadi's calendar queue has undergone a design review and has
+been revised accordingly.  This class is now yellow.
+
+
+Type System
+-----------
+
+Yuhong Xiong has coded the Ptolemy II type resolution scheme in the
+actor package. His design adds a method typeConstraints() to the Actor
+interface. The default implementation in the AtomicActor class supports
+a broad class of polymorphic actors where the input type are required
+to be at least as specific as the output types. The default
+implementation for the CompositeActor class collects type constraints
+from contained actors and forms constraints for the connections.
+
+TypedIOPort is a new subclass of IOPort that implements InequalityTerm.
+It stores the declared and resolved types. The Director class has a new
+method resolveType() that solve the type constraints by calling the
+generic inequality solver.
+
+
+User Interface
+--------------
+
+John Reekie has updated Tycho to work with Itcl 3.0.  Combined with
+Christopher Hylands port of Tcl Blend to JDK 1.2, this allows us to use
+the most modern versions of Tcl/Tk, Itcl, and Java in combination, under
+the Tycho environment.
+
+Christopher Hylands adapted John's port to work with Ptolemy 0.x, which
+uses a mixture of Tycho code and straight Tcl/Tk code, and has begun the
+NT port.
+
+As part of his porting effort, John has separately packaged the Tycho
+slate and released it on the net. This package made it into the Linux
+weekly news (see http://lwn.net/#softdev). Here is a description:
+
+     The Tycho Slate is a Tcl/Tk package that implements a useful layer
+     of abstraction over the regular Tk canvas. The Slate is part of
+     the Tycho user interface system, but can be installed and used by
+     itself as well. It runs with either: 
+
+          Tcl 8.0; or
+          [incr Tcl] 3.0
+
+     In the [incr Tcl] version, a slate is an [incr Tk] megawidget that
+     contains a Tk canvas. In the Tcl version, a slate is a "faked"
+     mega-widget, that can be invoked with an object-oriented style of
+     interface or a Tcl-like procedural style of interface. 
+
+     The Slate contains a number of features that we believe make the
+     Tk canvas more useful. We wrote it to help us implement graphical
+     editors and visualization widgets. The key features of the Slate
+     are: 
+
+     * User-defined item types 
+     * Shapes and features 
+     * Events and interactors 
+
+     The Slate also contains other useful methods, such as item
+     highlighting, selection, and so on. To see an example of an editor
+     and some widgets created with the Slate, see the Continuous time
+     simulation demo screen-shot page
+     (http://ptolemy.eecs.berkeley.edu/~johnr/research/ct-demo.html).
+
+CURRENT RELEASE
+
+     3.0 alpha
+
+     Feedback on this package is appreciated. This is
+     the first version of Slate that works with plain Tcl.
+
+DISTRIBUTION
+
+     This distribution can be obtained from
+
+         http://ptolemy.eecs.berkeley.edu/~johnr/code/slate/
+
+     The Tycho home page is always at
+
+         http://ptolemy.eecs.berkeley.edu/tycho
+
+
+John Reekie has also run the Scriptics syntax checker on Tycho. Apart
+from many complaints about non-literal expressions (for example,
+expr $x + $y is better as expr {$x + $y}), it found several lurking
+Tcl8.0 incompatibilities and a half dozen genuine bugs.
+
+
+Control Logic
+-------------
+
+Bilung Lee has implemented the valued FSM syntax in Ptolemy 0.7.1. One
+key issue that he had to resolve was the need to be able to distinguish
+between the evaluation based on the status of events (i.e. whether
+events occur) vs. their values. For example, when a user writes "e1 ||
+!e2", does this means "e1 is present or e2 is not present" or "e1 is
+non-zero or e2 is zero"?
+
+The approach he used is adapted from the Statemate. The transition
+of the FSM is denoted as
+
+    te [tc] / ta
+
+where
+
+* A trigger event te is a boolean expression generated by
+
+  te ::= TRUE | FALSE | e | !te | te&&te | te||te
+
+  e is an input event, and the evaluation of an event e is
+  either TRUE or FALSE when the event is either present or absent.
+  "!", "&&" and "||" are the logic operators "not", "and" and "or",
+  respectively.
+
+* A trigger condition tc is a boolean expression generated by
+
+  tc ::= nil | TRUE | FALSE | e | !tc | tc&&tc | tc||tc
+         | v==v | v!=v | v<v | v<=v
+
+  e is an input event, and the evaluation of an event e is either
+  TRUE or FALSE when the value of the event is either non-zero or zero.
+  "!", "&&" and "||" are the same as those in trigger event te.
+  "==", "!=", "<" and "<=" are the logic operators "equal to",
+  "not equal to", "less than" and "less than or equal to", respectively.
+  v is an arithmetic expression generated by
+
+  v ::= e | c | v+v | v-v | v*v | v/v
+
+  e is an input event, and the evaluation of an event e in v is
+  the value of that event. c is a constant value.
+  "+", "-", "*" and "/" are the arithmetic operators "add", "subtract",
+  "multiply" and "divide", respectively.
+
+* A trigger action ta lists a subset of the output events and
+  is generated by
+
+  ta ::= nil | e(v) | e | ta,ta
+
+  e is an output event. v is the same as that in trigger condition tc.
+  "," distinguishes two events in the trigger action.
+  
+In one reaction of the FSM, a subset of the input events are present
+with some values. One transition is triggered if its guard is TRUE
+under the current input events. The guard consists of two parts, a
+trigger event and a trigger condition. If the trigger condition is null,
+it means that the trigger condition is omitted and then the guard is
+exactly the same as the one for pure FSMs. Otherwise, the guard is TRUE
+if both trigger event and trigger condition are TRUE. Then the FSM goes
+to the destination state of the triggered transition, and emits each
+output event in the trigger action of the triggered transition, making
+these output events present. If the output event to be emitted is
+attached with an arithmetic expression, the value of that event is set
+to be the evaluation of the expression. Otherwise, the value of that
+event is set to be 0. If the trigger action is null, it means that no
+output event is emitted. 
+
+In addition, he modified the digital watch example in FSM demos.
+The one-state FSM in the previous version, which was a rather forced
+way to demonstrate concurrency, is removed. To demonstrate concurrency,
+he come up with another two-state FSM that controls the light of
+the digital watch. If you double click on the mode button,
+the light is turned on. Then push any button to turn off the light.
+This example now shows concurrency, sophisticated control, and
+sophisticated computation.
+
+
+Tcl and Java
+------------
+
+Christopher Hylands created a Java class TclShell that extends Panel
+and uses jacl to provide a Tcl shell console that can be embedded in
+other Java apps. This makes it fairly straightforward to embed
+scripting in either an applet or an application.
+
+
+Installation and Distribution
+-----------------------------
+
+Christopher Hylands was able to build an InstallShield executable that
+installs Tcl Blend 1.0up2. This will make it much easier for users who
+wish to use our Java/Itcl blend (or Ptolemy II/Tycho) on Windows NT.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Continuous-Time Modeling
+------------------------
+
+Jie Liu has overhauled the CT domain so that it now works again with the
+extensive changes to the underlying kernel and actor packages.
+
+
+Signal Plotter
+--------------
+
+We have overhauled the Ptolemy Plot package. The changes are backward
+compatible on static plots, but not with live plots. It includes a new
+application called PtolemyPlot that can open and save plot files. This
+is the beginning of a more interactive signal viewer. The changes are:
+
+ - Changed zoom out so it is not limited to the fill region.
+   You can now zoom out arbitrarily far.
+
+ - Fixed a bug where YTicks was not recognized in a file (XTicks was).
+
+ - Fixed a bug where DataSet: with a blank name does not create a blank
+   legend entry.
+
+ - Use jdk 1.1 event model and font support everywhere, as well as jdk 1.1
+   method names.
+
+ - Used javadoc formatting throughout.
+
+ - Fixed bug where auto-ranging depended on all data seen historically.
+   Now it is recalculated if boundary points are erased.
+
+ - Added a clear() method that clears the plot in preparation for new data.
+
+ - Allow an arbitrary number of data sets, rather than limiting it to 64.
+
+ - Cleaned up some questionable uses of threading.
+
+ - Redesigned the interface to live, animated plots.
+
+
+Filter Design
+-------------
+
+William Wu has modified his filter design applet (see
+http://ptolemy.eecs.berkeley.edu/~wbwu/Filter.html).  His changes include:
+
+* The proper handling of pole/zero. Now when one moves a pole on top of
+  a zero, they will cancel each other. The numbers of poles and zeros are
+  always equal, so if a pole is deleted, and there is more zero than pole,
+  then a pole will be added at origin. When a user wants to add a term in
+  the transfer function, he or she adds both pole/zero corresponding to
+  that term.
+
+* Support for complex conjugate poles and zeroes is added. So when user
+  want to create a pair of Complex conjugate poles, he or she can do
+  that at the add pole/zero dialog window. Once the pair is created,
+  they are linked. (Pole and Zero uses the new PoleZero class, which is
+  derived from Complex) When one pole, moves by the user, the other
+  pole in the pair moves also. When one is deleted, the other will also
+  be deleted. Also Math library also creates the conjugate link when
+  creating real filter like Butterworth.
+
+* The impulse response now shows both real and imaginary parts.
+
+
+Web-Based Simulation of Embedded Software (UT Austin)
+-----------------------------------------------------
+
+Under subcontract, Brian Evans and his team at UT Austin have released
+a new version of their extensible, configurable, portable, freely
+distributable framework for Web-enabled simulation of embedded software
+for DSPs and microcontrollers.  The new version, Version 1.0.6 (July 3,
+1998), can be run by using a Java-enabled Web browser to open the URL
+
+    http://anchovy.ece.utexas.edu/~arifler/wetics/
+
+The source code can be downloaded from
+
+    gftp://pepperoni.ece.utexas.edu/pub/wetics/
+
+Version 1.0.6 of the Web-enabled Simulation framework consists of:
+
+-- A set of Java applets that provide a configurable framework for
+   Web-based user interfaces for instruction set architecture simulators.
+
+-- A multithreaded TCP/IP Internet server written as a Java application
+   that provides the interface between the Java applets and the simulators.
+
+-- Command-line simulators/debuggers written in C/C++ for
+   a. Texas Instruments TMS320C30 floating-point digital signal
+      processor simulator
+   b. Motorola MC68HC11 microcontroller simulator
+   c. Motorola MC56811 fixed-point digital signal processing simulator
+   d. Motorola MC56LC811 fixed-point digital signal processing board
+      debugger
+
+They provide pre-built binaries of the simulators and debuggers for
+for Windows '95/NT and Solaris 2.5 machines.
+
+New command-line tools for DSP and microcontroller processors and
+boards can be added to the framework by only providing data about
+the tools-- no Java applet or application code changes.   All of
+the data is kept in one file.
+
+They are in the process of adding security and privacy to their framework.
+
+Their framework is in the spirit of the Web-based Electronic Design
+(WELD) Project at UC Berkeley directed by Richard Newton. WELD "aims to
+construct the first operational prototype of a national-scale CAD
+design environment enabling Internet-wide IC design for the U.S.
+electronics industry". WELD focuses on VLSI CAD tools and design
+management infrastructure, and UT Austin's framework provides a
+complementary focus on embedded software.
+
+
+Automated Multi-Criteria Filter Optimization Framework (UT Austin)
+------------------------------------------------------------------
+
+Under subcontract, Brian Evans and his team at UT Austin have released
+a set of Filter Optimization Packages for Matlab:
+
+   http://www.ece.utexas.edu/~bevans/projects/syn_filter_software.html
+
+The packages to optimize the following characteristics of analog filter
+designs simultaneously
+
+1. magnitude response 
+2. linear phase in the passband
+3. peak overshoot in the step response
+4. quality factors (Q)
+
+subject to constraints on the same characteristics. This framework
+takes both behavioral and implementation characteristics of filters
+into account. A traditional approach has been to design a filter
+according to behavioral properties and then iteratively tweak the
+filter poles and zeros for a given implementation technology. This
+framework designs filters that simultaneously meet both behavioral and
+implementation constraints and goals.
+
+In terms of execution time on a 167-MHz Sun Ultra-2 workstation, the
+Matlab packages take about 10 seconds to optimize fourth-order filters
+and 3 minutes to optimize eighth-order filters.
+
+Example: Design an analog lowpass filter with dp = 0.21 at wp = 20
+  rad/sec and ds = 0.31 and ws = 30 rad/sec that has minimized deviation
+  from linear phase in the passband and minimized peak overshoot in the
+  step response, where the maximum quality factor of the second-order
+  sections is 10.  We use the elliptic filter designed by Matlab to
+  meet the magnitude constraints as the initial guess in the optimization.
+
+          Elliptic Filter Designed by Matlab (Initial Guess)
+
+        Q             Poles                   Zeros
+      -----   ----------------------   ---------------------
+       1.7    - 5.3553 +/- j 16.9547    0.0    +/- j 20.2479
+      61      - 0.1636 +/- j 19.9899    0.0    +/- j 28.0184
+
+      Refined Filter Returned by Filter Optimization Packages
+
+        Q             Poles                   Zeros
+      -----   ----------------------   ---------------------
+       0.68   -11.4343 +/- j 10.5092   -3.4232 +/- j 28.6856
+      10      - 1.0926 +/- j 21.8241   -1.2725 +/- j 35.5476
+
+  The peak overshoot is reduced by 50% in the optimized filter,
+  and the phase of the passband has become nearly linear.
+  The initial elliptic filter cannot be built using breadboard
+  components since the second second-order section has a quality
+  factor of 61 (Q <= 25 is a practical upper limit for breadboard
+  components).  The quality factor is the radius of the pole
+  divided by -2 times the real part of the pole, so Q >= 0.5.
+  A Q of 0.5 means a real pole, and an infinite Q means a pure 
+  oscillator.  Lower Q is more desirable for filter implementation.
+  When the optimization procedure is given an infeasible solution,
+  the optimization routine searches for a feasible one, as it
+  did in this case. [1]
+
+The UT Austin team uses the symbolic mathematics environment
+Mathematica to describe the constrained non-linear optimization problem
+formally, derive the gradients of the cost function and constraints,
+and synthesize the Matlab code to perform the optimization. In the
+public release, they provide the Matlab to optimize analog IIR filters of
+fourth, sixth, and eighth orders. Using the Mathematica formulation,
+designers can add new measures and constraints, such as capacitance
+spread for integrated circuit layout, and regenerate the Matlab code.
+
+They describe the framework in [1]. An earlier version of the framework
+is described in [2]. They plan to extend this framework to digital IIR
+filters.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Nothing to report on this task.
+
+
+2.  Equipment/Infrastructure Status:
+
+Christopher Hylands installed JDK1.2beta4 on our software warehouse.
+We are in the process of evaluating changes required to Ptolemy II to
+use the collections classes in JDK 1.2 to replace the more informal
+collections package written by Doug Lea that we have so far depended on.
+Moreover, after identifying and reports a bug in the native-method
+interface, Christopher was able to get Tcl Blend to work with this
+version of Java.
+
+Christopher Hylands has installed a new Apache web server on our
+cluster.
+
+We have obtained the Saber simulation environment from Analogy and
+are planning to attend their training classes as soon as they allow it.
+
+We have obtained three new NT laptops to accommodate growth in the number
+of graduate students in the group.
+
+
+3.  Interactions and Technology Transfer
+
+-- Ivan Clark of NASA contacted us and told us that "NASA is involved
+   in a research program that uses our Ptolemy software as part of a
+   modeling effort. As part of the NASA aviation programs, there has
+   been underway for 2 or 3 years an effort to develop an Integrated
+   Electromagnetic Sensor Simulation (IESS). growing out of previous
+   Fortran-based modeling efforts to simulate windshear detection by
+   radar, the IESS program has been trying to modularize and convert
+   the fortran code into Ptolemy-compatible modules and to add
+   air-to-air multiple radar-target tracking to the simulation. the
+   next generation of the model effort will seek to add the capability
+   of simulating the flying of sensors (radar, lidar, radiometer, etc.)
+   through a weather model with emphasis on detection of aviation
+   weather hazards such as turbulence. this next-generation effort
+   currently includes participation by NASA, RTI, NCAR, Allied Signal,
+   and Collins."
+
+-- Mudit Goel's visit to Philips Research in Eindhoven continues. He
+   has completed the abstraction of the latest trimedia processor (an
+   embedded processor for multimedia applications) using a simulation
+   environment at Philips called TSS. He is able to map applications
+   onto the architecture using this environment.
+
+-- Neil Smyth spent a month at Delft University in The Netherlands, where he
+   was working closely with Bart Kienhuis on his simulator for stream based
+   function(SBF) objects. In particular, he added the notion of time to Bart's
+   simulator, with the intent of giving feedback earlier in the design cycle
+   to the designer on issues such as processor utilization and bottlenecks.
+
+-- John Reekie and Christopher Hylands are preparing a Tcl-Java
+   tutorial to present at the Tcl/Tk conference in September. The
+   current state of the tutorial is at:
+
+    http://ptolemy.eecs.berkeley.edu/~johnr/tutorials/tcljava98/tutorial/
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Talks
+-----
+
+ + "Performance Analysis of SBF Networks", Neil Smyth and Bart Kienhuis,
+    July 24th, 1998, Delft University, The Netherlands.
+
+Publications
+------------
+
+[1] N. Damera-Venkata, B. L. Evans, M. D. Lutovac, and D. V. Tosic,
+    "Joint Optimization of Multiple Behavioral and Implementation
+    Properties of Analog Filter Designs", Proc. IEEE Int. Sym. on
+    Circuits and Systems, Monterey, CA, May 31 - Jun. 3, 1998, vol. 6,
+    pp. 286-289. 
+    http://www.ece.utexas.edu/~bevans/papers/1998/filter_optimization/
+
+[2] B. L. Evans, D. R. Firth, K. D. White, and E. A. Lee,
+    "Automatic Generation of Programs That Jointly Optimize
+    Characteristics of Analog Filter Designs," Proc. of European
+    Conf. on Circuit Theory and Design, Istanbul, Turkey,
+    August 27-31, 1995, pp. 1047-1050.
+    http://ptolemy.eecs.berkeley.edu/papers/filter_design_ecctd95.ps.Z
+
+[3] H. J. Reekie and E. A. Lee, ``The Tycho Slate: Complex Drawing and
+    Editing in Tcl/Tk,'' April 27, 1998. Submitted to the Sixth Annual
+    Tcl/Tk Conference, September 14-18, 1998, San Diego, California.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to continue design and implementation of the actors, graph,
+math, pn, and ct packages in Ptolemy II.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.

@@ -1,0 +1,297 @@
+Monthly R&D Status Report
+Date: May 15, 1997
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+1. Tasks Performed
+
+A major part of the effort during this period was in architecting the 
+approach to building modular deployable design tools.  In addition, the 
+Tycho/Java infrastructure continues to progress.
+
+
+2. Significant Accomplishments
+
+2.1 Deployable Design Tools
+
+We have had extensive discussions within the group about how to achieve a 
+software architecture for modular deployable design tools.  A key part of 
+the problem is to determine how to reliably create a subset of the 
+developer's software infrastructure to deploy.  There is prior art on which 
+to base our design.  For example, many Lisp systems include a way to dump 
+the state of the system to disk for restarting later.  For example, GNU 
+Emacs includes the function 'dump-emacs'.  In Lucid Common Lisp, there was 
+a mechanism called 'tree shaking' which would allow a developer to 'shake' 
+a code tree and get the 'fruit', or the code that was actually used.  
+Franz' Allegro Common Lisp has a similar thing, in which the developer 
+'trains' the application and then can build a file that contains only the 
+necessary parts of the system.  Presumably we could do a similar thing with 
+Tycho, using 'namespace ::tycho {info classes}' to see what classes are 
+loaded.
+
+A possible visual aid would be to enhance the class diagram so that the 
+classes that are actually loaded are highlighted.  This might help the 
+developer understand the ramifications of particular choices.  To do this, 
+we would need to extend the EditDAG so that it would know that the DAG is a 
+class diagram and add the proper functionality.
+
+In Ptolemy, the CGC domain (code generation in C) comes fairly close to 
+building a deployable standalong binaries.  Clearly, CGC can build simple 
+non-graphical deployable applications.  Two key stumbling blocks to making 
+more complex applications stand-alone are the interactive graphical 
+infrastructure and the makefile infrastructure for compiling code.  Also 
+problematic are applications that use shared libraries that might be on the 
+user's system and applications that use proprietary sound formats, such as 
+Sun .au files.
+
+One question to deal with throughout is what platform we assume a 
+deployable system will be deployed on.  How much software infrastructure 
+can be assumed? A Java virtual machine interpreter? A Tcl interpreter? 
+Where processor-specific binaries are required, we need a mechanism to 
+package the minimal set of binaries.  Software component technology such as 
+Corba may provide a solution here.
+
+A Java-specific question is whether to focus on creating applets or to 
+focus on finding architectures that support Java applications.  The 
+security model built in to applets is essential for certain applications, 
+but it can also be a significant hinderance.  Java Beans, another software
+component technology, provides an alternative that we are investigating.
+
+Another issue to consider is the deployability and/or ubiquity of
+the Tcl/Java interface.  Sun Microsystems is looking into compiling
+Tcl applications into Java byte code, which should make this issue
+easier to deal with.  Sun has recently made a major comitment to using
+Tcl with Java; their announcement is included here as an appendix.
+
+Concerning the software architecture issues around modular deployable
+tools, John Reekie contributes the following observations:
+
+* There is always a tension between reusing code by inheritance (inherit and 
+  extend the functionality) or by composition (compose objects to obtain more 
+  complex functionality).  Our designs tend to use a lot of inheritance; 
+  deployability implies that the emphasis should shift to composition -- 
+  which in turn implies shallower, broader, inheritance trees.
+
+* Java encourages the separation needed for deployability
+  with its interfaces. Using interfaces could allow alternative
+  "lighter" classes to be deployed instead of heavier ones.
+
+* Cleanly staging the "evolution" of a design from UI to execution will aid 
+  deployment at one of a number of stages.  At each, it should be clear what 
+  is required to deploy and what is not.  For example, it should be possible 
+  to deploy and execute a system that contains no scheduler; implication: the 
+  run-time data structures contain a reference to a schedule, but not a 
+  reference to a scheduler.
+
+* Incremental changes need to be supported at each stage -- the amount of 
+  "stuff" required at each deployable stage depends on degree of mutability 
+  needed.  It should, for example, be possible to say "I want, at run-time, 
+  to substitute this subgraph with this other subgraph" without having to 
+  deploy an SDF scheduler.  The semantics of mutability at run-time should 
+  therefore not be defined as graph mutations.
+
+* A deployed executable can be as light as the preceding stages can make 
+  it.  It does not, for example, have to actually contain a graph.  The 
+  framework for deployed applications needs to support the concepts of 
+  execution, control, monitoring, and debugging without being dependent on 
+  a graph structure.
+
+
+2.2 Software Improvements
+
+Christopher Hylands completed the first cut at the Tycho test suite.
+It is possible to run all the tests with one command.
+
+Alain Girault has written an automatic star generator for the PN domain
+that takes as input OC specifications, which are the output from several
+synchronous languages (Esterel, Lustre, Argos).  This provides an 
+interesting experimental infrastructure for exploring the 
+"desynchronization" of synchronous specifications, allowing for 
+distributed implementations.  Details are contained in:
+
+    http://ptolemy.eecs.berkeley.edu/~girault/Ocpn/ocpn.html
+
+Christopher Hylands has constructed a "builder dialog" that can be used
+to manage installation of Tycho.  One consequence is that it becomes
+unnecessary to bloat the software distribution with automatically generated
+documentation because the builder dialog will manage generation of the 
+documentation at installation time.
+
+Christopher Hylands also modified the sound blocks in the Ptolemy SDF
+domain to insert Sun-compatible header information.  Such files can thus
+be included in web pages under the control of Java applets.
+
+John Reekie made improvements to the Tycho ListBrowser and subclasses, the 
+FileBrowser (for platform independence mainly), the IndexBrowser (for 
+performance), and the Model and Interchange classes (for performance).
+
+Cliff Cordeiro adjusted the binding in the text editors in Tycho to make
+them exactly equivalent to emacs.
+
+John Reekie reworked the ButtonBox/ToolBar/Query classes.
+
+
+3.0 Infrastructure
+
+Our near term strategy of using Itcl mixed with Java has received
+a boost from Sun Microsystems, who announced a major commitment to just
+such mixtures.  Their announcement is included as an appendix.
+
+We have installed JDK1.1.1 (the latest Java development kit from
+Sun) and have begun using it for the Tycho/Java interface.
+
+
+3.1 Personnel
+
+Jie Liu has joined the group as a graduate student.
+
+
+3.2 Software Infrastructure
+
+Christopher Hylands obtained a beta version of Itcl for the Macintosh from 
+Jim Ingham of Lucent.  We believe that Tycho0.2 will run on the Mac, NT and 
+Unix, although the Mac continues to display serious problems.
+
+We tested the ICEM CFD Tcl Lint program, but found that it could not
+handle Tk or Itcl, making it nearly useless for our purposes.
+
+
+3.0 Publications and Presentations
+
+3.1 Publications
+
+[1] C. Hylands, E. A. Lee, and H. J. Reekie, "The Tycho User Interface
+    System," accepted by the 1997 Tcl/Tk workshop, to be held in July,
+    1997, in Boston.
+
+[2] S. Edwards, L. Lavagno, E. A. Lee, and A. Sangiovanni-Vincentelli,
+    "Design of Embedded Systems: Formal Models, Validation and Synthesis,"
+    Proceedings of IEEE, vol 85, NO 3, March 97.
+    
+
+3.2 Talks by group members
+   
+ - "The Ptolemy Project," Edward A. Lee, EECS Colloquium, Wednesday April 
+    23, 1997.
+
+
+3.3 Talks by others
+
+ - "Performance Estimation for the Codesign of Systems Running Concurrent
+    Applications," Asawaree Kalavade, Bell Labs, Thursday, April 24th, 1997,
+    Design Seminar, UCB.
+
+ - "The Changing Vision of Web Application Development," David Ku,
+    Escalade Corp., Thursday, May 1st, 1997, Design Seminar, UCB.
+
+ - "Models of Computation in the Cubicon Medium," by Sanford Klausner,
+    Cubicon, Inc., Thursday, May 8th, 1997, Design Seminar, UCB.
+
+
+APPENDIX -- ANNOUNCEMENT FROM SUN
+=================================
+
+From: John Ousterhout <ouster@tcl.Eng.Sun.COM>
+Subject: New Sun business group: SunScript
+Date: 30 Apr 1997 20:11:25 -0700
+
+						Press Contact:
+ 						
+						Michael Sweeny
+						Sun Microsystems, Inc.
+						415-786-8428
+						michael.sweeny@sun.com
+
+						Taylor Kiland
+     						Burson-Marsteller
+     						for Sun Microsystems, Inc.
+     						(415) 463-4009
+     						taylor_kiland@bm.com
+
+
+
+SUN LAUNCHES NEW BUSINESS GROUP, SUNSCRIPT, TO DRIVE DEVELOPMENT OF TCL 
+SCRIPTING LANGUAGE
+
+SunScript Group To Integrate Tcl and Java
+
+Mountain View, Calif. - April 30, 1997 - In response to growing 
+interest in the Tcl scripting language, Sun Microsystems Inc. announced
+today the launch of SunScript, a new business group.  SunScript's
+mission is to develop and market rapid application development tools for
+Tcl developers and to provide access from Tcl to JavaBeans(TM) and
+Java(TM) applications.
+
+"These new Sun products will make many legacy and new applications
+accessible via the Web, where they can be used by Javastations(TM) and
+Java-enabled browsers, such as Netscape Communicator"  said Scott
+McNealy, Chairman, President, and CEO of Sun.
+
+Tcl is a popular scripting language that allows rapid development of
+"gluing" applications such as graphical user interfaces and system
+integration. Originally developed at the University of California at
+Berkeley and distributed freely on the Internet, Tcl has been supported
+informally by Sun since 1994.  The Tcl community is now estimated at
+500,000 developers world-wide.  Thousands of commercial Tcl applications
+have been deployed, ranging from computer-aided design to Internet
+commerce.
+
+"As the Tcl developer community has grown, there has been an increasing
+demand for high-quality development tools and support," said John
+Ousterhout, Sun Distinguished Engineer and inventor of Tcl.  "Tcl
+developers also want to deploy their applications on the Internet and
+take advantage of Java, Sun's universal software platform for network 
+application development."
+
+SunScript will provide a range of products that aid the development and
+deployment of Tcl applications, including an integrated development
+environment, a browser plugin module, and an embeddable Web server.  The
+development environment will include a GUI builder, debugger, and
+project manager.  The browser plugin allows Tcl applications to run in
+Web browsers such as Netscape Navigator(TM) and Microsoft Internet
+Explorer. The Tcl Web server makes it easy to manage devices and
+applications remotely via the Web.  Early releases of the GUI builder
+and plugin module are already available for download.
+
+The SunScript group will also provide products that allow Tcl and Java
+applications to work closely together.  Tcl developers will be able to
+include JavaBean components in their applications, and Java developers
+will be able to use Tcl as a bridge to legacy applications. Tcl/Java
+integration will enable developers to rapidly transition legacy
+applications to the Web and build exciting Web-centric applications in
+Tcl and Java.
+
+"Tcl technology is a splendid bridge solution for our enterprise
+customers," commented Bert Sutherland, Director of Sun Microsystems
+Laboratories. "Sun customers have pent up demand for technology that
+allows legacy software to communicate via Internet protocols, thus
+extending its useful lifetime. The SunScript group is building several
+such bridges to the future."
+
+For more information, please visit the SunScript Web site at 
+http://www.sunscript.sun.com.
+
+Since its inception in 1982, a singular vision, The Network Is The
+Computer(TM) has propelled Sun Microsystems, Inc., to its position as a 
+leading provider of hardware, software and services for establishing
+enterprise-wide  intranets and expanding the power of the Internet. With
+more than $7 billion  in annual revenues, Sun can be found in more than
+150 countries and on the  WorldWide Web at http://www.sun.com.
+
+Sun, the Sun logo, Sun Microsystems, Java, JavaBeans, JavaStation,
+SpecTcl,  Tcl Plugin, and The Network Is The Computer are trademarks or
+registered  trademarks of Sun Microsystems, Inc. in the United States
+and other countries.  Netscape Navigator(TM) is a trademark of Netscape
+Communications Corporation.
+
+Press announcements and other information about Sun Microsystems are 
+available on the Internet via the World Wide Web using a tool such as 
+Netscape or NCSA Mosaic.  Type http://www.sun.com at the URL prompt.
+
+[[Send Tcl/Tk announcements to tcl-announce@mitchell.org
+  Send administrivia to tcl-announce-request@mitchell.org
+  Announcements archived at http://www.xpi.com/tcl/comp.lang.tcl.announce/
+  The primary Tcl/Tk archive is ftp://ftp.neosoft.com/pub/tcl/ ]]

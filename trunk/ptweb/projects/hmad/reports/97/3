@@ -1,0 +1,271 @@
+Monthly R&D Status Report
+Date: March 15, 1997
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+
+1. Tasks Performed
+
+The major event of this reporting period was the Ptolemy Miniconference,
+held on March 14 in Berkeley, which drew a capacity turnout.  In addition,
+we have made quite a bit of progress on both the Itcl and Java based
+software infrastructure, and most interestingly on their interaction.
+
+
+2. Significant Accomplishments
+
+2.1 Ptolemy Miniconference
+
+On Friday, March 14, we held a full day miniconference that reviewed
+the Ptolemy project.  The objectives of the conference were primarily
+to report to and solicit advice from the industrial sponsors and friends
+of the project.  The miniconference reviewed both this DARPA effort, and
+our other DARPA effort entitled "System-Level Design Methodology for
+Embedded Signal Processors." That project is wrapping up and will
+conclude with the release of Ptolemy 0.7.  Thus, the more mature
+results presented at the miniconference stem from that project, while
+the more forward-looking presentations focused on this one.
+The conference included several outside speakers reporting on uses
+of Ptolemy software and techniques plus ongoing interactions.
+
+We had 58 attendees from the following organizations:
+
+    Adaptec
+    Advanced Fibre Communications
+    Advantest
+    Alta Group of Cadence Design Systems
+    Angeles Design Systems
+    Berkeley Design Technology
+    Data Flow Systems
+    Ericsson Radio Systems AB
+    Hewlett Packard
+    Hughes Aircraft
+    Hughes Space and Communications
+    LG Electronics
+    Lockheed Martin
+    Motorola
+    National Semiconductor
+    NEC
+    Nortel
+    Rockwell International
+    Sanders, a Lockheed Martin Company
+    Seiko Epson Corp.
+    Semiconductor Research Corporation
+    Seoul National University
+    Sony
+    Structured Software Systems
+    Sun Microsystems
+    Synopsys
+    Tektronix
+    Thomson-CSF
+    University of Pittsburg
+    University of Texas, Austin
+    University of Washington
+    White Eagle Systems
+
+The miniconference was held in conjunction with Berkeley's annual Industrial
+Liaison Program (ILP) conference, and we included two afternoons of
+laboratory demonstrations of Ptolemy software prior to the miniconference.
+
+The highlights of the conference included:
+
+  - The first public demonstration of hierarchical finite-state machines
+    combined with dataflow and discrete-event concurrency models.
+
+  - The first public demonstration of a synchronous/reactive modeling
+    environment that supports hierarchical heterogeneity.
+
+  - The first public demonstration of Tycho, our user-interface
+    development environment, interacting with Java and with Ptolemy.
+
+  - The first public demonstration of a web-based simulator for programmable
+    DSPs, from UT Austin.
+
+  - The first public description of an investment analysis tool from
+    Structured Software Systems, based on Ptolemy.
+
+The miniconference also included descriptions of the use of Ptolemy
+in modeling free-space optoelectronic systems (from the University of
+Pittsburg), a description of Myrnet network simulations in Ptolemy
+(from Sanders), the use of Ptolemy for VHDL-based
+circuit design, research on multidimensional signal processing models,
+and theory that we have developed to help us understand interacting
+models of computation.  In addition, we outlined plans for future work
+including a strategy for supporting fixed-point design and our plans
+for Java-based design.
+
+See http://ptolemy.eecs.berkeley.edu/papers/viewgraphs/miniconf97/
+for details.
+
+
+2.2 Java interface in Tycho
+
+Our Tycho/Java interface is now fully usable, and being used.
+We have ported Sun's tcljava interface to Windows NT and HPUX10.20,
+and made our changes to tcljava available at
+http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/tcljava.html
+
+Porting tcljava to NT means that we can run Tycho with Java classes
+under NT, which will allow more people to use our evolving software
+infrastructure.  We feel that the combination of a scripted language
+such as Itcl and a faster compiled language such as Java will be a
+compelling combination for a wide variety of network-aware applications.
+
+The next step for Tycho/Java under NT is to solve some of the Tcl exec
+command issues, perhaps by implementing our own exec command written
+in Java.  Java threads provide a suitable multitasking model.
+
+
+2.3 An Object-Oriented and Scripted Interface to Ptolemy
+
+We are constructing a two-level interface between Tycho and Ptolemy
+with the objective of being able to maximally leverage the Ptolemy
+software in developing the network-capable Java infrastructure.
+The lower-level interface is a set of Tcl procedures implemented
+in C++ that expose the Ptolemy kernel functionality to the Tcl
+scripting environment.  This low-level interface is not meant
+to be used directly, but rather is designed to provide a set of
+utilities to a higher-level interface.  The higher-level interface
+consists of a set of Itcl classes that mirror the key hierarchical
+graph data structures of the Ptolemy kernel.  One or the other of
+these interfaces (we are still evaluating this question) will also
+be implemented in Java, providing a compatible and modular connection
+between Tycho and either the C++-based facilities of Ptolemy or the
+new Java infrastructure we will be developing under this project.
+
+
+2.4 Mutable Systems and Recursion
+
+Mutable models capture dynamically changing application structure.
+One of the more interesting forms of mutable dataflow models are recursive,
+where a hierarchical block contains within it an instance of itself.
+In pictures:
+
+   --------------------------------
+   |foo                           |
+   |                              |
+-->|---> x (Bar) ---> y (foo) --->|---->
+   |                              |
+   --------------------------------
+
+The key to supporting recursion of this type is to not instantiate
+or evaluate the inside instance of "foo" (named "y") until it is
+actually required.  I.e., it must be instantiated at run time, much
+the way a procedure in a language capable of recursion dynamically
+allocates memory on the stack only when a procedure is invoked, rather
+than statically allocating memory at compile time.  Visual dataflow
+models have not historically been capable of supporting recursion
+because of a very static view of implementation.
+
+We have outlined a software architecture that exploits the Ptolemy
+"wormhole" concept to implement this.  The basic idea of a wormhole
+is that it is a hierarchical block that appears from the outside
+to be an atomic block.  In the above example, "y" would be initially
+instantiated as a wormhole with a reference to the master "foo",
+much the way a compiler in a language supporting recursion puts
+a reference to common source code at each call of a procedure.
+The objects (analogous to memory for automatic variables) required
+to execute "y" do not get created until "y" actually fires (analogous
+to a function call).  We believe that we can make this method quite
+efficient, and possibly generalize it to safely and robustly support
+other types of mutable systems.
+
+
+2.5 Java Infrastructure
+
+We have begun the design of the key Java infrastructure that will support
+the design of distributed adaptive signal processing systems.  The core
+of this design is a set of classes fashioned after the core of Ptolemy that
+support hierarchical graphs as an abstract data structure.  Many
+specializations, for example to process networks, are possible.
+We plan PN to be the first implemented specialization since it promises
+to give us the most benefit from Java threads.
+
+To avoid reimplementing basic data structures, we have decided to use
+Doug Lea's Java Collection classes, which are available freely on the
+internet.  This decision is based on a careful evaluation of the code
+quality and a determination that this is excellent code.
+
+We have had extensive discussions about coding style, naming
+conventions, and similar software engineering questions, and have
+refined the Tycho development environment to help enforce consistency.
+
+
+2.6 Multidimensional Signal Processing (contract Option, Questech, Inc)
+
+Negotiations with Thomson continue to make slow but steady progress.
+We expect to have a contract finalized within days.
+
+Despite not having officially started this project, we have made some
+progress. Brian Evans and Praveen Murthy have found a solution to scheduling
+generalized multidimensional synchronous dataflow graphs.  The load
+balancing is not only multidimensional but aligned on non-rectangular
+grids.  Using the Smith form decomposition of the integer resampling
+matrices that represent the non-rectangular grids (lattices), we can
+set up the balance equations.  We are in the process of showing that
+the Smith Canonical Form is sufficient for generating the balance
+equations.  The solution obtained by using the Smith Canonical Form
+is rarely optimal in terms of buffering.  We can search through the
+space of Smith forms to find the optimal solution with respect to
+buffering.
+
+
+2.7 Technical Improvements to the Software
+
+Kevin Chang separated our Exec class (an interface to external processes)
+in Tycho into a graphical and non-graphical portion.  The
+non-graphical portion allows scripted operations without user
+intervention, while the graphical portion allows for interactive
+operations such as compilation and system configuration.
+
+Christopher Hylands wrote a procedure that constructs and displays
+the hyperlinks in a set of interconnected HTML pages.  This gives
+a graphical map of the relationships between documents.
+
+
+3. Personnel
+
+Kevin Chang has joined our group as a Programmer/Analyst II for about
+9 months.  He'll be working on various Tycho programming tasks.
+
+
+4. Publications, Presentations, and Interactions
+
+4.1 Publications
+
+[1] C. Hylands, E. A. Lee, and H. J. Reekie, ``The Tycho User Interface
+    System,'' submitted to the 5th Annual Tcl/Tk Workshop '97, Boston,
+    Massachusetts, July, 1997, published as ERL Memorandum UCB/ERL 97/15,
+    http://ptolemy.eecs.berkeley.edu/papers/97/tcltk-97/
+    March 1997. 
+
+
+4.2 Presentations
+
+* "An Overview of the Ptolemy Project," Edward A. Lee, at Hughes Space
+   & Communications, LA, Feb. 19, 1997.
+
+* "Complexity Management: A Major Issue for Telecommunications and
+   Networking," Prof. David G Messerschmitt, Seminar on Design, Modeling, and
+   Specification of Systems, UC Berkeley, Feb. 20, 1997.
+
+* "Issues in the Design and Implementation of a Distributed Design
+   System for Microelectronics," Prof. Richard Newton, Seminar on
+   Design, Modeling, and Specification of Systems, UC Berkeley,
+   March 6, 1997.
+
+
+4.2 Interactions
+
+We have started a dialog with the WELD project (Web-Based Electronic
+Design), headed by Prof. Richard Newton
+(http://www-cad.eecs.berkeley.edu/Respep/Research/weld).  WELD uses
+the notion of "proxies" to provide a Java-based interface between
+design tools that are distributed on the network.  We are particularly
+interested in augmenting the capability to also support Itcl-based
+interactions, so that more sophisticated user interfaces can be
+developed more easily (at least today).
+

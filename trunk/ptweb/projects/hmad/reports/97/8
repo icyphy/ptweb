@@ -1,0 +1,259 @@
+Monthly R&D Status Report
+Date: August 15, 1997
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+1. Tasks Performed
+
+This reporting period included major progress in the semantics of
+specifications that mix control logic with signal processing (reported
+in [2]), major progress in multidimensional signal processing (Questec
+option), and continued improvement of our software. In addition, we
+continue to make steady progress in the area of modular deployable
+design tools, although there is little concrete to report at this time.
+
+
+2. Significant Accomplishments
+
+2.1 Control and Signal Processing
+
+We have completed a paper [2] that studies the semantics of
+hierarchical finite-state machines that are composed using various
+concurrency models, particularly dataflow, discrete-events, and
+synchronous/reactive modeling. It is argued that all three combinations
+are useful, and that therefore the concurrency model should be selected
+independently of the decision to use hierarchical FSMs. In contrast,
+most formalisms that combine FSMs with concurrency models, such as
+Statecharts (and its variants) and Hybrid systems, tightly integrate
+the FSM semantics with the concurrency semantics. An implementation
+that supports the three combinations studied is described. 
+
+One of the several contributions in this paper is the definition of a
+new dataflow model of computation called Heterochronous Dataflow (HDF)
+that combines FSMs with dataflow is such a way as to preserve the
+decidable nature of synchronous dataflow. This is particularly
+important for embedded system design, where questions such as deadlock
+and bounded memory must be answered at design time.
+
+
+2.2 Modular/Deployable Design Tools
+
+John Reekie and Christopher Hylands began the process of breaking up
+Tycho into a suite of modular and separately deployable packages. They
+used Tycho itself to construct a dependence graph of potential
+packages. The current working set of package names is:
+
+Kernel
+KernelUI
+Devel
+DataStruct
+HTML
+HTMLDevel
+JavaDevel
+TclShell
+ItclDevel
+VisEdit
+TextEdit
+PtolemyDevel
+Ptolemy
+TyCGC
+TyDoc
+IDoc
+Slate
+Misc
+WELD
+
+
+2.3 Multidimensional Signal Processing Option--Questec
+
+The main activity during this period has been an ongoing investigation
+into a dataflow model called Regular Dataflow graphs (RDFGs). RDFGs
+compactly represent multidimensional algorithms with regular control
+and data flow, and thus match multidimensional signal processing
+applications well. We hope to use them to improve the ability of
+multidimensional dataflow representations in Ptolemy to exploit
+parallel signal processing hardware.
+
+RDFGs have been studied before, although unsatisfactorily, in the
+context of wavefront array processors. RDFGs are distinguished by
+their highly regular structure; this regularity leads to descriptions
+that are exponentially more compact than descriptions of normal graphs.
+Hence, very large graphs can be described using very little space, and
+infinite graphs can be described using finite space (infinite graphs
+arise as precedence graphs in signal processing where the time
+dimension is infinite). RDFGs can model algorithms where the structure
+of the algorithm leads to highly homogeneous processing elements and
+activities, like matrix multiplication. RDFGs can also be used to model
+the precedence graphs of multidimensional data flow graphs (MD DFG),
+which is our practical motivation for studying them. 
+
+We have been interested in designing certain graph-theoretic algorithms
+for RDFGs that arise commonly in design prototyping environments. The
+goal is to have algorithms that work on the compact description, and
+hence take much less time than conventional algorithms that work on
+traditional graph descriptions (like incidence matrices and adjacency
+lists). Our first results in this area are discouraging in the sense
+that problems such as cycle detection and deadlock detection turn out
+to be NP-complete (proven in a forthcoming technical report). However,
+the NP-completeness arises when the size of the problem increases in
+certain dimensions; practically, the increase in these dimensions does
+not occur much. Hence, we have been pursuing heuristics, and the
+possibility of polynomial time algorithms when the particular
+dimensions that cause NP-completeness are assumed to be non-increasing
+(usually true in practice). A concrete example of such a "dimension" is
+the number of arcs that each node has in an RDFG. Usually, this is a
+fixed small number such as 4 or 5, and does not increase even if the
+number of nodes is very large. 
+
+Another problem of interest is the computation of the maximum cycle
+mean; this quantity determines the maximum rate at which the graph can
+be executed and is thus metric used for designing and evaluating
+multiprocessor schedulers.
+
+Ultimately, having such algorithms will enable us to better analyze the
+(infinite) precedence graphs that arise in MD DFGs. This in turn, will
+allow us to develop good multiprocessor schedulers for multidimensional
+dataflow in Ptolemy, something that is currently not there. 
+
+Since RDFGs are described using integer matrices, and cycles can be
+described using non-negative, integral vectors in the null space of
+these matrices, the theory of lattices and integer linear algebra is
+relevant here. We are engaged in deciphering the useful aspects of this
+theory, to see how it can be applied in our context. An example of
+integer linear algebra is the problem of computing linear dependence or
+independence of a set of integral vectors by *non-negative integral*
+coefficients (contrasted with linear algebra where the coefficients can
+be real numbers). This naturally requires the use of results from the
+study of Diophantine equations and geometric lattices. 
+
+
+2.4 Software Improvements
+
+Christopher Hylands improved the handling Java files within Tycho under
+Windows NT so that Java files can now be compiled and executed entirely
+from within Tycho. A major part of the challenge here was to develop a
+rational and robust handling the CLASSPATH environment variable that
+Java depends on.
+
+Christopher Hylands created a facility in Tycho for generating class
+inheritance diagrams from C++ source code. This complements the
+facility we previously wrote in Tycho that generates class diagrams
+from Itcl source code.
+
+Mudit Goel completed a modification of Ptolemy that improves the
+modeling of time in combined discrete-event and dataflow applications.
+In particular, previously, a dataflow subsystem within a discrete-event
+simulation had to be supplied with clocking events to trigger its
+firings. With Mudit's change, the dataflow subsystem can directly
+specify that it requires repeated periodic firing. This allows it to
+more naturally model real-time signal sources using dataflow.
+
+Christopher Hylands created a search facility in Tycho fashioned after
+"egrep," a Unix program, and integrated a directory search mechanism
+into Tycho. This provides a portable mechanism with a uniform interface
+across platforms (Windows '95, Windows NT, and Unix).
+
+Christopher Hylands added a mechanism to Tycho that will convert a Unix
+style makefile to a Microsoft Visual C++ makefile. This will help in
+the construction of a more complete port of Ptolemy to Windows.
+
+Edward Lee and Seehyun Kim implemented a gridded, multi-column user
+query widget in Tycho. The first application is a dialog whereby the
+user guides the selection of fixed-point properties of a signal
+processing system described with a dataflow graph.
+
+Brian Evans and Guy Maor (UT Austin, under subcontract) installed a new
+Matlab interface that removes dependencies on the Matlab 5 shared
+library in the Ptolemy executables. It also works with Matlab 4.2 and
+works when Matlab is not present.
+
+John Reekie created a widget class called MultiPanel in Tycho that
+provides hierarchically nested pull-down panels with arbitrary content.
+
+Seehyun Kim wrote some C++ code to collect statistics of inputs,
+outputs, and states of a functional block in the dataflow domains.
+Statistics might be used for estimating signal ranges to help in
+generating a fixed-point implementation of a system. He modified the
+Tycho editor class EditPtlang to translate a block definition without
+range estimation into one with range estimation. He has also modified
+the Ptolemy preprocessor ptlang to support the C++ classes implementing
+range estimation.
+
+
+3.0 Infrastructure
+
+3.1 Software
+
+Christopher Hylands ported Glimpse to Windows NT and interfaced it to
+Tycho. Glimpse is a search engine that efficiently handles large
+numbers of files. We use in Tycho for searching a source code tree.
+
+
+3.2 Personnel
+
+Dick Stevens completed his sabbatical year in our group and returned to
+the Naval Research Labs.
+
+Seehyun Kim completed his postdoctoral year and returned to Korea.
+
+
+4.0 Publications, Presentations, and External Interactions
+
+4.1 Publications
+
+[1] S. Kim and E. A. Lee, ``An Infrastructure for Numeric Precision
+    Control in the Ptolemy Environment'', Proceedings of the 40th Midwest
+    Symposium on Circuits and Systems, August 3-6, 1997.
+    http://ptolemy.eecs.berkeley.edu/papers/97/fixedpointInfra/
+
+[2] Alain Girault, Bilung Lee, and E. A. Lee, ``A Preliminary Study of
+    Hierarchical Finite State Machines with Multiple Concurrency Models,''
+    Memorandum UCB/ERL M97/57, Electronics Research Laboratory, U. C.
+    Berkeley, August 1997. 
+    http://ptolemy.eecs.berkeley.edu/papers/97/preliminaryStarcharts/
+
+[3] P. K. Murthy, S. S. Bhattacharyya, and E. A. Lee, ``Combined Code
+    and Data Minimization for Synchronous Dataflow Programs'', Journal of
+    Formal Methods in System Design, Vol. 11, No. 1, pp41-70, July 1997.
+    http://ptolemy.eecs.berkeley.edu/papers/97/jointCodeDataMinimize/
+
+[4] S. Ha and E. A. Lee, ``Compile-Time Scheduling of Dynamic
+    Constructs in Dataflow Program Graphs,'' IEEE Trans. on Computers, Vol.
+    46, No. 7, July 1997.
+    http://ptolemy.eecs.berkeley.edu/papers/97/compile/
+
+[5] S. S. Bhattacharyya, P. K. Murthy, and E. A. Lee, ``Software
+    Synthesis for Synchronous Dataflow,'' International Conference on
+    Application Specific Systems, Architectures, and Processors, July,
+    1997, invited paper. 
+    http://ptolemy.eecs.berkeley.edu/papers/97/softwareSynth/
+
+
+4.2 Talks and demos by group members
+
+-- "Modeling and Design of Reactive Systems - The Ptolemy Project,"
+   Edward A. Lee, Seminar at Woods Hole Oceanographic Institute, July 22, 1997.
+
+-- "Introduction to the PI Calculus," John Davis, Ptolemy Group Meeting,
+   Wednesday, July 23rd.
+
+
+4.3 Technology Transfer
+
+Continuing our tradition of effective transfer of research technology
+into industry, we just learned about a Canadian company called
+Technologies Lyre, in Québec City that has recently developed a
+rapid-prototyping DSP development platform that works under Ptolemy and
+Matlab. For further information, contact 
+    
+    Jean-Francois Ouellet
+    Technologies Lyre
+    220-5055 Boul. Hamel Ouest
+    Quebec City, PQ    Canada
+    G2E 3G6
+    Fax.: (418) 877-7710
+    Tel.: (418) 877-4644
+    e-mail : aad902@agora.ulaval.ca

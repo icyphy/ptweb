@@ -1,0 +1,424 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 June 29, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        5/15/98 - 6/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Progress on Ptolemy II continues, with the kernel package nearing "green"
+status, the data and actor packages maturing, and the package structure
+improving.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Interoperability
+----------------
+
+Jie Liu and William Wu prototyped a CORBA-based approach to
+reduced-order modeling in Ptolemy II. In this prototype, a CORBA server
+provided a reduced-order model of a MEMS accelerometer, while a CORBA
+client integrated the model within a larger model. The reduced-order
+model was provided by Dr. Per Ljung of Coyote Systems. The larger model
+was implemented in the CT domain of Ptolemy II. Eventually, we hope
+that this infrastructure can be used to solicit parameterized
+reduced-order models on demand from servers on the network.
+
+
+Mutable Systems
+---------------
+
+John Reekie defined a new "mutation" package for Ptolemy II designed to
+work with the Ptolemy II kernel to provide support for dynamically
+changing graph topologies. This package uses a publish-and-subscribe
+model, where the publisher informs subscribers of changes in the graph
+topology (mutations).  It addresses the problem that we wish to
+constrain mutations to occur at precisely defined points in an
+execution cycle in order to ensure determinism. 
+
+This package includes an interface called Mutation with two methods,
+perform() and update(), that correspond to performing mutations and
+informing all observers about the mutations, respectively.
+ 
+A second interface called MutationListener is implemented by any
+observer that depends on mutations. This interface has methods like
+addEntity, removeEntity, link, unlink, etc. corresponding to the
+elementary forms of mutations that are possible in the kernel.
+
+Now any actor performing mutations would then create an object
+implementing the interface Mutation, and implement the methods
+perform() and update(). The perform method contains commands
+corresponding to all the mutations that the actor intends to make. The
+update() method specifies the same mutations but using the methods
+defined in the MutationListener interface. 
+
+After listing these methods and creating the Mutation object, the actor
+calls a method queueMutation() on the director and queues the mutation
+with the director. The director chooses when the mutations are actually
+performed, to ensure that occur at a safe point in the execution sequence.
+
+This mechanism has been prototyped and demonstrated in the PN (process
+networks) domain.
+
+
+Ptolemy II Package Structure
+----------------------------
+
+We have re-organized the package structure in Ptolemy II to eliminate
+circular dependencies across packages and to simplify the dependencies.
+The objective is to minimize the number of other packages that each
+package depends on.  This will enhance the modularity of the resulting
+software architecture.
+
+
+Kernel Package
+--------------
+
+We have made another pass on the kernel package in Ptolemy II, with the
+objective of bringing that package to "green" in our code ranking.
+Green means that the interfaces of the classes are frozen, with a
+commitment made to backward compatibility in any future changes. In
+order to reach this stage, we had to resolve some tricky concurrency
+issues. In particular, kernel classes rely on a shared instance of the
+class Workspace to manage synchronization of multiple threads that are
+reading and modifying a topology simultaneously. Our first
+implementation only allowed a single thread at a time access to the
+workspace. It used the built-in monitors in Java. This was overly
+restrictive, and eliminated much of the potential parallelism in
+applications. We have modified the Workspace class so that read and
+write access are handled separately, using a variant of the standard
+reader/writer pattern. Any number of threads can simultaneously have
+read access. Write access is granted only if no other thread has read
+access. Priority is given to pending write accesses so that
+modifications to the topology are delayed as little as possible. This
+ensures that readers are always reading the most up-to-date information
+possible. This mechanism hinges on the immutability of the workspace
+associated with any instance of a kernel object.
+
+A second significant change was to support cloning of kernel objects.
+A clone is a systematically constructed deep copy.  Clones can be placed
+in a new workspace, providing a mechanism for migrating subsystems across
+workspaces.  The user interface relies on cloning to construct instances
+of a subsystem from a prototype.
+
+A third change was to overhaul the description method, which provides
+an ASCII representation of any kernel object (and objects it contains).
+This method has been made much more object oriented, so that subclasses
+simply append information to that provided by the superclass, rather
+than having to reconstruct the description from scratch.
+
+Finally, we thoroughly edited the documentation for the kernel,
+producing an overview document and detailed class definitions. We also
+conducted a formal code review of the entire kernel.
+
+
+Actor Package
+-------------
+
+We have reworked the actor package to implement transparent ports cleanly,
+solving the problems raised in the April monthly report.  Transparent ports
+support modular design by selectively exposing ports of a subsystem.
+
+
+Graph Package
+-------------
+
+Yuhong Xiong has reworked the graph package, which provides
+graph-theoretic operations similar to those in LEDA. His design
+emphasizes efficiency by representing the graph using an adjacency
+matrix, rather than a set of cross-referenced node and edge objects.
+But it also emphasizes convenient use by providing an interface in
+which arbitrary objects represent the nodes.  He has converted the
+topological sort algorithm from the previous version of the graph
+package and has added a suite of methods to support operations on
+partial orders.  This work is preparatory to building the type system
+for Ptolemy II.
+
+
+User Interface
+--------------
+
+John Reekie has begun work on a redesign of the Tycho slate using
+Java's new 2-D package. John also attended a short course on Swing
+(Sun's new Java Foundation Classes), and has scheduled for our Friday
+afternoon study group to work on learning Swing. Our general impression
+is that Swing is a very thorough implementation of a conventional UI
+framework. It's arguable that it is over-engineered, explaining its
+sluggish performance, but the quality may more than offset this
+disadvantage, particularly as processor speeds improve.
+
+John also made a number of tuning changes to Tycho in preparation
+for releasing it with Ptolemy 0.7.1.  The new version has a modular
+package structure and is Windows compatible in every way.
+
+
+Data Package
+------------
+
+After a detailed design review of the parser in the data package,
+written by Neil Smyth, that package has been promoted to "yellow."
+In our code rating system, yellow reflects a level of confidence
+in the interfaces so that users of the classes can design to it.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Ptolemy 0.7.1 Release
+---------------------
+
+We released the Alpha version on May 15, the beta version on May 29,
+and the final version on June 12.  The release notes are included as
+an appendix.  While much of Ptolemy 0.7.1 is independent of this HMAD
+project, it has the following connections:
+
+* Mutable discrete-event modeling
+* Starcharts generalized hybrid systems
+* The NT port (which gives us experience developing and releasing NT software)
+* Ptplot (which gives us experience developing and releasing Java software)
+
+
+NT port of Ptolemy
+------------------
+
+At the DARPA Composite CAD PI meeting on June 1 in Boston we gave the
+first public demonstration of the NT port of Ptolemy 0.7.1.
+
+
+Synthesis of Embedded Software
+------------------------------
+
+The UT Austin team, led by Prof. Brian Evans, has completed the work on
+the C50 domain in Ptolemy 0.7.1 that was described in the last monthly
+report.  This was released with Ptolemy 0.7.1.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Nothing to report on this task.
+
+
+2.  Equipment/Infrastructure Status:
+
+John Reekie has been exploring the use of CVS in a mixed Windows NT and
+Unix environment. CVS supports much more sophisticated source code
+control than SCCS, which is what we have been using in the Ptolemy
+project. In particular, it supports a more distributed computing
+environment, such as our own with 15 notebook computers and a network
+of Sun workstations.
+
+Christopher Hylands set up an automaton that compiles the Ptolemy II
+tree, runs the test suite, measures code coverage, and notifies the
+development team of the result by email.
+
+
+3.  Interactions and Technology Transfer
+
+-- Prof. Lee visited the MathWorks, makers of Matlab and Simulink, on June
+   2, to discuss the trajectory of ongoing work with Simulink and Stateflow.
+   Approximately 20 engineers and managers, including the company president,
+   were present for the meeting, which lasted all afternoon.  We offered a
+   critique of the current discrete-time model in Simulink and of the
+   interaction between Simulink and Stateflow, and received in return
+   an advance view of forthcoming product offerings.  Simulink and Stateflow
+   work together on a principle that is a special case of our *charts
+   (starcharts) model of computation.
+
+-- Prof. Brian Evans and his student Niranjan Damera-Venkata visited from
+   UT Austin on June 4.  They met with several group members to help
+   coordinate our ongoing collaboration (they are subcontractors on this
+   project).
+
+
+4.  Personnel Status
+
+Jennifer Basler has joined the group as a grants administrator. Mudit
+Goel took up residence at Philips Research in Eindhoven, where he is
+learning about embedded system architectures and mapping of process
+networks specifications onto embedded systems.
+
+
+5.  Talks/Presentations/Publications:
+
+-- Ptolemy II demonstration, given by Edward A. Lee at the DARPA PI
+   meeting for the Composite CAD program, June 1, 1998. We presented the
+   CT (continuous-time) domain, the PN (process networks domain), the NT
+   port of Ptolemy 0.7.1, and the *charts modeling in Ptolemy 0.7.1.
+
+-- "Heterogeneous Modeling and Design," presentation by Edward A. Lee
+   at the DARPA PI meeting for the Composite CAD program, June 3, 1998.
+
+
+Publications
+------------
+
+None in this period.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to continue design and implementation of the actors, graph,
+math, pn, and ct packages in Ptolemy II. We hope to bring the data and
+actor packages to "yellow" and the kernel package to "green".
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+APPENDIX
+========
+
+Release notes for Ptolemy 0.7.1
+-------------------------------
+
+New work
+
+   * Adaptive Computing Systems (ACS) domain.
+
+     James Lundblad of the Ptolemy group is developing the ACS domain
+     with Sanders, a Lockheed Martin company. A key feature of the ACS
+     domain is to make it easier to generate different implementations
+     of a simulation. The ACS domain uses the Corona/Core approach,
+     which was created by Jose Pino and Tom Parks while they were at UC
+     Berkeley. In the Corona/Core design, a star has one Interface,
+     named the Corona, and one or more implementations, named Cores.
+     The ACS domain will help in automating the FPGA design process; it
+     will help in transforming an SDF graph into a reasonable FPGA
+     implementation. Initially, an Annapolis Microsystems Wildforce
+     board will be the target. Sanders has a web page describing the
+     project at: http://www.sanders.com/spard/acs_env/acs_env.html
+
+
+   * Mutating Topologies Within DE - Jens Voigt, John Davis II
+
+     Jens Voigt of Dresden University of Technology and John S. Davis II of
+     the Ptolemy Group have worked jointly to support dynamic higher order
+     functions within the discrete event domain of Ptolemy 0.7.1.
+
+        o Dynamic Higher Order Functions within the DE domain facilitate the
+          creation of simulations which have star/graph topologies that can
+          mutate during simulation runtime. The Dynamic HOF interface, which
+          was created by Jens Voigt, employs a style that is similar to the
+          (static) higher order functions introduced in earlier versions of
+          Ptolemy. Dynamic HOF stars allow for runtime deletion and creation
+          of a master block. The master blocks can themselves contain
+          dynamic HOF stars so that cascaded mutations are supported. The
+          master blocks can be specified both graphically and textually.
+
+        o Runtime deletion of blocks requires removal of pending events that
+          are destined for the block in question. The storage and retrieval
+          of pending events has played a critical role in discrete event
+          modeling and a great deal of effort has been taken to maximize
+          the efficiency of this process. In particular, the calendar queue
+          of the DE domain has made the "pending event problem" less of a
+          bottle neck than it otherwise would be. To maintain this level of
+          efficiency within the setting of dynamic higher order functions,
+          John Davis extended and modified the calendar queue so that it
+          could support runtime mutations efficiently. Mutability is also
+          supported for Ptolemy users who prefer the FIFO queue-based DE
+          scheduler.
+
+   * HOF fixes - Tom Lane
+
+   * Synchronous/Reactive C Code Generation (SRCGC) domain - Frederic
+     Boulanger.
+
+   * C50 domain changes: Professor Brian Evans and his students
+          + The C50 stars no longer generate assembly code with assembly
+            directives so that different targets that support different
+            assembly directives can be used. The new stars work for both
+            the C50 DSK target and the new SimC50Target.
+          + The new SimC50Target invokes the standard (commercial) C50
+            simulator written by Texas Instruments. TI will generally
+            donate this simulator to universities. This new target sets
+            the stage for a C50 Evaluation Module Board target.
+
+   * Java version of pxgraph, Ptplot, - Edward A. Lee, Christopher Hylands -
+     We will not ship the X11 pxgraph sources, but they are available on our
+     website, along with binaries.
+
+   * Preliminary port to Windows NT - Christopher Hylands - Ptolemy
+     0.7.1 runs under Windows NT using the Cygwin32 compiler and the
+     Cygwin32 X11R6 binaries. To run pigi under NT, you will need a NT X
+     server. For more information, see
+     http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html 
+
+   * Support for the EGCS C++ Compiler - Christopher Hylands
+
+   * Support for the gcc-2.8 C++ Compiler - Christopher Hylands - Currently
+     gcc-2.8.0 crashes under Solaris2.5.1 when compiling certain c++ files
+     with -O -fPIC. As a result, we are planning on shipping using EGCS
+     instead of FSF gcc.
+
+   * Ptolemy interfaces to Matlab and Mathematica - Brian Evans, Guy Maor,
+     and Wade Schwartzkopf
+        o upgrade to work with Matlab 5 and Mathematica 3 by default but
+          allow it to be recompiled with Matlab 4 and Mathematica 2.2
+        o dynamically link the interface to Matlab
+        o remove dependence of the PTcl class on the interfaces to Matlab
+          and Mathematica Tcl commands, and instead, have the Matlab and
+          Mathematica Tcl commands be registered.
+     We cannot ship binaries built with the current Matlab 5 interface,
+     since they will not work on machines that do not have Matlab installed.
+
+   * Tycho 0.2.1
+        o New package system - John Reekie, Christopher Hylands
+        o Emacs-style search and file open - Cliff Cordeiro
+        o HTTP, FTP, and mailto support - Kevin Chang, John Reekie
+        o New documentation viewer (idoc) - Cliff Cordeiro
+
+Minor changes
+
+   * Vem/pigiRpc interlocks to prevent the dreaded "RPC Protocol Error" -
+     Tom Lane
+   * Custom display of universe parameters in run control panels. It is now
+     possible to add parameters to the Run Control panel by checking check
+     boxes in the Edit Parameters Window. - Tom Lane
+   * Support for using the ddd debugger from pigi -debug - Jens Voigt
+   * Support for compiling Ptolemy under Solaris 2.5 for the PC using
+     PTARCH=sol2.5pc - Dominique Ragot
+   * Support for the Process Network (PN) domain under Linux - Wolfgang
+     Reimer
+   * Various bug fixes from Wolfgang Reimer, including:
+        o Create 2 new Ptolemy targets for Linux (linux.static, linux.debug)
+        o Work around to allow to use Complex class of GNU libg++
+        o matlab.mk and mathematica.mk now allow predefinition of MATLABDIR
+          and MATHEMATICADIR
+     For complete details, see
+     http://ptolemy.eecs.berkeley.edu/ptolemy0.7/patches/reimer/index.html
+
+New Stars and Demos
+
+   * HOFBusInterleave3 star - Tom Lane
+   * SDF SunVideo and VideoEdgeDetect - Luis Gutierrez
+   * DEXYgraph star - Jens Voigt
+   * 60GHz DE demo - Jens Voigt
+   * SDF contrib AIFF stars that read and play AIFF Audio files on SGI
+     machines - Charles B. Owen
+   * SDF and CGC neural network stars, galaxies, and demos - Biao Lu and
+     Brian Evans
+   * SDF smart antenna wireless communications demonstration using the
+     constant modulus algorithm - Srikanth Gummadi and Brian Evans
+   * SDF galaxies ITUDTMFGenerator and ITUDTMFplusNoiseGenerator for testing
+     Dual-Tone Multi-Frequency (touchtone) detectors for ITU compliance -
+     Matt Felder, Jimmy Mason, and Brian Evans
+

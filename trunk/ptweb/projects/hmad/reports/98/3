@@ -1,0 +1,535 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 March 27, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        2/15/98 - 3/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+The highlight of this reporting period was the extraordinary number and
+quality of external interactions. Most notably, we have achieved yet
+another major technology-transfer milestone, this time in the area of
+simulation and modeling of optical fiber communication systems. We also
+conducted the first demonstration of Ptolemy II for anyone outside of
+Berkeley, in this case for Heather Dussault of DARPA, who visited on
+March 10 for an informal project review. This demonstration showed the
+first two Ptolemy II domains and their interaction with a Tycho-based
+block-diagram editor.  We have made progress on the interoperability
+strategy for Ptolemy II, and continue to make progress on its design.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Interoperability
+----------------
+
+We have invested considerable effort into evaluating Sun's Java-based
+RMI (remote method invocation) vs. CORBA as technologies for
+multi-source distributed modeling and simulation. John Davis and Mudit
+Goel have prototyped small systems using both mechanisms, and have
+reached some tentative conclusions. RMI is much simpler than CORBA, but
+is limited to distributed applications where all components are written
+in Java. However, it is also apparently possible to use a subset of RMI
+to develop CORBA-compliant distributed applications. A talk at Java One
+(the major Java conference) will include code examples showing a simple
+distributed application with a mixture of Java RMI technology code and
+C++ CORBA code. See
+
+      http://java.sun.com/javaone/javaone98/tracks.html#4jrmi.
+
+CORBA is surprisingly complex, requiring considerable expertise to use.
+We are concerned that the cost and complexity of setting up CORBA ORBs
+may preclude many possible uses within the Composite CAD community.
+
+We are also studying the use of JavaBeans with CORBA, and it appears
+that with CORBA 3.0, due out in the fourth quarter of this year, there
+could be a very useful synergy here. A 2/2/98 PC Week article,
+'JavaBeans key to CORBA upgrade,' states:
+
+  "Skeptics have long complained that CORBA lacked the ease of use known
+  to Microsoft Corp.'s rival COM (Component Object Model).  But CORBA
+  3.0's JavaBeans object model could solve that. The new model, dubbed
+  CORBAbeans, will enable rapid development of applications, with
+  easier-to-use tools and interfaces."
+
+See
+
+       http://www.zdnet.com/pcweek/news/0202/02corba.html
+
+Also, Beans has an interface called InfoBus that allows Beans to
+communicate within the same virtual machine, something more difficult
+to accomplish with CORBA alone. See:
+
+       http://www.javasoft.com/beans/faq/faq.infobus.html#Q34
+
+We have also been studying the applicability of EDIF as a file format
+for our hierarchical graphs.  For details, see
+
+       http://ptolemy.eecs.berkeley.edu/~cxh/sa/edif.html
+
+Finally, Christopher Hylands has investigated the Tcl Bean, which
+connects Tcl scripts via Java Beans to Java Studio, an environment
+distributed by Sun for graphically composing Java Beans. Christopher
+was studying how this might relate to Ptolemy II. For details, see:
+
+       http://ptolemy.eecs.berkeley.edu/~cxh/java/tclbean/index.html
+
+
+Ptolemy II
+----------
+
+The Java redesign of Ptolemy is progressing.  We have refined the design
+of the actors package and are in the process of implementing it.  This
+package will augment the kernel package by supporting entities that can
+execute.
+
+Jie Liu has done a simple performance analysis of continuous-time
+simulations in Ptolemy II. Our objective is to identify early any
+hidden costs associated with using Java and with our architecture.
+Indeed the analysis reveals that there are substantial costs associated
+with our strategy for transferring data between actors. In particular,
+one method, deepGetConnectedPorts(), which returns an enumeration of
+ports that are to receive data, consumes approximately half the
+simulation time. This is clearly way out of proportion with its value.
+We are investigating the source of the inefficiency and have developed
+a scheme for cacheing the data that this method constructs.
+
+Christopher Hylands designed and implemented methods in all the Ptolemy
+II kernel classes that report topology information in an ASCII format
+that is easily parsed.  One application is for making it easier to write
+test suites.  A second application (described further below) is to
+create visual displays of application structure.
+
+
+User Interface
+--------------
+
+Christopher Hylands created a visual display of the hierarchy in
+Ptolemy II topologies that provides a significantly different view than
+the usual block diagram and can be used to visualize mutable systems.
+The first application was to study the evolution of an implementation
+of the Sieve of Eratosthenes that Mudit Goel implemented in the process
+networks domain.
+
+
+Tycho Packages
+--------------
+
+John Reekie and Christopher Hylands have completed and installed the
+Tycho package system. Tycho is now comprised of a number of
+semi-autonomous packages, and packages are loaded as needed. Potential
+advantages:
+
+* Deployment of subsets of Tycho for specific applications.
+
+* A single consistent mechanism for managing directories.
+
+* Management and inclusion of 3rd-party and contributed software.
+
+* An easy way to include and exclude code in development.
+
+* Removal of all hard-wired paths from the test suite files.
+
+* No longer need to duplicate code for stand-alone scripts.
+
+* The package architecture will make it easier to manage the slow
+  conversion to using Java instead of Itcl for new user interface work
+  that we expect.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Software Engineering
+--------------------
+
+John Reekie led two study group sessions in which we examined and
+discussed software quality control strategies from NASA and other
+sources. As a result, John has drafted a set of design-review
+checklists for various phases of design, including architectural design
+and code reviews. His checklists are pared down considerably compared
+to the NASA version. In an academic environment, we require a simpler
+process or design reviews simply will not occur.  We have conducted a
+set of semi-formal design reviews for the Ptolemy II kernel and the
+preliminary graph package.
+
+
+Math Package
+------------
+
+Albert Chen implemented a technique suggested by Nick Weaver of the
+BRASS project at Berkeley to use higher-order functions to build up an
+extensible library of vector and matrix mathematical operations. This
+method is big improvement over what we had originally planned,
+prototyped by William Wu, in which we used the reflection package in
+Java. The resulting code is much more compact and more smoothly handles
+reflections.
+
+
+Graph Package
+-------------
+
+Ron Galicia and Jie Liu have proposed a design for a pair of classes in
+Java that support graph algorithms. One of these classes, called
+StaticGraph, is optimized for execution speed, and restricts the extent
+to which graphs can be altered once they are constructed. It uses Java
+arrays to create an adjacency list representation of the graph. The
+second class, called simply Graph, is an adaptor to the existing
+Ptolemy II kernel, which can represent ordinary mathematical graphs.
+The adaptor restricts the kernel to mathematical graphs and provides a
+set of methods for manipulating the graph in intuitive ways. In both
+cases, the interfaces and graph algorithms are being fashioned after
+LEDA, a popular graph manipulation package written in C++.
+
+
+Ptolemy 0.7.1 Release
+---------------------
+
+We are planning a new release of the C++ Ptolemy implementation to
+distribute recent improvements done under this project and others. The
+major contribution of this project is improvements to the FSM domain,
+support for mutability in discrete-event systems, and improvements to
+the Tycho side of the user interface. The release schedule is
+tentatively:
+
+     Friday, Mar 20, 1998 - No new major changes to 0.7.1 after this date. 
+     Monday, Mar 30, 1998 - Prerelease tree to people doing
+                            ports. Locally, we test and do bug fixes. 
+     Friday, Apr 17, 1998 - Changes due from people doing ports. 
+     Friday, Apr 24, 1998 - Code Freeze until May. Split tree that
+                            week. 
+     Friday, May 15, 1998 - Ptolemy0.7.1alpha Release 
+     Friday, May 29, 1998 - Ptolemy0.7.1beta Release 
+     Friday, June 12, 1998 - Ptolemy0.7.1 final Release 
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+We have formalized the semantics of discrete-event systems as a first
+step towards having a comprehensive mixed-signal semantics. See
+publication [1] below.
+
+
+2.  Equipment/Infrastructure Status:
+
+We have received and distributed to members of the group a set of
+notebook computers running Windows NT. This will help ensure
+cross-platform compatibility of our new software, correcting our past
+bias towards Unix workstations.
+
+
+3.  Interactions
+
+* We presented an informal project review for Heather Dussault of DARPA
+on March 10.  At this review, we gave four demonstrations:
+
+ 1) Hierarchical finite-state machines interacting with various
+    concurrency models under Ptolemy 0.7 (we view this as a generalization
+    of hybrid systems).
+
+ 2) Continuous-time simulation of a second order system under Ptolemy II
+    using a 4-th order Runge-Kutta ODE solver written in Java and controlled
+    by a Tycho block-diagram editor and interactive parameter controller.
+
+ 3) Multithreaded and mutable application operating under the process
+    networks model of computation in Ptolemy II written in Java with
+    views of the process hierarchy displayed in Tycho.
+
+ 4) Demonstration of the Tycho infrastructure with emphasis on its use
+    with Ptolemy II for modeling and design of mixed-technology systems.
+
+The viewgraphs for the presentation are available at:
+
+     http://ptolemy.eecs.berkeley.edu/papers/viewgraphs/hmad.pdf
+
+
+* For the informal project review, an update on the progress by the
+researchers on the UT Austin subcontract on real-time sonar beamforming
+on Unix workstations [3], smart antennas for wireless communications
+systems [4], hybrid neural network and signal processing systems,
+Web-enabled simulation of embedded software, and advanced analog filter
+design was made available and can be retrieved at
+
+     http://www.ece.utexas.edu/~bevans/talks/hmad98ucb.pdf
+
+
+* In a major technology-transfer milestone, BNeD and Hewlett-Packard
+have announced a joint marketing agreement to distribute a simulation
+environment designed by BNeD and based on Ptolemy for optical fiber
+communication systems. Wolfgang Reimer, who has done a lot of work with
+Ptolemy and Linux, is part of BNeD. He visited us on Feb. 27 with Igor
+Koltchanov, the BroadNeD Product Manager, and demonstrated the
+simulation environment, which focuses on the physical properties and
+their interaction with communication algorithms. The fact that HP's new
+design environment is based on Ptolemy made this marketing agreement a
+clear win for both sides. We have included the marketing announcement
+as an appendix below. An article in EE Times describes this event:
+
+     http://techweb.cmp.com/eet/news/98/997news/wdm.html
+
+Wolfgang Reimer also created a new package release of Ptolemy0.7p1 for
+RedHat Linux 5.0. 
+
+
+* We have had some discussions with Allen Dewey and Christopher Cramer of
+the IMPACT project at Duke about user interface and visualization
+tools. They are (correctly we believe) reluctant to use Itcl, in part
+because of the difficulties we have faced getting support and upgrades,
+and thus will not be able to use much of our Tycho infrastructure.
+Their plan is to base their work on Swing, the latest release of the
+Sun Java Foundation Classes. Indeed, we are also planning to use Swing
+for any new user interface development, so there is potential for
+leveraging each others' efforts. We have also sent them a preliminary
+version of the Ptolemy II design document. They may be able to use some
+of the (non-graphical) infrastructure we have developed.
+
+
+* We have scheduled a meeting with Per Ljung of Coyote Systems to
+discuss interaction between their static boundary element simulation
+tools and Ptolemy II.
+
+
+* We have initiated discussions with the BRASS group at UC Berkeley,
+directed by John Wawrzynek, which works on synthesis of FPGA
+configurations under the DARPA Configurable Computing program. We are
+forming a collaboration in which Ptolemy II might serve as a
+specification environment for such configurations.
+
+
+* We have also scheduled a talk at Synopsys on March 17 to outline the
+Ptolemy project.
+
+
+* Eric Pauer of Lockheed Sanders has had a paper accepted, "High
+Performance Scalable Computing Performance Modeling Using Ptolemy," to
+appear in the IASTED International Journal of Modeling and Simulation.
+
+
+* Dominique Ragot of Thomson-CSF Communications has modified the Ptolemy
+source distribution to run on a PC running Solaris 2.5.
+
+
+* Three visitors from the Philips Research Lab in Eindhoven, The
+Netherlands, Bart Kienhuis, Kees Vissers, and Pieter van der Wolf
+visited our group on March 13 and presented a model of computation that
+they are using for embedded video systems that is heavily inspired by
+our own work on Kahn process networks. Their model of computation
+blends Kahn process networks with a model called PAMELA that adds time.
+This notion of time should make it much easier for us to mix PN models
+with physical models where time is intrinsic. It has been agreed that
+Mudit Goel from our group, the author of the Ptolemy II process
+networks domain, will visit the Philips Research Lab this summer.
+
+
+* Frédéric Boulanger, of Supélec in France is developing a code
+generation domain for SR (our synchronous/reactive domain in Ptolemy)
+named SRCGC. Code generation for pure SR systems currently works, and
+they are studying code generation for mixed domain systems. Their final
+goal is to provide tools for separate development of the control and
+data processing parts of an application. SR and SDF (synchronous
+dataflow) could be used for prototyping, and SRCGC and CGC (code
+generation in C, which uses dataflow semantics) for the production of
+draft code, the final application code could require a last manual step
+before meeting size and speed requirements. In the process, Boulanger
+has provided a number of improvements to the SR implementation, and we
+have agreed that he should, in the near term, become the primary
+maintainer of this code. Boulanger has also made a new version of ocpl,
+which translates oc modules (from Lustre or Esterel programs) into
+Ptolemy blocks in the DE, SDF, SR, CGC and SRCGC domains. The
+distribution is at:
+
+     ftp://ftp.supelec.fr/pub/cs/distrib/ocpl/
+
+and an on-line version of the documentation is at
+
+     http://wwwsi.supelec.fr/fb/doc_ocpl/ocpl.html
+
+A public version of SRCGC should be made available in April or May. This
+work is done in collaboration with Xavier Warzee at Thomson TCO, and they
+agreed to make the new domain publicly available.
+
+
+* We conducted an extensive email discussion with Steve Goddard
+(goddard@cs.unc.edu) in the CS department at UNC-Chapel Hill, who works
+with Kevin Jeffay. He has extensive experience with PGM (a dataflow
+design language developed by the US Navy), and has been researching
+dynamic scheduling techniques for PGM graphs and the impact of dynamic
+scheduling on latency and memory requirements. We discussed some of
+their recent results and how these results relate to scheduling SDF
+graphs with off-line scheduling algorithms.
+
+
+4.  Personnel Status
+
+Fiona Sinclair, our contract administrator, has left the university and
+will be replaced in the near term by Diane Chang (changd@eecs.berkeley.edu).
+
+
+5.  Talks/Presentations/Publications:
+
+Talks by Group Members
+----------------------
+
+* "An Overview of Ptolemy II," Edward A. Lee, invited talk to the BRASS group
+  at UC Berkeley, March 9.
+
+* "Heterogeneous Modeling and Design," various group members, project review
+  for Heather Dussault of DARPA, March 10.
+
+Publications
+------------
+
+[1] E. A. Lee, ``Modeling Concurrent Real-time Processes Using Discrete
+    Events,,'' Invited paper to Annals of Software Engineering, Special
+    Volume on Real-Time Software Engineering, to appear, 1998. Also UCB/ERL
+    Memorandum M98/7, March 4th 1998.
+
+[2] E. A. Lee and A. Sangiovanni-Vincentelli, ``A Framework for
+    Comparing Models of Computation,'', March 12, 1998. (Revised from ERL
+    Memorandum UCB/ERL M97/11, University of California, Berkeley, CA
+    94720, January 30, 1997).
+
+[3] A. K. Kulkarni, A. Dube, and B. L. Evans, ``Benchmarking Code Generation
+    Methodologies for Programmable Digital Signal Processors,'' Proc. IEEE
+    Asilomar Conf. on Signals, Systems, and Computers, Nov. 1-4, 1998, Pacific
+    Grove, California, invited paper, to appear.
+
+[4] G. E. Allen, D. C. Schanbacher, and B. L. Evans, ``Real-Time Sonar
+    Beamforming on a Unix workstation Using Process Networks and POSIX
+    Threads'', Proc. IEEE Asilomar Conf. on Signals, Systems, and Computers,
+    Nov. 1-4, 1998, Pacific Grove, California, invited paper, to appear.
+
+[5] S. Gummadi and B. L. Evans, ``Cochannel Signal Separation in Fading
+    Channels Using a Modified Constant Modulus Array'', Proc. IEEE Asilomar
+    Conf. on Signals, Systems, and Computers, Nov. 1-4, 1998, Pacific Grove,
+    California, invited paper, to appear.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to continue design and implementation of the actors, graph,
+math, pn, and ct packages in Ptolemy II. In addition, we hope to start
+on the fsm package, which will support finite state machines in hybrid
+combinations with the other (concurrent) domains.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+APPENDIX
+========
+
+HP and BNeD to Develop EDA Products Together for Broadband Optical
+Market 
+
+February 25, 1998
+
+SAN JOSE, Calif.--(BUSINESS WIRE) via Individual Inc. -- To address
+the needs of engineers planning and designing photonic networks,
+systems and components, Hewlett-Packard Company and BNeD Broadband
+Network Design (BNeD) today announce an agreement to work together to
+develop electronic design automation (EDA) products for the photonic
+systems market. The announcement was made here at the Fiber Optic
+Communications Conference, Feb. 24 to 26.
+
+The growing traffic in data and image services, fueled by the
+dramatic increase in the use of the Internet and mobile communications
+systems, requires that the capacity of the present global fiber-optic
+telecommunications infrastructure be expanded. To accommodate this
+increased demand, designers of submarine cable and long-distance
+systems, cable TV (CATV) and metro, utility and corporate networks
+worldwide are moving to new technologies. Two of the technologies that
+engineers are using to upgrade existing systems are 10Gb/s to 40Gb/s
+time division multiplexing (TDM) and wavelength division multiplexing
+(WDM).
+
+"As with any new technology, designing WDM telecommunications networks
+brings with it a host of new issues, including the need to consider
+associated complicated physical effects, particularly nonlinearities,"
+said Kay Iversen, president and chief executive officer of
+BNeD. "Presently, optimization of WDM networks is being performed
+mainly by trial and error, using lab tests and trial networks. We look
+forward to working with HP to provide the industry with more accurate,
+cost-effective solutions through EDA simulation techniques."
+
+HP and BNeD will work together to develop an EDA software package that
+combines the powerful simulation technology and RF and DSP models in
+HP EEsof Division's Advanced Design System with the comprehensive
+optical model libraries from BNeD. The software is expected to allow
+telecommunications service providers, photonics and component systems
+manufacturers for the first time to codesign both the electrical
+high-frequency and the optical elements of photonics networks. This
+will allow them to optimize their designs early in the design process
+and to decrease time-to-market.
+
+"The agreement will provide us and BNeD with the opportunity to
+contribute to the emerging photonics market," said Jake Egbert,
+general manager of HP EEsof Division. "The products that result from
+our combined expertise will provide powerful solutions for
+telecommunications system and component manufacturers facing the
+challenges posed by rapidly evolving technologies. "
+
+HP's Advanced Design System high-frequency-simulation software,
+developed by the HP EEsof Division, integrates multiple simulation
+technologies to provide complete end-to-end communications
+signal-path-design capability.
+
+ABOUT BNED 
+
+In response to the telecommunications industry's need to update its
+networks quickly and frequently, BNeD offers software solutions and
+professional services for photonic automated design (photonic
+EDA). BNeD has established long-term contracts with major
+telecommunications providers as well as equipment and component
+manufacturers to deliver practical tools for the industry's most
+daunting problems.
+
+Information about BNeD and its products can be found on the World Wide
+Web at http://www.BNeD.com 
+
+ABOUT HP 
+
+Hewlett-Packard Company is a leading global provider of computing,
+Internet and intranet solutions, services, communications products and
+measurement solutions, all of which are recognized for excellence in
+quality and support. It is the second-largest computer supplier in the
+world, with computer-related revenue in excess of $35.4 billion in its
+1997 fiscal year. HP has 123,300 employees and had revenue of $42.9
+billion in its 1997 fiscal year.
+
+Information about HP and its products can be found on the World Wide
+Web at http://www.hp.com. 
+
+Information about HP EEsof products can be found on the World Wide Web
+via http://www.hp.com/go/hpeesof. 
+
+CONTACT: HP | Elisabeth Kannow, 818/879-6440 | 818/879-6223 (fax) |
+elisabeth_kannow@hp.com | or | CM Communications, for HP | Caroline
+Murphy, 650/324-8819 | 650/327-8213
+(fax) | cpm1@earthlink.net | or | BNeD GmbH | Dirk Seewald,
+49-30-34704715 | 49-30-34704717 (fax) | seewald@BNeD.com 
+
+[Copyright 1998, Business Wire] 
+
+This page was copied from
+
+http://www.newspage.com/cgi-bin/NA.GetStory?story=b0224110.500&date=19980225&level1=46510&level2=46516&level3=19887 
+

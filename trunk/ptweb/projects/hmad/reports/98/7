@@ -1,0 +1,357 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Aug. 18, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        6/15/98 - 7/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Progress on Ptolemy II continues. The kernel package has been promoted
+to "green." It now supports a more parallel read/writer model of
+synchronization. The actor package is approaching green. It now
+supports higher-order functions (both static and dynamic) and
+hierarchical heterogeneity ("wormholes" in the terminology of Ptolemy
+0.x).  We have found and corrected bugs in Sun's Tcl Blend code so that
+it would work with jdk 1.2, the latest version of Java.  And we have
+obtained the new release of Itcl (3.0) which works with the current
+version of Tcl/Tk, and have begun to port Tycho to use this new version.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Kernel Package
+--------------
+
+We have completed clone() and description() methods throughout the
+Ptolemy II kernel. The clone() methods support user interfaces that use
+templates for modular subsystem specification. The description() method
+supports scripted interfaces and debugging of applications.
+
+We have also modified the basic mechanism used for synchronizing multiple
+threads so that it uses a read/writer design pattern.  This pattern allows
+many simultaneous readers, and thus supports more parallelism than the
+previous model.
+
+We have completed a code review of the kernel, implemented the recommended
+changes, and promoted the kernel to "green" status.
+
+For the latest description of our code rating system, see:
+
+     http://ptolemy.eecs.berkeley.edu/tycho/tycho0.2.1/tycho0.2.1/doc/coding/rating.html
+
+It says about the "green" status:
+
+   The interface to green code has been finalized, and the implementation
+   is considered acceptable for development purposes. Clients can code to
+   green code in the expectation that the interface will not change
+   in such a way as to break compilation, nor will the implementation
+   change enough to break the caller's test suite. Green code is releasable. 
+
+Here is what it says about making changes to green code:
+
+   The author proposes advancement to green when he/she is satisfied that
+   the interface to the class is final, except for relatively minor
+   enhancements and additions, and that the implementation of the class
+   is satisfactory. This could be considered "beta" level code. Before
+   proposing advancement to green, the author is responsible for providing
+   a test suite that exercises and demonstrates the main functionality of
+   the class. 
+
+   Accepting advancement 
+
+   The tester/reviewer accepts advancement to green if he/she is satisfied
+   with the implementation of the class. The tester/reviewer shall determine
+   this by a) writing a test suite, and b) reviewing the code. The
+   test suite should have at least 50% code coverage. If appropriate, the
+   tester/reviewer is entitled to organize a code review at this time.
+   The author is required to write example test code if requested by
+   the tester/reviewer. 
+
+   Acceptable changes 
+
+   The interface to green code can only have incremental interface changes
+   (that is, new methods). Small changes, such as an additional argument
+   or a change in an argument type, are acceptable but should first be
+   cleared with authors of client classes. In any case, the author is
+   required to fix any test suites or clients that break as a result. 
+
+   Implementation changes to green code are allowed, provided that they
+   do not require clients to change the order of calls (which is, in effect,
+   changing the interface.) The author must verify that changes do
+   not break any test suites, and is required to fix the clients and/or
+   test suites if they do. If a change will require substantial fixes,
+   then the class should probably be taken back to yellow. 
+
+The next step is to move the kernel to blue.
+
+   The implementation of the class has been fully and completely tested,
+   and accepted as meeting all requirements. All documentation, including
+   external documentation if appropriate, is complete. Blue code
+   is releasable. 
+
+
+Actor Package
+-------------
+
+We have completed a major overhaul of the actor package, with the
+objective of bringing it to "green" status.  The actor package extends
+the kernel package by adding execution semantics to entities.
+
+One major set of changes concern the flow of control implemented by
+the Director class. One of the motivations for the changes is to
+cleanly support higher-order functions (HOF) in the style of Ptolemy
+0.x. While HOF was an afterthought in Ptolemy 0.x, it is an integral
+part of Ptolemy II. Ptolemy II will be able to support both static
+(compile-time) and dynamic (run-time) HOFs, even in domains (such as
+synchronous dataflow) where scheduling is done statically. Dynamic HOFs
+in a statically scheduled domain now automatically for recalculation of
+the schedule. The same mechanism also supports less structured run-time
+mutations than HOFs.
+
+The actor package now has a complete test suite.  The test suite is
+written as a Tcl script, and uses Tcl Blend to interface to Java.
+
+Lukito Muliadi has written a class for the actor.util package that
+implements a calendar queue, which is an efficient sorted queue used in
+discrete-event simulation.  A design review is under way.
+
+
+Type System
+-----------
+
+Yuhong Xiong has made major progress on the Ptolemy II type system. His
+design permits subsystems (including atomic actors) to define
+constraints on type relationships between their inputs and outputs. An
+algorithm based on partial orders resolves types so that all
+constraints are satisfied, or the constraints are determined to not be
+satisfiable. His design supports a rich variety of polymorphic actors,
+and meshes with the latest redesign of the actor package to support
+mutable systems.
+
+He defines a port TypedIOPort that is derived from IOPort and
+implements the InequalityTerm interface. The latter interface is used
+by generic algorithms that solve a set of inequalities.
+
+
+User Interface
+--------------
+
+Itcl 3.0 has finally emerged from AT&T, and John Reekie has begun
+the (hopefully minor) port of Tycho.  This allows Tycho to work with
+the most recent releases of Tcl/Tk.  See:
+
+    http://www.tcltk.com/itcl/
+
+
+Data Package
+------------
+
+We have completed a design review of the parser subpackage of the data
+package, designed by Neil Smyth, and have promoted the package to yellow.
+This package provides a flexible and extensible expression parser and
+evaluator.  We expect to use this for actors that evaluate expressions
+that are given as parameters, as well as for expressions that specify
+parameter values.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Ptolemy Plotter
+---------------
+
+Christopher Hylands released Ptplot1.3p1 on June 19.  See
+
+    http://ptolemy.eecs.berkeley.edu/java/ptplot/
+
+Ptplot is a Java 2-D plotting package that can be used as an applet or
+a stand-alone application. The changes between ptplot1.3 and ptplot1.3p1
+
+     * The plotting region is now always white. Formerly, the -bg option
+       would change the color of the plotting region and the region
+       around the plotting region where the legend is. Now -bg only
+       changed the region around the plotting region. The reason for this
+       change is that the colors of the data sets were designed to be
+       used on a white background.
+     * Ignore the -bb command line argument. In the X11 version of pxgraph,
+       -bb drew a bounding box around the data region. Formerly, the Java
+       version printed a message about -bb not being supported. In the
+       Java version of pxgraph, the region where plots appear is a
+       different color than the surround region, which makes -bb useless.
+     * Various minor cleanups to the comments. Stripped out trailing spaces
+       at the end of lines.
+     * Added fillPlot() method back in so that client programs can call it.
+       Reported by Stephan Puchegger <a9127383@unet.univie.ac.at>
+     * If JAVAHOME is not set, and pxgraph cannot find a JDK, then it looks
+       in /usr/eesww/lang/jdk1.1latest. This is for use in the EECS
+       Department here at UC Berkeley.
+
+---end---
+
+The next release of Ptplot will be ptplot2.0.  We expect that 2.0
+will be out sometime in the fall. It will have the following features:
+
+     * The ptplot classes in ptplot2.0 will be in the pt.plot
+       package (currently they are in the ptplot package).  This
+       change is necessary so that we can integrate ptplot into
+       Ptolemy II, which is our next generation hierarchical simulation 
+       system.
+
+     * Ptplot2.0 will use the JDK1.1 event handling mechanism.
+       This could cause problems with the use of Ptplot2.0 in
+       applets under browsers that do not support JDK1.1.  For
+       those users, they will either need to upgrade their browser,
+       or stick with Ptplot1.x.  We are making this change so
+       that we can clear up a bunch of deprecation warnings and
+       possibly use ptplot as a Java Bean or use it with Swing.
+
+
+Hardware Design Languages
+-------------------------
+
+James Lundblad has undertaken to lead the next phase in our Friday
+afternoon study group meetings, which is now looking at hardware design
+languages, focusing on Verilog and VHDL.  The purpose of the study group
+is to understand the semantics and practicalities of these languages and
+to better understand their role in the future of Ptolemy.
+
+
+Filter Optimization (UT Austin)
+-------------------------------
+
+The traditional approach to infinite impulse response (IIR) filter
+implementation is to first design a conventional IIR filter to
+double-precision accuracy in the pole and zero locations and then
+iteratively adjust the poles and zeros in the design for the target
+implementation technology (breadboard components, switched capacitor,
+custom integrated circuit, digital signal processor, heterogeneous, and
+so forth). Due to the implementation technology, it is possible for a
+stable filter to become unstable due to the truncation of the pole and
+zero locations.
+
+A key technology-independent measure of a filter's robustness under
+implementation is a quality factor. A quality factor is associated with
+each conjugate pair of poles. For analog filters, the quality factor is
+the radius of the pole divided by -2 times its real part. The quality
+factor varies from 0.5 (purely real pole; 100% damping) and infinity
+(imaginary pole; 100% oscillator). The approximate technology limits
+are 10 (low-end breadboard components and 8-bit microcontrollers), 25
+(high-end breadboard components and 16-bit digital signal processor),
+and 40 (switched capacitor).
+
+A recurring problem in filter implementation is that the conventional
+filter design formulas yield filters with quality factors in the 40-80
+range, even for low filter orders. For example, using the elliptic
+filter design formulas, Matlab returns a 4th-order elliptic filter with
+quality factors 1.7 and 61 for a given magnitude specification. This
+filter can only be realized with expensive custom integrated circuitry
+or 32-bit floating-point processors (using sampling and quantization).
+The UT Austin team has developed a filter optimization framework in
+Matlab that can take this filter as the initial guess, and in less than
+a minute, return a 4th-order filter that meets the original
+specifications but with quality factors of 0.68 and 10 [1]. The
+optimized filter design can now be easily implemented in a wide variety
+of technologies. 
+
+The framework is available on the Internet at
+
+  http://www.ece.utexas.edu/~bevans/projects/syn_filter_software.html
+
+Besides optimizing implementation properties (quality factors), the
+framework can also simultaneously optimize behavioral characteristics
+(magnitude, phase, and step responses). It now becomes possible to
+design analog filters for data conversion, which would have near-linear
+phase over the passband and minimized peak overshoot subject to
+constraints on magnitude response and quality factors. 
+
+They use the symbolic mathematics environment Mathematica to describe
+the constrained non-linear optimization problem formally, derive the
+gradients of the cost function and constraints, and synthesize the
+Matlab code to perform the optimization. In the public release, they
+provide the Matlab to optimize analog IIR filters of fourth, sixth, and
+eighth orders. Designers can add new measures and constraints, such as
+capacitance spread of the second-order sections for integrated circuit
+layout, using the Mathematica formulation and then regenerate the
+Matlab code. They describe the framework in [1].
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+One of the major changes in the actor package concern its support for
+heterogeneous modeling, using a technique that is called "wormholes"
+in Ptolemy 0.x.  The actor package now supports data transport across
+heterogeneous simulation engines and a clean model for transfer of
+control.
+
+
+2.  Equipment/Infrastructure Status:
+
+No changes.
+
+
+3.  Interactions and Technology Transfer
+
+-- John Reekie attended a Motorola Software Engineering Symposium near
+   Chicago. His notes are at:
+
+      http://ptolemy.eecs.berkeley.edu/~johnr/info/motorola.html
+
+-- Mudit Goel continues to work at Philips Natlab in Eindhoven, where he
+   is evaluating the next-generation trimedia signal processor and the modeling
+   techniques that are used at Philips to design systems that use this
+   processor as an embedded processor.  He will return to Berkeley in
+   August.
+
+-- Farhana Sheikh, a Project Leader at Cadabra
+   (http://www.cadabratech.com) reports that they used Tycho to generate
+   the C++ class diagram for their physical synthesis software. The
+   software contains a little over 700,000 lines of C++. She reports that
+   parsing the code did not take very long. However, it was a bit of a
+   struggle to get it all printed out on our plotter. They now have an
+   entire wall covered with our class hierarchy which has proven useful in
+   training new developers.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Publications
+------------
+
+[1] N. Damera-Venkata, B. L. Evans, M. D. Lutovac, and D. V. Tosic,
+    "Joint Optimization of Multiple Behavioral and Implementation
+    Properties of Analog Filter Designs", Proc. IEEE Int. Sym. on
+    Circuits and Systems, Monterey, CA, May 31 - Jun. 3, 1998, vol. 6,
+    pp. 286-289. 
+    http://www.ece.utexas.edu/~bevans/papers/1998/filter_optimization/
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to continue design and implementation of the actors, graph,
+math, pn, and ct packages in Ptolemy II.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.

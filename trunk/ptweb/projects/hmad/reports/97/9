@@ -1,0 +1,286 @@
+Monthly R&D Status Report
+Date: September 15, 1997
+
+Title: "Design of Distributed Adaptive Signal Processing Systems"
+Contract Number: "DAAB07-97-C-J007"
+Principal Investigator: Edward A. Lee
+Organization: University of California at Berkeley
+
+1. Tasks Performed
+
+We have achieved a major milestone in bringing to life a small Java
+implementation of key functionality in the Ptolemy kernel. In addition,
+we have developed a new approach for mixing models of computation based
+on partial orders that promises to greatly improve on the Wormhole
+concept previously used in Ptolemy. We have also completed our first
+Java module, a signal plotting facility.
+
+
+2. Significant Accomplishments
+
+2.1 Java Ptolemy Kernel
+
+John Davis and Neil Smyth designed and implemented a set of Java
+classes that realize key functionality in the Ptolemy kernel. An image
+of the more essential classes and their relationships can be found at:
+
+    http://ptolemy.eecs.berkeley.edu/reports/dasp/97/JtolemyOMT.gif
+
+(Thanks to Ron Galicia for the image).  John has built a small and
+highly simplified demonstration of a Ptolemy application that uses
+these classes.
+
+A key idea in the design of these classes is to define a small core
+data structure supporting uninterpreted hierarchical graphs. Although
+this idea is present in the original Ptolemy kernel, in fact the
+Ptolemy kernel has much more semantics than we would like. Much of the
+effort involved in implementing models of computation that are very
+different from dataflow stems from having to work around certain
+assumptions in the kernel that, in retrospect, proved to be particular
+to dataflow.
+
+Hierarchical graphs are collection of "entities" and "relations".
+Entities have "ports" and relations connect the ports. Entities can
+contain a graph, and ports in the contained graph can be exposed as
+ports of the container entity.
+
+Consistent with theoretical results recently obtained as part of the
+Ptolemy project, Neil Smyth reimplemented the Particle class to
+support Tags And Values. Particles are explicitly given the notion of
+tags and values by implementing a tag/value interface hierarchy (in the
+Java sense). In some cases, say SDF, a particle's tag may be
+non-existent and in other cases, say FSM, a particle's value may be
+non-existent. 
+
+Much of the design is still highly preliminary, and several group
+members are studying and critiquing it in detail. These classes will
+form the core of a much more flexible Ptolemy.
+
+
+2.2 Modular Deployable Design Tools
+
+A subset of the group has met several times to iron out the issues
+involved with breaking up Tycho (and eventually, the Java Ptolemy) into
+separately deployable modules. We have categorized dependencies among
+modules into three classes: required, invocable, and optional. The
+first dependence means that a module cannot function without another.
+The second means that a module may invoke another at run time, but will
+fail gracefully if it is not present. The third means that a module
+uses services provided by another if they are available. We have mapped
+out a configuration management strategy that is an extension of
+Christopher Hylands' builder dialog in Tycho. The idea is to exploit
+Tycho's HTTP ability to dynamically update a configuration when
+requested by the user.  A major issue that we have not yet dealt with
+is the module dependencies may include version dependencies.
+
+
+2.3 Mixing Models of Computation
+
+Heterogeneity has always been a core principle of the Ptolemy project.
+Ptolemy supports hierarchically nesting multiple models of computation
+using a software architecture that has come to be known as the Wormhole
+architecture. The strict hierarchy implied by Wormholes and the
+information hiding between them, however, preclude certain optimization
+possibilities. We have developed an approach that permits both
+arbitrary combination of models of computation using wormholes and
+tighter integration of models of computation. We are implementing this
+as part of the new Ptolemy kernel written in Java.
+
+Partially ordered sets (posets) of models of computation are specified
+by the designer of a particular modeling tool (formerly "domain"). At
+runtime, the model of computation of an application is resolved by
+selecting the least upper bound of the models of computation of the
+modules that compose the design.
+
+This process has been implicit in Ptolemy. For example, the dataflow
+domains are related according to the following order:
+
+                     SDF < BDF < DDF < PN 
+
+Thus, an SDF block can run in a PN simulation. In our current design,
+we take this idea beyond theory and explicitly set a policy for
+implementation. As designers create and implement new models of
+computation (both control and additional dataflow), relationships
+between these models of computation can be specified.  However,
+in the current Ptolemy, there is no systematic way to mix in models
+of computation that do not follow such a neat total order, such as FSMs.
+
+
+2.3  Option: Multidimensional Signal Processing
+
+In this period, we completed our study of regular dataflow graphs, and
+have prepared a report [1]. Key results in the report include proofs of
+NP-completeness of a few cycle-related problems based on the compact
+representation of RDFGs, and heuristics for solving the deadlock and
+maximum cycle mean problems. The heuristic for deadlock is based on
+Lenstra's polynomial time algorithm for integer programming with a
+fixed number of variables, and the heuristic for maximum cycle mean is
+based on the finite basis theorem for the set of solutions of a
+homogeneous set of linear Diophantine equations.
+
+We are continuing our study of the precedence graphs of
+multidimensional dataflow graphs (MD DFGs). Our intention is to
+characterize these precedence graphs as regular dataflow graphs, and to
+derive bounds on the degree of parallelization that is available. Based
+on this, efficient multiprocessor scheduling heuristics can be
+designed.
+
+
+2.4 Software Improvements
+
+Christopher Hylands and Edward Lee have written and packaged a Java
+applet and application for plotting signals.  This is intended to replace both
+Xgraph and the Tk-based animated plotting widgets used in Ptolemy.
+It is much more portable than Xgraph, which uses low-level Xlib
+calls, and much faster than the Tk plot widget.  This will be publically
+announced with a few days, and can be examined and downloaded at
+
+   http://ptolemy.eecs.berkeley.edu/java/plot/demo/
+
+Christopher Hylands was able to compile and run the DE domain under
+Tcl8.0 under NT4.0. He used Cygwin18 to compile Tcl8.0b2.  He has made
+some progress using Microsoft Visual C++, but this work remains incomplete.
+
+Guy Maor (UT Austin) is integrating Xpole with Tycho.  He is nearing
+the completion of encapulsating the back end C code, and is now
+rewriting the Xpole front end.  We expect to have a version ready
+soon.  Xpole is C program written in our group at Berkeley several years
+ago that provides highly animated interactive filter design.
+
+Tom Lane (of Structure Software Systems) contributed a patch that
+improves the speed of dispatch in the DE (discrete-event) domain by a
+useful amount. He reports about a 4% overall speedup on a particular
+simulation that was doing a nontrivial amount of real computation.
+
+
+2.5 Implementations:
+
+Biao Lu and Brian Evans (UT Austin) retargeted several SDF neural
+network stars from the SDF domain to CGC domain. The stars are: Neuron,
+MpNeuron, Binary and Sigmoid. The following demonstrations exist in the
+SDF and CGC domains:
+
+a. Andsgncgc.pal: use existing Ptolemy 0.7 stars to implement AND.
+b. MPandBinarycgc.pal: use the MpNeuron to implement AND, OR, and NAND.
+c. MPxorBinarycgc.pal: use two MpNeurons to implement XOR.
+d. hopfieldcgc.pal: three-node Hopfield network in CGC domain.
+e. hotcoldcgc.pal: hot and cold perceptron.
+f. xorBinarycgc.pal: use existing Ptolemy 0.7 to implement XOR.
+   The activation function is a binary thresholding function.
+g. xorSigmoidcgc.pal: use existing Ptolemy 0.7 to implement XOR.
+   The activation function is a Sigmoid function.
+
+They implemented a cellular neural network using a combination of SDF
+and BDF domains. We added a cnnedge.pal demonstration on edge
+detection, for which we added new SDF stars for two-dimensional
+convolution (SDFConv2) and a linear output function (SDFLinear). The
+demonstration uses Matlab to load images.
+ 
+In training the neural networks, they have been experimenting with
+using the Ptolemy interface to Matlab. We have developed a Ptolemy
+demonstration that uses the back propagation algorithm to train a
+neural network.
+
+
+3.0 Infrastructure
+
+3.1 Search Engine
+
+Christopher Hylands set up the htdig search engine so that it will
+search most of the pages on the http://ptolemy.eecs.berkeley.edu web
+site. This search mechanism is for our own internal use and has already
+proved extremely useful for searching the wealth of information we
+maintain locally.
+
+
+3.2 Tcl/Tk
+
+Sun Microsystems has announced the 8.0 releases of the Tcl scripting
+language and the Tk toolkit.  These are major releases with many
+exciting new features, including the following:
+
+-- Tcl has a new bytecode compiler that improves performance by a factor
+  of 2-10x.
+
+-- Tcl now has namespaces for structuring variables and procedures.
+
+-- Binary data is now supported in Tcl.
+
+-- The Safe-Tcl security model has been fleshed out and improved in
+  many ways.  It provides the most flexible approach to security for
+  Internet applications available anywhere.
+
+-- The Windows registry is now supported.
+
+-- A package "http" is available for making HTTP requests.
+
+-- Tk now provides native look and feel on Macintosh and Windows platforms.
+  Tcl and Tk now provide one of the best cross-platform development platforms
+  available anywhere.
+
+-- Fonts and menus have been improved to provide much better cross-platform
+  support.
+
+-- Text widgets allow images to be embedded directly in the text.
+
+The namespace support means that Itcl can be converted into an
+extension of Tcl rather than a modification of it. AT&T is working on
+this conversion, and an alpha release is expected any day. We expect to
+be one of the early testers.
+
+
+3.3 Personnel
+
+William Wu joined the group as a new graduate student to work
+on interactive signal processing.
+
+
+4.0 Publications, Presentations, and External Interactions
+
+4.1 Publications
+
+[1] P. K. Murthy, E. A. Lee, "Some cycle-related problems for regular
+    dataflow graphs: complexity and heuristics," UCB/ERL Tech. Report,
+    number pending, July 1997.
+
+[2] B. Lu, B. L. Evans, and D. V. Tosic, ``Simulation and Synthesis of
+   Artificial Neural Networks Using Dataflow Models in Ptolemy,''
+   Invited Paper, Proc. IEEE Conf. on Neural Network Applications in
+   Engineering, Sep. 8-9, 1997.
+   http://www.ece.utexas.edu/~bevans/papers/1997/neural_networks/
+
+[3] Alain Girault, Bilung Lee, and E. A. Lee, ``A Preliminary Study
+    of Hierarchical Finite State Machines with Multiple Concurrency
+    Models,'' Memorandum UCB/ERL M97/57, Electronics Research Laboratory,
+    U. C. Berkeley, August 1997. 
+    http://ptolemy.eecs.berkeley.edu/papers/97/preliminaryStarcharts/
+
+
+4.2 Talks and demos by group members
+
+- "Complex Systems," talk and discussion led by Edward A. Lee at the
+  Model Integration for Complex Systems Workshop, Portland, Oregon,
+  August 19-20, 1997.
+
+- Edward A. Lee chaired a DARPA ISAT (Information Science and
+  Technology) study on "Complex Systems" that culminated during a one
+  week retreat in Woods Hole, MA, August 22-27.  For further information, see
+
+         http://ptolemy.eecs.berkeley.edu/~eal/towers/
+
+- "Perspectives on Complex Systems," talk in the Berkeley Design
+  Seminar, Edward A. Lee September 12, 1997.
+
+
+4.3 Technology Transfer
+
+Ron Galicia returned from HP EEsof, where he spent the summer
+developing system-level models for use in codesign and scheduling
+algorithms. HP EEsof has allowed him to release the source code and
+documentation so that it can be included in the Ptolemy project. A
+rough outline of what he has so far can be found at:
+
+    http://ptolemy.eecs.berkeley.edu/~galicia/HWSW/HWSW.html
+
+
+

@@ -1,0 +1,444 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+DARPA ORDER NUMBER:
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 October 30, 1997
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        9/15/97 - 10/15/97
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+1.  Research Status
+
+We have released on the net our first Java module, a versatile signal
+plotter. This module is the first example of the sort of modular design
+tool that we expect to be building. We also continue to progress on a
+set of base classes in Java that will support graph-oriented algorithms
+and representations (such as netlists and operations on netlists). We
+have begun an in-depth study of object modeling in general, and the UML
+language in particular, partly in order to ensure that we are using the
+best of current design practices for the Java base classes. We have
+completely overhauled the Tycho Information Model (TIM), greatly
+simplifying its interface. Finally, we have begun serious study, in
+collaboration with Prof. Kris Pister, of the software infrastructure
+that would be required in Ptolemy for MEMS-oriented analog modeling.
+
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Java Signal Plotter
+-------------------
+
+We have released on the net our first Java module, a versatile signal
+plotter.  See the web page, which contains a number of demonstrations:
+
+    http://ptolemy.eecs.berkeley.edu/java/ptplot
+
+There are a number of reasons behind our choice to release this module
+first:
+
+1) It is neither trivial nor excessively complex, and thus represents
+   a manageable amount of software with which to learn about the issues
+
+   in releasing Java code.
+
+2) The application combines numerical computation, threading, and simple
+   user interfaces.  Thus, it hits most of the key facets we expect to
+   find in such modules.
+
+3) It is a clearly circumscribed module that is useful on its own as well
+   as within the larger Ptolemy system.
+
+The plotter is backwards compatible with pxgraph, the signal plotter
+that has been used in Ptolemy, but adds the interactive animated plotting
+feature of TkPlot, which is also used in Ptolemy.  Thus, it will replace
+these two facilities.  There are a number of things we have learned
+so far from this experience:
+
+1) Writing nontrivial multithreaded Java programs is very difficult.
+   It is hard to avoid deadlock and starvation conditions.  We believe
+   that the Ptolemy process networks domain that we will be reimplementing
+   in Java will make this much easier by providing a much higher level
+   interface to concurrency primitives than Java threads provide.
+
+2) Writing Java code that runs everywhere is much more difficult than
+   the hype from Sun Microsystems would have you believe. First, there are
+   multiple version of key Java classes with non-overlapping bug sets out
+   there.
+
+We also experimented a bit with real-time computing using Java by
+constructing an application that synthesizes musical sounds using the
+Karplus-Strong algorithm. There are many limitations, and few other
+algorithms would be as forgiving. We conclude that doing real-time
+signal processing with Java is not a reality today.
+
+The plotter has the following properties:
+
+   * It can be an applet or application.
+   * It can read binary or ASCII data.
+   * Auto-ranging.
+   * Automatic or manual labeling of axes.
+   * Automatic or manual tick marks.
+   * Live, animated plots.
+   * Infinite zooming.
+   * Various plot styles: connected lines, scatter plot, bars, etc.
+   * Various point styles: none, dots, points, and unique marks.
+   * Multiple data sets and a legend.
+   * Color or black and white plotting.
+
+The applet implementation can read data to plot from a URL or construct
+the data in custom Java code. The application can read data from a file
+and use command-line arguments to format the plot. The command-line
+arguments are compatible with pxgraph.
+
+There is a set of demonstrations of these classes. The main class
+implementing the plotter is Plot. It is derived from PlotBox, which
+provides only the axes and decorations of the plot. This is implemented
+in a base class so that it can be reused for different kinds of plots.
+Live (animated) data plots are supported by the PlotLive class. This
+class is abstract; a derived class must be created to generate the data
+to plot (or collect it from some other application).
+
+The application is implemented by the Pxgraph class. The Pxgraph class
+includes support for printing and generating HTML for use with the Plot
+applet.
+
+Unix users can invoke the pxgraph Bourne Shell script to simulate the
+pxgraph X11 binary on machines where the X Window System is not available.
+See the Pxgraph class documentation for pxgraph script installation
+instructions under Unix. Windows users can invoke the pxgraph.bat DOS batch
+file.
+
+Pxgraph is a slight extension to xgraph which reads binary files as well as
+ASCII. This code owes a heavy debt to David Harrison, the original author of
+xgraph. The extensions in pxgraph were written by Joe Buck.
+
+
+Object Modeling
+---------------
+
+John Reekie, a postdoc in the group, has undertaken to lead a study
+group that is examining current practice in object modeling in general
+and the UML language (from Rational) in particular.  This study is being
+applied to critically examine the current and future design of Ptolemy.
+Working documents describing the ongoing work can be found at:
+
+   http://ptolemy.eecs.berkeley.edu/~johnr/tycho/design/
+
+In particular, the following issues have been specifically addressed:
+
+1) The relationship between functional blocks in a netlist and their
+   graphical representation (stars and icons, in the terminology of
+   Ptolemy).  Major issues that have been considered is that a given
+   icon may actually represent several possible implementations of the
+   same functionality.  Also considered is the relationship between
+   mechanisms for interacting with a functional block (parameters and
+   ports) and their graphical representations.
+
+2) The relationship between ports (logical input and output of a
+   functional block) and terminals (the graphical representation thereof).
+   Questions about how to handle aggregation of indefinite numbers of
+   ports and how to restrict graphical manipulations of ports have been
+   addressed.
+
+3) The representation of logical connections in a netlist.  Issues
+   considered include the need to annotate connections, the need to
+   order terminals in a net, and the need to have both point-to-point
+   and multi-way nets.  The group has also created a dynamic model
+   for the process of creating and manipulating a connection.
+
+Currently, the group is addresses the uses of design patterns. Patterns
+seem to be a hot topic in the object-oriented design community, both
+academic and commercial. The promise of patterns is to provide a means
+of capturing and reusing object-oriented design expertise that simply
+cannot be expressed in terms of specific classes or applications.
+
+Tycho Modularity
+----------------
+
+John Reekie has redesigned the preferences manager in Tycho to make
+it more modular.  Previously, the preferences manager was entirely
+centralized, providing a significant barrier to modularizing Tycho.
+The preferences manager needed to be aware of all existing classes.
+Now, classes register a style sheet with the preferences manager,
+so classes can be added dynamically and there is no particular fixed
+set of preferred classes.
+
+The new version is based on the concept of a style sheet. Packages can
+define their own style-sheets, and each style-sheet can have multiple
+styles from which the user can choose. This can be overridden on a
+per-class basis.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+The Tycho Information Model
+---------------------------
+
+John Reekie has completely overhauled the classes supporting the Tycho
+Information Model (TIM), greatly simplifying their interface. These
+classes are expected to form the base classes for virtually all
+domain-specific visual editors and visualization tools that we will be
+building in Tycho. TIM is based on a "model-view" (MV) paradigm, which
+is a simplification of the classical "model-view-controller" (MVC)
+paradigm that was originally elaborated in Smalltalk. In MV, the view
+and controller are consolidated into a single object that serves both
+the visualization and manipulation role. This consolidation is
+warranted by the huge improvements in user interfaces since MVC was
+first developed. The basic idea in MV is that data is represented
+abstractly in a "model" and one or more "views" render that data
+concretely. For example, a model may represent a netlist as a
+mathematical graph and a view may render it as a block diagram.
+However, a given model may have more than one view. Thus, for example,
+the same netlist might be rendered as a gantt chart displaying an
+execution schedule. Either view may include editing, or direct
+manipulation capabilities, that modify the data stored in the model.
+Central to the MV concept is that views subscribe to the model and are
+automatically notified when changes to the model are made. The model
+"publishes" data modifications, and the views "subscribe" to the model
+to be notified of modifications.
+
+The base class, called Model, implements the publish-and-subscribe
+infrastructure.  It also implements a reasonably flexible unbounded
+undo and redo mechanism, something that almost all editable models
+will require.
+
+DataModel extends the Model class to support data models and the TIM
+interchange format. TIM is a simple meta-data format that encourages a
+simple and clean representation of data, both in in-memory objects and
+in an external file representation. A data model is loaded from a
+string in TIM format with the parse method, and will produce a TIM
+description of itself with the describe method. The DataModel class
+also provides infrastructure for searching and sorting the objects in
+the model.
+
+
+Web-Based Simulation of Embedded Software
+-----------------------------------------
+
+Under subcontract, Brian Evans and his team at UT Austin have developed
+an extensible, configurable, portable, freely distributable framework
+for Web-enabled simulation of embedded software for DSPs and
+microcontrollers [1].  Version 1.0.5 (October 31, 1997) is available at
+
+http://anchovy.ece.utexas.edu/~arifler/wetics/
+
+To run the framework, you will need a Java-enabled Web browser.
+
+Version 1.0.5 of the Web-enabled Simulation (WEDS) framework consists of:
+
+-- A set of Java applets that provide a configurable framework for
+   Web-based user interfaces for instruction set architecture
+   simulators/emulators.
+
+-- A multithreaded TCP/IP Internet server written as a Java application
+   that provides the interface between the Java applets and the
+   simulators/emulators.
+
+-- Command-line simulators/emulators written in C/C++ that run under
+   Windows '95, Windows NT, and more than twelve Unix architectures
+   including Solaris 2.5 and Linux for the following processors:
+   a. Texas Instruments TMS320C30 floating-point digital signal processor
+   b. Motorola MC68HC11 microcontroller.
+
+We provide pre-built binaries of the TMS320C30 and MC68HC11 emulators
+for Windows '95/NT machines and Solaris 2.5 machines.  The emulators
+accept file formats generated by freely available assemblers: .hex 
+files produced by the C30 DSK assembler dsk3a from TI and .s19 files
+produced by the As11 assembler from Motorola.
+
+Command-line tools for DSP and microcontroller processors and boards
+can be added to the framework by only providing data about the tools-- 
+o Java applet or application code changes.  We are in the process of
+putting Motorola MC56LC811 boards and simulators on line.
+
+Our WEDS framework is in the spirit of the Web-based Electronic Design
+(WELD) Project at UC Berkeley directed by Richard Newton.  WELD "aims to
+construct the first operational prototype of a national-scale CAD design
+environment enabling Internet-wide IC design for the U.S. electronics
+industry".  WELD focuses on VLSI CAD tools and design management
+infrastructure, and WEDS provides a complementary focus on embedded
+software.
+
+
+Benchmarking Code Generation Methodologies for Embedded Software
+----------------------------------------------------------------
+
+Under subcontract, Brian Evans and his team at UT Austin have also
+completed an in-depth study where they benchmark code generation
+methodologies for programmable digital signal processors [2]. They
+evaluate rapid prototyping tools and compilers as code generation
+methodologies for programmable digital signal processors (DSPs).
+Code generated by compilers and rapid prototyping tools have been
+reported as significantly less efficient in memory usage and
+execution time versus assembly language code written by expert
+programmers. As complexity of the system increases, however, the scale
+tips in favor of the automated code generation techniques. We quantify
+when this trade-off occurs on a Motorola 56002 DSP using the Motorola
+KCCA56 C compiler version 1.26 (May 22, 1996) and the automated C and
+56000 code generators in Ptolemy version 0.7 (June 13, 1997). The
+Motorola KCCA56 C compiler, which is GNU-based, is available on the
+Motorola DSP Development Tools CD ROM.
+
+In their evaluation of code generation techniques, they used 3 kernels
+and 3 stand-alone applications. The kernels were an IIR filter, a
+256-point Complex FFT, and Goertzel's DFT. For the applications, they
+used Ptolemy demonstrations that obey Synchronous Dataflow semantics:
+
+(1) IIR filtering,
+(2) CD-DAT converter, and
+(3) Dual-Tone Multiple-Frequency (DTMF) touchtone codec.
+
+To isolate the effects of (a) compiler inefficiencies and (b) automatic
+scheduling algorithms, they coded the kernels and the IIR filtering
+application
+
+(1) manually in 56002 assembly code
+(2) manually in C and compiled using the KCCA56 C compiler,
+(3) using Ptolemy's Code Generation for the 56000 (CG56) domain, and
+(4) using Ptolemy's Code Generation in C (CGC) domain to generate code
+    in C which was later compiled using the KCCA C compiler.
+
+They implemented the other two applications using (2)-(4). Comparing
+assembly language and C implementations exposes compiler deficiencies,
+whereas comparing hand-written code with Ptolemy generated code
+emphasizes differences in manual vs. automated scheduling algorithms.
+In addition, by comparing the results for the same application given by
+the Ptolemy CG56 domain vs. the Ptolemy CGC domain plus the KCCA56 C
+compiler with the same scheduler, they isolate the effects of the
+KCCA56 C compiler.
+
+Table 1 below (from the benchmarking for the CD-DAT converter), shows
+that Ptolemy performed very well on two fronts. First, with its
+libraries of optimized code blocks, it was able to come up with smaller
+code size. Second, its optimizing scheduler resulted in much shorter
+execution time for the same application. These same effects were
+visible to an even larger extent with the DTMF Codec application in
+which the hand-coded C version resulted in a final object code that was
+too large to fit onto our 56002 evaluation board's program memory.
+
+                   Ptolemy CG56      Ptolemy CGC       Hand coding in C
+                   ------------      -----------       ----------------
+Program Memory          413               586                 687
+X Data Memory           456               468                 398
+Y Data Memory           283               280                 324
+Execution Time       295069            381076              463004
+(in cycles)
+
+    Table 1. Memory Usage and Execution Times for the CD-DAT Converter.
+
+Ptolemy-generated 56000 assembly language programs outperform compiled
+hand-coded C implementations in program memory usage and execution
+time, and are comparable in data memory usage. The gap widens as
+complexity increases. At some point between the complexity of the IIR
+filtering and CD-DAT converter applications, Ptolemy-generated C
+programs begin to outperform hand-coded C implementations in the same
+way. The increase of complexity from a CD-DAT converter to a DTMF codec
+causes an increase by an order of magnitude of the efficiency of
+Ptolemy-generated C programs over the hand-coded C implementations.
+Although not shown, we found that for the IIR filtering demonstrations
+that Ptolemy-generated assembly language programs were only 2% worse in
+performance vs. hand-coded assembly implementations.
+
+As far as which code generation methodology to use to create the most
+efficient implementations in a DSP assembly language, they draw the
+following conclusions:
+
+1. When the choice is between writing C code manually for compilation
+   and using a synthesis tool to generate assembly language directly,
+   the synthesis tool should be chosen.
+
+2. A key use of a C compiler is to complement a tool that synthesizes
+   assembly language programs by generating efficient implementations
+   of kernels in assembly language when they do not exist.
+
+3. When the choice is between writing assembly language code manually
+   and using a synthesis tool to generate assembly language, the 
+   synthesis tool should be chosen for applications of complexity
+   slightly greater than a DTMF codec.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+There is nothing concrete to report on this task.
+
+
+2.  Equipment/Infrastructure Status:
+
+We continue to explore alternative Java packages that are available
+on the net that might provide generic infrastructure for our software
+development.  We have recently discovered JAL from Silicon Graphics,
+which is like the C++ Standard Template Library.  The following is
+from the SGI page (http://reality.sgi.com/austern/java/index.html):
+
+   "The Java Algorithm Library (JAL), is a collection of generic
+   algorithms for the Java (TM) language; it is modeled on the STL as
+   closely as Java makes possible. The only data structure in Java that
+   can contain both built-in types and user-defined classes is the
+   array, so the JAL is a set of algorithms that operate on
+   one-dimensional arrays."
+
+
+3.  Interactions
+
+ Publications
+ ============
+
+[1] D. Arifler, C. Duong, B. L. Evans, S. K. Marwat, C. M. Moy, and A. Yuan,
+    ``A Configurable, Portable, Extensible Framework for Web-Enabled
+    Interactive Simulation of Software for Embedded Programmable Processors,''
+    Proc. 1998 IEEE Design Automation Conf., submitted.
+
+[2] A. K. Kulkarni, A. Dube, and B. L. Evans, ``Benchmarking Code
+    Generation Methodologies for Programmable Digital Signal Processors,''
+    IEEE Transactions on Signal Processing, submitted.
+
+
+4.  Personnel Status
+
+Fiona Sinclair has replaced Diane Chang as the contract administrator.
+
+
+5.  Talks/Presentations:
+
+- "Ptolemy Ptutorial," by Edward A. Lee, Sept. 24, 1997, in EECS290A,
+  Topics in Computer-Aided Design.  See:
+
+     http://ptolemy.eecs.berkeley.edu/~eal/ptutorial/
+
+
+- "Critical Challenges In Electronic Design Automation,"
+  Professors Newton, Brayton, Lee, Rabaey, Sangiovanni and Henzinger,
+  EECS Department Colloquium, Oct. 1, 1997.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We hope to have a Java realization of the core classes of a
+rearchitected Ptolemy kernel completed. We are also engaging Professor
+Kris Pister to to better understand some MEMS modeling problems and
+simple approaches to simulation. Finally, we have obtained a simple
+example from Rome Labs of a design problem that investigates a tradeoff
+between a MEMS implementation and a digital FIR filter implementation
+of an antialiasing filter.  We plan to use this to illustrate current
+capabilities and limitations in Ptolemy for this type of modeling.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+

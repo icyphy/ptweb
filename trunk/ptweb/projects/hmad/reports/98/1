@@ -1,0 +1,238 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 January 26, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        12/15/97 - 1/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+1.  Research Status
+
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Ptolemy II
+----------
+
+The Java redesign of Ptolemy is starting to take shape.  During this
+period, we have made major progress in the design of the kernel, which
+is the set of classes that support the hierarchical graph abstract
+syntax.  Instead of attempting to include the design details in this
+report (which would be difficult without graphics), we have made
+available a highly provision design document that can be accessed
+at the following location:
+
+   http://ptolemy.eecs.berkeley.edu/reports/hmad/98/designdraft1.pdf
+
+This design offers some major improvements over the current C++ Ptolemy
+kernel. It is thread safe and has a much more robust and flexible
+mechanism for exporting ports to the next level of the hierarchy.
+Details are explained in the design document.
+
+
+Java Signal Plotter
+-------------------
+
+Christopher Hylands has added error bars, logarithmic axes, support
+for another form of raw binary data and an interface to JavaScript to
+Ptplot.  The documentation has been extended to include a list of
+Frequently Asked Questions and a troubleshooting guide.
+
+
+Java/Tcl interaction
+--------------------
+
+Christopher Hylands has posted on the web tclBlend1.0b1up1, an
+unofficial patch to Sun's tclBlend1.0b1. This patch provides the
+following new functionality over tclBlend1.0a1up1:
+
+  1. The jwish script has been extended so that if it it is called as
+     jtclsh, then a tclsh8.0 binary is run instead of wish8.0. The way we do
+     this is create a hard link between jtclsh and jwish.
+  2. First cut at support for JDK1.2beta2.
+  3. Fixed all warnings displayed by compiling with gcc -Wall -O2.
+  4. Added targets to build a Purified green binary.
+
+Besides the above functionality, this patch includes the following features
+found in tclblend1.0a1up1:
+
+  1. Provides fixes for configure --srcdir=
+  2. Provides a wrapper script named jwish, which will start a vanilla
+     wish8.0 with the proper LD_LIBRARY_PATH and CLASSPATH
+  3. Provides portability fixes so that tclBlend will build on other
+     platforms. Under HPUX10.20 with JDK1.1.3, tclBlend1.0b1up1 builds but
+     note that only the green binary seems to work, it does not seem to be
+     possible to dynamically load tclBlend into a running vanilla tclsh8.0
+     or wish8.0 under HPUX
+
+
+Mutable Systems
+---------------
+
+John Davis has modified the discrete-event (DE) calendar queue in
+Ptolemy so that it will facilitate mutability (dynamically changing
+system topologies). He has also carefully evaluated and integrated the
+contributions of Jens Voigt of Dresden (mentioned in the previous
+monthly report), which extends the functionality of the static higher
+order functions that are already in place. Here are John's comments:
+
+Functionality
+  Dynamic higher order functions facilitate runtime creation and/or
+  deletion of DE stars/galaxies. Both sources and sinks can be 
+  removed or added to topologies. The primary constraint is that stars
+  which are created or deleted can not have multiportholes. A simple
+  way to circumvent this problem is to connect "multiport-to-regular-
+  port" stars as necessary.
+
+Compatibility
+  One of the key advantages of this approach is that it integrates
+  well with other Ptolemy stars. The process of mutability is cleanly 
+  separated from the traditional behavior of stars and galaxies. This
+  separation occurs precisely because DynBlocks "operate" on regular DE 
+  stars. This means that backwards compatibility is preserved and the
+  additional programming required by users of this facility is eliminated.
+  Indeed, Ptolemy users interested in creating simulations that take 
+  advantage of dynamic HOF's need not leave the graphical domain.
+
+Initial State
+  Apparently the initial state of the dynamic HOF is always absent of
+  of mutable galaxies; mutable galaxies must be added (and then removed
+  if desired) during runtime. It would be nice if at the initialization of
+  the simulation run, the mutable components were already instantiated.
+  This detail is relatively minor and does not pose a significant problem.
+
+Speed
+  The demos that Jens composed run quite fast and appear to experience 
+  little to no lag due to mutability. However, we must keep in mind that
+  the demos are relatively simple. It is a concern that the Dynamic HOF's
+  will not scale. The reason for this is due to 
+	DEDynBlockBase::deletePendingEventsOfStar()
+  It is not uncommon that event queues can hold hundreds of events for
+  reasonable sized simulations. The most troublesome component of a discrete 
+  event simulation is the overhead that is experienced when storing and/or 
+  removing events from a queue. Given that the above method essentially 
+  searches through the queue event by event for each star that is removed, 
+  the problem is exacerbated using the above method.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Mixed Signal Design
+-------------------
+
+Yuhong Xiong implemented in Ptolemy a mixed-signal simulation of an
+example system provided by Rome Labs. This simulation explores the
+trade-off between analog (MEMS or electronic) anti-aliasing filtering
+and digital anti-aliasing filtering. The strategy in the simulation is
+to use impulse invariance to discretize the analog simulation and
+downsampling quantization to model digitization. A Tcl script controls
+the simulation and iterates through several downsampling ratios and
+filter orders. It invokes filter design functions in Matlab to provide
+the filter parameters and then evaluates the overall frequency response
+of the system.  We will be writing a brief report.  Here is a summary:
+
+The problem: To decide where to draw the boundary between analog and
+digital in an A/D conversion application. The constraints: Need to
+preserve approximate linear phase.
+
+The Ptolemy simulation:
+
+  - A Butterworth filter of order N modeling an analog filter.
+  - A downsampling FIR filter of order M designed using Parks McClellan.
+
+The requirements:
+  - Highest frequency of interest: 2kHz
+  - 66dB attenuation above 4kHz.
+  - 66dB of Signal-to-quantization-noise ratio within 0-2kHz.
+
+The Ptolemy simulation is scripted, iterating over the
+following parameters to outline the space of interest:
+
+  - The sample rate (& implicitly, the downsampling ratio).
+  - The order of the Butterworth analog filter
+  - The order of the FIR filter.
+  - The number of bits in the A/D converter.
+
+The demo iterates over a family of solutions that meet the criteria.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+We have begun discussion of a generalization to the Ptolemy wormhole
+mechanism, to be implemented in Ptolemy II.  Instead of a single model
+of interaction, we expect to have a small number (perhaps 3).  A fully
+interoperable domain would have to provide interfaces to all three.
+
+
+2.  Equipment/Infrastructure Status:
+
+We have upgraded our central server to Solaris.  It was the last
+Sun O/S machine on the network, and we had been running an obsolete
+O/S in order to support it in Ptolemy releases.  We will no longer
+be supporting it.  The main reason for the upgrade is security.
+The older operating system was vulnerable to external attack.
+
+We have installed three Sun workstations, three printers and a new
+network switch.  With the completion of the 3 year departmental
+networking project, the bandwidth between our website and the outside
+world is much higher. 
+ 
+
+3.  Interactions
+
+Nothing to report.
+
+
+4.  Personnel Status
+
+Nothing to report.
+
+
+5.  Talks/Presentations/Publications:
+
+Nothing to report.
+
+
+Talks by Group Members
+----------------------
+
+Nothing to report.
+
+
+Key Talks by Others
+-------------------
+
+Nothing to report.
+
+
+Publications
+------------
+
+Nothing to report.
+
+
+6.  Difficulties/Problems
+
+Nothing to report.
+
+
+7.  Next Quarter Plans
+
+Ptolemy II is starting to become capable of supporting various styles
+of simulation. Our first will be an analog simulation domain, a process
+networks domain, and a rendezvous-based communicating sequential
+processes domain. These are mostly orthogonal to current capabilities
+in Ptolemy, and hence will represent fundamentally new capability.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.

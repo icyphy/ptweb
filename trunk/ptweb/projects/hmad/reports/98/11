@@ -1,0 +1,676 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Dec. 24, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        10/15/98 - 11/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+In a major milestone for Ptolemy II, we have created the first
+mixed-domain simulation, combining continuous-time modeling with
+discrete events. We have also created a CSP domain (communicating
+sequential processes) that supports the most general form of CSP,
+augmented further with support for mutations and a model of time. We
+have also added time to the semantics of the PN (process networks)
+domain, enabling clean interaction with other timed models. We have
+defined levels of strictness for domain-polymorphic actors, which
+should greatly improve the ability to re-use polymorphic domains across
+domains. We have defined an XML syntax for icon libraries. Finally, we
+have released the first version of Diva, a user interface package
+designed collaboratively with the CAD group.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Actor Package
+-------------
+
+Mudit Goel and Neil Smyth added support to the actor package for
+process-orient domains. These are domains where actors represent
+distinct Java threads, as opposed to operations that are sequenced
+under the control of a single master thread. This support includes
+mechanisms for systematically starting and stopping threads.  This
+mechanism will be used by the PN and CSP domains, consolidating
+duplicate functionality.
+
+
+User Interface Toolkit
+----------------------
+
+In a collaboration between the Ptolemy project and the CAD group at
+Berkeley, John Reekie and Michael Shilman have released Diva 0.1.
+Below is the announcement they posted:
+
+      ANNOUNCE: Diva 0.1
+
+      Announcing Diva 0.1, the first step toward a software
+      infrastructure for visualizing and interacting with dynamic
+      information spaces. Diva's distinguishing characteristics are its
+      emphasis on dynamic data and interactive user interfaces, and
+      its clean, easy-to-use API. 
+
+      This release consists of two Java packages, diva.canvas and
+      diva.graph. The Diva canvas is a structured graphics layer over
+      the Java2D API with a coherent set of features intended to
+      support innovative and interesting visualizations and user
+      interfaces. The Diva graph package implements an easy-to-use
+      architecture for graph visualization, based on a Swing-style
+      MVC data and notification model. Extensible and pluggable
+      graph rendering and layout facilities complete the picture. 
+
+      Diva 0.1 is the first public release of Diva. For each release, we
+      have a "theme" that conveys its focus. This release is the
+      "hard-hat" release, so-called because it emphasizes that this an
+      early developer's release. The purpose of the hard-hat release
+      is to make Diva available to anyone that might be interested in
+      using it, and to solicit feedback on the architecture so far. The
+      release is located at: 
+
+         http://www-cad.eecs.berkeley.edu/diva
+
+      As the infrastructure matures, we believe it can be applied in a
+      variety of information-intensive domains, ranging from
+      software and hardware systems design to data browsing and
+      exploration. We hope that this announcement has piqued your
+      interest, and that you find Diva useful.
+
+      John Reekie
+      Michael Shilman
+      diva@ic.eecs.berkeley.edu
+
+
+User Interface API
+------------------
+
+We have made considerable progress in defining the API that a user
+interface will use to interact with Ptolemy II. A new package called
+the "schematic" package has been created implement this API. We have
+made the decision that the persistent file format in Ptolemy II will
+uniformly be XML. Steve Neuendorffer has begun work on an XML parser.
+
+One of the specific items that has been dealt with is the mechanism for
+storing and retrieving icons, which represent subsystems in Ptolemy II.
+
+* The PtolemySystem class understands the concept of "icon path." An
+  icon path is the icon equivalent to a package. Example: ptolemy.icons.
+
+* Icon paths are relative to CLASSPATH.
+
+* All files in any directory specified by icon paths may be an icon
+  "library." The file suffix for icon libraries is ".pticon." Each file
+  corresponds to one "palette" in the UI.
+
+* PtolemySystem needs a few new methods analogous to those for actor
+  paths, such as
+
+     Enumeration iconLibraries();
+     void addIconPath();
+     void removeIconPath();
+
+  This allows users, via the GUI, to add new paths for searching.
+
+* Icon paths are stored in the configuration file together with domains
+  names and actor library paths.
+
+* The enumeration from iconLibraries contains instances of an
+  IconLibrary class. This has methods to read the header information, to
+  get the names of the contained icons, and to get the information about
+  an icon. The whole file is not parsed until icons names are needed, to
+  minimize startup overhead.
+
+* Each file starts with a header element that includes elements such as:
+
+  -- The descriptive name of the library (for menus etc)
+  -- The parent library, to construct a suitable hierarchy
+  -- A description for tool tips etc
+  -- A help text
+
+* The body of a file is a series of <icon> elements. Icon has
+  attributes such as name, number of ports, etc.
+
+* Icon elements contains <graphic> elements. Graphic elements have a
+  format attribute, which can be one of Tcl, XML, gif, jpg. The contents
+  or other attributes of the graphic element is determined by the format
+  attribute.
+
+* The XML description format would be something simple like
+
+    <graphic format="xml">
+    <circle/ coords="10,20" height=20 width=40>
+    <line/ coords="10,20,30,40,50,108" color=blue>
+    </graphic>
+
+
+Kernel Package
+--------------
+
+Lukito Muliadi has rearchitected the synchronization mechanism in the
+Workspace class to remove a performance bottleneck. In particular, if a
+model is able to assert that a workspace will not be modified while it
+is being executed, then much of the synchronization overhead that
+coordinates multiple threads can be avoided. Performance measurements
+indicated that this overhead was consuming a sizable fraction of the
+execution time of a model. Lukito's mechanism reduces the overhead to a
+negligible fraction, and in one DE simulation, reduced the total
+execution time by 40%. Lukito also organized a design review for the
+changes, and completed his response to the review.
+
+
+Data Package
+------------
+
+We have modified the Complex class so that instances of this class,
+which represent complex numbers, are immutable. This means that once
+created, their value cannot be changed. This is consistent with other
+numeric types in java, such as Double and Integer. It is also
+consistent with our principle of making instances of Token immutable.
+
+
+Type System
+-----------
+
+Yuhong Xiong organized and responded to a design review of the Ptolemy
+II type system.
+
+
+Other Software
+--------------
+
+Scriptics has released new versions of Jacl and TclBlend.  Christopher
+Hylands had a major role in this release.  The release annoucement is
+included as an appendix.
+
+Under the guidance of John Davis, our weekly study group covered Jini,
+Sun's Java-based network architecture that promises "plug and
+participate" simplicity for the future of networking. We covered the
+motivation behind Jini, example uses of Jini, competing approaches and
+an overview of the architecture.
+
+Also under the guidance of John Davis, our weekly study group covered
+Javaspaces, a distributed computation mechanism built on top of Jini
+that is based on Linda.
+
+Christopher Hylands installed CVS on our machines and created a
+self-extracting archive for installing CVS on our laptops. CVS is a
+state-of-the-art version management system that we will be using to
+replace SCCS. SCCS is simply not able to support our distributed
+environment, where much of the code development occurs on laptop
+computers that are not necessarily on the network. Christopher took
+Gordon Chaffee's changes and applied them to CVS 1.10.3 and compiled a
+new cvs.exe using Microsoft Visual C++ version 6.0. He combined this
+with the SSH 1.2.14 binaries and used InstallWizard to create a self
+extracting installation file, which is available at:
+
+   http://ptolemy.eecs.berkeley.edu/~cxh/sa/nt/dists/cvs/cvsssh.exe
+
+In the process, Christopher has become an expert on InstallWizard, so
+we expect to use it for future distributions of Ptolemy II.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Finite State Machines (FSM)
+--------------------------
+
+Xiaojun Liu has made progress on defining an FSM domain in Ptolemy II.
+This domain will be used to specify control logic for modal models and
+for digital controllers. Specifically, he has created a Variable and
+VariableList class, based on Neil Smyth's Parameter class. These
+classes support expressions that serve as guards for state transitions
+and actions associated with state transitions.
+
+
+Communicating Sequential Processes (CSP)
+----------------------------------------
+
+Neil Smyth completed the design of the CSP (communicating sequential
+processes) domain. In this domain, each actor is a distinct Java
+thread, and threads communicate by rendezvous. Moreover, Neil's
+implementation supports mutations (changing topologies) and a model of
+time. The latter is extremely useful for interoperability with timed
+domains such as CT (continuous time) and DE (discrete events). The main
+anticipated application of this domain is for modeling resource
+management problems, such as embedded software multitasking and
+real-time scheduling. In keeping with this intent, Neil created an
+applet that demonstrates this domain by implementing a simulation of
+the famous dining philosophers problem.
+
+
+Process Networks Modeling
+-------------------------
+
+Mudit Goel has introduced a model of time into the PN domain. The
+technique he used is based on Pamela. See
+
+    http://dutepp0.et.tudelft.nl/~gemund/PAMELA/pamela.html
+
+This major innovation permits process networks to be used to model
+physical systems, such as cooperating real-time software, and to
+interoperate cleanly with other timed domains, such as CT.
+
+
+Plot Package
+------------
+
+Lukito Muliadi organized a design review of the plot package and
+corrected the discovered defects.
+
+
+Math Package
+------------
+
+Neil Smyth modified the Ptolemy II expression parser so that it now
+recognizes complex numbers. Whenever it sees a character string of the
+form
+
+	<number>i or <number>j
+
+it creates a leaf node with a complex number. So 2+3i results in the
+creation of the appropriate complex token.
+
+Jeff Tsay organized a design review of the MatrixMath class.
+
+
+Software Practice
+-----------------
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Multi-Domain Modeling
+---------------------
+
+Jie Liu and Lukito Muliadi created the first multi-domain simulation in
+Ptolemy II. This model has a CT (continuous-time) model inside a DE
+(discrete-event) model. This combination is particularly useful for
+mixed-signal modeling.
+
+
+Strictness
+----------
+
+We have determined that we need a generalized notion of strictness for
+actors that is supported in the kernel. In programming languages,
+"strict" means that a function or procedure needs to have all its
+arguments in order to be able to calculate any output. For actors, the
+question is whether the inputs need to be known on all input ports in
+order for the actor to be able to produce outputs. Note that "knowing
+an input" means knowing the number of available tokens (which may zero)
+and knowing the values of the available tokens.
+
+We have several uses for non-strict semantics. In the CT domain
+(continuous time), it is often important to be able to determine an
+estimate of an output value using an estimate of an input value. Thus,
+the value of the input tokens is not "known." Only an estimate of it is
+known. It is important that when an estimate of the output is
+calculated, that the state of the actor not be updated. The state
+should be updated only when the input is completely known.
+
+In synchronous/reactive modeling, for which we have not yet built a
+domain, it is essential to be able to assert outputs even when it is
+not known whether the inputs will have tokens.
+
+We identify three fundamental levels of strictness for actors:
+
+  - STRICT: An actor needs to know all inputs to perform its function.
+
+  - SOFT_STRICT: Given an estimate of all the inputs, the actor can produce
+    estimates of the outputs.
+
+  - NON_STRICT: An actor can produce partial information about the output
+    given partial information about the input.  By "partial information"
+    we mean that it need not be known whether an input has tokens, or
+    how many tokens it has.
+
+In both of the latter two cases, the actor should not update its state
+until the input is fully known. Typically, we will implement this by
+updating the state of the actor in its postfire method.
+
+Domain-polymorphic actors (those that can operate in more than one domain)
+would need to assert which of the three levels of strictness they follow.
+Opaque composite actors, which mediate the interaction between domains,
+would defer to the inside director to determine strictness.  Thus, a domain
+that is able to expose a NON_STRICT interface to other domains, for
+example, could assert NON_STRICT semantics.
+
+The CT domain would prefer SOFT_STRICT actors, but would be able to
+handle STRICT actors by introducing a delta delay. Since CT is based on
+convergence to a fixed point at each time instant, it normally needs to
+invoke actors repeatedly with estimates of the inputs until convergence
+is reached. For STRICT actors, it would only invoke them once, after
+the inputs are fully known. At that time instant, the output is already
+known because of the delta delay, so convergence is not compromised.
+Most domains embedded within CT, therefore, would have a delta delay
+from inputs to outputs.  CT can also make use of NON_STRICT actors to
+overcome stiffness problems.
+
+
+2.  Equipment/Infrastructure Status:
+
+Christopher Hylands has installed Rational's Quantify for Java, and we
+have also experimented with Optimizit, another commercial product for
+profiling Java software. Using these tools, we discovered major
+bottlenecks due to the conservative synchronization mechanism in the
+Workspace class in the Ptolemy II kernel. Lukito Muliadi proposed and
+implemented a simple fix, in which a domain can make a workspace
+"read-only" in order to bypass the synchronization overhead (see above).
+In the process, Lukito also discovered that Quantify has serious
+flaws.  He had to resort to simply timing the execution of the program
+to measure the performance improvement.
+
+
+3.  Interactions and Technology Transfer
+
+-- On Oct. 20, 1998, we met with 8 engineers and managers from Cadence
+   Design Systems at Berkeley for half a day to brief them on our approach
+   to integrating control logic with dataflow-oriented modeling.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Publications
+------------
+
+[1] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP systems - part 2: Latency-constrained
+    resynchronization." IEEE Transactions on Circuits and Systems - I:
+    Fundamental Theory and Applications, 1998. submitted for publication.
+
+[2] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP systems - part 1: Maximum throughput
+    resynchronization." IEEE Transactions on Circuits and Systems - I:
+    Fundamental Theory and Applications, 1998. submitted for publication.
+
+There is also a revised technical report corresponding
+to each of these submissions:
+
+[3] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP implementation - part 1: Maximum-throughput
+    resynchronization." Tech. Rep., Digital Signal Processing Laboratory,
+    University of Maryland, College Park, July 1998.  Revised from Memorandum
+    UCB/ERL 96/55, Electronics Research Laboratory, University of California
+    at Berkeley, October, 1996.
+
+[4] S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Resynchronization
+    for multiprocessor DSP implementation - part 2: Latency-constrained
+    resynchronization." Tech. Rep., Digital Signal Processing Laboratory,
+    University of Maryland, College Park, July 1998.  Revised from Memorandum
+    UCB/ERL 96/56, Electronics Research Laboratory, University of California
+    at Berkeley, October, 1996.
+
+
+The following publications were produced under subcontract to UT Austin:
+
+1. B. Lu, D. Wei, B. L. Evans, and A. C. Bovik, ``Improved Matrix Pencil
+    Methods'', Proc. IEEE Asilomar Conf. on Signals, Systems, and
+    Computers, Nov. 1-4, 1998, Pacific Grove, CA.
+    http://www.ece.utexas.edu/~bevans/papers/1998/estimation/
+ 
+2. G. E. Allen, D. C. Schanbacher, and B. L. Evans, "Real-Time Sonar
+    Beamforming on a Unix workstation Using Process Networks and
+    POSIX Pthreads," Proc. IEEE Asilomar Conf. on Signals, Systems,
+    and Computers, Nov. 1-4, 1998, Pacific Grove, CA.
+    http://www.ece.utexas.edu/~bevans/papers/1998/beamforming/index.html
+ 
+3. S. Gummadi and B. L. Evans, "Cochannel Signal Separation in Fading
+    Channels Using a Modified Constant Modulus Array," Proc. IEEE
+    Asilomar Conf. on Signals, Systems, and Computers, Nov. 1-4, 1998,
+    Pacific Grove, CA, to appear.
+    http://www.ece.utexas.edu/~bevans/papers/1998/constant_modulus/index.html
+ 
+4. R. Bhargava, R. Radhakrishnan, B. L. Evans, and L. K. John,
+    "Evaluating MMX Technology Using DSP and Multimedia Applications,"
+    Proc. IEEE Int. Sym. on Microarchitecture, Dallas, TX, Nov. 30 -
+    Dec. 2, 1998.
+    http://www.ece.utexas.edu/~bevans/papers/1998/mmx-pentiumII/index.html
+ 
+5. B. Lu and B. L. Evans, ``Channel Equalization Performance of Two
+    Feedforward Neural Networks,'' Proc. IEEE Conf. on Acoustics,
+    Speech, and Signal Processing, Mar. 14-19, 1999, submitted.
+ 
+6. N. Damera-Venkata and B. L. Evans, ``Optimal Design of Real and
+    Complex Minimum Phase Digital FIR Filters,'' Proc. IEEE Conf. on
+    Acoustics, Speech, and Signal Processing, Mar. 14-19, 1999,
+    submitted.
+ 
+7. B. Lu and B. L. Evans, ``Low-Complexity Channel Equalization by
+    Cascading Two Feedforward Neural Networks,'' Proc. IEEE Int. Sym.
+    on Circuits and Systems, May 30-Jun. 2, 1999, submitted.
+ 
+ 
+8. D. V. Tosic, M. D. Lutovac, and B. L. Evans, ``Advanced Digital IIR
+    Filter Design,'' Proc. IEEE Int. Sym. on Circuits and Systems, May
+    30-Jun. 2, 1999, submitted.
+ 
+9. N. Damera-Venkata and B. L. Evans, ``An Automated Framework for
+    Multi-criteria Optimization of Analog Filter Designs,'' IEEE
+    Transactions on Circuits and Systems II: Analog and Digital Signal
+    Processing, submitted.
+ 
+10. N. Damera-Venkata, B. L. Evans, and S. R. McCaslin, ``Design of
+    Optimal Minimum Phase Digital FIR Filters Using Discrete Hilbert
+    Transforms,'' IEEE Transactions on Signal Processing, submitted.
+
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We plan to finalize the GUI-related APIs, build actor libraries,
+complete the FSM domain, and increase the multi-domain modeling
+possibilities.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+Appendix
+========
+
+From: surles@scriptics.com
+Subject: Jacl & Tcl Blend 1.1alpha1 Release Announcement
+Date: 12 Nov 1998 18:28:06 GMT
+
+
+This message is to announce a new alpha release of Jacl and Tcl Blend.
+These products are the result of a joint effort of Christopher
+Hylands, Mo DeJong and Bryan Surles to continue the research and
+development of Tcl & Java integration.  The goal of this project is to
+extend and improve the existing 1.0 release of Jacl and Tcl Blend
+which was originally started by the Sun Tcl team.
+
+The 1.1 Alpha releases of Jacl and Tcl Blend are available for
+downloading at the following URL:
+
+    http://www.scriptics.com/java
+
+For changes from the 1.0 release please see the list at the bottom of
+this announcement.
+
+What is Jacl?
+-----------------
+
+Jacl is a 100% Java implementation of Tcl 8.0.  This allows Tcl to run
+in more environments and also brings the power of scripting to Java
+developers.  Jacl only implements a subset of the Tcl language (the C
+version of Tcl has a lot of features!).  However, the core of the
+language is implemented and well tested.
+
+What is Tcl Blend?
+-------------------------
+
+Tcl Blend is a Tcl Extension that allows you to have access to the
+Java VM from the Tcl interpreter.  The goal here is to allow Tcl
+developers to write new Tcl extensions in Java rather then C or C++
+for better portability.  Currently, Tcl Blend is only known to work
+with Solaris and Windows 95/NT.  However, it should be easy to port
+Tcl Blend to any system that supports dynamic loading and the Java JNI
+interface.
+
+For additional information:
+----------------------------------
+
+Scriptics Corporation maintains the download site for Jacl and Tcl
+Blend.  This site contains a variety of information about Tcl & Java
+integration: including FAQs, man pages, and the binary and source
+distributions for Jacl and Tcl Blend.  Please visit the following URL:
+
+    http://www.scriptics.com/java
+
+Christopher Hylands maintains his own page that lists a plethora of
+information.  There are links to related Web pages, his own personal
+notes about building and using Jacl and Tcl Blend, and in depth
+explanations about Tcl and Java integration.  This information can be
+found at the following URL:
+
+    http://ptolemy.eecs.berkeley.edu/~cxh/java/tclblend
+
+Comments and questions can be sent to the Tcl & Java integration
+mailing list at:
+
+    tcljava@tclconsortium.org
+
+Scriptics support for Jacl and Tcl Blend:
+--------------------------------------------------
+
+It is important to understand that this release is due entirely to the
+efforts of Christopher Hylands and Mo DeJong. Scriptics currently has
+a minor, facilitating role in Jacl and Tcl Blend and is not officially
+supporting these releases.
+
+Scriptics currently maintains a Web repository to host the source for
+many Tcl extensions.  The latest Jacl and Blend sources are available
+right now via netCVS.  This is the same mechanism Netscape uses for
+the source release of Navigator.  NetCVS is interesting because you
+can easily make changes to your source base, perform merges, and
+propose changes using CVS (which is a lot better than patches.)  For
+more information about the CVS repository, please visit the following
+URL:
+
+    http://www.scriptics.com/software/netcvs.html
+
+Scriptics also maintains a web page where users of Jacl and Tcl Blend
+can submit patches and bug reports.  As Scriptics is not currently
+supporting these Tcl extensions, these bug reports and patches will be
+emailed directly to the current supporters, Christopher Hylands and Mo
+DeJong.  We recommend the use of this form over directly emailing the
+current extension supporter, as it will help you provide enough
+information for the supporter to reproduce the bug on their system,
+and then fix it.
+
+    http://www.scriptics.com/support/bugForm.html
+
+New Features
+------------------
+
+This release fixes numerous bugs in the 1.0 release and adds some new
+features that will make combining Tcl and Java even easier then
+before.
+
+Changes to Jacl and Tcl Blend
+
+* Support for JDK1.2fcs
+
+* Support for more platforms: The build process for Jacl and Tcl Blend
+  has been updated to support more operating systems. Currently, Jacl
+  will build on Solaris, Windows NT, Windows 95, IRIX, Linux, and
+  HPUX. Tcl Blend should also work on these systems that have Native
+  Threads, but we have only tested Tcl Blend under NT and Solaris.
+  Jacl should also run on Macintosh systems but Macintosh support is
+  new and untested.
+
+* Startup scripts: The Unix source distributions include startup
+  scripts that are configured at compile time and that make it much
+  easier to start up Jacl and Tcl Blend.  A Windows startup script
+  for Jacl is also included.
+
+* Signature Matching: Java method invocations now use an argument
+  matching system to automatically determine which Java method a user
+  intended to invoke based on the types of the arguments.
+
+* The new java::cast command: This command is used to change the type
+  of Java references at runtime. In version 1.0, a reflected Java object
+  (a Java object that has been registered inside a Tcl interpreter and
+  has been assigned as instance command) did not correctly store the
+  class of the Java instance. This caused a number of subtle errors in
+  Tcl scripts that interacted with Java objects. The new 1.1alpha1
+  version fixes this problem by storing each Java object as a class and
+  instance pair. In this way, a Java object of type String can be
+  referenced as type String or by the generic Java type Object.
+
+* The java::isnull command now accepts only the string java0x0 as an
+  identifier for the null java object. In version 1.0 strings like
+  java0x00 or javax000 were incorrectly interpreted as the null Java
+  object.
+
+* The java::info command no longer crashes when the command is passed
+  java0x0 and returns reasonable results when passed the null java
+  object.
+
+Changes to Jacl Only
+
+* Improved Parser: Jacl is much faster. The command parser has been
+  completely rewritten so it uses much less memory and takes advantage
+  of more efficient Java APIs.
+
+* Improved exec Tcl command: The implementation of the exec command has
+  been completely rewritten. On UNIX systems the exec command did not
+  treat special characters correctly. The new implementation of the exec
+  command will work with file names that contain spaces or special
+  characters like '$'. In the 1.0 release, the Windows version of the
+  exec command did not run programs from the current directory. The
+  1.1alpha1 release of Jacl fixes this bug.
+
+* Improved Tcl file command: The file command was extended to include
+  the subcommand nativename. On Windows the command 'file nativename
+  C:/dir' will return 'C:\dir'.
+
+ Changes to Tcl Blend Only
+
+* Tcl Blend Initialization variable (JDK1.2 only): Using JDK1.2, Tcl
+  Blend now allows initialization arguments to be passed to the
+  JVM. When Tcl Blend is initializing the java package, it reads the Tcl
+  global variable, tclblend_init, and passes its value along to the Java
+  Virtual Machine upon initialization.
+
+Credits
+----------
+The Jacl and Tcl Blend 1.1alpha1 releases are brought to you by:
+
+ Mo DeJong
+ Christopher Hylands
+ Bryan Surles
+
+We would like to thank the Jacl and Tcl Blend 1.0 team:
+
+ Ray Johnson: Project Manager
+ Melissa Hirschl
+ Ioi Lam
+ Bryan Surles
+
+And a special thanks to Scott Stanton who implemented Tcl Blend, and
+John Reekie of UC Berkeley.
+

@@ -1,0 +1,385 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 February 18, 1998
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        1/15/98 - 2/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+The highlight of this reporting period is the first "hello world"
+simulation of continuous-time systems in the new CT domain in Ptolemy
+II. This domain was created by Jie Liu, and is still very much a
+prototype. But it is able to carry out simulations of simple ODEs using
+the popular 4th-order Runge-Kutta solution technique. A major objective
+of this domain is to support experimentation with mixed-signal
+simulation, semantics, and design. It follows close on the heels of
+Mudit Goel's PN (process networks) domain to be the second functional
+domain in Ptolemy II.
+
+Other highlights include a detailed plan for the user interface for
+Ptolemy II, a temporary solution to the Itcl/Java incompatibility that
+has been plaguing us, and major progress on Tycho modularization.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Java/Tcl interaction
+--------------------
+
+Our major problem right now is that the port of Itcl to Tcl 8.0 has
+still not been completed by Michael McLennan of Lucent. Our user
+interface environment, Tycho, is written in Itcl, and replicating even
+a small portion of its functionality in Java or Tcl would be a huge
+task. However, during this reporting period, we have identified two
+solutions that permit us to proceed with our work.
+
+First, Christopher Hylands has created a mechanism by which an Itcl
+process can send commands to a Tcl8 process via a socket. An
+architecture using this sort of connection would be similar to the way
+Ptolemy 0.x works, where the user interface, Vem, runs in a separate
+process from the Ptolemy kernel and sends it commands via a socket.
+There are some advantages to this architecture, and we had considered
+using it anyway. Now we have a compelling reason to use it since it
+permits us to proceed with interfacing Tycho and Ptolemy II.
+   
+Second, Matt Newman of Sensus Consulting Ltd. has created tcl++ and
+tk++, which are Tcl-only implementations of Itcl and Itk. I.e., no C
+code. These implementations are "near 100%" compatible with Itcl, but
+unlike Itcl, they work with Tcl 8, and therefore will work with
+TclBlend and Java. John Reekie did some preliminary experiments with
+it, and, as expected, it is considerably slower than the C
+implementation of Itcl. But it gives us an temporary solution to the
+Itcl/Java incompatibility. The code can be found at:
+    
+    ftp://www.sensus.org/pub/
+
+John Reekie also wrote a light-weight implementation of tcl++,
+in which all but the essential support for object-oriented
+programming was stripped out, and found that method calls could
+be sped up by about a factor of three to four by carefully
+tailoring the code used to simulate object-oriented inheritance.
+
+In a related development, John Ousterhout, the creator of Tcl/Tk, and
+several of his team at Sun Microsystems, have left Sun to start a new
+company called Scriptics. The web site has some basic information about
+the company:
+
+    http://www.scriptics.com.
+
+It is unclear what this means about the future of Tcl/Tk, Itcl, and the
+Tcl/Java interaction.
+
+
+User Interface
+--------------
+
+John Reekie has outlined a set of milestones needed to get a
+(graphical) user interface for Ptolemy II.  The dates are guesses.
+
+Internal release 1 (est. May 10):
+ 
+   This milestone provides a point at which our internal developers
+   can use the GUI to create simulations. It will use only a single
+   workspace, and be able to create entities, make multi-way
+   connections, have pop-up context menus for editing and querying
+   ports, entities, and relations, and load and save schematics.
+
+   A major design issue in this milestone is how constraints imposed by
+   a domain in Ptolemy II will be enforced at the user interface level.
+   For example, many domains do not allow outputs to be connected to
+   outputs. One option is that the user interface functions as a viewer
+   and controller, while the Java topology functions as the model, in a
+   model-view-controller architecture. This approach tightly couples
+   the user interface to the Ptolemy II kernel, which may not always be
+   desirable. We are evaluating the alternatives.
+
+Internal release 2 (est. July 10):
+
+   The second internal release extends the GUI functionality
+   to support some of the more innovative features of the
+   Ptolemy II kernel. The key issues are graphical support
+   of nested topologies and inter-mixing of visual syntaxes.
+   This release will also allow a user to add, delete, and
+   move ports around (rather than having them fixed).
+
+   There are several open issues:
+
+     - Are nested topologies displayed in-line or out-of-line?
+     - Are nested topologies stored in-line or out-of-line?
+     - How are level-crossing links handled?
+ 
+Pre-release (est. August 10):
+
+   The pre-release allows selected third-party developer access
+   to the new GUI. Work on this release is largely aimed at
+   improving usability and robustness. Multiple workspaces
+   and more robust and flexible user interface dialogs are key
+   issues here.
+
+Release (est. October 10):
+
+   The public release will go through the usual alpha-beta-final
+   process -- the date given is for the final release. The only
+   major functionality enhancements envisaged for this release
+   are the provision of edge reshaping, and possibly a better
+   icon editor.
+
+
+Tycho Modularization
+--------------------
+
+John Reekie has made good progress architecting a package policy for
+Tycho. He is now able to start up Tycho in various configurations built
+with different packages. The goals here are to make Tycho modular
+reconfigurable, and "componentable." He has split Tycho into
+separately-loadable packages, with explicit dependencies between
+packages. It will be thus be possible to use Tycho in a number
+of ways:
+
+* A "stand-alone" application, with its own console and feature
+  support. Other packages can be easily added to Tycho.
+* An application framework for other stand-alone applications. Tycho's
+  GUI foundation class package provides the base framework for this.
+* A utility library for existing [incr Tcl] applications. An existing
+  application may choose to load and use some subset of Tycho, such
+  as its HTML viewer or a graph editor.
+* A package management framework for other [incr Tcl] applications. 
+
+
+Java Signal Plotter
+-------------------
+
+On Friday, January 23 we released Ptplot version 1.2. The changes
+between Ptplot1.1 and Ptplot1.2:
+
+     * Added support for JAR files. 
+     * Added Troubleshooting Ptplot and Ptplot FAQ.
+     * Added a demo that illustrates a JavaScript Interface to Ptplot.
+     * Slight layout improvements. 
+     * Support raw binary files that consist only of 4 byte floats. 
+     * Error bars are now supported.
+     * Logarithmic axes are now supported.
+     * Fixed a bug with recycling colors and marks.
+
+Ptplot1.2 is available at:
+
+   http://ptolemy.eecs.berkeley.edu/java/ptplot/
+
+Ptplot can be used as a component in other Java programs, as an applet
+or as a standalone application. The website include sources and applet
+demonstration.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Mixed Signal Design
+-------------------
+
+Achieving a significant milestone for the project, Jie Liu has
+prototyped a continuous-time (CT) simulation domain in Ptolemy II. This
+also demonstrates progress in the design of Ptolemy II, since Jie was
+able to build this domain relatively easily. The purpose of this domain
+is to give us a numerical ODE solver that we can use to experiment with
+mixed signal design and simulation. The domain by itself is not a major
+fundamental contribution since there are many ODE solvers available,
+but this type of continuous-time modeling entirely within the Ptolemy
+environment is a first.
+
+To achieve the objective of studying mixed signal design, this domain
+needs to support a representative sample of ODE solution techniques,
+preferably those that exhibit the most challenging problems for
+mixed-signal modeling. A rough classification of numerical ODE solvers
+is as follows: 
+
+1. Time-marching vs. function matching
+
+   Most methods iterate in the time domain and calculates signal values at
+   monotonically increasing points in time. This class of methods is often
+   called time-marching. Another class of methods iterate in function
+   space, usually via waveform relaxation. Waveform methods can more
+   easily deal with multi-resolution time, but with tightly coupled
+   designs they converge extremely slowly. For this reason, most
+   general-purpose ODE solvers appear to use time marching methods.
+
+2. One Step Methods vs. Multistep methods
+
+   One step methods use only y(n) for calculating y(n+1). Multistep
+   methods use more historical points (more memory). 
+
+3. Fixed stepsize vs. adaptive(adjustable) stepsize
+
+   Discretization of time may use fixed or variable time steps. Fixed
+   steps result in variable accuracy; in slowly changing signals, the
+   accuracy is excessive (does not justify the computational burden),
+   while in rapidly changing signals the accuracy may be inadequate.
+   Adaptive steps introduce truncated-error control, so that it is more
+   uniformly accurate. But the down side is that adaptive step methods
+   need to estimate a partial differential, which requires more
+   function evaluations. For example, in the popular 4th order
+   Runge-Kutta method, the adaptive stepsize method requires
+   approximately 6 times more function evaluations. 
+
+4. Fixed order vs. variable order 
+
+   The order is defined differently for different methods. But
+   basically, it related to the times a function is evaluated during one
+   step of calculation (not include the function evaluation for error
+   control). Generally, higher order methods are more accurate than
+   lower order method, but also have more computational cost. 
+
+5. Explicit vs. Implicit 
+
+   Explicit methods use only the previously computed values to
+   calculate y(n+1). Such methods are usually straightforward and time
+   and memory cost are easy to predict. But they often have stability
+   problems. Implicit methods formulate y(n+1) in terms of itself and
+   previously computed values. Then y(n+1) is found by solving a
+   nonlinear algebraic equation, usually by an iterative procedure
+   where the number of iterations to convergence is hard to predict. In
+   addition, solutions may be non-unique. But implicit methods
+   generally have good stability. 
+
+Most commercial ODE solvers provide variable order variable
+stepsize(VOVS) explicit or implicit methods, including RK45,
+Adams-Moulton, etc. These methods have good numerical properties and
+require little background knowledge from the user. But they may not be
+the most efficient solution for a given particular problem. 
+
+Some simple and popular ODE solver methods are:
+
+1. One step forward Euler
+2. Euler two-step method
+3. Leapfrog (two-step) method
+4. Theta method (trapezoidal rule)
+5. Fixed step Runge-Kutta (4th order)
+
+The first of these is easily implemented in the SDF domain in Ptolemy.
+No new domain is required. The other methods require additional
+capability. In particular, 4th order RK requires a set of function
+evaluations that are not part of the normal SDF cycle. Providing the
+base classes to support such function evaluations is the main purpose
+of the CT domain. In addition, by maintaining an explicit model of
+time, the CT domain is designed to support variable step methods. Jie
+Liu has so far implemented only 4th-order fixed step Runga-Kutta in the
+CT domain.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+We have begun to figure out how CT modeling can be combined with other
+(digital) modeling techniques in Ptolemy.  The requirements are two-way
+hierarchical nesting.  A CT subsystem must be embeddable within a
+digital model, and a digital model must be embeddable within CT.
+The former problem is essential solved for time marching ODE solvers.
+The method we will use is essentially the same one that we use today
+to embed discrete-event and VHDL simulators within other digital models.
+The latter problem is harder, and appears to require fundamental
+support in the software infrastructure.
+
+To support nesting of the various digital domains (dataflow,
+discrete-event, FSM, etc.) within CT, we have to provide a mechanism
+for the sorts of multiple function evaluations that are needed in CT.
+That is, the digital subsystem has to appear to the CT domain to behave
+just like any other CT block. We are currently working out the details
+within the Ptolemy II architecture.
+
+
+2.  Equipment/Infrastructure Status:
+
+No changes.
+
+
+3.  Interactions
+
+Pertinent to the mixed signal model reported in the last monthly
+report, Hewlett-Packard has been using HP Ptolemy for A/D design,
+using its cosimulation with HP EEsof's analog tools.
+
+The work was presented at DesignCon98: "An Integrated Design
+Methodology for High-Performance Analog to Digital Converters", Kevin
+Nary, DesignCon98 - Digital Communications System Design Conference
+Proceedings, Professional Education International, 1998.
+
+Kevin Nary has designed many custom high speed A/Ds and is one of the
+founders of Celerix. Celerix is a company specializing in mixed-signal
+design, used the cosimulation capabilities of the Advanced Design
+System to analyze and refine a high speed (> 1 Gsample/sec) A/D
+converter. A mix of DSP, SPICE, and MATLAB cosimulation was used to
+achieve much faster analysis of an ADC.
+
+
+4.  Personnel Status
+
+Albert Chen, an honors undergraduate, has joined the group to work on
+libraries of mathematical functions in Java.
+
+
+5.  Talks/Presentations/Publications:
+
+Talks by Group Members
+----------------------
+
+- "Hierarchical Finite State Machines with Multiple Concurrency Models,"
+  by Alain Girault, Bilung Lee, and Edward Lee, presented by Girault at
+  the Workshop on Synchronous Languages, Roscoff, France, December, 1997
+  (omitted erroneously from the last report).
+
+- "Complex Systems," by Edward A. Lee, invited briefing to the National
+  Research Council study committee on "information technology research in
+  a competitive world," February 10, 1998.
+
+
+Key Talks by Others
+-------------------
+
+- "Stream-Based Media Processing: What, How, and Why," V, Michael Bove, Jr.,
+  MIT Media Laboratory, Berkeley Design Seminar, Friday January 30th, 1998.
+
+
+Publications
+------------
+
+[1] Shuvra S. Bhattacharyya, Praveen K. Murthy, and Edward A. Lee,
+    "Synthesis of Embedded Software from Synchronous Dataflow Specifications,"
+    Invited paper, to appear in Journal of VLSI Signal Processing, 1998. 
+    http://ptolemy.eecs.berkeley.edu/papers/98/synthesis/
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+The implementation of the two first Ptolemy II domains, CT (continuous
+time) and PN (process networks) have highlighted the need for some
+kernel infrastructure to be shared across domains. The first of these
+is a generic graph manipulation capability. The CT domain constructs an
+acyclic graph based on its block diagram and performs a topological
+sort on that graph. Instead of a point solution implementation that
+will only work in that domain, we will develop a support class or set
+of classes that efficiently perform graph manipulations such as
+topological sort, depth-first search, identifying cycles, etc. We are
+basing the design in part on LEDA, a popular and very well-designed C++
+package for graph manipulation. Another major objective in the next
+reporting period is to get the user interface construction moving
+again, now that we are no longer stalled by the Itcl/Java
+incompatibility.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.

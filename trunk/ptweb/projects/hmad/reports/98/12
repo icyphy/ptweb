@@ -1,0 +1,400 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 Jan. 28, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        11/15/98 - 12/15/98
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have released the first version of Ptolemy II, designated 0.1alpha,
+and a new version of Ptplot, designated 2.0.  We have constructed two
+mixed-domain applications, a MEMS accelerometer (using CT and DE) and
+a communication system with an alternating bit protocol (using FSM and
+DE).  These were both demonstrated at the Composite CAD DARPA PI meeting
+in San Diego, at which we also presented a poster and a talk.
+
+We have also scheduled a Ptolemy Miniconference to be held at Berkeley
+on Friday, February 19.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Ptolemy II 0.1 Release
+----------------------
+
+Ptolemy II 0.1alpha is available for downloading from:
+
+   http://ptolemy.eecs.berkeley.edu/ptolemyII/
+
+Ptolemy II 0.1alpha includes the Ptolemy II design document and the
+Java code that corresponds with the core Ptolemy II packages. The
+intent of this release is to make the system available to early
+adopters and to disclose basic design decisions in order to solicit
+feedback and criticism.
+
+This release does not include domains or a GUI, so it is not a
+replacement for Ptolemy 0.x. The primary audience of this release is
+experienced programmers and Ptolemy developers who are interested in
+the next generation of Ptolemy infrastructure.
+
+In house, we have several domains that are operational, including DE,
+SDF, CT (continuous time), PN, FSM, and CSP (communicating sequential
+processes). All of these will be included in the 1.0 release of Ptolemy
+II, which will be the first release that is useful to end users.
+
+
+Plot package
+------------
+
+We have released version 2.0 of ptplot, our Java-based plotting package.
+For details, see:
+
+    http://ptolemy.eecs.berkeley.edu/java/ptplot
+
+Ptplot is a set of two dimensional signal plotters components written
+in Java. 
+
+Ptplot has the following features:
+     * Embeddable in applets or applications. 
+     * Binary or ASCII data. 
+     * Auto-ranging. 
+     * Automatic or manual labeling of axes. 
+     * Automatic or manual tick marks. 
+     * Logarithmic axes. 
+     * Live, animated plots. 
+     * Infinite zooming. 
+     * Various plot styles: connected lines, scatter plot, bars, etc. 
+     * Various point styles: none, dots, points, and unique marks. 
+     * Multiple data sets and a legend. 
+     * Color or black and white plotting. 
+     * Error bars. 
+
+Ptplot 2.0 includes the following new features:
+     * Rewritten to use AWT 1.1 event model
+     * Classes and methods restructured to make it easier to
+       embed Ptplot in a user widget
+     * A new class named PlotApplication that uses menus to control
+       the plot 
+     * Code cleanups
+     * Other changes
+
+
+Visualization infrastructure
+----------------------------
+
+Last month saw the first release of Diva, an infrastructure for
+visualization of complex systems. Diva is a collaborative project
+between the Ptolemy and JavaTime (Professor Richard A. Newton) groups.
+We will be using Diva as a basis for advanced visualization tools for
+evolving systems in Ptolemy.
+
+Here is the Diva 0.1 release announcement:
+
+      Announcing Diva 0.1, the first step toward a software
+      infrastructure for visualizing and interacting with dynamic
+      information spaces. Diva's distinguishing characteristics are its
+      emphasis on dynamic data and interactive user interfaces, and its
+      clean, easy-to-use API. 
+
+      This release consists of two Java packages, diva.canvas and
+      diva.graph. The Diva canvas is a structured graphics layer over
+      the Java2D API with a coherent set of features intended to
+      support innovative and interesting visualizations and user
+      interfaces. The Diva graph package implements an easy-to-use
+      architecture for graph visualization, based on a Swing-style MVC
+      data and notification model. Extensible and pluggable graph
+      rendering and layout facilities complete the picture. 
+
+      Diva 0.1 is the first public release of Diva. For each release,
+      we have a "theme" that conveys its focus. This release is the
+      hard-hat release, so-called because it emphasizes that this an
+      early developer's release. The purpose of the hard-hat release is
+      to make Diva available to anyone that might be interested in
+      using it, and to solicit feedback on the architecture so far. The
+      release is located at: 
+
+         http://www-cad.eecs.berkeley.edu/diva
+
+      As the infrastructure matures, we believe it can be applied in a
+      variety of information-intensive domains, ranging from software
+      and hardware systems design to data browsing and exploration. We
+      hope that this announcement has piqued your interest, and that
+      you find Diva useful.
+
+
+Math package
+------------
+
+We have reworked the FFT implementation to use the new new immutable
+Complex class, and obtained about a factor of two performance
+improvement over the previous version. In addition, Jeff Tsay
+implemented an alternative algorithm called the Vetterli FFT, which
+achieves approximately another factor of three improvement.
+
+
+Test Coverage
+-------------
+
+Christopher Hylands measured the coverage of our automatic
+Ptolemy II test suite.  Here is a summary:
+
+* The kernel has all methods called but one.
+* kernel.util has 72 of 89 methods called.
+* math has 51 of 89 methods called.
+* actor has 148 of 237 or 62% of the methods called .
+
+These metrics indicate that our test suites still need a considerable
+amount of work.
+
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Finite State Machines (FSM)
+--------------------------
+
+Xiaojun Liu has checked in the FSM domain, and we demonstrated it
+interacting with the DE (discrete events) at the Composite CAD PI
+meeting in San Diego.
+
+
+Software Practice
+-----------------
+
+Design reviews:
+  - plot package
+  - csp package
+  - math package
+  - de package
+  - actor.process
+
+Code reviews:
+  - data package
+  - actor package
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Multi-Domain Modeling - CT + DE
+-------------------------------
+
+Jie Liu has created a multi-domain model of a MEMS accelerometers,
+which uses beams, gaps, and electrostatics to measure acceleration.
+This model was demonstrated live executing in an applet at the
+Composite CAD PI meeting in San Diego. Beams and anchors, separated by
+gaps, form parallel plate capacitors. When the device is accelerated in
+the sensing director, the displacement of the beams causes a change in
+the gap sizes, which further causes a change in the capacitance. By
+measuring the change in capacitance (using the Winston capacitor
+bridge), the acceleration can be obtained accurately.
+
+Feedback can be applied to the beams by charging the capacitors.
+The benefits of feedback are[1]: 
+
+* Reduce sensitivity to process variations.
+* Eliminate mechanical resonances, increase sensor bandwidth.
+* Improve selectivity and dynamic range.
+* Reduce sensor Brownian motion noise.
+
+Sigma-Delta modulation, also called pulse density modulation or
+bang-bang control, is a digital feedback technique, which gets the A/D
+conversion functionality "for free" [2].
+
+Mark Alan Lemkin designed a micro accelerometer with digital feedback
+[3]. A second-order CT (continuous-time) subsystem is used to model the
+beam. The voltage on the beam-gap capacitor is sampled every T seconds
+(much faster than the required output of the digital signal), and then
+filtered by a lead compensator (FIR filter), and fed to a one-bit
+quantizer. The output of the quantizer is converted to force and fed
+back to the beams. The output is also counted and averaged every N*T
+seconds to produce the digital output. In Jie's model, the external
+acceleration is a Sin wave.
+
+References:
+
+[1] Bernhard E. Boser, "Electrostatic Force-Feedback", talk slides,
+    http://kowloon.eecs.berkeley.edu/~boser/pdf/feedback.pdf.
+
+[2] James C. Candy, "A Use of Limit Cycle Oscillations to Obtain Robust
+    Analog-to-Digital Converters", IEEE Trans. on Communications, Vol.
+    COM-22, No. 3, March 1974, pp298-305.
+
+[3] Mark A. Lemkin, "Micro Accelerometer Design with Digital Feedback
+    Control", doctoral dissertation, University of California, Berkeley,
+    Fall 1997.
+
+
+Multi-Domain Modeling - FSM + DE
+--------------------------------
+
+Xiaojun Liu has created a model of a communication system using an
+alternating bit protocol that combines hierarchical finite state
+machines (FSMs) with discrete-event (DE) modeling. This model was
+demonstrated at the Composite CAD meeting in San Diego. The model
+contains the following modules: DEMessageSource, DETimer, two
+DEChannels (forward and backward), DEPlot, Sender, and Receiver. The
+Sender is a hierarchical FSM, which contains two submachines for
+connection setup and transmission. The receiver is a flat FSM.
+
+
+Polis Translator
+----------------
+
+Steve Neuendorffer implemented a translator from Polis to ptolemy II,
+using the FSM and DE domains. It reads the Polis shift file format into
+ptolemy II. Polis was developed in the CAD group at Berkeley for
+hardware/software codesign.
+
+
+Jini
+----
+
+Our regular Friday study group has turned its attention to Jini, the
+new networking technology from Sun Microsystems that is intended for
+embedded systems.
+
+
+2.  Equipment/Infrastructure Status:
+
+Christopher Hylands and John Reekie converted our source code
+management from SCCS to CVS. CVS works much better with our current
+computing environment, which is multi-platform, and includes notebook
+computers that are often not on the network.
+
+Christopher Hylands installed JDK1.2 (the final release from Sun).
+He also installed Jikes, a Java compiler from IBM (a replacement for
+javac that is distributed as Open Source).
+
+ "Jikes is a Java compiler that translates Java source files as defined
+ in The Java Language Specification (Addison-Wesley, 1996) into the
+ bytecoded instruction set and binary format defined in The Java
+ Virtual Machine Specification (Addison-Wesley, 1996). Unlike other
+ compilers, Jikes accepts the Java language only as specified: not as a
+ subset, variant, or superset.
+
+ In addition to strictly adhering to specifications, Jikes is faster
+ than most compilers and can compute the complete dependency relations
+ in program files. This allows for the generation of dependency
+ makefiles suitable for use with make. Jikes can also be run in
+ incremental mode: after the initial compilation, Jikes waits until
+ prompted, determines which files have been changed, and then does the
+ minimal amount of work needed to bring the class files into a complete
+ and consistent state. This cycle can be repeated until the q command
+ is entered to end the compilation."
+
+
+3.  Interactions and Technology Transfer
+
+- Jerry Isdale of ISX Corporation presented Diva, our recently released
+  user interface package, to Admiral Poindexter.  Apparently, the admiral
+  was quite interested.
+
+- Allen Miu, a researcher in the group of Prof. Kris Pister at
+  Berkeley, used the DE domain in Ptolemy II to create a model of a group
+  of communicating MEMS microrobots. His model uses a simple communication
+  relay scheme whereby a robot that receives a message that is not
+  addressed to it will rebroadcast the message.  The model showed
+  clearly that this scheme does not scale beyond a very few robots
+  since the retransmissions tend to overwhelm the available channels.
+
+- Xavier Warzee of Thomson-CSF and Frederique Boulanger of Supelec, both
+  in France, continue to develop SRCGC and FSMCGC domains under Ptolemy 0.7.1.
+  These domains generate optimized C code from synchronous/reactive models
+  and finite-state machine models, in combination with synchronous dataflow
+  models.  They are using them to model image processing applications.
+  Their latest developments are available at the following address:
+
+      http://ptolemy.thomson-csf.fr/~warzee
+
+  This is still a beta version, but they hope to complete this effort
+  next year with a real image processing application generated on a DSP
+  board.
+
+- Jose Luis Pino and Khalil Kalbasi, presented a talk and paper
+  ``Cosimulating Synchronous DSP Applications with Analog RF Circuits,''
+  presented at the Thirty-Second Annual Asilomar Conference on Signals,
+  Systems, and Computers, November, 1998.  This work is based on HP's
+  commercialization of Ptolemy 0.7.
+
+
+4.  Personnel Status
+
+Ron Galicia is leaving the group to join Hewlett-Packard's EEsoft
+division. Neil Smyth is graduating with his masters degree and is
+joining Bellcore. William Wu is leaving to join Mentor. We wish them all
+well and will miss their contributions.
+
+
+5.  Talks/Presentations/Publications:
+
+Talks and Presentations
+-----------------------
+
+ * We presented a poster and demonstrated Ptolemy II at the Composite CAD
+   meeting on December 2-3 in San Diego.
+
+ * Edward A. Lee, "Heterogeneous Modeling and Design," talk given at the
+   Composite CAD PI meeting, December 4, San Diego.
+
+ * John Reekie gave a presentation on giving presentations at our
+   group lunch on Dec. 11.
+
+
+Publications
+------------
+
+[1] Edward A. Lee, ``Overview of the Ptolemy Project'', ERL Technical
+    Report UCB/ERL No. M98/71, University of California, Berkeley, CA
+    94720, November 23, 1998.
+    http://ptolemy.eecs.berkeley.edu/papers/98/Overview/
+
+[2] The Ptolemy Team, ``Ptolemy II: Heterogeneous Modeling and Design
+    in Java,'' Version 0.1 of the Ptolemy II Design document.
+    http://ptolemy.eecs.berkeley.edu/ptolemyII/doc/design.html
+
+[3] Bilung Lee and Edward A. Lee, ``Interaction of Finite State
+    Machines with Concurrency Models,'' Proc. of Thirty Second Annual
+    Asilomar Conference on Signals, Systems, and Computers, Pacific Grove,
+    California, November 1998. 
+
+The following papers have been accepted for publication:
+
+[4] E. A. Lee and A. Sangiovanni-Vincentelli, "A Framework for
+    Comparing Models of Computation," to appear in IEEE Trans.
+    on Computer-Aided Design.
+
+[5] Rajarshi Gupta, Kiran and Edward A. Lee, ``Computationally
+    Efficient Version of the Decision Feedback Equalizer,'' to appear in
+    ICASSP 99, September 1998. 
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are planning the architecture of the domain-polymorphic actor
+library.  We will continue to develop the domains, focusing on
+polishing them for release.  We will hold a miniconference.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
+
+
+
