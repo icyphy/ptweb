@@ -1,20 +1,5 @@
 NAMES
-John Davis, II,
-Chamberlain Fong,
-Christopher Hylands,
-Bart Kienhuis,
-Bilung Lee,
-Edward A. Lee,
-Michael Leung,
-Jie Liu,
-Xiaojun Liu,
-Steve Neuendorffer,
-Shankar Rao,
-John Reekie,
-Mary P. Stewart, 
-Jeff Tsay, and
-Yuhong Xiong.
-
+John Davis, II, Chamberlain Fong, Christopher Hylands, Bart Kienhuis, Bilung Lee, Edward A. Lee, Michael Leung, Jie Liu, Xiaojun Liu, Steve Neuendorffer, Shankar Rao, John Reekie, Mary P. Stewart, Jeff Tsay, and Yuhong Xiong.
 EMAIL
 eal@eecs.berkeley.edu
 
@@ -28,6 +13,9 @@ Ptolemy II- Heterogeneous Concurrent Modeling and Design in Java
 
 CHAPTER
 02.cad
+
+SPONSOR
+The Ptolemy Project
 
 ABSTRACT 
 
