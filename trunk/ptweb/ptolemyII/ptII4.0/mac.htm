@@ -47,68 +47,6 @@ Under Mac OS 10.2 with Java 1.4, the Web Start binary downloads and
 starts up, but there might be a delay while the rest of the modules
 are pulled over the network.
 
-<h2>Mac OS X UI bugs</h2>
-<dl>
-<dt>Context Menu issues
-<dd>Most Macintoshes have only one button, yet the Vergil UI
-uses the right menu button to bring up a context menu with choices
-like "Look Inside".  Currently, our plan is to 
-is to use control-click to bring up the context menu on the Mac.
- <p><B>Note:</B> In Ptolemy II 4.0,
- at least one user could not get the context menu working
- <br>We are looking into this
-
- <p>Note further that, usually control-click is used to create a
-relation or select a relation and create a connection.  On the Mac,
-the command key (also known as the apple key) can be used to create a
-relation or select a relation and create a connection.
-
- <br>Note that the problem here is that making a connection to a relation
-is tricky, since if you click on the relation and drag, then the
-relation will move.  The solution is to hold the control key down and
-drag over the relation, which will create a connection.  A good test
-of this is to try to connect a relation and an input or output port
-in a composite actor)
- <p>The code in
-<a href="ptII/ptolemy/vergil/actor/ActorEditorGraphController.java"><CODE>ptolemy/vergil/actor/ActorEditorGraphController.java</CODE></a>
-is where the MacOS specific mouse code is located.
-
-<li> While we have not tried it ourselves, we have been told that
-an external two button USB mouse can be used.
-
-<dt> Drag and Drop does not work
-<dd> Dragging an actor from the actor library pane on the left results in
-<pre>
-java.lang.ClassCastException
-        at sun.awt.datatransfer.DataTransferer.translateTransferable(DataTransferer.java:1197)
-        at apple.awt.CDataTransferer.translateTransferable(CDataTransferer.java:128)
-        at sun.awt.datatransfer.DataTransferer$6.run(DataTransferer.java:1937)
-        at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:178)
-        at java.awt.EventQueue.dispatchEvent(EventQueue.java:448)
-        at java.awt.EventDispatchThread.pumpOneEventForHierarchy(EventDispatchThread.java:230)
-        at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:183)
-        at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:177)
-        at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:169)
-        at java.awt.EventDispatchThread.run(EventDispatchThread.java:99)
-
-</pre>
- <p>The following Sun Java Topic might be of use
-<a href="http://forum.java.sun.com/thread.jsp?thread=184916&forum=5&message=654598"><CODE>http://forum.java.sun.com/thread.jsp?thread=184916&amp;forum=5&amp;message=654598</CODE></a>
-
- <p>Making ptolemy/vergil/toolbox/PtolemyTransferable.java implement
-Serializable might help.
-
-Editing how the DataFlavor is created in PtolemyTransferable might
-also help:
-<pre>
-   public static final DataFlavor namedObjFlavor =
-    new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType +
-            ";class=ptolemy.kernel.util.NamedObj", "Named Object");
-
-</pre>
-
-</dl>
-
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
 </body>
