@@ -415,8 +415,15 @@ Publications
 [1] Jie Liu, Xiaojun Liu, Tak-Kuen John Koo, Bruno Sinopoli,
     Shankar Sastry, and Edward A. Lee, "Hierarchical hybrid
     system simulation," accepted to CDC 1999.
+    http://ptolemy.eecs.berkeley.edu/publications/papers/99/hybridsimu/
 
-[2] "Overview of the Ptolemy Project," FIXME
+[2] John Davis II, Mudit Goel, Christopher Hylands, Bart Kienhuis,
+    Edward A. Lee, Jie Liu, Xiaojun Liu, Lukito Muliadi, Steve
+    Neuendorffer, John Reekie, Neil Smyth, Jeff Tsay and Yuhong Xiong,
+    "Overview of the Ptolemy Project," ERL Technical Report UCB/ERL No.
+    M99/37, Dept. EECS, University of California, Berkeley, CA 94720, July
+    1999.
+    http://ptolemy.eecs.berkeley.edu/publications/papers/99/overview/
 
 [3] Thomas Henzinger, Xiaojun Liu, Shaz Qadeer, and Sriram Rajamani,
     "Formal Specification and Verification of a Dataflow Processor Array,"
