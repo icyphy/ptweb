@@ -28,13 +28,13 @@ with Ptolemy 0.7.1.  However, if you are upgrading the compiler,
 you should probably recompile Itcl.
 
 <li> The SDF Loop Scheduler library has been renamed from
-<code>libLS</code> to <CODE>libls</CODE>.  The reason is that case
+<code>libLS</code> to <code>libls</code>.  The reason is that case
 sensitivity issues with Samba were causing problems with the NT port.
 
 
 <li> It is best if you have <code>$PTOLEMY/bin</code> in your path
-before <code>$PTOLEMY/bin.$PTARCH</code>.  <CODE>pxgraph</CODE>
-and <code>itkwish</code> are scripts located in <CODE>$PTOLEMY/bin</CODE>
+before <code>$PTOLEMY/bin.$PTARCH</code>.  <code>pxgraph</code>
+and <code>itkwish</code> are scripts located in <code>$PTOLEMY/bin</code>
 that try to set your environment properly before calling executables in
 <code>$PTOLEMY/bin.$PTARCH</code>.
 
@@ -125,7 +125,7 @@ then the error message you will see is:
         RPC Error: server: bad VEM request
 </pre>
 The number '4' in the error message is a dead giveaway, the patch
-says <code>rcpInternal.h</code> had the following <CODE>#define</CODE>
+says <code>rcpInternal.h</code> had the following <code>#define</code>
 added:
 <pre>
 #define VEM_LOCKING_FUNCTION                    (long) 4

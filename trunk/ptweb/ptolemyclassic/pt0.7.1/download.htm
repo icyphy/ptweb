@@ -18,7 +18,7 @@ but the page does provide links to the ptolemy0.7.1 tar files.
 	are already familiar with Ptolemy, you might be able to get by
 	with these quick instructions.  If you are new to Ptolemy, you
 	may want to look over the 
-	<A HREF="#DetailedInstructions">Detailed Instructions</A> below.
+	<a href="#DetailedInstructions">Detailed Instructions</A> below.
 	
 	<menu>
 
@@ -171,7 +171,7 @@ follow the instructions in
 	ptolemy.  If you are short on space, see the <A
 	HREF="#DiskSpace">Disk Space</A> section below.
 
-<li> Set your <code>PTOLEMY</code> variable, your <CODE>PTARCH</CODE>
+<li> Set your <code>PTOLEMY</code> variable, your <code>PTARCH</code>
 	variable, and your path.  You could source <code>ptolemy/.cshrc</code>
 	or place the following in your <code>.cshrc</code>
 	<pre>	
@@ -187,7 +187,7 @@ follow the instructions in
 	
 	 <p>If you will be building the GNU tools under Solaris, you
 	need to have <code>/usr/bin</code> in your path before
-	<code>/usr/ucb</code>, see <CODE>$PTOLEMY/src/gnu/README</CODE>
+	<code>/usr/ucb</code>, see <code>$PTOLEMY/src/gnu/README</code>
 
 	 <p>If you are using the Java version of <code>pxgraph</code>,
 	either set <code>JAVAHOME</code> to the location of your
@@ -275,7 +275,7 @@ version, see the
 <br>The 0.7.1 gnu tar file includes egcs-1.0.2.  If you
 	can build the egcs compiler with shared libraries, then
 	incremental linking may work better for you.
-	<code>sol2.5</code> and <CODE>hppa</CODE> are the two
+	<code>sol2.5</code> and <code>hppa</code> are the two
 	architectures that have been built with shared libraries in
 	house.
 
@@ -301,13 +301,13 @@ make install_gnu
 <h3><a name="DiskSpace">Disk Space</A></h3>
 
 	Under Solaris2.5.1, untarring the <code>src</code>,
-	<code>sol2.5</code> and <CODE>gnu.sol2.5</CODE> tar files took up about
+	<code>sol2.5</code> and <code>gnu.sol2.5</code> tar files took up about
 	139 Mb of space.  Of that 139 Mb, 24.4 Mb were consumed by the
 	GNU binaries, and 23.4 Mb were taken up by itcl2.0 and tcltk.
 
 	<p>In a test build of the 0.7.1 release on a
 	Solaris2.5.1 machine building from <code>src</code>,
-	<code>other.src</code> and <CODE>gnu</CODE>, the total amount
+	<code>other.src</code> and <code>gnu</code>, the total amount
 	of disk space used was 392 Mb.  If you build in stages and
 	delete <code>obj.$PTARCH/gnu</code> (81.6 Mb),
 	<code>obj.$PTARCH/tcltk</code> (25.6 Mb) and

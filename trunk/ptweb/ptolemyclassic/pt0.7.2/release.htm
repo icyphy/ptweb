@@ -49,8 +49,8 @@ platform.
 
 <li> Windows NT4.0 support is more complete, 0.7.2devel support building under
   Cygwin32 b20.1
-  See <a href="nt"><CODE>$PTOLEMY/doc/html/nt</CODE></a> or
-  <a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html"><CODE>http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html</CODE></a>
+  See <a href="nt"><code>$PTOLEMY/doc/html/nt</code></a> or
+  <a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html"><code>http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/index.html</code></a>
 
 
 <li> Microsoft Visual C++ 6.0 can be used to compile ptcl.ptiny, which
@@ -64,16 +64,16 @@ platform.
 <h3><a name="compatibility">0.7.1 and 0.7.2devel Compatibility</a></h3>
 <menu>
 <li> The NT platform has problems with filenames that contain
-<CODE>%</CODE> and files or directories named <CODE>con</CODE>.
+<code>%</code> and files or directories named <CODE>con</CODE>.
 As a result, we had to rename several directories under
-<CODE>$PTOLEMY/lib</CODE> and then run <CODE>ptfixtree</CODE>
+<code>$PTOLEMY/lib</code> and then run <CODE>ptfixtree</CODE>
 on the entire Ptolemy tree to adjust for these changes.
 If you have any custom Ptolemy facets, you will need to run
-<CODE>$PTOLEMY/bin/ptfixtree</CODE> on your facets so that
+<code>$PTOLEMY/bin/ptfixtree</code> on your facets so that
 your facets will be able to find the newly renamed files.
 
- <br>The script <CODE>$PTOLEMY/bin/fixntpaths</CODE> is what we used
-to rename the files.  <CODE>$PTOLEMY/bin/ptfixtree.tcl</CODE>
+ <br>The script <code>$PTOLEMY/bin/fixntpaths</code> is what we used
+to rename the files.  <code>$PTOLEMY/bin/ptfixtree.tcl</code>
 was modifies so that the changes we made are automatically loaded.
 
 <li> A major feature of Ptolemy 0.7.2devel is that Itcl was upgraded from
@@ -112,7 +112,7 @@ Ptolemy 0.7.1p1
 
 <li> Ptolemy 0.7.2devel also includes
 an upgrade of the compiler from egcs-1.0.2 to egcs-1.1.
-In general, <CODE>.o</CODE> files built under Ptolemy 0.7
+In general, <code>.o</code> files built under Ptolemy 0.7
 will need to be recompiled for use with Ptolemy 0.7.1
 
 </menu>
@@ -127,34 +127,34 @@ should be in egcs.  It seems like egcs is much more active than gcc,
 for example egcs-1.0.2 was much more stable than gcc-2.8.1.
  <p> Note that under gcc-2.8.2,
 compiling with -O -fPIC causes an internal compiler error when
-compiling <CODE>Block.cc</CODE>, so we are shipping with egcs.
+compiling <code>Block.cc</code>, so we are shipping with egcs.
 
 
  <p>For more information about egcs, see
-<A HREF="http://egcs.com/egcs/"><CODE>http:/egcs.cygnus.com</CODE></A>.
+<a href="http://egcs.com/egcs/"><code>http:/egcs.cygnus.com</code></A>.
 
  <p>The most common problem with using egcs is that
-<CODE>libg++</CODE> is no longer used, so certain include files, such
-as <CODE>std.h</CODE> are not found at compile time 
+<code>libg++</code> is no longer used, so certain include files, such
+as <code>std.h</code> are not found at compile time 
 and certain symbols, such as
-<CODE>ACG::ACG(unsigned int, int)</CODE> are missing at link time.
- <p>Usually, doing a <CODE>make clean; make install</CODE> 
+<code>ACG::ACG(unsigned int, int)</code> are missing at link time.
+ <p>Usually, doing a <code>make clean; make install</code> 
 will solve the problem. 
- <p>The way we work around this is by defining <CODE>-DPT_EGCS</CODE>
-in <CODE>config-egcs.mk</CODE> and then including that makefile
-in the <CODE>config-<I>$PTARCH</I>.mk</CODE> file instead of
-<CODE>config-g++.mk</CODE>.
+ <p>The way we work around this is by defining <code>-DPT_EGCS</code>
+in <code>config-egcs.mk</code> and then including that makefile
+in the <code>config-<I>$PTARCH</I>.mk</code> file instead of
+<code>config-g++.mk</code>.
 
- <p>Note that egcs does not need <CODE>libg++</CODE>, so the
-<CODE>SYSLIBS</CODE> makefile variable is set to not include
-<CODE>-lg++</CODE>
+ <p>Note that egcs does not need <code>libg++</code>, so the
+<code>SYSLIBS</code> makefile variable is set to not include
+<code>-lg++</code>
 
 <h3><a name="ptclwithtk">Ptcl with Tk</a></h3>
 Olaf Lenzmann provided patches to Ptolemy that allow ptcl to be used
 with Tk. This functionality is experimental, and primarily for use
 with the Microsoft Visual C++ port.
 <ol>
-<li> Recompile <CODE>src/kernel/Star.cc</CODE> so that the Tk
+<li> Recompile <code>src/kernel/Star.cc</code> so that the Tk
 event loop is called from within Star::run()
 
 <pre>
@@ -164,8 +164,8 @@ make USERFLAGS="-DPT_PTCL_WITH_TK -I$PTOLEMY/tcltk/tcl/include -I/usr/openwin/in
 </pre>
 
 
-<li> Create the following <CODE>override.mk</CODE> file
-as <CODE>$PTOLEMY/obj.$PTARCH/ptcl/override.mk</CODE>
+<li> Create the following <code>override.mk</code> file
+as <code>$PTOLEMY/obj.$PTARCH/ptcl/override.mk</code>
  <br>
 <pre>
 # Override.mk file to create a Ptcl with Tk binary.
@@ -198,29 +198,29 @@ make
 <h3><a name="pxgraph">Pxgraph</a></h3>
 Pxgraph has been converted to Java.  See
 the troubleshooting guide at.
-<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/doc/internals/troubleshooting.html"><CODE>$PTOLEMY/tycho/java/ptolemy/plot/doc/internals/troubleshooting.html</CODE></a>
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/doc/internals/troubleshooting.html"><code>$PTOLEMY/tycho/java/ptolemy/plot/doc/internals/troubleshooting.html</code></a>
 
 If you don't have Java, see
-<a href="ftp://ptolemy.eecs.berkeley.edu/pub/misc/xgraph/index.html"><CODE>ftp://ptolemy.eecs.berkeley.edu/pub/misc/xgraph/index.html</CODE></a>
+<a href="ftp://ptolemy.eecs.berkeley.edu/pub/misc/xgraph/index.html"><code>ftp://ptolemy.eecs.berkeley.edu/pub/misc/xgraph/index.html</code></a>
 for pxgraph X11 binaries and sources.  See
-<a href="pxgraph.README.txt"><CODE>$PTOLEMY/src/pxgraph/README.txt</CODE></a> for details.
+<a href="pxgraph.README.txt"><code>$PTOLEMY/src/pxgraph/README.txt</code></a> for details.
 
  <p>To run the Java version of pxgraph, you must do one of the following:
 <ol>
-<li> Set the <CODE>JAVAHOME</CODE> environment variable to point
+<li> Set the <code>JAVAHOME</code> environment variable to point
 to the directory where the Java Development Kit is installed.
-For example, your <CODE>.cshrc</CODE> might contain
+For example, your <code>.cshrc</code> might contain
 <pre>
 setenv JAVAHOME /opt/jdk1.1.7B
 </pre>
 
-<li> If you do not set <CODE>JAVAHOME</CODE>, then the pxgraph
-script will search your path for the <CODE>javac</CODE> binary.
-If <CODE>javac</CODE> is found, then the directory above it
-is used for the value of <CODE>JAVAHOME</CODE>
+<li> If you do not set <code>JAVAHOME</code>, then the pxgraph
+script will search your path for the <code>javac</code> binary.
+If <code>javac</code> is found, then the directory above it
+is used for the value of <code>JAVAHOME</code>
 
-<li> You can also edit <CODE>$PTOLEMY/bin/pxgraph</CODE> directly
-and adjust the <CODE>JAVADEFAULT</CODE> variable.
+<li> You can also edit <code>$PTOLEMY/bin/pxgraph</code> directly
+and adjust the <code>JAVADEFAULT</code> variable.
 </ol>
 
 
