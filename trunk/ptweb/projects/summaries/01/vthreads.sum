@@ -11,21 +11,21 @@ PHONE
 (510)642-{8884, 1017}
 
 TITLE
-Simplifying Efficient Servers with Virtual Threads
+Simplifying the Creation of Efficient Servers with Virtual Threads
 
 CHAPTER
 
-ABSTRACT 
-For I/O-intensive tasks involving many concurrent users,
-single-process event-driven servers are generally more efficent than
-multi-threaded servers because the former have less context-switching
-overhead.  Unfortunately, event-driven servers are difficult to write
-and to debug.  When writing an event-driven server, the programmer is
-forced to divide the processing of a connection into discrete states
-and to handle passing of information between states.  When debugging
-such a server, the programmer must derive the current status of all
-connections by hand from the data structures she devised while writing
-the server.
+ABSTRACT
+For serving web pages and performing other I/O-intensive tasks
+involving many concurrent users, single-process event-driven servers
+are generally more efficent than multi-threaded servers because the
+former have less context-switching overhead.  Unfortunately,
+event-driven servers are difficult to write and to debug.  When
+writing an event-driven server, the programmer is forced to divide the
+processing of a connection into discrete states and to handle passing
+of information between states.  When debugging such a server, the
+programmer must derive the current status of all connections by hand
+from the data structures she devised while writing the server.
 
 <P> We propose a new development model for servers, Virtual Threads,
 which combines the efficiency of an event-driven server with the ease
