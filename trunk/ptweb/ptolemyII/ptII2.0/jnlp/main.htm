@@ -51,6 +51,25 @@
   </td>
  </tr>
 </table>
+
+<center>
+ <table border>
+  <tr>
+   <td>
+    <menu>
+     <SCRIPT LANGUAGE="Javascript"> 
+
+             <!-- 
+             insertLink("../vergil.jnlp", 
+                        "Vergil (Full Runtime) Web Start Download"); 
+             // --> 
+     </SCRIPT> 
+    </menu>
+   </td>
+  </tr>
+ </table>
+</center>
+
 <h2>Quick Installation Instructions</h2>
 
 <a href="http://java.sun.com/products/javawebstart/">Web Start</a>
@@ -58,16 +77,23 @@ is a product from Sun that uses the Web to download applications.
 
 <ol>
 <li> This web page attempts to detect whether Java Web Start
-is already installed.  If the box below contains
+is already installed.  If the box above contains
 <pre>
- You need to <a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install Web Start from Sun</a> before installing . . .
-</pre>
-Then download and install Java Web Start by following
-the  <a
+<B>
+You need to <a
 href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install
-Web Start from Sun</a> link
+Web Start from Sun</a> before installing</B> Vergil (Full Runtime) Web
+Start Download
+</pre>
+then download and install Java Web Start by following
+the  <a href="http://java.sun.com/cgi-bin/javawebstart-platform.sh?">Install
+Web Start from Sun</a> link.  If the bold text is not present, then
+Web Start is already installed and you can proceed with clicking
+on the <CODE>Vergil (Full Runtime) Web Start Download</CODE> link
+and continue with step 4 below.
 
-<li> Restart your browser and return to this page.
+<li> After installing Web Start,
+restart your browser and return to this page.
 
 <li> Hopefully, the Web Start detection will work and the
 <CODE>You will need to install Web Start from Sun </CODE>
@@ -87,25 +113,29 @@ by the HTML documentation of the Ptolemy II Java classes.
 
 </ol>
 
-For more information, see the
+For more information about installation, see the
 <a href="webStartHelp.htm">Web Start Help</a> page.
 
+<h2>Running the Throttle Body Models</h2>
 
-<table border>
-<tr>
-  <td>
-<menu>
+ <!-- Ideally, we would put these on gigascale, but if
+      we do, we would have to make the publically available so
+      that Ptolemy II could download them.  The problem is that
+      Ptolemy II does not handle cookie style authentication
+  -->
 
-<SCRIPT LANGUAGE="Javascript"> 
+You can access the first model by opening the following URL using the
+File:OpenURL command in vergil:
 
-             <!-- 
-             insertLink("../vergil.jnlp", 
-                        "Vergil (Full Runtime) Web Start Download"); 
-             // --> 
-</SCRIPT> 
-</menu>
-  </td>
- </tr>
- </table>
+<pre>
+   http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/jnlp/etc.xml
+</pre>
+
+ <p>The second model can be accessed with the following URL
+<pre>
+   http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/jnlp/noModes.xml
+</pre>
+
+
 </body>
 </html>
