@@ -1,0 +1,72 @@
+NAMES
+Elaine Cheong, Chamberlain Fong, Christopher Hylands, Takahide Inoue (Visiting Scholar) Edward A. Lee, Jie Liu, Xiaojun Liu, Steve Neuendorffer, Claudius Ptolemaus, John Reekie, Sonia Sachs, Mary P. Stewart, Brian Vogel and Yuhong Xiong.
+
+EMAIL
+eal@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~eal
+
+PHONE
+
+TITLE
+Ptolemy II- Heterogeneous Concurrent Modeling and Design in Java
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII">Ptolemy II</a> is
+a set of Java packages supporting heterogeneous, concurrent modeling,
+simulation, and design of component-based systems. The emphasis is on a
+clean, modular software architecture, divided into a set of coherent,
+comprehensible packages. The kernel package supports definition and
+manipulation of clustered hierarchical graphs, which are collections of
+<I>entities</I> and <I>relations</I> between those entities. The actor
+package extends the kernel so that entities have functionality and can
+communicate via the relations. The <I>domains</I> extend the actor
+package by imposing <I>models of computation</I> on the interaction
+between entities. Domains that have been created include:
+
+<ul>
+<li><i>CSP</i>: modeling of communicating sequential processes, where
+    interactions have a rendezvous style, including both conditional send
+    and conditional receive;
+<li><i>CT</i>: modeling of linear and nonlinear continuous-time
+    ordinary differential equations, extended to support discrete events;
+<li><i>DE</i>: modeling of discrete-event systems, with emphasis on
+    deterministic handling of simultaneous events;
+<li><i>DDE</i>: a distributable version of discrete-event modeling, where
+    management of the advancement of time is distributed;
+<li><i>FSM</i>: modeling of finite state machines;
+<li><i>PN</i>: modeling of Kahn process networks, which are implemented
+    as communicating Java threads; and
+<li><i>SDF</i>: (synchronous dataflow) modeling of deterministic,
+    repetitive stream-based computations, such as signal processing.
+</ul>
+
+Domains that are planned include:
+
+<ul>
+<li><i>DT</i>: modeling of discrete-time systems (an extension of SDF);
+<li><i>SR</i>: modeling of synchronous/reactive systems;
+<li><i>PBO</i>: modeling of port-based objects, where temporal constraints
+    take precedence over data determinacy.
+</ul>
+
+The Ptolemy II software architecture supports interaction between domains
+(heterogeneous modeling).  For example, FSM can be combined with CT to
+model <i>hybrid systems</i>.
+<p>
+Ptolemy II includes a number of support packages, such as
+<ul>
+<li> <i>graph</i>, providing graph-theoretic manipulations,
+<li> <i>math</i>, providing matrix and vector math and signal
+     processing functions,
+<li> <i>plot</i>, providing visual display of data, and
+<li> <i>data</i>, providing a type system, data encapsulation and an
+     expression parser.
+</ul>
+
+

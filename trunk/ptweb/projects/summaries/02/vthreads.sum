@@ -1,0 +1,41 @@
+NAMES
+Elaine Cheong
+Fred Reiss
+
+EMAIL
+{celaine, phred}@eecs.berkeley.edu
+
+HOMEPAGE
+
+PHONE
+(510)642-{8884, 1017}
+
+TITLE
+Simplifying the Creation of Efficient Servers with Virtual Threads
+
+CHAPTER
+
+ABSTRACT
+For serving web pages and performing other I/O-intensive tasks
+involving many concurrent users, single-process event-driven servers
+are generally more efficent than multi-threaded servers because the
+former have less context-switching overhead.  Unfortunately,
+event-driven servers are difficult to write and to debug.  When
+writing an event-driven server, the programmer is forced to divide the
+processing of a connection into discrete states and to handle passing
+of information between states.  When debugging such a server, the
+programmer must derive the current status of all connections by hand
+from the data structures she devised while writing the server.
+
+<P> We propose a new development model for servers, Virtual Threads,
+which combines the efficiency of an event-driven server with the ease
+of implementation of a multithreaded server.  In this model,
+developers write the code to handle a single connection as if it were
+a single thread in a multithreaded server.  A preprocessor then
+generates an event-driven state machine from this straight-line code,
+annotating the generated code so that debuggers can refer to the
+original straight-line code.  We will define a subset of the C
+language, vtC, that makes this conversion tractable and prove formally
+that converting vtC to a state machine is indeed possible.  We will
+then write a preprocessor that does this conversion.  We will use
+these development tools to implement a simple Web server.

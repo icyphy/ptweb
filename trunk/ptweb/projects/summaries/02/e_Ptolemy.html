@@ -1,0 +1,41 @@
+<HTML>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>e-Ptolemy: A Distributed Framework for Software Systems 
+</title>
+</head>
+<body>
+<H1>e-Ptolemy: A Distributed Framework for Software Systems </H1>
+<HR>
+<TABLE>
+<TR><TH ALIGN=RIGHT>Researchers: </TH><TD>
+ Jie Liu, Xiaojun Liu, Sonia Sachs</TD></TR>
+<TR><TH ALIGN=RIGHT>Advisor:</TH><TD>Edward A. Lee</TD></TR>
+</TABLE>
+<HR>
+
+<P>
+A large number of embedded systems applications require the coordination of physically separated components. Distributing system components across a network can improve robustness of a system and simplify its architecture by allowing components to run concurrently and independently. It also facilities exploitation of the intrinsically parallel nature of specialized hardware, offering the promise of improved execution speed.
+
+<P>
+Traditional distributed computing is built on the client-server model, which lacks object-orientation and could be hard to scale up. Middleware technologies, like the Common Object Request Broker Architecture (CORBA) and the Distributed Common Object Model (DCOM) offer object models and scalability, but the programming model is too liberal to analyze formal properties of a system. In this project, we are exploring the concept of models of computation in distributed software systems. In particular, we extend the Ptolemy II infrastructure with CORBA compatibility and study the implication of Ptolemy component architecture, message passing mechanisms, and execution models.
+
+
+<P>
+At an early study, we have demonstrated importing a remote model as a component of a larger model, executing the model in a distributed fashion over a network. We have also implemented a publish/subscribe type of message passing mechanism based on JINI and JavaSpaces. Current work includes the definition of a clean interface for distributed components and their interaction, and the exploration of real-time issues under the framework. 
+
+<P>
+In order to support distributed components, three distributed objects -- receivers, parameters, and executable interfaces -- were exported via CORBA. These objects are the basis of Ptolemy II support of models of computations that govern interacting components. Distributed Ptolemy II entities make use of these CORBA objects to pass messages and transfer execution control, obeying the model of computation defined by the director, regardless of their locations on the network.
+
+<P>
+We identify three ways to distribute Ptolemy models: two user-defined mechanisms, and one automatic, load-balancing based distribution method. Under the centralized user-defined mechanism, users decide which Ptolemy actors are to be distributed to which remote hosts. This is specified by setting a parameter of an actor. Users then manually initiate the distributed models at the remote hosts. Under the shared user-defined mechanism, users may synchronously or asynchronously access a distributed model that is persistently stored in a shared model-base, collaborating on its construction.  Synchronous collaboration is achieved by establishing or joining a modeling session in which users view and participate in building a shared model using a shared whiteboard paradigm.  As a user starts a distributed model, its execution is automatically started in all remote hosts configured in the distribution. Under the automatic, load-balancing based mechanism, users are not required to decide on which components to run remotely; instead a run-time policy decides which components to distribute to which hosts, automatically scheduling them upon delivery.
+
+
+<P>
+A major application of this work is the open control platform (OCP), which we are developing collaboratively with Boeing. The OCP is a distributed component architecture for embedded control systems, particularly in the area of avionics.
+
+
+<p><font size="2" color="#cc0000">Last updated 09/24/01</font>
+</body>
+</html>
