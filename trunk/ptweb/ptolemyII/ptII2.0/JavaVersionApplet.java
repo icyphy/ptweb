@@ -77,6 +77,7 @@ public class JavaVersionApplet extends JApplet {
                     + javaVersion + ", " + newline
                     + "which is sufficient to run Ptolemy II." + newline
                     + "You need only download the Ptolemy II distribution."
+                    + newline
                     + "Note that the applets will run fine under Java 1.4"
                     + newline
                     + "but that the code generator will not work with "
