@@ -157,6 +157,17 @@ for known limitations.
 See the <a href="mac.htm">Ptolemy II 4.0-beta Notes for Mac OS X</a> page for
 details.
 
+
+<li> If an icon file is not present, then a Vergil applet might
+ 	try to download the icon file multiple times.  Ptolemy II
+ 	uses XML files to store icons.  For example
+$PTII/ptolemy/actor/lib/BooleanSwitchIcon.xml
+ 	is an icon for
+$PTII/ptolemy/actor/lib/BooleanSwitch.java
+ 	 <br>The problem is that if an actor does not have an icon file,
+ 	then the applet may go back to the server multiple times looking
+ 	for the icon. 
+
 <li> Printing a model that contains transparent objects can result
 in problems when printing to Encapsulated Postscript (EPS).
 
