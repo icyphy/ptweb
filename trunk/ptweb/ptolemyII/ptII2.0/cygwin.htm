@@ -8,8 +8,8 @@
 <body>
 <h1>Cygwin Installation</h1>
 The Cygwin toolkit provides Unix tools on the Windows platform.
-You need only install the Cygwin toolkit if you are going to
-develop your own actors.  
+You need only install the Cygwin toolkit if you are rebuilding
+from source and intend to develop your own actors using Java.
 
  <p>Note that compile your own actors, you will also need the 
 <CODE>javac</CODE> compiler.  The <CODE>javac</CODE> compiler
@@ -27,34 +27,51 @@ Java Runtime Environment (JRE)
 
 <h2>Installing Cygwin from the self-extracting executable</h2>
 
- <p>We provide a self-extracting .exe file that contains the set of tools
-necessary to configure and compile Ptolemy II.
+ <p>The Ptolemy II Matlab interface use the GNU gcc compiler and requires
+that Matlab be installed on the local machine.  The gcc compiler is
+fairly large, so we provide two separate self-extracting downloads
+of the cygwin tools
+<ol>
+<li> <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a>
+(XXMb) - The tools necessary to compile and configure Ptolemy II
+except for the Matlab interface
+<li> <a href="cygwinDevel.exe"><CODE>cygwingDevel.exe</CODE></a>
+(XXMb) - The tools necessary to compile and configure Ptolemy II
+including the Matlab interface
+</ol>
+ <p>The sources for the above downloadables can be found in
+<a href="cygwinDevelSrc.exe"><CODE>cygwingDevelSrc.exe</CODE></a>
 
- <p>The file we provide includes the following packages and their source code.
+ <p>We provide a self-extracting .exe file that contains the
+the set of tools necessary to configure and compile Ptolemy II.  
+
+
+ <p>The download of basic cygwin tools includes:
 <pre>
-ash-20001012
-bash-2.04-5
-cygwin-1.1.7-1
-diff
-fileutils-4.0-1
-findutils
-grep-2.4.2-1
-gzip
-less
-make-3.79.1-2
-sed-3.02-1
-shellutils
-tar-1.13.18-2
-textutils-2.0-1
+TBA
+</pre>
+
+
+ <p>The download of devel cygwin tools includes all the tools
+from the basic cygwin download listed above and
+<pre>
+TBA
 </pre>
 
 <ol>
-<li> Download and execute <a href="cygwinforptolemy.exe"><CODE>cygwinforptolemy.exe</CODE></a> (17.5Mb).
-The files will be extracted to an seemingly arbitrary directory.
+
+<li> Most users will
+<br> Download and execute <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a> (XXMb).
+ <br> If you are running under Windows and 
+have Matlab installed on your local machine, then 
+<br> Download and execute <a href="cygwinforptolemy.exe"><CODE>cygwinforptolemy.exe</CODE></a> (XXMb).
+
+ <br>The files will be extracted to an seemingly arbitrary directory.
 You may find it easier to change the directory to something short, like
 <CODE>c:\temp\cygwin</CODE>. 
 
 <li> Run <CODE>setup.exe</CODE>
+
 
 <li> Select <CODE>Install from Local Directory</CODE> and click on <CODE>Next</CODE>.
 
@@ -75,63 +92,15 @@ according to your preferences.
 
 <li> Remove the temporary directory where you extracted the files.
 
+
+<li> Follow the instructions in the
+<a href="ptII2.0/doc/install.htm#settingptII">Set the value of the <CODE>PTII</CODE> environment variable</a> section
 </ol>
 
 <h2>Installing Cygwin from the Web</h2>
-Below are the instructions for installing Cygwin from the Cygwin website.
-You may want to do this to get the most up-to-date tools.
-
- <ol>
- <li> Create an empty directory
-
- <li> Download <a href="http://sources.redhat.com/cygwin/setup.exe"><CODE>http://sources.redhat.com/cygwin/setup.exe</CODE></a> and save it in the empty directory
-
- <li> Click on <CODE>setup</CODE>
-
- <li> Select Install from Internet
-
- <li> Use the default Local Package Directory, which should be the
- directory you created above.
-
- <li> Select <CODE>c:\cygwin</CODE> as your install root directory.
-
- <li> Select 'Default Text File Type' of DOS.
-
- <li> If you are not behind a firewall, click on direct connection.
-
- <li> Select a nearby mirror.
-
- <li> You will be presented with a list of packages to install.
-  <br>A complete installation takes at least 75Mb.
-
-  <p>At the minimum, select the packages below, which is roughly a
-  3Mb download
-	that expands into an 8.7Mb installation.
-	<ul>
-	<li> ash -  For <CODE>/bin/sh</CODE>
-	<li> bash
-	<li> cygwin
-	<li> diff - Configure uses <CODE>cmp</CODE>
-	<li> fileutils - For <CODE>ls</CODE>
-	<li> grep - Used by configure
-	<li> make
-	<li> sed - Needed by config.status, which is created by configure
-	<li> shellutils - For <CODE>basename</CODE>
-	<li> textutils - For <CODE>cat</CODE> and <CODE>tr</CODE>
-	</ul>
-
-	 <p> If you are serious about development you may also want:
-	<ul>
-
-	<li> autoconf - requires gawk, grep, m4
-	<li> findutils
-	<li> gzip
-	<li> less
-	<li> tar
-	<li> Rebuilding in java/lang/ptbyacc requires gcc and w32api
-	</ul>
-
-</ol>
+Instructions for installing Cygwin from the Cygwin website
+can be found on the 
+for <a href="ptII2.0/doc/install.htm#cygwin">Ptolemy II Installation Page</a>
 
 </body>
 </html>
