@@ -3,12 +3,12 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <link href="../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
-<title>Ptolemy II 4.0 Limitations</title>
+<title>Ptolemy II 4.0.1 Limitations</title>
 </head>
 <body>
-<h2>Ptolemy II 4.0 Limitations</h2>
+<h2>Ptolemy II 4.0.1 Limitations</h2>
 
-The <a href="ptII4.0/doc/ptII4.0.release.htm">Ptolemy II 4.0 Release notes</a>
+The <a href="ptII4.0.1/doc/ptII4.0.release.htm">Ptolemy II 4.0.1 Release notes</a>
 list limitations.  The Vergil welcome window has a link to
 a similar list.
 
@@ -28,15 +28,22 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 	<menu>
 	<li> Vergil
 	<li> The local version of the web pages
-	<li> The <a href="ptII4.0/doc/index.htm" target="_top">PtolemyII 4.0 website version of the web pages</a>
+	<li> The <a href="ptII4.0.1/doc/index.htm" target="_top">PtolemyII 4.0.1 website version of the web pages</a>
 	<li> The Web Start version
 	</menu>
 </menu>
 
 <h2>Places to go</h2>
 <menu>
-<li><a href="ptII4.0/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
-<li> <a href="ptII4.0/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
+<li><a href="ptII4.0.1/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
+<li> <a href="ptII4.0.1/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
+</menu>
+
+<h2>Changed between 4.0 and 4.0.1</h2>
+<menu>
+<li> The context (right click) menu works more reliably under
+MacOS X and Linux.
+
 </menu>
 
 <h2>Changed between 4.0-beta and 4.0</h2>
@@ -237,7 +244,7 @@ for use by Eclipse
 <menu>
 
 <li>See the
-<a href="ptII4.0/doc/ptII4.0.release.htm#limitations">Ptolemy II 4.0 Release notes</a>
+<a href="ptII4.0.1/doc/ptII4.0.release.htm#limitations">Ptolemy II 4.0.1 Release notes</a>
 for known limitations.
 
 <li> The PSDF Blind Communication demo does not run under Web Start,
@@ -246,15 +253,6 @@ the message is:
 ptolemy.kernel.util.IllegalActionException: The number of elements in the
 input ArrayToken (2047) is not the same as the arrayLength parameter (2048).
 </pre>
-
-<li> <B>Linux</B> and <B>MacOS X</B> users:
- <p>There are problems with the context menu in the graph editor.
- <br>Under Linux with Java 1.4, the right mouse button will not 
-bring up the context menu for an actor (Under MacOS X, the
-context menu is Control-click).  The fix is to apply 
-<a href="http://ptolemy.eecs.berkeley.edu/~cxh/tmp/diva"  target="_top">a patch</a>.
- <br>We are working on creating a new download that includes
-this patch and some other fixes.
 
 <li> If an icon file is not present, then a Vergil applet might
  	try to download the icon file multiple times.  Ptolemy II
@@ -322,8 +320,6 @@ Then edit the file by hand in Illustrator to add the transparency back in.
 
 </menu>
  
- <p> You may later want to exclude ptolemy/moml/jxta from the build.
-
 <menu>
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
