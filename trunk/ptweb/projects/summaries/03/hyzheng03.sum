@@ -29,11 +29,13 @@ A lot of interesting interactions could be studied based on the cyclic firing ru
 For the implementation on real architectures, our exploration on UDF is focused on these four properties: periodicity, bounded execution time, bounded memory and no deadlock.
 <p>
 Reference:
-1. A comparison of synchronous and cycle-static dataflow
+<p>
+1. A comparison of synchronous and cycle-static dataflow <p>
 Parks, T.M.; Pino, J.L.; Lee, E.A.
 Signals, Systems and Computers, 1995. Conference Record of the Twenty-Ninth Asilomar Conference on , Volume: 1 , 1996
 Page(s): 204 -210 vol.1
-2. Cyclo-dynamic dataflow
+<p>
+2. Cyclo-dynamic dataflow <p>
 Wauters, P.; Engels, M.; Lauwereins, R.; Peperstraete, J.A.
 Parallel and Distributed Processing, 1996. PDP '96. Proceedings of the Fourth Euromicro Workshop on , 1996
 Page(s): 319 -326
