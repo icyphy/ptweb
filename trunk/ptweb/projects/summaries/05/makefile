@@ -11,8 +11,7 @@ SUM_SOURCES =  \
 	ptinygals.sum \
 	softwalls.sum \
         ePtolemy05.sum \
-        sensorNetworks.sum \
-	compositionalDataflow.sum \
+        compositionalDataflow.sum \
         DDF_BDF.sum \
 	simTimedMoCs.sum \
 	ptIIdistributed.sum
