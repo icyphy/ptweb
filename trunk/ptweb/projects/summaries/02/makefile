@@ -9,7 +9,8 @@ SUM_SOURCES = ptolemyII.sum \
 	  vergil02.sum \
 	  vogel02.sum \
 	  winthrop02.sum \
-	  yuhong02.sum
+	  yuhong02.sum \
+	  hyzheng02.sum
 
 # other sources that are not .sum files 
 OTHER_SRCS = \
