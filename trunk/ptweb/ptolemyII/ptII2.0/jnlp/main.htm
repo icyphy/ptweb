@@ -15,9 +15,9 @@
                 isIE = "true"; 
         } 
 
-        function insertLink(url, name) { 
+        function insertLink(img, url, name) { 
         	if (javawsInstalled) { 
-                	document.write("<li> <a href=" + url + ">"  + name + "</a>"); 
+                	document.write("<li> <a href=" + url + "><img src=" + img + ">" + name + "</a>"); 
                 } else { 
                 	document.write("<li> You need to <a href=http://java.sun.com/cgi-bin/javawebstart-platform.sh?>Install Web Start from Sun</a> before installing <a href=" + url + ">"  + name + "</a>"); 
                 } 
@@ -57,14 +57,11 @@
  <table border>
   <tr>
    <td>
-  <img src="doc/img/PtolemyIISmallIcon.gif" alt="Ptolemy II Planet" align="left">
-   </td>
-
-   <td>
      <SCRIPT LANGUAGE="Javascript"> 
 
              <!-- 
-             insertLink("vergil.jnlp", 
+             insertLink("doc/img/PtolemyIISmallIcon.gif",
+			"vergil.jnlp", 
                         "Vergil (Full Runtime) Web Start Download"); 
              // --> 
      </SCRIPT> 
