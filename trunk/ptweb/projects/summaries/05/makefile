@@ -13,7 +13,8 @@ SUM_SOURCES =  \
         sensorNetworks.sum \
 	compositionalDataflow.sum \
         DDF_BDF.sum \
-	simTimedMoCs.sum
+	simTimedMoCs.sum \
+	ptIIdistributed.sum
 
 # other sources that are not .sum files 
 OTHER_SRCS =
