@@ -12,25 +12,12 @@
 <h2><a name="bugs">Bugs</a></h2>
 The Installshield Installer has a number of bugs:
 <menu>
-<li> By default, the Ptolemy II is installed in the All Users menu.
-Ideally, the user would be given a choice as to whether Ptolemy II
-was installed for the current user or in the All Users menu.
 
-<li> If you choose to install using the Installshield installer
-applet, then hitting cancel does not stop the download.
-
-<li> The user should be prompted for where in the Start menu 
-Ptolemy II is installed.
-<li> The size of the install may be reported as 0kb.
-<li> The percent completed bars may not work.
-<li> Installing a bundled JRE does not work well so we don't use it.
-Installshield Multiplatform edition can be configured to download a
-JVM, but the JVM gets installed in a _jvm directory and is not added
-to Add/Remove Programs and the browswers can't use the plug-in.  
-
- <br>The JRE is roughly 5Mb in size, so it is not feasible to 
-require users who are downloading small applications to pull over
-a 5Mb file they may or may not need.
+<li> The installer seems to require Java 1.3.1_02, and will not
+work with Java 1.3.1_07.  Ptolemy itself will run under Java 1.3.1_07,
+the problem here is that the installer might say something like
+'A suitable JVM could not be found'.  The workaround is to
+install Java 1.3.1_02, or to install from source.
 
 <li> Before upgrading your JVM, you should uninstall Ptolemy II.  The
 uninstaller may not work if the JVM that was used at install time
@@ -61,6 +48,27 @@ After that I've created a file called
            java run (that execute run.class)
 </pre>
 </blockquote>
+
+
+<li> By default, the Ptolemy II is installed in the All Users menu.
+Ideally, the user would be given a choice as to whether Ptolemy II
+was installed for the current user or in the All Users menu.
+
+<li> If you choose to install using the Installshield installer
+applet, then hitting cancel does not stop the download.
+
+<li> The user should be prompted for where in the Start menu 
+Ptolemy II is installed.
+<li> The size of the install may be reported as 0kb.
+<li> The percent completed bars may not work.
+<li> Installing a bundled JRE does not work well so we don't use it.
+Installshield Multiplatform edition can be configured to download a
+JVM, but the JVM gets installed in a _jvm directory and is not added
+to Add/Remove Programs and the browswers can't use the plug-in.  
+
+ <br>The JRE is roughly 5Mb in size, so it is not feasible to 
+require users who are downloading small applications to pull over
+a 5Mb file they may or may not need.
 
 <li> Installshield Multiplatform Edition 4.0 can't update environment
 variables, so the user's path is not updated to include the directory
