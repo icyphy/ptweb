@@ -4,12 +4,10 @@
 SUM_SOURCES =  \
 	ptolemyII.sum \
 	copernicus05.sum \
-	distributedComponentManagement.sum \
 	compositionalityAnalysis.sum \
         fsmExtension.sum \
         softDevel05.sum \
 	tinygals.sum \
-	ptplot05.sum \
 	softwalls.sum \
         ePtolemy05.sum \
         sensorNetworks.sum \
