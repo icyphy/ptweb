@@ -1,0 +1,443 @@
+MONTHLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     DAAB07-97-C-J007
+CONTRACT PERIOD:      11/18/96 - 11/31/99
+DATE:                 August 14, 1999
+TITLE:                Heterogeneous Modeling And Design
+REPORT PERIOD:        6/15/99 - 7/15/99
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        James P. Hanna
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+We have released the alpha version of Ptolemy II 0.3. As part of this
+release, we have dramatically improved the documentation. We have also
+made basic progress on the type system support for expressions, on
+distributed models, and on Matlab to process networks translation.
+We have also reworked the way discrete-event actors are created, and
+overhauled the DE domain.
+
+
+1.  Research Status
+
+ Task 1: Modular deployable design tools
+ =======================================
+
+Software Release
+----------------
+
+On June 17 we announced the 0.3alpha1 release of Ptolemy II.
+
+Ptolemy II 0.3 is the first Ptolemy II release to include domains,
+actors, and applets of sufficient quality and architectural stability
+to use as models for development. The domain-polymorphic actor
+libraries, in the ptolemy.actor.lib and ptolemy.actor.gui packages are
+still small, but reasonably solid. An infrastructure for easily
+constructing applets is also provided, and several of the domains of
+the matured to the point that serious modeling is possible. The
+documentation has progressed considerably, and now includes a tutorial
+on writing applets and chapters on actor libraries and several of the
+domains.
+
+Nonetheless, Ptolemy II 0.3 is still an interim release. It includes a
+great deal of code that has not progressed beyond our "yellow" code
+rating, and some that has not progressed beyond "red." You should use
+caution when basing your own development on such code. For such code,
+we have not yet made any commitment, even internally, to keeping the
+interface the same. You can find the code rating at the beginning of
+all source code files. Unrated files are all "red."
+
+The Ptolemy II 0.3 applets require the JDK1.2 plug-in. If you have
+JDK1.2 installed on your machine, then the plug-in may already be
+installed. You may obtain the JDK1.2 plug-in from JavaSoft
+(http://www.javasoft.com/products/plug-in/) The plug-in is easiest to
+use from a Windows machine. If you don't have access to a Windows
+machine, you can run the applets by downloading Ptolemy II 0.3 and
+running 'make demo' For more information, see the Plug-In section of
+the Installation page.
+
+There are also some serious infrastructural problems with applets that
+we believe are due to quality problems with the Sun plug-in that is
+required to run the applets. Applications and applets run under the Sun
+appletviewer do not exhibit these problems.
+
+The JDK1.2.1 Plug-in has a known bug described at
+http://developer.java.sun.com/developer/bugParade/bugs/4236070.html
+that causes the Netscape or Iexplorer process to linger after exiting.
+The workaround is to turn of the JIT using the Java Plug-in Control
+Panel, see the Troubleshooting guide for details.
+
+Another known problem is that some of the applets will not run a second
+time without reloading the Java classes. Unfortunately, the JDK1.2.1
+plug-in makes it difficult to reload the classes, the easiest thing is
+to restart your browser. (The Troubleshooting Guide includes a method
+of reloading Java classes by turning off the Jar Cache).
+
+When you visit a Ptolemy II applet, the first applet that is run will
+download ptsupport.jar, which is 478k. Each applet then will download
+smaller domain specific jar files of between 18k and 65k. If you have a
+slow network connection, or if there is congestion in the network or on
+our server, you may experience significant delays before the first
+applet runs.
+
+Some of the applets use Diva, a visualization package. diva.jar file is
+roughly 550k.
+
+
+Documentation
+-------------
+
+We have dramatically improved the documentation for Ptolemy II.
+The new version is divided into three parts:
+
+ -- A user-level tutorial (how to write applets, a guide to the
+    domain polymorphic actor library, and how to write actors).
+ -- A programmer-level guide to the Ptolemy infrastructure.
+ -- A guide to the domains.
+
+The new version is more than 300 pages long.  It is available on
+the web at:
+
+http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII0.3/ptII0.3/doc/design/design.pdf
+
+
+Type System
+-----------
+
+Ptolemy II includes an expression language used for flexibly specifying
+parameters and operating in polymorphic ways on tokens. However, we had
+built too much flexibility into the core class, Variable, where the
+type of a variable was permitted to change to become more specific as
+new values were set.  This "ratcheting" of types towards more specific
+types was creating problems, particularly with repeated executions of
+models.  We have modified the variable class to have a more strongly
+typed semantics.  When the type of a Variable is set, it remains fixed.
+
+
+Domain-Polymorphic Actors
+-------------------------
+
+Michael Leung has added a suite of type conversion actors, creating a
+new sublibrary of the domain polymorphic library. These actors are used
+when automatic (lossless) type conversions are not adequate. For
+example, the actors support extracting the real and imaginary parts
+from a complex token, and converting rectangular form to polar form.
+
+
+Distributed Models
+------------------
+
+John Davis and Jie Liu have been working on CORBA capabilities in
+Ptolemy II.  John Davis writes:
+
+"I think that it would be useful to incorporate facilities in Ptolemy
+II so that a model can be distributed. I think there are numerous
+advantages of this including collaborative design, remote IP validation
+and pay per use distributed design tools.
+
+I think that we should add distributed computing features to Ptolemy II
+to allow:
+
+   * Dynamic, remote access to actor libraries.
+   * Simulation runs on multiple workstations.
+   
+I am currently assuming that remote object invocation will always
+involve a remote actor (atomic or composite). The actor will of course
+contain other remote objects such as ports and receivers but the
+highest level of granularity for remote objects will always be an actor
+(not a port for example).
+
+Consider the following scenario involving three actors A, B and C:
+        
+        -----           -----           -----
+        | A |---------->| B |---------->| C |
+        -----           -----           -----
+
+Assume that actors A and C are on the "client" side and that actor
+B is remote (on the "server" side). 
+
+There are three distributed computing frameworks that are widely
+available: CORBA, Java RMI and Microsoft's DCOM. We need to choose one
+of them to make the above scenario possible. All of them have some
+similarities:
+
+   * They each create a client side stub (or proxy) to serve
+     as the public interface for a remote object. 
+   * Each framework has an interface definition language (IDL)
+     for specifying stubs.  
+   * They each have a server side implementation.
+   * They each have a server skeleton that takes a client
+     request and calls the appropriate method of the server
+     side implementation.
+   * They each have facilities for dynamic method invocation
+     in case a new object is made available without a stub.
+   
+There are some key differences between the frameworks:
+
+   * The DCOM IDL does not allow exceptions to be thrown in stubs.
+   * Java/RMI and CORBA are much closer to one another than to
+     DCOM.
+   * Java/RMI seems to be the simplest and cleanest protocol.
+   * Java/RMI has IDL features which can eventually allow
+     our system to be "compatible" with CORBA.
+   * All Java/RMI stub methods must declare the 
+     java.rmi.RemoteException.
+
+I suggest that we go with either Java/RMI or CORBA. At first I was
+completely sold on Java/RMI but now I think I'm leaning towards CORBA
+and this is due in great part to the RemoteException requirement of
+Java/RMI. If we go with Java/RMI my sense is that several files in the
+actor package will need to be modified. If we go with CORBA I think
+that a smaller set of files will need to be modified.
+
+USING CORBA
+      
+JDK 1.2 includes an org.omg.CORBA.SystemExeption that derives from
+java.lang.RuntimeException. Since this exception is a run time
+exception, it does not have to be declared or caught at compile time.
+Hence we have the option of catching it at a high level without
+explicitly passing it up the method chain.
+
+I think that the use of SystemException will mean that relatively few
+Ptolemy II objects need to be rewritten or extended to accomodate a
+distributed computing framework. In my opinion, we will need to extend
+a single class: CompositeActor. The extended class, that I'll refer to
+as RemoteCompositeActor, would be necessary to encapsulate a remote
+actor. 
+
+In the asciigram above a RemoteCompositeActor (RCA) would be necessary
+to contain actor B (and actors A and C). Of course an RCA does not need
+to be the top level actor and may be contained in another composite
+actors. The RCA would have address information of the remote server
+(perhaps via a Parameter) and would deal with such information in its
+initialize() method. In addition, the RCA would override the various
+executable methods to catch and deal with SystemException. 
+
+I think a RemoteCompositeActor would be all that is necessary
+if we choose a CORBA solution.
+
+      CORBA Conclusion
+      Pros
+      * The Java runtime exception org.omg.CORBA.SystemException 
+        can be caught.
+      * A single Ptolemy II class is necessary to support a
+        CORBA implementation.
+        
+      Cons      
+      * The client side implementation is more difficult
+        then that of Java/RMI. In particular, the remote
+        addressing involves a few more steps.
+
+USING JAVA/RMI
+
+One of the big issues with Java/RMI is dealing with RemoteException.
+Unfortunately RemoteException does not subclass RuntimeException so 
+it must be caught. Thus, if an arbitrary Ptolemy II object calls a 
+remote method, it must deal with RuntimeException. I think there are 
+two ways to deal with this problem:
+
+   1) Limit the set of Ptolemy II classes that directly 
+      participate in distributed computing and catch 
+      RemoteException where necessary.
+
+   2) Make all Ptolemy-specific classes subclass RemoteException.
+
+Option 2 is clearly too burdensome as sections of Ptolemy II that
+have nothing to do with Java RMI would be capable of throwing
+erroneous exceptions. Furthermore, such a design would not be very
+flexible in case of future changes.
+
+I think option 1 is reasonable and it could work in the following
+manner. The following seven classes would be extended to incorporate 
+Java RMI facilities:
+
+        * TypedIOPort
+        * CompositeActor
+        * AtomicActor
+        * Director
+        * Receiver
+        * ProcessThread
+        * Workspace
+
+I add the prefix "Remote" to the above classes (for clarity) and 
+cite some of the reasons why they are necessary below:
+
+   Enabling Remote Objects
+   * RemoteCompositeActor
+     This class will be necessary to use a remote class. If a
+     model needs to contain local actors communicating with
+     remote actors, a RemoteCompositeActor must contain all
+     of the actors. In addition, a RemoteCompositeActor will
+     contain an address for the rmiregistry.
+     
+   Catching RemoteExceptions
+   The following classes will override particular methods, catch
+   RemoteExceptions in these methods and then throw an
+   appropriate Ptolemy-specific method with an appropriate
+   message.
+
+   * RemoteDirector, e.g. override the executable methods
+        (initialize, prefire, etc.) to catch RemoteException.
+
+   * RemoteCompositeActor, e.g. override connect() (and
+        similar methods) in addition to the responsibilities 
+        listed above.
+
+   * RemoteTypedIOPort, e.g. override deepGetReceivers(), send().
+
+   * RemoteProcessThread, e.g. override run().
+
+   * RemoteWorkspace, RemoteAtomicActor
+   
+   * RemoteReceiver is a hard one. Since Receiver is an interface,
+     there is no common class that can be modified that will 
+     impact all implementations of receivers in the various domains.
+     One possibility is to add RemoteException to the signatures of
+     the Receiver methods and let RemoteIOPort deal with them. 
+
+   Java/RMI Conclusion
+      Pros
+      * Java RMI uses Java and hence is consistent with 
+        the rest of Ptolemy II.
+      * RemoteException can be quite informative in case
+        of errors.
+      Cons
+      * Several files will have to be subclassed to 
+        deal with RemoteException
+
+CONCLUSION
+   * Go with a CORBA implementation. Most of the addressing
+     difficulties with CORBA will not be seen by the actor
+     writer as they will be incorporated by RemoteCompositeActor.
+
+Things I'm Unsure About
+   * Client vs. Server Objects
+     I'm unsure how easy it is to do peer to peer communication
+     remotely with CORBA (or Java/RMI for that matter). All of 
+     the examples that Sun talks about have well defined 
+     client/server roles. I don't know what happens if two actors 
+     (on different JVM's) want to send tokens to each other in 
+     an alternating fashion such that they both act as clients
+     and servers.
+
+I've checked around other websites to see related work. At DAC
+there were representatives from the Vela project (MIT, NC State, 
+Mississippi State, UCB and Stanford). Apparently Newton is part
+of this (as well as De Micheli). See www.cbl.ncsu.edu/vela 
+ 
+
+ Task 2: Domain-specific design tools
+ ====================================
+
+Discrete-Event Modeling
+-----------------------
+
+We have reworked the DE domain in Ptolemy II to simplify the way it
+handles event delays. It used to, by default, assume that an actor
+derived from DEActor had delayed outputs, relative to the inputs, but
+for actors not derived from DEActor, which includes all domain
+polymorphic actors, it would assume the reverse (that there was no
+delay). This asymmetry was confusing to actor designers. Moreover, the
+mechanism for specifying dependencies when actors derived from DEActor
+did not have delays was confusing and difficult to use correctly. It
+was directly copied from Ptolemy Classic.
+
+Now, all actors are assumed to have instantaneous output unless
+otherwise stated. Any actor that introduces delay from any particular
+input port to any particular output port asserts a delay relation
+between those two ports (typically in its constructor).
+
+This rework required a significant rewrite of the discrete event
+scheduler. We took advantage of this opportunity to generally clean up
+the code and to build a comprehensive test suite.
+
+
+ Task 3: Heterogeneous interaction semantics
+ ===========================================
+
+Matlab translation
+------------------
+
+Bart Keinhuis continues to make progress on translation of Matlab
+specifications into process networks.  Specifically:
+
+- Parser for Matlab code is finished.
+- Printing of Matlab using Visitor Design Pattern 
+- Able to find all Left Hand Side/Right Hand Side variables
+- Sort them on the basis of some criteria.
+
+
+2.  Equipment/Infrastructure Status:
+
+We installed JDK1.2.2-rc2 and verified that the 0.3 release works under
+this version of Java. However, this version does not fix the lingering
+Netscape process problem in the plugin using the JIT.
+
+
+3.  Interactions and Technology Transfer
+
+-- On 29 June Peter van der Hamer and Marjan Driessen of Philips
+   Research, The Netherlands, gave a presentation to our group about
+   Design Management according to the Delft/Philips school on 'system
+   design environments'.
+
+-- John Davis, Steve Neuendorffer, and Bart Keihuis attended DAC
+   in New Orleans, and then represented the Ptolemy group at the
+   GSRC workshop that followed DAC.  GSRC is the "Gigascale Silicon
+   Research Center," a new multi-university center headquartered
+   at Berkeley.
+
+
+4.  Personnel Status
+
+No changes.
+
+
+5.  Talks/Presentations/Publications:
+
+Presentations
+-------------
+
+-- "The Ptolemy Project: Heterogeneous Modeling and Design of Embedded
+    Systems," Edward A. Lee, June 16, 1999, invited talk at INRIA,
+    Sophia Antipolis, France.
+
+-- "Modeling embedded systems using PtolemyII," Bart Keinhuis,
+    presented to GSRC workshop, New Orleans.
+
+
+Publications
+------------
+
+[1] Jie Liu, Xiaojun Liu, Tak-Kuen John Koo, Bruno Sinopoli,
+    Shankar Sastry, and Edward A. Lee, "Hierarchical hybrid
+    system simulation," accepted to CDC 1999.
+
+[2] "Overview of the Ptolemy Project," FIXME
+
+[3] Thomas Henzinger, Xiaojun Liu, Shaz Qadeer, and Sriram Rajamani,
+    "Formal Specification and Verification of a Dataflow Processor Array,"
+    accepted to ICCAD '99.
+
+[4] Edwin Rijpkema, Bart Kienhuis, and Ed F. Deprettere,
+    "Compilation from Matlab to Process Networks," submitted to CASES '99.
+
+
+6.  Difficulties/Problems
+
+None to report.
+
+
+7.  Next Quarter Plans
+
+We are stepping up the effort to define and implement an XML-based file
+format for modeling and a user interface for constructing models
+specified in this way.
+
+
+8. Financial Data
+
+Provided separately on a quarterly basis by the university.
