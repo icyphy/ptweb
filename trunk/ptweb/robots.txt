@@ -100,9 +100,15 @@ Disallow: /tycho/tycho0.2/
 Disallow: /tycho/tycho0.2
 Disallow: /SCCS/
 Disallow: /eecs20/book
+Disallow: /eecs20/homeF02.html
+Disallow: /eecs20/homeSp03.html
 Disallow: /eecs20/homework
 Disallow: /eecs20/homeworks
 Disallow: /eecs20/homeworkF02
+Disallow: /eecs20/homeworkSp04
+Disallow: /eecs20/homeworkF04
+Disallow: /eecs20/homeworkSp05
+Disallow: /eecs20/homeworkF05
 Disallow: /eecs20/hwkSpr02
 Disallow: /eecs20/problemSession
 Disallow: /eecs20/labs/solutions
