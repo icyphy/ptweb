@@ -6,11 +6,16 @@
 <title>Abstract</title>
 </head>
 <body>
-<b></b>
-<br><i></i>
+<b>Introducing Dataflow in the VCC Discrete Event Environment</b>
 <br>
-<br>
+bpriya@cadence.com
 <p>
+VCC is a relatively new block diagram tool from Cadence for system level design. The simulation engine in VCC is based on the discrete event (DE) model of computation, where a block is activated at run-time, as soon as it receives an event on any of its input ports. In this talk, we will describe a prototype system that introduces dataflow (DF) semantics within the VCC environment, with minimum modifications to the core simulator, and maintaining the existing DE block design interface, for a uniform look and feel. The difference lies in the activation semantics - a DE block  is activated only when its firing rule is satisfied, i.e. all input ports have sufficient tokens (possibly multi-rate). 
 <p>
+Our prototype supports a <i>non-clustered</i> flow (isolated DF blocks), and a <i>clustered</i> flow (a group of DF blocks designated as a cluster). In the non-clustered flow, dynamic dataflow (DDF) blocks are allowed, while only static dataflow (SDF) blocks can be clustered. Non-clustered DF blocks are scheduled dynamically, whereas the static nature of a DF cluster is exploited to generate a static schedule. The clustered flow results in a more efficient simulation, and also supports full debug features within the cluster at the level of the leaf DF blocks. 
+<p>
+The main strength of VCC lies in its performance simulation capabilities, and our dataflow prototype is amenable to performance modeling at the granularity respectively, of a leaf DF block, and a DF cluster, in the two different flows.
+<p>
+In this talk, we will describe our dataflow methodology; compare with the previous SPW-import feature in VCC and with the mixed DE-DF environment in Ptolemy; and discuss future directions
 </body>
 </html>
