@@ -1,0 +1,45 @@
+NAMES
+Paul Whitaker
+
+EMAIL
+pwhitake@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~pwhitake
+
+PHONE
+
+TITLE
+Interface Mechanisms and System Visualization in Component-Based Models 
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+<p> This work involves system visualization and interface design.  In a system 
+such as Ptolemy II, it can be very desirable for components in the model to be 
+capable of providing information about themselves or accepting input from the 
+user.
+
+<p> A block diagram view, using icons, is often an intuitive way to visualize 
+a system.  Within 
+<a href="http://ptolemy.eecs.berkeley.edu/java/vergil/body.htm>Vergil</a>, 
+the Ptolemy II user interface, components of the model are displayed as 
+icons.  Dynamic icons are a natural way of expressing information regarding 
+the characteristics and status of particular components.  Icons are also a 
+natural receptacle for user input.  The Java Foundation Classes provide a 
+rich collection of user-interface components.  This work requires using these 
+components within Vergil (and 
+<a href="http://www.gigascale.org/diva">Diva</a>, the graphics framework on 
+which it is based).  It is possible that configurability options could be 
+specified using the MoML XML schema. 
+
+<p> Like Vergil itself, this work is intended to be sufficiently general to 
+be applicable to other component-based design tools.
+
+
+
+
+
+
