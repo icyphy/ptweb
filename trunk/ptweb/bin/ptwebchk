@@ -95,7 +95,7 @@ do
 	fi
 
 	# 7) links that go to pages outside our page should have target="_top"
-	results=`egrep -i '"http:' $file | grep -vi 'target="_top"' | egrep -vi 'http://ptolemy.eecs.berkeley.edu/[^~]`
+	results=`egrep -i '"http:' $file | grep -vi 'target=' | egrep -vi 'http://ptolemy.eecs.berkeley.edu/[^~]`
 	if [ "x$results" != "x" ]; then
 	    echo "$file: has a link to an outside website, but it is not have target=\"_top\""
 	    echo "$results"
