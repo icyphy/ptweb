@@ -37,6 +37,9 @@ Disallow: /~pino/DS
 Disallow: /~pino/Ptolemy
 Disallow: /~pino/Ptolemy/tycho
 
+# Diva is located in ~johnr and on www-cad
+Disallow: /diva
+
 # This causes a loop in htdig
 Disallow: /papers/almagest/docs/user/html/troubleshooting.doc1.html
 
