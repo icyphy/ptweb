@@ -1,0 +1,49 @@
+NAMES
+Edward A. Lee
+
+EMAIL
+eal@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~eal
+
+PHONE
+642-0455
+
+TITLE
+Discrete-Event System Theory
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+This project studies models of computation and programming language
+semantics used for the specification and modeling of real-time and
+reactive electronic systems. It uses extensively the mathematics
+of partially ordered sets, particularly as applied to prefix orders and
+Scott orders.  Timed discrete-event systems (those where events are
+globally totally ordered) are modeled in a metric space.  This enables
+the use of standard results, such as the Banach fixed-point
+theorem, to study determinacy and other formal properties of systems.
+Untimed discrete-event systems (those where events are partially ordered)
+are studied using the Scott topology and complete partial orders (CPOs).
+<p>
+
+A major objective of this project is to develop a framework for
+studying models of computation for concurrent systems. We are
+particularly interested in modeling the interaction between diverse
+heterogeneous systems. Models of computation of interest include
+event-based simulation models, such as those embodied in hardware
+description languages, synchronous/reactive languages (Esterel, Lustre,
+Signal, Argos), process networks, and dataflow models.
+
+<p>
+
+Basic issues of Turing completeness and lambda computability,
+boundedness, determinacy, reachability, and liveness are studied, with
+emphasis on decidability and efficiency of verification and synthesis
+algorithms. Throughout, applications to signal processing, real-time,
+and reactive systems are emphasized, as are synthesis and compilation
+techniques amenable to such modern approaches as embedded system
+design, hardware/software codesign and formal verification. 

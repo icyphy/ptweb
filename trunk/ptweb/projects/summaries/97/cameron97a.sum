@@ -1,0 +1,124 @@
+NAMES
+Michael C. Williamson
+
+EMAIL
+cameron@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~cameron/
+
+PHONE
+642-2352
+
+TITLE
+Synthesis of Parallel Hardware Implementations from Synchronous Dataflow Graph Specifications
+
+CHAPTER
+02.cad
+
+ABSTRACT
+We have constructed a method for the partitioning of a single application
+specified in synchronous dataflow (SDF) [1] into multiple independently
+synthesizable, communicating VHDL hardware modules. Either synchronous or
+asynchronous communication between modules is allowed (global
+synchrony/asynchrony), and the clock timing and control are automatically
+generated. We have shown that this method guarantees the preservation of
+correct functional behavior as specified in the original SDF graph, and that
+many choices of partitioning into multiple hardware modules are possible.
+The ability to break up a larger application into smaller synthesizable
+hardware modules can lead to efficiencies in hardware synthesis, which is
+faster when performed on smaller hardware description language (HDL)
+specifications. We have demonstrated this method with some practical example
+applications that have been constructed in the Ptolemy [2] system simulation
+and prototyping environment.
+<P>
+This method draws on techniques developed for software synthesis for DSP
+applications [3]. In particular, methods for parallel scheduling of SDF
+graphs on multiple processors [4,5] and techniques for interfacing
+heterogeneous code generation subsystems [6] have provided the main
+groundwork for this method. The parallel scheduling techniques have been
+aimed at generating software for parallel execution on multiple
+communicating DSP processors. The emphasis of the code generation mechanism
+has been on combining multiple, heterogeneous subsystems into a single
+parallel architecture.
+<P>
+In this work, we start with the same algorithm representation, a dataflow
+graph, but rather than partitioning and scheduling that graph for execution
+on a homogeneous or heterogeneous parallel target architecture, we are
+actually synthesizing the parallel implementation architecture that will
+execute our application. In this respect this technique is similar to
+hardware/software cosynthesis where both the processor/instruction set and
+the software to be executed on the synthesized processor are generated
+[7,8]. Unlike that class of methods, we do not explicitly synthesize an
+instruction set, but rather a sequence of clock and control signals. We also
+do not synthesize any explicit block of memory, but instead individual
+registers with input, output, and clock signals. Further design analysis
+following the application of our technique could be performed to map these
+registers into reusable blocks of memory, but we do not attempt to deal with
+memory management in the current implementation of our method.
+<P>
+In support of this work, we have produced two working VHDL domains in
+Ptolemy for VHDL code generation, the VHDLB and VHDL domains. The VHDLB
+domain (VHDL-Behavioral) supports structurally-oriented VHDL code generation
+of systems that combine existing VHDL library entities. This domain provides
+a basic infrastructure for generating top-level VHDL design specifications.
+These designs are composed of predefined VHDL blocks connected according to
+the block diagram specifications of the designer, and then elaborated to a
+full design by the code generator.
+<P>
+The newer VHDL domain is restricted to SDF semantics, but has targets to
+support a variety of VHDL code generation styles, including single-process
+sequential statements for efficient simulation, as well as synthesizable
+VHDL for passing to register-transfer level (RTL) synthesis tools such as
+Synopsys Design Compiler. Through Ptolemy's retargeting mechanism, designers
+can switch domains from SDF simulation to VHDL code generation when
+identical block actors exist in both domains. Supporting infrastructure has
+been added to Ptolemy so that VHDL simulation engines such as Synopsys VSS
+and Model Technology's simulator can be invoked for standalone- or
+co-simulation with dataflow simulation or other code generation subsystems
+in Ptolemy.
+
+<DL COMPACT>
+
+<DT> [1]
+<DD> E. A. Lee and D. G. Messerschmitt, "Synchronous Data Flow," Proc. IEEE,
+Vol. 75, No. 9, September 1987.
+
+<DT> [2]
+<DD> J. T. Buck, S. Ha, E. A. Lee, and D. G. Messerschmitt, "Ptolemy: A
+Framework for Simulating and Prototyping Heterogeneous Systems," Int.
+J. Computer Simulation: Special Issue on Simulation Software
+Development, Vol. 4, April 1994.
+
+<DT> [3]
+<DD> J. L. Pino, S. Ha, E. A. Lee, and J. T. Buck, "Software Synthesis for
+DSP Using Ptolemy," J. VLSI Signal Processing, Vol. 9, No. 1-2, 1995.
+
+<DT> [4]
+<DD> J. L. Pino, S. S. Bhattacharyya, and E. A. Lee, A Hierarchical
+Multiprocessor Scheduling Framework for Synchronous Dataflow Graphs, UC
+Berkeley Electronics Research Laboratory, Memorandum No. UCB/ERL
+M95/36, May 1995.
+
+<DT> [5]
+<DD> J. L. Pino, T. M. Parks, and E. A. Lee, "Automatic Code Generation for
+Heterogeneous Multiprocessors," Proc. IEEE ICASSP, Adelaide, South
+Australia, April 1994.
+
+<DT> [6]
+<DD> J. L. Pino, M. C. Williamson, and E. A. Lee, "Interface Synthesis in
+Heterogeneous System-Level DSP Design Tools," Proc. IEEE ICASSP,
+Atlanta, GA, May 1996.
+
+<DT> [7]
+<DD> R. K. Gupta, C. N. Coelho, Jr., and G. De Micheli, "Synthesis and
+Simulation of Digital Systems Containing Interacting Hardware and
+Software Components," Proc. ACM/IEEE Design Automation Conf., Anaheim,
+CA, June 1992.
+
+<DT> [8]
+<DD> R. K. Gupta and G. De Micheli, "Hardware-Software Cosynthesis for
+Digital Systems," IEEE Design and Test of Computers, Vol. 10, No. 3,
+September 1993.
+
+</DL>

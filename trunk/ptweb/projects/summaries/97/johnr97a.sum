@@ -1,0 +1,45 @@
+NAMES
+John Reekie!Postdoctoral Researcher
+
+EMAIL
+johnr@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~johnr
+
+PHONE
+643-7683
+
+TITLE
+Visual Language Editor Toolkit 
+
+CHAPTER
+02.cad
+
+ABSTRACT
+This work aims to make it easy to generate visual language editors. We
+treat a visual program as a ``picture.'' Pictures are hierarchically
+composed of simpler pictures using picture combinators: examples
+includes aggregation of pictures, containment of one picture by
+another, and connection by arrowed lines. 
+<p>
+
+These combinators can be represented by visual ``meta-syntax'' that
+glues together smaller bits of visual syntax. This is analogous to the
+use of meta-syntax like [...] and {...} in BNF grammars. We plan to use
+structural inference rules (with pictures) to specify visual syntaxes. 
+<p>
+
+Our approach to implementing a visual language editor is directly
+implement each picture combinator as a class. Together with a set of
+classes for ``primitive'' pictures (lines, boxes, labels etc), these
+classes form a framework that will (we hope) make it quite easy to
+construct an editor once given its syntax in terms of pictures and
+picture combinators. I'm currently working on a prototype visual
+language editing framework in [incr Tcl]/Tk.
+<p>
+Unfortunately, the syntactic approach is no help for specifying user
+interaction. Our first stab was based on the Tk event model, but this
+is quite low-level. We are now using an approach based on Brad Meyer's
+interactors, and have found that this cleans up interaction code
+considerably, making it both modular and reusable. 

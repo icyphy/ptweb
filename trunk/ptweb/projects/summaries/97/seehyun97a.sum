@@ -1,0 +1,46 @@
+NAMES
+Dr. Seehyun Kim!Visiting Scholar, LG Electronics Research Center
+
+EMAIL
+seehyun@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~seehyun/
+
+PHONE
+643-5883
+
+TITLE
+Fixed-point Computation Infrastructure for Ptolemy
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+In terms of power consumption, hardware cost, and execution speed,
+fixed-point arithmetic is often preferable over floating point for
+embedded signal processing systems. Algorithms, however, are usually
+developed using an idealized arithmetic model, usually approximated by
+double-precision floating-point arithmetic on standard workstations. In
+practice, one can think of the idealized model as more abstract, and
+the fixed-point model as more concrete, closer to the physical world.
+Our approach is to make concrete the an abstract specification in the
+final phases of the ``algorithm-to-implementation'' design process. In
+more adaptive applications, fixed-point properties may be varied in the
+field, at run time, for example to conserve power.
+<P> 
+In this project, an infrastructure of the fixed-point computation will
+be constructed for Ptolemy. Functional fixed-point blocks will be
+synthesized automatically from the corresponding floating-point blocks.
+Simulation and analysis will then be combined for performance
+assessment. Self-tuning systems, which dynamically change their own 
+parameters to meet varying operational criteria, will also be explored. 
+For example, the wordlength of a signal or the number of taps of a filter
+will be adjusted on-the-fly in order to adapt to a changing criterion,
+such as power dissipation or the signal-to-noise ratio.
+
+
+
+
+

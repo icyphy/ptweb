@@ -1,0 +1,51 @@
+NAMES
+Edward A. Lee
+Christopher Hylands
+
+EMAIL
+eal@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~eal
+
+PHONE
+642-0455
+
+TITLE
+Tycho - A Heterogeneous Syntax Manager
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+Tycho is an object-oriented syntax manager with an underlying
+heterogeneous technical rationale. The Ptolemy software system, which
+has been under development at U.C. Berkeley since 1990, addresses the
+problem of mixing "models of computation", or semantic models. The
+Tycho software system, under development since 1995 as a part of the
+Ptolemy project, addresses the problem of mixing syntactic models. For
+example, while Ptolemy can support mixtures of discrete-event and
+dataflow modeling, Tycho can support mixtures of textual and graphical
+syntaxes.
+<p>
+
+Tycho provides a number of editors and graphical widgets in an
+extensible, reusable framework. The editors for textual syntaxes are
+modeled after emacs in the sense the emacs key bindings are used when
+possible. However, they make more extensive use of menus, windows, and
+visualization tools will be fully integrated, something that would be
+difficult to accomplish with emacs in its current form. Editors for
+visual syntaxes will be more diverse. The system documentation is
+integrated, using a hypertext system compatible with the worldwide web.
+Tycho has been designed primarily for use with the Ptolemy system, but
+it is also useful on its own.
+
+<p>
+
+Tycho is written primarily in Itcl, also called [incr Tcl], developed
+by by Michael McLennan of AT&amp;T. Itcl is an object-oriented
+extension of Tcl, a "tool command language" written by John Ousterhout
+of U.C. Berkeley. The X-window toolkit Tk and its object-oriented
+extension Itk are also used extensively. Tycho has been used
+extensively in the development of the Tycho software itself.

@@ -1,0 +1,224 @@
+#!/bin/sh
+# ignored by Tcl \
+exec tclsh "$0" "$@"
+
+set year 1997
+
+# $Id$
+# Parser/scanner for the ERL research summaries
+#
+# File format:
+#
+# NAMES
+# researcher names, one per line.  If one is a visiting scholar, postdoc
+# or otherwise, add an exclamation point and their affiliation, e.g.,
+# Stephen Edwards!Visiting Scholar, Wasteful Research Labs
+#
+# EMAIL
+# your email address
+#
+# HOMEPAGE
+# URL of your homepage
+#
+# PHONE
+# Your office phone number, e.g., 642-6686
+#
+# TITLE
+# Title of the abstract, may span multiple lines
+#
+# CHAPTER
+# Chapter in the research summary in which the abstract should appear
+# This will probably be "02.cad" "10.comm" or "18.prog"
+#
+# ABSTRACT
+# Text of the abstract.  Please use HTML formatting conventions, e.g., 
+# use <P> to separate paragraphs.
+
+
+proc foreachLine {cmd} {
+    global f line
+    upvar line line
+    while { [gets $f line] >= 0 } {
+	if {$line == ""} {
+	    break
+	} else {
+	    uplevel $cmd
+	}
+    }
+}
+
+proc handleNAMES {} {
+    global nameList
+    foreachLine {
+	lappend nameList $line
+    }
+}
+
+proc handleEMAIL {} {
+    global email
+    foreachLine {
+	set email $line
+    }
+}
+proc handleHOMEPAGE {} {
+    global homePage
+    foreachLine {
+	set homePage $line
+    }
+}
+proc handlePHONE {} {
+    global phoneNumber
+    foreachLine {
+	set phoneNumber $line
+    }
+}
+proc handleTITLE {} {
+    global title
+    foreachLine {
+	append title "$line "
+    }
+}
+proc handleCHAPTER {} {
+    global chapter
+    foreachLine {
+	set chapter $line
+    }
+}
+proc handleABSTRACT {} {
+    global f abstract
+    while { [gets $f line] >=0 } {
+	append abstract "$line\n"
+    }
+}
+
+proc htmlHeader {} {
+    global nameList email homePage phoneNumber title chapter abstract
+    set nameList ""
+    set email ""
+    set homePage ""
+    set phoneNumber ""
+    set title ""
+    set chapter ""
+    set abstract ""
+}
+
+proc htmlTrailer {} {
+    global nameList email homePage phoneNumber title chapter abstract
+    global year basename
+    puts "writing ${basename}.html"
+    set h [open "${basename}.html" w]
+    regsub "!" $nameList "---" newNameList
+    puts $h "<HTML>
+<head>
+<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=iso-8859-1\">
+<link href=\"../../../lib/default.css\" rel=\"stylesheet\" type=\"text/css\">
+<title>$title
+</title>
+</head>
+<body>
+<H1>$title</H1>
+<HR>
+<TABLE>
+<TR><TH ALIGN=RIGHT>Researchers: </TH><TD>
+ [join $newNameList "</TD></TR>\n<TR><TD></TD><TD>"]</TD></TR>
+<TR><TH ALIGN=RIGHT>Advisor:</TH><TD>Edward A. Lee</TD></TR>
+<TR><TH ALIGN=RIGHT>Sponsor:</TH></TR>
+</TABLE>
+<HR>
+$abstract
+
+<p><font size=\"2\" color=\"#cc0000\">Last updated [clock format [clock seconds] -format %D]</font>
+</body>
+</html>"
+    close $h
+}
+
+proc stripAffiliation {name} {
+    regsub {!.*$} $name "" newname
+    return $newname
+}
+
+proc indexHeader {} {
+
+}
+
+proc indexEntry {} {
+    global basename
+    global basenames
+    global nameList email homePage phoneNumber title chapter abstract
+    global names titles homepages
+    set names($basename) $nameList
+    set titles($basename) $title
+    set homepages($basename) $homePage
+    lappend basenames $basename
+}
+
+proc indexTrailer {} {
+    global basenames year
+    global names homepages titles
+
+    puts "writing index.html"
+    set h [open index.html w]
+    puts $h "<html>
+<head>
+<title>$year Research Summaries for the Ptolemy Project</title>
+<head>
+<body bgcolor=\"#faf0e6\">
+<center><H1>$year Research Summaries for the Ptolemy Project</H1></center>
+<HR>
+Research advisor: <a href=\"http://ptolemy.eecs.berkeley.edu/~eal/\" target=\"_top\">Edward A. Lee</a>
+<P>
+These research summaries give a snapshot of many of the research
+efforts within the
+<a href=\"http://ptolemy.eecs.berkeley.edu/\" target=\"_top\">Ptolemy Project</a>.
+These summaries appear in the collection of research abstracts
+<a href=\"http://hera.eecs.berkeley.edu/~ilpbook/\" target=\"_top\"><I>EECS/ERL $year Research Summary</I></a>.
+The research summary is published once a year by the
+
+<a href=\"http://hera.eecs.berkeley.edu/~ilp/\" target=\"_top\">Industrial Liaison Program</a>,
+<a href=\"http://www.eecs.berkeley.edu/\" target=\"_top\">Electrical Engineering and Computer Sciences Department</a>, and the
+<a href=\"http://diva.eecs.berkeley.edu/~erl\"  target=\"_top\">Electronics Research Laboratory</a>
+of the University of California at Berkeley.
+The Industrial Liaison Program office can be reached at +1-510-643-6691 or
+<a href=\"mailto:ilp@eecs.berkeley.edu\">ilp@eecs.berkeley.edu</a>
+<P>
+<TABLE BORDER>
+<TR><TH>Researcher(s)</TH>
+    <TH>Project Title</TH></TR>"
+
+    foreach basename $basenames {
+	set namelist $names($basename)
+	set strippednamelist ""
+	foreach name $namelist {
+	    lappend strippednamelist [stripAffiliation $name]	
+	}
+	puts $h "<TR><TD><a href=\"$homepages($basename)\" target=\"_top\">[lindex $strippednamelist 0]</a><BR>[join [lrange $strippednamelist 1 end] "<BR>"]</TD>
+<TD><a href=\"${basename}.html\" target=\"main\">$titles($basename)</a></TD></TR>"
+    }
+    puts $h "</TABLE>
+
+<p><font size=\"2\" color=\"#cc0000\">Last updated [clock format [clock seconds] -format %D]</font>
+</body>
+</html>"
+    close $h    
+}
+
+indexHeader
+
+foreach filename $argv {
+    set f [open $filename r]
+    set basename [file tail [file rootname $filename]]
+    htmlHeader
+    while { [gets $f line] >= 0 } {
+	eval handle$line
+    }
+    close $f
+    htmlTrailer
+    indexEntry
+}
+
+indexTrailer
+
+# Local Variables:
+# mode: Tcl
+# End:

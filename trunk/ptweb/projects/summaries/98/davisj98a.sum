@@ -1,0 +1,51 @@
+NAMES
+John S. Davis II
+
+EMAIL
+davisj@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~davisj/
+
+PHONE
+642-2352
+
+TITLE
+The Application of the pi-Calculus to the Design of Embedded Systems
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+The design of embedded systems is becoming an increasingly difficult
+task. While designs increase in complexity, scope and magnitude, time
+to market requirements are constraining design cycles to shorter bounds.
+To alleviate these opposing trends, effective specification languages
+are needed for the diverse lot of embedded system design requirements.
+The specification languages must expedite the design process while
+minimizing errors and guaranteeing applicable safety and liveness
+properties.
+<P>
+In this project, we consider systems in which resource sharing plays a
+prominent role. Example systems include embedded hardware architecture
+designs involving shared memory. Non embedded system examples such as
+object request brokers or client server models are also relevant. To
+address such systems we consider process calculi in general and the
+pi-Calculus specifically as a framework for modeling shared resources.
+The pi-Calculus offers a rich and mature formalism. In particular, we
+will leverage off of its notion of atomic communication as a technique
+for maintaining safety in the midst of resource contention.
+<P>
+Our goal is to properly modify the semantics of the pi-Calculus to
+facilitate our design needs. In particular, we are currently studying the
+usefulness of an appropriate notion of time to supplement the pi-Calculus.
+At the same time, we may remove other features of the pi-Calculus should
+we decide that they lead to over-specification. Our aim is a model of
+computation which has the proper level of expressiveness.
+<P>
+We will implement our result within JPtolemy. JPtolemy is a redesign project
+in which Ptolemy is being rewritten using Java instead of C++. A key benefit
+of JPtolemy will be the incorporation of a standard threading mechanism.
+This will be useful for our purposes as the fundamental nature of the
+pi-Calculus incorporates concurrency.
+

@@ -1,0 +1,87 @@
+NAMES
+Alain Girault!Research fellow, INRIA, France
+
+EMAIL
+girault@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~girault/
+
+PHONE
+643-5883
+
+TITLE
+Distributing Reactive Systems
+
+CHAPTER
+18.prog
+
+ABSTRACT 
+Reactive systems are computer systems that react continuously to their
+environment, at a speed determined by the latter. Synchronous
+languages have been designed to facilitate the programming of reactive
+systems. The main synchronous languages are <B>Esterel</B> [1],
+<B>Lustre</B> [2], <B>Signal</B> [3], and <B>Argos</B> [4].
+
+<P>
+
+Many reactive systems have to be distributed on several computing
+locations, for various reasons: performance increase, location of
+sensors and actuators, fault tolerance. The <B>ocrep</B> tool
+parallelizes synchronous programs, according to distribution
+specifications given by the user. It takes as input an <B>oc</B> file,
+for instance produced by the <B>Esterel</B>, <B>Lustre</B> or
+<B>Argos</B> compiler. An <B>oc</B> program is a finite state
+automaton with a directed acyclic graph of actions in each state.
+
+<P>
+
+The <B>ocrep</B> tool replicates the control structure of the initial
+centralized program, and on each computing location, removes the
+irrelevant actions. Then communication actions are added to permit
+references to non local variables. Two communications actions are
+used: a <B>put</B> sends a value to a FIFO queue (non blocking) and a
+<B>get</B> extracts the head value from a FIFO queue (blocking when the
+queue is empty).
+
+<P>
+
+The fact that the control structure is replicated on each computing
+location has allowed the formal proving of the parallelization's
+correctness. The aim was to show that the set of admissible behaviors
+of the initial centralized program was equivalent to the set of
+behaviors of the final parallel program.
+
+<P>
+
+Another consequence of the replication of the control structure is the
+loss of the clocks from the initial source program. Clocks allow the
+mixing of parts of the program having different dynamics. But they are
+hidden in the <B>oc</B> automaton. After distributing the <B>oc</B>
+program, it is possible to retrieve the clocks and implement each part
+of the final parallel program with its own dynamics. This involves a
+bisimulation algorithm for detecting that two branches of a binary
+test have the same behavior, and thus removing such tests.
+
+
+<DL COMPACT>
+<DT> [1]
+<DD> G. Berry and G. Gonthier, "The Esterel Synchronous Programming
+Language: Design, Semantics, Implementation," Science of Computer
+Programming, Vol. 19, No. 2, November 1992.
+
+<DT> [2]
+<DD> N. Halbwachs, P. Caspi, P. Raymond, and D. Pilaud, "The
+Synchronous Data Flow Programming Lustre," Proceedings of the IEEE,
+Vol. 79, No. 9, September 1991.
+
+<DT> [3]
+<DD> P. LeGuernic, T. Gauthier, M. LeBorgne and C. LeMaire, 
+"Programming Real-Time Applications with Signal", Proceedings of 
+the IEEE, Vol. 79, No. 9, September 1991.
+</DL>
+
+<DT> [4]
+<DD> F. Maraninchi, "Operational and Compositional Semantics of
+Synchronous Automaton Compositions," Proceedings of CONCUR '92,
+</DL>

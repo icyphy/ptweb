@@ -1,0 +1,42 @@
+NAMES
+Richard Stevens!Visiting Scholar, Naval Research Laboratory, Washington, DC
+
+EMAIL
+dstevens@eecs.berkeley.edu
+
+PHONE
+643-6686
+
+TITLE
+Assigning Processes to Processors in a Parallel Architecture
+
+CHAPTER
+21.Parallel Architectures, Languages, and Applications
+
+ABSTRACT
+To acquire state-of-the-art hardware at reduced cost, the U.S. Navy is
+committed to buying Commercial Off The Shelf (COTS) computer hardware.
+In this rapidly changing technological world, today's hardware will be
+obsolete tomorrow.  Parallel machines tend to have architecture
+specific languages, requiring an expensive and time-consuming manual
+rewrite of application software as new technology and new machines
+become available.  <P>
+
+The Processing Graph Method (PGM), developed at the Naval Research
+Laboratory (NRL) in Washington, DC, is an architecture independent
+method for specifying application software for parallel architectures.
+The on-going PGM Tool (PGMT) project at NRL will devolop a toolset for
+rapid, low-cost production of PGM "compilers" for parallel
+architectures.    <P>
+
+A major part of the PGMT effort will be the assignment of processes to
+processors.  This will explore various assignment methods for Dynamic
+Data Flow (DDF) graphs, where the flow of data between processing
+nodes is data dependent and thus not predictable at compile time.
+These assignment methods will be evaluated for there effectiveness in
+providing high throughput with low memory requirements and low
+latency.  <P>
+
+Richard Stevens is an employee of the U.S. Government whose contributions
+to this work fall within the scope of 17 U.S.C. A7 105
+
