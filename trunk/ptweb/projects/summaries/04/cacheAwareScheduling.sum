@@ -10,11 +10,22 @@ PHONE
 TITLE
 Cache Aware Scheduling for Synchronous Dataflow Programs
 
-
 ABSTRACT 
+<p>Synchronous data flow (SDF) graphs are an efficient and popular way
+to represent signal processing systems. In SDF, the amount of data
+produced and consumed by a data flow actor is specified a priori for
+each input and output. This determinism of SDF allows static
+generation of highly optimized schedules according to one (or more) of
+the several optimization criterion, e.g. minimum buffer size, maximum
+throughput, minimum makespan, minimum program memory etc. However,
+these scheduling optimizations do not consider the effect of caches
+(instruction and data) and hence a schedule generated according to the
+above mentioned optimization criterion can turn out to be highly
+inefficient when implemented on an architecture that contains caches.
 
-<p>Synchronous data flow (SDF) graphs are an efficient and popular way to represent signal processing systems. In SDF, the amount of data produced and consumed by a data flow actor is specified a priori for each input and output. This determinism of SDF allows static generation of highly optimized schedules according to one (or more) of the several optimization criterion, e.g. minimum buffer size, maximum throughput, minimum makespan, minimum program memory etc. However, these scheduling optimizations do not consider the effect of caches (instruction and data) and hence a schedule generated according to the above mentioned optimization criterion can turn out to be highly inefficient when implemented on an architecture that contains caches. 
-
-<p>Cache misses amount to a significant overhead in the total execution time of the graph and need to be minimized. This project's aim is to develop an efficient algorithm that generates minimum cache miss schedules to reduce this overhead.
+<p>Cache misses amount to a significant overhead in the total
+execution time of the graph and need to be minimized. The aim of this 
+project is to develop an efficient algorithm that generates minimum cache
+miss schedules to reduce this overhead.
 
 
