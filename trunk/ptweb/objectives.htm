@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>Ptolemy Project Objectives</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="lib/default.css" rel="stylesheet" type="text/css">
+</head>
+<h1><a name="objectives">Ptolemy Project Objectives</a></h1>
+
+<blockquote>
+For a more complete description, see the
+<A HREF="http://ptolemy.eecs.berkeley.edu/papers/98/Overview">
+Overview of the Ptolemy Project</A>.
+</blockquote>
+
+The Ptolemy project studies modeling, simulation, and design of
+concurrent, real-time, embedded systems. The focus is on assembly of
+concurrent components. The key underlying principle in the project is
+the use of well-defined <i>models of computation</i> that govern the
+interaction between components. A major problem area being addressed is
+the use of heterogenous mixtures of models of computation.
+A software system called Ptolemy II is being constructed in Java.
+<p>
+
+The class of systems addressed by the project is sometimes called
+<i>reactive systems</i>. Reactive systems are those that interact with
+their environment at the speed of the environment. They are often
+embedded systems, and have been contrasted with interactive systems,
+which react with the environment at their own speed, and
+transformational systems, which process a body of input data to produce
+a body of output data. Reactive systems typically include elements of
+signal processing, communications, and real-time control. They are
+typically implemented with mixed technologies, possibly including
+embedded software, custom digital hardware, configurable hardware,
+analog circuits, microwave circuits, and microelectromechanical systems
+(MEMS).
+
+<p>
+A key principle in the Ptolemy project is the use of multiple
+models of computation in a hierarchical heterogeneous
+design environment.
+A premise in this work is that no single general purpose model
+of computation is likely to emerge in the near future that will
+deliver what designers need.  Modeling the diverse implementation
+technologies and their interaction is not reasonable within a
+homogeneous environment. Consider embedded DSP software controlling
+a MEMS device, for example.  The MEMS device requires physical modeling
+using differential equations, a modeling technique that is entirely
+inappropriate for the DSP software. Moreover, the ability to
+validate designs and to synthesize high-quality
+implementations from high-level abstract models are both
+compromised by generality in the modeling framework.
+<p>
+The project aims to develop techniques supporting
+heterogeneous modeling, including both formal "meta-models" and
+a software laboratory for experimenting with heterogeneous modeling.
+In this context, it has explored methods based on dataflow
+and process networks, discrete-event systems, synchronous/reactive
+languages, finite-state machines, and communicating sequential processes.
+It has made contributions ranging from fundamental semantics to synthesis
+of embedded software and custom hardware.
+<p>
+The approach of the Ptolemy project at this time includes:
+<ul>
+<li> Use of programming language concepts such as
+semantics, type theories, reflection, and concurrency theories
+in system-level design of electronic systems.
+
+<li>
+Focus on domain-specific modeling and design problems
+so the designer can focus on the problem, not the tools.
+
+<li>
+Emphasis on <i>understanding</i> of systems, which is
+promoted by visual representations, executable models,
+and verification.
+
+<li>
+Use of Java, design patterns, UML, and a modern software engineering
+practice adapted to the realities of academic research.
+</ul>
+
+<p>
+Ptolemy software provides the laboratory for the experimental
+side of the project.
+It supports the interaction of diverse models of computation by using
+the object-oriented principles of polymorphism and information hiding.
+For example, using Ptolemy software,
+a high-level dataflow model of a signal processing
+system can be connected to a hardware simulator that in turn may be
+connected to a discrete-event model of a communication network.
+<p>
+Since the Ptolemy Project began, numerous advances in semantics,
+design, simulation, and code generation have occurred.
+Results of the Ptolemy Project have included:
+<ul>
+<li>adaptation of modern type theories to block-diagram-level
+specification of systems.
+<li>timed extensions of communicating sequential processes (CSP) and
+process networks (PN).
+<li>a modular approach to synchronous/reactive design.
+<li>a mathematical framework for comparing models of computation
+and studying their interaction.
+<li>a bounded execution policy for process networks.
+<li>formalization of computational models for dataflow.
+<li>managing regularity in dataflow graphs using higher-order functions.
+<li>automating the design of multidimensional multirate	systems.
+<li>simulating and scheduling multidimensional multirate systems.
+<li>simulating heterogeneous systems.
+<li>modular hierarchical finite state machines with various concurrency models.
+<li>synthesizing embedded software from dataflow graphs.
+<li>parallel scheduling techniques.
+<li>optimizing interprocessor communication in parallel implementations.
+<li>deriving fast algorithms for hardware/software partitioning
+	of dataflow graphs.
+<li>managing tool invocations and data dependencies in design processes.
+<li>integrated heterogeneous design visualization.
+</ul>
+<p>
+The Ptolemy software environment has been used for a broad range of
+applications including signal processing, telecommunications, parallel
+processing, wireless communications, network design, investment
+management, modeling of optical communication systems,
+real-time systems, and hardware/software co-design.
+Ptolemy software has also been used as a laboratory for signal processing and
+communications courses.
+Currently Ptolemy software
+has hundreds of active users at various sites worldwide in
+industry, academia, and government.
+</body>
+</html>
