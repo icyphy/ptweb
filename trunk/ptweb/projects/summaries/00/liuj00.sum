@@ -1,0 +1,43 @@
+NAMES
+Jie Liu
+
+EMAIL
+liuj@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~liuj/
+
+PHONE
+642-0395
+
+TITLE
+System-Level Modeling of Continuous and Discrete Dynamics
+
+CHAPTER
+FIXME: 02.cad
+
+ABSTRACT
+
+Complex systems like mixed-signal electronic systems, microelectromechanical
+systems (MEMS), and real-time control systems, contain both continuous
+and discrete dynamics. Typically, continuous dynamics takes the form of
+ordinary differential equations (ODEs) and discrete dynamics may be in the
+form of a discrete event model or finite state machines.
+Such systems are modeled in Ptolemy II using hierarchical heterogeneous
+components in continuous time (CT), discrete event (DE), and finite
+state machine (FSM) domains. 
+<P>  
+In order to achieve a correct simulation of such systems, it is essential 
+for the continuous time simulation engine to have the ability of detecting 
+and handling discrete events. The central part of the work is the formal
+semantics study of the models and their interaction, including, causality,
+determinacy, fixed-point behavior, event detection and signal conversions.
+<P>
+The semantics study also gives a deep insight of how heterogeneous 
+(simulation) CAD tools interacts. We developed a methodology that
+classifies CAD tools by their underlying models of computation (MoC),
+and embeds CAD tools only in the Ptolemy II domains that has the 
+same MoC. Ptolemy II acts as the standard semantic glue for the external
+tools.
+
+
