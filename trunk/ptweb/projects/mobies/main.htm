@@ -15,7 +15,7 @@ Defense Advanced Research Projects Agency (DARPA)</A>
 Information Technology Office (ITO)</A>
 (project number F33615-00-C-1703).
 Its goal is to develop technology for
-<b>Process-Based Software Components for Networked Embedded Systems</b>.
+<b>Process-Based Software Components for Embedded Systems</b>.
 
 <p>
 <ul>
@@ -29,7 +29,7 @@ Tom Henzinger</a>
 	<em>Organization</em>:
 	<a href="http://www.berkeley.edu/" target="_top">University of California at Berkeley</a>
 <li> <em>Start date</em>: June 2000
-<li> <em>End date</em>: November 2004
+<li> <em>End date</em>: November 2003
 </ul>
 </p>
 <p>
@@ -37,6 +37,20 @@ This project aims to develop
 technology for systematic composition of embedded software components.
 </p>
 <h2>Objectives</h2>
+<p>
+Our focus is on the design of process-oriented components and their
+runtime environment for embedded systems. The emphasis of this project
+is on the dynamics of the components, including the communication
+protocols that they use to interface with other components and the
+modeling of their state. The objective is to provide mechanisms for
+introspection, supporting both the ability of the run-time environment
+to safely dispatch tasks and the ability of components to adapt their
+interfaces using polymorphism. The focus is on real-time applications,
+which implies that models of time are a critical part of the
+abstractions that we will develop. The purpose of the mechanisms we
+develop is to improve robustness and safety while promoting
+component-based design.
+</p>
 <p>
 Strong type systems have done more than any other "formal method" to
 improve robustness and composability of software. However, type systems
@@ -62,29 +76,39 @@ application.
 Our focus is on the design of process-oriented components.  Such
 components operate concurrently, and we are particularly concerned
 with the dynamics of their interaction, including for example the
-communication protocols that they use when exchanging data.
-Our approach is inspired by type systems, in that we propose to
+communication protocols that they use when exchanging data
+and the mechanisms by which they change modes of operation.
+Our approach is inspired by type systems, and particularly
+by polymorphic type systems, in that we propose to
 characterize such dynamics as part of the interface definition
 of a component.  The characterization itself will have enough in
 common with a classical "type" that mechanisms such as type
 consistency checks, type inference, and polymorphism can be applied.
+We will develop code generators that use this type system information
+to produce high-quality embedded software.
 </p>
 <p>
 Our interest is in real-time applications, which implies that models of
 time are a critical part of the abstractions that we will develop. The
 purpose of the mechanisms we develop is to improve robustness and
-safety while promoting component-based design.
+safety while promoting component-based design. Code generation mechanism
+must produce code that respects the time semantics in the model.
+Such "correct by construction" generated code promises to be much more
+robust than hand-tweaked code running under a priority-driven multitasking
+embedded operating system.
 </p>
 <h2>Approach</h2>
 <p>
-Our plan is to build on top of a Java infrastructure that we have been
+Our approach is to build on top of a Java infrastructure that we have been
 developing at Berkeley called Ptolemy II. We will augment component
 interfaces to capture dynamic properties, particularly concurrency,
 communication protocols, and real-time requirements and properties. We
 will define domains, which are models of computation (MoC) that govern
 the interactions of components, and we will define the MoCs as sets of
 compatible dynamic types. These MoCs will capture design patterns for
-component-based concurrent system designs. Finally, we will integrate
+component-based concurrent system designs. We will build code generators
+that exploit the type information to produce "correct by construction"
+embedded software. Finally, we will integrate
 modeling of physical and information processes, viewing the models as a
 form of reflection (where a system contains a model of itself).
 </p>
@@ -92,14 +116,7 @@ form of reflection (where a system contains a model of itself).
 <h2>Resources</h2>
 
 <dl>
-<dt> <a href="../../presentations/00/ptolemyII.pdf" target="_top">
-Process-Based Software Components for Networked Embedded Systems</a>
-<dd> June 27, 2000, DARPA-Mobies Kickoff, Monterey CA.
-
-<dt> <a href="http://www.darpa.mil/ito/solicitations/cbd_00-19.html" target="_top">
-BAA #00-19 Model-Based Integration of Embedded Software (MoBIES)</a>
-<dd>CBD Reference
-
+<dt> <a href="presentations/main.htm">Presentations</a>
 <dt><a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/embedded/" target="main">Embedded Software - An Agenda for Research</a>,
 <dd>ERL Technical Report UCB/ERL No. M99/63, Dept. EECS, University of California, Berkeley, CA  94720, December 15, 1999.
 </menu>
