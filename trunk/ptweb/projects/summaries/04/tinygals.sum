@@ -88,7 +88,7 @@ achieve distributed multitasking among unreliable nodes.
 <DT> [2]
 <DD> Elaine Cheong, "Design and Implementation of TinyGALS: A
      Programming Model for Event-Driven Embedded Systems," Master's
-     Report, <I>Technical Memorandum No. UCB/ERL M03/14<I>, University of
+     Report, <I>Technical Memorandum No. UCB/ERL M03/14</I>, University of
      California, Berkeley, CA, 94720, USA, May 23, 2003.
 <DT> [3]
 <DD> The Ptolemy Project. http://ptolemy.eecs.berkeley.edu
