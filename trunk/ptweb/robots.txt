@@ -36,10 +36,13 @@ Disallow: /~ptdesign/tycho/tcldp
 Disallow: /~ptdesign/ptweb
 Disallow: /ptolemyII/ptII0.1alpha
 Disallow: /ptolemyII/ptII0.2
+Disallow: /ptolemyII/ptII0.2/ptII0.2devel
 Disallow: /ptolemyII/ptII0.3
+Disallow: /ptolemyII/ptII0.3/ptII0.3
 Disallow: /ptolemyII/ptII0.4/ptII0.4
 Disallow: /ptolemyII/ptII0.4/ptII0.4beta
 Disallow: /ptolemyII/ptII1.0/ptII1.0beta
+Disallow: /ptolemyII/ptII1.0ptiny
 Disallow: /ptolemyII/ptIIlatest
 Disallow: /~ptII/java/opt
 Disallow: /~ptII/java/ptdesignvendors
