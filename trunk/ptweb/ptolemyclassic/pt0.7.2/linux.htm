@@ -1,0 +1,122 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Installing Ptolemy 0.7.2 Under Linux</title>
+</head>
+<body>
+<h1>Installing Ptolemy 0.7.2 Under Linux</h1>
+Below are notes about installing under Red Hat 8 in July, 2003
+
+<ol>
+<li> Download
+<BLOCKQUOTE>
+The Ptolemy 0.7.2devel release is at
+
+ <p><a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel"><CODE>http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel</CODE></a>
+<pre>
+user:   ptdevel
+password: ptrules
+</pre>
+
+The NT port is fairly difficult to build, and is fairly slow because
+of signal limitations in cygwin.  There are no Windows binaries available.
+</BLOCKQUOTE>
+
+ <p>Download by following the links above or using scp
+<pre>
+cd /root
+mkdir downloads
+cd downloads
+scp ptII@andrews:/vol/andrews/andrews2/ftp/pub/ptolemy/ptolemy0.7.2devel/pt0.7.2devel.other.src.tar.gz .
+scp ptII@andrews:/vol/andrews/andrews2/ftp/pub/ptolemy/ptolemy0.7.2devel/pt0.7.2devel.src.tar.gz .
+scp ptII@andrews:/vol/andrews/andrews2/ftp/pub/gnu/ptolemy0.7.2devel/pt0.7.2devel.gnu.tar.gz  .
+</pre>
+
+
+<li> Untar
+<pre>
+cd /root
+tar -zxf downloads/pt0.7.2devel.gnu.tar.gz
+tar -zxf downloads/pt0.7.2devel.src.tar.gz
+tar -zxf downloads/pt0.7.2devel.other.src.tar.gz
+</pre>
+
+
+<li> Edit <CODE>/root/.bashrc</CODE> and add the following
+<pre>
+PTOLEMY=/root/ptolemy
+export PTOLEMY
+
+PTARCH=linux
+export PTARCH
+
+PATH=$PATH:$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin
+</pre>
+
+<li> Exit your shell and restart a shell
+
+<li> Start the compile:
+<pre>
+cd $PTOLEMY
+make bootstrap &gt;&amp; boot.out &amp;
+</pre>
+
+<li> If you get messages like:
+<pre>
+mkdir /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES
+ /usr/bin/install -c -m 644 de.mo /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES/make.mo
+/usr/bin/install: cannot stat `de.mo': No such file or directory
+
+</pre>
+Do
+<pre>
+cd $PTOLEMY/obj.linux/gnu/make/i18n
+ln -s  ../../../../src/gnu/src/make/i18n/* .
+</pre>
+and restart:
+<pre>
+make bootstrap &gt;&amp; boot2.out &amp;
+</pre>
+
+
+<li> While installing tcltk, I got:
+<pre>
+/root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c: In function `
+Tcl_ErrnoId':
+/root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c:340: duplicate
+ case value
+/root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c:328: this is t
+he first entry for that value
+
+</pre>
+
+The fix is to edit
+<CODE> ~/ptolemy/src/tcltk/tcl8.0.5pt/generic/tclPosixStr.c
+</CODE>
+and comment out the EOPNOTSUPP in two locations
+<pre>
+               /*#ifdef EOPNOTSUPP
+        case EOPNOTSUPP: return "EOPNOTSUPP";
+#endif
+                */
+
+</pre>
+and
+<pre>
+              /*#ifdef EOPNOTSUPP
+        case EOPNOTSUPP: return "operation not supported on socket";
+        #endif*/
+
+</pre>
+I then restarted with
+<pre>
+make install_tcltk
+</pre>
+
+
+</ol>
+
+</body>
+</html>
