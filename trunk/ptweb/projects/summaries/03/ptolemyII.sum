@@ -23,7 +23,7 @@ ABSTRACT
   <img src="PtolemyIISmall.gif" alt="Mr. Ptolemy">
  </td>
  <td>
-<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII" target="_top">Ptolemy II</a> is
+Ptolemy II [1] is
 a set of Java packages supporting heterogeneous, concurrent modeling,
 simulation, and design of component-based systems. The emphasis is on a
 clean, modular software architecture, divided into a set of coherent,
@@ -73,6 +73,9 @@ Ptolemy II includes a number of support packages, such as
 <li> <i>data</i>, providing a type system, data encapsulation and an
      expression parser.
 </ul>
+
+For more information about Ptolemy II, see
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII" target="_top"><code>http://ptolemy.eecs.berkeley.edu/ptolemyII</code></a>
 
 <p>[1]Shuvra S. Bhattacharyya, Elaine Cheong, John Davis II, Mudit Goel, Christopher Hylands, Bart Kienhuis, Edward A. Lee, Jie Liu, Xiaojun Liu, Lukito Muliadi, Steve Neuendorffer, John Reekie, Neil Smyth, Jeff Tsay, Brian Vogel, Winthrop Williams, Yuhong Xiong, Haiyang Zheng, "<a href="http://ptolemy.eecs.berkeley.edu/papers/02/ptIIdesign">Heterogeneous Concurrent Modeling and Design in Java</a>," Memorandum UCB/ERL M02/23, University of California, Berkeley, CA  USA  94720, August 5, 2002.
 
