@@ -46,7 +46,7 @@ This version of Ispell requires
  <li>Download
 <a href="/tycho/tychoTools/windows/ispell401cygbin.tar.gz"><CODE>ispel401cygbin.tar.gz</CODE></A>,
 
-unzip it in the root directory (usually c:) 
+unzip it in the root directory of cygwin (usually c:/cygwin) 
 so that the following files are created
 <menu>
 <li> <CODE>/usr/local/lib/ispell/ispell.dict</CODE>
@@ -55,6 +55,28 @@ so that the following files are created
 <li> <CODE>/usr/local/man/man1/ispell.1</CODE>
 </menu>
 
+In the example below, the download is in c:/tmp/downloads,
+and Cygwin is installed in c:/cygwin, so when running bash,
+<CODE>cd /</CODE> actually goes to <CODE>c:/cygwin</CODE>,
+not <CODE>c:/</CODE>
+<pre>
+bash-2.04$ cd /
+bash-2.04$ mkdir /usr/local/bin /usr/local/lib/ispell
+bash-2.04$ tar -zxvf /cygdrive/c/tmp/downloads/ispell401cygbin.tar.gz 
+usr/local/bin/ispell.exe
+usr/local/lib/ispell/
+usr/local/lib/ispell/ispell.dict
+usr/local/lib/ispell/ispell.words
+usr/man/man1/ispell.1
+bash-2.04$ ls -l /usr/local/bin/ispell.exe
+-rwxr-xr-x   1 administ None       222109 May 30  2000 /usr/local/bin/ispell.exe
+bash-2.04$ 
+
+</pre>
+ <p>To spell check a file, use
+<pre>
+/usr/local/bin/ispell -l &lt; file.txt
+</pre>
 
 
 <li> The ispell binary requires that your Path under NT have two directories
