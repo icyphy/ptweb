@@ -7,6 +7,7 @@ Disallow: /~cxh/private
 Disallow: /~cxh/sapub/AudioFile
 Disallow: /~cxh/sa/amanda
 Disallow: /~cxh/sa/mhonarc
+Disallow: /~cxh/sa/nt/dists
 Disallow: /~cxh/sapub/spamlib/old
 Disallow: /~johnr/norobots
 Disallow: /~johnr/local/nt/bulk/ibm/OLD
