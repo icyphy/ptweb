@@ -10,32 +10,19 @@
 Below are notes about installing under Red Hat 8 in July, 2003
 
 <ol>
-<li> Download
-<BLOCKQUOTE>
-The Ptolemy 0.7.2devel release is at
 
- <p><a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel"><CODE>http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel</CODE></a>
+<li> See <a href="download.htm">Download Ptolemy 0.7.2</a>
+for instructions about how to access Ptolemy Classic 0.7.2
+ <br>You will need
 <pre>
-user:   ptdevel
-password: ptrules
+pt0.7.2devel.other.src.tar.gz
+pt0.7.2devel.src.tar.gz
+pt0.7.2devel.gnu.tar.gz
 </pre>
-
-The NT port is fairly difficult to build, and is fairly slow because
-of signal limitations in cygwin.  There are no Windows binaries available.
-</BLOCKQUOTE>
-
- <p>Download by following the links above or using scp
-<pre>
-cd /root
-mkdir downloads
-cd downloads
-scp ptII@andrews:/vol/andrews/andrews2/ftp/pub/ptolemy/ptolemy0.7.2devel/pt0.7.2devel.other.src.tar.gz .
-scp ptII@andrews:/vol/andrews/andrews2/ftp/pub/ptolemy/ptolemy0.7.2devel/pt0.7.2devel.src.tar.gz .
-scp ptII@andrews:/vol/andrews/andrews2/ftp/pub/gnu/ptolemy0.7.2devel/pt0.7.2devel.gnu.tar.gz  .
-</pre>
+We recommend putting them in a <CODE>~/downloads</CODE>  directory. 
 
 
-<li> Untar
+<li> Untar the files:
 <pre>
 cd /root
 tar -zxf downloads/pt0.7.2devel.gnu.tar.gz
@@ -113,6 +100,13 @@ and
 I then restarted with
 <pre>
 make install_tcltk
+</pre>
+
+
+
+<li> Proceed with installing octtools:
+<pre>
+make install_octtools &gt;&amp; oct.out &amp;
 </pre>
 
 
