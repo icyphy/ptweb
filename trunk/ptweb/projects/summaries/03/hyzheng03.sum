@@ -8,19 +8,33 @@ HOMEPAGE
 http://ptolemy.eecs.berkeley.edu/~hyzheng
 
 PHONE
-510-642-6067
+510-642-6899
 
 TITLE
-Models for Adaptive Vehicle Cruise Control and Power-train Throttle Control
+Mobies Project
 
 CHAPTER
 02.cad
 
 ABSTRACT
 
-The project is about component-based design. It emphases on the models of computation used for modular system construction, the precise definition of component interfaces, and the synthesis of embedded software from abstract, problem-level specifications.
-<P>
-The plan is to address the automotive challenge problems of multi-view modeling and model analysis in the strong type system. The model analysis will elevate strong type checking from static structure to system dynamics. The co-compilation will combine both traditional compilation and user-defined component-level code generation for optimization of efficiency of model computations. 
-<P>
-Finally, to address the challenge problem of automated composition of subcomponents, we will systematize an approach that we call higher-order components. The plan will equate model data and models and enable much more concise and parameterized models to describe complex functionality.
-<P>
+Synchronous dataflow (SDF) is well suited to multi-rate signal processing applications. In SDF, actors have static firing rules: they consume and produce a fixed number of data tokens in each firing. This model lends itself to efficient, static scheduling, avoiding the runtime scheduling overhead incurred by general implementations of process networks. SDF is based on token consumption and production rates of actors to solve the balance equations and deadlock problems. For some executable models, SDF fails to find the executable schedule. [1] Cyclo-static dataflow (CSDF) could resolve the schedule with exposing the internals about the actors. CSDF is a generalization of SDF, whose actors have cyclically changing firing rules. The genuine benefits of the CSDF over SDF are the simpler precedence constraints and exposure of the internal details via cyclic firing rules. [2]
+<p>
+Dynamic dataflow (DDF) leaves the firing rule be any Boolean expression which is undefined at compile time. The runtime scheduling mechanism determines which actor to be executable. The limitations of DDF include the loss of deterministic behaviors, runtime overhead and possibly unbounded buffer. The key point is that all actors having firing rules satisfied should fire once and only once during each minor iteration.
+<p>
+Our approach is to generalize the SDF, CSDF and DDF as Uniform dataflow (UDF). The UDF model is basically hierarchically mixed SDF/CSDF models. A SDF model could be generalized into a UDF model as following: Computing the SDF schedule of the SDF model based on the balance equations, applying the DDF scheduling algorithm on the SDF schedule, a UDF schedule can be generated. From this UDF schedule, cyclic firing rules for the UDF model can be constructed. The cyclic firing rules expose more details about the internals of the UDF model while still keeps the necessary modularity. Because the schedule calculation of CSDF model is similar to the SDF model, a composite UDF model could be clustered from several UDF models via the similar method presented above.
+<p>
+A lot of interesting interactions could be studied based on the cyclic firing rules. One of them is to do the model composition analysis, e.g. the schedulability analysis of UDF models caused by the change of the topology. The key and difficult issue is about how to generate the abstract but also internal-detailed enough cyclic firing rules from the UDF schedule.  Other interesting topics include the causality analysis, parallel architecture design and the refinement relationship to the timed dataflow. 
+<p>
+For the implementation on real architectures, our exploration on UDF is focused on these four properties: periodicity, bounded execution time, bounded memory and no deadlock.
+<p>
+Reference:
+1. A comparison of synchronous and cycle-static dataflow
+Parks, T.M.; Pino, J.L.; Lee, E.A.
+Signals, Systems and Computers, 1995. Conference Record of the Twenty-Ninth Asilomar Conference on , Volume: 1 , 1996
+Page(s): 204 -210 vol.1
+2. Cyclo-dynamic dataflow
+Wauters, P.; Engels, M.; Lauwereins, R.; Peperstraete, J.A.
+Parallel and Distributed Processing, 1996. PDP '96. Proceedings of the Fourth Euromicro Workshop on , 1996
+Page(s): 319 -326
+
