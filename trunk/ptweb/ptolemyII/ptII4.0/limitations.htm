@@ -234,6 +234,7 @@ for use by Eclipse
 
 <h3>Know Limitations</h4>
 
+
 <h4>Web Start</h4>
 
 <menu>
@@ -252,6 +253,16 @@ input ArrayToken (2047) is not the same as the arrayLength parameter (2048).
 <a href="ptII4.0/doc/ptII4.0.release.htm#limitations">Ptolemy II 4.0 Release notes</a>
 for known limitations.
 
+
+
+<li> <B>Linux</B> and <B>MacOS X</B> users:
+ <p>There are problems with the context menu in the graph editor.
+ <br>Under Linux with Java 1.4, the right mouse button will not 
+bring up the context menu for an actor (Under MacOS X, the
+context menu is Control-click).  The fix is to apply 
+<a href="http://ptolemy.eecs.berkeley.edu/~cxh/tmp/diva">a patch</a>.
+ <br>We are working on creating a new download that includes
+this patch and some other fixes.
 
 <li> If an icon file is not present, then a Vergil applet might
  	try to download the icon file multiple times.  Ptolemy II
