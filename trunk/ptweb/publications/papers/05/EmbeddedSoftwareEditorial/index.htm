@@ -6,17 +6,14 @@
 <title>What are the Key Challenges in Embedded Software?</title>
 </head>
 <body>
-<center>
-  <h1>What are the Key Challenges in Embedded Software?</h1>
-</center>
-<center>
+<h1>What are the Key Challenges in Embedded Software?</h1>
 <p><a href="http://ptolemy.eecs.berkeley.edu/~eal">Edward A. Lee</a></p>
-<p>Guest Editorial<br>
+<p><i>Guest Editorial</i><br>
 in System Design Frontier, Volume 2, Number 1, January 2005<br>
 Shanghai Hometown Microsystems Inc
 <a href="http://www.hwswworld.com/">http://www.hwswworld.com/</a>
 </p>
-<br>
+<p>
 
 Embedded software has traditionally been thought of as "software on
 small computers." In this traditional view, the principal problem is
@@ -28,7 +25,7 @@ architectures such as programmable DSPs and network processors are
 developed to provide hardware support for common operations. These
 solutions have defined the practice of embedded software design and
 development for the last 25 years or so.
-
+<p>
 Of course, thanks to the semiconductor industry's ability to follow
 Moore's law, the resource limitations of 25 years ago should have
 almost entirely evaporated today. Why then has embedded software design
@@ -39,7 +36,7 @@ is questionable, however, since there are many examples where
 functionality has proven more important than efficiency. We will argue
 that resource limitations are not the only defining factor for embedded
 software, and may not even be the principal factor.
-
+<p>
 Resource limitations are an issue to some degree with almost all
 software. So generic improvements in software engineering should, in
 theory, also help with embedded software. There are several hints,
@@ -57,7 +54,7 @@ such as the use of Java in cell phones, but their application remains
 limited and is largely providing services that are actually more akin
 to general-purpose software applications (such as database services in
 cell phones).
-
+<p>
 Embedded systems are integrations of software and hardware where the
 software reacts to sensor data and issues commands to actuators. The
 physical system is an integral part of the design and the software must
@@ -71,7 +68,7 @@ of actions is defined by the program, but not their timing. This
 prevailing imperative abstraction is overlaid with another, that of
 threads or processes, typically provided by the operating system, but
 occasionally by the language (as in Java).
-
+<p>
 The lack of timing in the core abstraction is a flaw, from the
 perspective of embedded software, and threads as a concurrency model
 are a poor match to embedded systems. They are mainly focused on
@@ -82,7 +79,7 @@ scheduling policies are sufficient. Indeed, several recent innovative
 embedded software frameworks, such as Simulink (from the MathWorks),
 TinyOS (from Berkeley), and SCADE (from Esterel Technologies) have no
 threads or processes.
-
+<p>
 Embedded software systems are generally held to a much higher
 reliability standard than general purpose software. Often, failures in
 the software can be life threatening (e.g., in avionics and military
@@ -99,14 +96,14 @@ software, such errors can be far more than inconvenient. Moreover,
 software is often written without sufficient use of these interlock
 mechanisms, resulting in race conditions that yield nondeterministic
 program behavior.
-
+<p>
 In practice, errors due to misuse (or no use) of semaphores and mutual
 exclusion locks are extremely difficult to detect by testing. Code can
 be exercised for years before a design flaw appears. Static analysis
 techniques can help (e.g. Sun Microsystems' LockLint), but these
 methods are often thwarted by conservative approximations and/or false
 positives, and they are not widely used in practice.
-
+<p>
 It can be argued that the unreliability of multi-threaded programs is
 due at least in part to inadequate software engineering processes. For
 example, better code reviews, better specifications, better compliance
@@ -120,7 +117,7 @@ the understanding that a designer has of the behavior of a complex
 program. But if the basic mechanisms fundamentally lead to programs
 that are difficult to understand, then these improvements will fall
 short of delivering reliable software.
-
+<p>
 The key challenge in embedded software is to invent (or apply)
 abstractions that yield more understandable programs that are both
 concurrent and timed. These abstractions will be very different from
