@@ -76,7 +76,8 @@ This can result in reduced overhead as well, since a system designer is not
 limited to a single model of computation.
 <p>
 We have implemented this code-generation strategy as the Copernicus package,
-which is part of <a href="http://ptolemy.eecs.berkeley.edu/">Ptolemy II</a>.
+which is part of
+<a href="http://ptolemy.eecs.berkeley.edu/" target="_top">Ptolemy II</a>.
 Copernicus parses the Java bytecode for actors, optimizes it, combines it
 with code generation from the model and outputs Java bytecode.  The resulting
 generated code is currently useful for high-speed compiled code simulation.
