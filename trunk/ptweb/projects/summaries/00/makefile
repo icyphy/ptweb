@@ -12,6 +12,7 @@ SOURCES = ptolemyII.sum \
 		kienhuis00b.sum \
 		vogel00.sum \
 		ptplot00.sum \
+		vissers00.sum \
 		softpract00.sum
 
 index.html : $(SOURCES) sum2html
