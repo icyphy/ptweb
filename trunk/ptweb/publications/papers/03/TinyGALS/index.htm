@@ -1,0 +1,24 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>TinyGALS: A Programming Model for Event-Driven Embedded Systems</title>
+</head>
+<body>
+<center>
+  <h1>TinyGALS: A Programming Model for Event-Driven Embedded Systems</h1>
+</center>
+<center>
+  <p>Elaine Cheong, Judy Liebman, Jie Liu, and Feng Zhao</p>
+  <p>in <i>Proceedings of the 18th Annual ACM Symposium on Applied Computing</i> (SAC'03), Melbourne, FL, Mar. 9-12, 2003.</p>
+  <p> <a href="TinyGALS.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+<p>
+Networked embedded systems such as wireless sensor networks are usually designed to be event-driven so that they are reactive and power efficient. Programming embedded systems with multiple reactive tasks is difficult due to the complex nature of managing the concurrency of execution threads and consistency of shared states. This paper describes a globally asynchronous and locally synchronous model (TinyGALS) for programming event-driven embedded systems. Software components are composed locally through synchronous method calls to form modules, and asynchronous message passing is used between modules to separate the flow of control. In addition, a guarded yet synchronous model (TinyGUYS) is designed to allow thread-safe sharing of global state by multiple modules without explicitly passing messages. This programming model is structured such that all asynchronous message passing code and module triggering mechanisms can be automatically generated from a high-level specification. We have implemented the programming model and code generation facilities on a wireless sensor network platform known as the Berkeley motes. As an example, we have redesigned a multi-hop <i>ad hoc</i> communication protocol using the TinyGALS model.
+</body>
+</html>
+
