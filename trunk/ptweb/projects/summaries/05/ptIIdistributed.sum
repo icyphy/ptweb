@@ -70,7 +70,8 @@ semantics of those highly autonomous but still mutually dependent components
 in a distributed system.
 This work will probably give rise to a formalism which, like PN (process
 networks), regards components as processes and abstracts the physical
-connections between them as data channels with FIFO queues. Unlike PN,
+connections between them as data channels with FIFO queues. However,
+unlike PN or DE (discrete events) systems,
 issues related to the nature of distributed systems cannot be abstracted
 away. In this scenario,
 components are highly flexible, whose activities are not restricted by
