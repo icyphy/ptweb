@@ -247,6 +247,10 @@ section in $PTOLEMY/tycho/kernel/gui/Dialog.itcl
 <li> (12/03) The following problem was reported by Shachindra Sharma in
 <CODE>src/octtools/Packages/st/st.c</CODE> where a particular
 string results in a negative hash code because of overflow.
+ <br>Ptolemy Classic does not call this function, but st.c
+appears in other locations, such as
+<a href="http://www.mit.edu/afs/sipb/project/ruby-lang/src/ruby-1.6.4/st.c" target="_top"><CODE>http://www.mit.edu/afs/sipb/project/ruby-lang/src/ruby-1.6.4/st.c</CODE></a>.
+
  <br>The fix is below:
 
 <pre>
