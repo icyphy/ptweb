@@ -1,0 +1,55 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>A Model of Computation with Push and Pull Processing</title>
+</head>
+<body>
+<center>
+<h1>A Model of Computation with Push and Pull Processing</h1>
+</center>
+<center>
+Yang Zhao
+</center>
+<br>
+<center>
+<i>Technical Memorandum UCB/ERL M03/51</i>,
+University of California, Berkeley, CA 94720, December 16, 2003.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="PushAndPull.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A><br>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+
+This report studies a model of computation (MoC) that supports Push-Pull communication
+between software components. Push represents message transfer that is initiated by the
+producer. On the contrast, Pull represents message transfer that is initiated by the consumer.
+
+<p>
+
+Push-Pull messaging mechanisms have been used in various domains, such as the
+CORBA Event service, the Click modular router, inter-process communication among
+multi-processors, data dissemination in a peer to peer network. Formalizing the computation
+and communication in these domains to a MoC facilitates reusability of programming
+models and software architectures, and allows user to model and analyze more complex
+systems.
+
+<p>
+
+This model of computation has been implemented as the Component Interaction (CI)
+domain in Ptolemy II, a hierarchical and heterogeneous modeling environment. Composition
+of the CI domain with other domains in Ptolemy II is discussed.
+This report also connects CI to other data-flow models of computation, such as Process
+Networks (PN), Synchronous Data Flow (SDF) and Dynamic Data Flow (DDF), and discusses
+the uses of CI in the execution of distributed systems.
+
+
+
+<p> Keywords: push; pull; Distributed; model-based design; models of computation; Data Flow;
+Process Network; CORBA; Click; Ptolemy II. <p>
+</body> </html>
+
