@@ -29,16 +29,18 @@ Java Runtime Environment (JRE)
 
  <p>The Ptolemy II Matlab interface use the GNU gcc compiler and requires
 that Matlab be installed on the local machine.  The gcc compiler is
-fairly large, so we provide two separate self-extracting downloads
+fairly large, so we provide three separate self-extracting downloads
 of the cygwin tools
 <ol>
 <li> <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a>
-(XXMb) - The tools necessary to compile and configure Ptolemy II
+(16Mb) - The tools necessary to compile and configure Ptolemy II
 except for the Matlab interface
 <li> <a href="cygwinDevel.exe"><CODE>cygwingDevel.exe</CODE></a>
 (XXMb) - The tools necessary to compile and configure Ptolemy II
-including the Matlab interface
+including the Matlab interface.  This download includes
+everything in <CODE>cygwinBasic.exe</CODE> above.
 </ol>
+
  <p>The sources for the above downloadables can be found in
 <a href="cygwinDevelSrc.exe"><CODE>cygwingDevelSrc.exe</CODE></a>
 
@@ -61,7 +63,7 @@ TBA
 <ol>
 
 <li> Most users will
-<br> Download and execute <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a> (XXMb).
+<br> Download and execute <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a> (16.3Mb).
  <br> If you are running under Windows and 
 have Matlab installed on your local machine, then 
 <br> Download and execute <a href="cygwinforptolemy.exe"><CODE>cygwinforptolemy.exe</CODE></a> (XXMb).
@@ -71,20 +73,28 @@ You may find it easier to change the directory to something short, like
 <CODE>c:\temp\cygwin</CODE>. 
 
 <li> Run <CODE>setup.exe</CODE>
-
-
+<li> Click on  <CODE>Next</CODE>
 <li> Select <CODE>Install from Local Directory</CODE> and click on <CODE>Next</CODE>.
+
+<li> Keep the default of <CODE>C:\cygwin</CODE> for the <CODE>Select Root Install Directory</CODE>.  
+ <br>Keep the default <CODE>All Users</CODE>,
+ <br>Change the <CODE>Default Text File Type</CODE> to <CODE>DOS</CODE>
+ <br> and click on <CODE>Next</CODE>.
 
 <li> Keep the default for <CODE>Local Package Directory</CODE>
 and click on <CODE>Next</CODE>.
 
 
-<li> Keep the default of <CODE>c:/cygwin</CODE> for the <CODE>Select install root directory</CODE>  
-and click on <CODE>Next</CODE>.
+<li> The <CODE>Select packages to install</CODE> window will come
+up with the default settings, we need to change from
+<CODE>default</CODE> to <CODE>install</CODE>
+click on
+the word <CODE>default</CODE> that is to the right of <CODE>All</CODE>.
+The subpages should then change from <CODE>default</CODE> to
+<CODE>all</CODE>
 
 
-<li> In the <CODE>Select packages to install</CODE> window, click on
-<CODE>Next</CODE>, which will install all the packages.
+<li> Select <CODE>Next</CODE>, which will install all the packages.
 
 
 <li> Select <CODE>Create Desktop Icon</CODE> and <CODE>Add to Start Menu</CODE>
@@ -92,6 +102,21 @@ according to your preferences.
 
 <li> Remove the temporary directory where you extracted the files.
 
+
+<li> <CODE>c:/cygwin/etc/passwd</CODE> is created during the 
+Cygwin installation.  If your Windows account is a domain account
+and not a local account, then you may need to add an entry
+to <CODE>c:/cygwin/etc/passwd</CODE> by hand.
+ <br>To do this, start up the Cygwin bash shell with
+Start -&gt;?Cygwin
+ <br>Then use the <CODE>mkpasswd</CODE> command to append
+a line with your login information, for example, I used:
+
+<pre>
+ mkpasswd -d -u cxh --path-to-home=/cygdrive/c/users &gt;&gt; /etc/passwd
+</pre>
+<CODE>mkpasswd -h</CODE> will print out help for the <CODE>mkpasswd</CODE>
+command
 
 <li> Follow the instructions in the
 <a href="ptII2.0/doc/install.htm#settingptII">Set the value of the <CODE>PTII</CODE> environment variable</a> section
