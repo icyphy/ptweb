@@ -10,10 +10,28 @@
 <a name="Ptolemy II 0.3">Ptolemy II 0.3</a></h1>
 <img src="../../image/ptIIplanet.gif" alt="Ptolemy II Planet" align="left">
 
-Ptolemy II 0.3 consists of Java applet demonstrations developed
-to illustrate key points of the various models of computation in Ptolemy II.
+Ptolemy II 0.3 is the first Ptolemy II release to include domains,
+actors, and applets of sufficient quality and architectural stability
+to use as models for development.  The domain-polymorphic actor libraries,
+in the ptolemy.actor.lib and ptolemy.actor.gui packages are still small,
+but reasonably solid.  An infrastructure for easily constructing applets
+is also provided, and several of the domains of the matured to the point
+that serious modeling is possible.  The documentation has progressed
+considerably, and now includes a tutorial on writing applets and
+chapters on actor libraries and several of the domains.
 
- <p>The 0.3 release also includes actors and infrastructure for model writers.
+ <p>Nonetheless, Ptolemy II 0.3 is still an interrim release. It includes
+a great deal of code that has not progressed beyond our "yellow" code
+rating, and some that has not progressed beyond "red."  You should use
+caution when basing your own development on such code. For such code,
+we have not yet made any commitment, even internally, to keeping the
+interface the same.  You can find the code rating at the beginning of
+all source code files. Unrated files are all "red."
+
+ <p>There are also some serious infrastructural problems with applets
+that we believe are due to quality problems with the Sun plugin that
+is required to run the applets.  Applications and applets run under
+the Sun appletviewer do not exhibit these problems.
 
  <p>The Ptolemy II 0.3 applets require the JDK1.2 plugin.
 If you have JDK1.2 installed on your machine, then the plugin may
@@ -37,12 +55,13 @@ delays before the first applet runs.
 <code>diva.jar</code> file is roughly 550k.
 
 <p>A known problem is that some of the applets do not stop properly,
-and will not run a second time
-without reloading the java code
-(use Shift-Reload under Netscape Communicator or
-Control-Reload under Microsoft Internet Explorer).  If you
-have other problems, you may want to review the 
-<a href="ptII0.3/doc/troubleshooting.htm">Troubleshooting Guide</a>.
+and will not run a second time without reloading the Java classes.
+Unfortunately, the JDK1.2.1 plugin makes it difficult to reload the
+classes, the easiest thing is to restart your browser.
+(The <a href="ptII0.3/doc/troubleshooting.htm">Troubleshooting Guide</a>
+includes a method of reloading Java classes by turning off the
+Jar Cache).  
+
  <p>We would be interested in any feedback you might have concerning
 these demos.  You can send email to 
 <a href="mailto:ptII@eecs.berkeley.edu"><code>ptII@eecs.berkeley.edu</code></a>.
