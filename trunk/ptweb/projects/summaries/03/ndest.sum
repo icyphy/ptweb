@@ -1,0 +1,45 @@
+NAMES
+Elaine Cheong
+Yang Zhao
+
+EMAIL
+celaine@eecs.berkeley.edu
+ellen_zh@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~celaine
+
+PHONE
+
+TITLE
+Networked and Distributed Embedded Systems Technology
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+We consider networked embedded systems, where computers with sensors
+and actuators communicate via CAN bus, ethernet, bluetooth, or other
+networking technology.  These systems can be event-triggered or
+time-triggered.  The network can be reliable (e.g. CAN bus) or ad-hoc
+(e.g. smart dust).  We are exploring two types of systems:
+time-triggered distributed systems and event-triggered networked
+systems.
+<P>
+Giotto is a programming methodology being developed by the group of
+Prof. Tom Henzinger.  It aims at hard real-time applications with
+periodic behavior, especially distributed embedded control systems
+with reliable networks.  We are interested in modeling these types of
+applications in Ptolemy with Giotto semantics and generating code for
+arbitrary embedded platforms.
+<P>
+TinyOS is an event-based operating system for networked sensors being
+developed by the group of Prof. David Culler.  It supports ad-hoc
+networking and is designed to support the concurrency intensive
+operations required by networked sensors with minimal hardware
+requirements.  We are interested in formalizing its programming model
+in a Ptolemy domain and exploring how to build larger models on top of
+it.  The TinyOS platform is an ideal testbed for code generation
+because of the severe memory and processing limitations inherent in
+the system.
