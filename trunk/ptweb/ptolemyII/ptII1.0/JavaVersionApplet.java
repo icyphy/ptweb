@@ -71,11 +71,13 @@ public class JavaVersionApplet extends JApplet {
             _jTextArea.append("Congratulations, you are running Java "
                     + javaVersion + ", " + newline
                     + "which is sufficient to run Ptolemy II." + newline
-                    + "You need only download the Ptolemy II.");
+                    + "You need only download the Ptolemy II distribution.");
         } else {
             _jTextArea.append("You are running Java "
                     + javaVersion + ". " + newline
-                    + "Ptolemy II requires JDK 1.3, you should upgrade.");
+                    + "Ptolemy II requires JDK 1.3, you should upgrade." 
+                    + newline
+                    + "Java and then download Ptolemy II.");
         }
         validate();
         repaint();
