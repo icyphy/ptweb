@@ -19,7 +19,7 @@ OTHER_SRCS =
 
 index.html : $(SUM_SOURCES) sum2html
 	-chmod a+x sum2html
-	c:/hyzheng/ptII/bin/ptjacl sum2html $(SUM_SOURCES)
+	${PTII}/bin/ptjacl sum2html $(SUM_SOURCES)
 	-chgrp ptolemy *.html
 	-chmod g+w *.html
 
