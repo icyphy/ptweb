@@ -12,7 +12,7 @@ SUM_SOURCES =  \
 	ptplot04.sum \
 	cal04.sum \
 	softwalls.sum \
-        sensorNetworks \
+        sensorNetworks.sum \
 	wireless.sum \
 	cacheAwareScheduling.sum \
 	structuredIA.sum  
