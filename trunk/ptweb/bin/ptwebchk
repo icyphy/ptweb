@@ -42,6 +42,7 @@
 # 5) Check for $Id CVS keyword#
 # 6) bgcolor="#faf0e6" should be removed
 # 7) links that go to pages outside our page should target _top
+# 8) </LI> should not be present
 
 doesnot () {
 	egrep -s "$1" $file
@@ -99,5 +100,13 @@ do
 	    echo "$file: has a link to an outside website, but it is not have target=\"_top\""
 	    echo "$results"
 	fi
+
+	# 8) </LI> should not be present
+	results=`egrep -i '</LI>' $file`
+	if [ "x$results" != "x" ]; then
+	    echo "$file: has </LI>, which should not be present"
+	    echo "$results"
+	fi
+
 done
 
