@@ -1,0 +1,58 @@
+NAMES
+Adam Cataldo, Xiaojun Liu, and Zhongning Chen
+
+EMAIL
+neuendor@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~neuendor
+
+PHONE
+510-642-6817
+
+TITLE
+Soft Walls: Modifying Flight Control Systems to Limit the Flight Space of 
+Commercial Aircraft.
+
+CHAPTER
+04.cont
+
+ABSTRACT 
+<p>The Soft Walls project is a technological response to the September 11, 2001
+tragedy [1]. The project goal is to design an aircraft control system to
+enforce government-mandated no-fly zones. The
+no-fly zones will include major cities, government centers, military
+installations, chemical and nuclear plants, and critical infrastructure centers. As an aircraft
+approaches a no-fly zone, the flight control system will force the aircraft away, giving the pilot a sensation of an external
+force. The no-fly zone boundaries are called Soft Walls, because
+aircraft are gently diverted as they approach these zones.<p> In the future,
+all aircraft are likely to use fly-by-wire systems, where pilot controls are mediated by computers, rather than being mechanically or
+hydraulically connected to the aircraft control surfaces. We are designing our
+control system for fly-by-wire aircraft. The aircraft will carry a
+three-dimensional model of the earth’s surface, augmented with the no-fly zones. The model will change only when
+the no-fly zones change.&nbsp; One of our design principles is to give the pilot
+as much control as possible, subject to the constraint that the aircraft can
+never enter the no-fly zone.
+<p>We have developed a control algorithm for two-dimensional infinite wall [2]. This algorithm uses a simplified model of the aircraft dynamics and
+adds a bias to the pilot's control as the aircraft gets near the no-fly
+zone. The bias is increased and decreased gradually, and the algorithm is provably safe,
+that is,
+the aircraft can never enter the
+no-fly zone. Our next goal is to
+find a control algorithm which works for any convex, two-dimensional no-fly
+zone.
+<dl compact>
+  <dt>[1]
+  <dd>E. A. Lee, <i>Soft Walls: Modifying Flight Control Systems to Limit the
+    Flight Space of Commercial Aircraft,</i> UC Berkeley Electronics Research
+    Laboratory Memorandum No. UCB/ERL M001/31, September 2001.</dd>
+</dl>
+<dl compact>
+  <dt>[2]
+  <dd>J. Adam Cataldo, Edward A. Lee, and Xiaojun Liu,<font size="3"> <i>Preliminary
+    Version of a Two-Dimensional Technical Specification for SoftWalls,&nbsp;</i></font>
+    UC Berkeley Electronics Research Laboratory Memorandum No. UCB/ERL M02/9,
+    University of California, Berkeley, CA 94720, April 17, 2002.</dd>
+</dl>
+
+
