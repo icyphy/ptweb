@@ -1,5 +1,5 @@
 NAMES
-Ye Zhou
+Rachel Zhou
 
 EMAIL
 zhouye@eecs.berkeley.edu
@@ -11,7 +11,7 @@ PHONE
 510-642-6067
 
 TITLE
-Component-based Design for Wireless Networked Systems
+Heterochronous Dataflow
 
 CHAPTER
 03.cad
@@ -19,9 +19,12 @@ CHAPTER
 ABSTRACT 
 
 <P>
-In this project, we are trying to provide a solution to support different cellular-network standards, namely GSM, and 3G standards of WCDMA, TD-SCDMA and CDMA2000. Our approach is to use an actor-oriented System-on-Chip (SoC) architecture, where a number of small DSP cores are developed to support various programmable functions. The idea behind is to develop a hardware platform for wireless communications which can be used to derive various SoC products by changing software only.
+Synchronous dataflow (SDF) is very useful in modeling dataflow systems with fixed structure, such as signal processing systems. Under the SDF model of computation, actors consume and produce a fixed number of tokens on each firing. A schedule can be pre-computed at compile time and questions such as deadlock and memory usage are decidable.
 <P>
-We begin with looking into the RAKE receiver, as it is the key part of CDMA systems. We also focus on 2 standards first: WCDMA and TD-SCDMA, which appear to be quite popular and promising in research and market. The work is planned to progress in the following steps: (1)We start with system functional analysis, where we explore a shared block-diagram for the 2 standards. (2)We will then develop some adaptive algorithm and analyze the system complexity. (3)Based on these previous work, we are able to come up with decisions on system architecture and software/hardware partition. At each step, different levels of simulations are involved to support our ideas. (4)Eventually, the architecture is designed to be at a fairly optimal point, considering the trade-off among factors such as power, speed, flexibility, etc.
+However, many signal processing systems nowadays implement adaptive algorithms, which result in data rates change during execution. The constraint of fixed rates in SDF limits its usage in these kinds of applications. In this projects, we will study heterochronous dataflow (HDF), which is a heterogenous composition of SDF and finite state machine (FSM). The semantics of HDF allow rate changes through state transitions of FSM, while within each state the system can be considered as an SDF model. Therefore, HDF retains many of the benefits of SDF, yet it has dramatically increased its expressiveness.
 <P>
-This wireless communications project is conducted in cooperation with National Semiconductor.
-
+Currently we are implementing HDF in Ptolemy II. The scheduling of HDF involve an intensive interaction between the dataflow models and FSM, especially in hierarchical HDF. We will explore the optimization scheduling algorithm of HDF while retaining its compatibility with the basic SDF and FSM. We will further study how HDF can be used in modeling adaptive signal processing systems and its limitations and possible extensions. Relations between HDF and other dataflow models such as Boolean dataflow (BDF) and dynamic dataflow (DDF) will also be studied.
+<P>
+[1] A. Girault, B. Lee, and E. A. Lee, "Hierarchical Finite State Machines with Multiple Concurrency Models", IEEE Transactions on Computer-aided Design of Integrated Circuits and Systems, Vol. 18, No. 6, June 1999.
+<P>
+[2] E. A. Lee and D. G. Messerschmitt, "Synchronous Data Flow", Proceedings of the IEEE, Vol. 75, No. 9, pp. 1235-1245, September, 1987.
