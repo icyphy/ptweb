@@ -1,0 +1,398 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-11/1/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        7/1/02 - 9/30/02
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Lyttle James, James.Lyttle@wpafb.af.mil
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+Our focus is on component-based design using principled models of
+computation and their runtime environments for embedded systems. The
+emphasis of this project is on the dynamics of the components,
+including the communication protocols that they use to interface with
+other components, the modeling of their state, and their flow of
+control. The objective is to provide mechanisms for introspection,
+supporting both the ability of the run-time environment to safely
+dispatch tasks and the ability of components to adapt their interfaces
+using polymorphism. The focus is on real-time applications, which
+implies that models of time are a critical part of the abstractions
+that we are developing. The purpose of the mechanisms we develop is to
+improve robustness and safety while promoting component-based design.
+
+We have made progress on importing HSIF models into Ptolemy II (and
+continue to influence the HSIF standard); we have developed an extended
+behavioral type system that includes temporal information; we have
+improved the interoperability of Giotto models with other domains in
+Ptolemy II; we have built distributed Ptolemy II models that use
+JXTA-based discovery, and have applied this to interfacing through a
+CORBA name server; we have made progress on formal actor composition
+and on code generation; and we have adapted our configuration
+infrastructure to make it easier to create domain-specific tools that
+use the Ptolemy II infrastructure.
+
+
+1.  Research Status
+
+HSIF
+====
+
+HSIF is a proposed hybrid system interchange format that the Mobies
+community is working on. Haiyang Zheng implemented the tool for reading
+HSIF into Ptolemy. He tested this tool on several examples provided by
+the HSIF team, including the thermostat, swimming pool and vehicle
+platoon. Haiyang's tool is written in XSLT; it reads a HSIF model and
+constructs an Ptolemy model. We have used the EffigyFactory mechanism
+in Ptolemy II so that it is easy to build a configuration of Ptolemy II
+that supports reading HSIF files.
+
+Currently, when HSIF models are imported into Ptolemy II, some
+modifications are required to get a useful model In particular, we
+need to add plotter components to display the results, and we need to
+specify the initial states of integrators. We have proposed that the
+latter be included in the HSIF standard.
+
+
+Timed Actors
+============
+
+John Reekie has extended our behavioral type schema with timing and has
+illustrated an actor definition language called Actif that incorporates
+this timing notion. Actif uses the minimum number of constructs
+necessary to express actors that will work in a broad range of models
+of computation. To this end, John added a single construct to Actif,
+which delays the readiness of an actor to fire an action by a certain
+amount of time. This has some interesting consequences for the
+interface automata used to compose actors. This technical note, which
+is still highly preliminary, is [7] below.
+
+
+Distributed Modeling
+====================
+
+Yang Zhao and Xiaojun Liu prototyped a peer-to-peer capability in
+Ptolemy II using JXTA, the successor to JINI from Sun Microsystems.
+They created an actor called "Peer" which can accept requests to change
+a model (such as adding an actor). They used this to add discovered
+remote actors to a library of actor as they are discovered. To do this,
+they extended the EntityLibrary class to create a P2PLibrary class,
+which implements the DiscoveryListener interface of JXTA, turning a
+Vergil process into a JXTA peer.
+
+Yang and Xiaojun then combined the JXTA-based mechanism with CORBA for
+more flexible use of the naming service. CORBA offers a mechanism that
+allow a client to invoke a remote object, and it depends on COS Naming
+Service or IOR (interoperable object reference) to provide the remote
+object's reference. The Naming Service depends on a name server. To use
+it, the name server should be first started somewhere, and you need to
+know the address of the server and the port the server is using. JXTA
+provides some mechanism for discovering and exchanging resources, such
+as information of a remote object. Their mechanism modifies some prior
+CORBA work by Jie Liu on CorbaActorClient and ModelServer to make them
+both start as JXTA peers, and the IOR representing the remote object is
+included in an JXTA Advertisement so that it can be published or gotten
+by JXTA's discovery mechanism. Once the Client gets the IOR, it can
+obtain the remote reference from the IOR, and then call methods on the
+remote object through ORB.
+
+
+Actor Composition
+=================
+
+In work that is jointly funded by the Marco GSRC center, Jorn Janneck
+has devised a framework for describing the semantics of actors and
+models of computation. The key notion is the concept of a model of
+computation as a program transformation that composes actor
+descriptions into a description of a composite actor. This framework is
+entirely independent of any specific syntax for describing actors, or
+any particular modeling language. He uses this framework to describe
+properties of actor compositions and models of computation, and to
+classify and analyze them. This work has profound implications of this
+theory for the design of languages for describing actors and models of
+computation.
+
+Code Generation
+===============
+
+Xiaojun Liu, Haiyang Zheng, and Steve Neuendorffer have done an
+analysis of the code generation problems in Giotto,
+Simulink/Real-Time-Workshop, and the Ptolemy Synchronous Dataflow and
+Discrete-Time domains. They have concluded that there is the
+opportunity to unify the scheduling and run-time code organization of
+all of these just by providing different “receivers” (implementations
+of the communication channel among tasks).
+
+Shuvra Bhattacharyya (under subcontract from Maryland) reports
+considerable progress on the C code generation back end.
+
+Steve Neuendorffer reports that deep code generation once again works
+now that we have an update of the Soot compiler infrastructure (from
+McGill) that supports JDK 1.4.1.
+
+
+Creating Domain-Specific Tools from a Tool Infrastructure
+=========================================================
+
+We have refactored our configuration mechanism to make it easier to
+create domain-specific tool that includes only a targeted subset of
+Ptolemy II. The intent is to use this first to create a modeling
+environment for hybrid systems.
+
+One key change was that if you create a Tableau factory containing a
+LibraryAttribute, then by default, when that Tableau factory is
+invoked, the library attribute is used to specify what library to open.
+It used to be that certain models (e.g. modal models) would store in
+the model file the actor library. As a consequence, this library would
+get replicated in many places.
+
+Another change specifies that if a configuration has a FileAttribute
+named "_help" or "_about", then the specified file or URL is opened by
+default when you invoke the Help menu's About or Help commands. In
+addition, a model can have a FileAttribute named "_help", and that file
+will be opened if Help is invoked in the graph window viewing that
+model.
+
+A third change establishes a file naming convention so that one can
+create a directory with a few simple XML files, deposit the directory
+in a visible place, and then easily invoke a specialized tool whose
+configuration is specified by the XML files.
+
+
+Giotto
+======
+
+Steve Neuendorffer modified the Giotto domain so that it coordinates
+its notion of time better with other timed domains such as DE. In
+particular, if it gets invoked multiple times in reaction to input
+events during one basic cycle of its schedule, then it simply records
+the input event data, but does not execute additional cycles of the
+Giotto schedule.
+
+
+Improvements to Basic Modeling Infrastructure
+=============================================
+
+-- We upgraded our required Java version to JDK 1.4. This required
+   finding several fixes and workarounds to problems that Soot has
+   with this version of Java.  Soot is the compiler infrastructure
+   upon which we are building the code generator.
+
+-- Christopher Hylands created a makefile writer for the code
+   generator.
+
+-- David Lee created a joystick interface for use by a Ptolemy actor.
+
+-- Steve Neuendorffer added methods to the key IOPort class for accessing
+   data from the inside, providing better symmetry between access from
+   the inside and access from the outside.
+
+-- Mandeep Singh, as an undergraduate project, has systematically filled
+   in missing functions and added new functions and tests to the Ptolemy
+   II math and matrix libraries.
+
+-- Christopher Hylands improved the help capability of command-line
+   invocations of Ptolemy tools.
+
+-- A full-screen mode was created for viewing Ptolemy II models.  This
+   could be used, for example, in presentations.
+
+-- Steve Neuendorffer changed the DatagramReader and DatagramWriter
+   actors to factor out the encoding from these actors. The encodings
+   have become the conversion actors: TokenToExpression,
+   ExpressionToToken, StringToUnsignedByteArray,
+   UnsignedByteArrayToString.
+
+-- Haiyang Zheng created an assertion mechanism in Ptolemy II that
+   permits a model-builder to specify an expression that must always
+   be satisfied. If a condition is encountered during execution where
+   the expression is not satisfied, then an exception is thrown.
+
+-- We made various changes to the continuous-time directors to better
+   handle anomalous models, such as those that contain no integrators
+   or other actors that exercise control over the simulation step size.
+   At the same time, we changed the directors to better handle
+   discontinuities by forcing the simulation to evaluate signals at
+   times prior to, at, and after the discontinuity.
+
+-- Steve Neuendorffer changed the way inside receivers were accessed
+   in hierarchical models to make them more symmetric with outside
+   receivers.  This fixed some strange errors in the SDF scheduler
+   for models with opaque hierarchy and different inside and outside
+   widths.
+
+
+Study Group
+===========
+
+Our quasi-weekly study group examined the following topics:
+
+-- JXTA: new peer-to-peer technology from Sun Microsystems
+-- Colif, an actor oriented system from Grenoble for system design
+-- MDA: The Model Driven Architecture at OMG
+-- David Harel, Live Sequence Charts, play-in, play-out
+-- XML Schema
+-- Metropolis 
+
+
+2.  Interactions, Meetings, and Technology Transfer
+
+Presentations and Meetings
+==========================
+
+* John Reekie attended the Mobies/OMG meeting on Thursday 21 November
+  in Washington, D.C.
+
+* A New System Science in Research and Education, Edward A. Lee,
+  November 14th, 2002, CHESS kickoff, University of California, Berkeley,
+  CA.
+
+* Advanced Tool Architectures Supporting Interface-Based Design, Edward
+  A. Lee, November 14th, 2002, CHESS kickoff, University of California,
+  Berkeley, CA. 
+
+* Behavioral Types for Actor-Oriented Design, Edward A. Lee (with
+  Yuhong Xiong), Nov. 6-8, 2002, invited talk, FMCAD, Fourth
+  International Conferences on Formal Methods in Computer-Aided Design,
+  Portland, OR.
+
+* Integrated Safety Envelopes; Built-in Restrictions of Navigable
+  Airspace, Edward A. Lee, Sept. 19-20, 2002, NSF/OSTP Workshop on
+  Information Technology Research for Critical Infrastructure Protection,
+  Lansdowne, VA. 
+
+
+Personnel
+=========
+
+Sanjeev Kohli and Eleftherios D. Matsikoudis have joined the Ptolemy
+group as graduate student researchers.
+
+
+Technology Transfer
+===================
+
+* The NSF-funded IceCube project, which places neutrino detectors
+  under Antarctic ice, has published a paper on the use of Ptolemy II
+  for modeling [4].
+
+* Prof. Jim Armstrong at Virginia Tech finishing teaching a class on
+  models of computation. His class made extensive use of Ptolemy II
+  and SystemC, and most projects were Ptolemy based. See
+     http://www.visc.vt.edu/armstrong/ee5514/ee5514_02.html
+
+
+Other Interactions
+==================
+
+* Ernesto Wandeler, a student from ETH in Switzerland, joined the
+  Ptolemy group temporarily to write his diploma thesis. He will be
+  working on actor definition notations.
+
+* Ned Stoffel, of RSoftDesign, contributed a modification to the
+  synchronous dataflow scheduler to minimize the number of unconsumed
+  tokens that are simultaneously present.  His application involves
+  tokens that consume a great deal of memory.
+
+* Elaine Cheong, working jointly with researchers at Xerox Parc, has
+  developed a programming model called Tiny Gals for Tiny OS applications
+  running on very small embedded processors. A paper on the topic has
+  been accepted to the ACM Symposium on Applied Computing [2].
+
+* Zoltan Kemenczy, of Research In Motion, contributed a pair of
+  classes that integrate emacs with Ptolemy II, for the benefit of
+  users for whom emacs is the preferred editor. These two classes
+  are ExternalTextEffigy and ExternalTextTableau.
+
+* Agile Design contributed several new capabilities that we have
+  integrated into the Ptolemy II user interface:
+
+    1. Undo/Redo.
+    2. Ability to change the orientation of ports on icons.
+    3. Ability to customize an icon with an image file.
+    4. Ability to save an icon for a subsystem in a user library.
+    5. A mechanism for selecting a group of icons and creating
+       a hierarchical submodel for them.
+
+  Christopher Hylands made extensive changes to these to integrate
+  them with our tree and to fix certain problems.
+
+* Peter N. Steinmetz, of the University of Minnesota, contributed
+  enhancements to the Ptolemy II plotter:
+
+    1. A new PlotBox.java to allow user specification of the rectangle 
+    inside the axes, the 'plot rectangle' of the PlotBox class. He is 
+    using this to line up two graphs which share the same time scale. 
+    Other changes  allows setColors to specify the color set to be used.
+    
+    2. A new PlotApplication.java which allows one to use a "-" option to 
+    specify reading the standard input. We use this to have programs 
+    which generate .plt format files and then pipe into PlotApplication 
+    to have a quick look at it.
+
+* Ned Stoffel of RSoft Design Group contributed a modification to the
+  synchronous dataflow (SDF) domain in Ptolemy to allow scheduling of
+  disconnected graphs.
+
+* We participated in various teleconferences on HSIF with other Mobies
+  participants, keeping them apprised of our plans to import HSIF into
+  Ptolemy II and idenitfying difficulties we found with example HSIF
+  models that were being circulated.
+
+* Hugues Balp of Thales reports that he is developing a distributed
+  process network domain in Ptolemy II.
+
+* Prof. Shuvra S. Bhattacharyya, under subcontract at the University
+  of Maryland, visited for a few days. We conducted a design review
+  of his (extensive) revisions to our graph package, and worked on his
+  his C code generator operation/integration.  We also discussed his
+  proposal for a standardized DIF (dataflow interchange format).
+     
+
+4. Publications
+
+[1] H. John Reekie and Edward A. Lee, "Lightweight Component Models for
+    Embedded Systems," Memorandum UCB/ERL M02/30, University of
+    California, Berkeley, CA 94720, USA, October 30, 2002. 
+
+[2] Elaine Cheong, Judy Liebman, Jie Liu, and Feng Zhao, "TinyGALS: A
+    Programming Model for Event-Driven Embedded Systems," to appear in
+    Proceedings of the 18th Annual ACM Symposium on Applied Computing
+    (SAC'03), Melbourne, FL, Mar. 9-12, 2003.
+
+[3] Stephen Neuendorffer, "Automatic Specialization of Actor-Oriented
+    Models in Ptolemy II," Master's Report, Technical Memorandum
+    UCB/ERL M02/41, University of California, Berkeley, CA 94720,
+    December 25, 2002.
+
+[4] Jozsef Ludvig, James McCarthy, Stephen Neuendorffer, Sonia R.
+    Sachs,"Reprogrammable Platforms for High-Speed Data Acquisition,"
+    Kluwer Journal of Design Automation for Embedded Systems, Volume 7,
+    Number 4, November, 2002. 
+
+[5] Edward A. Lee and Yuhong Xiong, "Behavioral Types for
+    Component-Based Design," Memorandum UCB/ERL M02/29, University of
+    California, Berkeley, CA 94720, USA, September 27, 2002. 
+
+[6] Edward A. Lee, Stephen Neuendorffer and Michael J. Wirthlin,
+    "Actor-Oriented Design of Embedded Hardware and Software Systems,"
+    Invited paper, Journal of Circuits, Systems, and Computers ,
+    Version 2, November 20, 2002.
+
+[7] H. John Reekie, "Timed Actors," UC Berkeley, November 2002,
+    techincal note, online at: http://ptolemy.berkeley.eecs/~johnr.
+
+[8] Jie Liu and Edward A. Lee, "On The Causality Of Mixed-signal
+    And Hybrid Models," accepted to HSCC '03: Hybrid Systems:
+    Computation and Control, Prague, The Czech Republic, April 3-5, 2003.
+
+
+5. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
