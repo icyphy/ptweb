@@ -1,0 +1,26 @@
+NAMES
+Haiyang Zheng
+
+EMAIL
+hyzheng@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~hyzheng
+
+PHONE
+510-642-6067
+
+TITLE
+Models for Adaptive Vehicle Cruise Control and Power-train Throttle Control
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+The project is about component-based design. It emphases on the models of computation used for modular system construction, the precise definition of component interfaces, and the synthesis of embedded software from abstract, problem-level specifications.
+<P>
+The plan is to address the automotive challenge problems of multi-view modeling and model analysis in the strong type system. The model analysis will elevate strong type checking from static structure to system dynamics. The co-compilation will combine both traditional compilation and user-defined component-level code generation for optimization of efficiency of model computations. 
+<P>
+Finally, to address the challenge problem of automated composition of subcomponents, we will systematize an approach that we call higher-order components. The plan will equate model data and models and enable much more concise and parameterized models to describe complex functionality.
+<P>
