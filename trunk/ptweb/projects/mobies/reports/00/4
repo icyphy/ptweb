@@ -1,0 +1,558 @@
+QUARTERLY PROGRESS REPORT
+
+CONTRACTOR:           University of California at Berkeley
+AGREEMENT NUMBER:     F33615-00-C-1703
+CONTRACT PERIOD:      5/25/00-11/1/03
+TITLE:                Process-Based Software Components for
+                      Networked Embedded Systems
+REPORT PERIOD:        8/30/00 - 12/31/00
+SPONSOR:              Air Force Research Laboratory (AFRL)
+TECHNICAL POC:        Stephen L. Hary
+REPORT PREPARED BY:   Edward A. Lee
+
+
+0.  Executive Summary
+
+This project aims to develop technology for systematic composition of
+embedded software components. We are working on a software framework
+called Ptolemy II, and on models of computation for component-based
+designs.
+
+In this reporting period, we have made the user interface (called
+Vergil) for Ptolemy II fully usable. It is now the primary mechanism
+for creating Ptolemy II models. The user interface is architected using
+Ptolemy II components, and can be easily configured with customized
+libraries of components, domains, and visual editors. We have extended
+the type system to support record types, and extended the expression
+language to support these. We have simplified our XML schema, called
+MoML, for representing Ptolemy II designs. Published a paper on code
+generation [1] and a paper on embedded software [2].
+
+
+1.  Research Status
+
+Configuration Infrastructure
+============================
+
+Steve Neuendorffer and Edward Lee have completely rearchitected the
+user interface. It is now a modular architecture where the modules are
+Ptolemy II components in a Ptolemy II hierarchy. First, any application
+or applet using Ptolemy II invokes a "configuration," which is a
+Ptolemy II model of the application or applet. Whenever the application
+opens a Ptolemy II model, the configuration creates an "effigy" of the
+model, which it stores in a directory, and one or more "tableaux" to
+display the model. The effigy and the tableaux record the meta data
+associated with the model data, and manage the interaction with the
+file system and/or network.
+
+There are many consequences to the new architecture:
+
+- A model can have multiple views, such as a textual view of the MoML,
+  a visual schematic, and a tree view of the hierarchy.  The multiple
+  views are managed together in a coherent fashion.
+
+- Shared infrastructure for populating menus so that the various editors
+  and viewers in Ptolemy II present a coherent and consistent interface.
+
+- Tracking of changes and management of saving data to disk are handled
+  by a few simple base classes that are then shared across a wide variety
+  of editors.
+
+- Stylized file opening, depending on the filename extension (as in
+  MIME types), and optionally on the file contents, is supported.
+  A configuration specifies an ordered list of Effigy factories that
+  are tried one  by one until one agrees to open the file.
+
+
+Other Graphical User Interface Improvements
+===========================================
+
+We have made a number of improvements to Steve Neuendorffer's GUI for
+Ptolemy II, called Vergil. In particular, Vergil now is now a component
+architecture using the configuration infrastructure mentioned above. It
+now cleanly supports hierarchical models, including composite actors
+that are internally defined in the same file as their containers, and
+composite actors defined in another file.
+
+Vergil now also supports cut-and-paste. The clipboard representation is
+in MoML, and hence is plain text that can be pasted into a text editor,
+or any other application. If the application happens to understand XML,
+then it will be able to parse MoML.
+
+Vergil also includes an HTML viewer now that supports hyperlinks in an
+integrated fashion. In particular, if a hyperlink points to a MoML
+file, then that file is opened using the first editor in the
+configuration that agrees to open it. In effect, hyperlinks that point
+to Ptolemy II models result in opening the graphical editor on those
+models.
+
+Vergil now supports "visible attributes," which are attributes that
+appear on the screen in the visual editor.  The director, which defines
+the execution semantics of a model, is one such attribute.
+
+Icons are now defined using SVG (scalable vector graphics), a
+standardized XML schema for two-dimensional graphics (see
+http://www.w3.org/TR/SVG/). At this time, we have only implemented a
+subset of SVG, but eventually, we hope to implement all of it. SVG is
+supported in Diva, the graphics package underlying Vergil. The
+available tags are:
+
+<svg>
+  <rect x="0" y="0" width="20" height="20"
+        style="fill:blue;stroke:green;stroke-width:30"/>
+  <circle cx="0" cy="0" r="20"
+        style="fill:blue;stroke:green;stroke-width:30"/>
+  <ellipse cx="0" cy="0" rx="20" ry="30"
+        style="fill:blue;stroke:green;stroke-width:30"/>
+  <polygon points="10,30 50,10 50,30"
+        style="fill:blue;stroke:green;stroke-width:30"/>
+  <polyline points="10,30 50,10 50,30"
+        style="stroke:green;stroke-width:30"/>
+  <line x1="10" y1="20" x2="30" y2="40"
+        style="stroke:green;stroke-width:30"/>
+</svg>
+
+Vergil also now supports adding, deleting, and configuring ports on an
+actor. A number of actors (Expression, RecordAssembler, ...) depend on
+the user to add ports.
+
+Vergil also supports text in icons and text on schematics (realized as
+a visible attribute).
+
+We have added a Rename item to the popup menu. It works with ports,
+visible attributes (like directors), and entities.
+
+We have modified the tooltip so that now it shows the class name of an
+entity, and the simple name of the port.
+
+We have created a simple applet infrastructure so that Vergil schematics
+can now appear in applets, and are fully interactive.
+
+
+Graphics Domain
+===============
+
+Chamberlain Fong created a new domain, called GR, which unifies Ptolemy
+II with Java 3D. This domain has simplified synchronous semantics for
+composing both static and dynamic components into scene graphs. Only
+the dynamic components are computed on each iteration, so the domain
+results in reasonably responsive interactive three-dimensional
+animations.
+
+Chamberlain has created a number of interesting models using the GR
+domain. A pendulum model, for example, uses the CT domain to model the
+continuous dynamics of a pendulum, and GR to display a swinging
+pendulum.
+
+
+Record Type
+===========
+
+Yuhong Xiong extended the Ptolemy II type system to include record
+types, which are data types that contain any number of named fields,
+each of which is of arbitrary type.  He created a RecordAssembler
+and RecordDisabler actor, which construct and deconstruct records,
+respectively.
+
+The type of RecordToken is implemented by the data.type.RecordType
+class.  Similar to ArrayType, type constraints can be set up between
+the element type of a record and the type else where in the system.
+For example, the above two actors have type constraints between
+the element type and the type of a port.
+
+
+Expression Language Enhancements
+================================
+
+Xiaojun Liu (supported by SEC, not Mobies) has made a number of
+improvements to the expression language. First, the following syntax is
+now supported:
+
+   {foo = "abc", bar = 1}
+
+The result of parsing and evaluating this expression will be a record
+token with two fields: a field named "foo" containing a string token of
+value "abc", and a field named "bar" containing an IntToken of value 1.
+
+
+Mutable Models
+==============
+
+Ptolemy II is carefully architected so that multiple threads can modify
+the structure and parameterization of a model while the model is
+executing. We have made a number of changes in this mechanism to make
+it easier to use. In particular, a change is made by creating a "change
+request" object, and queueing it with any component in the model. The
+component delegates the change request up the hierarchy until it
+encounters a component that can handle the request. If no such
+component is encountered, then the request propagates to the top level,
+where it is executed between top-level iterations.
+
+
+MoML - An XML Schema
+====================
+
+We have made a number of changes to the MoML parser, and simplifications
+to our (already very simple) MoML schema, in order to better support
+hierarchy and inheritance. In Ptolemy II hierarchical models,
+components are instances cloned from reference models called "classes."
+A model (a composite entity) is a "class" in Ptolemy II if its
+getMoMLElementName() method returns the string "class". If a component
+is cloned from a class, then when that component exports MoML, it
+references the class from which it was cloned and exports only its
+attributes. However, if further changes are made to the component, it
+is important that when the component exports MoML, that those changes
+are represented in the exported MoML. Our parser ensures that they are
+by creating an instance of MoMLAttribute for each change that is made
+to the clone after cloning. That attribute exports a MoML description
+of the change. This effectively implements an inheritance mechanism,
+where a component inherits all the features of the master from which it
+is cloned, but then extends the model with its own changes.
+
+This class works closely with MoMLChangeRequest to implement another
+feature of Ptolemy II hierarchy. In particular, if an entity is cloned
+from another that identifies itself as a "class", then any changes that
+are made to the class via a MoMLChangeRequest are also made to the
+clone. This parser ensures that those changes are not exported when
+MoML is exported by the clone, because they will be exported when the
+master exports MoML.
+
+There is one significant subtlety with using this class mechanism. If
+you create a MoMLChangeRequest with a specified context, then the
+change will be executed in that context. Moreover, if that context has
+other objects deferring their MoML definitions to it, then the change
+will be replicated in those other objects. This is the principal
+mechanism in MoML for an object to serve as a class definition, and
+others to serve as instances. A change to the class propagates to the
+instances. However, it means that when you make a change request, you
+have to be sure to pick the right context. The getDeferredToParent()
+method returns the first parent in the containment hierarchy of its
+argument that has other objects deferring their MoML definitions to it.
+That is the correct context to use for a change request.
+
+NOTE: Another significant subtlety remains. If the parent returned by
+getDeferredToParent() itself has a parent that is deferred to, then
+changes will not propagate to the objects that defer to it. That is, if
+a MoML class contains a MoML class, and a change is made to the inner
+class, then instances of the outer class are unaffected. Perhaps MoML
+should not permit inner classes.
+
+The moml package has a new class called MoMLAttribute that has the
+following class description:
+
+   This attribute has an arbitrary MoML description that is exported
+   when the exportMoML() methods of the container are called. Thus, it
+   serves as a convenient way to attach persistent information that
+   will not otherwise be exported to MoML. To specify its MoML
+   description, call setMoMLDescription().
+
+We also modified the MoML definition so that <configure> and <doc> tags
+can contain arbitrary markup. The only constraint is that within that
+markup, and <configure>...</configure> or <doc>...</doc> pairs be
+balanced. Notice that this is a major increment over either CDATA or
+processing instructions in XML, which (strangely) cannot be nested.
+
+Finally, we added a rename element to MoML.  To use it, do:
+
+   <entity name="oldName"><rename name="newName"/></entity>
+
+
+Code Generation
+===============
+
+Christopher Hylands (who is partially supported by GSRC) converted the
+code generation facility to use reflection to obtain information about
+classes where the source code is not going to be parsed. These classes
+are to be used as-is (e.g., the built-in Java classes in Sun's
+distribution). In the first version of the code generator, Jeff Tsay
+create "skeleton" files for all such classes, where these files
+contained the essential interface information. Christopher first used
+Jeff idea of having zero length file indicate that reflection should be
+used to find the methods and fields of that class. He created a utility
+for creating the zero- length files to mirror the classes in the Java
+tree. Then he managed to eliminate the skeleton files altogether.
+
+Under JDK1.2.2, it seems like there is very little performance hit for
+using reflection instead of  using skeleton files.
+
+With the help of Shuvra Bhattacharyya, from the University of Maryland,
+we also created a user interface for code generation that is a tableau
+in the configuration infrastructure (see above). Shuvra also created a
+first version of a much simpler code generator than Jeff Tsay's that
+merely translates MoML files into Java. This could be useful for
+lightweight applets or embedded software, because it obviates the need
+for a MoML parser.
+
+
+
+Network Integration of Ptolemy II
+=================================
+
+We have improved in several ways the network integration of Ptolemy II.
+The user interface, Vergil, can open models defined anywhere on the
+network, given only the URL to the MoML file. Moreover, components in
+Ptolemy II can now be specified relative to the classpath (enabling
+highly modular design of applets). I.e, you can now say:
+
+   <entity name="sinewave" class="ptolemy.actor.lib.Sinewave"/>
+
+where the class is a composite actor defined by a file Sinewave.xml or
+Sinewave.moml in the directory ptolemy/actor/lib. The classpath is used
+to find the file. Thus, hierarchical actors become virtually identical
+to Java actors in how they are used.
+
+Moreover, you don't have to search relative to the classpath.
+You can say:
+
+   <entity name="foo" class="Foo" source="http://.../Foo.xml"/>
+
+The source can be an absolute URL, or one that is relative to the file
+in which the <entity ...> element appears. This makes it easy to try
+out other people's actors. They can just put their XML on the web, and
+you can use their actors from anywhere. Presumably we could do the same
+with Java actors, but we haven't implemented that... Java actors are
+only loaded relative to the classpath. There are security issues with
+the latter that we have not fully worked out.
+
+More interestingly, we can now implement models constructed with
+custom, remotely defined libraries. In other words, a vendor could
+provide a service where Vergil is used to create a Ptolemy II model
+built out of components supplied by the vendor, rather than components
+built into Ptolemy II.
+
+
+Other Software Improvements
+===========================
+
+-- Reconciled the lazy evaluation of the expression language with the
+   need to notify components when their parameter values change.
+
+-- Christopher Hylands removed the need to create clone() methods
+   in most cases when defining actors by using reflection in the clone()
+   method of the base class to handle parameters and ports that are
+   public members of the class.
+
+-- Allow specification of port types in MoML.
+
+-- Creted a string-valued attribute class that is much simpler
+   than a string-valued parameter.
+
+-- Improved support for mutating models in domains where there is
+   static scheduling.
+
+-- Improved handling of errors in parameter dialogs.
+
+-- Created mechanism for interactively adding, deleting, and reconfiguring
+   ports of components.
+
+-- Create a generic MessageHandler abstract class, and two concrete
+   implementations, one that relies on a GUI, and one that does not.
+   This means that all code in Ptolemy II now has a simple mechanism
+   for relaying messages, regardless of the context in which the model
+   is executed.
+
+-- Steve Neuendorffer experimented with dynamic class reloading in
+   Java, and made some progress, but has not fully resolved the issues.
+   The objective is to be able to reload modified Java components
+   without restarting the executable.
+
+-- We relaxed the containment hierarchy so that actors and directors
+   can be contained by objects that are not TypedCompositeActor. This
+   makes it easier to construct and maintain libraries using Ptolemy II
+   models for the libraries.
+
+-- Directors have become attributes, and in the visual editor, are
+   simply dragged into a model to control the model.
+
+-- We added a mechanism in the UI to save a model to the library,
+   making it available to use as a component elsewhere.
+
+-- Elaine Cheong fixed some long standing problems in the signal
+   processing library classes.
+
+-- Brian Vogel created a class for compactly representing static
+   schedules of actor invocations.
+
+-- Christopher Hylands did some analysis of the sizes of objects in
+   Ptolemy II, as a starting point to doing some optimization.
+
+-- Chamberlain Fong created a MathFunction actor, which consolidates
+   several random actors with simple operations.
+
+-- Paul Whitaker created a LogicFunction actor, and generally
+   improved the logic library.
+
+-- With the help of Bart Kienhuis, we have a made a cleanup pass
+   of the fixed point infrastructure code.
+
+-- Jie Liu (supported by SEC, not Mobies) did some profiling of
+   execution times, measuring the cost of basic operations in Ptolemy
+   II, such as reading a token from a receiver.
+
+-- We added a "quick tour" of Ptolemy II, accessible from the welcome
+   splash window.
+
+-- We improved a number of actors so that they would support changes
+   to their parameter values during execution of the model.
+
+-- Jie Liu (supported by SEC, not Mobies) fixed a subtle problem with
+   the FSM domain where it was initializing a submodel when a reset
+   transition is taken by calling both preinitialize() and
+   initialize(). Our semantic model requires that preinitialize() be
+   called exactly once, and this code was violating that contract.
+
+-- We improved the library of discrete-event actors.
+
+-- Paul Whitaker created a Synchronize actor, which coordinates a number
+   of asynchronous streams.
+
+-- We have redone the applet infrastructure so that we no longer need
+   domain-specific applet classes.  This simplifies the creation of a new
+   domain.
+
+-- Yuhong Xiong changed the base class implementation of
+   TypedAtomicActor to invalidate type resolution when the attribute
+   types change. It used to be that we relied on the actor to do this,
+   but actor writers were forgetting to do it. This change simplifies
+   the creation of actors whose parameters are allowed to change type.
+
+-- Steve Neuendorffer created an ArrayAppend actor that concatenates
+   arrays.
+
+-- We have cleaned up the fixed point code.
+
+
+Design and Code Reviews
+=======================
+
+Mary Stewart and Christopher Hylands moved the web pages that we use to
+track and manage design and code reviews so that they operate under the
+elaborate GSRC infrastructure. This infrastructure makes management
+through the web much easier.
+
+We performed the following design reviews:
+
+- GR domain actor library.
+- actor.gui.style package.
+- domains.ct.kernel.solver package.
+- MoML chapter of the design document.
+- FSM chapter of the design document.
+- ptolemy.lang.java SearchPath and ASTReflect.
+- Giotto domain kernel package.
+- CT chapter in the design document.
+- new classes in kernel.util.
+- schedule package.
+- actor.lib.logic package.
+- Designing Actors chapter of the design document.
+- Custom Applets chapter of the design document.
+
+We performed the following code reviews:
+
+- Kernel change request mechanisms.
+- actor.gui classes: Configurer, Documentation, EditorPaneFactory,
+  EditParametersDialog, PtolemyQuery, TopDebugListener.
+- ptolemy.actor.TypedAtomicActor.clone().
+- new classes in kernel.util.
+
+
+Study Group
+===========
+
+Our sort-of weekly study group examined the following topics:
+
+-- "Why the future doesn't need us," Bill Joy, Wired Magazine, April 2000.
+-- Jester, Esterel semantics with Java syntax.
+-- Models of Computation for computer graphics.
+-- Diposets (modeling concurrency and hierarchy simultaneously).
+-- Real-Time Specification for Java (RTSJ).
+-- Abstract State Machines (ASM, also called 'Evolving Algebras').
+-- The Rossetta System-Level Design Language
+-- Object Constraint Language (OCL)
+
+
+2.  Interactions, Meetings, and Technology Transfer
+
+External CVS Access
+===================
+
+We have made a number of changes that make it easier to collaborate
+with offsite software developers. Christopher Hylands moved the Polemy
+II CVS repository over to the Gigascale website. He set up a workgroup
+called ptexternal for external Ptolemy II developers. That workgroup
+can be found at http://www.gigascale.org/ptexternal/. He set up a
+mailing list, ptexternal@gigascale.org. Anyone who joins the ptexternal
+workgroup will automatically be on the ptexternal mailing list.
+
+Most usefully, Christopher set up anonymous read-only access to the
+CVS repository, allowing our external collaborators to download an
+up-to-the-minute snapshot of our development tree.  For information,
+see http://www.gigascale.org/ptexternal/.
+
+
+Presentations
+=============
+
+-- "Concurrent Models of Computation in System Level Design,"
+    Keynote Presentation by Edward A. Lee, Forum on Design Languages,
+    Tubingen, Germany, September 7th, 2000.
+
+-- "What comes after C++ for System Level Specification?"
+    Panel participation by Edward A. Lee, Forum on Design Languages,
+    Tubingen, Germany, September 8th, 2000.
+
+
+Other Interactions
+==================
+
+*  Weekly meetings with Mobies Phase II project at Berkeley,
+   Mondays, 9-10am.
+
+*  Met with Marco Antoniotti of the NYU Bioinformatics Group                       to explore the possibility of combining Jester (Esterel semantics
+   with Java syntax) with Ptolemy II.  Our decision was to not
+   proceed with that.
+
+*  Satnam Singh, from Xilinx Labs, visited our group and presented:
+   Lava: The Pros and Cons of Circuit Design in a Functional Language.
+
+*  Prof. Shuvra Bhattacharyya, from the University of Maryland, visited
+   us for one week in December to work on code generation infrastructure.
+   We hope to be collaborating much more in the future.
+
+*  Eylon Caspi, from the Brass group at Berkeley, which works on
+   reconfigurable hardware, visited our group to tell us about SCORE,
+   and to discuss issues associated with its model of computation.
+
+*  We met with a group from Wind River Systems, giving them an overview
+   of our various embedded software efforts, and seeking support and
+   software.
+
+*  Eylon Caspi, from the Berkeley BRASS project, which works on
+   configurable hardware, visited our group to describe a model of
+   computation being used for specifying configurable hardware.
+
+*  John Davis (at IBM) fixed a bug with the process networks director
+   that occationally led to runaway execution.
+
+*  Steve Neuendorffer visited Thomson CSF (now called Thales) in
+   France, for in depth introduction on Vergil and Ptolemy II.
+
+*  Perry Alexander from the University of Kansas, chief architect
+   of the Rossetta System-Level Design Language, visited us.  He briefed
+   us on current work in Rosetta, and we briefed him on current work
+   in Ptolemy.
+
+
+3.  Publications
+
+[1] Jeff Tsay, Christopher Hylands and Edward Lee, "A Code Generation
+    Framework for Java Component-Based Designs," CASES '00, November 17-19,
+    2000, San Jose, CA.
+
+[2] Edward A. Lee, "What's Ahead for Embedded Software?,"IEEE Computer,
+    September 2000, pp. 18-26.
+
+
+4. Financial Data
+
+Provided separately on a quarterly basis by the university.
+
