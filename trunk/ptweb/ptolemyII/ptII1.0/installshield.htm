@@ -62,6 +62,16 @@ specify each JVM by hand.
 
  <p>The first thing to try is installing a more recent JVM.
 
+ <p>If, under NT with JDK1.3, you get the following message when
+you run the installer:
+<pre>
+L'linstruction 0x77ff7741b emploi l'adresse m?moire
+0x00000034
+la memoire ne peeut pas etre "read".
+</pre>
+Then be sure that Sun's java.exe is in your path before the Microsoft
+java.exe.
+
  <p>Ultimately, you may find it easier to download the source Ptolemy
 II distribution, install Cygwin and a JDK and then rebuild by scratch.
 
