@@ -441,15 +441,15 @@ diff -c -r1.10.2.1 RenameConfigurer.java
 ***************
 *** 125,131 ****
               moml.append(newName);
-              moml.append("\"/>");
+              moml.append("\"/&gt;");
               // Remove or show name.
 !             boolean showName = booleanValue("Show name");
               if (_object instanceof Port) {
                   if (showName) {
-                      moml.append("<property name=\"_showName\" "
+                      moml.append("&lt;property name=\"_showName\" "
 --- 125,140 ----
               moml.append(newName);
-              moml.append("\"/>");
+              moml.append("\"/&gt;");
               // Remove or show name.
 !             boolean showName = false;
 !             if (!(_object instanceof Port)) {
@@ -463,7 +463,7 @@ diff -c -r1.10.2.1 RenameConfigurer.java
 !             }
               if (_object instanceof Port) {
                   if (showName) {
-                      moml.append("<property name=\"_showName\" "
+                      moml.append("&lt;property name=\"_showName\" "
 
 cxh@DOPLAP03 /cygdrive/c/ptII2.0.2/ptolemy/actor/gui
 $
