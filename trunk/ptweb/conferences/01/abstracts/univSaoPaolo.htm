@@ -6,11 +6,22 @@
 <title>Abstract</title>
 </head>
 <body>
-<b></b>
-<br><i></i>
+<b>Behavioral Primitives Analysis : An Approach for
+Selecting Models of  Computation</b>
+<br><i>Ivan Jeukens</i>
 <br>
+University of Sao Paulo
 <br>
+ijeukens@lme.usp.br
 <p>
+In order to exploit Ptolemy's most distinct feature, the possibility of 
+conjoint use of different models of computation (MoC) in the same executable
+specification, the designer is faced with the problem of choosing an 
+appropriate set of such models for his application. This requires a deep understanding of each MoC.
 <p>
+         Therefore, it is not reasonable to leave the designer without
+help. In this paper, we present an approach for choosing a set of MoCs to capture the functionally of a system under design. We start by analyzing the description of "behavioral primitives" under each MoC. A behavioral primitive is a basic behavior employed by designers in order to describe part of the system. Examples of behavioral primitives are basic blocks, conditional execution, iteration, synchronization, concurrency, recursion, preemption, resource sharing, etc.. For each behavioral primitive, we choose a "toy benchmark", a simple example system that contains the particular primitive.  One or more executable specifications are created for  the toy benchmark under each MoC. The analysis of the specification's execution is a crucial point when trying to draw conclusions about the right choice of MoCs. To the best of our knowledge, there is currently no support for such task. Therefore, we developed a first prototype of a graphical tool for such an analysis. It is based on recording: 1) token production/consumption 2) actor's change among 3 states (blocked, ready and  executing). The tool can
+then reproduce the execution and report statistical information. Our goal is the
+development of a library of behavioral primitives (and associated tools) and a strategy for decomposing a specification into these primitives. We illustrate our methodology by presenting preliminary results on the analysis of three primitives (basic block, conditional  execution and fixed length iteration) under six models of computation (SDF, DDF, PN, CSP, DE and SR).
 </body>
 </html>
