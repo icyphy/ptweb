@@ -40,14 +40,6 @@ vergilConfiguration.xml come up because we install those files twice.
 
 <h2>Runtime limitations</h2>
 <menu>
-<li> Security concern dialog comes up when we run any model
-that contains a Sinewave actor via an applet.
- <br>The problem
-is that the model is, in fact, being loaded over the net.
-So the warning is correct.  However, the _entire model_
-is being loaded over the net into an applet, so the warning
-need not be displayed.
-
 
 <li> The DDE Zeno demo produces an error message in the Java Plug-in console
 window:
@@ -82,6 +74,9 @@ Attempted to find as a moml class, but got: java.security.AccessControlException
 	at ptolemy.actor.gui.MoMLApplet._createModel(MoMLApplet.java:188)
 </pre>
 
+The Network demo does not work as a local applet because the xml file
+includes a reference to http://ptolemy.eecs.berkeley.edu, which is
+not on the local file system, so we get a SecurityException.
 
 <li> <code>vergil foo</code> hangs.  No window comes up if foo does not exist.
 
