@@ -18,8 +18,10 @@ SOURCES = ptolemyII.sum \
 	  cont_and_disc.sum \
 	  e_Ptolemy.sum \
 	  nest.sum \
-	  vogel01.sum \
-	  celaine.sum
+	  celaine.sum \
+	  pwhitake.sum \
+	  vogel01.sum 
+
 
 index.html : $(SOURCES) sum2html
 	-chmod a+x sum2html
