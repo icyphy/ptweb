@@ -1,0 +1,32 @@
+NAMES
+Jeff Tsay
+
+EMAIL
+ctsay@cs.berkeley.edu
+
+HOMEPAGE
+http://www.cs.berkeley.edu/~ctsay/
+
+PHONE
+
+TITLE
+Java to C Converter, with Support for Ptolemy II SDF Actors
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+The synchronous dataflow domain of Ptolemy II is excellent for representing 
+signal processing systems. However, because the code is written in Java and
+because there is an overhead involved in communication between the
+signal processing blocks (or SDF actors), the performance is inherently
+not optimal. In addition, a such a system cannot be easily ported to a
+DSP chip, as there are few Java compilers and Java virtual machines for DSP's.
+
+DSP's do have C compilers, which frequently generate optimized code. So
+the goal of the project is to generate C code from a Ptolemy II SDF system.
+To reach that goal, we must have the ability to translate ordinary Java code 
+into C code as well, which would be useful to many Java programmers. Once
+we have that abiility, we will optimize the communication between SDF actors,
+to produce C code that is reasonably efficient.  
+
