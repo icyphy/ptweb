@@ -1,2 +1,2 @@
 JavaVersionApplet.class: JavaVersionApplet.java
-	javac -classpath . $@
+	javac -classpath . $<
