@@ -1,0 +1,55 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>CVS For Windows</title>
+</head>
+<body>
+<h1>CVS For Windows</h1>
+
+<menu>
+
+<li> CVS and SSH binaries for NT <a href="http://ptolemy.eecs.berkeley.edu/~cxh/sa/nt/dists/cvs/cvsssh.exe"><CODE>cvsssh.exe</CODE></a> 
+(For use on .eecs.berkeley.edu machines only)
+
+<li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">JohnR's docs</a>, including information about setting up under windows.
+</menu>
+
+<h2>Installation instructions</h2>
+
+<h2><a name="troubleshootingNT">Troubleshooting NT</a></h2>
+<ol>
+<li> Reboot NT.
+<li> Be sure that you have created a key on the Unix side
+and copied the <CODE>identity*</CODE> files from Unix to NT
+
+<li> Be sure that <CODE>$HOME</CODE> is set for your NT account
+
+<li> Try using the <CODE>ssh.exe</CODE> binary that
+the <CODE>$CVS_RSH</CODE> variable refers to.
+ <p>Below is an example where we rsh over to carson and get the date:
+<pre>
+bash-2.02$ echo $CVS_RSH
+D:\Program Files\Ptolemy\CVS SSH\ssh.exe
+bash-2.02$ /Program\ Files/Ptolemy/CVS\ SSH/ssh carson date
+Enter passphrase for RSA key 'cxh@carson.eecs.berkeley.edu':
+ld.so.1: /usr/local/bin/xauth: warning: /usr/4lib/libXmu.so.4.0: has older revision than expected 10
+Thu Feb  4 15:35:06 PST 1999
+</pre>
+Below is an example that failed because of an incorrect CVS password,
+note that the password is prompted for twice:
+<pre>
+bash-2.02$ /Program\ Files/Ptolemy/CVS\ SSH/ssh carson date
+Enter passphrase for RSA key 'cxh@carson.eecs.berkeley.edu':
+Bad passphrase.
+Password:
+Permission denied.
+bash-2.02$
+</pre>
+</ol>
+
+<h2>Build instructions</h2>
+
+</body>
+</html>

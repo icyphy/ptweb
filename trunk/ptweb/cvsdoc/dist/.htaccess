@@ -1,0 +1,9 @@
+# Restrict Access of this page to eecs and cs users
+# Version: $Id$
+<Limit GET>
+order deny,allow
+deny from all
+allow from .cs.berkeley.edu
+allow from .eecs.berkeley.edu
+allow from .hip.berkeley.edu
+</Limit>

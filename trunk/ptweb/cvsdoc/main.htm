@@ -1,0 +1,572 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>CVS Resources</title>
+</head>
+<body>
+
+<h1>CVS Resources</h1>
+CVS is the Concurrent Version control System, based on RCS.
+CVS allows multiple developers to concurrently modify source code packages.
+<p>Remote Links
+<menu>
+<li> <a href="http://www.yahoo.com/Computers_and_Internet/Software/Programming_Tools/Software_Engineering/Configuration_Management/CVS___Concurrent_Versions_System/" target="_top">Yahoo CVS links</a>
+
+<li> <a href="http://www.cyclic.com" target="_top">Cyclic Software</a> - Commercial Support for CVS, lots of good links
+
+
+<li> <a href="http://www.cs.washington.edu/homes/gjb/ToolsTalks/project-management/" target="_top">CVS and RCS Tutorial</a>
+<li> Mailing Lists: -
+<a href="news:comp.software.config-mgmt"><CODE>comp.software.config-mgmt</CODE></a> -
+<a href="http://www.egroups.com/list/info-cvs/" target="_top"><CODE>info-cvs</CODE> archive</a>
+
+<li> <a name="FAQ">FAQ</a>:
+<a href="cvs/doc/FAQ">Local copy from 10.x distribution </a> -
+<a href="http://www.cyclic.com/cvs/doc-faq.html" target="_top">Cyclic.com CVS FAQ</a> 
+
+<li> <a href="http://interactivate.com/public/cvswebsites/" target="_top">Interactive.com - CVS specific search engine.</a>
+<li> <a href="http://www.loria.fr/~molli/cvs-index.html" target="_top">CVS-Index at <CODE>www.loria.fr</CODE></a>
+
+<li> pcl-cvs emacs mode
+	<menu>
+
+	<li> <a href="http://www.cyclic.com/cvs/soft-pcl.html" target="_top">Cyclic.com pcl-cvs page</a>
+
+	<li> pcl-cvs 2.x: <a href="ftp://ftp.weird.com/pub/local/" target="_top"><CODE>ftp://ftp.weird.com/pub/local/</CODE></a>
+
+	<li> <a href="ftp://rum.cs.yale.edu/pub/monnier/pcl-cvs" target="_top"><CODE>ftp://rum.cs.yale.edu/pub/monnier/pcl-cvs</CODE></a>
+
+	<br> <a href="ftp://rum.cs.yale.edu/pub/monnier/pcl-cvs.tar.gz"><CODE>ftp://rum.cs.yale.edu/pub/monnier/pcl-cvs.tar.gz</CODE></a>
+	</menu>
+
+<li> <a href="http://www.cyclic.com/tkcvs/index.html" target="_top">tkCVS</a> - Tk Interface to CVS
+
+<li> <a href="http://www.ice.com/cvs/" target="_top">jCVS</a> - Java Interface to CVS
+<LI> <A HREF="http://www.extreme.indiana.edu/hpjava/cvsClient/index.html" target="_top">cvsClient</A> - jdk1.0.2 Java Interface to CVS
+
+<li> <a href="http://www.scriptics.com/software/netcvs.html" target="_top">Scriptics NetCVS page</a>
+</MENU>
+
+Local Links
+<menu>
+<li> CVS and SSH binaries for NT
+<a href="http://ptolemy.eecs.berkeley.edu/~cxh/sa/nt/dists/cvs/cvsssh.exe"><CODE>cvsssh.exe</CODE></a> 
+(For use on .eecs.berkeley.edu machines only) -
+<a href="windows.htm">Detailed Windows Instructions</a>
+
+<li> <a href="http://ptolemy.eecs.berkeley.edu/~johnr/info/cvs.html">JohnR's docs</a>, including information about setting up under windows.
+
+<li> <a href="cvsweb.htm">cvsweb</a> -
+<a href="http://ptolemy.eecs.berkeley.edu/cvs-web/read/cvsweb.cgi">cvsweb interface to Ptolemy Development tree</a>
+
+<li> <a href="sccs.htm">Notes about CVS and SCCS</a>
+
+<li> Documentation
+<menu>
+<li> <a href="cvs/doc">CVS PostScript and PDF documentation</a>
+
+<li> <a href="http://www.cs.utah.edu/csinfo/texinfo/cvs/cvs_toc.html">CVS HTML Documentation (Dated 5/1/96) </a>
+
+<li> Man pages:
+<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs"><CODE>cvs(1)</CODE></A>
+-
+<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs.5"><CODE>cvs(5)</CODE></A>
+-
+<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvsbug"><CODE>cvsbug</CODE></A>
+<li> <a href="emacsvc.html">Emacs VC Mode and CVS</a>
+<li> To get Emacs info format documentation, start up emacs and type
+M-x info, then search for <CODE>CVS1.10</CODE>.
+<li> The cvsssh.exe file above includes CVS documentation in Windows Help
+format.
+</menu>
+
+
+<li> <a href="../java/jacl.htm">Jacl developer information</a> 
+(includes an example of how to use a remote cvs repository)
+
+<li> <a href="http://ptolemy.eecs.berkeley.edu/~ptdesign/tycho/dcvs.html">Tycho notes about various distributed version control systems</a>
+</menu>
+
+Contents
+<menu>
+
+<li> <a href="#cvscommands">Common CVS Commands</a>
+<li> <a href="#cvstasks">Common CVS tasks</a>
+<li> <a href="#cvsadmincommands">Administrative CVS Commands</a>
+<li> <a href="#binary">Binary Files</a>
+<li> <a href="#EDITOR">EDITOR Variable</a>
+<li> <a href="#localinstallation">Local Installation</a>
+<li> <a href="#cvsmapfs">cvsmapfs</a>
+</menu>
+
+
+ <hr>
+
+ <hr>
+<H2><a name="cvscommands">Common CVS Commands</a></H2>
+Below is some text from William Wu about CVS commands
+
+<dl>
+ <dt> <CODE>cvs import [module|file]</CODE>
+ <dd>add files/modules into the repository directory.
+
+ <dt><CODE>cvs commit [module|file]</CODE>
+ <dd>Check in your modified files/module to the repository,
+creates a new file that merge your file and the one in
+repository.  Note it is a MERGE not a replace, so it could
+cause problem.  A good rule is to after you modified the 
+file, do a cvs update (see below) first, so you have the 
+newest version, and try to recompile and run, so that you
+can find any conflict that arise.  
+
+ <dt><CODE>cvs update [module|file]</CODE>
+ <dd>updates your files to the files in the repository,
+if you have made some change to your files, it will
+merge the two.  This is always a good thing to do before
+you do commit, since someone else can modify the file
+and check in after you last update, thus it is possible
+the changes he made is in conflict with you changes.
+By doing a update, you can find out about the changes he made
+and spot any conflict. (conflict is indicated by a letter c
+in front of file name, in the messages from CVS)
+ <br> You can run <CODE>cvs -n update</CODE> to preview what
+would happen if you ran <CODE>cvs update</CODE>.  The <CODE>-n</CODE>
+option does not change any files, it only issues reports.
+ <dt><CODE>cvs checkout [module|file]</CODE>
+ <dd>Use this when you check out the files/module for the first time. 
+When someone had import a new file in, you can use this command
+to check it out, or I think do a update on the module will also 
+add the new file to you directory.
+
+ <dt><CODE>cvs status [module|file]</CODE>
+ <dd>Give a status report on the files comparing with the newest
+version in the repository.  The files status can be Up-to-Date,
+Modified ...   Uses this command before commit, then you can
+check if you need to do a update or not.
+
+ <dt><CODE>cvs diff [module|file] </CODE>
+ <dd>does a diff with your file and its newest version in repository.
+
+ <dt><CODE>cvs history [module|file]</CODE>
+ <dd>gives a report on the history of modication done on this file,
+users, date etc.
+
+</dl>
+ <p>These are some commonly used ones, you can always use 
+<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs"><CODE>cvs(1)</CODE></A>
+ man page for help. 
+
+ <hr>
+<h2><a name="cvstasks">Common CVS tasks</a></h2>
+
+
+<h3>Checking out the Ptolemy II tree under Unix</h3>
+CVS uses the <CODE>CVSROOT</CODE> environment variable to
+find the location of the repository.
+ <p><CODE>/usr/cluster/bin/setpath</CODE> sets
+<CODE>CVSROOT</CODE> to <CODE>/users/cvs/Repository</CODE>
+ <p>You can also override <CODE>CVSROOT</CODE> with
+the <CODE>-d</CODE> option to cvs, see the 
+<A HREF="http://ptolemy.eecs.berkeley.edu/cgi-bin/man?cvs"><CODE>cvs(1)</CODE></A> man page for details
+
+ <p>Assuming that <CODE>CVSROOT</CODE> is set to <CODE>/users/cvs/Repository
+</CODE>, follow the steps below to get a copy of the tree
+<ol>
+<li> A good place for the Ptolemy II tree is ~/ptII
+<pre>
+cd
+</pre>
+
+<li> Checkout the ptII tree
+<pre>
+cvs checkout ptII
+</pre>
+
+<li> Make the ptII release
+<pre>
+cd ptII
+make
+</pre>
+
+</ol>
+
+
+<h3>Checking out the Ptolemy II tree under NT</h3>
+The Ptolemy II tree will only build if you have the Cygwin toolkit
+installed.
+<ol>
+<li> Be sure that you have CVS and SSH installed.  Note that
+CVS uses a different version of SSH than the F-Secure verion.
+To install, download <a href="http://ptolemy.eecs.berkeley.edu/~cxh/sa/nt/dists/cvs/cvsssh.exe"><CODE>cvsssh.exe</CODE></a>
+
+ <br><a href="http://bmrc.berkeley.edu/people/chaffee/winntutil.html#sshnt">Gordon Chaffee's SSH and SCP for Windows page</a> says:
+<BLOCKQUOTE>
+
+ If you make a copy of ssh.exe to sshc.exe, it will automatically run
+ with compression on. I find this useful when running with cvs.
+
+</BLOCKQUOTE>
+
+You can also use the <CODE>-z <I>compression-level</I></CODE> command
+line option to <CODE>cvs</CODE>.  <CODE>-z3</CODE> seems to be a good
+level of compression.
+
+<li> Note that if you install your ptII tree under NT 
+with the same pathname as your Unix ptII tree, then your life
+will be easier.  For example, my ptII tree is
+at <CODE>/users/cxh/ptII</CODE> under both NT and Unix, even though
+these are different file systems.
+
+<li> Checkout the tree
+<pre>
+cvs -d :ext:carson.eecs.berkeley.edu:/users/cvs/Repository co pt
+</pre>
+
+<li> You should set your PTII environment variable to point to
+the ptII directory.  Also, you should be sure that the java 
+<CODE>bin</CODE> directory (i.e. <CODE>/jdk1.1.6/bin</CODE>)
+and the current directory (i.e. <CODE>.</CODE>) are in your PATH. 
+
+<li> Build it:
+<pre>
+cd ptII
+make
+</pre>
+
+
+</ol>
+
+<h3>Checking out just one directory</h3>
+The old symbolic links method we used with SCCS probably won't work
+as well.  Your best bet is to just check out the entire tree
+
+ <p>To check out just one directory outside of your tree, you can use
+the directory name with <CODE>cvs checkout</CODE>
+
+<pre>
+cvs checkout ptII/ptolemy/plot
+</pre>
+will create the directory <CODE>ptII/ptolemy/plot</CODE>
+in the current directory.
+
+<h3>.cvsrc file</h3>
+Brian Evans suggested that if your <CODE>~/.cvsrc</CODE> file contains
+the following:
+<pre>
+cvs -z3
+update -d -P
+</pre>
+Then you will get the following features automatically:
+<dl>
+<dt> <CODE>cvs -z3</CODE>
+<dd> compression when doing a <CODE>cvs checkout</CODE>.  This
+can be especially useful when you are dialed in from home
+
+<dt> <CODE>update -d -P</CODE>
+<dd> When you do <CODE>cvs update</CODE>, create and prune directories
+as necessary.
+
+</dl>
+The alternative is to use the command line arguments each time you
+run the appropriate commands.
+
+ <hr>
+<h2><a name="cvsadmincommands">Administrative CVS Commands</a></h2>
+Below are some common scenarios for fixing up the CVS database.
+See the <a href="#FAQ">FAQ</a> for more examples.
+
+<h3>Ignoring files</h3>
+<CODE>/users/cvs/Repository/CVSROOT/cvsignore</CODE> contains
+the patterns for files that are ignored when cvs update is done.
+If <CODE>cvsignore</CODE> includes <CODE>*.class</CODE>,
+then when you do <CODE>cvs update</CODE>, you won't see messages like
+<pre>
+? DEActor.class
+? DEDirector.class
+</pre>
+
+<h3>Adding a directory</h3>
+<ol>
+<li> Create the directory
+<pre>
+mkdir <I>foo</I>
+</pre>
+
+<li> Update the Repository and create <CODE><I>foo</I>/CVS</CODE>
+<pre>
+cvs add <I>foo</I>
+</pre>
+
+<li> Populate <CODE><I>foo</I></CODE> with your files
+
+<li> Add the files:
+<pre>
+cd <I>foo</I>
+cvs add <I>file1 file2</I>
+cvs commit
+</pre>
+
+
+</ol>
+
+<h3>Deleting a file</h3>
+<ol>
+<li> (optional)
+Make sure that you do not have any uncommitted changes to the file:
+<pre>
+cvs update <I>foo.c</I>
+</pre>
+
+<li> Remove the file:
+<pre>
+rm -f <I>foo.c</I>
+</pre>
+
+<li> Tell CVS you want to remove the file:
+<pre>
+cvs remove <I>foo.c</I>
+</pre>
+
+<li> Commit the changes, move the file to the CVS attic directory
+<pre>
+cvs commit <I>foo.c</I>
+</pre>
+
+</ol>
+
+<h3><a name="FixingaBinaryfile">Fixing a Binary file</></h3>
+This is covered in Chapter 9 of the CVS documentation.
+ <p>If a file gets added without <CODE>-kb</CODE>, then you can fix it with
+
+<ol>
+<li> 
+<pre>
+cvs admin -kb <I>foo.class</I>
+</pre>
+
+<li> 
+<pre>
+cvs update  -A <I>foo.class</I>
+</pre>
+
+
+<li> Then copy in a good copy of the file from outside CVS.
+
+<li> 
+<pre>
+cvs commit -m "Make it binary" <I>foo.class</I>
+</pre>
+
+</ol>
+
+<CODE>cvs remove -f <I>foo.c</I></CODE> will remove the file for you.
+
+<h3>Renaming a file</h3>
+The faq says:
+<pre>
+ 4. How do I rename a file? 
+    
+   CVS does not offer a way to rename a file in a way that CVS can track
+   later. See Section 4B for more information.
+   
+   Here is the best (to some, the only acceptable) way to get the effect
+   of renaming, while preserving the change log:
+   
+     Copy the RCS (",v") file directly in the Repository.
+   
+   cp $CVSROOT/<odir>/<ofile>,v $CVSROOT/<ndir>/<nfile>,v
+   
+   By duplicating the file, you will preserve the change history and the
+   ability to retrieve earlier revisions of the old file via the "-r
+   <tag/rev>" or "-D <date>" options to "checkout" and "update".
+   
+     Remove the old file using CVS.
+   
+   cd <working-dir>/<odir> rm <ofile>
+                cvs remove <ofile>
+                cvs commit <ofile>
+
+   This will move the <ofile> to the Attic associated with <odir>.
+   
+     Retrieve <nfile> and remove all the Tags from it.
+   
+   By stripping off all the old Tags, "checkout -r" and "update -r" won't
+   retrieve revisions Tagged before the renaming.
+   
+   cd <working-dir>/<ndir>
+                cvs update <nfile>
+                cvs log <nfile>                 # Save the list of Tags
+                cvs tag -d <tag1> <nfile>
+                cvs tag -d <tag2> <nfile>
+                . . .
+
+   This technique can be used to rename files within one directory or
+   across different directories. You can apply this idea to directories
+   too, as long as you apply the above to each file and don't delete the
+   old directory.
+   
+   Of course, you have to change your build system (e.g. Makefile) in
+   your <working-dir> to know about the name change.
+   
+   Warning: Stripping the old tags from the copied file will allow "-r
+   <tag>" to do the right thing, but you will still have problems with
+   "-D <date>" because there is no place to store the "deletion time".
+   See 5B.3 for more details.
+   
+   Last modified: _6/13/1997_
+   
+</pre>
+
+
+
+ <hr>
+<h2><a name="#binary">Binary Files</a></h2>
+See <a href="#FixingaBinaryfile">Fixing a Binary file</a> above.
+ <p>Using cvswrappers might be useful
+
+ <hr>
+<h2><a name="EDITOR">EDITOR Variable</a></h2>
+
+When CVS needs a log message, it reads the <CODE>EDITOR</CODE>
+environment variable to determine which editor to startup.  
+
+If you set <CODE>EDITOR</CODE> to <CODE>emacs</CODE>, then
+each time CVS needs a log message it will start up an emacs.
+
+If you always have an <CODE>emacs</CODE> process running.
+Consider using <CODE>emacsclient</CODE> instead.  
+<ol>
+<li> Edit your <CODE>~/.emacs</CODE> file and add
+<pre>
+(server-start)
+</pre>
+to it
+
+<li> Edit your <CODE>~/.cshrc</CODE> file and add
+<pre>
+setenv EDITOR emacsclient
+</pre>
+
+</ol>
+
+Now, when you CVS needs a log message, it will bring up a window
+in your <CODE>emacs</CODE> process.  When you are done editing,
+type <CODE>C-x #</CODE>
+ <p>For more information about <CODE>emacsclient</CODE>, start
+up <CODE>emacs</CODE> and type <CODE>M-x info</CODE> and search for
+the emacs online documentation.
+
+
+ <hr>
+<H2><a name="localinstallation">Local Installation</a></H2>
+The local installation is in <CODE>/usr/eesww/gnu/cvs</CODE>
+<h4>Installing</h4>
+<ol>
+<li> <CODE>configure --prefix=/usr/eesww/share/gnu/cvs-1.10.3 --exec-prefix=/usr/eesww/gnu/cvs-1.10.3 --enable-encryption
+</CODE>
+
+<li> Edit <CODE>config.h</CODE> and change
+<pre>
+/* #undef HAVE_KERBEROS */
+</pre>
+to
+<pre>
+#define HAVE_KERBEROS 1
+</pre>
+
+
+<li> Edit <CODE>src/Makefile</CODE>, and add the following to
+the <CODE>INCLUDES</CODE> line
+<pre>
+-I/usr/kerberos/include/kerberosIV -I/usr/kerberos/include
+</pre>
+
+
+<li> Edit <CODE>Makefile</CODE>, and add the following to <CODE>LIBS</CODE>
+<pre>
+-L/usr/kerberos/lib -lkrb -ldes -lcompat
+</pre>
+
+<li> Compilation failed because <CODE>flock was undefined</CODE>
+<pre>
+Undefined			first referenced
+ symbol  			    in file
+flock                               /usr/kerberos/lib/libkrb.a(tf_util.o)
+</pre>
+The fix was to edit <CODE>Makefile</CODE> and add
+<CODE>-lcompat</CODE> after <CODE>-lkrb</CODE>
+
+<li> Create directories:
+<pre>
+mkdir /usr/eesww/share/gnu/cvs-1.10.3
+mkdir /usr/eesww/share/gnu/cvs-1.10.3/info
+mkdir /usr/eesww/gnu/cvs-1.10.3
+mkdir /usr/eesww/gnu/cvs-1.10.3/bin
+mkdir /usr/eesww/share/gnu/cvs-1.10.3/man
+mkdir /usr/eesww/share/gnu/cvs-1.10.3/man/man1
+mkdir /usr/eesww/share/gnu/cvs-1.10.3/man/man5
+mkdir /usr/eesww/share/gnu/cvs-1.10.3/man/man8
+make install
+</pre>
+
+<li> <CODE>/usr/eesww/share/gnu/cvs-1.10.3/doc</CODE> contains
+<CODE>.ps</CODE> and <CODE>.pdf</CODE> documentation files that
+were placed there by hand.o
+
+
+</ol>
+ <HR>
+<h3><a name="complingCVSunderWindows">Compiling CVS Under Windows</a></h3>
+
+In the System Control Panel
+<ol>
+<li> Add
+
+<CODE>D:\Program Files\Microsoft Visual Studio\VC98\Bin;D:\Program Files\Microsoft Visual Studio\Common\MSDev98\Bin
+</CODE>
+to your Path
+
+
+<li> Create a new variable called INCLUDE and set it to
+<CODE>D:\Program Files\Microsoft Visual Studio\VC98\Include</CODE>
+
+<li> Create a new variable called LIB and set it to
+<CODE>D:\Program Files\Microsoft Visual Studio\VC98\LIB</CODE>
+
+</ol>
+
+ <HR>
+<H2><a name="cvsmapfs">cvsmapfs</a></H2>
+
+<a href="http://www.cyclic.com/cyclic-pages/sysadmin.html"><CODE>http://www.cyclic.com/cyclic-pages/sysadmin.html</CODE></a> says
+<BLOCKQUOTE>
+
+Because CVS has a client/server protocol, it may be an alternative to
+tools such as rdist. One thing that CVS doesn't yet do is preserve
+file permissions and related information. You may be interested in
+<a href="http://www.cyclic.com/cyclic-pages/soft-cvsmapfs.html">cvsmapfs</a>
+ which is an add-on package to do this.
+
+</BLOCKQUOTE>
+
+ <hr>
+<h2>pcl-cvs Emacs mode</h2>
+
+See the remote links at the top.
+ <p>Installation notes
+<ol>
+<li> downloaded from pcl-cvs 2.x: <a href="ftp://ftp.weird.com/pub/local/"><CODE>ftp://ftp.weird.com/pub/local/</CODE></a>
+
+<li> Untar'd  in <CODE>/usr/tools/gnu/lib/emacs/ohm-lisp</CODE>
+
+<li> edited <CODE>pcl-cvs.el</CODE> and added
+<pre>
+		    "/usr/eesww/gnu/cvs/bin"
+</pre>
+
+</ol>
+
+</body>
+</html>
