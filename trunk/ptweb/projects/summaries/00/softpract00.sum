@@ -1,0 +1,50 @@
+NAMES
+John Reekie, Christopher Hylands, Edward A. Lee
+
+EMAIL
+ptolemy@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/
+
+PHONE
+
+TITLE
+Software Design Practices in an Academic Setting
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+
+The Ptolemy Project has an extensive history of releasing freely
+available software.  In the past, software development efforts in
+academia have often relied upon the super-human efforts of the 'hero
+programmer'.  When the star programmer leaves, software quality
+sometimes suffers.
+
+<p>Our group has developed a set of methods for training new software
+developers, passing on good software practices and collaborating as a
+team.
+
+<p>Our primary tool is to have regularly scheduled study groups where we
+cover new areas in topics such as software engineering.  Our early
+study groups covered design patterns and Unified Modeling Language
+(UML).  As we started to apply what we learned, we started having
+regular design and code reviews of software under development.
+
+<p>One outgrowth of the design and review system was to implement
+a code rating system, where code that is less stable is red, 
+code that has been design reviewed is yellow, and code
+that has been design and code reviewed is green.
+
+<p>The Ptolemy project has a long standing tradition of nightly builds,
+but after studying development processes, we decided to make the build
+results available to the developer community.   We also designed
+and implemented a test suite and started measuring test case code coverage.
+
+<p>Our initial work is documented in 
+"<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/sftwareprac/">Software Practice in the Ptolemy Project</a>"
+
+<p>We are starting to transfer some of our tools to other groups in
+academia and in industry.
