@@ -17,13 +17,40 @@ To do this,
    makefile and run
    cvs add yourfile.sum
 
-4. update the .html files
+4. In your summary, consider adding the following
+   
+   * If there is a website that talks about your research, then
+   consider adding a link to the bottom (before the references) that
+   looks something like:
+     For more information about Foo, see 
+     <a href="http://ptolemy.eecs.berkeley.edu/projects/foo/index.htm" 
+          target="_top"><code>http://ptolemy.eecs.berkeley.edu/projects/foo/</code></a>
+
+   There are several reasons for this:
+   1. The reader might want more info
+   2. Spelling out the URL ensures that it will be in the printed
+   version of the Research Summary (we should check out previous years
+   and see what happens to URLS)
+   3. target="_top" means that the page will come up outside the
+   current frame.  This is critical if the link goes to a frame
+   based webpage
+
+   
+   * Any references to pertinent papers.  Be sure to use
+   proper bibliographic format - your best bet is to copy the reference
+   from http://ptolemy.eecs.berkeley.edu/publications/papers
+   Usually once does not use target="_top" here, though you can if
+   you want
+
+5. Spell check your summary with ptspell
+
+6. update the .html files
    make
 
-5.  Check in your changed sum file (and makefile if necessary)
-    cvs commit -m "Added my research" yourfile.sum makefile
+7. Check in your changed sum file (and makefile if necessary)
+   cvs commit -m "Added my research" yourfile.sum makefile
 
-6. Become the ptII user on messier, see
+8. Become the ptII user on messier, see
    http://www.gigascale.org/ptolemy/group/public.htm
 
    Once you are set up, use ssh to log on to a Unix machine such
@@ -33,7 +60,7 @@ To do this,
    cvs update
    make
 	
-7.  Verify your changes
+9.  Verify your changes
 http://ptolemy.eecs.berkeley.edu/projects/summaries/03/index.html   
 
 
