@@ -26,7 +26,7 @@ Remote places to go
 <h3>Ptolemy 0.7.1</h3>
 
 <a href="pt0.7.1/body.htm" target="body">Ptolemy 0.7.1</a>
- contains two SDF ATM demos in the Communications Demo palette
+ contains two SDF ATM demos in the Communications Demo palette.
 <dl>
 <dt> <CODE>lossySpeech</CODE>
 
@@ -34,15 +34,8 @@ Remote places to go
 a network (such as ATM) with 48 byte packets and a variable loss
 probability. Note that this demo requires audio capability and will
 probably only work on Sun workstations.
- <br>Images of the model generated with:
-<pre>
-cd $PTOLEMY/src/domains/sdf/demo
-$PTOLEMY/bin/prfacet -TOFILE /tmp/l.ps -N -n -p -x lossySpeech
-pstoimg /tmp/l.ps
-distill /tmp/l.ps
-</pre>
 
-<a href="atm/lossySpeech.pdf">PDF</a> -
+ <br>Images: <a href="atm/lossySpeech.pdf">PDF</a> -
 <a href="atm/lossySpeech.png">PNG</a>
 
 <dt> <CODE>lossySpeechPrevCell</CODE>
@@ -60,8 +53,22 @@ The Discrete Event (DE) Domain contains blocks for cell creation and
 access in the Networking Palette.  There are also a few networking
 demonstrations.
 
-See the DE chapter of the
+ <p>See the DE chapter of the
 <a href="almagest/user.htm"> Ptolemy User's Manual</a>
+
+<BLOCKQUOTE>
+ The images of the models were generated with
+<pre>
+cd $PTOLEMY/src/domains/sdf/demo
+$PTOLEMY/bin/prfacet -TOFILE /tmp/lossySpeech.ps -N -n -p -x lossySpeech
+pstoimg /tmp/lossySpeech.ps
+distill /tmp/lossySpeech.ps
+</pre>
+Note that the original models are in color, but due to software aging,
+when we generated the images in color, the background of each actor
+was black.
+
+</BLOCKQUOTE>
 
 <h3>Ptolemy 0.5.2</h3>
  <p><a href="ftp://ptolemy.eecs.berkeley.edu/pub/ptolemy/ptolemy0.5.2">Ptolemy 0.5.2</a> contained other DE ATM demos
