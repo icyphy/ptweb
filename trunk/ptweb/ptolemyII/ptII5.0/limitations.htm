@@ -1,0 +1,132 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II 5.0-beta Limitations</title>
+</head>
+<body>
+<h2>Ptolemy II 5.0-beta Limitations</h2>
+
+The <a href="ptII5.0-beta/doc/ptII5.0.release.htm">Ptolemy II 5.0-beta Release notes</a>
+list limitations.  The Vergil welcome window has a link to
+a similar list.
+
+
+
+ <p>If you find bugs, check the limitations page inside Vergil, then
+check this page, and then send email to
+<a href="mailto:ptolemy@eecs.berkeley.edu"><CODE>ptolemy@eecs.berkeley.edu</CODE></a>
+ <p>In your email, please be sure to list
+<menu>
+<li> What operating system you are operating under (Windows XP sp1? Solaris 8?)
+
+<li> What version of Java you are running. (Run java -version, or use
+our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
+
+<li> Whether the problem occurs in
+	<menu>
+	<li> Vergil
+	<li> The local version of the web pages
+	<li> The <a href="ptII5.0-beta/doc/index.htm" target="_top">PtolemyII 5.0-beta website version of the web pages</a>
+	<li> The Web Start version
+	</menu>
+</menu>
+
+<h2>Places to go</h2>
+<menu>
+<li><a href="ptII5.0-beta/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
+<li> <a href="ptII5.0-beta/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
+</menu>
+
+<h5>Bug Fixes</h5>
+
+<I>None, yet!</I>
+
+<h3>Know Limitations</h4>
+
+<menu>
+
+<li>See the
+<a href="ptII5.0-beta/doc/ptII4.0.release.htm#limitations">Ptolemy II 5.0-beta Release notes</a>
+for known limitations.
+
+<li> The PSDF Blind Communication demo does not run under Web Start,
+the message is:
+<pre>
+ptolemy.kernel.util.IllegalActionException: The number of elements in the
+input ArrayToken (2047) is not the same as the arrayLength parameter (2048).
+</pre>
+
+<li> If an icon file is not present, then a Vergil applet might
+ 	try to download the icon file multiple times.  Ptolemy II
+ 	uses XML files to store icons.  For example
+$PTII/ptolemy/actor/lib/BooleanSwitchIcon.xml
+ 	is an icon for
+$PTII/ptolemy/actor/lib/BooleanSwitch.java
+ 	 <br>The problem is that if an actor does not have an icon file,
+ 	then the applet may go back to the server multiple times looking
+ 	for the icon. 
+
+<li>Matlab interface has problems work with gcc-3.3
+ Under Windows, the Matlab interface has problems at runtime with gcc-3.3.
+<br>Under Windows, we recommend using gcc-3.2.
+
+<li> The code generator GUI has been removed from the configuration,
+instead use <CODE>$PTII/bin/copernicus</CODE>.
+
+ <li> Plot windows don't resize when control panel is resized
+  <br>If a model with plotters
+ is executed using the run button on the toolbar, and
+ then re-executed using the run control panel accessed through
+ the View menu, then resizing the run control panel does not
+ cause the plots to resize to fit.
+ <br>Workaround:
+ Close the model and re-open it, and then run first using the
+ run control panel.
+
+<li> Printing a model that contains transparent objects can result
+in problems when printing to Encapsulated Postscript (EPS).
+
+ <br>If a model has transparent objects, then when it is printed to
+EPS, the resulting file is a bitmap instead of a Postscript
+description of the graphics.  You can tell by the file size (several
+Meg vs. several K) and by opening it in Illustrator, where in theory
+you should be able to ungroup and select and edit individual
+components.
+
+ <br>The way Java prints EPS is that there is an implementation of
+Graphics2D that literally translates each graphics2D call into a
+Postscript snippet.  If Java detects any transparent colors or images,
+then the literal translation of each element independently doesn't
+work, so the printing code reverts to writing everything to an image
+and then sending the image, encapsulated in Postscript to the printer.
+
+ <br>Solution1: Use one of these pdf writing programs to generate
+pdf-1.4 compliant pdf files, which have extensions to support
+transparency that Postscript lacks, and then print them to eps, which
+would use the distill implementation of the above algorithm.
+Or alternatively, we could switch to using pdftex instead of 
+latex-&gt;dvips-&gt;distill which should
+embed pdf for figures directly at the expense of less robust latex support.
+<a href="http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html#in_browser" target="_top"><CODE>http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html</CODE></a>
+
+ <br>Solution 2: Use the undocumented flag
+-Dsun.java2d.print.pipeline=pdl on the command line to force the
+printing to use the postscript path, ignoring transparency.
+Under Cygwin:
+<pre>
+export JAVAFLAGS=-Dsun.java2d.print.pipeline=pdl
+vergil
+</pre>
+Then edit the file by hand in Illustrator to add the transparency back in.
+
+
+</menu>
+ 
+<menu>
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+
+</body>
+</html>
