@@ -30,28 +30,26 @@ Java Runtime Environment (JRE)
  <p>Compiling the Ptolemy II Matlab interface and Java Native
 Interface (JNI) actor requires that the a C compiler be installed.
 The Matlab interface requires that Matlab be installed on the local machine.
-The gcc compiler is
+
+ <p>Note that The Matlab Interface does not work gcc3.3.
+ Under Windows, the Matlab interface has problems at runtime with gcc-3.3.
+<br><B>Under Windows, we recommend using gcc-3.2 or Microsoft Visual C++.</B>
+ <br>The Cygwin Windows installer below includes <B>gcc-3.3</B>
+If you want to install gcc-3.2, see the
+<a href="../ptII4.0/cygwin.htm">Ptolemy II 4.0 Cygwin Instructions</a>.
+ <br>The gcc compiler is
 fairly large, so we provide three separate self-extracting downloads
 of the cygwin tools for Windows.
 <ol>
 <li> <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a>
 (10.9 Mb) - The tools necessary to compile and configure Ptolemy II
-except for the Matlab interface and the JNI Actor.
-<BLOCKQUOTE>
-<B>Note: currently, this is the version of Cygwin as was made available
-with Ptolemy II 3.0.</B>
-</BLOCKQUOTE>
+except for the Matlab interface.
+
 
 <li> <a href="cygwinDevel.exe"><CODE>cygwingDevel.exe</CODE></a>
 (34.6 Mb) - The tools necessary to compile and configure Ptolemy II
 including the Matlab interface and the JNI Actor.  This download includes
 everything in <CODE>cygwinBasic.exe</CODE> above.
-<BLOCKQUOTE>
-<B>Note: currently, this is the version of Cygwin as was made available
-with Ptolemy II 3.0.</B>
- <br>Note that the Matlab interface has problems with gcc-3.3, though
-gcc-3.2.x works fine.
-</BLOCKQUOTE>
 </ol>
 
  <p>The sources for the above downloadables can be found in
@@ -66,22 +64,11 @@ gcc-3.2.x works fine.
 <ol>
 <li> Most users Ptolemy II users will
 <br> Download and execute <a href="cygwinBasic.exe"><CODE>cygwinBasic.exe</CODE></a> (11.1 Mb) 
-<BLOCKQUOTE>
-<B>Note: currently, this is the version of Cygwin as was made available
-with Ptolemy II 3.0.</B>
-</BLOCKQUOTE>
 
 
  <br> If you are running under Windows and 
 have Matlab installed on your local machine, then 
 <br> Download and execute <a href="cygwinDevel.exe"><CODE>cygwinDevel.exe</CODE></a> (35.4 Mb).
-<BLOCKQUOTE>
-<B>Note: currently, this is the version of Cygwin as was made available
-with Ptolemy II 3.0.</B>
- <br>Note that the Matlab interface has problems with gcc-3.3, though
-gcc-3.2.x works fine.
-</BLOCKQUOTE>
-
 
  <br>The files will be extracted to an seemingly arbitrary directory.
 You may find it easier to change the directory to something short, like
@@ -198,78 +185,85 @@ properties
 <p>The download of basic cygwin tools from April, 2003 includes:
 
 <pre>
-_update-info-dir-00160-1
-ash-20040127-1		required by cvs
-base-files-2.6-1
-base-passwd-1.1-1
-bash-2.05b-16
-binutils-20040312-1
-bzip2-1.0.2.5
-crypt-1.1-1	required by cvs
-cvs-1.11.6-3
-cygwin-1.5.9-1
-diffutils-2.8.4-1
-editrights-1.01-1
-fileutils-4.1-2
-findutils-4.1.7-4
-gawk-3.1.3-4
-gdbm-1.8.3-7
-grep-2.5-1
-groff-1.18.1-2		 required by man
-gzip-1.3.5-1
-less-381-1
-libbz2_1-1.0.2-2	 required by tar
-libgdbm-1.8.0.5		 required by cvs
-libiconv2-1.9.1-3	 required by sed
-libintl1-0.10.40-1
-libintl2-0.12.1-3
-libncurses5-5.2-1
-libncurses6-5.2-8
-libncurses7-5.3-1
-libreadline4-4.1-2
-libreadline5-4.2-2
-login-1.9-7		optional
-make-3.80-1
-man-1.5k-3		optional
-minires-0.97-1		Required by openssh
-ncurses-5.3-1		Required by readline
-openssh-3.up1-1  	Used by cvs
-openssl-0.9.7d-3	Required by openssh
-pcre-4.1-1		Required by less (pcre = Perl Compatible regex)
-readline4-4.1-2
-readline5-4.3-5
-sed-4.0.9-2
-sh-utils-2.0.15-4
-tar-1.13.25-5
-termcap-20021106-2
-terminfo-5.3_20030726-1
-texinfo-4.2-4
-textutils-2.0.21-1
-which-1.5-2
-zlib-1.2.1-1
+_update-info-dir-00232-1.tar.bz2
+ash-20040127-1.tar.bz2		required by cvs
+base-files-3.2-1.tar.bz2
+base-passwd-2.2-1.tar.bz2
+bash-2.05b-17.tar.bz2
+binutils-20041229-1.tar.bz2
+bzip2-1.0.2-6.tar.bz2
+coreutils-5.3.0-5.tar.bz2
+crypt-1.1-1.tar.bz2		required by cvs
+cvs-1.11.17-1.tar.bz2
+cygrunsrv-1.01-1.tar.bz2
+cygutils-1.2.7-1.tar.bz2
+cygwin-1.5.16-1.tar.bz2
+cygwin-doc-1.4-2.tar.bz2
+diffutils-2.8.7-1.tar.bz2
+editrights-1.01-1.tar.bz2
+expat-1.95.8-1.tar.bz2
+findutils-20041227-1.tar.bz2
+gawk-3.1.4-3.tar.bz2
+gdbm-1.8.3-7.tar.bz2
+grep-2.5.1a-2.tar.bz2
+gzip-1.3.5-1.tar.bz2
+less-381-1.tar.bz2
+libbz2_1-1.0.2-6.tar.bz2	required by tar
+libcharset1-1.9.2-1.tar.bz2
+libdb4.2-4.2.52-1.tar.bz2
+libgdbm-1.8.0-5.tar.bz2
+libgdbm-devel-1.8.3-7.tar.bz2	required by cvs 
+libgdbm3-1.8.3-3.tar.bz2
+libgdbm4-1.8.3-7.tar.bz2
+libiconv-1.9.2-1.tar.bz2	
+libiconv2-1.9.2-1.tar.bz2	required by sed
+libintl-0.10.38-3.tar.bz2
+libintl1-0.10.40-1.tar.bz2
+libintl2-0.12.1-3.tar.bz2
+libintl3-0.14.1-1.tar.bz2
+libncurses5-5.2-1.tar.bz2
+libncurses6-5.2-8.tar.bz2
+libncurses7-5.3-4.tar.bz2
+libncurses8-5.4-1.tar.bz2
+libpcre-4.1-1.tar.bz2		Required by less (pcre = Perl Compatible regex)
+libpcre0-4.5-1.tar.bz2
+libpopt0-1.6.4-4.tar.bz2
+libreadline4-4.1-2.tar.bz2
+libreadline5-4.3-5.tar.bz2
+libreadline6-5.0-1.tar.bz2
+login-1.9-7.tar.bz2		optional
+make-3.80-1.tar.bz2
+minires-1.00-1.tar.bz2		Required by openssh
+ncurses-5.4-1.tar.bz2
+openssh-4.0p1-1.tar.bz2		Used by cvs
+openssl-0.9.7g-1.tar.bz2	Required by openssh
+readline-5.0-1.tar.bz2
+sed-4.1.4-1.tar.bz2
+tar-1.13.25-5.tar.bz2
+termcap-20050421-1.tar.bz2
+terminfo-5.4_20041009-1.tar.bz2
+which-1.7-1.tar.bz2
+zlib-1.2.2-1.tar.bz2
 </pre>
 
- <p>The download of devel cygwin tools from April, 2004, includes all
+ <p>The download of devel cygwin tools from May 5, 2005, includes all
 the tools from the basic cygwin download listed above and
 
 <pre>
-autoconf-2.59-1
-autoconf-devel-2.59.1
-autoconf-stable-2.13-5
-binutils-20030307-1
-db4.1	                 required by perl
-gcc-3.3.1-3
-gcc-g++-3.3.1-3		 Matlab interface uses a C++ file
-gcc-mingw-core-20031020
-gcc-mingw-g++-20031020-1
-gcc-mingw-20020817-5
-libbz2_1-1.0.2-5	Used by g++?
-m4-1.4-1
-mingw-runtime-3.2-1
-mktemp-1.5-3
-perl-5-8.2-1.tar.gz      sadly, autoconf requires perl
-pcre-4.5-1	
-w32api-2.5-1
+autoconf-2.59-1.tar.bz2
+autoconf-devel-2.59-1.tar.bz2
+autoconf-stable-2.13-5.tar.bz2
+binutils-20041229-1.tar.bz2
+gcc-core-3.3.3-3.tar.bz2	  Matlab interface uses a C++ file
+gcc-g++-3.3.3-3.tar.bz2
+gcc-mingw-core-20040810-1.tar.bz2
+gcc-mingw-g++-20040810-1.tar.bz2
+m4-1.4.3-1.tar.bz2
+mingw-runtime-3.7-1.tar.bz2
+mktemp-1.5-3.tar.bz2
+perl-5.8.6-4.tar.bz2		sadly, autoconf requires perl
+w32api-3.2-1.tar.bz2
+
 </pre>
 
 
