@@ -12,12 +12,14 @@
 
 <menu>
 <li> 
-<a href="install.htm">Run the Ptolemy II installer as an applet</a>
+<a href="install.htm">Run the Ptolemy II installer as an applet.</a>
+ <br>(The applet installer includes links to non-windows installers as well)
+
 </menu>
 <B>or</B>
 <menu>
 <li> 
-<a href="InstData/Windows/VM/ptII5_0_beta_installer.exe">Download the Ptolemy II 79.1 Mb Windows executable file that includes a private copy of the Java Runtime Environment and some of the support packages such as Java 3D</a>  
+<a href="InstData/Windows/VM/ptII5_0_beta_installer.exe">Download the Ptolemy II 85.8 Mb Windows executable file that includes a private copy of the Java Runtime Environment and some of the support packages such as Java 3D</a>  
 <B>Most Windows users will select this installer</B>
 </menu>
 <B>or</B>
@@ -33,7 +35,7 @@
 
 <li> <a href="#installJava">Install Java</a>
 <li> 
-<a href="InstData/Windows/NoVM/ptII5_0_beta_installer.exe">Download the Ptolemy II 56.5 Mb Windows executable file that does not include Java</a>
+<a href="InstData/Windows/NoVM/ptII5_0_beta_installer.exe">Download the Ptolemy II 58.9 Mb Windows executable file that does not include Java</a>
 </menu>
 
 
@@ -69,7 +71,8 @@ rely on other versions of the JRE that might be on your machine.  Note
 that after installing with Ptolemy II with the private JRE you may
 later download another JRE later to view the applets.
 
-Note further that the private copy of the JRE includes 
+Note further that the private copy of the JRE includes Java packages
+that are used by various domains and actors.
 <menu>
 <li> Java 3D, which is required to run the Graphical (GR) domain demos.
  <br>The version of Java 3D included in the JRE
@@ -80,11 +83,11 @@ DirectX.
  <br>DirectX can be downloaded from
 <a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><CODE>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</CODE></a>
 
-<li> The Java Advanced Imaging Interface, which is used by some
-of the actors.
-
-<li> The Java Media Framework, which is used by some
-of the actors.
+<li> The Java Advanced Imaging Interface.
+<li> The Java Serial port communication interface.
+<li> The Java Media Framework.
+<li> The Joystick Interface.
+<li> The X10 Interface.
 </menu>
 
 
@@ -106,16 +109,23 @@ The JDK includes a Java compiler.
 
 <h4>Which Version of Java?</h4>
 
-Ptolemy II requires Java 1.4 or later Java 1.4.2_04 is preferred.
- <br>There are various problems with Java 1.5.0-beta:
+Ptolemy II requires Java 1.4 or later Java 1.4.2_05 is preferred.
+ <br>There are various problems with Java 1.5.0.
 <menu>
 <li> <a href="webstart.htm">Web Start</a> does not work
 
-<li> Caltrop does not work 
+<li> Caltrop does not work because of XML parser issues
 </menu>
- <br>Ptolemy II has been compiled and run 
-under IBM JDK 1.4.1 and IBM JDK 1.4.1
-
+ <p>Ptolemy II has been compiled and run
+under IBM JDK 1.4.2_01-b06.  There are the following limitations
+under IBM JDK 1.4.2:
+<menu>
+<li> The Copernicus code generator does not work.
+<li> Caltrop does not work.
+<li> The IBM JDK seems to return directory contents in a different
+order than the Sun JDK.  Thus actor.lib.io.DirectoryListing
+might return elements in a different order.
+<menu>
 
 
 <p>
@@ -143,8 +153,9 @@ or use download the installer that includes a private copy of the JRE
 <a href="http://java.sun.com/j2se/1.4.2/" target="_top"><CODE>http://java.sun.com/j2se/1.4.2/</CODE></a>
 
 
-<li> Windows DirectX Java 3D runtime necessary to run the GR domain (2.8 Mb):
-<a href="java3d-1_2_1_04-win32-directx-rt.exe"><CODE>java3d-1_2_1_04-win32-directx-rt.exe</CODE></a>  
+<li> The Java 3D runtime is necessary to run the GR domain.
+Java 3D can be found at
+<a href="http://java.sun.com/products/java-media/3D/download.html"><CODE>http://java.sun.com/products/java-media/3D/download.html</CODE></a>
  <br>The Windows DirectX Java 3D installer requires that DirectX is installed on your machine.
  <br>If, when you run the GR domain demos, you get a message
 about <CODE>d3d8.dll</CODE> missing, then you probably need to install
@@ -152,9 +163,6 @@ DirectX.
  <br>DirectX can be downloaded from
 <a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><CODE>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</CODE></a>
 
-
-<li> Java 3D for other platforms and for recompiling:
-<a href="http://java.sun.com/products/java-media/3D/download.html"><CODE>http://java.sun.com/products/java-media/3D/download.html</CODE></a>
 
 </menu
 
@@ -167,6 +175,9 @@ spaces in the path name may fail if the applet tries to download a
 data file.  The workaround is to place the Ptolemy II installation in a
 directory that does not have space in the pathname.  For details, see
 the <a href="ptII5.0-beta/doc/troubleshooting.htm#spaces">Troubleshooting Guide</a>.
+ <p>In addition, the Copernicus code generator has a hard time with
+spaces in the path name because of limitations in parameter 
+passing in Soot, a package that Copernicus uses.
 
 <h4>Ptolemy II Installers</h4>
 
@@ -186,13 +197,13 @@ the installation process, click on the 'Grant' button.
 <B>or</B>
 <menu>
 <li> 
-<a href="InstData/Windows/VM/ptII5_0_beta_installer.exe">Download the Ptolemy II 79.1 Mb Windows executable file that includes a private copy of the Java Runtime Environment and some of the support packages such as Java 3D </a>
+<a href="InstData/Windows/VM/ptII5_0_beta_installer.exe">Download the Ptolemy II 85.8 Mb Windows executable file that includes a private copy of the Java Runtime Environment and some of the support packages such as Java 3D </a>
 </menu>
 <B>or</B>
 <menu>
 
 <li> 
-<a href="InstData/Windows/NoVM/ptII5_0_beta_installer.exe">Download the Ptolemy II 56.5 Mb Windows executable file that does not include Java</a>
+<a href="InstData/Windows/NoVM/ptII5_0_beta_installer.exe">Download the Ptolemy II 58.9 Mb Windows executable file that does not include Java</a>
 </menu>
 
 
