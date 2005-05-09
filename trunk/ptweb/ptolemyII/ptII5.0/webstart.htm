@@ -65,7 +65,7 @@ End If
  *if the browser is Gecko based. This is because it is not possible
  *to detect MIME type application/x-java-jnlp-file on Gecko-based browsers. 
  */
-if (javaws150Installed || (navigator.userAgent.indexOf("Gecko") !=-1)) {
+if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
     document.write("<a href=jnlp/vergil.jnlp>Ptolemy II 5.0-beta Web Edition (16.9Mb to 41.3Mb)</a>"); 
 } else {
     document.write("Click ");
@@ -83,9 +83,10 @@ if (javaws150Installed || (navigator.userAgent.indexOf("Gecko") !=-1)) {
 Below are more detailed instructions.
 
  <p><a href="http://java.sun.com/products/javawebstart/" target="_top">Web Start</a> is a product from Sun that is used to
-download the Ptolemy II 5.0-beta Web Edition.  If version
-1.4.1 or later of Sun's Java Runtime Environment (JRE) or Java
-Development Kit (JDK) is installed, then Web Start is already installed!
+download the Ptolemy II 5.0-beta Web Edition.  
+ <p>Sun's Java Web Start is included in version 1.4.1 or later of Sun's Java Runtime Environment (JRE) or Java Development Kit (JDK). 
+ <p>In other words, If you have <B>Java 1.4.1</B> or later installed,
+then <B>Web Start</B> is <B>already installed!</B>
 
 
 <ol>
@@ -93,20 +94,14 @@ Development Kit (JDK) is installed, then Web Start is already installed!
 is already installed.  If the Quick Start list above contains
 
 <BLOCKQUOTE>
-<a href="http://java.com/" target="_top">Install Web Start from Sun (720KB - 8.6Mb)</a>
+Click 
+<a href="http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII5.0/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html">here</a> 
+to download and install JRE 5.0 and the application.
+
 </BLOCKQUOTE>
 
-then download and install Web Start by following the
-<a href="http://java.com/" target="_top">Install Web Start from Sun (720Mb - 8.6Mb)</a>
-link.
-
- <p>If you already have the Java Runtime Environment version 1.4 (JRE
-1.4) or higher installed, you only need the Java Web Start Update,
-which is 720Mb.
-
- <p>If you do not have the Java Runtime Environment installed, or you
-are not sure, then you would need to download the Full Java Web Start
-package (5.7Mb), which includes a JRE.
+then download and 
+<a href="http://java.com/" target="_top">Install Java from Sun (15.2Mb)</a>
 
  <br>If the above step is not present, then Web Start is
 already installed and you can proceed with clicking on the 
@@ -121,7 +116,8 @@ and continue with step 4 below.
 restart your browser and return to this page.
 
 <li> Hopefully, the Web Start detection will work and the
-<CODE>Install Web Start from Sun (720KB - 8.6Mb)</CODE> step will not be present.
+<CODE>Click here to download and install JRE 5.0 and the application</CODE>
+step will not be present.
 
  <br><B>Even if the Install Web Start step is present</B>, try
 downloading and/or opening the
@@ -136,7 +132,7 @@ link and select <CODE>open</CODE>.  If Java Web Start has been installed,
 then it should start up automatically.
 
 
-<li> The download is roughly 29.8Mb, 
+<li> The download is between 16.9Mb and 41.3Mb,
 roughly half the size of the application download is consumed
 by the HTML documentation of the Ptolemy II Java classes.
 
