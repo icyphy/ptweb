@@ -65,7 +65,7 @@ End If
  *if the browser is Gecko based. This is because it is not possible
  *to detect MIME type application/x-java-jnlp-file on Gecko-based browsers. 
  */
-if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
+if (javaws150Installed || (navigator.userAgent.indexOf("Gecko") !=-1)) {
     document.write("<a href=jnlp/vergil.jnlp>Ptolemy II 5.0-beta Web Edition (16.9Mb to 41.3Mb)</a>"); 
 } else {
     document.write("Click ");
