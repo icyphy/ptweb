@@ -4,35 +4,43 @@
 <link href="../../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
 <title>Ptolemy II 5.0-beta Web Edition Download</title>
-<SCRIPT LANGUAGE="Javascript"> 
-	var javawsInstalled = 0; 
-	isIE = "false"; 
-
-        if (navigator.mimeTypes && navigator.mimeTypes.length) { 
-        	x = navigator.mimeTypes['application/x-java-jnlp-file']; 
-                if (x) javawsInstalled = 1; 
-        } else { 
-                isIE = "true"; 
-        } 
-
-        function insertLink(url, name) { 
-        	if (javawsInstalled) { 
-                	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
-                	document.write("<li> <a href="\"http://java.com\"" target=_top>Install Web Start from Sun (720KB - 8.6Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
-  
-              } 
-        } 
- </SCRIPT> 
-<SCRIPT LANGUAGE="VBScript"> 
-          on error resume next 
-          If isIE = "true" Then 
-            If Not(IsObject(CreateObject("JavaWebStart.IsInstalled"))) Then 
-                  javawsInstalled = 0 
-            Else 
-                  javawsInstalled = 1 
-            End If 
-          End If 
-      </SCRIPT>
+<SCRIPT LANGUAGE="JavaScript"> 
+var javawsInstalled = 0;  
+var javaws142Installed=0;
+var javaws150Installed=0;
+isIE = "false"; 
+if (navigator.mimeTypes && navigator.mimeTypes.length) { 
+   x = navigator.mimeTypes['application/x-java-jnlp-file']; 
+   if (x) { 
+      javawsInstalled = 1; 
+      javaws142Installed=1;
+      javaws150Installed=1;
+   } 
+} 
+else { 
+   isIE = "true"; 
+} 
+</SCRIPT> 
+<SCRIPT LANGUAGE="VBScript">
+on error resume next
+If isIE = "true" Then
+  If Not(IsObject(CreateObject("JavaWebStart.isInstalled"))) Then
+     javawsInstalled = 0
+  Else
+     javawsInstalled = 1
+  End If
+  If Not(IsObject(CreateObject("JavaWebStart.isInstalled.1.4.2.0"))) Then
+     javaws142Installed = 0
+  Else
+     javaws142Installed = 1
+  End If 
+  If Not(IsObject(CreateObject("JavaWebStart.isInstalled.1.5.0.0"))) Then
+     javaws150Installed = 0
+  Else
+     javaws150Installed = 1
+  End If  
+End If
+</SCRIPT>
 
 </head>
 <body>
@@ -51,13 +59,22 @@
        simple.  
 
  <h2>Quick Start</h2>
-   <ol>  <SCRIPT LANGUAGE="Javascript"> 
+   <ol> 
+<script language="JavaScript">
+/* Note that the logic below always launches the JNLP application
+ *if the browser is Gecko based. This is because it is not possible
+ *to detect MIME type application/x-java-jnlp-file on Gecko-based browsers. 
+ */
+if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
+    document.write("<a href=jnlp/vergil.jnlp>Ptolemy II 5.0-beta Web Edition (16.9Mb to 41.3Mb)</a>"); 
+} else {
+    document.write("Click ");
+    document.write("<a href=http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII5.0/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html>here</a> ");
+    document.write("to download and install JRE 5.0 and 
+        the application.");
+}
+</SCRIPT>
 
-             <!-- 
-             insertLink("jnlp/vergil.jnlp", 
-                        "Ptolemy II 5.0-beta Web Edition (16.9Mb to 41.3Mb)"); 
-             // --> 
-     </SCRIPT> 
    </ol> 
  <p>
  <p>
@@ -66,31 +83,10 @@
 
 Below are more detailed instructions.
 
- <p><a href="http://java.sun.com/products/javawebstart/" target="_top">Web Start</a>
-is a product from Sun that is used to download the Ptolemy II 5.0-beta Web Edition.
-
-
-
-<BLOCKQUOTE>
- <table border=2>
- <tr><td>
-
-<h3>Java 1.5.0-beta problem</h3>
-
-Under Java 1.5.0-beta, you may get a "failed to validate certificate"
-error.
-
- <p>You might be able to configure Web Start to use something other
-than 1.5.0-beta
-Try running
-<CODE>C:\Program Files\Java\j2re1.4.2_08\javaws</CODE>
-and then doing File -> Preferences -> Java to select a different
-Java Runtime Version.
-
- </td></tr>
- </table>
-</BLOCKQUOTE>
-
+ <p><a href="http://java.sun.com/products/javawebstart/" target="_top">Web Start</a> is a product from Sun that is used to
+download the Ptolemy II 5.0-beta Web Edition.  If version
+1.4.1 or later of Sun's Java Runtime Environment (JRE) or Java
+Development Kit (JDK) is installed, then Web Start is already installed!
 
 
 <ol>
