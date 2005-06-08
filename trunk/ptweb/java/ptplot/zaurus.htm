@@ -1,0 +1,54 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Ptplot on the Zaurus</title>
+</head>
+<body>
+<img src="../../image/ptplot32.gif">
+<h1>Ptplot on the Zaurus</h1>
+Ptplot 1.0 and Ptplot 2.0 can run on the Sharp Zaurus!
+The basic idea is to recompile Ptplot using 
+<CODE>javac -target 1.1</CODE> and then run using <CODE>evm</CODE>
+<ol>
+<li> Download
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot2.0.tar.gz"><CODE>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot2.0.tar.gz</CODE></a> to a Windows or
+Unix box
+
+<li> Untar, set <CODE>$PTII</CODE> and configure:
+<pre>
+cd ~/src
+gtar -zxf /tmp/ptolemy.plot2.0.tar.gz
+cd ptolemy.plot2.0
+setenv PTII `pwd`
+./configure
+</pre>
+
+
+<li> Edit <CODE>$PTII/mk/ptII.mk</CODE> and add 
+<CODE>-target 1.1</CODE> to <CODE>JFLAGS</CODE>
+<pre>
+JFLAGS = 	-g  -target 1.1
+</pre>
+Note that I had to remove <CODE>-depend</CODE>
+from the above line
+
+<li> Run
+<pre>
+make clean
+make
+make install
+</pre>
+
+
+<li> This will produce <CODE>ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar</CODE>, which 
+
+
+</ol>
+
+</body>
+</html>
+
+
+
