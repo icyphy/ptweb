@@ -1,4 +1,4 @@
-<!-- MoML DTD Version 1.2, UC Berkeley -->
+<!-- MoML DTD Version 1.3, UC Berkeley -->
 <!-- $Id$ -->
 <!-- If you update this file, please also update:  -->
 <!--    ptweb/xml/dtd/MoML_1.dtd, -->
@@ -72,8 +72,10 @@
 <!ELEMENT link EMPTY>
 <!ATTLIST link insertAt CDATA #IMPLIED
                insertInsideAt CDATA #IMPLIED
-               port CDATA #REQUIRED
+               port CDATA #IMPLIED
                relation CDATA #IMPLIED
+               relation1 CDATA #IMPLIED
+               relation2 CDATA #IMPLIED
                vertex CDATA #IMPLIED>
 
 <!-- Deprecated.  Use a property instead. -->
@@ -103,7 +105,9 @@
 <!ELEMENT unlink EMPTY>
 <!ATTLIST unlink index CDATA #IMPLIED
                  insideIndex CDATA #IMPLIED
-                 port CDATA #REQUIRED
+                 port CDATA #IMPLIED
+                 relation1 CDATA #IMPLIED
+                 relation2 CDATA #IMPLIED
                  relation CDATA #IMPLIED>
 
 <!ELEMENT vertex (configure | doc | location | property | rename)*>
