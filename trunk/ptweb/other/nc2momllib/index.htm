@@ -64,29 +64,16 @@ find it and automatically make the TinyOS libraries available.</p>
             </ul>
             Or
             <ul>
-              <li> Download the <a
-              href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
-              Installshield Wizard</a>.  Run the wizard, and choose
-              "Custom" install.  Install only the AVR tools.  This
-              will install all of the rpms below for you.  <b>Do not
-              choose the "cygwin" install option (it will overwrite
-              and corrupt your current cygwin installation) or the
-              "TinyOS" install option (you will install this later
-              from CVS as a separate step).</b> You may choose to
-              install the other remaining options if you do not
-              already have them installed on your system. The wizard
-              will install all of the selected rpms for you.
-            </ul>
-            Or
-            <ul>
-              <li> <b>If your Cygwin is installed so your 'Default Text
-	      File Type' is Unix, you can use these rpms</b>
-	      <br><b>Note</b>: If you select 'Default Text File Type' of 
-	      Unix instead of DOS, then you will likely have
-	      <a href="http://www.gigascale.org/softdevel/faq/23.html" target="_top">Cygwin CR/NL problems</a> with CVS.
-	      <br>So, if your 'Default Text File Type' is Unix,
-	      you can download the rpms separately from
-	      <a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/" target="_top">here</a>.  More convenient links are included here:
+              <li> <b>If your Cygwin is installed so your 'Default
+              Text File Type' is Unix</b>, download the following rpms
+              to an empty directory:
+
+	      <br><b>Note</b>: If your Cygwin installation has
+	      'Default Text File Type' of Unix instead of DOS, then
+	      you will likely have <a
+	      href="http://www.gigascale.org/softdevel/faq/23.html"
+	      target="_top">Cygwin CR/NL problems</a> with CVS.
+
                 <ul>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm</a>
@@ -94,9 +81,32 @@ find it and automatically make the TinyOS libraries available.</p>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-insight-pre6.0cvs.tinyos-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-insight-pre6.0cvs.tinyos-1w.cygwin.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-libc-20030512cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-libc-20030512cvs-1w.cygwin.i386.rpm</a>
                 </ul>
-              and install them on the cygwin command line with
-              <pre>rpm --ignoreos -ivh *.rpm</pre> in the directory
-              where you saved the files.
+                and install them on the cygwin command line by typing:
+                
+                <pre>rpm --ignoreos -ivh *.rpm</pre> 
+
+                in the directory where you saved the files.
+
+                <p>
+                  The rpms are also available
+                  <a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/" target="_top">here</a>.  
+            </ul>
+            Or
+            <ul>
+              <li> Download the <a
+              href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
+              Installshield Wizard</a>.  Run the wizard, and choose
+              "Custom" install.  Install only the AVR tools.  This
+              will install all of the rpms below for you. <b>Do not
+              choose the "cygwin" install option (it will overwrite
+              and corrupt your current cygwin installation) or the
+              "TinyOS" install option (you will install this later
+              from CVS as a separate step).</b> You may choose to
+              install the other remaining options if you do not
+              already have them installed on your system.  The wizard
+              will install all of the selected rpms for you.  JavaCOMM
+              is not needed if you are not planning on using the
+              TinyOS java tools (these are not needed for Viptos).
             </ul>
 
           <li> If you are running Linux (Redhat 9), download the rpms from
@@ -147,18 +157,28 @@ export TOSROOT=$PTII/vendors/ptinyos/tinyos-1.x
 export TOSDIR=$TOSROOT/tos
             </pre>
 
-          <li>Under Windows with Cygwin, you can permanently set
-          environment variables from the System control panel. For
-          details, see <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII4.0/ptII/doc/install.htm#settingptII">Set the value of
-          the PTII environment variable</a>. While you are setting
-          environment variables in Windows, you may want to set <a
-          href="#NC2MOMLLIB_NESC_dist">NC2MOMLLIB_NESC</a>.
-
           <li>Under csh or tcsh:
             <pre>
 setenv TOSROOT $PTII/vendors/ptinyos/tinyos-1.x
 setenv TOSDIR $TOSROOT/tos
             </pre>
+
+          <li>Under Windows with Cygwin, you can permanently set
+          environment variables from the System control panel. (For
+          details, see <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII4.0/ptII/doc/install.htm#settingptII">Set the value of
+          the PTII environment variable</a>).
+
+            <p>
+            Go to Start Menu -> Settings -> Control Panels -> System -> Advanced -> Environment Variables.
+              <br>
+              Set <code>TOSROOT</code> to <code>%PTII%/vendors/ptinyos/tinyos-1.x</code>
+              <br>
+              Set <code>TOSDIR</code> to <code>%PTII%/vendors/ptinyos/tinyos-1.x/tos</code>
+            <p>
+              While you are setting environment variables in Windows,
+              you may want to set <a
+              href="#NC2MOMLLIB_NESC_source">NC2MOMLLIB_NESC</a>.
+
         </ul>
       <li> Download the <a href="nc2momllib-1.1.1-1.tar.gz">nc2momllib distribution</a> and save it in $PTII/vendors/ptinyos.  Install it:
         <pre>
@@ -205,24 +225,34 @@ export NC2MOMLLIB_NESC=$PTII/vendors/ptinyos
             <pre>
 setenv NC2MOMLLIB_NESC $PTII/vendors/ptinyos
             </pre>
+
+          <li>Under Windows with Cygwin, you can permanently set the environment variables from the System control panel:
+
+            <p>
+            Go to Start Menu -> Settings -> Control Panels -> System -> Advanced -> Environment Variables.
+              <br>
+              Set <code>NC2MOMLLIB_NESC</code> to <code>%PTII%/vendors/ptinyos</code>
         </ul>
 
-      <li> Run the example 
+      <li> Run the makefile
         <pre>
 cd $TOSROOT/contrib/momllib
 make momllib mica
         </pre>
+        You can ignore most warnings, since these are errors for .nc files in the TinyOS tree that do not compile properly.
 
-      <li> See if the examples worked: 
+      <li> See if it worked:
         <menu> 
-          <li> You should see some valid MoML code in
-          <CODE>$TOSROOT/contrib/momllib/build/momllib/Counters.xml</CODE>
+          <li> You should see some valid MoML code in:
+            <CODE>$TOSDIR/lib/Counters/Counter.xml</CODE>
 
-          <li> It should correspond to the contents of
-          <CODE>$TOSDIR/lib/Counters</CODE>
+          <li> It should be listed by:
+            <CODE>$TOSDIR/lib/Counters/index.xml</CODE>
+
+          <li> You should see a top-level index file:
+            <CODE>$TOSROOT/TOSIndex.xml
         </menu>
     </ol>
-  </ol>
 
 <h2><a name="nc2momllib_source">How to install nc2momllib from CVS and build it</a></h2>
     
@@ -277,6 +307,35 @@ make momllib mica
             </ul>
             Or
             <ul>
+              <li> <b>If your Cygwin is installed so your 'Default
+              Text File Type' is Unix</b>, download the following rpms
+              to an empty directory:
+
+	      <br><b>Note</b>: If your Cygwin installation has
+	      'Default Text File Type' of Unix instead of DOS, then
+	      you will likely have <a
+	      href="http://www.gigascale.org/softdevel/faq/23.html"
+	      target="_top">Cygwin CR/NL problems</a> with CVS.
+
+                <ul>
+<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm</a>
+<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm</a>
+<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-gcc-3.3tinyos-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-gcc-3.3tinyos-1w.cygwin.i386.rpm</a>
+<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-insight-pre6.0cvs.tinyos-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-insight-pre6.0cvs.tinyos-1w.cygwin.i386.rpm</a>
+<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-libc-20030512cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-libc-20030512cvs-1w.cygwin.i386.rpm</a>
+                </ul>
+                and install them on the cygwin command line by typing:
+                
+                <pre>rpm --ignoreos -ivh *.rpm</pre> 
+
+                in the directory where you saved the files.
+
+                <p>
+                  The rpms are also available
+                  <a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/" target="_top">here</a>.  
+            </ul>
+            Or
+            <ul>
               <li> Download the <a
               href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
               Installshield Wizard</a>.  Run the wizard, and choose
@@ -288,28 +347,9 @@ make momllib mica
               from CVS as a separate step).</b> You may choose to
               install the other remaining options if you do not
               already have them installed on your system.  The wizard
-              will install all of the selected rpms for you.
-            </ul>
-            Or
-            <ul>
-              <li> <b>If your Cygwin is installed so your 'Default Text
-	      File Type' is Unix, you can use these rpms</b>
-	      <br><b>Note</b>: If you select 'Default Text File Type' of 
-	      Unix instead of DOS, then you will likely have
-	      <a href="http://www.gigascale.org/softdevel/faq/23.html" target="_top">Cygwin CR/NL problems</a> with CVS.
-	      <br>So, if your 'Default Text File Type' is Unix,
-	      you can download the rpms separately from
-	      <a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/" target="_top">here</a>.  More convenient links are included here:
-                <ul>
-<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm</a>
-<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm</a>
-<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-gcc-3.3tinyos-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-gcc-3.3tinyos-1w.cygwin.i386.rpm</a>
-<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-insight-pre6.0cvs.tinyos-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-insight-pre6.0cvs.tinyos-1w.cygwin.i386.rpm</a>
-<li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-libc-20030512cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-libc-20030512cvs-1w.cygwin.i386.rpm</a>
-                </ul>
-              and install them on the cygwin command line with
-              <pre>rpm --ignoreos -ivh *.rpm</pre> in the directory
-              where you saved the files.
+              will install all of the selected rpms for you.  JavaCOMM
+              is not needed if you are not planning on using the
+              TinyOS java tools (these are not needed for Viptos).
             </ul>
 
           <li> If you are running Linux (Redhat 9), download the rpms from
@@ -360,18 +400,27 @@ export TOSROOT=$PTII/vendors/ptinyos/tinyos-1.x
 export TOSDIR=$TOSROOT/tos
             </pre>
 
-          <li>Under Windows with Cygwin, you can permanently set
-          environment variables from the System control panel. For
-          details, see <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII4.0/ptII/doc/install.htm#settingptII">Set the value of
-          the PTII environment variable</a>. While you are setting
-          environment variables in Windows, you may want to set <a
-          href="#NC2MOMLLIB_NESC_source">NC2MOMLLIB_NESC</a>. 
-
           <li>Under csh or tcsh:
             <pre>
 setenv TOSROOT $PTII/vendors/ptinyos/tinyos-1.x
 setenv TOSDIR $TOSROOT/tos
             </pre>
+
+          <li>Under Windows with Cygwin, you can permanently set
+          environment variables from the System control panel. (For
+          details, see <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII4.0/ptII/doc/install.htm#settingptII">Set the value of
+          the PTII environment variable</a>).
+
+            <p>
+            Go to Start Menu -> Settings -> Control Panels -> System -> Advanced -> Environment Variables.
+              <br>
+              Set <code>TOSROOT</code> to <code>%PTII%/vendors/ptinyos/tinyos-1.x</code>
+              <br>
+              Set <code>TOSDIR</code> to <code>%PTII%/vendors/ptinyos/tinyos-1.x/tos</code>
+            <p>
+              While you are setting environment variables in Windows,
+              you may want to set <a
+              href="#NC2MOMLLIB_NESC_source">NC2MOMLLIB_NESC</a>.
         </ul>
 
       <li> Get the nesC CVS Tree, see <a
@@ -389,7 +438,7 @@ cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/nescc co -r nc2momllib
 cd $PTII/vendors/ptinyos/nesc
 ./Bootstrap
         </pre>
-        
+
       <li> Run configure for nesc 
         <pre>
 ./configure --prefix=$PTII/vendors/ptinyos
@@ -418,30 +467,41 @@ make install
       points to the nesc installation.
 
         <ul>
-          <li> Under bash, type:
+          <li>Under bash, type:
             <pre>
 export NC2MOMLLIB_NESC=$PTII/vendors/ptinyos
             </pre>
             
-          <li>Under csh or tcsh 
+          <li>Under csh or tcsh, type:
             <pre>
 setenv NC2MOMLLIB_NESC $PTII/vendors/ptinyos
             </pre>
+
+          <li>Under Windows with Cygwin, you can permanently set the environment variables from the System control panel:
+
+            <p>
+            Go to Start Menu -> Settings -> Control Panels -> System -> Advanced -> Environment Variables.
+              <br>
+              Set <code>NC2MOMLLIB_NESC</code> to <code>%PTII%/vendors/ptinyos</code>
         </ul>
 
-      <li> Run the example 
+      <li> Run the makefile
         <pre>
 cd $TOSROOT/contrib/momllib
 make momllib mica
         </pre>
+        You can ignore most warnings, since these are errors for .nc files in the TinyOS tree that do not compile properly.
 
-      <li> See if the examples worked: 
+      <li> See if it worked:
         <menu> 
-          <li> You should see some valid MoML code in
-          <CODE>$TOSROOT/contrib/momllib/output/Counters.xml</CODE>
+          <li> You should see some valid MoML code in:
+            <CODE>$TOSDIR/lib/Counters/Counter.xml</CODE>
 
-          <li> It should correspond to the contents of
-          <CODE>$TOSDIR/lib/Counters</CODE>
+          <li> It should be listed by:
+            <CODE>$TOSDIR/lib/Counters/index.xml</CODE>
+
+          <li> You should see a top-level index file:
+            <CODE>$TOSROOT/TOSIndex.xml
         </menu>
     </ol>
 
