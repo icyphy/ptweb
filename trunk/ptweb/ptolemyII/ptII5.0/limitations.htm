@@ -47,54 +47,22 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 
 <menu>
 
+
+<li> Running a Matlab Demo twice will crash Ptolemy!
+
+<li>Matlab interface has problems work with gcc-3.3
+ Under Windows, the Matlab interface has problems at runtime with gcc-3.3.
+<br>Under Windows, we recommend using gcc-3.2.
+
 <li> The quick tour in the applets needs to be updated.
-
-<li> The "Listen to Actor" menu choice is missing.
- <p>The fix is to edit <CODE>ptolemy/vergil/actor/ActorController.java</CODE>
-and change
-<pre>
-        if (((BasicGraphController) getController()).getFrame() != null) {
-            // If we are in an applet, then we have no frame, so no need
-            // for a "Listen to Actor" or "Save in Library" menu choices.
-            // FIXME: this is not perfect, it would be better if we
-            // could just test if we are in an applet or else fix this
-            // so we have a frame.
-            // NOTE: This requires that the configuration be non null, or it
-            // will report an error.
-            _menuFactory.addMenuItemFactory(new MenuActionFactory(
-                                                    new SaveInLibraryAction()));
-
-            _listenToActorAction = new ListenToActorAction((BasicGraphController) getController());
-            _menuFactory.addMenuItemFactory(new MenuActionFactory(
-                                                    _listenToActorAction));
-            _listenToActorAction.setConfiguration(_configuration);
-        }
-</pre>
-to
-<pre>
-        //if (((BasicGraphController) getController()).getFrame() != null) {
-            // If we are in an applet, then we have no frame, so no need
-            // for a "Listen to Actor" or "Save in Library" menu choices.
-            // FIXME: this is not perfect, it would be better if we
-            // could just test if we are in an applet or else fix this
-            // so we have a frame.
-            // NOTE: This requires that the configuration be non null, or it
-            // will report an error.
-            _menuFactory.addMenuItemFactory(new MenuActionFactory(
-                                                    new SaveInLibraryAction()));
-
-            _listenToActorAction = new ListenToActorAction((BasicGraphController) getController());
-            _menuFactory.addMenuItemFactory(new MenuActionFactory(
-                                                    _listenToActorAction));
-            _listenToActorAction.setConfiguration(_configuration);
-            //}
-</pre>
-
-
 
 <li>See the
 <a href="ptII5.0/doc/ptII5.0.release.htm#limitations">Ptolemy II 5.0 Release notes</a>
 for known limitations.
+
+
+<li> The Higher Order Components ModelReference demo does not
+work under Web Start.
 
 <li> The PSDF Blind Communication demo does not run under Web Start,
 the message is:
@@ -112,10 +80,6 @@ $PTII/ptolemy/actor/lib/BooleanSwitch.java
  	 <br>The problem is that if an actor does not have an icon file,
  	then the applet may go back to the server multiple times looking
  	for the icon. 
-
-<li>Matlab interface has problems work with gcc-3.3
- Under Windows, the Matlab interface has problems at runtime with gcc-3.3.
-<br>Under Windows, we recommend using gcc-3.2.
 
 <li> The code generator GUI has been removed from the configuration,
 instead use <CODE>$PTII/bin/copernicus</CODE>.
