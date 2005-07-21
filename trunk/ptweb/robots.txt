@@ -58,6 +58,7 @@ Disallow: /ptolemyII/ptII3.0/ptII3.0.2
 Disallow: /ptolemyII/ptII4.0/ptII
 Disallow: /ptolemyII/ptII4.0/ptII4.0-alpha
 Disallow: /ptolemyII/ptII4.0/ptII4.0
+Disallow: /ptolemyII/ptII5.0/ptII5.0-beta
 Disallow: /ptolemyII/ptIIlatest
 Disallow: /~ptII/java/opt
 Disallow: /~ptII/java/ptdesignvendors
