@@ -66,10 +66,10 @@ End If
  *to detect MIME type application/x-java-jnlp-file on Gecko-based browsers. 
  */
 if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
-    document.write("<a href="jnlp-5.0/vergil.jnlp">Download Ptolemy II 5.0 Web Edition (16.9Mb to 41.3Mb)</a>"); 
+    document.write("<a href=\"jnlp-5.0/vergil.jnlp\">Download Ptolemy II 5.0 Web Edition (16.9Mb to 41.3Mb)</a>"); 
 } else {
     document.write("Click ");
-    document.write("<a href="http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII5.0/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html">here</a> ");
+    document.write("<a href=\"http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII5.0/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html\">here</a> ");
     document.write("to download and install JRE 5.0 and the application.");
 }
 </SCRIPT>
