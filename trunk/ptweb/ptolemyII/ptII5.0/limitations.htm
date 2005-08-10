@@ -1,4 +1,4 @@
-<!-- $Id$ -->
+x1<!-- $Id$ -->
 <html>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <link href="../../lib/default.css" rel="stylesheet" type="text/css">
@@ -41,7 +41,153 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 
 <h5>Bug Fixes</h5>
 
-<I>None, yet!</I>
+<dl>
+<dt>Problem surrounding saving in the library 
+<dd>
+<blockquote>
+Stephen Neuendorffer writes:
+<pre>
+I think it's my fault... I've checked in a fix.
+
+Basically: The mechanism for has changed slightly in version 5.0: it
+now uses the class mechanism for keeping track of the user library.
+The user library is a class and when vergil loads it instantiates a
+single instance of the class.  In this case, the actor was being saved
+in the instance, but not in the class, meaning that it was not being
+saved back to the file.
+
+If you download the source, you can patch the code:
+</pre>
+<i>Below is an updated patch, or you can download
+<a href="BasicGraphFrame.java">BasicGraphFrame.java</a> and 
+replace <code>$PTII/ptolemy/vergil/basicl/BasicGraphFrame.java</code>
+</i>
+<pre>
+cxh@maury 162% diff  ~ptII/ptweb/ptolemyII/ptII5.0/ptII/ptolemy/vergil/basic/BasicGraphFrame.java .
+156c156
+&lt;    @version $Id$
+---
+&gt;    @version $Id$
+1205c1205,1206
+&lt;             CompositeEntity library = (CompositeEntity) configuration.getEntity(
+---
+&gt;             CompositeEntity libraryInstance =
+&gt;                 (CompositeEntity) configuration.getEntity(
+1208c1209
+&lt;             if (library == null) {
+---
+&gt;             if (libraryInstance == null) {
+1215c1216,1224
+&lt;             configuration.openModel(library);
+---
+&gt;             // Note that the library in the configuration is an
+&gt;             // instance of another model.  We have to go get the
+&gt;             // original model to make sure that the change propagates
+&gt;             // back to the file from which the library is loaded from.
+&gt;             Tableau libraryTableau = configuration.openModel(libraryInstance);
+&gt;             PtolemyEffigy libraryEffigy =
+&gt;                 (PtolemyEffigy)libraryTableau.getContainer();
+&gt;             CompositeEntity library =
+&gt;                 (CompositeEntity)libraryEffigy.getModel();
+
+</pre>
+<i>Continuing with Steve's analysis:</i>
+<pre>
+Alternatively, you can right click on the user library and "open" it...
+Then paste whatever you want in.
+
+On a related note, while trying this out, I ran across a nasty bug I
+haven't seen before:
+
+If you have an unnamed composite actor it's name is the empty string.
+If you use the dotted notation to access something inside it (e.g.,
+the _location attribute), then it's name is "._location"
+unfortunately, names that begin with a dot are 'special' and are
+interpreted relative to the toplevel.
+You can see this problem if you open a new model, do graph -&gt; Save
+Model in Library to save to the library, and then try to drag it in
+the library.  Vergil tries to reference it's _location attribute, but
+fails because of the above.
+
+Steve
+
+&gt; -----Original Message-----
+&gt; From: owner-ptolemy-hackers@doppler.eecs.berkeley.edu 
+&gt; [mailto:owner-ptolemy-hackers@doppler.eecs.berkeley.edu] On 
+&gt; Behalf Of Edward A. Lee
+&gt; Sent: Monday, August 08, 2005 12:07 PM
+&gt; To: Reilly, Timothy (MN17)
+&gt; Cc: ptolemy-hackers@eecs.berkeley.edu
+&gt; Subject: Re: another question on libraries
+&gt; 
+&gt; 
+&gt; Indeed there seems to be a bug here...
+&gt; When I do "Save Actor In Library" on an actor, I get the library
+&gt; file opened ( ~/.ptolemyII/UserLibrary.xml), but the actor is not in
+&gt; it.  Strangely, the actor is in the UserLibrary in the actor library
+&gt; menu.  But why aren't these two the same thing?
+&gt; 
+&gt; I'll look into it, unless anyone else knows offhand what's up...
+&gt; 
+&gt; Edward
+&gt; 
+&gt; 
+&gt; At 01:30 PM 8/4/2005 -0700, Reilly, Timothy (MN17) wrote:
+&gt; 
+&gt; &gt;I have spent a lot of time with this library stuff the last two days 
+&gt; &gt;and I am pretty confused.
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;I use utilities composite actor on a sheet.  I change the name of
+&gt; &gt;composite actor to radar_if.  I then open a new sheet and open my
+&gt; &gt;model of radar_if, the guts of the radar_if composite model.  I
+&gt; &gt;copy what is in this sheet, look inside the composite actor
+&gt; &gt;radar_if, and paste what was in the radar_if model into the inside
+&gt; &gt;of the composite actor radar_if.  I then close the sheet with the
+&gt; &gt;model of radar_if , close the sheet of the composite actor
+&gt; &gt;radar_if.  I now have a sheet with a compsite actor radar_if, all
+&gt; &gt;the right ports and names, and additionally the composite actor is
+&gt; &gt;in the userlibrary.  So far so good.  For good measure I save the
+&gt; &gt;new composite actor as radar_ifcomposite.  I then highlight the
+&gt; &gt;composite actor and click save actor to library, it says the actor
+&gt; &gt;is already in the library.  The timestamp on userlibrary is usually
+&gt; &gt;within a minute of all of this.  I shut down Ptolemy, restart and
+&gt; &gt;the library I just made is not visible, and if I load the library
+&gt; &gt;UserLibrary.xml in my directory (C:\Documents and
+&gt; &gt;Settings\E223049\.ptolemyII) it is empty.
+&gt; &gt;
+&gt; It looks like this:
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;&lt;entity name="UserLibrary" class="ptolemy.moml.EntityLibrary"/
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;
+
+&gt; &gt;It is like the UserLibrary does not actually get written, although
+&gt; &gt;some write happens because the timestamps are about right.  What is
+&gt; &gt;going on?  Please help me with this.  I guess I can just load my
+&gt; &gt;composite actor separately.  That is starting to look pretty good
+&gt; &gt;to me.
+
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;Thanks,
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;
+&gt; &gt;Tim
+&gt; 
+&gt; ------------
+&gt; Edward A. Lee
+
+</pre>
+</blockquote>
+
+</dl>
 
 <h3>Know Limitations</h4>
 
