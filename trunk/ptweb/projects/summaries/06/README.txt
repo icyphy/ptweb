@@ -1,7 +1,7 @@
 I did the heavy lifting
 
 I copied the summaries over from last year, they are visible at
-http://ptolemy.eecs.berkeley.edu/projects/summaries/05/index.html
+http://ptolemy.eecs.berkeley.edu/projects/summaries/06/index.html
 but there are no links from the website to them yet.
 
 Each person should have a summary, so either create up or update your
@@ -10,7 +10,7 @@ summary.
 To do this,
 1. Check out a copy of the website
    cvs -d :ext:cooley.eecs.berkeley.edu:/users/cvs/Repository co ptweb
-2. go to ptweb/projects/summaries/05
+2. go to ptweb/projects/summaries/06
 
 3. If your .sum file exists, update it
    if it does not exist, copy an existing one, add it it to the
@@ -54,17 +54,17 @@ To do this,
    cvs commit -m "Added my research" yourfile.sum makefile
 
 8. Become the ptII user on messier, see
-   http://www.gigascale.org/ptolemy/group/public.htm
+   http://chess.eecs.berkeley.edu/ptolemy/group/public.htm
 
    Once you are set up, use ssh to log on to a Unix machine such
    as cooley, then do
-   ssh -l ptII messier
-   cd ~ptII/ptweb/projects/summaries/05
+   ssh -l ptII bennett
+   cd ~ptII/ptweb/projects/summaries/06
    cvs update
    make
 	
 9.  Verify your changes
-http://ptolemy.eecs.berkeley.edu/projects/summaries/05/index.html   
+http://ptolemy.eecs.berkeley.edu/projects/summaries/06/index.html   
 
 
 --------
