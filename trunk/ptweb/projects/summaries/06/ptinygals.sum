@@ -1,0 +1,41 @@
+NAMES
+Elaine Cheong
+
+EMAIL
+celaine@eecs.berkeley.edu
+
+HOMEPAGE
+http://galsc.sourceforge.net/
+
+PHONE
+
+TITLE
+PtinyOS and PtinyGALS: Simulating Event-Driven Embedded Systems in Ptolemy II
+
+CHAPTER
+02.cad
+
+ABSTRACT
+In this project, we study the interaction between event-driven, procedure-oriented code and actor-oriented code through the development of a graphical simulation environment for event-driven software for sensor networks that allows developers to use multiple models of computations.
+
+<p>
+<a href="http://www.tinyos.net/" target="_top">TinyOS</a> [1] is an open-source operating system designed for wireless embedded sensor networks.  It has been ported to over a dozen platforms and numerous sensor boards, including the Berkeley/Crossbow Motes, which are based on the Atmel AVR 8-/16-bit microcontroller series.  TinyOS uses a component-based architecture which enables code reuse and minimizes code size.  It uses an event-driven execution model which allows it to respond to events from the wireless radio and sensor interfaces.  TinyOS applications are written in nesC, an extension of the C programming language that is designed to embody the structuring concepts and execution model of TinyOS.
+
+<p>
+Long running concurrent tasks can be created within TinyOS components, but avoiding race conditions and ensuring that tasks do not starve other tasks is the responsibility of the programmer.  TinyGALS [4] is a model for programming event-driven systems that improves upon the TinyOS programming model by allowing software designers to create concurrent tasks without the burden of thinking about multiple threads. The TinyGALS programming model essentially provides an actor-oriented wrapper around traditional procedure-oriented code. The actor framework automatically handles concurrency and communication between tasks and enforces a consistent notion of state in the system.  <a href="http://galsc.sourceforge.net/" target="_top">galsC</a> [5] is the language and compiler that implements the TinyGALS programming model for the motes and is based on nesC.  Given a high level specification of a TinyGALS program, the galsC compiler will automatically generate the code for all inter-actor communication, actor triggering mechanisms, and access to guarded global variables.
+
+<p>
+TOSSIM [2] is a simulator for TinyOS.  TOSSIM compiles directly from nesC code for a TinyOS application, which allows users to run nesC code on the PC.  It supports discrete event simulation of TinyOS sensor networks and execution of nesC/TinyOS programs for the sensor nodes.  We will study the strengths and weaknesses of this heterogeneous combination by integrating TOSSIM with <a href="http://ptolemy.eecs.berkeley.edu" target="_top">Ptolemy II</a> [3].  The preliminary version of the "ptinyos" domain in Ptolemy II can generate nesC code for very simple TinyOS programs.  We will further develop this domain for simulation of nesC programs from within Ptolemy II with discrete event simulation.  Using the experience gained from extending the "ptinyos" domain, we will also extend Ptolemy II with a TinyGALS domain so that it can simulate galsC programs as well, during which we will define and codify the semantics of the interactions between TinyGALS and a discrete event model of computation.
+
+<DL COMPACT>
+<DT> [1]
+<DD> Jason Hill, Robert Szewczyk, Alec Woo, Seth Hollar, David Culler, Kristofer Pister, "System architecture directions for network sensors," ASPLOS 2000, Cambridge, November 2000.  <a href="http://www.tinyos.net/" target="_top">http://www.tinyos.net/</a>
+<DT> [2]
+<DD> Philip Levis, Nelson Lee, Matt Welsh, and David Culler, "TOSSIM: Accurate and Scalable Simulation of Entire TinyOS Applications", Proceedings of the First ACM Conference on Embedded Networked Sensor Systems (SenSys 2003).
+<DT> [3]
+<DD> The Ptolemy Project. <a href="http://ptolemy.eecs.berkeley.edu" target="_top">http://ptolemy.eecs.berkeley.edu</a>
+<DT> [4]
+<DD> Elaine Cheong, Judy Liebman, Jie Liu, and Feng Zhao, "TinyGALS: A Programming Model for Event-Driven Embedded Systems," Proceedings of the 18th Annual ACM Symposium on Applied Computing (SAC'03), Melbourne, FL, March 9-12, 2003.
+<DT> [5]
+<DD> Elaine Cheong and Jie Liu, "galsC: A Language for Event-Driven Embedded Systems," Technical Memorandum UCB/ERL M04/7, University of California, Berkeley, CA 94720, USA, April 20, 2004.  <a href="http://galsc.sourceforge.net/" target="_top">http://galsc.sourceforge.net/</a>
+</DL>
