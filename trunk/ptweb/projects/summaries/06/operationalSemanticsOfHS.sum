@@ -1,0 +1,34 @@
+NAMES
+Haiyang Zheng
+
+EMAIL
+hyzheng@eecs.berkeley.edu
+
+HOMEPAGE
+
+PHONE
+510-642-6899
+
+TITLE
+An Operational Semantics for Hybrid Systems
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+This research focuses on the study of hybrid systems from a software point of view. In particular, we are interested in how to execute a hybrid system such that the results are deterministic and well-defined. We call the semantics that resolves such issues an operational semantics, in contrast to a denotational semantics, which describes the behavior of a hybrid system.  
+<p>
+We discovered a set of corner cases to reveal the limitations of the current research on the executions of hybrid systems. One case is how to represent a piecewise-continuous signal precisely. The difficulty comes from the fact that the signal has more than one values at the time a discontinuity happens. Consequently, such signal is not a function of time. Our solution is to use a tagged-signal model to precisely describe such discontinuities. One of the outcomes is that such signal can be treated as a function again. 
+<p>
+Another case is the occurrence of a transient state, which has its incoming and outgoing transitions enabled at the same time. Transient states can be easily found inside a network of hybrid systems, where an enabled transition of a hybrid system depends on the states of others. If we do not specify the amount of time spent inside a transient state, different simulators may give different results. By constraining the time spent inside a transient state to zero, we are able to achieve a deterministic simulation.
+<p>
+We heavily leverage the tagged-signal model to study the denotational semantics of hybrid systems, specifically the aspects related to the causality property. With the Banach fixed-point theorem, we developed an operational semantics for hybrid systems with certain properties. Thus the suite of corner cases we discovered is solved. We continue experimenting with the operational semantics to discover more interesting corner cases, which in turn refine our operational semantics.
+<p>
+References:
+<p>
+1. E. A. Lee and A. Sangiovanni-Vincentelli, "A Framework for Comparing Models of Computation," IEEE Transactions on CAD, Vol. 17, No. 12, December 1998. 
+2. Edward A. Lee, "Modeling Concurrent Real-time Processes Using Discrete Events," Invited paper to Annals of Software Engineering, Special Volume on Real-Time Software Engineering, Volume 7, 1999, pp. 25-45<p>
+3. Jie Liu and Edward A. Lee, "On the Causality of Mixed-Signal and Hybrid Models," 6th International Workshop on Hybrid Systems: Computation and Control (HSCC '03), April 3-5, 2003, Prague, Czech.
+<p>
+
