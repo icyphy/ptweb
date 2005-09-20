@@ -27,8 +27,11 @@ We heavily leverage the tagged-signal model to study the denotational semantics 
 <p>
 References:
 <p>
-1. E. A. Lee and A. Sangiovanni-Vincentelli, "A Framework for Comparing Models of Computation," IEEE Transactions on CAD, Vol. 17, No. 12, December 1998. 
-2. Edward A. Lee, "Modeling Concurrent Real-time Processes Using Discrete Events," Invited paper to Annals of Software Engineering, Special Volume on Real-Time Software Engineering, Volume 7, 1999, pp. 25-45<p>
-3. Jie Liu and Edward A. Lee, "On the Causality of Mixed-Signal and Hybrid Models," 6th International Workshop on Hybrid Systems: Computation and Control (HSCC '03), April 3-5, 2003, Prague, Czech.
+1. Edward A. Lee, "Modeling Concurrent Real-time Processes Using Discrete Events," Invited paper to Annals of Software Engineering, Special Volume on Real-Time Software Engineering, Volume 7, 1999, pp. 25-45<p>
+2. Edward A. Lee and Alberto Sangiovanni-Vincentelli, "A Framework for Comparing Models of Computation," IEEE Transactions on CAD, Vol. 17, No. 12, December 1998. <p>
+3. Edward A. Lee and Haiyang Zheng, "Operational Semantics of Hybrid Systems," Invited paper in Proceedings of Hybrid Systems: Computation and Control (HSCC) LNCS 3414, Zurich, Switzerland, March 9-11, 2005. <p>
+4. Jie Liu and Edward A. Lee, "On the Causality of Mixed-Signal and Hybrid Models," 6th International Workshop on Hybrid Systems: Computation and Control (HSCC '03), April 3-5, 2003, Prague, Czech.<p>
+5. Jonathan Sprinkle, Aaron D. Ames, Alessandro Pinto, Haiyang Zheng, and S. Shankar Sastry, "On the Partitioning of Syntax and Semantics For Hybrid Systems Tools", 44th IEEE Conference on Decision and Control and European Control Conference ECC 2005 (CDC-ECC'05), Seville, Spain, Dec., 12--15, 2005. <p>
+6. Arjan van der Schaft and Hans Schumacher. An Introduction to Hybrid Dynamical Systems. Lecture Notes in Control and Information Sciences 251, Springer-Verlag, 2000.<p>
 <p>
 
