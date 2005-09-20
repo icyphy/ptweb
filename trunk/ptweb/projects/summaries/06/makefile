@@ -5,6 +5,7 @@ SUM_SOURCES =  \
     actorLang.sum \
     ptolemyII.sum \
     compositionalityAnalysis.sum \
+    semanticInterpretation.sum \
     operationalSemanticsOfHS.sum \
     fsmExtension.sum \
     softDevel05.sum \
