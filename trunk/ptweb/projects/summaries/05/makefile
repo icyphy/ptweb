@@ -22,10 +22,10 @@ OTHER_SRCS =
 
 
 index.html : $(SUM_SOURCES) sum2html
-    -chmod a+x sum2html
-    ${PTII}/bin/ptjacl sum2html $(SUM_SOURCES)
-    -chgrp ptolemy *.html
-    -chmod g+w *.html
+	-chmod a+x sum2html
+	${PTII}/bin/ptjacl sum2html $(SUM_SOURCES)
+	-chgrp ptolemy *.html
+	-chmod g+w *.html
 
 clean:
-    rm -f index.html
+	rm -f index.html
