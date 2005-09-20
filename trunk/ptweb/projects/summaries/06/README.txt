@@ -7,9 +7,10 @@ but there are no links from the website to them yet.
 Each person should have a summary, so either create up or update your
 summary.
 
-To do this,
+To do this:
 1. Check out a copy of the website
-   cvs -d :ext:cooley.eecs.berkeley.edu:/users/cvs/Repository co ptweb
+   cvs -d :ext:source.eecs.berkeley.edu:/home/cvs co ptweb
+
 2. go to ptweb/projects/summaries/06
 
 3. If your .sum file exists, update it
