@@ -2,8 +2,8 @@
 
 # .sum files that are used to create the .html files
 SUM_SOURCES =  \
-    actorLang.sum \
     ptolemyII.sum \
+    actorLang.sum \
     compositionalityAnalysis.sum \
     semanticInterpretation.sum \
     operationalSemanticsOfHS.sum \
