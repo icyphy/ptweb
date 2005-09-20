@@ -8,7 +8,6 @@ SUM_SOURCES =  \
     semanticInterpretation.sum \
     operationalSemanticsOfHS.sum \
     fsmExtension.sum \
-    softDevel05.sum \
     ptinygals.sum \
     ePtolemy05.sum \
     compositionalDataflow.sum \
