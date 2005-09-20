@@ -36,8 +36,9 @@ References:
 1. A. Benveniste, B. Caillaud, P. Le Guernic, Compositionality in dataLow synchronous languages: specification & distributed code generation, Inform. Comput. 163 (2) (2000) 125-171. <p>
 2. Stephen A. Edwards and Edward A. Lee,"The Semantics and Execution of a Synchronous Block-Diagram Language," Science of Computer Programming, Vol. 48, no. 1, July 2003.<p>
 3. G. Kahn and D. B. MacQueen, "Coroutines and Networks of Parallel Processes," In Proceedings of Information Processing, North-Holland Publishing Co., 1977. <p>
-4. Edward A. Lee and Thomas M. Parks, "Dataflow Process Networks", In Proceedings of the IEEE, vol. 83, no. 5, pp. 773-801, May, 1995 <p>
-5. Edward A. Lee, "Modeling Concurrent Real-time Processes Using Discrete Events," Invited paper to Annals of Software Engineering, Special Volume on Real-Time Software Engineering, Volume 7, 1999, pp. 25-45<p>
-6. Edward A. Lee, "Embedded Software," Advances in Computers (M. Zelkowitz, editor), Vol. 56, Academic Press, London, 2002.
+4. Edward A. Lee, "Modeling Concurrent Real-time Processes Using Discrete Events," Invited paper to Annals of Software Engineering, Special Volume on Real-Time Software Engineering, Volume 7, 1999, pp. 25-45<p>
+5. Edward A. Lee, "Embedded Software," Advances in Computers (M. Zelkowitz, editor), Vol. 56, Academic Press, London, 2002.<p>
+7. Edward A. Lee and Thomas M. Parks, "Dataflow Process Networks", In Proceedings of the IEEE, vol. 83, no. 5, pp. 773-801, May, 1995 <p>
+6. Edward A. Lee, Haiyang Zheng, and Ye Zhou, "Causality Interfaces and Compositional Causality Analysis," Invited paper in Foundations of Interface Technologies (FIT), Satellite to CONCUR 2005, ENTCS TBD, San Francisco, California, USA, August 21, 2005. <p> 
 <p>
 
