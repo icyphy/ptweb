@@ -6,12 +6,12 @@ SUM_SOURCES =  \
     ptolemyII.sum \
     compositionalityAnalysis.sum \
     operationalSemanticsOfHS.sum \
-        fsmExtension.sum \
-        softDevel05.sum \
+    fsmExtension.sum \
+    softDevel05.sum \
     ptinygals.sum \
-        ePtolemy05.sum \
-        compositionalDataflow.sum \
-        DDF_BDF.sum \
+    ePtolemy05.sum \
+    compositionalDataflow.sum \
+    DDF_BDF.sum \
     ptIIdistributed.sum \
     ndest.sum \
     wireless.sum
