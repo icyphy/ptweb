@@ -27,7 +27,7 @@ II, one builds hierarchies of actors, where the communication
 patterns, which can change between hierarchy levels, are specified 
 via reusable components called <i>directors</i>.
 
-This environment naturally describes large systems, where the 
+<p>This environment naturally describes large systems, where the 
 interaction between components depends on the level in the 
 hierarchy.  To support such systems, features must scale well with 
 model size.  Unfortunately, this is not true for the current 
@@ -35,7 +35,7 @@ implementation.  I therefore propose designing a scalable,
 actor-oriented language which leverages the flexible interaction 
 patterns of Ptolemy II. 
 
-Such a language should simplify the design of large concurrent 
+<p>Such a language should simplify the design of large concurrent 
 systems, where programmers must be able bundle components through 
 hierarchy [3] and extend components in an object-oriented approach 
 [4]. Higher-order actors can allow programmers to model dynamic 
