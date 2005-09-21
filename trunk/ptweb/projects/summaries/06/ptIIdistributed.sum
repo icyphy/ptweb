@@ -16,9 +16,9 @@ CHAPTER
 02.cad
 
 ABSTRACT 
-Distributed modeling and simulation are an active research area. It has
+Distributed modeling and simulation are active research areas. They
 received increasing concern, particularly because high-speed networks
-and cluster computer systems become widely available. There are many
+and cluster computer systems are widely available. There are many
 good reasons for using such systems in large-scale modeling and
 simulation, some of which are:
 
@@ -49,10 +49,8 @@ from different physical locations.</p>
 <p>
 Ptolemy II is a modeling, design, and simulation framework suitable for addressing
 such requirements. To incorporate the ability of high-speed distributed
-computation into Ptolemy II, a number of interesting problems are going to
-be studied thoroughly.
+computation into Ptolemy II, we study a number of interesting problems.
 </p><p>
-Some of the arising problems are technically hard.
 One example is the strategy employed to overcome network latency while
 still maximizing speed. Time Warp [1] is one approach, and there are others
 under research.
