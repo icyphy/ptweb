@@ -4,9 +4,9 @@
 SUM_SOURCES =  \
     ptolemyII.sum \
     actorLang.sum \
-    compositionalityAnalysis.sum \
-    semanticInterpretation.sum \
+    causalityInterfaces.sum \
     operationalSemanticsOfHS.sum \
+    semanticInterpretation.sum \
     fsmExtension.sum \
     ptinygals.sum \
     ePtolemy05.sum \
