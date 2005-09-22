@@ -17,7 +17,7 @@ CHAPTER
 
 ABSTRACT
 
-This research interpretates hybrid system models as executable programs written in a domain-specific programming language that has a hybrid system semantics. The semantic properties of such language affect our ability to understand, execute, and analyze a hybrid system model [3]. We focus on several semantic issues that come in defining such a programming language, such as the interpretations of discrete-event signals and discontinuities in continuous-time signals, and the handling of multiple simultaneous interactions between these signals, and the consequences of numerical ODE solver techniques. We describe the solution by giving its operational semantics [2]. We will continue identifying and solving more semantics issues and complete the operational semantics of the programing language. We will implement the operational semantics in HyVisual [1].
+This research interprets hybrid system models as executable programs written in a domain-specific programming language that has a hybrid system semantics. The semantic properties of such language affect our ability to understand, execute, and analyze a hybrid system model [3]. We focus on several semantic issues that come in defining such a programming language, such as the interpretations of discrete-event signals and discontinuities in continuous-time signals, and the handling of multiple simultaneous interactions between these signals, and the consequences of numerical ODE solver techniques. We describe the solution by giving its operational semantics [2]. We will continue identifying and solving more semantics issues and complete the operational semantics of the programing language. We will implement the operational semantics in HyVisual [1].
 <p>
 References:
 <p>
