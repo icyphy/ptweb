@@ -1,0 +1,49 @@
+NAMES
+Adam Cataldo
+Eleftherios Matsikoudis
+Haiyang Zheng
+
+EMAIL
+acataldo@eecs.berkeley.edu
+ematsi@eecs.berkeley.edu
+hyzheng@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.cs.berkeley.edu/~acataldo
+
+PHONE
+510-642-6817
+
+TITLE
+Abstract Semantics
+
+CHAPTER
+04.ess
+
+ABSTRACT 
+
+In the abstract semantics project, we study formal models of 
+computation which express concurrency.  We call the semantics 
+abstract because we may express models in a high-level framework; 
+that is, we may abstract away certain details in our models.  In 
+large-scale system design, different models of computation will be 
+used at different levels of the hierarchy of a system.  We thus 
+concern ourselves with the interaction of models of computation 
+across hierarchies.
+
+<p>To support hierarchical systems, we need to understand how we can 
+compose models which require state rollback with those that do not.  
+Models which require rollback include continuous time models, like 
+Simulink, and hybrid system models.  We seek an operational 
+semantics for such interacting systems.
+
+<p>We also seek a denotational semantics for timed discrete-event 
+programming languages, to provide a means for reasoning about the 
+correctness of the individual languages, like VHDL and DEVS.  We 
+hope this will allow hidden commonalities of seemingly different 
+timed systems to emerge. 
+
+<p>Along these lines, we are studying extensions to dataflow to provide 
+an operational semantics for timed models.  This may allow us to 
+extend domain-theoretic results in a meaningful way within this 
+denotational framework.
