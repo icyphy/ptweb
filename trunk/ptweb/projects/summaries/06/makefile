@@ -5,7 +5,6 @@ SUM_SOURCES =  \
 	ptolemyII.sum \
 	actorLang.sum \
 	abstractSemantics.sum \
-	collaborativeEnvironment.sum \
 	causalityInterfaces.sum \
 	operationalSemanticsOfHS.sum \
 	semanticInterpretation.sum \
