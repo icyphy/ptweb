@@ -10,7 +10,6 @@ SUM_SOURCES =  \
 	semanticInterpretation.sum \
 	fsmExtension.sum \
 	ptinygals.sum \
-	collaborativeEnvironment.sum \
 	compositionalDataflow.sum \
 	DDF_BDF.sum \
 	ptIIdistributed.sum \
