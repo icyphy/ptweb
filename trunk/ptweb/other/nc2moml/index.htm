@@ -255,23 +255,16 @@ make install
         cannot find avr-gcc, then the AVR rpm's were not installed
         correctly, and you will need to try to reinstall them.
 
-      <li> Run the makefile
+      <li> Run the script to generate the .moml files from the .nc files.
         <pre>
-cd $TOSROOT/contrib/momllib
-make momllib mica
+cd $PTII/ptolemy/domains/ptinyos/util/nc2moml
+./nc2moml
         </pre>
-        You can ignore most warnings, since these are errors for .nc files in the TinyOS tree that do not compile properly.
 
       <li> See if it worked:
         <menu> 
           <li> You should see some valid MoML code in:
-            <CODE>$TOSDIR/lib/Counters/Counter.xml</CODE>
-
-          <li> It should be listed by:
-            <CODE>$TOSDIR/lib/Counters/index.xml</CODE>
-
-          <li> You should see a top-level index file:
-            <CODE>$TOSROOT/TOSIndex.xml
+            <CODE>$PTII/vendors/ptinyos/moml</CODE>
         </menu>
     </ol>
 
