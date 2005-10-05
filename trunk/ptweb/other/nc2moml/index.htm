@@ -262,10 +262,25 @@ cd $PTII/ptolemy/domains/ptinyos/util/nc2moml
         </pre>
 
       <li> See if it worked:
-        <menu> 
+        <ol> 
           <li> You should see some valid MoML code in:
-            <CODE>$PTII/vendors/ptinyos/moml</CODE>
-        </menu>
+            <pre>$PTII/vendors/ptinyos/moml</pre>
+            <br>
+            The directory structure should reflect that of the TinyOS
+            directory structure.
+
+          <li> 
+            <ol>
+              <li>Try running Viptos:
+                <pre>vergil -ptinyos</pre>
+
+              <li>Create a new PtinyOS Graph Editor from the File |
+              New menu.
+
+              <li>Click in the left hand pane under Actors to see the
+              newly generated directory structure.
+            </ol>
+        </ol>
     </ol>
 
 
