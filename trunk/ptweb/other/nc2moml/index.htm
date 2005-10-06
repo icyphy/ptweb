@@ -255,6 +255,20 @@ make install
         cannot find avr-gcc, then the AVR rpm's were not installed
         correctly, and you will need to try to reinstall them.
 
+      <li> Configure and install the TinyOS nesC tools
+        <pre>
+cd $TOSROOT/tools/src/ncc
+./configure
+make
+make install
+        </pre>
+        By default, this configuration will cause the tools to be
+        installed in <code>/usr/local</code>.  We assume that
+        <code>/usr/local/bin</code> is in your path.  If you wish to
+        install in a different directory, run <code>./configure
+        --prefix=&lt;MYDIR&gt;</code> instead and add the
+        <code>bin</code> directory to your path.
+
       <li> Run the script to generate the .moml files from the .nc files.
         <pre>
 cd $PTII/ptolemy/domains/ptinyos/util/nc2moml
