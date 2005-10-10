@@ -118,6 +118,7 @@
 		 <p>If you get a message about checksum errors, complain
 		to the TinyOS authors and then reinstall Cygwin with 
 		<CODE>Unix</CODE> line endings.
+ <p><I>Note to tinyos developers:  Unix line endings are not the right choice for naive Windows users.  </I>
 
 		 <p>If you get
 		<pre>
@@ -193,6 +194,7 @@ cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/tinyos login
 <i>Hit Enter when prompted for a password</i>
 cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/tinyos co tinyos-1.x
         </pre>
+ <p><I>Note to tinyos developers: why is this download so large?  Perhaps there should be a core cvs module and then a contrib module?</I>
 
         This will create a directory <code>tinyos-1.x</code>.  For more
         information, see <a
