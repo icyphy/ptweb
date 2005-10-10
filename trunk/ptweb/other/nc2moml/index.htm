@@ -87,7 +87,7 @@
                     <br> The link should be at the top of the page 
                     and have a name like "WinAVR 20040404"
                   <li>Install Winavr in any directory 
-                    <i>Directories with spaces in the pathname might not work?</i>
+                    <i>FIXME: Directories with spaces in the pathname might not work?</i>
                 </ol>
             </ul>
             Or
@@ -238,13 +238,8 @@ setenv PTINYOS_MOMLROOT $PTII/vendors/ptinyos/moml
 cd $PTII/vendors/ptinyos
 cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/nescc login
 <i>Hit Enter when prompted for a password</i>
-cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/nescc co -r nc2moml nesc
+cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/nescc co nesc
         </pre>
-
-<BLOCKQUOTE>
-<I>10/10/05: There is no nc2moml tag, use <CODE>-r nc2momllib</CODE></I>
-</BLOCKQUOTE>
-
 
       <li> Boostrap nesC 
         <pre>
