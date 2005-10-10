@@ -114,6 +114,27 @@
                 <pre>rpm --ignoreos -ivh *.rpm</pre> 
 
                 in the directory where you saved the files.
+		
+		 <p>If you get a message about checksum errors, complain
+		to the TinyOS authors and then reinstall Cygwin with 
+		<CODE>Unix</CODE> line endings.
+
+		 <p>If you get
+		<pre>
+		bash-3.00$ rpm --ignoreos -ivh *.rpm
+		error: Failed dependencies:
+		/bin/sh is needed by make-3.80tinyos-1
+		/bin/sh is needed by mspgcc-win32tinyos-20041204-2
+	        bash-3.00$
+		</pre>
+		Then try 
+		<pre>
+		rpm --ignoreos --nodeps -ivh *.rpm
+		</pre>
+
+</I>
+</BLOCKQUOTE>
+
 
                 <p>
                   The rpms are also available
