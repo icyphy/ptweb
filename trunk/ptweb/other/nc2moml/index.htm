@@ -92,6 +92,23 @@
             </ul>
             Or
             <ul>
+              <li> Download the <a
+              href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
+              Installshield Wizard</a>.  Run the wizard, and choose
+              "Custom" install.  Install only the AVR tools.  This
+              will install all of the rpms below for you. <b>Do not
+              choose the "cygwin" install option (it will overwrite
+              and corrupt your current cygwin installation) or the
+              "TinyOS" install option (you will install this later
+              from CVS as a separate step).</b> You may choose to
+              install the other remaining options if you do not
+              already have them installed on your system.  The wizard
+              will install all of the selected rpms for you.  JavaCOMM
+              is not needed if you are not planning on using the
+              TinyOS java tools (these are not needed for Viptos).
+            </ul>
+            Or
+            <ul>
               <li> <b>If your Cygwin is installed so your 'Default
               Text File Type' is Unix</b>, download the following rpms
               to an empty directory:
@@ -101,8 +118,10 @@
 	      you will likely have <a
 	      href="http://www.gigascale.org/softdevel/faq/23.html"
 	      target="_top">Cygwin CR/NL problems</a> with CVS.
-
-                <ul>
+	
+             <p><B>Installing the rpms under Cygwin is not recommended</B>,
+		it causes include file problems later.
+             <ul>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-gcc-3.3tinyos-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-gcc-3.3tinyos-1w.cygwin.i386.rpm</a>
@@ -141,23 +160,6 @@
                   The rpms are also available
                   <a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/" target="_top">here</a>.  
             </ul>
-            Or
-            <ul>
-              <li> Download the <a
-              href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
-              Installshield Wizard</a>.  Run the wizard, and choose
-              "Custom" install.  Install only the AVR tools.  This
-              will install all of the rpms below for you. <b>Do not
-              choose the "cygwin" install option (it will overwrite
-              and corrupt your current cygwin installation) or the
-              "TinyOS" install option (you will install this later
-              from CVS as a separate step).</b> You may choose to
-              install the other remaining options if you do not
-              already have them installed on your system.  The wizard
-              will install all of the selected rpms for you.  JavaCOMM
-              is not needed if you are not planning on using the
-              TinyOS java tools (these are not needed for Viptos).
-            </ul>
 
           <li> If you are running Linux (Redhat 9), download the rpms from
           <a
@@ -181,6 +183,7 @@
         <pre>
     mkdir -p $PTII/vendors/ptinyos
         </pre>
+	Note that <CODE>$PTII</CODE> should not have spaces in it.
 
       <li> We have put into the TinyOS makefiles a rule that you can
       run to create all the TinyOS libraries in one step. To use this,
@@ -338,7 +341,7 @@ rpm -force --ignoreos --nodeps -ivh *.rpm
 cd $PTII/ptolemy/domains/ptinyos/util/nc2moml
 ./nc2moml
         </pre>
-	The <CODE>nc2moml</CODE> command will take 10-20 minutes to complete.
+	The <CODE>nc2moml</CODE> command will take 10-30 minutes to complete.
       <li> See if it worked:
         <ol> 
           <li> You should see some valid MoML code in:
