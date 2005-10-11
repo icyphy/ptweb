@@ -329,6 +329,10 @@ cd <I>Location of avr rpms</I>
 rpm -force --ignoreos --nodeps -ivh *.rpm
 </pre>
 
+ <p><I>Note that you need to have <CODE>pdflatex</CODE> and <CODE>bibtex</CODE> installed, or else edit <CODE>nesc/Makefile</CODE> and comment remove
+<CODE>doc</CODE> from the <CODE>SUBDIRS</CODE> line.
+</I>
+
       <li> Run the script to generate the .moml files from the .nc files.
         <pre>
 cd $PTII/ptolemy/domains/ptinyos/util/nc2moml
