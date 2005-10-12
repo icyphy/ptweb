@@ -9,11 +9,12 @@ SUM_SOURCES =  \
 	operationalSemanticsOfHS.sum \
 	semanticInterpretation.sum \
 	fsmExtension.sum \
-	ptinygals.sum \
+	realtime.sum \
+	actor-wsn.sum \
+	viptos.sum \
 	compositionalDataflow.sum \
 	DDF_BDF.sum \
 	ptIIdistributed.sum \
-	ndest.sum \
 	wireless.sum
 
 # other sources that are not .sum files
