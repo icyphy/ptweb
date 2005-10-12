@@ -1,0 +1,26 @@
+NAMES
+Elaine Cheong
+
+EMAIL
+
+HOMEPAGE
+
+PHONE
+510-642-4557
+
+TITLE
+Actor-Oriented Programming for Wireless Sensor Networks
+
+CHAPTER
+04.ess
+
+ABSTRACT 
+In this project, I am investigating an actor-oriented approach to programming wireless sensor network applications with complex event sequences.  Existing approaches to programming wireless sensor networks can be divided into four layers.  The bottom-most layer is the operating system approach.  Examples include TinyOS, SOS, Linux, .NET, and BTNut.  In this layer, the focus is to provide basic programming abstractions to allow the program to run on the sensor node hardware.  The next layer up is the node-centric approach, examples of which include Mat&#233;, SNACK, Token Machine Language, and the Object State Model.  Software in this layer runs on a single node on top of the operating system, and more abstract programming models are used, which makes programming easier for the user.  The third layer is the middleware approach, including examples such as directed diffusion, abstract regions, Hood, and IDSQ.  The middleware layer starts to include programming abstractions that allow the user to address multiple nodes.  The top-most layer, called <i>macroprogramming</i>, allows the user to create an application by programming the wireless sensor network as a whole, rather than programming individual nodes separately.  Examples include TinyDB (database), Agilla (mobile agent), and Regiment (stream operator/functional language).  Current macroprogramming approaches are insufficient for wireless sensor network applications with complex event sequences.  In the first example, the database view only gives the programmer data collection operators.  In the second example, the mobile agent approach degenerates to a node-centric program for static problems.  In the third example, the purely functional approach makes it difficult to store state.
+
+<p>My hypothesis is that an actor-oriented programming model will easily allow a user to compose a set of actors to react to complex event sequences.  We can choose the communication model between actors to best fit the target application.  I propose a four layer approach, using the terminology introduced above.  In the top-most layer, I am investigating developing an actor-oriented macroprogramming language using a visual programming environment like <a href="viptos.html">Viptos</a>.  Implementations of the actors in this language can then be integrated with existing middleware such as Hood to form the middleware layer.  The macroprogramming language will eventually be compiled down to run on individual nodes.  I plan to use <a href="http://galsC.sourceforge.net" target="_top">galsC</a>, an actor-oriented node-centric programming language, as the target language [1].  galsC essentially runs on top of TinyOS, which forms the bottom-most layer.
+
+<DL COMPACT>
+<DT> [1]
+<DD> Elaine Cheong and Jie Liu, "<a href="http://ptolemy.eecs.berkeley.edu/papers/05/galsC-date05" target="_top">galsC: A Language for Event-Driven Embedded Systems</a>," <i>Proceedings of Design, Automation and Test in Europe</i> (DATE), March 7-11, 2005, Munich, Germany.
+</DL>
+

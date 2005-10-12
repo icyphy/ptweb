@@ -1,0 +1,32 @@
+NAMES
+Elaine Cheong
+Jackie Man-Kit Leung
+Gang Zhou
+Rachel Zhou
+
+EMAIL
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu
+
+PHONE
+510-642-4557
+
+TITLE
+Real-Time Systems
+
+CHAPTER
+04.ess
+
+ABSTRACT 
+
+In the real-time systems project, we study 
+
+#  Real-time software: Models of computation with time and
+concurrency, metaprogramming techniques, code generation and
+optimization, domain-specific languages, schedulability analysis,
+programming of sensor networks.
+
+<p>CGC, DT, schedulability, stochastic models, DE and TM as replacements for Simulink, Giotto, xGiotto, SR.  Aspect-oriented multi-view modeling (quantity managers).  Metropolis as a back end.
+
+code gen.
