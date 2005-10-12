@@ -20,7 +20,7 @@ CHAPTER
 
 ABSTRACT 
 
-In the real-time systems project, we are studying real-time software
+<p>In the real-time systems project, we are studying real-time software
 systems including models of computation with time and concurrency,
 metaprogramming techniques, code generation and optimization,
 domain-specific languages, schedulability analysis, and programming of
@@ -47,7 +47,6 @@ conversions that prevent the automation of creating the C helpers.  In
 particular, code generation must overcome issues such as converting
 Java object types to C primitive types and using language-specific
 hardware APIs.
-
 
 <p><a name="1">[1]</a>
  Christopher Brooks, Edward A. Lee, Xiojun Liu, Stephen
