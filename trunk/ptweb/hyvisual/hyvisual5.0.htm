@@ -26,6 +26,21 @@ machines to define discrete behavior.
  <br>This release fixes a few bugs in the 5.0 release and includes
 a standalone HyVisual-5.0.1 installer.
 
+<BLOCKQUOTE>
+<B>Bug Alert</B>: (Oct. 12, 2005):
+ <p>If you compile HyVisual from sources on a machine that does not
+have Matlab, then start up will fail with an exception.  The
+workaround is to edit
+<CODE>$PTII/ptolemy/configs/hyvisual/configuration.xml</CODE> 
+and remove the
+<pre>
+&lt;input source="ptolemy/matlab/matlab.xml"/&gt;
+</pre>
+line.
+ <p>We will release a new version of HyVisual with this fix sometime soon.
+
+</BLOCKQUOTE>
+
 
  <p>The table below summarizes the HyVisual 5.0.1 installers
 <table border=1>
