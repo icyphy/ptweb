@@ -234,6 +234,17 @@ setenv PTINYOS_MOMLROOT $PTII/vendors/ptinyos/moml
               Set <code>PTINYOS_MOMLROOT</code> to <code>%PTII%/vendors/ptinyos/moml</code>
         </ul>
 
+      <li> Note: if you <B>change</B> <CODE>TOSROOT</CODE>
+	or <CODE>TOSDIR</CODE>, you must rerun <CODE>configure</CODE>
+<pre>
+cd $PTII
+./configure
+</pre>
+	The reason is that <CODE>configure</CODE> creates
+	<CODE>$PTII/lib/ptII.properties</CODE>, which contains
+	the values of <CODE>TOSDIR</CODE> and 
+	<CODE>TOSROOT</CODE>.
+
       <li> Get the nesC CVS Tree, see <a
       href="http://sourceforge.net/cvs/?group_id=56288"><CODE>http://sourceforge.net/cvs/?group_id=56288</CODE></a>
 
@@ -336,6 +347,25 @@ rpm -force --ignoreos --nodeps -ivh *.rpm
  <p><I>Note that you need to have <CODE>pdflatex</CODE> and <CODE>bibtex</CODE> installed, or else edit <CODE>nesc/Makefile</CODE> and comment remove
 <CODE>doc</CODE> from the <CODE>SUBDIRS</CODE> line.
 </I>
+
+
+      <li> Compile tinyos
+      <pre>
+cd $PTII/vendors/ptinyos/tinyos-1.x
+make
+make install
+      </pre>
+      <p><CODE>tinyos-1.x/tools/src/uisp/src/Serial.C</CODE>  failed to compile
+      <pre>
+Serial.C: In member function `void TSerial::OpenPort()':
+Serial.C:243: warning: right-hand operand of comma has no effect
+Serial.C:244: warning: right-hand operand of comma has no effect
+make[4]: *** [Serial.o] Error 1
+      </pre>
+
+      The solution is to edit
+      <CODE>tinyos-1.x/tools/src/uisp/src/Makefile</CODE>
+      and remove the <CODE>-Werror</CODE> and rerun make from the top.
 
       <li> Run the script to generate the .moml files from the .nc files.
         <pre>
