@@ -201,6 +201,22 @@ cd $PTII/vendors/ptinyos/nc2momllib-1.1.1-1
         expanding the <code>TOSROOT</code> and <code>TOSDIR</code>
         environment variables if you still have problems.
 
+      <li> If you are using the CVS version:
+<pre>
+cd $PTII/vendors/ptinyos
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/nescc login
+<i>Hit Enter when prompted for a password</i>
+cvs -z3 -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/nescc co nesc
+cd $PTII/vendors/ptinyos/nesc
+./Bootstrap
+./configure --prefix=$PTII/vendors/ptinyos
+make
+make install
+</pre>
+
+
+
+
       <li> Install nc2momllib: 
         <pre>
 make
