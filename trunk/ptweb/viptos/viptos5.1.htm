@@ -7,12 +7,8 @@
 </head>
 <body>
 <h1>
-<a name="Viptos">Viptos 5.1-alpha - Hybrid System Visual Modeler</a></h1>
-<table>
-<tr><td>
- <img src="../image/viptos.gif" alt="Viptos" width="240" height="241" align="left">
-</td>
-</table>
+<a name="Viptos">Viptos 5.1-alpha - Visual interface betwee Ptolemy and TinyOS</a></h1>
+ <img src="../image/viptos.gif" alt="Viptos" width="120" height="120" align="left">
 Viptos is an interface between 
     <a href="http://www.tinyos.net" target="_top">TinyOS</a>
 and 
@@ -30,6 +26,8 @@ and
 	the model fails.
 </BLOCKQUOTE>
 
+<h2>Downloads</h2>
+
 <menu>
 <li> <a
 href="viptos5.1/viptos5.1-alpha.src.tar.gz"><CODE>viptos5.1-alpha.src.tar.gz</CODE></a>
@@ -38,26 +36,27 @@ Gzipped Tar file with Unix line endings
 <li> <a href="viptos5.1/nc2moml.htm">nc2moml instructions</a>,
 included in the release as <CODE>$PTII/ptolemy/domains/ptinyos/util/nc2moml/index.htm</CODE>
  <br> <CODE>nc2moml</CODE>
-is used to convert nesC files (.nc) into 
-<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml#in_browser">MoML</a>
-(.moml) files.  This will create the Ptolemy II libraries of
-components that are used to assemble models.  TinyOS provides a
-rich library of nesC components. If you install TinyOS 1.x in
-<code>$PTII/vendors/ptinyos/tinyos-1.x</code> , then the Ptolemy
-II configure script will find it and automatically make the TinyOS
-libraries available.
+    is used to convert nesC files (.nc) into <a
+    href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml">MoML</a>
+    (.moml) files.  This will create the Ptolemy II libraries of
+    <I>components</I> that are used to assemble models.  TinyOS provides a
+    rich library of nesC components. If you install TinyOS 1.x in
+    <code>$PTII/vendors/ptinyos/tinyos-1.x</code>, then the Ptolemy
+    II configure script will find it, running <CODE>nc2moml</CODE>
+    will convert the TinyOS libraries and make them available to
+    Ptolemy.
 
 <li> <a href="viptos5.1/ncapp2moml.htm">ncapp2moml instructions</a>,
 included in the release as <CODE>$PTII/ptolemy/domains/ptinyos/util/ncapp2moml/index.htm</CODE>
  <br><CODE>ncapp2moml</CODE>
-    is used to convert nesC application files (.nc) into
-    <a
-    href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml#in_browser"
-    target="_top">MoML</a> (.moml) files.  This will create Ptolemy II
+    is used to convert nesC <I>application</I> files (.nc) into
+    <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml#in_browser"target="_top">MoML</a> (.moml) files.  This will create Ptolemy II
     models that you can run in Viptos.  You must setup the necessary
-    MoML library of nesC components with the <a
-    href="viptos5.1/nc2moml.htm">nc2moml</a> tool before you can successfully
-    open files made with this ncapp2moml tool.
+    MoML library of nesC components with the 
+    <a href="viptos5.1/nc2moml.htm"><CODE>nc2moml</CODE></a>
+    tool before you can successfully
+    open files made with this <CODE>ncapp2moml</CODE> tool.
+
 
 </menu>
 
