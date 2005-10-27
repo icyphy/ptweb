@@ -18,24 +18,26 @@
     extension to the C programming language designed to embody the
     structuring concepts and execution model of TinyOS.
 
-    <p><a href="viptos5.1/nc2moml.htm">nc2moml</a>
+    <p><a href="viptos5.1/nc2moml.htm"><CODE>nc2moml</CODE></a>
     is used to convert nesC files (.nc) into <a
     href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml">MoML</a>
     (.moml) files.  This will create the Ptolemy II libraries of
-    components that are used to assemble models.  TinyOS provides a
+    <I>components</I> that are used to assemble models.  TinyOS provides a
     rich library of nesC components. If you install TinyOS 1.x in
-    <code>$PTII/vendors/ptinyos/tinyos-1.x</code> , then the Ptolemy
-    II configure script will find it and automatically make the TinyOS
-    libraries available.
+    <code>$PTII/vendors/ptinyos/tinyos-1.x</code>, then the Ptolemy
+    II configure script will find it running <CODE>nc2moml</CODE>
+    will convert the TinyOS libraries and make them available to
+    Ptolemy.
 
  <p>
-    <a href="viptos5.1/ncapp2moml.htm">ncapp2moml</a>
-    is used to convert nesC application files (.nc) into
+    <a href="viptos5.1/ncapp2moml.htm"><CODE>ncapp2moml</CODE></a>
+    is used to convert nesC <I>application</I> files (.nc) into
     <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml#in_browser"target="_top">MoML</a> (.moml) files.  This will create Ptolemy II
     models that you can run in Viptos.  You must setup the necessary
-    MoML library of nesC components with the <a
-    href="viptos5.1/nc2moml.htm">nc2moml</a> tool before you can successfully
-    open files made with this ncapp2moml tool.
+    MoML library of nesC components with the 
+    <a href="viptos5.1/nc2moml.htm"><CODE>nc2moml</CODE></a>
+    tool before you can successfully
+    open files made with this <CODE>ncapp2moml</CODE> tool.
 
 <menu>
 <li> <B>November 1, 2005</B>
