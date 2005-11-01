@@ -51,12 +51,12 @@
 	<pre>
 cd $PTII
 mkdir -p vendors/ptinyos
-ln -s <I>location_of_your_tiny-1.x tree</I> .
-ln -s <I>location_of_your_nesc tree</I> .
+ln -s <I>location_of_your_tiny-1.x_tree</I> .
+ln -s <I>location_of_your_nesc_tree</I> .
 	</pre>
 	Be sure to update to the latest nesC cvs version, then
 	 proceed to 
-	<a href="#environmentVarialbles">Set up the necessary
+	<a href="#environmentVariables">Set up the necessary
     environment variables</a> below.  You may skip installing TinyOS
 	and nesc and proceed to running <CODE>nc2moml</CODE>.
 
@@ -101,6 +101,16 @@ ln -s <I>location_of_your_nesc tree</I> .
           <li> avr-libc
         </ul>
         <p>
+
+          Note: If the files below do not work for you, you can try
+          using the latest files (although these have not been tested
+          with Viptos yet): <a
+          href="http://www.tinyos.net/dist-1.2.0/tools"
+          target="_top"><code>
+          http://www.tinyos.net/dist-1.2.0/tools</code></a>.
+
+
+        <p>
         Choose and follow the appropriate directions for your operating system:
         <ul>
           <li> If you are running Windows XP or Windows 2000, you can either:
@@ -110,7 +120,7 @@ ln -s <I>location_of_your_nesc tree</I> .
                   <li>Go to 
                     <a href="http://sourceforge.net/project/showfiles.php?group_id=68108#in_browser" target="_top"><code>http://sourceforge.net/project/showfiles.php?group_id=68108</code></a>              
                   <li>Download
-<a href="http://prdownloads.sourceforge.net/winavr/WinAVR-20040404-bin-install.exe?download" target="_top"><code>WinAVR-20040404-bin-install.exe</code>
+<a href="http://prdownloads.sourceforge.net/winavr/WinAVR-20040404-bin-install.exe?download" target="_top"><code>WinAVR-20040404-bin-install.exe</code></a>
                   <br><b>Note:</b> Do <b>not</b> install 
 		  <code>WinAVR-20050214-install.exe</code>, as of 10/05,
 		  it will not work.  When converting .nc files to .moml files,
@@ -120,10 +130,22 @@ ln -s <I>location_of_your_nesc tree</I> .
                   <li>Install Winavr in any directory, <code>C:\WinAVR</code>
 		  is preferred.
                     <i>FIXME: Directories with spaces in the pathname might not work?</i>
+                  <li>Under Windows with WinAVR-20040404, we had to copy 
+		  <code>c:/cygwin/usr/local/lib/ncc/</code> to
+		  <code>c:/usr/local/lib/ncc/</code>:
+		  <pre>
+		  mkdir -p c:/usr/local/lib
+		  cd c:/usr/local/lib
+		  cp -r /usr/local/lib/ncc .
+		  </pre>
+		  The reason is that Cygwin mounts directories under
+		  </code>c:/cygwin</code> and the WinAVR binaries don't
+		  know how to handle that.
                 </ol>
             </ul>
             Or
             <ul>
+
               <li> Download the <a
               href="http://webs.cs.berkeley.edu/tos/dist-1.1.0/tinyos/windows/tinyos-1.1.0-1is.exe">TinyOS
               Installshield Wizard</a>.  Run the wizard, and choose
@@ -153,6 +175,9 @@ ln -s <I>location_of_your_nesc tree</I> .
 	
              <p><B>Installing the rpms under Cygwin is not recommended</B>,
 		it causes include file problems later.
+	      <li> FIXME the list below is old, we should try:
+	      <a href="http://www.tinyos.net/dist-1.2.0/tools/"><code>http://www.tinyos.net/dist-1.2.0/tools/</code></a>
+
              <ul>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avarice-2.0.20030825cvs-1w.cygwin.i386.rpm</a>
 <li><a href="http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm">http://today.cs.berkeley.edu/tos/dist-1.1.0/tools/windows/avr-binutils-2.13.2.1-1w.cygwin.i386.rpm</a>
@@ -268,17 +293,6 @@ setenv PTINYOS_MOMLROOT $PTII/vendors/ptinyos/moml
               Set <code>PTINYOS_MOMLROOT</code> to <code>%PTII%/vendors/ptinyos/moml</code>
         </ul>
 
-      <li> Note: if you <B>change</B> <CODE>TOSROOT</CODE>
-	or <CODE>TOSDIR</CODE>, you must rerun <CODE>configure</CODE>
-<pre>
-cd $PTII
-./configure
-</pre>
-	The reason is that <CODE>configure</CODE> creates
-	<CODE>$PTII/lib/ptII.properties</CODE>, which contains
-	the values of <CODE>TOSDIR</CODE> and 
-	<CODE>TOSROOT</CODE>.
-
       <li> Get the nesC CVS Tree, see <a
       href="http://sourceforge.net/cvs/?group_id=56288#in_browser" target="_top"><CODE>http://sourceforge.net/cvs/?group_id=56288</CODE></a>
 
@@ -367,7 +381,7 @@ In file included from /usr/local/include/fcntl.h:1,
 /usr/local/include/sys/fcntl.h:139: error: redefinition of `struct flock'
 make[3]: *** [regions.o] Error 1
 </pre>
-	The solution was to unistall one of the rpms.
+	The solution was to uninstall one of the rpms.
 <pre>
 cd <I>Location of avr rpms</I>
 rpm -e arm-thumb-elf-gcc-3.2-1
