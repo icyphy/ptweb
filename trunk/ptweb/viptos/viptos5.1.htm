@@ -29,6 +29,15 @@ and
 	solution.  In the interim, Windows users can convert 
 	.nc files to .moml files and create models, but running
 	the model fails.
+
+<p>Despite the bug above, Windows users and other users can
+generate code by changing the PtinyOSDirector target
+from <code>ptII</code> to <code>pc</code> or some other tinyos target like
+<code>mica</code> or <code>mica install</code>.
+See <code>$PTII/ptolemy/configs/viptos/help.htm</code> for details.
+Only running a simulation within ptII will bring up the pthreads issue.
+
+
 </BLOCKQUOTE>
 
 This is the first release of Viptos, which is based on Ptolemy II 5.1,
