@@ -22,14 +22,14 @@
     target="_top">MoML</a> (.moml) files.  This will create Ptolemy II
     models that you can run in Viptos.  You must setup the necessary
     MoML library of nesC components with the <a
-    href="../nc2moml.htm">nc2moml</a> tool before you can successfully
+    href="../nc2moml/index.htm">nc2moml</a> tool before you can successfully
     open files made with this ncapp2moml tool.
 
     <h2>Installation instructions</h2>
 
     <p><BLOCKQUOTE>
 	<B>Note: You must follow the instructions <a
-	href="nc2moml.htm">here</a> for running the nc2moml
+	href="../nc2moml/index.htm">here</a> for running the nc2moml
 	tool before you can use models generated with this ncapp2moml
 	tool.</B>
     </BLOCKQUOTE>
@@ -70,13 +70,36 @@ make
           <li> 
             <ol>
               <li>Try running Viptos:
-                <pre>vergil -ptinyos</pre>
+                <pre>$PTII/bin/vergil -viptos</pre>
 
-              <li>Open a demo by going to File | Open File, and opening file $PTII/vendors/ptinyos/momlapp/apps/CntToLeds/CntToLeds.moml
+              <li>Open a demo by going to File -&gt; Open File, and
+              opening file
+              <CODE>$PTII/vendors/ptinyos/momlapp/apps/CntToLeds/CntToLeds.moml</CODE>
+              or
+              <CODE>$PTII/vendors/ptinyos/momlapp/apps/CntToLeds/CntToLeds-InWireless.moml</CODE>
+              (only one of these will have been generated, depending
+              on what options were used in running ncapp2moml).
 
-              <li>You may wish to run the automatic graph layout by selecting Graph | Automatic Layout form the menu, or by typing Ctrl-T.
+              <li>
+                <ul>
+                  <li>If you opened CntToLeds.moml, you may wish to
+                  run the automatic graph layout by selecting Graph -&gt;
+                  Automatic Layout form the menu, or by typing Ctrl-T.
+                  <li>If you opened CntToLeds-InWireless.moml, you
+                  have to first right-click on the MicaBoard and
+                  select Look Inside, then right-click on the
+                  MicaActor and select Look Inside.  Then, you can run
+                  the automatic graph layout by selecting Graph -&gt;
+                  Automatic Layout form the menu, or by typing Ctrl-T.
+                </ul>
 
-              <li>Try to open a demo that uses components original source directory.  Go to File | Open File, and open file $PTII/vendors/ptinyos/momlapp/apps/Blink/Blink.moml
+              <li>Try to open a demo that uses the components original
+              source directory.  Go to File -&gt; Open File, and open file
+              <CODE>$PTII/vendors/ptinyos/momlapp/apps/Blink/Blink.moml</CODE>
+		 or
+              <CODE>$PTII/vendors/ptinyos/momlapp/apps/Blink/Blink-InWireless.moml</CODE>
+              (only one of these will have been generated, depending
+              on what options were used in running ncapp2moml.
             </ol>
         </ol>
     </ol>
