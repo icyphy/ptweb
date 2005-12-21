@@ -1,0 +1,89 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Semantic Foundation of the Tagged Signal Model</title>
+</head>
+<body>
+<center>
+  <h1>Semantic Foundation of the Tagged Signal Model</h1>
+</center>
+<center>
+<p>Xiaojun Liu<p>
+<p>PhD Thesis, EECS Department, University of California, Berkeley, December 20, 2005.
+<p> <a href="xiaojun_thesis.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+		<p> Also available as: <a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2005/EECS-2005-31.html"><i>Technical Report No. UCB/EECS-2005-31</i><a>, EECS Department, University of California, Berkeley, CA 94720, December 20, 2005.
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+
+The tagged signal model provides a denotational framework
+to study properties of various models of computation.
+It is a generalization of the <i>Signals and Systems</i> approach
+to system modeling and specification. Having different
+models of computation or aspects of them specified in the
+tagged signal model framework provides the following
+opportunities. First, one can compare certain properties
+of the models of computation, such as their notion of
+synchrony. Such comparisons highlight both the differences
+and the commonalities among the models of computation.
+Second, one can define formal relations among signals and
+process behaviors from different models of computation.
+These relations have important applications in the
+specification and design of heterogeneous embedded systems.
+Third, it facilitates the cross-fertilization of results
+and proof techniques among models of computation. This
+opportunity is exploited extensively in this dissertation.
+
+<p>
+The main goal of this dissertation is to establish a
+semantic foundation for the tagged signal model. Both
+order-theoretic and metric-theoretic concepts and
+approaches are used. The fundamental concepts of the
+tagged signal model--signals, processes, and networks of
+processes--are formally defined. From few assumptions on
+the tag sets of signals, it is shown that the set of all
+signals with the same partially ordered tag set and the
+same value set is a complete partial order. This leads
+to a direct generalization of Kahn process networks to
+tagged process networks.
+
+<p>
+Building on this result, the order-theoretic approach is
+further applied to study timed process networks, in which
+all signals share the same totally ordered tag set. The
+order structure of timed signals provides new
+characterizations of the common notion of causality
+and the discreteness of timed signals. Combining the
+causality and the discreteness conditions is proved to
+guarantee the non-Zenoness of timed process networks.
+
+<p>
+The metric structure of tagged signals is studied from the
+very specific--the Cantor metric and its properties.
+A generalized ultrametric on tagged signals is proposed,
+which provides a framework for defining more specialized
+metrics, such as the extension of the Cantor metric to
+super-dense time.
+
+<p>
+The tagged signal model provides not only a framework for
+studying the denotational semantics of models of
+computation, but also useful constructs for studying
+implementations or simulations of tagged processes.
+This is demonstrated by deriving certain properties
+of two discrete event simulation strategies from the
+behavioral specifications of discrete event processes.
+A formulation of tagged processes as labeled transition
+systems provides yet another framework for comparing
+different implementation or simulation strategies for
+tagged processes. This formulation lays the foundation to
+future research in polymorphic implementations of tagged
+processes.
+
+</body>
+</html>
+
+
