@@ -20,22 +20,19 @@ and
 <a href="../ptolemyII" target="_top">Ptolemy II</a>
 
  <p><BLOCKQUOTE>
-	<B>Note: As of 10/05, Windows users will not be able
+	<B>Note: As of 2/06, Windows users must use gcc-3.2 to
        to run TinyOS models inside Ptolemy.</B>
-	The reason is that reloading the TinyOS shared objects
-	into the running Ptolemy interface fails because the
-	TinyOS shared objects use pthreads and under Windows, Java
-	is using Windows native threads.  We are working on a
-	solution.  In the interim, Windows users can convert 
-	.nc files to .moml files and create models, but running
-	the model fails.
+	The reason is that that Java Native Interface (JNI) is broken
+	in newer versions of Cygwin.  Windows users must install
+	Cygwin from roughly August, 2003, such as
+	<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII3.0/cygwin.htm">Ptolemy II 3.0 Cygwin Devel</a>
 
 <p>Despite the bug above, Windows users and other users can
 generate code by changing the PtinyOSDirector target
 from <code>ptII</code> to <code>pc</code> or some other tinyos target like
 <code>mica</code> or <code>mica install</code>.
 See <code>$PTII/ptolemy/configs/viptos/help.htm</code> for details.
-Only running a simulation within ptII will bring up the pthreads issue.
+Only running a simulation within ptII involves JNI.
 
 
 </BLOCKQUOTE>
@@ -51,7 +48,7 @@ on the Ptolemy 5.1-alpha sources.
 
 <menu>
 <li> <a
-href="viptos1.0/viptos1.0-beta.src.tar.gz"><CODE>viptos1.0-beta.src.tar.gz</CODE></a> (14Mb)
+href="viptos1.0/viptos1.0-beta.src.tar.gz"><CODE>viptos1.0-beta.src.tar.gz</CODE></a> (14.4Mb)
 Gzipped Tar file with Unix line endings.  
 
 
