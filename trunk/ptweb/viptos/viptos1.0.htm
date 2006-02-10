@@ -1,0 +1,64 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Viptos 1.0-beta</title>
+</head>
+<body>
+<h1>
+<a name="Viptos">Viptos 1.0-beta - Visual interface between Ptolemy and TinyOS</a></h1>
+<table>
+ <tr>
+   <td><img src="image/viptos-logo-forweb.gif" alt="Viptos" width="441" height="189" align="left">
+   </td> 
+</table>
+
+ <p>Viptos is an interface between 
+    <a href="http://www.tinyos.net" target="_top">TinyOS</a>
+and 
+<a href="../ptolemyII" target="_top">Ptolemy II</a>
+
+ <p><BLOCKQUOTE>
+	<B>Note: As of 10/05, Windows users will not be able
+       to run TinyOS models inside Ptolemy.</B>
+	The reason is that reloading the TinyOS shared objects
+	into the running Ptolemy interface fails because the
+	TinyOS shared objects use pthreads and under Windows, Java
+	is using Windows native threads.  We are working on a
+	solution.  In the interim, Windows users can convert 
+	.nc files to .moml files and create models, but running
+	the model fails.
+
+<p>Despite the bug above, Windows users and other users can
+generate code by changing the PtinyOSDirector target
+from <code>ptII</code> to <code>pc</code> or some other tinyos target like
+<code>mica</code> or <code>mica install</code>.
+See <code>$PTII/ptolemy/configs/viptos/help.htm</code> for details.
+Only running a simulation within ptII will bring up the pthreads issue.
+
+
+</BLOCKQUOTE>
+
+This release is called Viptos 1.0-beta, it is the second release of
+Viptos, which is based on Ptolemy II 6.0-devel.
+
+ <br>The first release was named Viptos-5.1-alpha because it was released
+on the Ptolemy 5.1-alpha sources.
+
+
+<h2>Downloads</h2>
+
+<menu>
+<li> <a
+href="viptos1.0/viptos1.0-beta.src.tar.gz"><CODE>viptos1.0-beta.src.tar.gz</CODE></a> (14Mb)
+Gzipped Tar file with Unix line endings.  
+
+
+</menu>
+
+
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+</body>
+</html>
