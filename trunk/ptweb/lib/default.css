@@ -1,5 +1,5 @@
-BODY, H2, H3  { background: #faf0e6; font-family: Arial, sans-serif;
-        font-size: 12pt; font-weight: strong }
+BODY, H2, H3, table  { background: #faf0e6; font-family: Arial, sans-serif;
+        font-size: 11pt; font-weight: strong }
 
 
 H1 { font-family: Arial, sans-serif;
