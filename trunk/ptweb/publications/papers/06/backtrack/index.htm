@@ -1,0 +1,25 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Incremental Checkpointing with Application to Distributed Discrete Event Simulation</title>
+</head>
+<body>
+<center>
+  <h1>Incremental Checkpointing with Application to Distributed Discrete Event Simulation</h1>
+</center>
+<center>
+<p>Thomas Huining Feng and Edward A. Lee<p>
+<p>
+submitted to <i>Winter Simulation Conference 2006</i> <br>to be held in Monterey, CA, Dec. 3-6, 2006.
+<p> <a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-37.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+<p>
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+Checkpointing is widely used in robust fault-tolerant applications. We present an efficient incremental checkpointing mechanism. It requires to record only the the state changes and not the complete state. After the creation of a checkpoint, state changes are logged incrementally as records in memory, with which an application can spontaneously roll back later. This incrementality allows us to implement checkpointing with high performance. Only small constant time is required for checkpoint creation and state recording. Rollback requires linear time in the number of recorded state changes, which is bounded by the number of state variables times the number of checkpoints. We implement a Java source transformer that automatically converts an existing application into a behavior-preserving one with checkpointing functionality. This transformation is application-independent and application-transparent. A wide range of applications can benefit from this technique. Currently, it has been used for distributed discrete event simulation using the Time Warp technique.
+<p>
+</body>
+</html>
