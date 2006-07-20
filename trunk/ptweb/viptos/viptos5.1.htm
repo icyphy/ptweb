@@ -43,6 +43,16 @@ Only running a simulation within ptII will bring up the pthreads issue.
 This is the first release of Viptos, which is based on Ptolemy II 5.1,
 hence the name of the release is Viptos 5.1-alpha.
 
+    <p> Summary of steps for getting Viptos to the point where you can create and simulate wireless sensor node applications:
+    <ol>
+      <li>Download <a href="viptos5.1/viptos5.1-alpha.src.tar.gz">viptos5.1-alpha.src.tar.gz</a>, compile it.
+      <li>Set up the links to your tinyos-1.x and nesc trees in $PTII/vendors/ptinyos
+      <li>Install the tools required by <a href="viptos5.1/nc2moml.htm">nc2moml</a> and use it to build a moml library
+        representing the basic nesC components.
+      <li>Install the tools required by <a href="viptos5.1/ncapp2moml.htm">ncapp2moml</a> and use it to build moml versions
+        of the nesC applications.
+    </ol>
+
 <h2>Downloads</h2>
 
 <menu>
