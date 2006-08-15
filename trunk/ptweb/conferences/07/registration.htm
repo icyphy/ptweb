@@ -1,0 +1,106 @@
+<!--@(#)registration.html	1.4 10/27/98 
+This page is based on the page by Bob Miller at:
+http://http.cs.berkeley.edu/~bmiller/BRASS.rsvp.html
+
+The mailform.pl program can be found at
+http://www.colorado.edu/webworks/resources/mailform/
+-->
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Registration</title>
+</head>
+<body>
+<H1>Registration</H1>
+<p>
+The Sixth Biennial Ptolemy Miniconference will occur on Thursday, May 12, 2005 at the
+<a href="venue.htm">Soda Hall HP Auditorium</a> 
+on the University of California campus, Berkeley, California. 
+<p>
+Please complete the form and then click on the
+<STRONG>OK</STRONG> button at the end of the form.
+<P>
+<STRONG>Please note:</STRONG><i> All provided information will be for
+the Ptolemy Miniconference use only.</i>
+
+<FORM METHOD="POST" ACTION="/cgi-bin/mailform.pl">
+
+<!- Address of the person who will receive the email >
+<input type="hidden" name="sendTo" value="ptconf05@ptolemy.eecs.berkeley.edu">
+
+<!- Subject of the email >
+<input type="hidden" name="subject" value="Ptolemy Miniconference Registration (May 12, 2005)">
+
+<!- Website to email to>
+<input type="hidden" name="webSite" value="ptolemy.eecs.berkeley.edu">
+
+<!- URL to go to when we are done >
+<input type="hidden" name="url" value="http://ptolemy.eecs.berkeley.edu/conferences/05/main.htm">
+
+<P><STRONG><H3>Name: </STRONG></H3><inPUT TYPE="TEXT" NAME="01Name" SIZE="40"></P>  
+<P><STRONG><H3>Organization and Address: </STRONG></H3>
+<TEXTAREA NAME="02Organization" ROWS="6" COLS="40"></TEXTAREA>
+</P> 
+<P>
+<STRONG><H3>Phone: </STRONG></H3><inPUT TYPE="TEXT" NAME="03Phone" SIZE="20">
+<tt> </tt>
+<STRONG><H3>FAX: </STRONG></H3><inPUT TYPE="TEXT" NAME="04FAX" SIZE="20"><BR>
+<tt> </tt>
+<STRONG><H3>Email: </STRONG></H3><inPUT TYPE="TEXT" NAME="05Email" SIZE="50"></p>
+
+<H4><STRONG>Presenter</H4></STRONG> 
+If you are giving a presentation, please type in the title;
+otherwise, leave the field below blank.
+ <br>Note that you may change your title as you see fit;
+we are only trying to get an idea of who is presenting.
+<P><TEXTAREA NAME="06Presentation" ROWS=3 COLS=40></TEXTAREA></P>
+
+<H4><STRONG>Poster</H4></STRONG> 
+If you are giving a poster, please type in the title,
+otherwise, leave the field below blank.
+ <br>Note that you may change your title as you see fit;
+we are only trying to get an idea of who is giving a poster.
+<P><TEXTAREA NAME="07Poster" ROWS=3 COLS=40></TEXTAREA></P>
+<p>
+If you require power and a monitor at your poster, please
+check the following:
+<H3>
+<INPUT TYPE="CHECKBOX" name="12NeedPower" value="Need Power and Monitor">Need Power and Monitor
+</H3>
+
+<H4><STRONG>Meal Preferences</H4></STRONG> 
+If you would like a vegetarian lunch, please check the following:
+<H3>
+<INPUT TYPE="CHECKBOX" name="12Vegetarian" value="Vegetarian">Vegetarian
+</H3>
+</ul>
+
+<P><STRONG><H3>Comments related to any of the information given above:</P></STRONG></H3>
+<P><TEXTAREA NAME="13Comments" ROWS=6 COLS=40></TEXTAREA></P>
+
+ <p><STRONG><H3>Conference Fee</P></STRONG></H3>
+
+<p><a name="fee">Note</a> that there will be a $100 conference fee.
+<br>The fee can be paid in advance or paid at the conference.
+<br>To pay in advance, send a cheque for $100 made out 
+to 'The Regents of the University of California' to:
+
+<p>University of California At Berkeley
+<br>Mary Stewart
+<br>337 Cory Hall #1770
+<br>Berkeley, CA 94720-1770 
+
+<p>At the conference, we will accept Visa and cheques.
+
+<P>
+<STRONG><H3>To submit, please click the "OK" button. Thank you.</Strong> </P></H3>
+
+<inPUT TYPE="SUBMIT" VALUE="OK">
+<inPUT TYPE="RESET" VALUE="Clear Form">
+</FORM>
+
+<p>
+</body>
+</html>
