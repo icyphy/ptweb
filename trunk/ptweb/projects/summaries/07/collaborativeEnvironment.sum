@@ -13,24 +13,51 @@ PHONE
 TITLE
 Programming Large-scale Distributed Collaborative Virtual Environment
 
-
 CHAPTER
 02.cad
 
 ABSTRACT
-Collaborative Virtual Environment (CVE) is an computer generated artificial space in which multiple users interact and collaborate with each other as if they were co-located, even though those users may be geographically dispersed[1]. Example areas of CVEs include multi-player computer  games, online education, military and industrial training, and collaborative design.
+Collaborative Virtual Environment (CVE) is an computer generated
+artificial space in which multiple users interact and collaborate with
+each other as if they were co-located, even though those users may be
+geographically dispersed[1]. Example areas of CVEs include
+multi-player computer games, online education, military and industrial
+training, and collaborative design.
 
-<P>
-CVE Applications typically use one of the two architectures:  the client-server architecture and the peer-to-peer architecture. With the increasing interest in large-scale collaborative virtual environment, design of peer-to-peer CVEs is gaining more attention in both academic and industrial research. In the peer-to-peer architecture, the program that simulates the virtual space is replicated to each participant's node, and user actions are propagated to all the participants. Key challenges in designing such systems include ensuring that users share the same state of the virtual space (consistency) upon random communication delays and message loss, maintaining reasonable responsiveness, and managing concurrent user actions on different objects or the same objects in the virtual space. 
+<P> CVE Applications typically use one of the two architectures: the
+client-server architecture and the peer-to-peer architecture. With the
+increasing interest in large-scale collaborative virtual environment,
+design of peer-to-peer CVEs is gaining more attention in both academic
+and industrial research. In the peer-to-peer architecture, the program
+that simulates the virtual space is replicated to each participant's
+node, and user actions are propagated to all the participants. Key
+challenges in designing such systems include ensuring that users share
+the same state of the virtual space (consistency) upon random
+communication delays and message loss, maintaining reasonable
+responsiveness, and managing concurrent user actions on different
+objects or the same objects in the virtual space.
 
-<P>
-In recent years, a large number of protocols for consistency, reliability and fault tolerance management for distributed CVEs have been developed, including protocols for shared whiteboard applications and distrubuted games. However, designers for CVE applications are required to have specific knowledge about these protocols, and need to manage concurrency issues in the system by themselves. The computation logic is often tied up with some specific protocol, and it is difficult to port an application based on some particular protocol to another protocol, or integrate applications based on different protocols. 
+<P> In recent years, a large number of protocols for consistency,
+reliability and fault tolerance management for distributed CVEs have
+been developed, including protocols for shared whiteboard applications
+and distrubuted games. However, designers for CVE applications are
+required to have specific knowledge about these protocols, and need to
+manage concurrency issues in the system by themselves. The computation
+logic is often tied up with some specific protocol, and it is
+difficult to port an application based on some particular protocol to
+another protocol, or integrate applications based on different
+protocols.
 
-<P>
-In this project, we plan to factor out some common aspects of distributed CVEs, and provide a set of generic services to support message propagation, consistency and fault tolerance management, etc. Then we develop programming models using these services but provide a higher level of abstraction to designers. The goal is to free designers from the shared state management and concurrency management, but focus on the computing logic part which is well encapsulated in some component model.
+<P> In this project, we plan to factor out some common aspects of
+distributed CVEs, and provide a set of generic services to support
+message propagation, consistency and fault tolerance management,
+etc. Then we develop programming models using these services but
+provide a higher level of abstraction to designers. The goal is to
+free designers from the shared state management and concurrency
+management, but focus on the computing logic part which is well
+encapsulated in some component model.
 
 <P>
 References:
 <p>
 1. S. Singhal and M. Zyda, Networked Virtual Environment: Design and Implementation, Addison-Wesley, Reading, MA, 1999 
-<p>
