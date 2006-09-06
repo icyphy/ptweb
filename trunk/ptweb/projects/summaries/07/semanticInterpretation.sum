@@ -1,0 +1,29 @@
+NAMES
+Eleftherios D. Matsikoudis
+
+EMAIL
+ematsi@eecs.berkeley.edu
+
+TITLE
+Semantic Interpretation of Timed Discrete-Event Systems
+
+ABSTRACT
+<p> In the context of timed discrete-event systems, processes are allowed to 
+realize functions that are not order-preserving with respect to the prefix 
+ordering relation on the communicated sequences of values. This property 
+renders naive applications of traditional domain-theoretic models inadequate 
+for the semantic interpretation of such systems. Yet interesting results have 
+been obtained by imposing a fixed lower bound on the reaction time of the 
+involved processes, effectively precluding Zeno behavior [1, 2]. 
+
+<p> This work focuses on relaxing this requirement to obtain semantic 
+interpretations even in the presence of Zeno conditions. The underlying aim is 
+to establish a canonical denotational definition of timed discrete-event 
+programming languages, thereby providing the means for reasoning about the 
+correctness of the individual implementations, as well as allowing hidden 
+commonalities of seemingly different timed systems to emerge.
+
+<p>[1] R. K. Yates, "Networks of real-time processes", 
+In CONCUR ’93: Proceedings of the 4th International Conference on Concurrency Theory, pages 384–397, Springer-Verlag, 1993.
+<p>[2] E. A. Lee, <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/99/realtime/">"Modeling concurrent real-time processes using discrete events"</a>, 
+Annal of Software Engineering, 7(3):25–45, 1999, Invited Paper.

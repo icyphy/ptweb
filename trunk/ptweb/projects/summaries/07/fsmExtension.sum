@@ -1,0 +1,29 @@
+NAMES
+Rachel Zhou
+
+EMAIL
+zhouye@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/~zhouye/
+
+PHONE
+510-642-6067
+
+TITLE
+Extension of Finite State Machine
+
+CHAPTER
+03.cad
+
+ABSTRACT 
+
+<P>
+The current Ptolemy II software uses modal model to compose finite state machine (FSM)  with other models of computation. A modal model is a composite actor with an FSM director  as its local director. A modal model can be embedded in, as well as each of its states can  be refined to a different domain. The FSM itself cannot represent the computational  dynamics or the consumption and production of tokens. But rather they are inferred by the  current state refinement. Such semantics limit the designer's power to specify the  behavior of FSM/modal model. 
+<P>
+In this project, we would like to experiment adding expressiveness in state transitions of  FSM. Transitions should be able to infer the consumption and production of tokens. This  requires correctly parsing the guard and action expressions in the transition. The study  plan is as follows: (1) We will first study the case where all the inferred ports have  rate 1. Ports that are not inferred have rate zero. (2) Next we shall design a syntax  where multirate ports can be specified. We assume there is no state refinement in the  above two cases. (3) We study the case where both transition and state refinement consume  and/or produce tokens.
+<P>
+References:
+<p>
+[1] C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, H. Zheng (eds.), "<a href="http://ptolemy.eecs.berkeley.edu/papers/05/ptIIdesign3-domains">Heterogeneous Concurrent Modeling and Design in Java (Volume 3: Ptolemy II Domains),"</a> <i>Technical Memorandum UCB/ERL M05/23</i>, University of California, Berkeley, CA USA 94720, July 15, 2005.
+<P>

@@ -1,0 +1,91 @@
+NAMES
+Thomas Feng
+
+EMAIL
+tfeng@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.eecs.berkeley.edu/~tfeng/
+
+PHONE
+
+TITLE
+Distributed Modeling and Simulation with Backtracking
+
+CHAPTER
+02.cad
+
+ABSTRACT 
+Distributed modeling and simulation are active research areas. They
+received increasing concern, particularly because high-speed networks
+and cluster computer systems are widely available. There are many
+good reasons for using such systems in large-scale modeling and
+simulation, some of which are:
+
+<ul type="circle">
+  <li>
+    <p>to make full use of the combined power of the computing resources
+available in a network by involving them in a simulation, which is too
+slow or too large to fit into a single affordable machine;</p>
+  </li>
+  <li>
+    <p>to simulate a real application featuring the ability of high-speed
+distributed computation;</p>
+  </li>
+  <li>
+    <p>to build distributed collaborative shared data spaces;</p>
+  </li>
+  <li>
+    <p>to model the behavior of a P2P (peer-to-peer) or CS (client-server)
+network, to analyze its performance with a simulation identical to its
+real behavior, and finally to optimize it and re-engineer it;</p>
+  </li>
+  <li>
+    <p>and to enable cooperation in the modeling process with participants
+from different physical locations.</p>
+  </li>
+</ul>
+
+<p>
+Ptolemy II is a modeling, design, and simulation framework suitable for addressing
+such requirements. To incorporate the ability of high-speed distributed
+computation into Ptolemy II, we study a number of interesting problems.
+</p><p>
+One example is the strategy employed to overcome network latency while
+still maximizing speed. Time Warp [1] is one approach, and there are others
+under research.
+</p><p>
+Some other problems are more tractable and partially
+satisfactory solutions have been found. One example is the backtracking
+requirement for the above-mentioned strategy. I have prototyped a
+mechanism using aspect-oriented programming to
+transparently insert rollback code into a Ptolemy II models with
+relatively small overhead. I am studying refinements, improvements,
+and semantic implications.
+</p><p>
+In this project, I will take a formal approach to describe the global
+semantics of those highly autonomous but still mutually dependent components
+in a distributed system.
+This work will probably give rise to a formalism which, like PN (process
+networks), regards components as processes and abstracts the physical
+connections between them as data channels with FIFO queues. However,
+unlike PN or DE (discrete events) systems,
+issues related to the nature of distributed systems cannot be abstracted
+away. In this scenario,
+components are highly flexible, whose activities are not restricted by
+blocking reads. Connections between them might be
+established, destroyed, or re-established dynamically. Components might
+transparently migrate from one
+physical location to another. Latency is observable, and in the worst case,
+messages might be lost. No single manager is able to arbitrate such global
+notions as global startup signals and global time. With the penalty of
+increased
+complexity, this formalism significantly improves flexibility, and more
+directly maps to implementation.
+</p><p>
+<b>References:</b>
+</p><p>
+[1] D. Jefferson, Brian Beckman, et al, <em>Distributed Simulation and the
+Time Warp Operating System</em>, UCLA Computer Science Department: 870042,
+1987.
+</p>
