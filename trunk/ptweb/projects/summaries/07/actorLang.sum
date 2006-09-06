@@ -1,0 +1,77 @@
+NAMES
+Adam Cataldo
+
+EMAIL
+acataldo@eecs.berkeley.edu
+
+HOMEPAGE
+http://www.cs.berkeley.edu/~acataldo
+
+PHONE
+510-642-6817
+
+TITLE
+Building An Actor-Oriented Language
+
+CHAPTER
+04.ess
+
+ABSTRACT 
+
+Ptolemy II [1] is an <i>actor-oriented</i> modeling environment for 
+embedded software design. In actor-oriented design [2], actors are 
+concurrent components which communicate through ports according to a 
+pattern of interaction. This contrasts object-oriented design, where 
+objects interact by passing control between each other.  In Ptolemy 
+II, one builds hierarchies of actors, where the communication 
+patterns, which can change between hierarchy levels, are specified 
+via reusable components called <i>directors</i>.
+
+<p>This environment naturally describes large systems, where the 
+interaction between components depends on the level in the 
+hierarchy.  To support such systems, features must scale well with 
+model size.  Unfortunately, this is not true for the current 
+implementation.  I therefore propose designing a scalable, 
+actor-oriented language which leverages the flexible interaction 
+patterns of Ptolemy II. 
+
+<p>Such a language should simplify the design of large concurrent 
+systems, where programmers must be able bundle components through 
+hierarchy [3] and extend components in an object-oriented approach 
+[4]. Higher-order actors can allow programmers to model dynamic 
+networks. The design challenge is to provide the appropriate 
+language features while maintaining the scalability needed for large 
+models.
+
+
+<p><a name="1">[1]</a>
+Christopher Brooks, Edward A. Lee, Xiojun Liu, Stephen Neuendorffer, 
+Yang Zhao, and Haiyang Zheng. <a href = 
+"http://ptolemy.eecs.berkeley.edu/publications/papers/05/ptIIdesign1-intro">Heterogeneous 
+concurrent modeling and design in Java.</a> Technical Report UCB/ERL 
+M05/21, EECS, University of
+California, Berkeley, 2005.
+
+<p><a name="2">[2]</a>
+Edward A. Lee. <a href = 
+"http://ptolemy.eecs.berkeley.edu/publications/papers/03/MontereyWorkshopLee/">Model-driven 
+development - from object-oriented design to actor-oriented 
+design.</a> In <i>Workshop on Software Engineering for Embedded 
+Systems: From Requirements to Implementation (a.k.a. The Monterey
+Workshop)</i>, Chicago, 2003.
+
+<p><a name="3">[3]</a>
+Johan Eker, J¨orn W. Janneck, Edward A. Lee, Jie Liu, Xiaojun Liu, 
+J. Ludvig, Stephen Neuendorffer, S. Sachs, and Yuhong Xiong. <a href 
+= 
+"http://ptolemy.eecs.berkeley.edu/publications/papers/03/TamingHeterogeneity/">Taming 
+heterogeneity - the Ptolemy approach.</a> <i>Proceedings of the 
+IEEE</i>, 91(1):127–144,
+2003.
+
+<p><a name="4">[4]</a>
+Edward Lee and Stephen Neuendorffer. <a href = 
+"http://ptolemy.eecs.berkeley.edu/publications/papers/04/Classes/">Classes 
+and subclasses in actor-oriented design.</a> In <i>Conference of 
+Formal Methods and Models for Codesign</i>,
+2004.
