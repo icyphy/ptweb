@@ -14,7 +14,6 @@ SUM_SOURCES =  \
 	fsmExtension.sum \
 	operationalSemanticsOfHS.sum \
 	ptIIdistributed.sum \
-	ptolemyII.sum \
 	realtime.sum \
 	semanticInterpretation.sum \
 	viptos.sum \
