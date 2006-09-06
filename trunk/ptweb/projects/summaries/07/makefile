@@ -3,20 +3,23 @@
 # .sum files that are used to create the .html files
 SUM_SOURCES =  \
 	ptolemyII.sum \
-	actorLang.sum \
+	DDF_BDF.sum \
 	abstractSemantics.sum \
+	actor-wsn.sum \
+	actorLang.sum \
 	causalityInterfaces.sum \
 	collaborativeEnvironment.sum \
-	operationalSemanticsOfHS.sum \
-	semanticInterpretation.sum \
-	fsmExtension.sum \
-	realtime.sum \
-	actor-wsn.sum \
-	viptos.sum \
 	compositionalDataflow.sum \
-	DDF_BDF.sum \
+	ePtolemy05.sum \
+	fsmExtension.sum \
+	operationalSemanticsOfHS.sum \
 	ptIIdistributed.sum \
+	ptolemyII.sum \
+	realtime.sum \
+	semanticInterpretation.sum \
+	viptos.sum \
 	wireless.sum
+
 
 # other sources that are not .sum files
 OTHER_SRCS =
