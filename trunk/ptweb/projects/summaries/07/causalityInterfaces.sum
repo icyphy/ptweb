@@ -1,32 +1,29 @@
 NAMES
-Haiyang Zheng and Ye Zhou
+Ye Zhou and Edward A. Lee
 
 EMAIL
-hyzheng@eecs.berkeley.edu
+zhouye@eecs.berkeley.edu
 
 HOMEPAGE
-http://www.eecs.berkeley.edu/~hyzheng/
+http://www.eecs.berkeley.edu/~zhouye/
 
 PHONE
 510-642-6899
 
 TITLE
-Causality Interfaces and Compositional Causality Analysis
+Causality Interfaces for Actor Networks
 
 CHAPTER
 02.cad
 
 ABSTRACT
 
-Component-based design is important for design of complex embedded software, where composition and abstraction play key roles for success. In this research, we study compositions of one kind of active components called "actors", which are in charge of their own actions and communicate by exchanging messages. The patterns of the communication or interactions between actors are called "models of computation". Examples of models of computation include the classical actor model, synchronous languages, dataflow models, and discrete-event models. 
-Many of these models of computation benefit considerably from having access to causality information about actors. 
+We consider concurrent models of computation where "actors" (components that are in charge of their own actions) communicate by exchanging messages. The interfaces of actors principally consist of "ports," which mediate the exchange of messages. Actor-oriented architectures contrast with and complement object-oriented models by emphasizing the exchange of data between concurrent components rather than transformation of state. Examples of such models of computation include the classical actor model, synchronous languages, dataflow models, process networks, and discrete-event models. Many experimental and production languages used to design embedded systems are actor oriented and based on one of these models of computation. Many of these models of computation benefit considerably from having access to causality information about the components. This work augments the interfaces of such components to include such causality information. It shows how this causality information can be algebraically composed so that compositions of components acquire causality interfaces that are inferred from their components and the interconnections. We illustrate the use of these causality interfaces to statically analyze timed models and synchronous language compositions for causality loops and dataflow models for deadlock. We also show that that causality analysis only needs to be performed for one port in each directed communication cycle, and we give a conservative approximation technique for handling dynamically changing causality properties.
 <p>
-We augment the static structure interfaces of actors (ports, parameters, and their type constraints) with a family of causality interfaces. These causality interfaces can be algebraically composed so that compositions of components acquire causality interfaces that are inferred from their components and the interconnections [3]. We have illustrated the use of these causality interfaces to help statically analyze discrete-event models for uniqueness of behaviors [2] and synchronous language models for constructive semantics [1]. We will introduce more causality interfaces and apply them on dataflow models to resolve deadlock problem.
+We are currently working on the use of causality interfaces in the rendezvous model of computation. Further work also includes a clean implementation of such causality interfaces in Ptolemy II, a software infrastructure for embedded system design developed at UC Berkeley.
 <p>
 References:
 <p>
-1. G. Berry, "The constructive semantics of pure Esterel - draft version 3". Technical report, INRIA, 06902 Sophia-Antipolis CDX, France, July 2, 1999. <p>
-2. E. A. Lee, "Modeling Concurrent Real-time Processes Using Discrete Events", Invited paper to Annals of Software Engineering, Special Volume on Real-Time Software Engineering, Volume 7, 1999, pp. 25-45<p>
-3. E. A. Lee, H. Zheng, and Y. Zhou, "Causality Interfaces and Compositional Causality Analysis", Invited paper in Foundations of Interface Technologies (FIT), Satellite to CONCUR 2005, ENTCS TBD, San Francisco, California, USA, August 21, 2005. <p> 
+1. Y. Zhou and E. A. Lee, ¡°A Causality Interface for Deadlock Analysis in Dataflow,¡± Accepted to EMSOFT 2006, Seoul, Korea, October 22-25, 2006. <p>
+2. E. A. Lee, H. Zheng, and Y. Zhou, "Causality Interfaces and Compositional Causality Analysis", Invited paper in Foundations of Interface Technologies (FIT), Satellite to CONCUR 2005, ENTCS TBD, San Francisco, California, USA, August 21, 2005. <p>
 <p>
-
