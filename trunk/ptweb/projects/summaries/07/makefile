@@ -11,13 +11,11 @@ SUM_SOURCES =  \
 	collaborativeEnvironment.sum \
 	compositionalDataflow.sum \
 	ePtolemy05.sum \
-	fsmExtension.sum \
 	operationalSemanticsOfHS.sum \
 	ptIIdistributed.sum \
 	realtime.sum \
 	semanticInterpretation.sum \
-	viptos.sum \
-	wireless.sum
+	viptos.sum 
 
 
 # other sources that are not .sum files
