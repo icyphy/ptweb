@@ -16,57 +16,77 @@
  <table border=1>
    <tr>
      <td>
- <p><B>October 10, 2005</B> - Ptolemy II 6.0-alpha is available for download.
+ <p><B>September 13, 2005</B> - Ptolemy II 6.0-alpha is available for download.
    </td>
   </tr>
 
-   <tr>
-     <td>
- <p><B>July 21, 2005</B> - Ptolemy II 5.0 is available for download.
-   </td>
-  </tr>
  </table>
 </BLOCKQUOTE>
 
  <p>Ptolemy II 6.0-alpha includes
 <ul>
 
-<li> A Dynamic Dataflow (DDF) domain, in which actors are fired in
-response to available input data.
+<ul>
+<li> <a href="ptII/ptolemy/codegen/README.html">Ptolemy II C Code Generation</a>
+ <p>Primary Developers: Jackie Leung, Gang Zhou, Ye Zhou, Edward A. Lee,
+	Christopher Brooks
+ <br>  Ptolemy II can now generate C code for SDF, FSM and HDF models.
+  This new code generator consists of actor templates (called helpers)
+  that contain C code stubs that are stitched together.  Only a subset
+  of actors have helpers, so only a subset of models can be converted
+  to C.  Creating new helpers is fairly easy though.  The code generator
+  has been written to be easily extensible to languages other than C.
 
-<li> Modeling of Hybrid systems. 
-Hybrid systems are a special case of modal models where finite-state
-machines (FSMs) are combined with the continuous-time (CT) models to
-get mixed continuous-time and discrete-event models.
 
-<li> Stochastic hybrid systems, which add random behavior to
-continuous-time models mixed with discrete events.
+<li> The
+<a href="ptII/ptolemy/domains/rendezvous/doc/main.htm">Rendezvous domain</a>:
+ <br>Primary Authors: Thomas Huining Feng, Edward A. Lee
+ <br>In the Rendezvous domain in Ptolemy II, each actor executes in
+its own thread of control, and communication between actors is
+by rendezvous.  If an actor is ready to send a message,
+it blocks until the receiving actor is ready to receive it. Similarly if
+an actor is ready to receive a message, it blocks until the sending actor
+is ready to send it.
+<p>
+This domain supports both conditional and multi-way rendezvous.
+In conditional rendezvous, an actor is willing to rendezvous with
+any one of several other actors. In multiway rendezvous, an actor requires
+rendezvous with multiple other actors at the same time.
+When using conditional rendezvous, the choice of which rendezvous
+occurs is nondeterministic, in general.
+<P>
+The model of computation is based on the Communicating Sequential
+Processesmodel first proposed by Hoare in 1978. Rendezvous-based
+communication is also known as synchronous message passing, but we
+avoid this term to avoid confusion with the SR (synchronous/reactive)
+domain.
+<P><a href="ptII/ptolemy/domains/rendezvous/doc">Demonstration Applets</a> - 
+Javadoc: <a href="ptII/doc/codeDoc/ptolemy/domains/rendezvous/kernel/package-summary.html>kernel</a>, 
+<a href="ptII/doc/codeDoc/ptolemy/domains/rendezvous/lib/package-summary.html>lib</a>
 
-<li> Heterochronous Dataflow (HDF), which is an extension of
-synchronous dataflow (SDF) that permits dynamically changing
-production and consumption patterns without sacrificing static
-scheduling.
+<li> <a href="ptII/ptolemy/configs/viptos/intro.htm">Viptos</a> 
+ <i>Visual editor, code generator, and simulator for TinyOS programs</i>.
+ <br>Primary Author: Elaine Cheong
+ <br><B>Viptos</B> is an interface between TinyOS and Ptolemy II that
+provides a graphical user interface for TinyOS developers.  Users can create TinyOS programs as block diagrams and use Viptos to generate code for any TinyOS-supported target hardware.  Users can also simulate heterogenous networks of TinyOS-based nodes within Viptos.  Viptos includes a tool to make existing libraries of TinyOS/nesC components available as graphical blocks (nc2moml), and another tool to transform existing TinyOS/nesC applications into Viptos models (ncapp2moml).
+<p>
+
+<li> <a href="ptII/doc/codeDoc/ptolemy/distributed/domains/sdf/kernel/DistributedSDFDirector.html">Distributed SDF Domain using Jini</a>
+ <br>Authors: Daniel Lazaro Cuadrado (Aalborg University).
+ <br> The Distributed-SDF domain is an extended version of the existing SDF
+ Domain that performs the simulation in a distributed manner using
+ Jini.
+Javadoc:
+ <a href="ptII/doc/codeDoc/ptolemy/distributed/actor/package-summary.html">actor</a>,
+ <a href="ptII/doc/codeDoc/ptolemy/distributed/client/package-summary.html">client</a>,
+ <a href="ptII/doc/codeDoc/ptolemy/distributed/common/package-summary.html">common</a>,
+ <a href="ptII/doc/codeDoc/ptolemy/distributed/domains/sdf/kernel/package-summary.html">domains.sdf.kernel</a>,
+ <a href="ptII/doc/codeDoc/ptolemy/distributed/rmi/package-summary.html">rmi</a>,
+ <a href="ptII/doc/codeDoc/ptolemy/distributed/util/package-summary.html">util</a>
 
 </ul>
 
-Ptolemy II 6.0-alpha includes the following changes since Ptolemy II 5.0:
-<menu>
-<li> Fixed problem with selecting different user styles for parameters.
-
-<li> shutdown.bat script removed from a demo directory.
-For details see
-<a href="windows.htm#virusWarning">Bat/sdwn3 Virus Warning</a></h2>
-
-<li> Fixed a problem surround saving in a library. See the
-<a href="limitations.htm">Limitations</a> page.
-
-<li> Minor documentation updates
-
-</menu>
-
-
-
-The <a href="ptII6.0-alpha/doc/ptII5.0.release.htm">Ptolemy II 6.0-alpha Release Notes</a> include a list of new features and actors.
+The <a href="ptII6.0-alpha/doc/ptII6.0.release.htm">Ptolemy II 6.0-alpha Release Notes</a> include a list of new features and actors.
 
 <h2>Quick Start Instructions</h2>
 <p>
@@ -176,7 +196,7 @@ various installers.
 <tr>
  <td><a href="windows.htm">Windows Installer</a></td>
  <td>InstallAnywhere, untested on other platforms,
- 1.4.2_08 Java Runtime Environment optionally downloaded </td>
+ 1.5.0_08_ Java Runtime Environment optionally downloaded </td>
  <td>Windows only</td>
  <td>58.5 Mb - 85.8 Mb</td>
  <td>Yes</td>
@@ -202,8 +222,8 @@ various installers.
 <h4> Places to go</h4>
 <menu>
 <li> The 
-"<a href="ptII6.0-alpha/doc/design/usingVergil/index.htm" target="_top">Using Vergil</a>" chapter from the
-<a href="ptII6.0-alpha/doc/design/index.htm" target="_top">Ptolemy II Design Document</a>
+"<a href="ptII/doc/design/usingVergil/index.htm" target="_top">Using Vergil</a>" chapter from the
+<a href="ptII/doc/design/index.htm" target="_top">Ptolemy II Design Document</a>
 <li><a href="limitations.htm">Limitations</a>
 </menu>
 
