@@ -1,0 +1,213 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Ptolemy II 5.0.1</title>
+</head>
+<body>
+<table>
+<tr><td>
+ <img src="ptII/doc/img/PtolemyIISplash.gif" alt="Ptolemy II 5.0.1" align="left">
+</td>
+</table>
+
+<BLOCKQUOTE>
+ <table border=1>
+   <tr>
+     <td>
+ <p><B>October 10, 2005</B> - Ptolemy II 5.0.1 is available for download.
+   </td>
+  </tr>
+
+   <tr>
+     <td>
+ <p><B>July 21, 2005</B> - Ptolemy II 5.0 is available for download.
+   </td>
+  </tr>
+ </table>
+</BLOCKQUOTE>
+
+ <p>Ptolemy II 5.0.1 includes
+<ul>
+
+<li> A Dynamic Dataflow (DDF) domain, in which actors are fired in
+response to available input data.
+
+<li> Modeling of Hybrid systems. 
+Hybrid systems are a special case of modal models where finite-state
+machines (FSMs) are combined with the continuous-time (CT) models to
+get mixed continuous-time and discrete-event models.
+
+<li> Stochastic hybrid systems, which add random behavior to
+continuous-time models mixed with discrete events.
+
+<li> Heterochronous Dataflow (HDF), which is an extension of
+synchronous dataflow (SDF) that permits dynamically changing
+production and consumption patterns without sacrificing static
+scheduling.
+
+</ul>
+
+Ptolemy II 5.0.1 includes the following changes since Ptolemy II 5.0:
+<menu>
+<li> Fixed problem with selecting different user styles for parameters.
+
+<li> shutdown.bat script removed from a demo directory.
+For details see
+<a href="windows.htm#virusWarning">Bat/sdwn3 Virus Warning</a></h2>
+
+<li> Fixed a problem surround saving in a library. See the
+<a href="limitations.htm">Limitations</a> page.
+
+<li> Minor documentation updates
+
+</menu>
+
+
+
+The <a href="ptII5.0.1/doc/ptII5.0.release.htm">Ptolemy II 5.0.1 Release Notes</a> include a list of new features and actors.
+
+<h2>Quick Start Instructions</h2>
+<p>
+Ptolemy II is available in several formats:
+<dl>
+<dt> Applets
+<dd>
+ You can browse Ptolemy II and run demonstration applets
+without downloading the distribution by accessing the
+<a href="ptII5.0.1/doc/index.htm" target="_top">web copy</a>.
+
+<br>The web copy is merely a set of web pages that were created
+when we untar'd the distribution on the Ptolemy web site.
+
+ <br>To access Ptolemy II via the applets, you can either
+go directly to the
+<a href="ptII5.0.1/doc/index.htm" target="_top">web copy</a>,
+or go to the <a href="applet.htm">Ptolemy II 5.0.1 Applets</a>
+page for more information.
+
+<dt> Web Start
+<dd> 
+Web Start is a tool from Sun that
+makes installation and updates particularly simple.  
+ <br>The Web Start installation works best with Windows, but
+has also been tried under Solaris, Linux and Mac OSX.
+ <br>The Web Start installation does not include source,
+but behaves almost exactly like a standalone installation:
+you can save models locally, and you need not be connected
+to the net after the initial installation.
+<br>Note that the Applet web copy and the 
+<a href="webstart.htm">Web Start</a> installations are different, 
+the web copy is a set of web pages where some of the pages
+contain applets, and Web Start is a set of jar files that
+get downloaded to your machine so that you can run Ptolemy II
+at a later time, even if you are not connected to the network.
+For details, see the <a href="#Summary">Installation Summary</a>
+
+ <br>To download using Web Start, see the 
+<a href="webstart.htm">Ptolemy II 5.0.1 Web Start</a> page.
+
+<dt> Windows Installer
+<dd> To download a Windows Installer, see the 
+<a href="windows.htm">Ptolemy II 5.0.1 Windows Installer</a> page.
+
+<dt> Source
+<dd> The source distribution requires either the
+<a href="cygwin.htm">Cygwin tools</a>, 
+<a href="ptII/doc/coding/eclipse.htm">Eclipse</a> or some
+other way of running commands like <CODE>make</CODE>.
+ <br>After building Ptolemy II from source, start
+<CODE>vergil</CODE> from the command line and follow the 
+tour. 
+ <br>The source distribution has been compiled and run under
+Windows, Solaris and Linux.
+
+ <br>If you intend to develop your own actors in Java, then
+you should download the source distribution.
+ <br>To download source, see the
+<a href="download.htm">Ptolemy II 5.0.1 Source Download</a> page and then
+follow the <a href="ptII5.0.1/doc/install.htm">installation instructions</a>.
+</dl>
+
+<h2><a name="Summary">Summary</a></h2>
+The table below is a summary that compares and contrasts the
+various installers.
+
+<table border=1>
+<tr>
+ <th>Download Format</th>
+ <th>Requirement</th>
+ <th>Platform</th>
+ <th>Size</th>
+ <th>Create your own models?</th>
+ <th>Require net connection at runtime?</th>
+ <th>Custom Actor creation? (download includes sources)</th>
+ <th>Code generator?</th>
+</tr>
+
+<tr>
+ <td><a href="applet.htm">Applets</a></td>
+ <td>
+ The applets work best with the 
+<a href="http://java.sun.com/j2se/1.4.2/download.html" target="_top">Java 1.4.2_08 JRE</a>.  See also
+<a href="http://java.sun.com/products/plugin/" target="_top">Java 1.4 plugin</a></td>
+
+ <td>Windows, Linux, MacOS X, Solaris</td>
+ <td>Initially ~3 Mb</td>
+ <td>No</td>
+ <td>Yes</td>
+ <td>No</td>
+ <td>No</td>
+</tr>
+
+<tr>
+ <td><a href="webstart.htm">Web Start</a></td>
+ <td><a href="http://java.sun.com/products/javawebstart/" target="_top">Java Web Start</a>
+</td>
+ <td>Windows, Linux, MacOS X, Solaris</td>
+ <td>~29.8 Mb</td>
+ <td>Yes</td>
+ <td>Not required, but can get updates if connected</td>
+ <td>No</td>
+ <td>No</td>
+</tr>
+
+<tr>
+ <td><a href="windows.htm">Windows Installer</a></td>
+ <td>InstallAnywhere, untested on other platforms,
+ 1.4.2_08 Java Runtime Environment optionally downloaded </td>
+ <td>Windows only</td>
+ <td>58.5 Mb - 85.8 Mb</td>
+ <td>Yes</td>
+ <td>No</td>
+ <td>Yes</td>
+ <td>No</td>
+</tr>
+
+<tr>
+ <td><a href="download.htm">Source Download</a></td>
+ <td><a href="http://java.sun.com/j2se/1.4.2/" target="_top">JDK1.4.2</a>,
+ <a href="cygwin.htm">Devel. tools like make</a>
+ <td>Windows, Linux, MacOS X, Solaris</td>
+ <td>27.6 Mb</td>
+ <td>Yes</td>
+ <td>No</td>
+ <td>Yes</td>
+ <td>Yes</td>
+</tr>
+
+</table>
+
+<h4> Places to go</h4>
+<menu>
+<li> The 
+"<a href="ptII5.0.1/doc/design/usingVergil/index.htm" target="_top">Using Vergil</a>" chapter from the
+<a href="ptII5.0.1/doc/design/index.htm" target="_top">Ptolemy II Design Document</a>
+<li><a href="limitations.htm">Limitations</a>
+</menu>
+
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+</body>
+</html>
