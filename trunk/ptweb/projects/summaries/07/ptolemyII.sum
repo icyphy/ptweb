@@ -34,7 +34,7 @@ communicate via the relations. The <I>domains</I> extend the actor
 package by imposing <I>models of computation</I> on the interaction
 between entities.
 
-<p>The Ptolemy II graphica user interface is called Vergil.  Vergil
+<p>The Ptolemy II graphical user interface is called Vergil.  Vergil
 itself is a component assembly defined in Ptolemy II. Ptolemy II
 includes facilities for code generation from models.
 
