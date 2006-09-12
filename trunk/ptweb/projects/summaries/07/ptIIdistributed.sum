@@ -83,6 +83,11 @@ increased
 complexity, this formalism significantly improves flexibility, and more
 directly maps to implementation.
 </p><p>
+This project will also aim at high availability and recoverable components in a
+distributed system. Checkpoints for the components can be created independently
+and be stored either in backup servers or on hard disks. When the primary component
+fails, one of its backups may be used instead, until the primary restarts and
+catches up.
 <b>References:</b>
 </p><p>
 [1] D. Jefferson, Brian Beckman, et al, <em>Distributed Simulation and the
