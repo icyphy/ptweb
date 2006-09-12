@@ -51,7 +51,6 @@ between entities.
 <li><I>DDF</I>: modeling of dynamically scheduled systems(an extension of SDF);
 <li><i>DT</i>: modeling of discrete-time systems (an extension of SDF);
 <li><i>FSM</i>: modeling of finite state machines;
-
 <li><I>HDF</I>: modeling of systems with changing port rates
 (an extension of SDF);
 <li><i>Giotto</i>: modeling of periodic time-driven systems;
@@ -59,6 +58,7 @@ between entities.
     as communicating Java threads;
 <li><i>PSDF</i>: (parameterized synchronous dataflow) an extension
     of SDF that allows for more extensive reconfiguration of models;
+<li> Rendezvous: process networks with synchronous message passing
 <li><i>SDF</i>: (synchronous dataflow) modeling of deterministic,
     repetitive stream-based computations, such as signal processing;
 <li><i>SR</i>: modeling of synchronous/reactive systems;
@@ -79,6 +79,8 @@ Ptolemy II includes a number of support packages, such as
 <li> <i>plot</i>, providing visual display of data, and
 <li> <i>data</i>, providing a type system, data encapsulation and an
      expression parser.
+<li> <i>codegen</i>, providing C code generation for a subset of
+SDF HDF and FSM models.
 </ul>
 
 For more information about Ptolemy II, see
