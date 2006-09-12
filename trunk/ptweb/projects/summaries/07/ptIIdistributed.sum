@@ -88,6 +88,7 @@ distributed system. Checkpoints for the components can be created independently
 and be stored either in backup servers or on hard disks. When the primary component
 fails, one of its backups may be used instead, until the primary restarts and
 catches up.
+</p><p>
 <b>References:</b>
 </p><p>
 [1] D. Jefferson, Brian Beckman, et al, <em>Distributed Simulation and the
