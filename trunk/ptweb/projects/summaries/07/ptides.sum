@@ -1,0 +1,43 @@
+NAMES
+Yang Zhao
+
+EMAIL
+ellen_zh@eecs.berkeley.edu
+
+HOMEPAGE
+http://ptolemy.eecs.berkeley.edu/
+
+PHONE
+510-642-4557
+
+TITLE
+PTIDES: Programming Temporally Integrated Distributed Embedded Systems
+
+CHAPTER
+02.cad
+
+ABSTRACT
+
+<P>
+In this project, we are interested in developing programming models for real-time distributed systems and studying algorithms that can statically check whether a given model is deployable over a network of nodes.
+
+<P>
+The introduction of network time protocols such as NTP (at a coarse granularity) and IEEE 1588 (at a fine granularity) gives a relatively consistent global notion of time to distributed systems. A key question that arises in the face of such technologies is how they can change the way that real-time distributed systems are developed. 
+
+<P>
+In [1], we present a programming model called PTIDES (Programming Temporally Integrated Distributed Embedded Systems), which leverages time synchronization over distributed platforms. PTIDES uses discrete-event (DE) models as programming specifications for distributed real-time systems and extends discrete-event models with the capability of mapping certain events to physical time. We use model time to define execution semantics and add constraints that bind certain model time events to physical time. We limit the relationship of model time to physical time to only those circumstances where this relationship is needed. An execution model that permits out of order processing of events without sacrificing determinacy and without requiring backtracking is described in [1]. The formal foundation is based on the concepts of relevant dependency and relevant order.
+
+<P>
+As the next step, we want to continue our work in the following directions:
+
+1. Design algorithms that statically analyze whether a given model is deployable over a network of nodes, assuming that we have upper bounds on the network delays and lower bounds on the time interval of events.
+2. Build a prototype programming environment that combine heterochronous dataflow (HDF) [2] and DE. The overall architecture of an application is a distributed discrete-event model of interactions of concurrent real-time components (which we call actors). The components themselves have functionality that can be specified either by HDF models or conventional programming languages (C, C++ or Java, in this case). 
+
+<p> 
+References:
+
+<p>
+[1] Y. Zhao, E. A. Lee, and J. Liu. Programming temporally integrated distributed embedded systems. Technical Report UCB/EECS-2006-82, EECS Department, University of California, Berkeley, May 28 2006.
+
+<p>
+[2] A. Girault, B. Lee, and E. A. Lee. Hierarchical finite state machines with multiple concurrency models. IEEE Transactions On Computer-aided Design Of Integrated Circuits And Systems, 18(6):742–760, 1999.
