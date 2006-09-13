@@ -8,10 +8,9 @@ SUM_SOURCES =  \
 	actor-wsn.sum \
 	actorLang.sum \
 	causalityInterfaces.sum \
-	collaborativeEnvironment.sum \
 	compositionalDataflow.sum \
-	ePtolemy05.sum \
 	operationalSemanticsOfHS.sum \
+	ptides.sum \
 	ptIIdistributed.sum \
 	realtime.sum \
 	semanticInterpretation.sum \
