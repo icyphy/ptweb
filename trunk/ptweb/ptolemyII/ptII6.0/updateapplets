@@ -1,0 +1,19 @@
+#!/bin/sh
+
+version=6.0.alpha
+if [ ! -d tmp ]; then
+  mkdir tmp
+fi
+
+cd tmp
+echo "In `pwd`"
+files=`find ../jnlp-${version} -name "*.jar" -print | grep -v /signed/lib/ | grep -v signed/doc/codeDoc | grep -v signed/vendors | grep -v doc/design/ | grep -v doc/docConfig.jar`
+for file in $files
+do
+	echo $file
+	jar -xf $file
+done
+
+tar -cf classes.tar `find . -name "*.class"`
+cd ../ptII${version}; tar -xvf ../tmp/classes.tar
+
