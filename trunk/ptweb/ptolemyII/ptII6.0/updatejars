@@ -1,0 +1,27 @@
+#!/bin/sh
+
+version=6.0.alpha
+
+if [ ! -d unjar ]; then
+  mkdir unjar
+fi	
+
+cd unjar
+echo "In `pwd`"
+
+files=`find ../jnlp-${version} -name "*.jar"`
+for file in $files
+do
+	rm -rf tmp
+	mkdir tmp
+	cd tmp
+        echo "  In `pwd`"
+	jar -xf ../$file
+	rm -rf META-INF
+	newjar=`echo $file | sed 's@^\.\./jnlp[^/]*/signed/@@'`
+	echo $newjar
+	mkdir -p ../../ptII${version}/`dirname $newjar`
+	jar -cf ../../ptII${version}/${newjar} .
+	jar -i ../../ptII${version}/${newjar}
+	cd ..
+done
