@@ -67,7 +67,10 @@ public class JavaVersionApplet extends JApplet {
 
         String newline = System.getProperty("line.separator");
         String javaVersion = System.getProperty("java.version");
-        if (javaVersion.startsWith("1.4")) {
+        if (javaVersion.startsWith("1.4")
+                || javaVersion.startsWith("1.5")
+                || javaVersion.startsWith("1.6")
+                || javaVersion.startsWith("1.7")) {
             _jTextArea.append("Congratulations, you are running Java "
                     + javaVersion + ", " + newline
                     + "which is sufficient to run Ptolemy II." + newline
@@ -75,7 +78,7 @@ public class JavaVersionApplet extends JApplet {
         } else {
             _jTextArea.append("You are running Java "
                     + javaVersion + ". " + newline
-                    + "Ptolemy II requires JDK 1.4, you should upgrade." 
+                    + "Ptolemy II requires JDK 1.4 or later, you should upgrade." 
                     + newline
                     + "Java and then download Ptolemy II.");
         }
