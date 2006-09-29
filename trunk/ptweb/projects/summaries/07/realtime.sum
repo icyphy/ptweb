@@ -20,78 +20,14 @@ CHAPTER
 
 ABSTRACT 
 
-<p>Embedded software has been traditionally written with assembly language 
-to maximize efficiency. High level programming languages like C are used to 
-improve productivity. These imperative programming languages essentially 
-abstract how a Von Neumann computer operates in a sequential manner. 
-They are good matches for general-purpose software applications, which are 
-essentially a series of data transformations. However, in the embedded world, 
-the computing system constantly engages the physical system. Thus the physical 
-system becomes an integral part of the design and the software must operate 
-concurrently with the physical system. The basic techniques for doing concurrent 
-programming on top of traditional programming languages like C use threads, 
-complemented with synchronization mechanisms like semaphores and mutual exclusion 
-locks. These methods are at best retrofits to the original fundamentally 
-sequential formalism. Interacting threads are not compositional and therefore 
-they are difficult to reason about and guarantee correctness [1]. In fact, 
-according to a survey conducted by the Microsoft Windows Driver Foundation team, 
-the top reason for Windows crashes is due to driver crashes and driver crashes 
-mostly due to concurrency and race conditions. This is not acceptable for 
-embedded applications that are real-time and often safety-critical. We need 
-alternative concurrency formalisms to match the abstractions with the embedded 
-applications. 
+<p>The Ptolemy project advocates an actor-oriented approach for embedded system design, where actors are concurrent components (we use “actor” and “component” interchangeably in this context) that communicate through ports and interact according to a common pattern of interaction. Ptolemy II is a software lab for experimenting with multiple concurrency formalisms for embedded system design. Many features in Ptolemy II contribute to the ease of its use as a rapid prototyping environment. In particular, modular components make systems more flexible and extensible. Different compositions of the same components can implement different functionality. However, component designs are often slower than purpose-built code. The cost of inter-component communication through the interface introduces overhead, and generic components are highly parameterized for the reusability and thus less efficient. 
+<p>To regain the efficiency for the implementation, the users could write big, coarse-grained components to reduce inter-component communication, and write highly specialized components rather than general ones. These solutions come at the cost of flexibility and extensibility and are therefore not acceptable. There would be no problem, however, if the whole process can be automated and partial evaluation [1] is the mechanism for doing that. In the past partial evaluation has been mostly used for general purpose software. Recently partial evaluation has begun to see its use in the embedded world, e.g, see [2]. In our research partial evaluation is used as a code generation technique, which is really a compilation technique for transforming an actor-oriented model into the target code while preserving the model’s semantics. However, compared with traditional compiler optimization, partial evaluation for embedded software works at the component level and heavily leverages the domain-specific knowledge. Through model analysis, the tool can discover data type, buffer size, parameter value, model structure and model execution schedule, and then partially (pre)evaluate all the known information to reach a very efficient implementation. The end result is that the benefit offered by the high level abstraction comes with (almost) no performance penalty. 
+<p>A prototype has been realized and will be shipped with the release of Ptolemy II 6.0 in Fall 2006. We are working to improve the system and further explore additional optimization opportunities.
 
-<p>The Ptolemy project advocates an actor-oriented approach for embedded 
-system design, where actors are concurrent components (from now on we use 
-“actor” and “component” interchangeably) that communicate through ports 
-and interact according to a common pattern of interaction. In this approach, 
-we emphasize dataflow between actors over control flow induced by procedure 
-calls and this leads to conceptually concurrent execution of actors. The 
-interaction between actors happens in a highly disciplined way according to 
-a specific model of computation. The low-level mechanisms such as threads 
-and mutexes do not even rise to consciousness, forming instead the 
-“assembly-level” mechanisms used to deliver much more sophisticated models 
-of computation. Ptolemy II is a software lab for experimenting with multiple 
-concurrency formalisms for embedded system design. Many features in Ptolemy II 
-contribute to the ease of its use as a rapid prototyping environment. 
-In particular, modular components make systems more flexible and extensible. 
-Different compositions of the same components can implement different 
-functionality. However, component designs are often slower than purpose-built 
-code. The cost of inter-component communication through the interface 
-introduces overhead, and generic components are highly parameterized for 
-the reusability and thus less efficient.
-
-<p>To regain the efficiency for the implementation, the users could write big, 
-coarse-grained components to reduce inter-component communication, and write 
-highly specialized components rather than general ones. These solutions come 
-at the cost of flexibility and extensibility and are therefore not acceptable. 
-There would be no problem, however, if the whole process can be automated and 
-partial evaluation [2] is the mechanism for doing that. In the past partial 
-evaluation has been mostly used for general purpose software. Recently partial 
-evaluation has begun to see its use in the embedded world, e.g, see [3]. 
-In our research partial evaluation is used as a code generation technique, 
-which is really a compilation technique for transforming an actor-oriented 
-model into the target code while preserving the model’s semantics. However, 
-compared with traditional compiler optimization, partial evaluation for 
-embedded software works at the component level and heavily leverages the 
-domain-specific knowledge. Through model analysis, the tool can discover 
-data type, buffer size, parameter value, model structure and model execution 
-schedule, and then partially (pre)evaluate all the known information to reach 
-a very efficient implementation. The end result is that the benefit offered 
-by the high level abstraction comes with (almost) no performance penalty.
-
-<p>A prototype has been realized and will be shipped with the release of 
-Ptolemy II 6.0 in Fall 2006. We are working to improve the system and further 
-explore additional optimization opportunities. 
-
-<p><a name="1">[1]</a> Edward A. Lee, "The Problem with Threads," 
-in IEEE Computer, 39(5):33-42, May 2006 as well as an EECS Technical Report, 
-UCB/EECS-2006-1, January 2006.
-
-<p><a name="2">[2]</a> Neil D. Jones, Carsten K. Gomard, and Peter Sestoft. 
+<p><a name="1">[1]</a> Neil D. Jones, Carsten K. Gomard, and Peter Sestoft. 
 Partial Evaluation and Automatic Program Generation. Prentice-Hall, June 1993.
 
-<p><a name="3">[3]</a> Kohler E, Morris R, Benjie Chen, "Programming language 
+<p><a name="2">[2]</a> Kohler E, Morris R, Benjie Chen, "Programming language 
 optimizations for modular router configurations," ACM. SIGPLAN Notices, vol.37, 
 no.10, Oct. 2002, pp. 251-63. 
 
