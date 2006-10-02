@@ -113,6 +113,69 @@ contributions from off site developers, see
 
 <h2>Recent Releases and News</h2>
 
+
+<p><p><a href="ptII6.0/body.htm" target="body">Ptolemy II 6.0.alpha</a> 
+was made available on October 2, 2006
+ <br>Ptolemy II 6.0 includes
+<menu>
+<li> <li> <a href="ptII6.0/ptII6.0.alpha/ptolemy/codegen/README.html">Ptolemy II C Code Generation</a>
+ <p>Primary Developers: Jackie Leung, Gang Zhou, Ye Zhou, Edward A. Lee,
+	Christopher Brooks
+ <br>  Ptolemy II can now generate C code for SDF, FSM and HDF models.
+  This new code generator consists of actor templates (called helpers)
+  that contain C code stubs that are stitched together.  Only a subset
+  of actors have helpers, so only a subset of models can be converted
+  to C.  Creating new helpers is fairly easy though.  The code generator
+  has been written to be easily extensible to languages other than C.
+
+
+<li> The
+<a href="ptII6.0/ptII6.0.alpha/ptolemy/domains/rendezvous/doc/main.htm">Rendezvous domain</a>:
+ <br>Primary Authors: Thomas Huining Feng, Edward A. Lee
+ <br>In the Rendezvous domain in Ptolemy II, each actor executes in
+its own thread of control, and communication between actors is
+by rendezvous.  If an actor is ready to send a message,
+it blocks until the receiving actor is ready to receive it. Similarly if
+an actor is ready to receive a message, it blocks until the sending actor
+is ready to send it.
+<p>
+This domain supports both conditional and multi-way rendezvous.
+In conditional rendezvous, an actor is willing to rendezvous with
+any one of several other actors. In multiway rendezvous, an actor requires
+rendezvous with multiple other actors at the same time.
+When using conditional rendezvous, the choice of which rendezvous
+occurs is nondeterministic, in general.
+<P>
+The model of computation is based on the Communicating Sequential
+Processesmodel first proposed by Hoare in 1978. Rendezvous-based
+communication is also known as synchronous message passing, but we
+avoid this term to avoid confusion with the SR (synchronous/reactive)
+domain.
+
+<li> <a href="ptII6.0/ptII6.0.alpha/ptolemy/configs/viptos/intro.htm" target="_top">Viptos</a> 
+ <i>Visual editor, code generator, and simulator for TinyOS programs</i>.
+ <br>Primary Author: Elaine Cheong
+ <br><B>Viptos</B> is an interface between TinyOS and Ptolemy II that
+provides a graphical user interface for TinyOS developers.  Users can create TinyOS programs as block diagrams and use Viptos to generate code for any TinyOS-supported target hardware.  Users can also simulate heterogenous networks of TinyOS-based nodes within Viptos.  Viptos includes a tool to make existing libraries of TinyOS/nesC components available as graphical blocks (nc2moml), and another tool to transform existing TinyOS/nesC applications into Viptos models (ncapp2moml).
+ <br><B>Note:</B> Viptos is not available in the Windows installer,
+Viptos must be built from source.  
+(<a href="ptII6.0/ptII6.0.alpha/ptolemy/domains/ptinyos/doc/installation.htm">Viptos Installation Notes</a>)
+<p>
+
+<li> <a href="ptII6.0/ptII6.0.alpha/doc/codeDoc/ptolemy/distributed/domains/sdf/kernel/DistributedSDFDirector.html">Distributed SDF Domain using Jini</a>
+ <br>Authors: Daniel Lazaro Cuadrado (Aalborg University).
+ <br> The Distributed-SDF domain is an extended version of the existing SDF
+ Domain that performs the simulation in a distributed manner using
+ Jini.
+
+</ul>
+
+The <a href="ptII6.0/ptII6.0.alpha/doc/ptII6.0.release.htm">Ptolemy II 6.0.alpha Release Notes</a> include a list of new features and actors.
+
+<h2>Quick Start Instructions</h2>
+</menu>
+
+
 <p><p><a href="../viptos/index.htm" target="top">Viptos 5.1-alpha</a> 
 was released on November 1, 2005. Viptos is an interface between 
     <a href="http://www.tinyos.net" target="_top">TinyOS</a>
