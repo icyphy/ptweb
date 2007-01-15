@@ -3,12 +3,12 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <link href="../../lib/default.css" rel="stylesheet" type="text/css">
 <head>
-<title>Ptolemy II 6.0.beta Limitations</title>
+<title>Ptolemy II 6.0.1 Limitations</title>
 </head>
 <body>
-<h2>Ptolemy II 6.0.beta Limitations</h2>
+<h2>Ptolemy II 6.0.1 Limitations</h2>
 
-The <a href="ptII6.0.beta/doc/ptII5.0.release.htm">Ptolemy II 6.0.beta Release notes</a>
+The <a href="ptII6.0.1/doc/ptII5.0.release.htm">Ptolemy II 6.0.1 Release notes</a>
 list limitations.  The Vergil welcome window has a link to
 a similar list.
 
@@ -28,7 +28,7 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 	<menu>
 	<li> Vergil
 	<li> The local version of the web pages
-	<li> The <a href="ptII6.0.beta/doc/index.htm" target="_top">PtolemyII 6.0.beta website version of the web pages</a>
+	<li> The <a href="ptII6.0.1/doc/index.htm" target="_top">PtolemyII 6.0.1 website version of the web pages</a>
 	<li> The Web Start version
 	</menu>
 </menu>
@@ -37,8 +37,8 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 
 <h2>Places to go</h2>
 <menu>
-<li><a href="ptII6.0.beta/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
-<li> <a href="ptII6.0.beta/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
+<li><a href="ptII6.0.1/doc/index.htm" target="_top">Online Applet Demonstrations and Documentation</a>
+<li> <a href="ptII6.0.1/doc/design/index.htm" target="_top">Ptolemy II Design Document</a> 
 </menu>
 
 <h3>Know Limitations</h4>
@@ -93,18 +93,13 @@ Try running the Matlab demos by compiling Ptolemy II from
 source and then running <CODE>vergil -jni</CODE>.
 
 <li>See the
-<a href="ptII6.0.beta/doc/ptII5.0.release.htm#limitations">Ptolemy II 6.0.beta Release notes</a>
+<a href="ptII6.0.1/doc/ptII5.0.release.htm#limitations">Ptolemy II 6.0.1 Release notes</a>
 for known limitations.
 
 
 <li> In HyVisual, the Thermostat demo does not work.
 
-<li> The Applet code generator does not automatically include ptcolt.jar 
-for models that require it.
-
 <li> The Applet code generator seems to have problems including ptsupport.jar 
-
-<li> The Code Generator README needs work
 
 <li> The Higher Order Components ModelReference demo does not
 work under Web Start.
@@ -125,9 +120,6 @@ $PTII/ptolemy/actor/lib/BooleanSwitch.java
  	 <br>The problem is that if an actor does not have an icon file,
  	then the applet may go back to the server multiple times looking
  	for the icon. 
-
-<li> The code generator GUI has been removed from the configuration,
-instead use <CODE>$PTII/bin/copernicus</CODE>.
 
  <li> Plot windows don't resize when control panel is resized
   <br>If a model with plotters
@@ -174,18 +166,6 @@ export JAVAFLAGS=-Dsun.java2d.print.pipeline=pdl
 vergil
 </pre>
 Then edit the file by hand in Illustrator to add the transparency back in.
-
-
-<li> 1/2/07: On the Mac the right menu choice does not work.
-For some unknown reason, the Macintosh still ships with a one button
-mouse.  Usually, to get a right button menu on the Mac, one holds
-down the command key.  Unfortunately, in Ptolemy II 6.0.beta,
-this does not work.  Dan Higgins supplied a fix, which we have compiled
-into 
-<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII6.0/ptII6.0.beta/lib/diva.jar"><CODE>diva.jar</CODE></a>
-This file should be placed in <CODE>$PTII/lib/</CODE>
-(available also as
-<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII6.0/ptII6.0.beta/lib/diva.jar.gz"><CODE>diva.jar.gz</CODE></a>, which should be downloaded and ungzipped).  
 
 
 <li> 1/8/07: The Datagram actors do not work very well.
