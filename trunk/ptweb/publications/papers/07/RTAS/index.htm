@@ -1,0 +1,53 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>A Programming Model for Time-Synchronized Distributed Real-Time Systems</title>
+</head>
+<body>
+<center>
+  <h1>A Programming Model for Time-Synchronized Distributed Real-Time Systems</h1> 
+</center>
+<center>
+<p>Yang Zhao, jie Liu and Edward A. Lee<p>
+<p>
+in <i>Proceedings of the 13th IEEE Real-Time and Embedded
+Technology and Applications Symposium (RTAS 07) </i>, Bellevue, WA, United States.
+
+<p><a href="ZhaoLiuLee_PTIDES.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/im
+age/PDF.gif" width=29 height=32 border=0 alt="[PDF
+]"></A>
+
+<p>
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+Discrete-event (DE) models are formal system specifications
+that have analyzable deterministic behaviors. Using a
+global, consistent notion of time, DE components communicate
+via time-stamped events. DE models have primarily
+been used in performance modeling and simulation, where
+time stamps are a modeling property bearing no relationship
+to real time during execution of the model. In this
+paper, we extend DE models with the capability of relating
+certain events to physical time. We propose a programming
+model, called PTIDES (Programming Temporally Integrated
+Distributed Embedded Systems), which has DE semantics,
+but with carefully chosen relations between model
+time and real time. Key to making this model effective is to
+ensure that constraints that guarantee determinacy in the
+semantics are preserved at runtime. To accomplish this,
+we give a distributed execution strategy that obeys DE semantics
+without the penalty of totally ordered executions
+based on time stamps. Our technique relies on having a distributed
+common notion of time, known to some precision.
+Based on causality analysis of DE models, we define relevant
+dependency and relevant orders to enable out-of-order
+execution without compromising determinism and without
+requiring backtracking.
+<p>
+</body>
+</html>
+
