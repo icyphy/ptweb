@@ -1,0 +1,62 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Viptos </title>
+</head>
+<body>
+<h1>
+<a name="Viptos">Viptos - Visual interface between Ptolemy and TinyOS</a></h1>
+<table>
+ <tr>
+   <td><img src="image/viptos-logo-forweb.gif" alt="Viptos" width="441" height="189" align="left">
+   </td> 
+</table>
+
+<h2>Screenshots</h2>
+
+This page shows screenshots of SendAndReceiveCnt.  SendAndReceiveCnt is an example Viptos model that contains a model of two nodes.  One node runs the TinyOS 1.x CntToLedsAndRfm program, which displays an increasing counter in binary on the LEDs of the mote and transmits the counter value over the radio.  The other node runs the TinyOS 1.x RfmToLeds, which listens for transmitted counter values and displays them on the LEDs of the mote.
+
+<p>
+Also see:
+<ul>
+<li><a href="screenshots.htm">SenseToLeds</a> - A simple light sensing example.
+<li><a href="screenshots-Surge.htm">Surge</a> - A multihop routing example.
+</ul>
+ 
+<table>
+<tr>
+<p><p>Top level view of SendAndReceiveCnt:<br>
+<tr>
+<img src="screenshots/SendAndReceiveCnt/SendAndReceiveCnt.png" alt="Top level view of SendAndReceiveCnt"><br>
+<tr>
+<p><p>Hardware level view of sender:<br>
+<tr>
+<img src="screenshots/SendAndReceiveCnt/SendAndReceiveCnt-CntToLedsAndRfm.png" alt="Hardware level view of sender"><br>
+<tr>
+<p><p>Software level view of sender:<br>
+<tr>
+<img src="screenshots/SendAndReceiveCnt/SendAndReceiveCnt-CntToLedsAndRfm-CntToLedsAndRfm.png" alt="Software level view of sender"><br>
+<tr>
+<p><p>Hardware level view of receiver:<br>
+<tr>
+<img src="screenshots/SendAndReceiveCnt/SendAndReceiveCnt-RfmToLeds.png" alt="Hardware level view of receiver"><br>
+<tr>
+<p><p>Software level view of receiver:<br>
+<tr>
+<img src="screenshots/SendAndReceiveCnt/SendAndReceiveCnt-RfmToLeds-RfmToLeds.png" alt="Software level view of receiver"><br>
+<tr>
+<p><p>Packets produced by sender:<br>
+<tr>
+<img src="screenshots/SendAndReceiveCnt/SendAndReceiveCnt-CntToLedsAndRfm-Display.png" alt="Packets produced by sender"><br>
+<tr>
+<p><p>Packets received by receiver:<br>
+<tr>
+<img src="screenshots/SendAndReceiveCnt/SendAndReceiveCnt-RfmToLeds-Display.png" alt="Packets received by receiver"><br>
+</table>
+
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+</body>
+</html>
