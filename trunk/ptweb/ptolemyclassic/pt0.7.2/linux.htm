@@ -22,8 +22,8 @@ pt0.7.2devel.other.src.tar.gz
 pt0.7.2devel.src.tar.gz
 pt0.7.2devel.gnu.tar.gz
 </pre>
-We recommend putting them in a <CODE>~/downloads</CODE>  directory. 
 
+We recommend putting them in a <CODE>~/downloads</CODE>  directory. 
 
 <li> Untar the files:
 <pre>
@@ -33,6 +33,35 @@ tar -zxf downloads/pt0.7.2devel.src.tar.gz
 tar -zxf downloads/pt0.7.2devel.other.src.tar.gz
 </pre>
 
+<h3>CVS instructions</h3>
+<blockquote>
+<ol>
+<li>Check out the sources
+<pre>
+cvs -d :pserver:anon@source.eecs.berkeley.edu:/home/cvs/cvsanon login
+# No password needed, hit enter
+cvs -d :pserver:anon@source.eecs.berkeley.edu:/home/cvs/cvsanon co ptclassic
+</pre>
+
+<li>Download <code>http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz</code> 
+<pre>
+user:   ptdevel
+password: ptrules
+</pre>
+For example, to get it, use wget:
+<pre>
+wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz
+</pre>
+<li>Then untar and move the gnu sources
+<pre>
+tar -zxf pt0.7.2devel.gnu.tar.gz 
+mv ptolemy/src/gnu/* ptclassic/src/gnu/
+</pre>
+
+</ol>
+</blockquote>
+]
+
 <ul>
 <li>
 [Red Hat 9.0]: I am logged in as celaine.  I have untarred the .tar.gz files in ~/ptclassic.  Modify the instructions below accordingly.
@@ -40,18 +69,14 @@ tar -zxf downloads/pt0.7.2devel.other.src.tar.gz
 
 <li> Create <CODE>$PTOLEMY/.bashrc</CODE> and add the following:
 <pre>
-PTOLEMY=/root/ptolemy
-export PTOLEMY
-
-PTARCH=linux
-export PTARCH
+export PTOLEMY=/root/ptolemy
+export PTARCH=linux
 
 PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
 
 # To use the X11 pxgraph, follow the instructions
 # in $PTOLEMY/src/pxgraph/README.txt and uncomment the next line.
-PT_USE_X11_PXGRAPH=yes
-export PT_USE_X11_PXGRAPH
+export PT_USE_X11_PXGRAPH=yes
 </pre>
 
 [Debug version]: To compile the debug version, create <CODE>$PTOLEMY/.bashrc</CODE> and add the following instead:
