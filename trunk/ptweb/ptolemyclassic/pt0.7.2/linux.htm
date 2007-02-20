@@ -42,6 +42,7 @@ cvs -d :pserver:anon@source.eecs.berkeley.edu:/home/cvs/cvsanon login
 # No password needed, hit enter
 cvs -d :pserver:anon@source.eecs.berkeley.edu:/home/cvs/cvsanon co ptclassic
 </pre>
+This will create a directory called <code>ptclassic</code>.
 
 <li>Download <code>http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz</code> 
 <pre>
@@ -52,7 +53,9 @@ For example, to get it, use wget:
 <pre>
 wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz
 </pre>
-<li>Then untar and move the gnu sources
+<li>Then untar and move the gnu sources into the
+<code>ptclassic/</code>
+directory
 <pre>
 tar -zxf pt0.7.2devel.gnu.tar.gz 
 mv ptolemy/src/gnu/* ptclassic/src/gnu/
@@ -60,7 +63,6 @@ mv ptolemy/src/gnu/* ptclassic/src/gnu/
 
 </ol>
 </blockquote>
-]
 
 <ul>
 <li>
@@ -68,6 +70,7 @@ mv ptolemy/src/gnu/* ptclassic/src/gnu/
 </ul>
 
 <li> Create <CODE>$PTOLEMY/.bashrc</CODE> and add the following:
+<br>[CVS: $PTOLEMY/.bashrc already exists, you will need to edit it].
 <pre>
 export PTOLEMY=/root/ptolemy
 export PTARCH=linux
