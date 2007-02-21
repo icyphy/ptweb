@@ -57,6 +57,7 @@ password: ptrules
 For example, to get it, use wget:
 <pre>
 wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz
+wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.other.src.tar.gz
 </pre>
 <li>Then untar and move the gnu sources into the
 <code>ptclassic/</code>
@@ -64,6 +65,10 @@ directory
 <pre>
 tar -zxf pt0.7.2devel.gnu.tar.gz 
 mv ptolemy/src/gnu/* ptclassic/src/gnu/
+tar -zxf pt0.7.2devel.other.src.tar.gz 
+mv ptolemy/src/tcltk/itcl3.0.1pt ptclassic/src/tcltk/itcl3.0.1
+mv ptolemy/src/tcltk/tcl8.0.5pt ptclassic/src/tcltk/tcl8.0.5
+mv ptolemy/src/tcltk/tk8.0.5pt ptclassic/src/tcltk/tk8.0.5
 </pre>
 
 </ol>
