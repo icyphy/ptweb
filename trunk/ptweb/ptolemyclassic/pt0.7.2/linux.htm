@@ -19,28 +19,6 @@ work.
 
 <ol>
 
-<li> See <a href="download.htm">Download Ptolemy 0.7.2</a>
-for instructions about how to access Ptolemy Classic 0.7.2
- <br>You will need
-<pre>
-pt0.7.2devel.other.src.tar.gz
-pt0.7.2devel.src.tar.gz
-pt0.7.2devel.gnu.tar.gz
-</pre>
-
-We recommend putting them in a <CODE>~/downloads</CODE>  directory. 
-
-<li> Untar the files:
-<pre>
-cd /root
-tar -zxf downloads/pt0.7.2devel.gnu.tar.gz
-tar -zxf downloads/pt0.7.2devel.src.tar.gz
-tar -zxf downloads/pt0.7.2devel.other.src.tar.gz
-</pre>
-
-<h3>CVS instructions</h3>
-<blockquote>
-<ol>
 <li>Check out the sources
 <pre>
 cvs -d :pserver:anon@source.eecs.berkeley.edu:/home/cvs/cvsanon login
@@ -71,28 +49,17 @@ mv ptolemy/src/tcltk/tcl8.0.5pt ptclassic/src/tcltk/tcl8.0.5
 mv ptolemy/src/tcltk/tk8.0.5pt ptclassic/src/tcltk/tk8.0.5
 </pre>
 
-</ol>
-</blockquote>
 
 <ul>
 <li>
 [Red Hat 9.0]: I am logged in as celaine.  I have untarred the .tar.gz files in ~/ptclassic.  Modify the instructions below accordingly.
 </ul>
 
-<li> Create <CODE>$PTOLEMY/.bashrc</CODE> and add the following:
-<br>[CVS: $PTOLEMY/.bashrc already exists, you will need to edit it].
-<pre>
-export PTOLEMY=/root/ptolemy
-export PTARCH=linux
+<li> Edit <CODE>$PTOLEMY/.bashrc</CODE> and change the setting
+for <CODE>PTOLEMY</CODE> to point to your directory, which will
+be something like <CODE>/root/ptclassic</CODE>.
 
-PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
-
-# To use the X11 pxgraph, follow the instructions
-# in $PTOLEMY/src/pxgraph/README.txt and uncomment the next line.
-export PT_USE_X11_PXGRAPH=yes
-</pre>
-
-[Debug version]: To compile the debug version, create <CODE>$PTOLEMY/.bashrc</CODE> and add the following instead:
+ <br>[Debug version]: To compile the debug version, create <CODE>$PTOLEMY/.bashrc</CODE> and add the following instead:
 <pre>
 PTOLEMY=/root/ptolemy
 export PTOLEMY
@@ -159,6 +126,7 @@ The fix is to edit
 <CODE> ~/ptolemy/src/tcltk/tcl8.0.5pt/generic/tclPosixStr.c
 </CODE>
 and comment out the EOPNOTSUPP in two locations
+<I>This change is in the CVS tree, so it should not be necessary.</I>
 <pre>
                /*#ifdef EOPNOTSUPP
         case EOPNOTSUPP: return "EOPNOTSUPP";
@@ -220,8 +188,9 @@ make install &gt;&amp; install.out &amp;
 ../../../../src/domains/cg/kernel/CGTarget.cc:703: implicit declaration of func
 tion `int cuserid(...)'
 </pre>
+<I>This change is in the CVS tree, so it should not be necessary.</I> <br>
+>The change is to comment
 
-The change is to comment
 <pre>
       //msg   &lt;&lt; "User:      " &lt;&lt; cuserid(NULL) &lt;&lt; "\n"
 </pre>
@@ -232,6 +201,7 @@ and use
 
 
 <li> <CODE>vhdl/targets/SynthTarget.cc</CODE> needs a similar change
+ <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
 <pre>
         //      comCode &lt;&lt; "designer = \"" &lt;&lt; cuserid(NULL) &lt;&lt; "\"" &lt;&lt; "\n";
 </pre>
@@ -240,7 +210,7 @@ and use
 
 </pre>
 As does <CODE>SynthArchTarget.cc</CODE>
-
+ <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
 
 <li> acs/targets/StringArray.cc fails with
 <pre>
@@ -250,7 +220,7 @@ The fix is to add
 <pre>
 #include &lt;string.h&gt;
 </pre>
-
+ <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
 
 <li> acs/stars fails to link with
 <pre>
@@ -261,6 +231,7 @@ ACSRamDelayFixSim.o(.data+0x0): first defined here
 The fix is to edit <CODE>acs/stars/make.template</CODE> and
 find the second instance of ACSRamDelayFixSim.pl and 
 remove it and the remaining .pl files.  
+ <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
 <pre>
 [root@dhcp-43-60 stars]# diff -c make.template.old make.template 
 *** make.template.old   2003-07-15 18:05:10.000000000 -0700
@@ -303,6 +274,7 @@ XYgraphFixSim.pl
 </pre>
 The fix is to edit <CODE>ptolemy/src/pxgraph/pxgraph/xgraph.h</CODE>
 and comment out the declaration of strchr
+ <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
  <br>Then run <CODE>make install</CODE>
 
 <li>Run a sample demo by doing
