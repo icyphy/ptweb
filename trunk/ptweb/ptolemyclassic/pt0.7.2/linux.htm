@@ -326,7 +326,15 @@ export PT_USE_X11_PXGRAPH
 
 <ul>
 <li>
-[Red Hat 9.0]: If it complains that it cannot find ptiny, run <CODE>make install</CODE> in <CODE>obj.linux/pigiRpc</CODE>
+[Red Hat 9.0]: If it complains that it cannot find ptiny, run
+<CODE>make install</CODE> in <CODE>obj.linux/pigiRpc</CODE> 
+and then run
+<pre>
+cd $PTOLEMY
+make bin/pigi
+</pre>
+<code>$PTOLEMY/bin/pigi</code> is merely a symbolic link that
+from <code>$PTOLEMY/bin/pigiEnv.sh</code>.
 
 <li>
 [Red Hat 9.0]: I get the following message in the terminal window after clicking on "Go":
