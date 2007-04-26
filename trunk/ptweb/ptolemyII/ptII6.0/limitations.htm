@@ -228,6 +228,17 @@ an important tool such as make only hurts the GNU tools.
  <p>For further updates, see
 <a href="https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=55" target="_top"><CODE>https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=55</CODE></a>.
  
+ <p>4/26/07: Wile compiling in <CODE>$PTII/jni/test</CODE>,
+I was getting
+<pre>
+Process_begin: CreateProcess((null), /usr/bin/gcc -shared
+-Wl,--add-stdcall-alias -o testDeux.dll testDeux.c, ...) failed.
+</pre>
+The problem was I was running a broken version of make and updating
+to
+<a href="http://www.cmake.org/files/cygwin/make.exe"><CODE>http://www.cmake.org/files/cygwin/make.exe</CODE></a>
+helped.
+
 <li> 2/8/07: In HyVisual, the HSIF translater is merely a prototype,
 it is not a full implementation of a HSIF translator.
 
