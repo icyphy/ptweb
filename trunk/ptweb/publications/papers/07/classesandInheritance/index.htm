@@ -1,0 +1,31 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Classes and Inheritance in Actor-Oriented Design</title>
+</head>
+<body>
+<center>
+  <h1>Classes and Inheritance in Actor-Oriented Design</h1> 
+</center>
+<center>
+<p>E.A. Lee, Y. Zhao, and S. Neuendorffer<p>
+<p>
+<i>to appear in ACM Transactions on Embedded Computing Systems</i>, August
+27, 2007. 
+
+<p><a href="LeeZhao_ReinventingComputing.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/im
+age/PDF.gif" width=29 height=32 border=0 alt="[PDF
+]"></A>
+
+<p>
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+Actor-oriented components emphasize concurrency and temporal semantics and are used for modeling and designing embedded software and hardware. Actors interact with one another through ports via a messaging schema that can follow any of several concurrent semantics. Domain-specific actor-oriented languages and frameworks are common (Simulink, LabVIEW, SystemC, etc.). However, they lack many modularity and abstraction mechanisms that programmers have become accustomed to in object-oriented components, such as classes, inheritance, interfaces, and polymorphism, except as inherited from the host language. This paper shows a form that such mechanisms can take in actor-oriented components, gives a formal structure, and describes a prototype implementation. The mechanisms support actor-oriented class definitions, subclassing, inheritance, and overriding. The formal structure imposes structural constraints on a model (mainly the "derivation invariant") that lead to a policy to govern inheritance. In particular, the structural constraints permit a disciplined form of multiple inheritance with unambiguous inheritance and overriding behavior. The policy is based formally on a generalized ultrametric space with some remarkable properties. In this space, inheritance is favored when actors are "closer" (in the generalized ultrametric), and we show that when inheritance can occur from multiple sources, one source is always unambiguously closer than the other.
+<p>
+</body>
+</html>
+
