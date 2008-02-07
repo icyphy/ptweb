@@ -75,8 +75,8 @@ Domains that are still experimental:
 <li> <a href="ptIIlatest/ptII/ptolemy/domains/ci/doc/body.htm" target="body">CI</a>:
 	component interaction (push/pull)
 <!--vergilDocs-->
-<li> <a href="ptIIlatest/ptII/ptolemy/domains/csp/doc/body.htm" target="body">CSP</a>:
-	 communicating sequential processes
+<li> <a href="ptIIlatest/ptII/ptolemy/domains/continuous/doc/body.htm" target="body">Continuous</a>:
+	continuous-time modeling
 <!--/vergilDocs-->
 <li> <a href="ptIIlatest/ptII/ptolemy/domains/dde/doc/body.htm" target="body">DDE</a>:
 	distributed discrete events
@@ -114,11 +114,57 @@ contributions from off site developers, see
 <h2>Recent Releases and News</h2>
 
 
+<p><p><a href="ptII7.0/body.htm" target="body">Ptolemy II 7.0.beta</a> 
+was made available on February 7, 2008.
+ <br>Ptolemy II 7.0.beta includes
+<menu>
+<li> <a href="ptII7.0/ptII7.0.beta/ptolemy/codegen/README.html">Ptolemy II C Code Generation</a>
+ <br>The Ptolemy C Code generator can generate code for SDF, FSM and
+ HDF models.  Arbitrary C code may be embedded in a Java actor.
+The entire model can then be converted to C code and the C code with
+the Java actor is used.
+ 
+ <br>Primary Codegen Developers: Gang Zhou, Man-kit Leung.
+ <br>Codegen Contributors: Christopher Brooks, Teale Fristoe, Edward A. Lee, Ye Zhou
+
+<li> <a href="http://chess.eecs.berkeley.edu/ptalon">Ptalon</a>
+ <br>Primary Ptalon Developer: Adam Cataldo
+ <br>Contributor: Elaine Cheong
+<br>Actor-oriented design is a common design strategy in embedded
+system design, where actors are concurrent components which
+communicate through ports by sending signals to one another. Such
+systems are frequently modeled with block diagrams, where the blocks
+represent systems and lines or arrows between blocks represent
+signals. Examples include Simulink, LabView, and VHDL/Verilog.
+A common problem in such environments is managing complexity,
+particularly when the designs become large. Most actor-oriented design
+environments allow hierarchy, or systems (blocks) which are composed
+of other systems (blocks). To take this a step further, we are
+developing the Ptalon programming language, which allows users to
+parameterize components with other components.
+
+
+<li> Backtracking
+ <br>Primary Backtracking Developer: Thomas Huining Feng
+ <br>A backtracking facility enables the system to restore its old
+state. It has many applications in practice, and is especially
+important to high-performance distributed computation.
+
+
+<li> <a href="ptII7.0/ptII/ptolemy/domains/continuous/doc/main.htm">Continuous domain</a>:
+ <br>Primary Continuous Domain Developers: Haiyang Zheng, Edward A. Lee
+ <br>The Continuous Domain is a redesign of the Continuous Time (CT)
+ domain with a rigorous semantics.
+
+
+</menu>
+
+
 <p><p><a href="ptII6.0/body.htm" target="body">Ptolemy II 6.0.2</a> 
 was made available on February 4, 2007
  <br>Ptolemy II 6.0 includes
 <menu>
-<li> <li> <a href="ptII6.0/ptII6.0.2/ptolemy/codegen/README.html">Ptolemy II C Code Generation</a>
+<li> <a href="ptII6.0/ptII6.0.2/ptolemy/codegen/README.html">Ptolemy II C Code Generation</a>
  <p>Primary Developers: Jackie Leung, Gang Zhou, Ye Zhou, Edward A. Lee,
 	Christopher Brooks
  <br>  Ptolemy II can now generate C code for SDF, FSM and HDF models.
