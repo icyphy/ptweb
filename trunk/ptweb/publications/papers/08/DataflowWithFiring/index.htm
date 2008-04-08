@@ -1,0 +1,41 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>The Semantics of Dataflow with Firing</title>
+</head>
+<body>
+<center>
+  <h1>The Semantics of Dataflow with Firing</h1> 
+</center>
+<center>
+<p>Edward A. Lee and Eleftherios Matsikoudis<p>
+<p>Chapter in <i>From Semantics to Computer Science: Essays in memory of Gilles Kahn</i>, Gérard Huet, Gordon Plotkin, Jean-Jacques Lévy, Yves Bertot, editors, Preprint Version, March 07, 2008, Copyright (c) Cambridge University Press, 2008.<p><a href="DataflowWithFiring.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+
+<p>
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+Dataflow models of computation have intrigued computer scientists since the 1970s. 
+They were first introduced by Jack Dennis as a basis for parallel programming languages and architectures,
+and by Gilles Kahn as a model of concurrency. 
+Interest in these models of computation has been recently rekindled by the
+resurrection of parallel computing, 
+due to the emergence of multicore architectures.
+However, 
+Dennis and Kahn approached dataflow very differently.
+Dennis' approach was based on an operational notion of atomic firings driven by certain firing rules.
+Kahn's approach was based on a denotational notion of processes as continuous functions on infinite streams. 
+This paper bridges the gap between these two points of view, 
+showing that sequences of firings define a continuous Kahn process
+as the least fixed point of an appropriately constructed functional.
+The Dennis firing rules are sets of finite prefixes satisfying certain conditions that ensure determinacy.
+These conditions result in firing rules 
+that are strictly more general than the blocking reads of the Kahn-MacQueen implementation of Kahn process networks,
+and solve some compositionality problems in the dataflow model.
+<p>
+</body>
+</html>
+
