@@ -1,0 +1,98 @@
+
+           Ptolemy Ptutorial and Miniconference
+                 April 15-16, 2009
+                    Berkeley, CA
+
+                >>>Call for Abstracts<<<
+   Please submit proposals for posters and presentations to
+     ptconf09 at ptolemy dot eecs dot berkeley dot edu
+                >>by January 16, 2009<<
+
+     http://ptolemy.eecs.berkeley.edu/conferences/09
+
+The Eighth Biennial Ptolemy Miniconference will be held on Thursday,
+April 16, 2009 at the University of California, Berkeley.  
+
+We will hold a Ptolemy Ptutorial for Java programmers on April 15, 2009.
+
+Cyber-Physical Systems Week (http://www.cpsweek.org) is being held in
+San Francisco earlier in the week.
+
+
+The Ptolemy project (http://ptolemy.org) studies modeling, simulation,
+and design of concurrent, real-time, embedded systems. The focus is on
+assembly of concurrent components.
+
+The Ptolemy Miniconference is an opportunity for research
+collaborators and Ptolemy users and extenders from industry, academia,
+and government to get together, present their work to the Ptolemy
+community, and hear about related research and results. It is
+typically held every two years.
+
+This year, we have again asked the Kepler community to give
+presentations and posters. Kepler (http://www.kepler-project.org) is a
+cross-project collaboration to develop open source tools for
+Scientific Workflows and is currently based on the Ptolemy II system
+for heterogeneous concurrent modeling nd design.
+
+In addition, the miniconference will act as an annual meeting for the
+Center for Hybrid and Embedded Software Systems 
+(CHESS, http://chess.eecs.berkeley.edu)
+
+At Miniconferences in the past we have had presentations and
+posters from organizations worldwide, plus members of the Ptolemy
+project describing current research at Berkeley.
+
+Topics of interest for this year include:
+     * Applications of Ptolemy II or Kepler
+     * Model-based design techniques
+     * Concurrency models
+     * Applications of concurrency to multicore and distributed computing
+     * Code generation for embedded systems
+     * Model engineering methods
+     * Models of computation
+     * Workflow infrastructure
+     * Model transformation
+     * Model verification
+     * Semantics of models
+     * Performance evaluations
+     * Comparisons of model-based design tools
+     * Integration of multiple design tools
+     * Static analysis of models
+     * Provenance tracking techniques
+     * Data visualization and data management
+     * Visual syntaxes for models
+
+If you have suggestions for posters and presentations, please send an
+abstract to
+ptconf09 at ptolemy dot eecs dot berkeley dot edu
+by January 9, 2009
+
+Our plan is to have 20 minute presentations and a poster session.
+We will also have 3 minute poster presentations.  These are informal
+rapid fire summaries of the posters.
+
+We will hold a tutorial on April 15, the day _before_ the
+Miniconference.  The tutorial is for Java programmers who are
+interested in extending Ptolemy.
+
+The tutorial program is in the process of being developed, we hope
+ to include topics such as
+   * Writing actors for Code generation
+   * Using the Event Relation Graph domain
+   * Using the model transformation facility
+Other topics will be added to the tutorial.
+
+If you are interested in giving a tutorial, please email us at
+ptconf09 at ptolemy dot eecs dot berkeley dot edu
+
+Please register for the tutorial and conference. Registration will close on
+April 10. In the past, the conference has sold out, so we recommend
+registering early.
+
+Registration and presentation/poster instructions may be found at:
+http://ptolemy.eecs.berkeley.edu/conferences/09
+
+Please direct questions to ptconf09 at ptolemy eecs berkeley edu
+
+
