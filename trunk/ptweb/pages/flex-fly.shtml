@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>UC Berkeley</title>
+<meta name="Description" content="University of California, Berkeley" />
+
+<!--Script inserts current year in copyright section of footer -->
+<script type="text/javascript" src="/js/getyear.js"></script>
+<link href="/css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-flex.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+<!-- Conditional comment addds IE6-specific CSS deviations -->
+<!--[if lte IE 6]>
+<link href="/css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+<![endif]-->
+</head>
+
+<body>
+<div id="sizer"><div id="expander"><div id="innerwrapper">
+<div id="outside">
+  <div id="banr">
+    <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+    <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+    <!-- Link to UC Berkeley home page; do not remove -->
+    <div id="ucb"><a href="http://www.berkeley.edu">UC Berkeley</a></div>
+    <!-- OPTIONAL most-used toolset. Search is entire UC Berkeley web; can be customized to site  -->
+    <!--#include virtual="/ssi/tools.htm" -->
+<!-- Website logo -->
+<div id="logo"><img src="/img/logo-templates.gif" alt="UC Berkeley templates" /></div>
+    <!-- OPTIONAL Customizable Quick Links dropdown -->
+    <!--#include virtual="/ssi/links.htm" -->
+    <!-- OPTIONAL horizontal top navigation -->
+    <!--#include virtual="/ssi/topnav.htm" -->
+  </div>
+  <!-- /#banr -->
+  <div id="pagebody">
+    <div id="navcol">
+      <!-- Main site navigation -->
+      <!--#include virtual="/ssi/menu-flyout.htm" -->
+      <!-- OPTIONAL Additional text or links in left column -->
+      <div id="addon">
+        <p>Optional extra info</p>
+      </div>
+      <!-- /#addon -->
+    </div>
+    <!-- /#navcol -->
+    <div id="contentcol">
+      <!-- OPTIONAL section title; can be used w or w/o photo strip below -->
+      <!--#include virtual="/ssi/section.htm" -->
+      <div id="content">
+      <!-- OPTIONAL floated sidebar for internal page anchor links and/or extra features -->
+          <div id="sidebar">
+            <div id="pagelinks"><strong>Page links</strong>
+                <ul>
+                  <li><a href="#">Link 1</a></li>
+                  <li><a href="#">Link 2</a> </li>
+                </ul>
+            </div>
+            <!-- /#pagelinks -->
+            <div id="infobox">
+              <h3>H3 Sidebar head</h3>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus sodales, mi non lobortis commodo, nunc sapien varius erat, non varius massa orci non nunc.</p>
+              <p><a href="#">Link 1</a></p>
+              <p><a href="#">Link 2</a></p>
+              <p><a href="#">Link 3</a></p>
+            </div>
+            <!-- /#infobox -->
+          </div>
+        <!-- /#sidebar -->
+          <!-- Begin main page content -->
+      <!-- Link target for accessibility Skip Nav -->
+      <a name="maincontent" id="maincontent"></a>
+		<div id="skip2"><a href="#sidebar" title="Skip to sidebar">Skip to sidebar</a></div> 
+          <h1>H1 heading</h1>
+        <h1 class="subhead">H1 subhead</h1>
+        <h2>H2 heading</h2>
+        <h3>H3 heading</h3>
+        <h4>H4 heading</h4>
+        <h5>H5 heading</h5>
+        <h6>H6 heading</h6>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam nec erat a neque tempus iaculis. In hac habitasse platea dictumst. Fusce orci lorem, varius ut, fermentum eget, interdum sed, eros. Nulla est. Integer pulvinar augue id quam. Nulla tempus tempor risus. Praesent lectus metus, posuere at, dignissim ac, elementum in, sapien. Nulla enim diam, viverra in, pulvinar a, pellentesque id, pede. Fusce condimentum posuere velit. Nunc diam ante, lobortis eu, volutpat vel, imperdiet sed, arcu. Donec quis quam. Cras pretium mauris sit amet leo.</p>
+        <ul>
+            <li>List item 1</li>
+          <li><a href="#">List item 2</a></li>
+          <li>List item 3</li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam nec erat a neque tempus iaculis. In hac habitasse platea dictumst. Fusce orci lorem, varius ut, fermentum eget, interdum sed, eros. </p>
+        <ol>
+            <li>Ordered list item 1</li>
+          <li><a href="#">Ordered list item 2</a></li>
+          <li>ordered list item 3</li>
+        </ol>
+        <hr />
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam nec erat a neque tempus iaculis. In hac habitasse platea dictumst. Fusce orci lorem, varius ut, fermentum eget, interdum sed, eros. Nulla est. Integer pulvinar augue id quam. Nulla tempus tempor risus. Praesent lectus metus, posuere at, dignissim ac, elementum in, sapien. Nulla enim diam, viverra in, pulvinar a, pellentesque id, pede. Fusce condimentum posuere velit. Nunc diam ante, lobortis eu, volutpat vel, imperdiet sed, arcu. Donec quis quam. Cras pretium mauris sit amet leo.</p>
+        <p><div class="pixLeft" style="width: 200px;"><img src="/img/sample.jpg" height="150" width="200" alt="Alt text" />Caption <em>(Credit)</em></div>Aliquam vitae nibh. Proin hendrerit. Sed cursus, sapien in accumsan fermentum, ipsum dui ultrices tellus, eu sollicitudin velit augue in tortor. Sed pharetra sodales elit. Nulla lobortis est vitae nisi. Fusce aliquam gravida dolor. Ut ullamcorper, enim pretium lobortis tincidunt, urna mi mattis nibh, ut pulvinar lectus ipsum ac dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc lobortis auctor dui. Quisque ut felis quis nibh tempus ullamcorper. Aliquam ut diam.</p>
+        <p>In enim velit, adipiscing sollicitudin, convallis quis, semper et, justo. Vivamus pede nulla, accumsan id, tristique at, placerat quis, lacus. Aenean laoreet vehicula nisi. Proin viverra ornare metus. Cras posuere rhoncus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eleifend massa nec leo. Praesent tincidunt lectus viverra sem. Vivamus blandit semper eros. Duis tincidunt vestibulum odio. Mauris nulla lorem, fermentum non, rutrum non, consectetuer eu, nisl. Nullam aliquet, velit nec volutpat vulputate, orci libero iaculis sapien, id placerat enim lorem et odio. Morbi a lectus. Nullam justo urna, iaculis at, aliquam eget, pellentesque non, ante. In hac habitasse platea dictumst. </p>
+        <p><div class="pixRight" style="width: 200px;"><img src="/img/sample.jpg" height="150" width="200" alt="Alt text" />Caption <em>(Credit)</em></div>Nulla ut tortor eget ipsum rutrum auctor. Vestibulum velit velit, rutrum vel, luctus sed, fringilla id, urna. Integer at enim at erat ultrices interdum. Vestibulum nulla mauris, vulputate molestie, elementum sit amet, ultricies eget, libero. Etiam sit amet urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In fringilla eros eget purus. Suspendisse non neque. Suspendisse adipiscing nisl quis odio. Mauris at lacus. Duis varius risus ac dolor. Nulla sed felis sed metus congue tincidunt. Phasellus a mauris. Suspendisse potenti. </p>
+      </div>
+      <!-- /#content -->
+    </div>
+    <!-- /#contentcol -->
+  </div>
+  <!-- /#pagebody -->
+</div>
+<!-- /#outside -->
+<!--#include virtual="/ssi/footer.htm" -->
+</div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+<!-- OPTIONAL Insert tracking code here -->
+</body>
+</html>

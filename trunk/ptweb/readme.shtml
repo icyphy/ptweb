@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>UC Berkeley templates</title>
+<meta name="Description" content="University of California, Berkeley" />
+
+<!--Script inserts current year in copyright section of footer -->
+<script type="text/javascript" src="/js/getyear.js"></script>
+<link href="/css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-flex-nonav.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+<!-- Conditional comment addds IE6-specific CSS deviations -->
+<!--[if lte IE 6]>
+<link href="/css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+<![endif]-->
+<style type="text/css">
+<!--
+#files {border-collapse:collapse;}
+#files td {border:1px solid #000; padding:.2em .4em;}
+ul ul, ol ul, blockquote {margin-left: 2.5em;}
+blockquote {background:#ededed; padding:.2em;}
+
+-->
+</style>
+</head>
+
+<body>
+<div id="sizer"><div id="expander"><div id="innerwrapper">
+<div id="outside">
+  <div id="banr">
+    <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+    <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+    <!-- Link to UC Berkeley home page; do not remove -->
+    <div id="ucb"><a href="http://www.berkeley.edu">UC Berkeley</a></div>
+    <!-- OPTIONAL most-used toolset. Search is entire UC Berkeley web; can be customized to site  -->
+    <!--#include virtual="/ssi/tools.htm" -->
+<!-- Website logo -->
+<div id="logo"><img src="/img/logo-webresources.gif" alt="UC Berkeley web resources" /></div>
+  </div>
+  <!-- /#banr -->
+  <div id="pagebody">
+    <div id="contentcol">
+      <!-- OPTIONAL section title; can be used w or w/o photo strip below -->
+      <a name="templates" id="templates"></a>
+      <div id="section">
+<div id="section-txt">Page design templates</div>
+<!-- OPTIONAL tiled photo strip; make image 900px x 95px -->
+<!-- If photostrip is removed, in UCB.css remove margin-top:70px; line from #content and remove height:3em; line from #section -->
+<div id="pstrip"></div>
+</div><!-- /#section -->      <div id="content">
+      <!-- OPTIONAL floated sidebar for internal page anchor links and/or extra features -->
+          <div id="sidebar">
+            <div id="pagelinks"><strong>In this file</strong>
+                <ul>
+                  <li><a href="#templates">UC Berkeley templates</a></li>
+                  <li><a href="#support">Support &amp; assistance</a></li>
+                  <li><a href="#next">Next steps</a></li>
+                  <li><a href="#inzip">Files included</a></li>
+                  <li><a href="#quick">Quick-start instructions</a></li>
+                  <li><a href="#mods">Common modifications</a></li>
+                  <li><a href="#dwt">Dreamweaver templates</a></li>
+                </ul>
+            </div>
+            <!-- /#pagelinks -->
+            <!-- /#infobox -->
+          </div>
+          <!-- /#sidebar -->
+          <!-- Begin main page content -->
+      <!-- Link target for accessibility Skip Nav -->
+      <a name="maincontent" id="maincontent"></a>
+		<div id="skip2"><a href="#sidebar" title="Skip to sidebar">Skip to sidebar</a></div> 
+          <h1>Website in a box</h1>
+          <h3>One design, six variations, infinite options.</h3>
+          <p>These templates from the Public Affairs web team are intended to provide nearly everything you'll need to create or redesign your UC Berkeley-affiliated website with the look and feel of the new campus gateway site &mdash; you just supply the content. Our modular templates allow you to include or remove page elements as desired. We've minimized the number of components used, and maximized the sitewide reuse of elements to streamline your maintenance work.</p>
+          <h2>Page styles</h2>
+          <ul>
+            <li><a href="http://www.berkeley.edu/webstyle/pages/fix-nofly.shtml">Fixed width, static left navigation</a></li>
+            <li><a href="http://www.berkeley.edu/webstyle/pages/fix-fly.shtml">Fixed width, flyout left navigation</a></li>
+            <li><a href="http://www.berkeley.edu/webstyle/pages/fix-nonav.shtml">Fixed width, no left navigation</a></li>
+            <li><a href="http://www.berkeley.edu/webstyle/pages/flex-nofly.shtml">Flexible width, static left navigation</a></li>
+            <li><a href="http://www.berkeley.edu/webstyle/pages/flex-fly.shtml">Flexible width, flyout left navigation</a></li>
+            <li><a href="http://www.berkeley.edu/webstyle/pages/flex-nonav.shtml">Flexible width, no left navigation</a></li>
+          </ul>
+          <h2>Optional page components</h2>
+          <ul>
+            <li>Campus toolbar (map, email, customizable search)</li>
+            <li>Quick Links dropdown</li>
+            <li>Top navigation strip</li>
+            <li>Section titles</li>
+            <li>Photostrips</li>
+            <li>Content below navigation in left column</li>
+            <li>Sidebar with internal page links and/or related content</li>
+          </ul><p>All templates include a link back to the campus home page, for branding and navigational purposes, and an automatically updated copyright notice in the customizable footer.</p><p>All pages are based around HTML semantic elements and Cascading Style Sheets to separate content from design. They are coded to XHTML and CSS standards, and pass Section 508 accessibility checks. They are tested to display and print properly in Firefox 3, Internet Explorer 6 &amp; 7, Safari 3 and Opera 9.</p>
+          <a name="support" id="support"></a>
+          <h2>Support and assistance</h2>
+          <p>These templates are supplied on an as-is basis; Public Affairs cannot customize the designs for you beyond the flexible components outlined above. We have included full documentation in the .ZIP archive explaining how to use the templates and how to make common modifications. The code for the templates and Cascading Style Sheets is also extensively commented to help you find your way.</p><p>However, we do want to help you successfully use these templates to create campus websites. We'll do our best to answer questions about how to deploy the templates on your site, how you can create logos that harmonize with the design, how you can obtain photos and fonts for your website, etc. If your needs are more elaborate and/or your web skills more limited, we'll also try to put you in touch with freelance web developers who can help build your site. And as your template-based site nears completion, we'd be happy to review it and offer design or technical suggestions. Please send any such questions or requests to <a href="mailto:webstyle@berkeley.edu">webstyle@berkeley.edu</a>.</p>
+          <a name="next" id="next"></a>
+          <h2>Next steps</h2>
+          <p>Public Affairs has commissioned the creation of a UC Berkeley Old Style digital font, based on the current campus signature typography, which will be made freely available to all campus users as soon as it has completed testing (anticipated to occur in early 2009). Once this font is ready, we'll add it to the template .ZIP file for future downloads. The font can be used for logo creation for these templates, as well as for other web- or print-based design work.</p>
+          <p>We'll be working with volunteer partners to extend these templates into Content Management Systems commonly used around campus. Aleksandr Vladimirskiy of the College  of Engineering has already created a prototype version for use with Plone, and we're working with Tao Starbow of the Drupal Users Group to find someone who can create a Drupal theme based on the templates. In addition, Public Affairs plans to create WordPress themes derived from the template designs. Users of other CMS tools are encouraged to contact <a href="mailto:webstyle@berkeley.edu">webstyle@berkeley.edu</a> if you are willing to build templates or themes based on these designs for sharing with others.</p><p>Public Affairs also expects &nbsp;to deploy a blog (using the gateway theme, once completed) to track the ongoing development of the gateway templates, and to offer the user community a forum to ask questions and share experiences. We'll share the URL for the blog as soon as it's ready for release. (A big shout-out to our friends at the Graduate School of Journalism for their help in cutting our blogging teeth.)</p>
+          <a name="inzip" id="inzip"></a>
+          <h2>Files included in the .ZIP archive</h2>
+          <table cellspacing="0" cellpadding="0" id="files">
+            <tr>
+              <td>/pages/fix-nofly.shtml</td>
+              <td>Page template, fixed width, static left nav column</td>
+            </tr>
+            <tr>
+              <td>/pages/fix-fly.shtml</td>
+              <td>Page template, fixed width, flyout left nav column</td>
+            </tr>
+            <tr>
+              <td>/pages/fix-nonav.shtml</td>
+              <td>Page template, fixed width, no left column</td>
+            </tr>
+            <tr>
+              <td>/pages/flex-nofly.shtml</td>
+              <td>Page template, flexible width, static left nav column</td>
+            </tr>
+            <tr>
+              <td>/pages/flex-fly.shtml</td>
+              <td>Page template, flexible width, flyout left nav column</td>
+            </tr>
+            <tr>
+              <td>/pages/flex-nonav.shtml</td>
+              <td>Page template, flexible width, no left column</td>
+            </tr>
+            <tr>
+              <td>/css/UCB.css</td>
+              <td>Main stylesheet, controls typography &amp; positioning</td>
+            </tr>
+            <tr>
+              <td>/css/UCB-fix.css</td>
+              <td>Style overrides for fixed-width pages</td>
+            </tr>
+            <tr>
+              <td>/css/UCB-fix-nonav.css</td>
+              <td>Style overrrides for fixed-width pages w/o left column</td>
+            </tr>
+            <tr>
+              <td>/css/UCB-flex.css</td>
+              <td>Style overrides for flexible-width pages</td>
+            </tr>
+            <tr>
+              <td>/css/UCB-flex-nonav.css</td>
+              <td>Style overrrides for flexible-width pages w/o left column</td>
+            </tr>
+            <tr>
+              <td>/css/UCB-print.css</td>
+              <td>Styles for printing, without navigational elements</td>
+            </tr>
+            <tr>
+              <td>/css/UCB-printall.css</td>
+              <td>Styles for printing all page elements</td>
+            </tr>
+            <tr>
+              <td>/css/IE6.css</td>
+              <td>Style overrides for IE6 (invoked w/conditional comment)</td>
+            </tr>
+            <tr>
+              <td>/js/getyear.js</td>
+              <td>Javascript to insert current year in footer copyright line</td>
+            </tr>
+            <tr>
+              <td>/ssi/footer.htm</td>
+              <td>Server Side Include: Page footer</td>
+            </tr>
+            <tr>
+              <td>/ssi/links.htm</td>
+              <td>Server Side Include: Dropdown links in header</td>
+            </tr>
+            <tr>
+              <td>/ssi/menu.htm</td>
+              <td>Server Side Include: Static one-level navigational menu</td>
+            </tr>
+            <tr>
+              <td>/ssi/menu-flyout.htm</td>
+              <td>Server Side Include: Flyout two-level navigational menu</td>
+            </tr>
+            <tr>
+              <td>/ssi/section.htm</td>
+              <td>Server Side Include: Section title and photo strip</td>
+            </tr>
+            <tr>
+              <td>/ssi/tools.htm</td>
+              <td>Server Side Include: Toolbar (map/email/search)</td>
+            </tr>
+            <tr>
+              <td>/ssi/topnav.htm</td>
+              <td>Server Side Include: Horizontal navigation menu in header</td>
+            </tr>
+            <tr>
+              <td>/img/banr1.jpg</td>
+              <td>Banner gradient background; Sather Gate image left</td>
+            </tr>
+            <tr>
+              <td>/img/banr2.jpg</td>
+              <td>Banner gradient background; Sather Gate image right</td>
+            </tr>
+            <tr>
+              <td>/img/banr3.jpg</td>
+              <td>Banner gradient background; no Sather Gate image</td>
+            </tr>
+            <tr>
+              <td>/img/bearpaw.gif</td>
+              <td>GO image for search toolbar</td>
+            </tr>
+            <tr>
+              <td>/img/column-bg.gif</td>
+              <td>Faux-column background for left nav; deep blue</td>
+            </tr>
+            <tr>
+              <td>/img/column-bg-print.gif</td>
+              <td>Faux-column background for left nav; light gray for   printing</td>
+            </tr>
+            <tr>
+              <td>/img/list-arrow.gif</td>
+              <td>Double arrow icon for page links unordered list</td>
+            </tr>
+            <tr>
+              <td>/img/pagelink-bg.gif</td>
+              <td>Tiling background screen for page links sidebar section</td>
+            </tr>
+            <tr>
+              <td>/img/logo-templates.gif</td>
+              <td>Placeholder logo for header</td>
+            </tr>
+            <tr>
+              <td>/img/photostrip.jpg</td>
+              <td>Placeholder tiling photo strip; 900x95px standard size</td>
+            </tr>
+            <tr>
+              <td>/img/sample.jpg</td>
+              <td>Placeholder image of library and Campanile for page body</td>
+            </tr>
+            <tr>
+              <td>readme.shtml</td>
+              <td>This documentation file</td>
+            </tr>
+          </table>
+          <a name="quick" id="quick"></a>
+          <h2>Quick-start instructions</h2>
+          <p>These instructions envision a site built from scratch. If you are replacing existing files, you'll need to design a file structure and workflow to accommodate the temporary existence of new and old versions of your site.</p>
+          <ol>
+            <li>Copy      all files from the .ZIP archive into the root level of your site,      retaining the folder structure provided.</li>
+            <li>Determine      which basic page design you want, from the six options provided in the      /pages/ folder.</li>
+            <li>Create      a logo for your department/unit with a transparent background to float      over the gradient banner background. Place this .GIF or .PNG file in the      /img directory, and point to it in the <strong>div#logo</strong> of your chosen template, modifying the      alt=&quot; &quot; tag to suit.</li>
+            <li>Select      the best background for your logo (banr1/banr2/banr3), and point to it in      the <strong>#banr</strong> section of UCB.css.</li>
+            <li>&nbsp;In the <strong>&lt;head&gt;</strong> section of the template .shtml file, change the      following items:
+          <ul>
+            <li>Give the template a generic title and generic meta-description appropriate to your website.</li>
+            <li>If you want navigation sections to appear on user printouts, change<strong> /css/UCB-print.css</strong> to <strong>/css/UCB-printall.css</strong></li>
+          </ul></li>
+            <li>Decide      which of the optional sections you wish to remove (toolbar, Quick Links,      top navigation, extra left-column info, section title, photostrip, sidebar      page links and/or infobox) and delete them from the template code (see      detailed instructions below).</li>
+            <li>Delete      the placeholder text, headlines and photos from the <strong>#content</strong> section of the template page. You may want to keep      one headline and brief text for placement purposes. You can either retain      or remove the right <strong>#sidebar</strong>,      depending on which look will be more common on your site, and then restore      (or remove) it on individual pages as needed. Likewise, if you retained      the <strong>#addon</strong> section below the      left navigation, you can include its content in the page template (making      it global across your site), or you can supply it on a page-by-page basis.</li>
+            <li>Save      the modified template page.</li>
+            <li>If you      retained the Quick Links, open the links.htm file in the /ssi folder and      replace the generic text and links in the &lt;li&gt;s with your site's top      links, adding or removing &lt;li&gt;s as needed.</li>
+            <li>If you      retained the top navigation, open the topnav.htm file in the /ssi folder      and replace the generic text and links in the &lt;li&gt;s with your site's      navigational links, adding or removing &lt;li&gt;s as needed.</li>
+            <li>If      your chosen page design uses a left navigation column, open the      appropriate file in /ssi (either menu.htm or menu-flyout.htm) and replace      the generic text and links in the &lt;li&gt;s with your site's      navigational links, adding or removing &lt;li&gt;s as needed. If you're      using the flyout navigation design, make sure you adhere to the nesting      structure for the second-level links.</li>
+            <li>If you      retained the section title and photostrip, open the section.htm file in      the /ssi folder and change the text as needed. You can supply a new      photostrip (900x95 px; change the path in the <strong>#pstrip</strong> section of UCB.css) or keep the placeholder image provided.</li>
+            <li>Open      the footer.htm file in the /ssi folder and replace the generic text and      links in the &lt;li&gt;s with your site's navigational links, adding or      removing &lt;li&gt;s as needed.</li>
+            <li>Save      any of the SSI files that you modified, and then upload the contents of the      /css, /img, /js and /ssi folders to your server.</li>
+            <li>Open      your modified template file and Save As the index page of your site,      retaining the .shtml suffix (needed to parse the server side includes) and      placing it in the root-level folder. Add page content as needed, adhering      to semantic structure (H1 through H6 for headings; &lt;p&gt; for text paragraphs,      &lt;ol&gt;/&lt;ul&gt;/&lt;li&gt; tags for lists) for optimal accessibility and search engine findability. Make      sure to include an appropriate page title and meta-description      information. Save and upload this new index page to your server.</li>
+            <li>Open      the page in a web browser and make sure all is as planned.</li>
+            <li>To      create additional pages, repeat steps 15 and 16 as needed, creating a      folder structure for your pages as desired.</li>
+          </ol>
+          <a name="mods" id="mods"></a>
+          <h2>Common modifications</h2>
+          
+          <h4>To remove optional modules </h4>
+          <p>The tools, Quick Links and horizontal top navigation blocks can be removed from the page header by deleting the relevant <strong>&lt;!--#include virtual=&quot; &quot; --&gt;</strong> line from the template code. The <strong>#addon</strong> left column content and/or the right-floated <strong>#sidebar</strong> can be removed by deleting the <strong>&lt;div&gt;</strong> of the same ID and its content from the template code.</p>
+          <p>To remove the photostrip but retain the section title, in the section.htm file remove the <strong>&lt;div id=&quot;pstrip&quot;&gt;&lt;/div&gt;</strong> tags, and in the UCB.css file remove the <strong>margin-top:70px;</strong> line from <strong>#content</strong> and remove the <strong>height:3em;</strong> line from <strong>#section</strong>.</p><p>To remove both section title and photostrip, delete the <strong>&lt;!--#include virtual=&quot;ssi/section.htm&quot; --&gt;</strong> line from the template code, and then in the UCB.css file remove the <strong>margin-top:70px;</strong> line from <strong>#content</strong>.</p>
+          <h4>To change widths</h4>
+          <ul>
+            <li><em>Fixed-width page:</em> Change the width value for <strong>#outside</strong> in UCB-fix.css and/or UCB-fix-nonav.css</li>
+            <li><em>Flexible-width page &ndash; minimum width:</em> The Jello Mold concept on which the flexible pages are based uses negative horizontal margins and offsetting positive horizontal padding to establish the minimum width (in addition to a min-width value, which is not recognized by all browsers). The padding and margin values are each one-half of the total desired minimum width, since the values get applied to both left and right sides of the selected elements. To adjust this minimum width, change the following in UCB-flex.css and/or UCB-flex-nonav.css</li>
+            <ul>
+              <li>in <strong>body</strong>, change the horizontal padding (385px in default) to one-half your desired minimum width</li>
+              <li>in <strong>#expander</strong>, change <strong>margin-left</strong> and <strong>margin-right</strong> to one half your minimum width</li>
+              <li>in <strong>#expander</strong> and <strong>#outside</strong>, change <strong>min-width</strong> to your full minimum width</li>
+            </ul>
+            <li><em>Flexible-width page &ndash; maximum width:</em> This one requires more experimentation, because the maximum width is calculated on the fly using a combination of the Jello Mold padding and negative margins, and the percentage width and max-width values of <strong>#sizer</strong>. Adjusting <strong>#sizer width:</strong> will change the size of the margins between the page border and the edge of the browser; adjusting <strong>#sizer max-width:</strong> will change the overall maximum width of the page body. Experiment with these values to get the maximum width and borders you want. NOTE: Max-width limits don't work in IE6.</li>
+            <li><em>Left navigation column:</em> In UCB.css, adjust <strong>#navcol width:</strong> and <strong>#contentcol padding-left</strong> by the same amount in the same direction (higher for a wider column, lower for a narrower column). Also adjust <strong>#menu a width:</strong> and/or <strong>#menu-flyout width:</strong> and <strong>#menu-flyout a width: </strong>and<strong> #menu-flyout ul left:</strong> by this same amount and direction. Finally, create new faux-column background images column-bg.gif and column-bg-print.gif in which the colored section is narrower or wider by the same amount changed above.</li>
+          </ul>
+          <h4>To use an alternate banner &amp; logo on individual page(s)</h4>
+           <p>Insert the following into the <strong>&lt;head&gt;</strong> section of the desired page(s):</p>
+          <blockquote> &lt;style type=&quot;text/css&quot;&gt;<br />
+  &lt;!--<br />
+            #banr {background-image:url(/img/banr#.jpg);}<br />
+            --&gt;<br />
+  &lt;/style&gt;                  </blockquote>
+          <p>replacing <strong>banr#.jpg</strong> with the file name of the appropriate banner background. Then in the <strong>&lt;body&gt;</strong> section, change the logo image:</p>
+          <blockquote> &lt;img src=&quot;/img/logo-templates.gif&quot; alt=&quot;UC Berkeley templates&quot; /&gt;
+          </blockquote>
+          <p>to point to your alternate logo image file.</p>
+          <h4>To search your site, rather than the entire berkeley.edu domain</h4>
+          <p>If you haven't done so already, set up a Google Custom Search Engine to search the URLs you wish (details at <a href="http://www.google.com/coop/cse/">http://www.google.com/coop/cse/</a>). Then, in the tools.htm file in the /ssi folder, in the search form, replace the long string in <strong>value=&quot; &quot;</strong> for the cx input with the similar cx value for your Google CSE (you can find this value in the Code section of your CSE's Control Panel).</p>
+          <h4>To add tracking code</h4>
+          <p>If you use Google Analytics, copy the Javascript code block from your GA account (Analytics Settings&nbsp; &gt;&nbsp; Profile Settings&nbsp; &gt;&nbsp; Tracking Code) at the indicated place at the bottom of the page template, just before the closing <strong>&lt;/body&gt;</strong> tag. For users of other analytical tools, follow your tool's instructions.</p>
+          <h4>Variable section titles</h4>
+          <p>If you will be using the section titles (with or without photostrips) but want a different title on most pages, you'll want to replace the section title SSI line in your template(s) with the actual code from the section.htm file. That way you can change text on a per-page basis. NOTE: The section title should not be used as the page title/headline; that must go inside the <strong>&lt;h1&gt;</strong> tag for accessibility and search engine optimization reasons.</p>
+          <h4>To change the section title background color globally</h4>
+          <p>In UCB.css, supply a different hex value for <strong>background-color:</strong> in <strong>#section</strong>. To override the color on a per-page basis, add this code at the end of the <strong>&lt;head&gt;</strong> section on the desired page(s):</p>
+          <blockquote> &lt;style type=&quot;text/css&quot;&gt;<br />
+  &lt;!--<br />
+            #section {background-color: #000000;}<br />
+            --&gt;<br />
+  &lt;/style&gt;</blockquote>
+          <p>replacing #000000 with your desired color's hex code.</p>
+          <a name="dwt" id="dwt"></a>
+          <h2>Dreamweaver templates</h2>
+          <p>The .shtml files in /pages can easily be converted into Dreamweaver templates (.dwt files) for use in Dreamweaver and Contribute. To do so, follow the instructions with your version of Dreamweaver, and select which areas should be editable by users. We recommend:</p>
+          <ul>
+            <li>One line at the end of the template's <strong>&lt;head&gt;</strong> section, for insertion of page-specific CSS styles, scripts, &lt;meta&gt; tags or other info.</li>
+            <li>&nbsp;All code inside the <strong>&lt;div id=&quot;content&quot;&gt;</strong> tags. If you will be using section titles that vary from page to page, you'll instead want to make all code within the <strong>&lt;div id=&quot;contentcol&quot;&gt;</strong> tags editable (and see note above about replacing the section title SSI with editable code).</li>
+            <li>All code inside the <strong>&lt;div id=&quot;addon&quot;&gt;</strong> tags (unless you remove this section, or make it a sitewide SSI as well)</li>
+          </ul>
+          </div>
+      <!-- /#content -->
+    </div>
+    <!-- /#contentcol -->
+  </div>
+  <!-- /#pagebody -->
+</div>
+<!-- /#outside -->
+<div id="footer">
+<ul>
+<li class="first"><a href="http://www.berkeley.edu">UC Berkeley</a></li> 
+<li><a href="http://newscenter.berkeley.edu">NewsCenter</a></li>
+<li><a href="http://www.berkeley.edu/photos">Image gallery</a></li>
+</ul>
+<!-- Script inserts current year in copyright string -->
+Copyright &copy; <script type="text/javascript">
+<!--
+displayDate();
+//-->
+</script> 
+UC Regents; all rights reserved.
+</div><!-- /#footer -->
+</div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+<!-- OPTIONAL Insert tracking code here -->
+</body>
+</html>
