@@ -1,12 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<meta http-equiv="Expires" content="0">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Installshield</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII1.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>Installshield</h1>
 
 <h2><a name="bugs">Bugs</a></h2>
@@ -72,7 +74,7 @@ a 5Mb file they may or may not need.
 
 <li> Installshield Multiplatform Edition 4.0 can't update environment
 variables, so the user's path is not updated to include the directory
-where <CODE>vergil.exe</CODE> is located.  This might be fixed in
+where <code>vergil.exe</code> is located.  This might be fixed in
 Installshield Multiplatform 4.01.
 
 </menu>
@@ -124,7 +126,7 @@ the Installer is looking for the JVM
 
 <h3>Extraction</h3>
 The Installshield installer and launchers contain several files
-that can be extracted with the <CODE>-is:extract</CODE> command
+that can be extracted with the <code>-is:extract</code> command
 
 <pre>
 bash-2.03$ ./ptII1_0_1setup.exe -is:extract
@@ -163,33 +165,33 @@ The Windows Installshield .exe files can take the following
 command line arguments:
 
 <dl>
-<dt> <CODE>-is:extract</CODE>
+<dt> <code>-is:extract</code>
 <dd> Extract the components from the .exe file.
 
-<dt> <CODE>-is:in</CODE>
+<dt> <code>-is:in</code>
 <dd> Unknown, probably for input files.
 
-<dt> <CODE>-is:javaconsole</CODE>
+<dt> <code>-is:javaconsole</code>
 <dd> After JVM resolution, bring up a window that will display
 the contents of standard out.  Another workaround is to
 run the installer in a DOS or Bash shell
 
-<dt> <CODE>-is:javahome</CODE>
+<dt> <code>-is:javahome</code>
 <dd> Unknown, could be a way to specify which JVM to use.  Unfortunately
 The Installshield verification step is likely to reject non-standard JVMs
 
-<dt> <CODE>-is:log <I>logfile</I></CODE>
-<dd> Send log output to <CODE><I>logfile</I></CODE>
+<dt> <code>-is:log <I>logfile</I></code>
+<dd> Send log output to <code><I>logfile</I></code>
 To generate a log file, run
-<CODE>e:/ptII1_0_1setup.exe -is:logfile c:/tmp/log.txt</CODE>
+<code>e:/ptII1_0_1setup.exe -is:logfile c:/tmp/log.txt</code>
 
-<dt> <CODE>-is:silent</CODE>
+<dt> <code>-is:silent</code>
 <dd> Run in silent mode?
 
-<dt> <CODE>-is:tempdir <I>tempdir</I></CODE>
-<dd> Use <CODE><I>tempdir</I></CODE> as a temporary directory.
+<dt> <code>-is:tempdir <I>tempdir</I></code>
+<dd> Use <code><I>tempdir</I></code> as a temporary directory.
 
-<dt> <CODE>-is:version</CODE>
+<dt> <code>-is:version</code>
 <dd> Print out the version of the installer?
 
 </dl>
@@ -206,5 +208,4 @@ To generate a log file, run
 
 
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

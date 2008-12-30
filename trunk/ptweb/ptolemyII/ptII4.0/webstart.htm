@@ -1,41 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Ptolemy II 4.0.1 Web Edition Download</title>
-<SCRIPT LANGUAGE="Javascript"> 
-	var javawsInstalled = 0; 
-	isIE = "false"; 
 
-        if (navigator.mimeTypes && navigator.mimeTypes.length) { 
-        	x = navigator.mimeTypes['application/x-java-jnlp-file']; 
-                if (x) javawsInstalled = 1; 
-        } else { 
-                isIE = "true"; 
-        } 
-
-        function insertLink(url, name) { 
-        	if (javawsInstalled) { 
-                	document.write("<li> Install <a href=" + url + ">" + name + "</a>");                 } else { 
-                	document.write("<li> <a href=\"http://java.com\" target=_top>Install Web Start from Sun (720KB - 8.6Mb)</a><li> Restart your browser and return to this page.<li> Install <a href=" + url + ">"  + name + "</a>"); 
-  
-              } 
-        } 
- </SCRIPT> 
-<SCRIPT LANGUAGE="VBScript"> 
-          on error resume next 
-          If isIE = "true" Then 
-            If Not(IsObject(CreateObject("JavaWebStart.IsInstalled"))) Then 
-                  javawsInstalled = 0 
-            Else 
-                  javawsInstalled = 1 
-            End If 
-          End If 
-      </SCRIPT>
-
-</head>
-<body>
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII4.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 
 <table>
 <tr>
@@ -120,7 +93,7 @@ and continue with step 4 below.
 restart your browser and return to this page.
 
 <li> Hopefully, the Web Start detection will work and the
-<CODE>Install Web Start from Sun (720KB - 8.6Mb)</CODE> step will not be present.
+<code>Install Web Start from Sun (720KB - 8.6Mb)</code> step will not be present.
 
  <br><B>Even if the Install Web Start step is present</B>, try
 downloading and/or opening the
@@ -131,7 +104,7 @@ Web Start is properly installed.
 
  <br>For example, under Opera 6.01 under Windows 2000, click on the
 <a href="jnlp-4.0.1/vergil.jnlp">Ptolemy II 4.0.1 Web Edition (~29.8Mb)</a>
-link and select <CODE>open</CODE>.  If Java Web Start has been installed, 
+link and select <code>open</code>.  If Java Web Start has been installed, 
 then it should start up automatically.
 
 
@@ -140,8 +113,8 @@ roughly half the size of the application download is consumed
 by the HTML documentation of the Ptolemy II Java classes.
 
 <li> After the download completes, you will be prompted with a window
-that states that the certificate from <CODE>University of California
-Berkeley</CODE> is valid.  You should hit the <CODE>Start</CODE> button
+that states that the certificate from <code>University of California
+Berkeley</code> is valid.  You should hit the <code>Start</code>g button
 to proceed with start up.
 
 </ol>
@@ -170,6 +143,4 @@ to proceed with start up.
 
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
-</body>
-</html>
-
+<!--#include virtual="/ssi/bottom.htm" -->

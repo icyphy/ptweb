@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Ptolemy II 1.0.1 Limitations</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII1.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h2>Ptolemy II 1.0.1 Limitations</h2>
 
 <B>Note that there is a <a href="../ptIIlatest/body.htm" target="body">more recent version of Ptolemy II</a> is available for download.</B>  
@@ -28,7 +31,7 @@ section for details.
 
 <li> We have only tested the Installshield Installers under Windows
 2000 and Windows 98.  Unix users should install from the
-<a href="ptII1.0.1.src.tar.gz"><CODE>ptII1.0.1.src.tar.gz</CODE></a>
+<a href="ptII1.0.1.src.tar.gz"><code>ptII1.0.1.src.tar.gz</code></a>
 tar file and
 follow the <a href="ptII1.0/doc/install.htm">Installation Instructions</a>.
 
@@ -79,7 +82,7 @@ or to upgrade to JDK1.3.1rc1.
 
 
 <li> Under Linux SuSe 6.4, jdk1.3.0_02, you may have problems
-entering a <CODE>*</CODE> (asterisk) in a parameter editing textbox.
+entering a <code>*</code> (asterisk) in a parameter editing textbox.
 Upgrading to JDK1.3.1rc1 may help.
 Other test to try include running the swing demos and trying to
 the entry widget in the the Ptplot Edit-&gt;Format window.
@@ -96,24 +99,24 @@ java.security.AccessControlException: access denied (java.lang.RuntimePermission
 	at java.lang.SecurityManager.checkPermission(Unknown Source)
 </pre>
 
-This error occurs when Netscape is not yet running, and <CODE>HTML Demos and Docs</CODE> starts a new Netscape process.  A workaround is to start up 
-Netscape by hand and then click on the <CODE>HTML Demos and Docs</CODE>
+This error occurs when Netscape is not yet running, and <code>HTML Demos and Docs</code> starts a new Netscape process.  A workaround is to start up 
+Netscape by hand and then click on the <code>HTML Demos and Docs</code>
 menu choice.
 
- <p>The fix is to change the <CODE>Start in</CODE> directory
-of the <CODE>HTML Demos and Docs</CODE> shortcut to include the doc directory.
+ <p>The fix is to change the <code>Start in</code> directory
+of the <code>HTML Demos and Docs</code> shortcut to include the doc directory.
  <p>
 <ol>
 <li> Start -&gt; Programs -&gt; Ptolemy -&gt; Ptolemy II 1.0.1
 
-<li> Right click on <CODE>HTML Demos and Docs</CODE>
+<li> Right click on <code>HTML Demos and Docs</code>
 
 
-<li> In <CODE>Start in</CODE>, change:
+<li> In <code>Start in</code>, change:
  <br>
-<CODE>"C:\Program Files\Ptolemy\Ptolemy II 1.0.1\"</CODE>
+<code>"C:\Program Files\Ptolemy\Ptolemy II 1.0.1\"</code>
  <br>to:
-<CODE>"C:\Program Files\Ptolemy\Ptolemy II 1.0.1\doc"</CODE>
+<code>"C:\Program Files\Ptolemy\Ptolemy II 1.0.1\doc"</code>
 
 </ol>
 
@@ -182,5 +185,4 @@ our <a href="JavaVersionApplet.htm">Java Version Applet </a>)
 	</menu>
 </menu>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

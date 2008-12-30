@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Cygwin Installation</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII6.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>Cygwin Installation</h1>
 
  <p>
@@ -14,18 +17,18 @@ You need only install the Cygwin toolkit if you are rebuilding
 from source and intend to develop your own actors using Java.
 
  <p>Note that compile your own actors, you will also need the 
-<CODE>javac</CODE> compiler.  The <CODE>javac</CODE> compiler
+<code>javac</code> compiler.  The <code>gjavac</code>g compiler
 is part of the JDK, which is available at:
 
-<a href="http://java.sun.com/j2se/1.4.2/" target="_top"><CODE>http://java.sun.com/j2se/1.4.2/</CODE></a>.
-The <CODE>javac</CODE> compiler is <B>not</B> present in the 
+<a href="http://java.sun.com/j2se/1.4.2/" target="_top"><code>http://java.sun.com/j2se/1.4.2/</code></a>.
+The <code>javac</code> compiler is <B>not</B> present in the 
 Java Runtime Environment (JRE)
 
 
  <p>The Cygwin home page is at
-<a href="http://sources.redhat.com/cygwin/" target="_top"><CODE>http://sources.redhat.com/cygwin/</CODE></a>
+<a href="http://sources.redhat.com/cygwin/" target="_top"><code>http://sources.redhat.com/cygwin/</code></a>
  <p>Complete installation instructions can be found at
-<a href="http://sources.redhat.com/cygwin/faq" target="_top"><CODE>http://sources.redhat.com/cygwin/faq</CODE></a>.
+<a href="http://sources.redhat.com/cygwin/faq" target="_top"><code>http://sources.redhat.com/cygwin/faq</code></a>.
 
 <h2>Installing Cygwin from the self-extracting executable</h2>
 
@@ -37,19 +40,19 @@ The Matlab interface requires that Matlab be installed on the local machine.
 fairly large, so we provide three separate self-extracting downloads
 of the cygwin tools for Windows.
 <ol>
-<li> <a href="cygwin100706basic.exe"><CODE>cygwin100706basic.exe</CODE></a>
+<li> <a href="cygwin100706basic.exe"><code>cygwin100706basic.exe</code></a>
 (19.5 Mb) - The tools necessary to compile and configure Ptolemy II
 except for the Matlab interface.
 
 
-<li> <a href="cygwin100706devel.exe"><CODE>cygwin100706devel.exe</CODE></a>
+<li> <a href="cygwin100706devel.exe"><code>cygwin100706devel.exe</code></a>
 (65.9 Mb) - The tools necessary to compile and configure Ptolemy II
 including the Matlab interface and the JNI Actor.  This download includes
-everything in <CODE>cygwin100706basic.exe</CODE> above.
+everything in <code>cygwin100706basic.exe</code> above.
 </ol>
 
  <p>The sources for the above downloadables can be found in
-<a href="cygwin100706develsrc.exe"><CODE>cygwin100706develsrc.exe</CODE></a> (229.6 Mb)
+<a href="cygwin100706develsrc.exe"><code>cygwin100706develsrc.exe</code></a> (229.6 Mb)
 
  <p>
  <p>
@@ -59,60 +62,60 @@ everything in <CODE>cygwin100706basic.exe</CODE> above.
 
 <ol>
 <li> Most Ptolemy II users will
-<br> Download and execute <a href="cygwin100706basic.exe"><CODE>cygwin100706basic.exe</CODE></a> (19.5 Mb) 
+<br> Download and execute <a href="cygwin100706basic.exe"><code>cygwin100706basic.exe</code></a> (19.5 Mb) 
 
 
  <br> If you are running under Windows and 
 have Matlab installed on your local machine, then 
-<br> Download and execute <a href="cygwin100706devel.exe"><CODE>cygwin0505devel.exe</CODE></a> (65.9 Mb).
+<br> Download and execute <a href="cygwin100706devel.exe"><code>cygwin0505devel.exe</code></a> (65.9 Mb).
 
  <br>The files will be extracted to an seemingly arbitrary directory.
 You may find it easier to change the directory to something short, like
-<CODE>c:\temp\cygwin</CODE>. 
+<code>c:\temp\cygwin</code>. 
 
-<li> <CODE>setup.exe</CODE> should start up automatically for you.
-<li> Click on  <CODE>Next</CODE>
-<li> <CODE>Install from Local Directory</CODE> should already be selected
-for your. Click on <CODE>Next</CODE>.
+<li> <code>setup.exe</code> should start up automatically for you.
+<li> Click on  <code>Next</code>
+<li> <code>Install from Local Directory</code> should already be selected
+for your. Click on <code>Next</code>.
 
-<li> Keep the default of <CODE>C:\cygwin</CODE> for the <CODE>Select Root Install Directory</CODE>.  
- <br>Keep the default <CODE>All Users</CODE>,
- <br>Change the <CODE>Default Text File Type</CODE> to <CODE>DOS</CODE>
+<li> Keep the default of <code>C:\cygwin</code> for the <code>gSelect Root Install Directory</code>g.  
+ <br>Keep the default <code>All Users</code>,
+ <br>Change the <code>Default Text File Type</code> to <code>gDOS</code>g
  <br>(If you select Unix instead of DOS, then you will likely have
  <a href="http://www.gigascale.org/softdevel/faq/23.html" target="_top">Cygwin CR/NL problems</a> with CVS)
 
- <br> and then click on <CODE>Next</CODE>.
+ <br> and then click on <code>Next</code>.
 
-<li> Keep the default for <CODE>Local Package Directory</CODE>
-and click on <CODE>Next</CODE>.
+<li> Keep the default for <code>Local Package Directory</code>
+and click on <code>Next</code>.
 
 
-<li> The <CODE>Select packages to install</CODE> window will come
+<li> The <code>Select packages to install</code> window will come
 up with the default settings, we need to change from
-<CODE>default</CODE> to <CODE>install</CODE>
+<code>default</code> to <code>ginstall</code>g
 click on
-the word <CODE>default</CODE> that is to the right of <CODE>All</CODE>.
-The subpages should then change from <CODE>default</CODE> to
-<CODE>Install</CODE>.  In the screen shot below, we have just
-clicked on <CODE>default</CODE>:
+the word <code>default</code> that is to the right of <code>gAll</code>g.
+The subpages should then change from <code>default</code> to
+<code>Install</code>.  In the screen shot below, we have just
+clicked on <code>default</code>:
 <img src="../../image/cygwinSetup.gif" alt="Cygwin Setup">
  <br>
-<li> Select <CODE>Next</CODE>, which will install all the packages.
+<li> Select <code>Next</code>, which will install all the packages.
 
 
-<li> Select <CODE>Create Desktop Icon</CODE> and <CODE>Add to Start Menu</CODE>
+<li> Select <code>Create Desktop Icon</code> and <code>gAdd to Start Menu</code>g
 according to your preferences.
 
 <li> Remove the temporary directory where you extracted the files.
 
 
-<li> <CODE>c:/cygwin/etc/passwd</CODE> is created during the 
+<li> <code>c:/cygwin/etc/passwd</code> is created during the 
 Cygwin installation.  If your Windows account is a domain account
 and not a local account, then you may need to add an entry
-to <CODE>c:/cygwin/etc/passwd</CODE> by hand.
+to <code>c:/cygwin/etc/passwd</code> by hand.
  <br>To do this, start up the Cygwin bash shell with
 Start -&gt;?Cygwin
- <br>Then use the <CODE>mkpasswd</CODE> command to append
+ <br>Then use the <code>mkpasswd</code> command to append
 a line with your login information, for example, I used:
 
 <pre>
@@ -120,11 +123,11 @@ mkpasswd -l > /etc/passwd
 mkpasswd -d -u cxh --path-to-home=/cygdrive/c/users &gt;&gt; /etc/passwd
 
 </pre>
-<CODE>mkpasswd -h</CODE> will print out help for the <CODE>mkpasswd</CODE>
+<code>mkpasswd -h</code> will print out help for the <code>gmkpasswd</code>g
 command
 
 <li> Follow the instructions in the
-<a href="ptII6.0.2/doc/install.htm#settingptII">Set the value of the <CODE>PTII</CODE> environment variable</a> section
+<a href="ptII6.0.2/doc/install.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section
 </ol>
 
 <h2>Installing Cygwin from the Web</h2>
@@ -144,7 +147,7 @@ highlight text by left clicking and dragging the mouse over the text
 and then hitting the Enter key to copy the highlighted text.
  <p>
 The Cygwin faq at
-<a href="http://www.cygwin.com/faq/faq.html#SEC55" target="_top"><CODE>http://www.cygwin.com/faq/faq.html#SEC55</CODE></a>
+<a href="http://www.cygwin.com/faq/faq.html#SEC55" target="_top"><code>http://www.cygwin.com/faq/faq.html#SEC55</code></a>
 says:
 <BLOCKQUOTE>
 How can I copy and paste into Cygwin console windows?
@@ -276,5 +279,4 @@ gperf
 rpm 
 </pre>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

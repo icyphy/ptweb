@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Ptolemy II 4.0.1 Limitations</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII4.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h2>Ptolemy II 4.0.1 Limitations</h2>
 
 The <a href="ptII4.0.1/doc/ptII4.0.release.htm">Ptolemy II 4.0.1 Release notes</a>
@@ -259,7 +262,7 @@ reopened.
 <li> Configure now handles causes where the Java Advanced Imaging (JAI)
 interface is in a location outside of the JRE
 
-<li> Configure now sets up <CODE>$PTII/.classpath</CODE> properly
+<li> Configure now sets up <code>$PTII/.classpath</code> properly
 for use by Eclipse
 
 <li> Broken HTML links have been fixed.
@@ -296,7 +299,7 @@ $PTII/ptolemy/actor/lib/BooleanSwitch.java
 <br>Under Windows, we recommend using gcc-3.2.
 
 <li> The code generator GUI has been removed from the configuration,
-instead use <CODE>$PTII/bin/copernicus</CODE>.
+instead use <code>$PTII/bin/copernicus</code>.
 
  <li> Plot windows don't resize when control panel is resized
   <br>If a model with plotters
@@ -332,7 +335,7 @@ would use the distill implementation of the above algorithm.
 Or alternatively, we could switch to using pdftex instead of 
 latex-&gt;dvips-&gt;distill which should
 embed pdf for figures directly at the expense of less robust latex support.
-<a href="http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html#in_browser" target="_top"><CODE>http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html</CODE></a>
+<a href="http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html#in_browser" target="_top"><code>http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html</code></a>
 
  <br>Solution 2: Use the undocumented flag
 -Dsun.java2d.print.pipeline=pdl on the command line to force the
@@ -351,5 +354,4 @@ Then edit the file by hand in Illustrator to add the transparency back in.
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

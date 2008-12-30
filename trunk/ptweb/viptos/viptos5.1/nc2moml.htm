@@ -1,10 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-  <head>
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-    <title>nc2moml</title>
-  </head>
-  <body>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+
+
+<!--#include virtual="/ssi/top.htm"-->
     <h1>nc2moml</h1> 
 
     <p> <a href="http://www.tinyos.net#in_browser" target="_top">TinyOS</a> is an
@@ -39,8 +41,8 @@
 	the model fails.
 </BLOCKQUOTE>
     <p>However, Windows and users on other platforms can generate code for the
-	<CODE>pc</CODE> or other targets.  See the help instructions
-	in <CODE>$PTII/ptolemy/configs/viptos/help.htm</CODE>.
+	<code>pc</code> or other targets.  See the help instructions
+	in <code>$PTII/ptolemy/configs/viptos/help.htm</code>.
 
     <p> These installation instructions assume that you already have
     Ptolemy II installed, and that if you are running on Windows, you
@@ -62,7 +64,7 @@ ln -s <I>location_of_your_nesc_tree</I> nesc
  	to <a href="#environmentVariables">Set up the necessary
  	environment variables</a> below.  You may skip installing
  	TinyOS and nesc and <a href="#unzip">proceed</a> to unzipping
- 	the opts files and running <CODE>nc2moml</CODE>.
+ 	the opts files and running <code>nc2moml</code>.
 	</BLOCKQUOTE>
 
 
@@ -196,7 +198,7 @@ ln -s <I>location_of_your_nesc_tree</I> nesc
 		
 		 <p>If you get a message about checksum errors, complain
 		to the TinyOS authors and then reinstall Cygwin with 
-		<CODE>Unix</CODE> line endings.
+		<code>Unix</code> line endings.
  <p><I>Note to tinyos developers:  Unix line endings are not the right choice for naive Windows users.  </I>
 
 		 <p>If you get
@@ -244,7 +246,7 @@ ln -s <I>location_of_your_nesc_tree</I> nesc
         <pre>
     mkdir -p $PTII/vendors/ptinyos
         </pre>
-	Note that <CODE>$PTII</CODE> should not have spaces in it.
+	Note that <code>$PTII</code> should not have spaces in it.
 
       <li> We have put into the TinyOS makefiles a rule that you can
       run to create all the TinyOS libraries in one step. To use this,
@@ -297,7 +299,7 @@ setenv PTINYOS_MOMLROOT $PTII/vendors/ptinyos/moml
         </ul>
 
       <li> Get the nesC CVS Tree, see <a
-      href="http://sourceforge.net/cvs/?group_id=56288#in_browser" target="_top"><CODE>http://sourceforge.net/cvs/?group_id=56288</CODE></a>
+      href="http://sourceforge.net/cvs/?group_id=56288#in_browser" target="_top"><code>http://sourceforge.net/cvs/?group_id=56288</code></a>
 
         <pre>
 cd $PTII/vendors/ptinyos
@@ -395,8 +397,8 @@ cd <I>Location of avr rpms</I>
 rpm -force --ignoreos --nodeps -ivh *.rpm
 </pre>
 
- <p><I>Note that you need to have <CODE>pdflatex</CODE> and <CODE>bibtex</CODE> installed, or else edit <CODE>nesc/Makefile</CODE> and comment remove
-<CODE>doc</CODE> from the <CODE>SUBDIRS</CODE> line.
+ <p><I>Note that you need to have <code>pdflatex</code> and <code>gbibtex</code>g installed, or else edit <code>gnesc/Makefile</code>g and comment remove
+<code>doc</code> from the <code>gSUBDIRS</code>g line.
 </I>
 
 
@@ -406,7 +408,7 @@ cd $PTII/vendors/ptinyos/tinyos-1.x
 make
 make install
       </pre>
-      <p><CODE>tinyos-1.x/tools/src/uisp/src/Serial.C</CODE>  failed to compile
+      <p><code>tinyos-1.x/tools/src/uisp/src/Serial.C</code>  failed to compile
       <pre>
 Serial.C: In member function `void TSerial::OpenPort()':
 Serial.C:243: warning: right-hand operand of comma has no effect
@@ -415,8 +417,8 @@ make[4]: *** [Serial.o] Error 1
       </pre>
 
       The solution is to edit
-      <CODE>tinyos-1.x/tools/src/uisp/src/Makefile</CODE>
-      and remove the <CODE>-Werror</CODE> and rerun make from the top.
+      <code>tinyos-1.x/tools/src/uisp/src/Makefile</code>
+      and remove the <code>-Werror</code> and rerun make from the top.
 
       <li><a name="unzip"> Run the script that will unzip the file
       that contains additional compiler flags.  It will place "opts"
@@ -447,9 +449,9 @@ chmod a+x nc2moml*
         </pre>
         then try the step above again.
 
-	The <CODE>nc2moml</CODE> command will take 10-30 minutes to complete.
+	The <code>nc2moml</code> command will take 10-30 minutes to complete.
 
-        <p> Note: The nc2moml tool requires that you build the tools in <CODE>$PTII/bin</CODE>.  Do the following and rerun the script above if they are missing:
+        <p> Note: The nc2moml tool requires that you build the tools in <code>$PTII/bin</code>.  Do the following and rerun the script above if they are missing:
         <pre>
 cd $PTII/bin
 make
@@ -477,5 +479,4 @@ make
     </ol>
 
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

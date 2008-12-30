@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Ptolemy 0.7.1 Release Notes</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyclassic/pt0.7.1/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>Ptolemy 0.7.1 Release Notes</h1>
 
 Below are some common problems that you might run across with 0.7.1.
@@ -54,7 +57,7 @@ compiling with -O -fPIC causes an internal compiler error when
 compiling <code>Block.cc</code>, so we are shipping with egcs.
 
  <p>For more information about egcs, see
-<a href="http://www.cygnus.com/egcs/" target="_top"><code>http://www.cygnus.com</code></A>.
+<a href="http://www.cygnus.com/egcs/" target="_top"><code>http://www.cygnus.com</code></a>.
 
  <p> EGCS has a few mailing lists, <code>egcs-bugs</code> is
 archived at:
@@ -245,11 +248,11 @@ section in $PTOLEMY/tycho/kernel/gui/Dialog.itcl
 
 
 <li> (12/03) The following problem was reported by Shachindra Sharma in
-<CODE>src/octtools/Packages/st/st.c</CODE> where a particular
+<code>src/octtools/Packages/st/st.c</code> where a particular
 string results in a negative hash code because of overflow.
  <br>Ptolemy Classic does not call this function, but st.c
 appears in other locations, such as
-<a href="http://www.mit.edu/afs/sipb/project/ruby-lang/src/ruby-1.6.4/st.c" target="_top"><CODE>http://www.mit.edu/afs/sipb/project/ruby-lang/src/ruby-1.6.4/st.c</CODE></a>.
+<a href="http://www.mit.edu/afs/sipb/project/ruby-lang/src/ruby-1.6.4/st.c" target="_top"><code>http://www.mit.edu/afs/sipb/project/ruby-lang/src/ruby-1.6.4/st.c</code></a>.
 
  <br>The fix is below:
 
@@ -302,5 +305,4 @@ int st_strhash(string, modulus)
 <a href="../../tycho/tycho0.2.1/tycho0.2.1/doc/bugs.html"><code>$PTOLEMY/tycho/doc/bugs.html</code></a>
 </menu>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

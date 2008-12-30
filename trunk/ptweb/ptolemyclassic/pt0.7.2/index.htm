@@ -1,20 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<title>Ptolemy 0.7.2</title>
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<frameset rows="75,*,24" border=0>
-  <frame name="banner" scrolling="no" noresize target="toc" src="../../lib/banner.htm"
-    marginheight=2 marginwidth=2 frameborder=0>
-  <frame name="body" scrolling="no" noresize src="body.htm"
-    marginheight=2 marginwidth=2 frameborder=0>
-  <frame name="bottom" scrolling="no" noresize target="toc" src="../../lib/footer.htm"     marginheight=2 marginwidth=2 frameborder=0>
-  <noframes>
-  <body>
-  <p>This page uses frames, but your browser doesn't support them.</p>
-  </body>
-  </noframes>
-</frameset>
-</html>
+<title>Ptolemy 0.7.2</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyclassic/pt0.7.2/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<h1>Ptolemy 0.7.2</h1>
+<img src="../../image/ptolemySmall.gif" align="left" vspace="5" hspace="25">
+
+Ptolemy 0.7.2devel is available for <a href="download.htm">download</a>
+by seasoned developers.
+
+ <p>Ptolemy 0.7.2devel includes the following new features:
+<menu>
+<li> Changes to the ACS domain by Eric Pauer's group at <a href="http://www.sanders.com" target = "_top"> Sanders, a Lockheed Martin Company</a>
+
+<li> Support for gcc-2.95.1
+
+<li> Support for Itcl3.0 and Tcl/Tk 8.0.5
+
+<li> Better support for NT4.0 under Cygwin b20.2
+
+</menu>
+
+ <p>Development of Ptolemy Classic is winding down at UC Berkeley,
+the 0.7.2devel release has not undergone strenuous testing.  At this time,
+we are not planning on doing further Ptolemy Classic releases, most
+of our effort is going into <a href="../../ptolemyII" target="_top">Ptolemy II</a>.
+
+<menu>
+
+<li> There are various minor problems with Tycho, such as menu traversal,
+that were caused by the upgrade to Itcl3.0
+
+<li> The VHDL domain is basically untested - We had to upgrade Synopsys,
+so it likely broke the VHDL domain.
+
+<li> The CG56 domain is untested
+
+<li> The NT port is rather immature, it does not really reflect the overall
+level of quality in Ptolemy Classic.   On the PC Platform, you might
+want to run under Linux instead.
+
+<li> The NT port is rather slow, the problem has to do with the event
+loop, see
+<a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/ptntbugs.html">Ptolemy NT Bugs</a>
+
+ <p>August, 2005:
+To compile under Windows XP, <a href="download.htm">download</a>
+via CVS and follow the 
+<a href="http://ptolemy.eecs.berkeley.edu/~cxh/ptpub/nt/ptxpinstall.html">Ptolemy Windows XP Installation</a>
+instructions.  Note that this installation procedure is non-trivial.
+
+</menu>
+
+Most of the problems are basically bit rot, which occurs to software
+over time as the OS and compilers change.
+
+<!--#include virtual="/ssi/bottom.htm" -->

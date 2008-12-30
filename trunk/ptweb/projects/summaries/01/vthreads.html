@@ -1,20 +1,21 @@
-<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Simplifying the Creation of Efficient Servers with Virtual Threads 
-</title>
-</head>
-<body>
-<H1>Simplifying the Creation of Efficient Servers with Virtual Threads </H1>
-<HR>
+
+<!--#include virtual="/ssi/top.htm"-->
+<h1>Simplifying the Creation of Efficient Servers with Virtual Threads </h1>
+
 <TABLE>
 <TR><TH ALIGN=RIGHT>Researchers: </TH><TD>
  Elaine Cheong</TD></TR>
 <TR><TD></TD><TD>Fred Reiss</TD></TR>
 <TR><TH ALIGN=RIGHT>Advisor:</TH><TD>Edward A. Lee</TD></TR>
 </TABLE>
-<HR>
+
 For serving web pages and performing other I/O-intensive tasks
 involving many concurrent users, single-process event-driven servers
 are generally more efficent than multi-threaded servers because the
@@ -26,7 +27,7 @@ of information between states.  When debugging such a server, the
 programmer must derive the current status of all connections by hand
 from the data structures she devised while writing the server.
 
-<P> We propose a new development model for servers, Virtual Threads,
+<p> We propose a new development model for servers, Virtual Threads,
 which combines the efficiency of an event-driven server with the ease
 of implementation of a multithreaded server.  In this model,
 developers write the code to handle a single connection as if it were
@@ -41,5 +42,4 @@ these development tools to implement a simple Web server.
 
 
 <p><font size="2" color="#cc0000">Last updated 11/03/00</font>
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

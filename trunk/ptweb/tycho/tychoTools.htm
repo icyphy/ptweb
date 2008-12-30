@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Tycho Tools</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/tycho/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>Tycho Tools</h1>
 This page contains auxiliary binaries and standalone packages that are used by Tycho. 
 <h2>Packages</h2>
@@ -19,14 +22,14 @@ documentation from Itcl files.  For more information, see the
 </dl>
 In 7/2000, Sebastien B posted a "comparison of 3 documentation tools",
 to comp.lang.tcl.  You can find this posting as:
-<a href="http://x63.deja.com/getdoc.xp?AN=652781752"><CODE>http://x63.deja.com/getdoc.xp?AN=652781752</CODE></a>
+<a href="http://x63.deja.com/getdoc.xp?AN=652781752"><code>http://x63.deja.com/getdoc.xp?AN=652781752</code></a>
  <p>Other documentation tools include:
 <menu>
 <li> Autodoc -
-<a href="http://www.oche.de/~akupries/soft/autodoc/index.htm"><CODE>http://www.oche.de/~akupries/soft/autodoc/index.htm</CODE></a>
+<a href="http://www.oche.de/~akupries/soft/autodoc/index.htm"><code>http://www.oche.de/~akupries/soft/autodoc/index.htm</code></a>
 
 <li> TNA: tcl namespace analyzer -
-<a href="http://www.frisoft.com/download/tna"><CODE>http://www.frisoft.com/download/tna</CODE></a>
+<a href="http://www.frisoft.com/download/tna"><code>http://www.frisoft.com/download/tna</code></a>
 </menu>
 
 
@@ -35,7 +38,7 @@ to comp.lang.tcl.  You can find this posting as:
 <DT> <code>ispell</code>
 <DD> <code>ispell</code> is used under windows for the Spelling checker.
 This version of Ispell requires
-<a href="http://sourceware.cygnus.com/cygwin/" target="_top">Cygwin 1.0.1</A> 
+<a href="http://sourceware.cygnus.com/cygwin/" target="_top">Cygwin 1.0.1</a> 
 <ol>
 
  <li> In a bash shell, run
@@ -44,21 +47,21 @@ This version of Ispell requires
  </pre>
 
  <li>Download
-<a href="/tycho/tychoTools/windows/ispell401cygbin.tar.gz"><CODE>ispel401cygbin.tar.gz</CODE></A>,
+<a href="/tycho/tychoTools/windows/ispell401cygbin.tar.gz"><code>ispel401cygbin.tar.gz</code></a>,
 
 unzip it in the root directory of cygwin (usually c:/cygwin) 
 so that the following files are created
 <menu>
-<li> <CODE>/usr/local/lib/ispell/ispell.dict</CODE>
-<li> <CODE>/usr/local/lib/ispell/ispell.words</CODE>
-<li> <CODE>/usr/local/bin/ispell.exe</CODE>
-<li> <CODE>/usr/local/man/man1/ispell.1</CODE>
+<li> <code>/usr/local/lib/ispell/ispell.dict</code>
+<li> <code>/usr/local/lib/ispell/ispell.words</code>
+<li> <code>/usr/local/bin/ispell.exe</code>
+<li> <code>/usr/local/man/man1/ispell.1</code>
 </menu>
 
 In the example below, the download is in c:/tmp/downloads,
 and Cygwin is installed in c:/cygwin, so when running bash,
-<CODE>cd /</CODE> actually goes to <CODE>c:/cygwin</CODE>,
-not <CODE>c:/</CODE>
+<code>cd /</code> actually goes to <code>gc:/cygwin</code>g,
+not <code>c:/</code>
 <pre>
 bash-2.04$ cd /
 bash-2.04$ mkdir /usr/local/bin /usr/local/lib/ispell
@@ -95,16 +98,16 @@ in it:
 
 </menu>
 Under NT 4.0, to adjust your path, go to the 
-<code>Start</code> menu, select <CODE>Settings</CODE>, then
-<code>Control Panels</code>, then <CODE>System</CODE>, then select the
+<code>Start</code> menu, select <code>Settings</code>, then
+<code>Control Panels</code>, then <code>System</code>, then select the
 <code>Environment</code> tab
 
 </ol>
 
 Below are the Ispell4.01 sources and the README.cyg file
 <menu>
- <li><a href="/tycho/tychoTools/windows/ispell401cyg.tar.gz">Ispell4.01 Windows binaries and sources</A>
- <li><a href="/tycho/tychoTools/windows/ispell401_README.txt"><code>ispell401cyg/README.cyg</code></A>
+ <li><a href="/tycho/tychoTools/windows/ispell401cyg.tar.gz">Ispell4.01 Windows binaries and sources</a>
+ <li><a href="/tycho/tychoTools/windows/ispell401_README.txt"><code>ispell401cyg/README.cyg</code></a>
  ftom the zip file.
 
 </menu>
@@ -116,32 +119,31 @@ The Tycho Glimpse browser uses the <code>glimpse</code> program to search
 the sources for patterns.  
 
  <li> Glimpse homepage: 
-<a href="http://glimpse.cs.arizona.edu" target="_top"><code>http://glimpse.cs.arizona.edu</code></A>.
+<a href="http://glimpse.cs.arizona.edu" target="_top"><code>http://glimpse.cs.arizona.edu</code></a>.
  <li> The Glimpse windows
-<a href="/tycho/tychoTools/windows/glimpse/glimpse-4.0a.cybin.zip">binaries</A>
-require <a href="http://www.cygnus.com/misc/gnu-win32" target="_top">Cygwin b18</A> to
+<a href="/tycho/tychoTools/windows/glimpse/glimpse-4.0a.cybin.zip">binaries</a>
+require <a href="http://www.cygnus.com/misc/gnu-win32" target="_top">Cygwin b18</a> to
 run.  
 
- <li> <a href="/tycho/tychoTools/windows/glimpse/README.cyg"><code>README.cyg</code></A>
+ <li> <a href="/tycho/tychoTools/windows/glimpse/README.cyg"><code>README.cyg</code></a>
 file that describes the port to Cygwin b17
- <li> The <a href="/tycho/tychoTools/windows/glimpse/glimpse-4.0a.src.zip">sources</A>
+ <li> The <a href="/tycho/tychoTools/windows/glimpse/glimpse-4.0a.src.zip">sources</a>
 used to create the binaries are also available.
 
 
 <DT> <code>pxgraph</code>
-<DD> <code>pxgraph</code> is an extension to the Unix <CODE>xgraph</CODE> 
+<DD> <code>pxgraph</code> is an extension to the Unix <code>xgraph</code> 
 utility.  <code>pxgraph</code> is not used by Tycho, but it is used
 by Ptolemy, so if you are running Ptolemy under NT, you will need
 <code>pxgraph</code>.  There are two implementationsn
 <menu>
 <li> A Java implementation of pxgraph can be found at
-<a href="http://ptolemy.eecs.berkeley.edu/java/ptplot" target="_top"><code>http://ptolemy.eecs.berkeley.edu/java/ptplot</code></A>.
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptplot" target="_top"><code>http://ptolemy.eecs.berkeley.edu/java/ptplot</code></a>.
 
 <li> A port of the C version of pxgraph to Cygwin can be found at
-<a href="../other/pxgraph.htm"><code>http://ptolemy.eecs.berkeley.edu/other/pxgraph.htm</code></A>.
+<a href="../other/pxgraph.htm"><code>http://ptolemy.eecs.berkeley.edu/other/pxgraph.htm</code></a>.
 </menu>
 
 </DL>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

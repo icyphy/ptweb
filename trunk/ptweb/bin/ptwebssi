@@ -70,7 +70,7 @@ fixit() {
     for fullfile in $files
     do
 	cd $toptop
-	echo "Now processing: $fullfile"
+	echo "Now processing: $fullfile in `pwd`"
 	if [ "$useegrep" = "yes" ]; then
 	    egrep -s -e  "$EGREPMATCH" $fullfile
 	else
@@ -137,15 +137,22 @@ echo "###################################################"
 echo " 0.5) <A HREF -> <a href, <LI> -> <li> etc"
 
 doit() {
-	sed -e 's@<A HREF@<a href@g' \
+	sed -e 's@^<!-- : ptwebssi@<!-- \$Id: ptwebssi@' \
+	    -e 's@<A HREF@<a href@g' \
 	    -e 's@<A NAME@<a name@g' \
+	    -e 's@</A>@</a>@g' \
 	    -e 's@<BR>@<br>@' \
-	    -e 's@<CODE>@<code>@' \
-	    -e 's@</CODE>@</code>@' \
+	    -e 's@<BODY>@<body>@' \
+	    -e 's@</BODY>@</body>@' \
+	    -e 's@<CODE>@<code>g@' \
+	    -e 's@</CODE>@</code>g@' \
 	    -e 's@<H\([1-9]\)>@<h\1>@' \
 	    -e 's@</H\([1-9]\)>@</h\1>@' \
 	    -e 's@<HEAD>@<head>@' \
 	    -e 's@</HEAD>@</head>@' \
+	    -e 's@<HTML>@<html>@' \
+	    -e 's@<html >@<html>@' \
+	    -e 's@</HTML>@</html>@' \
 	    -e 's@<LI>@<li>@' \
 	    -e 's@<MENU>@<menu>@' \
 	    -e 's@</MENU>@</menu>@' \
@@ -154,10 +161,11 @@ doit() {
 	    -e 's@</PRE>@</pre>@' \
 	    -e 's@<TITLE>@<title>@' \
 	    -e 's@</TITLE>@</title>@' \
+	    -e 's@<!-- #include virtual=@<!--#include virtual=@' \
 	    $file > /tmp/fix-files.tmp
 	diff -c $file /tmp/fix-files.tmp
 }
-EGREPMATCH='<A HREF|<A NAME|<BR>|<CODE>|<H[1-9]>|<HEAD>|<LI>|<MENU>|<P>|<TITLE>|<PRE>'
+EGREPMATCH='<!\-\- : ptwebssi|<A HREF|<A NAME|</A>|<BODY>|<BR>|<CODE>|<H[1-9]>|<HEAD>|<HTML>|<html >|<LI>|<MENU>|<P>|<TITLE>|<PRE>|<!-- #include virtual='
 LOGMESSAGE="Downcased HTML tags"
 
 fixit
@@ -220,11 +228,13 @@ echo ' 5) Add <!-- $Id$ -->'
 useegrep=no
 # If the file has the string the return 1
 searchit() { 
-    awk '$0 ~ /<!-- \$Id/ { exit 1}' $1
+    awk '$0 ~ /<!-- \$Id/ { exit 1}
+         $0 ~ /<!-- : ptwebssi/ { exit 1}
+       ' $1
 }
 
 doit() {
-    awk 'BEGIN { print "<!-- $Id$ -->"}
+    awk 'NR == 2  { print "<!-- $Id$ -->"}
     	{print $0}' \
 	    $file > /tmp/fix-files.tmp
 	diff -c $file /tmp/fix-files.tmp
@@ -272,13 +282,16 @@ useegrep=no
 searchit() { 
     basename=`basename $1`
     if [ "$basename" = "index.html" -o "$basename" = "index.htm" ]; then
-
         dirname=`dirname $1`
+	if [ ! -f "$dirname/main.htm" ]; then
+	    echo "$1: $dirname/main.htm not present, so not copying main.htm into index.htm"
+	    return 1
+        fi
         EGREPMATCH='<meta http-equiv="REFRESH"'
 	egrep -s -e  "$EGREPMATCH" $dirname/main.htm
 	retval=$?
 	if [ $retval = 0 ]; then
-	    echo "$file: main.htm had REFRESH, so $file is done?"
+	    echo "$1: main.htm had REFRESH, so $file is done?"
 	    return 1
         fi
         EGREPMATCH='^<frameset'
@@ -295,12 +308,13 @@ doit() {
     dirname=`dirname $file`
     if [ ! -f "$dirname/main.htm" ]; then
 	echo "$file: $dirname/main.htm does not exist, so do nothing"
-	exit
+        cp $file /tmp/fix-files.tmp
+	return
     fi	
     title=`egrep -i "^<title>" $dirname/main.htm`    
     cat <<EoF >/tmp/fix-files.tmp 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- $Id$ -->
+<!-- \$Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -332,28 +346,29 @@ fixit
 useegrep=yes
 
 echo "###################################################"
-echo ' 8) If there is a main.htm that does not redirect, then redirect'
+echo ' 8) If there is a main.htm or body.htm that does not redirect, then do so.'
 
 useegrep=no
 # If the file has the string the return 1
 searchit() { 
-    # If the file is not named main.htm, return 1
-    if [ "$file" != "main.htm" ]; then
-        exit 1
+    basename=`basename $1`
+    # If the file is not named main.htm or body.ht, return 1
+    if [ "$basename" != "main.htm" -a "$basename" != "body.htm" ]; then
+        return 1
     fi
 
     # If the file has the string the return 1
     awk '$0 ~ /<meta http-equiv="REFRESH"/ { exit 1}' $1
 }
 doit() {
-    dirname=`dirname $fullfile |  sed 's@\^./@/@'`
+    dirname=`dirname $fullfile |  sed 's@^\./@/@'`
     
     # FIXME: this only works if we are in the ptweb directory
     curdirbase=`basename $toptop`
     if [ "$curdirbase" != "ptweb" ]; then
-       echo "$file: must run in ptweb dir to fix up main.htm"
+       echo "$file: must run in ptweb dir to fix up main.htm and body.htm"
        cp $file /tmp/fix-files.tmp
-       exit
+       return
     fi
     url="$dirname/$file"
     targeturl="$dirname/index.htm"
@@ -377,7 +392,175 @@ EoF2
 	diff -c $file /tmp/fix-files.tmp
 }
 EGREPMATCH='href="http://[^"]*">'
-LOGMESSAGE="Convert index.htm to use SSI"
+LOGMESSAGE="Use redirect"
 
 fixit
 useegrep=yes
+
+echo "###################################################"
+echo ' 9) process .htm files that do not redirect or yet use SSI'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    basename=`basename $1`
+    # If the file is named toc.htm, then skip it
+    if [ "$basename" = "toc.htm" ]; then
+        return 1
+    fi
+
+    awk '$0 ~ /#include virtual="/ { exit 1}
+         $0 ~ /<meta http-equiv="REFRESH"/ { exit 1}
+        ' $1
+}
+doit() {
+    title=`egrep -i "^<title>" $file`
+    cat <<EoF >/tmp/fix-files.tmp 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- \$Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+$title
+
+<!--#include virtual="/ssi/top.htm"-->
+EoF
+        awk '{ if (sawbody==1) {
+	           if ($1 == "</body>") {
+		       print "<!-- #include virtual=\"/ssi/bottom.htm\" -->"
+		       exit
+                   } else {
+                       print $0
+                   }  
+               } else { 
+	           if ($1 == "<body>") {
+                       sawbody = 1 
+                   } 
+               }
+            }' $file \
+	   >> /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH=''
+LOGMESSAGE="Use SSI"
+
+fixit
+useegrep=yes
+
+
+
+echo "###################################################"
+echo " 10) links that go to body.htm and _body should go to index.htm"
+doit() {
+	sed 's@\(href="http://[^"]*\)body.htm" target="_body>@\1index.htm">@' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='target="_body"'
+LOGMESSAGE="Instead of linking to body.htm and target=_body, link to index.htm"
+
+fixit
+
+echo "###################################################"
+echo ' 11) If there is a toc.htm, then include it'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    basename=`basename $1`
+    if [ "$basename" = "toc.htm" ]; then
+        echo "$1: Don't include toc.htm in itself"
+        return 1
+    fi
+    dirname=`dirname $1`
+    if [ ! -f "$dirname/toc.htm" ]; then
+        echo "$1: $dirname/toc.htm not present, so not including.htm into $1"
+        return 1
+    fi
+    EGREPMATCH='<!--#include virtual="/ssi/top.htm"-->'
+    egrep -s -e  "$EGREPMATCH" $1
+    retval=$?
+    return $retval
+}
+doit() {
+    # FIXME: this only works if we are in the ptweb directory
+    curdirbase=`basename $toptop`
+    if [ "$curdirbase" != "ptweb" ]; then
+       echo "$file: must run in ptweb dir to fix up $file to include toc.htm"
+       cp $file /tmp/fix-files.tmp
+       return
+    fi
+    dirname=`dirname $fullfile |  sed 's@^\./@/@'`
+    gawk -v dirname="$dirname" '{ if ($0 ~ /<!--#include virtual="\/ssi\/top.htm"-->/) {
+               print "<!--#include virtual=\"/ssi/toppremenu.htm\" -->"
+               print "<!--#include virtual=\"/" dirname "/toc.htm\" -->"
+               print "<!--#include virtual=\"/ssi/toppostmenu.htm\" -->"
+         } else {
+               print $0
+         }
+      }' $file \
+	   > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH=''
+LOGMESSAGE="Use local toc"
+
+fixit
+useegrep=yes
+
+echo "###################################################"
+echo ' 12) Fix up toc.htm'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    basename=`basename $1`
+    if [ "$basename" != "toc.htm" ]; then
+        echo "$1: Only operate on toc.htm"
+        return 1
+    fi
+    awk '$0 ~ /<div id="menu">/ { exit 1}' $1
+    return 0
+}
+doit() {
+    awk 'BEGIN { print "<div id=\"menu\">"
+                 print "<ul>"
+         }
+         $0 ~ /<a href=.*<\/[aA]>/ {
+                 if (count ==0) {
+                     count++
+                     printf("<li class=\"first\">");
+                 } else {
+                     printf("<li>");
+                 }
+                 if ($0 ~ /<\/li>/) {
+                     print $0
+                 } else {
+                     print $0 "</li>"
+                 } 
+         }
+         END { print "</ul>"
+               print "</div><!-- /#menu -->"
+         }' $file |
+    sed -e 's@<br>@@' \
+        -e 's@<li class="first"><li class="first">@<li class="first">@' \
+        -e 's@<li><li>@<li>@' \
+        -e 's@<li> *<a@<li><a@' \
+        -e 's@<p>@@' \
+        -e 's@body.htm" target="body"@index.htm"@' \
+        -e 's@main.htm" target="main"@index.htm"@' \
+        -e 's@ target="body"@@' \
+        -e 's@ target="main"@@' \
+        -e 's@ target="_top"@@' \
+        -e 's@body.htm"@index.htm"@' \
+        -e 's@main.htm"@main.htm"@' \
+	   > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH=''
+LOGMESSAGE="Fix up toc"
+
+fixit
+useegrep=yes
+

@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Installing Ptolemy 0.7.2 Under Linux</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyclassic/pt0.7.2/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>Installing Ptolemy 0.7.2 Under Linux</h1>
 Below are notes about installing under Red Hat 8 in July, 2003 [and
 also Red Hat 9.0] from source files.  You are probably better off
@@ -28,7 +31,7 @@ cvs -d :pserver:anon@source.eecs.berkeley.edu:/home/cvs/cvsanon co ptclassic
 This will create a directory called <code>ptclassic</code>.
 
 <li>Download <code>http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz</code> 
-and <CODE>pt0.7.2devel.other.src.tar.gz</CODE>
+and <code>pt0.7.2devel.other.src.tar.gz</code>
 <pre>
 user:   ptdevel
 password: ptrules
@@ -56,11 +59,11 @@ mv ptolemy/src/tcltk/tk8.0.5pt ptclassic/src/tcltk/tk8.0.5
 [Red Hat 9.0]: I am logged in as celaine.  I have untarred the .tar.gz files in ~/ptclassic.  Modify the instructions below accordingly.
 </ul>
 
-<li> Edit <CODE>$PTOLEMY/.bashrc</CODE> and change the setting
-for <CODE>PTOLEMY</CODE> to point to your directory, which will
-be something like <CODE>/root/ptclassic</CODE>.
+<li> Edit <code>$PTOLEMY/.bashrc</code> and change the setting
+for <code>PTOLEMY</code> to point to your directory, which will
+be something like <code>/root/ptclassic</code>.
 
- <br>[Debug version]: To compile the debug version, create <CODE>$PTOLEMY/.bashrc</CODE> and add the following instead:
+ <br>[Debug version]: To compile the debug version, create <code>$PTOLEMY/.bashrc</code> and add the following instead:
 <pre>
 PTOLEMY=/root/ptolemy
 export PTOLEMY
@@ -110,7 +113,7 @@ cd $PTOLEMY
 make bootstrap &gt;&amp; boot2.out &amp;
 </pre>
 
-[Debug version]: The directory name should be <CODE>obj.linux.debug</CODE> instead of <CODE>obj.linux</CODE>.
+[Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
 
 <li> While installing tcltk, I got:
 <pre>
@@ -124,8 +127,8 @@ he first entry for that value
 </pre>
 
 The fix is to edit
-<CODE> ~/ptolemy/src/tcltk/tcl8.0.5pt/generic/tclPosixStr.c
-</CODE>
+<code> ~/ptolemy/src/tcltk/tcl8.0.5pt/generic/tclPosixStr.c
+</code>
 and comment out the EOPNOTSUPP in two locations
 <I>This change is in the CVS tree, so it should not be necessary.</I>
 <pre>
@@ -157,14 +160,14 @@ In file included from
 X11/Xlib.h: No such file or directory
 </pre>
 
-The fix is to install <a href="http://www.redhat.com/swr/i386/XFree86-devel-4.3.0-2.i386.html"><CODE>XFree86-devel-4.3.0-2.i386.rpm</CODE></a> from <a href="http://www.redhat.com">redhat.com</a>, which will give you the necessary header files.  You may also need to install other rpms in the dependency list, including <a href="http://www.redhat.com/swr/i386/fontconfig-devel-2.1-9.i386.html"><CODE>fontconfig-devel-2.1-9.i386.rpm</CODE></a> and <a href="http://www.redhat.com/swr/i386/freetype-devel-2.1.3-6.i386.html"><CODE>freetype-devel-2.1.3-6.i386.rpm</CODE></a>.
+The fix is to install <a href="http://www.redhat.com/swr/i386/XFree86-devel-4.3.0-2.i386.html"><code>XFree86-devel-4.3.0-2.i386.rpm</code></a> from <a href="http://www.redhat.com">redhat.com</a>, which will give you the necessary header files.  You may also need to install other rpms in the dependency list, including <a href="http://www.redhat.com/swr/i386/fontconfig-devel-2.1-9.i386.html"><code>gfontconfig-devel-2.1-9.i386.rpm</code>g</a> and <a href="http://www.redhat.com/swr/i386/freetype-devel-2.1.3-6.i386.html"><code>gfreetype-devel-2.1.3-6.i386.rpm</code>g</a>.
 
-To reconfigure the build to detect <CODE>/usr/X11R6/lib/libX11.a</CODE>, do:
+To reconfigure the build to detect <code>/usr/X11R6/lib/libX11.a</code>, do:
 <pre>
 rm -rf obj.linux/tcltk/
 </pre>
 
-[Debug version]: The directory name should be <CODE>obj.linux.debug</CODE> instead of <CODE>obj.linux</CODE>.
+[Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
 
 Rerun:
 <pre>
@@ -201,7 +204,7 @@ and use
 </pre>
 
 
-<li> <CODE>vhdl/targets/SynthTarget.cc</CODE> needs a similar change
+<li> <code>vhdl/targets/SynthTarget.cc</code> needs a similar change
  <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
 <pre>
         //      comCode &lt;&lt; "designer = \"" &lt;&lt; cuserid(NULL) &lt;&lt; "\"" &lt;&lt; "\n";
@@ -210,7 +213,7 @@ and use
         comCode &lt;&lt; "designer = \"" &lt;&lt; getlogin() &lt;&lt; "\"" &lt;&lt; "\n";
 
 </pre>
-As does <CODE>SynthArchTarget.cc</CODE>
+As does <code>SynthArchTarget.cc</code>
  <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
 
 <li> acs/targets/StringArray.cc fails with
@@ -229,7 +232,7 @@ ACSRamDelayFixSim.o(.data+0x0): multiple definition of `star_nm_ACSRamDelayFixSi
 ACSRamDelayFixSim.o(.data+0x0): first defined here
 </pre>
 
-The fix is to edit <CODE>acs/stars/make.template</CODE> and
+The fix is to edit <code>acs/stars/make.template</code> and
 find the second instance of ACSRamDelayFixSim.pl and 
 remove it and the remaining .pl files.  
  <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
@@ -273,10 +276,10 @@ XYgraphFixSim.pl
 <pre>
 ../../../src/pxgraph/pxgraph/xgraph.h:77:21: macro "strchr" requires 2 arguments, but only 1 given
 </pre>
-The fix is to edit <CODE>ptolemy/src/pxgraph/pxgraph/xgraph.h</CODE>
+The fix is to edit <code>ptolemy/src/pxgraph/pxgraph/xgraph.h</code>
 and comment out the declaration of strchr
  <br><I>This change is in the CVS tree, so it should not be necessary.</I> <br>
- <br>Then run <CODE>make install</CODE>
+ <br>Then run <code>make install</code>
 
 <li>Run a sample demo by doing
 <pre>
@@ -300,7 +303,7 @@ export PT_USE_X11_PXGRAPH
 <ul>
 <li>
 [Red Hat 9.0]: If it complains that it cannot find ptiny, run
-<CODE>make install</CODE> in <CODE>obj.linux/pigiRpc</CODE> 
+<code>make install</code> in <code>gobj.linux/pigiRpc</code>g 
 and then run
 <pre>
 cd $PTOLEMY
@@ -317,7 +320,7 @@ from <code>$PTOLEMY/bin/pigiEnv.sh</code>.
     use the X11 pxgraph instead of the Java pxgraph.
     See /home/celaine/ptclassic/ptolemy/src/pxgraph/README.txt for more information
 </pre>
-<CODE>cd</CODE> to <CODE>obj.linux/pxgraph</CODE> and run <CODE>make install</CODE>.  I got the following errors:
+<code>cd</code> to <code>gobj.linux/pxgraph</code>g and run <code>gmake install</code>g.  I got the following errors:
 
 <pre>
 In file included from ../../../src/pxgraph/pxgraph/xgout.h:37,
@@ -332,31 +335,31 @@ gcc -c -O3 -fomit-frame-pointer  -Wall -Wcast-align -Wsynth -Dlinux -D_REENTRANT
 ../../../src/pxgraph/pxgraph/xtb.c:77: macro `strcpy' used without args
 </pre>
 
-Comment out the lines in <CODE>src/pxgraph/pxgraph/xgraph.h</CODE> and <CODE>src/pxgraph/pxgraph/xtb.c</CODE> that say:
+Comment out the lines in <code>src/pxgraph/pxgraph/xgraph.h</code> and <code>gsrc/pxgraph/pxgraph/xtb.c</code>g that say:
 
 <pre>
 extern char *strcpy();
 </pre>
 
-Rerun <CODE>make install</CODE>
+Rerun <code>make install</code>
 
 </ul>
-[Debug version]: The directory name should be <CODE>obj.linux.debug</CODE> instead of <CODE>obj.linux</CODE>.
+[Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
 
-<li>[Debug version]: Try to run <CODE>pigi</CODE>.  If you get this error message, it is not running the correct binary:
+<li>[Debug version]: Try to run <code>pigi</code>.  If you get this error message, it is not running the correct binary:
 
 <pre>
 pigi: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.debug does not exist or is not
        executable. Using /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc instead.
 </pre>
 
-<li>[Debug version]: In <CODE>obj.linux.debug/pigiRpc</CODE>:
+<li>[Debug version]: In <code>obj.linux.debug/pigiRpc</code>:
 
 <pre>
 make pigiRpc.ptrim.debug
 </pre>
 
-Try to run <CODE>ptrim -debug</CODE>.  The following error message is ok:
+Try to run <code>ptrim -debug</code>.  The following error message is ok:
 
 <pre>
 ptrim: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.ptrim.debug does not exist or is not
@@ -365,5 +368,4 @@ ptrim: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.ptrim.debug does 
 
 </ol>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

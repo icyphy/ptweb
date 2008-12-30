@@ -1,11 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Hierarchical Reconfiguration of Dataflow Models</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/top.htm"-->
 <center>
   <h1>Hierarchical Reconfiguration of Dataflow Models</h1>
 </center>
@@ -14,7 +15,7 @@
 <p>Conference on Formal Methods and Models for Codesign (MEMOCODE)
 <br> San Diego, California
 <br> June 22-25, 2004.
-<p> <a href="unifiedReconfigurationMemocode.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+<p> <a href="unifiedReconfigurationMemocode.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a> 
 </CENTER>
 <p>&nbsp;
 <p>
@@ -22,6 +23,4 @@
 
 This paper presents a unified approach to analyzing patterns of reconfiguration in dataflow graphs.  The approach is based on hierarchical decomposition of the structure and execution of a dataflow model.  In general, reconfiguration of any part of the system might occur at any point during the execution of a model.  However, arbitrary reconfiguration must often be restricted, given the constraints of particular dataflow models of computation or modeling constructs.  For instance, the reconfiguration of parameters that influence dataflow scheduling or soundness of data type checking must be more heavily restricted.  The paper first presents an abstract mathematical model that is sufficient to represent the reconfiguration of many types of dataflow graphs.  Using this model, a behavioral type theory is developed that bounds the points in the execution of a model when individual parameters can be reconfigured.  This theory can be used to efficiently check semantic constraints on reconfiguration, enabling the safe use of parameter reconfiguration at all levels of hierarchy.
 <p>
-</body>
-</html>
-
+<!--#include virtual="/ssi/bottom.htm" -->

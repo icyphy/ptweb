@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>oct2moml</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/other/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 
 <h1>oct2moml</h1>
 Oct2moml is a start at a tool that converts Ptolemy Classic Octtools Facets
@@ -14,7 +17,7 @@ to Ptolemy II MoML files.
 for getting a start on converting Ptolemy Classic Octtools facets
 to MoML Files
  <p>The oct2moml home page is at
-<a href="http://ptolemy.eecs.berkeley.edu/other/oct2moml.htm"><CODE>http://ptolemy.eecs.berkeley.edu/other/oct2moml.htm</CODE></a>
+<a href="http://ptolemy.eecs.berkeley.edu/other/oct2moml.htm"><code>http://ptolemy.eecs.berkeley.edu/other/oct2moml.htm</code></a>
  <p>oct2moml is heavily based on oct2ptcl, which was written by
 Kennard White.  Christopher Hylands developed oct2moml.  Questions
 about oct2monl should be posted to the ptolemy-hackers mailing list, or to 
@@ -73,7 +76,7 @@ make install_octtools
 
 
 <li> Download oct2moml-0.01.tar.gz from
-<a href="http://ptolemy.eecs.berkeley.edu/other/oct2moml-0.01.tar.gz"><CODE>http://ptolemy.eecs.berkeley.edu/other/oct2moml-0.01.tar.gz</CODE></a>
+<a href="http://ptolemy.eecs.berkeley.edu/other/oct2moml-0.01.tar.gz"><code>http://ptolemy.eecs.berkeley.edu/other/oct2moml-0.01.tar.gz</code></a>
 and untar it
 <pre>
 cd $PTOLEMY
@@ -83,7 +86,7 @@ tar -zxf oct2moml-0.01.tar.gz
 
 <li> Build oct2moml.  Currently, MAKEARCH does not build a separate
 obj.$PTARCH directory for oct2moml, so you will need to build
-the source files in the <CODE>src/</CODE> directory:
+the source files in the <code>src/</code> directory:
 <pre>
 cd $PTOLEMY/src/octtools/tkoct/top
 make
@@ -99,7 +102,4 @@ oct2moml -g $PTOLEMY/src/domains/sdf/demo/butterfly
 
 
 </ol>
-
-
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

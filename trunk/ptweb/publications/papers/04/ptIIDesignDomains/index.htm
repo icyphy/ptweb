@@ -1,11 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Heterogeneous Concurrent Modeling and Design in Java</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/top.htm"-->
 <h3><a href="http://ptolemy.eecs.berkeley.edu/publications/papers/05/ptIIdesign3-domains">
 <i>superseded by a more recent version</i></a></h3>
 
@@ -22,7 +23,7 @@ C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, H. Zheng (eds.)
 <p>
 Memorandum UCB/ERL M04/17,
 <br> EECS, University of California, Berkeley, CA  USA 94720
-<BR>
+<br>
 June 24, 2004
 </CENTER>
 <p>
@@ -30,7 +31,7 @@ June 24, 2004
 Volume 3: Ptolemy II Domains:
 <a href="ptIIdesign3-domains.pdf" target="_top"><img hspace=0
 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29
-height=32 border=0 alt="[PDF]"></A> (1.9 Mb PDF File)
+height=32 border=0 alt="[PDF]"></a> (1.9 Mb PDF File)
 </CENTER>
  <p>Note that some chapters are available separately on the
 <a href="http://embedded.eecs.berkeley.edu/concurrency/ptolemy/index.html"
@@ -41,6 +42,4 @@ target="_top">Concurrency workgroup Ptolemy II Documentation Page</a>
 This volume describes Ptolemy II domains. The domains implement models of computation, which are summarized in chapter 1. Most of these models of computation can be viewed as a framework for component- based design, where the framework defines the interaction mechanism between the components.  Some of the domains (CSP, DDE, and PN) are thread-oriented, meaning that the components implement Java threads. These can be viewed, therefore, as abstractions upon which to build threaded Java programs. These abstractions are much easier to use (much higher level) than the raw threads and monitors of Java. Others (CT, DE, SDF) of the domains implement their own scheduling between actors, rather than relying on threads. This usual results in much more efficient execution. The Giotto domain, which addresses real-time computation, is not threaded, but has concurrency features similar to threaded domains. The FSM domain is in a category by itself, since in it, the components are not producers and consumers of data, but rather are states. The non-threaded domains are described first, followed by FSM and Giotto, followed by the threaded domains. Within this grouping, the domains are ordered alphabetically (which is an arbitrary choice).
 <p>
 Volume 1 is an introduction to Ptolemy II, including tutorials on use of the software, and volume 2 describes the Ptolemy II software architecture.
-</body>
-</html>
-
+<!--#include virtual="/ssi/bottom.htm" -->

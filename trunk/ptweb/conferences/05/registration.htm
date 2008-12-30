@@ -1,19 +1,15 @@
-<!--@(#)registration.html	1.4 10/27/98 
-This page is based on the page by Bob Miller at:
-http://http.cs.berkeley.edu/~bmiller/BRASS.rsvp.html
-
-The mailform.pl program can be found at
-http://www.colorado.edu/webworks/resources/mailform/
--->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Registration</title>
-</head>
-<body>
-<H1>Registration</H1>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/conferences/05/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<h1>Registration</h1>
 <p>
 The Sixth Biennial Ptolemy Miniconference will occur on Thursday, May 12, 2005 at the
 <a href="venue.htm">Soda Hall HP Auditorium</a> 
@@ -21,7 +17,7 @@ on the University of California campus, Berkeley, California.
 <p>
 Please complete the form and then click on the
 <STRONG>OK</STRONG> button at the end of the form.
-<P>
+<p>
 <STRONG>Please note:</STRONG><i> All provided information will be for
 the Ptolemy Miniconference use only.</i>
 
@@ -39,48 +35,48 @@ the Ptolemy Miniconference use only.</i>
 <!- URL to go to when we are done >
 <input type="hidden" name="url" value="http://ptolemy.eecs.berkeley.edu/conferences/05/main.htm">
 
-<P><STRONG><H3>Name: </STRONG></H3><inPUT TYPE="TEXT" NAME="01Name" SIZE="40"></P>  
-<P><STRONG><H3>Organization and Address: </STRONG></H3>
+<p><STRONG><h3>Name: </STRONG></h3><inPUT TYPE="TEXT" NAME="01Name" SIZE="40"></P>  
+<p><STRONG><h3>Organization and Address: </STRONG></h3>
 <TEXTAREA NAME="02Organization" ROWS="6" COLS="40"></TEXTAREA>
 </P> 
-<P>
-<STRONG><H3>Phone: </STRONG></H3><inPUT TYPE="TEXT" NAME="03Phone" SIZE="20">
+<p>
+<STRONG><h3>Phone: </STRONG></h3><inPUT TYPE="TEXT" NAME="03Phone" SIZE="20">
 <tt> </tt>
-<STRONG><H3>FAX: </STRONG></H3><inPUT TYPE="TEXT" NAME="04FAX" SIZE="20"><BR>
+<STRONG><h3>FAX: </STRONG></h3><inPUT TYPE="TEXT" NAME="04FAX" SIZE="20"><br>
 <tt> </tt>
-<STRONG><H3>Email: </STRONG></H3><inPUT TYPE="TEXT" NAME="05Email" SIZE="50"></p>
+<STRONG><h3>Email: </STRONG></h3><inPUT TYPE="TEXT" NAME="05Email" SIZE="50"></p>
 
-<H4><STRONG>Presenter</H4></STRONG> 
+<h4><STRONG>Presenter</h4></STRONG> 
 If you are giving a presentation, please type in the title;
 otherwise, leave the field below blank.
  <br>Note that you may change your title as you see fit;
 we are only trying to get an idea of who is presenting.
-<P><TEXTAREA NAME="06Presentation" ROWS=3 COLS=40></TEXTAREA></P>
+<p><TEXTAREA NAME="06Presentation" ROWS=3 COLS=40></TEXTAREA></P>
 
-<H4><STRONG>Poster</H4></STRONG> 
+<h4><STRONG>Poster</h4></STRONG> 
 If you are giving a poster, please type in the title,
 otherwise, leave the field below blank.
  <br>Note that you may change your title as you see fit;
 we are only trying to get an idea of who is giving a poster.
-<P><TEXTAREA NAME="07Poster" ROWS=3 COLS=40></TEXTAREA></P>
+<p><TEXTAREA NAME="07Poster" ROWS=3 COLS=40></TEXTAREA></P>
 <p>
 If you require power and a monitor at your poster, please
 check the following:
-<H3>
+<h3>
 <INPUT TYPE="CHECKBOX" name="12NeedPower" value="Need Power and Monitor">Need Power and Monitor
-</H3>
+</h3>
 
-<H4><STRONG>Meal Preferences</H4></STRONG> 
+<h4><STRONG>Meal Preferences</h4></STRONG> 
 If you would like a vegetarian lunch, please check the following:
-<H3>
+<h3>
 <INPUT TYPE="CHECKBOX" name="12Vegetarian" value="Vegetarian">Vegetarian
-</H3>
+</h3>
 </ul>
 
-<P><STRONG><H3>Comments related to any of the information given above:</P></STRONG></H3>
-<P><TEXTAREA NAME="13Comments" ROWS=6 COLS=40></TEXTAREA></P>
+<p><STRONG><h3>Comments related to any of the information given above:</P></STRONG></h3>
+<p><TEXTAREA NAME="13Comments" ROWS=6 COLS=40></TEXTAREA></P>
 
- <p><STRONG><H3>Conference Fee</P></STRONG></H3>
+ <p><STRONG><h3>Conference Fee</P></STRONG></h3>
 
 <p><a name="fee">Note</a> that there will be a $100 conference fee.
 <br>The fee can be paid in advance or paid at the conference.
@@ -94,13 +90,12 @@ to 'The Regents of the University of California' to:
 
 <p>At the conference, we will accept Visa and cheques.
 
-<P>
-<STRONG><H3>To submit, please click the "OK" button. Thank you.</Strong> </P></H3>
+<p>
+<STRONG><h3>To submit, please click the "OK" button. Thank you.</Strong> </P></h3>
 
 <inPUT TYPE="SUBMIT" VALUE="OK">
 <inPUT TYPE="RESET" VALUE="Clear Form">
 </FORM>
 
 <p>
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->
