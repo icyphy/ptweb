@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Ptolemy II 2.0.1 Limitations</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII2.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h2>Ptolemy II 2.0.1 Limitations</h2>
 
 The <a href="ptII2.0.1/doc/ptII2.0.release.htm">Ptolemy II 2.0.1 Release notes</a>
@@ -119,8 +122,8 @@ choose which version of Java to use.
 <h3><a name="build">Build Limitations</a></h3>
 
 <h4><a name="Jini">Jini Version</a></h4>
-The Jini actors in <CODE>$PTII/ptolemy/actor/lib/jspaces</CODE> and
-the demos in <CODE>$PTII/ptolemy/domains/ct/demo/jspaces</CODE>
+The Jini actors in <code>$PTII/ptolemy/actor/lib/jspaces</code> and
+the demos in <code>$PTII/ptolemy/domains/ct/demo/jspaces</code>
 require Jini 1.0.1.
 
  <p>Unfortunately, Jini 1.0.1 is no longer available from Sun.
@@ -137,12 +140,12 @@ and $PTII/ptolemy/actor/lib/makefile uses the value of PTJSPACES
 to decide whether to go into the jspaces subdirectory.
 
  <p>There is a fairly complete description of the process of how external
-packages are handled in in <CODE>$PTII/doc/coding/develsetup.htm</CODE>
+packages are handled in in <code>$PTII/doc/coding/develsetup.htm</code>
 which can be found at
 
-<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/ptII2.0.1/doc/coding/develsetup.htm#ExternalPackages"><CODE>http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/ptII2.0.1/doc/coding/develsetup.htm#ExternalPackages</CODE></a>
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/ptII2.0.1/doc/coding/develsetup.htm#ExternalPackages"><code>http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII2.0/ptII2.0.1/doc/coding/develsetup.htm#ExternalPackages</code></a>
 
- <p>One trick is to search the web for the <CODE>jini1_0_1.zip</CODE>
+ <p>One trick is to search the web for the <code>jini1_0_1.zip</code>
 file and use that
 
  <p>Jim Kleckner discovered this bug, and he included the following
@@ -197,9 +200,9 @@ ptolemy.kernel.util.IllegalActionException: Error evaluating expression
 The reason the error occurs is because under Windows $PTII will likely
 have a backslash which causes problems when creating a URL.
 
-The fix is to add a new property called <CODE>ptolemy.ptII.dirAsURL</CODE>
-to <CODE>$PTII/ptolemy/data/expr/UtilityFunction.java</CODE>
-and modify <CODE>$PTII/ptolemy/actor/lib/javasound/AudioReader.java</CODE>
+The fix is to add a new property called <code>ptolemy.ptII.dirAsURL</code>
+to <code>$PTII/ptolemy/data/expr/UtilityFunction.java</code>
+and modify <code>$PTII/ptolemy/actor/lib/javasound/AudioReader.java</code>
 to use it.
 
 <pre>
@@ -323,7 +326,7 @@ cxh@cooley 153%
 
 <h4><a name="ViewScreen">ViewScreen</a></h4>
 The GR ViewScreen actor may display a black image.
-The fix is to patch <CODE> ptII/ptolemy/domains/gr/lib/ViewScreen.java</CODE>:
+The fix is to patch <code> ptII/ptolemy/domains/gr/lib/ViewScreen.java</code>:
 Change this
 <pre>
 ***************
@@ -352,19 +355,19 @@ to
 </pre>
 If you downloaded the source version, you can edit the file yourself 
 or download a
-<a href="ViewScreen.java">fixed version of <CODE>ViewScreen.java</CODE></a>
+<a href="ViewScreen.java">fixed version of <code>ViewScreen.java</code></a>
 and recompile with:
 <pre>
 cd $PTII/ptolemy/domains/gr/lib
 make
 </pre>
 If you downloaded the Windows installer, then you can 
-<a href="experimentalDomains.zip">download <CODE>experimentalDomains.zip</CODE></a>
-uncompress it, which will create <CODE>experimentalDomains.jar</CODE> and replace
-<CODE>Ptolemy_II_2.0.1/ptolemy/domains/experimentalDomains.jar</CODE> with the
+<a href="experimentalDomains.zip">download <code>experimentalDomains.zip</code></a>
+uncompress it, which will create <code>experimentalDomains.jar</code> and replace
+<code>Ptolemy_II_2.0.1/ptolemy/domains/experimentalDomains.jar</code> with the
 new version.
  <br>Usually, the file to be replaced will be at
-<CODE>c:/Ptolemy/Ptolemy_II_2.0.1/ptolemy/domains/experimentalDomains.jar</CODE>
+<code>c:/Ptolemy/Ptolemy_II_2.0.1/ptolemy/domains/experimentalDomains.jar</code>
 
  <p>This bug was reported by Jim Kleckner.
 
@@ -529,5 +532,4 @@ This occurs under MacOS 10.1.5 with Java 1.3.1
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

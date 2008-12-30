@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Viptos 5.1-alpha</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/viptos/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>
 <a name="Viptos">Viptos 5.1-alpha - Visual interface between Ptolemy and TinyOS</a></h1>
 <table>
@@ -57,33 +60,33 @@ hence the name of the release is Viptos 5.1-alpha.
 
 <menu>
 <li> <a
-href="viptos5.1/viptos5.1-alpha.src.tar.gz"><CODE>viptos5.1-alpha.src.tar.gz</CODE></a> (14Mb)
+href="viptos5.1/viptos5.1-alpha.src.tar.gz"><code>viptos5.1-alpha.src.tar.gz</code></a> (14Mb)
 Gzipped Tar file with Unix line endings.  
 
 
 <li> <a href="viptos5.1/nc2moml.htm">nc2moml instructions</a>,
-included in the release as <CODE>$PTII/ptolemy/domains/ptinyos/util/nc2moml/index.htm</CODE>
- <br> <CODE>nc2moml</CODE>
+included in the release as <code>$PTII/ptolemy/domains/ptinyos/util/nc2moml/index.htm</code>
+ <br> <code>nc2moml</code>
     is used to convert nesC files (.nc) into <a
     href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml">MoML</a>
     (.moml) files.  This will create the Ptolemy II libraries of
     <I>components</I> that are used to assemble models.  TinyOS provides a
     rich library of nesC components. If you install TinyOS 1.x in
     <code>$PTII/vendors/ptinyos/tinyos-1.x</code>, then the Ptolemy
-    II configure script will find it, running <CODE>nc2moml</CODE>
+    II configure script will find it, running <code>nc2moml</code>
     will convert the TinyOS libraries and make them available to
     Ptolemy.
 
 <li> <a href="viptos5.1/ncapp2moml.htm">ncapp2moml instructions</a>,
-included in the release as <CODE>$PTII/ptolemy/domains/ptinyos/util/ncapp2moml/index.htm</CODE>
- <br><CODE>ncapp2moml</CODE>
+included in the release as <code>$PTII/ptolemy/domains/ptinyos/util/ncapp2moml/index.htm</code>
+ <br><code>ncapp2moml</code>
     is used to convert nesC <I>application</I> files (.nc) into
     <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/00/moml#in_browser"target="_top">MoML</a> (.moml) files.  This will create Ptolemy II
     models that you can run in Viptos.  You must setup the necessary
     MoML library of nesC components with the 
-    <a href="viptos5.1/nc2moml.htm"><CODE>nc2moml</CODE></a>
+    <a href="viptos5.1/nc2moml.htm"><code>nc2moml</code></a>
     tool before you can successfully
-    open files made with this <CODE>ncapp2moml</CODE> tool.
+    open files made with this <code>ncapp2moml</code> tool.
 
 
 </menu>
@@ -91,5 +94,4 @@ included in the release as <CODE>$PTII/ptolemy/domains/ptinyos/util/ncapp2moml/i
 
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

@@ -1,21 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<title>Ptolemy Adaptive Computing Systems</title>
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<frameset rows="75,*,24"
-	border=0>
-  <frame name="banner" scrolling="no" noresize src="../../lib/banner.htm"
-    marginheight=2 marginwidth=2 frameborder=0>
-  <frame name="body" scrolling="no" noresize src="body.htm"
-    marginheight=2 marginwidth=2 frameborder=0>
-  <frame name="bottom" scrolling="no" noresize src="../../lib/footer.htm" frameborder=0>
-  <noframes>
-  <body>
-  <p>This page uses frames, but your browser doesn't support them.</p>
-  </body>
-  </noframes>
-</frameset>
-</html>
+<title>ACS Home Page</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/acs/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<h1>Adaptive Computing Systems</h1>
+<table>
+<tr>
+<td><img alt="Solar Corona" width=150 height=150 src="../../image/corona.jpg" alt=[Corona]></a>
+<td><img alt="Solar Core" width=150 height=150 src="../../image/core.gif" alt="[Core]"></a>
+<td>
+
+This project is a subcontract under
+the
+<a href="http://www.sanders.com/adv_tech/aam.htm" target="_top">
+Adaptive Computing Program</a> of
+<a name="Sanders"><a href="http://www.sanders.com" target="_top">
+Sanders, a Lockheed Martin Company</a>.
+The program is funded by the
+<a href="http://www.darpa.mil/ito/">Information Technology Office</a>
+of the
+<a href="http://www.darpa.mil/">
+Defense Advanced Research Projects Agency (DARPA)</a>.
+
+
+<p>
+<ul>
+<li><em>Principal Investigator</em>:
+	<a href="http://ptolemy.eecs.berkeley.edu/~eal/">Edward A. Lee</a>
+<li>
+	<em>Organization</em>:
+	<a href="http://www.berkeley.edu/">
+	University of California at Berkeley</a>
+
+</table>
+
+<h1>Overview</h1>
+<p>
+ <p>The Ptolemy group is cooperating with Sanders on the development
+of software for synthesizing configurations of adaptive computing hardware
+from high-level, abstract descriptions of computations.  A near-term
+result is the ACS domain of Ptolemy Classic, which supports design
+refinement from dataflow graphs through fixed-point analysis and
+design, through to FPGA synthesis.
+
+<p>A key feature of the ACS domain is its software architecture
+supporting the synthesis of different implementations from the same
+specification. The ACS domain uses the Corona/Core approach, which was
+created by Jose Pino and Tom Parks while they were at UC Berkeley. In
+the Corona/Core design, a star has one Interface, named the Corona, and
+one or more implementations, named Cores.
+
+<p>The ACS domain will help in automating the FPGA design process; it
+will help in transforming an SDF graph into a reasonable FPGA
+implementation. Initially, an <a href="http://www.annapmicro.com"
+target="_top">Annapolis Microsystems</a> Wildforce board will be the
+primary target.
+
+<p>The first public release of ACS 
+is available in <a href="../../ptolemyclassic/pt0.7.1" target="_top">
+Ptolemy 0.7.1</a>
+
+<p>Other links of interest:
+<menu>
+
+<li> <a href="http://www.sanders.com/spc/publish.html" target="_top">Sanders Signal Processing Center (SPC) Papers Page </a>
+
+<li> <a href="http://http.cs.berkeley.edu/projects/brass/" target="_top">
+BRASS Project</a> (Berkeley Reconfigurable Architecture, Systems and Software)
+</menu>
+<!--#include virtual="/ssi/bottom.htm" -->

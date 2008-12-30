@@ -1,19 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Actor-Oriented Metaprogramming</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/top.htm"-->
 <center>
   <h1>Actor-Oriented Metaprogramming</h1>
 </center>
 <center>
 <p>Stephen Neuendorffer<p>
 <p> PhD Thesis, University of California, Berkeley, December 21, 2004.
-<p> <a href="oneside.pdf" target="_top">Single-Sided <img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
-<p> <a href="twoside.pdf" target="_top">Double-Sided <img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+<p> <a href="oneside.pdf" target="_top">Single-Sided <img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a> 
+<p> <a href="twoside.pdf" target="_top">Double-Sided <img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a> 
 <p> Also available as: <i>Technical Memorandum UCB/ERL M05/1</i>, University of California, Berkeley, CA 94720, January 4, 2005.
 </CENTER>
 <p>&nbsp;
@@ -33,7 +34,4 @@ Run-time reconfiguration of actors not only presents difficulties for a system m
 In order to remove the indirection overhead, we have developed a system called Copernicus which transforms a Ptolemy II model into self-contained Java code.  In performing this transformation the Java code for each actor is specialized to its usage in a particular model.  As a result, indirection overhead only remains in the generated code if it is required by reconfiguration in the model.  The specialization is guided by various types of static analysis, including data type analysis and analysis of reconfiguration.  In certain cases, the generated code runs 100 times faster and with almost no memory allocation, compared to the same model running in a Ptolemy II simulation.  For small examples, performance close to handwritten Java code has been achieved. <p>
 
 <p>
-</body>
-</html>
-
-
+<!--#include virtual="/ssi/bottom.htm" -->

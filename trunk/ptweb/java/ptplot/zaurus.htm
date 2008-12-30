@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Ptplot on the Zaurus</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/java/ptplot/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <img src="../../image/ptplot32.gif">
 <h1>Ptplot on the Zaurus</h1>
 Ptplot 1.0 and Ptplot 2.0 can run on the Sharp Zaurus!
@@ -14,14 +17,14 @@ Ptplot 1.0 and Ptplot 2.0 can run on the Sharp Zaurus!
 
 <ol>
 <li> Download
-<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar"><CODE>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar</CODE></a>
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar"><code>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar</code></a>
 
-(tar file version: <a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy_plot_jar.tar"><CODE>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy_plot_jar.tar</CODE></a>)
+(tar file version: <a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy_plot_jar.tar"><code>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy_plot_jar.tar</code></a>)
 
-On the Zaurus put <CODE>ptolemy.plot.jar</CODE> into a directory.
-I put it in <CODE>/home/root/lib</CODE>
+On the Zaurus put <code>ptolemy.plot.jar</code> into a directory.
+I put it in <code>/home/root/lib</code>
 
-<li> Create a shell script on the Zaurus at <CODE>/home/root/bin/ptplot</CODE>.
+<li> Create a shell script on the Zaurus at <code>/home/root/bin/ptplot</code>.
 The script should look like:
 
 <pre>
@@ -36,7 +39,7 @@ chmod a+x /home/root/bin/ptplot
 </pre>
 
 
-<li> On the Zaurus, add <CODE>/home/root/bin</CODE> to your path:
+<li> On the Zaurus, add <code>/home/root/bin</code> to your path:
 <pre>
 export PATH=/home/root/bin:${PATH}
 </pre>
@@ -65,22 +68,22 @@ ptplot plot.plt
 </ol>
 
 For more information, see the Ptplot 2.0 web page at
-<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/index.html"><CODE>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/index.html</CODE></a>
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/index.html"><code>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/index.html</code></a>
 
 
 <h2>Recompiling</h2>
 
 The basic idea is to recompile Ptplot using 
-<CODE>javac -target 1.1</CODE> and then run using <CODE>evm</CODE>
+<code>javac -target 1.1</code> and then run using <code>gevm</code>g
 
  <p>Versions of PtPlot after PtPlot 2.0 use Java 1.2 features or
 use Swing.  I don't think the JVM on the Zaurus can handle 1.2 or Swing.
 <ol>
 <li> Download
-<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot2.0.tar.gz"><CODE>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot2.0.tar.gz</CODE></a> to a Windows or
+<a href="http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot2.0.tar.gz"><code>http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot/ptolemy.plot2.0.tar.gz</code></a> to a Windows or
 Unix box
 
-<li> Untar, set <CODE>$PTII</CODE> and configure:
+<li> Untar, set <code>$PTII</code> and configure:
 <pre>
 cd ~/src
 gtar -zxf /tmp/ptolemy.plot2.0.tar.gz
@@ -90,12 +93,12 @@ setenv PTII `pwd`
 </pre>
 
 
-<li> Edit <CODE>$PTII/mk/ptII.mk</CODE> and add 
-<CODE>-target 1.1</CODE> to <CODE>JFLAGS</CODE>
+<li> Edit <code>$PTII/mk/ptII.mk</code> and add 
+<code>-target 1.1</code> to <code>gJFLAGS</code>g
 <pre>
 JFLAGS = 	-g  -target 1.1
 </pre>
-Note that I had to remove <CODE>-depend</CODE>
+Note that I had to remove <code>-depend</code>
 from the above line
 
 <li> Run
@@ -106,19 +109,19 @@ make install
 </pre>
 
 
-<li> This will produce <CODE>ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar</CODE>.
-Copy <CODE>ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar</CODE> to
-the Zaurus.  I put it in <CODE>/home/root/lib</CODE>
+<li> This will produce <code>ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar</code>.
+Copy <code>ptolemy.plot2.0/ptolemy/plot/ptolemy.plot.jar</code> to
+the Zaurus.  I put it in <code>/home/root/lib</code>
 
-<li> Create a small script called <CODE>ptplot</CODE>:
+<li> Create a small script called <code>ptplot</code>:
 <pre>
 #!/bin/sh
 # Ptplot
 evm -classpath /home/root/lib/ptolemy.plot.jar ptolemy.plot.PlotApplication $@
 </pre>
 I created this script on my host machine, did
-<CODE>chmod a+x ptptot</CODE> and then copied it to the zaurus
-to <CODE>/home/root/lib/ptplot</CODE>
+<code>chmod a+x ptptot</code> and then copied it to the zaurus
+to <code>/home/root/lib/ptplot</code>
 
 
 <li> On the zaurus, run
@@ -130,8 +133,4 @@ to <CODE>/home/root/lib/ptplot</CODE>
 
 </ol>
 
-</body>
-</html>
-
-
-
+<!--#include virtual="/ssi/bottom.htm" -->

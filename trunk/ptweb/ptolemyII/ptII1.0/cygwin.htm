@@ -1,29 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Cygwin Installation</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII1.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>Cygwin Installation</h1>
 The Cygwin toolkit provides Unix tools on the Windows platform.
 You need only install the Cygwin toolkit if you are going to
 develop your own actors.  
 
  <p>Note that compile your own actors, you will also need the 
-<CODE>javac</CODE> compiler.  The <CODE>javac</CODE> compiler
+<code>javac</code> compiler.  The <code>gjavac</code>g compiler
 is part of the JDK, which is available at:
 
-<a href="http://java.sun.com/j2se/1.3/" target="_top"><CODE>http://java.sun.com/j2se/1.3/</CODE></a>.
-The <CODE>javac</CODE> compiler is <B>not</B> present in the 
+<a href="http://java.sun.com/j2se/1.3/" target="_top"><code>http://java.sun.com/j2se/1.3/</code></a>.
+The <code>javac</code> compiler is <B>not</B> present in the 
 Java Runtime Environment (JRE)
 
 
  <p>The Cygwin home page is at
-<a href="http://sources.redhat.com/cygwin/" target="_top"><CODE>http://sources.redhat.com/cygwin/</CODE></a>
+<a href="http://sources.redhat.com/cygwin/" target="_top"><code>http://sources.redhat.com/cygwin/</code></a>
  <p>Complete installation instructions can be found at
-<a href="http://sources.redhat.com/cygwin/faq" target="_top"><CODE>http://sources.redhat.com/cygwin/faq</CODE></a>.
+<a href="http://sources.redhat.com/cygwin/faq" target="_top"><code>http://sources.redhat.com/cygwin/faq</code></a>.
 
 <h2>Installing Cygwin from the self-extracting executable</h2>
 
@@ -49,28 +52,28 @@ textutils-2.0-1
 </pre>
 
 <ol>
-<li> Download and execute <a href="cygwinforptolemy.exe"><CODE>cygwinforptolemy.exe</CODE></a> (17.5Mb).
+<li> Download and execute <a href="cygwinforptolemy.exe"><code>cygwinforptolemy.exe</code></a> (17.5Mb).
 The files will be extracted to an seemingly arbitrary directory.
 You may find it easier to change the directory to something short, like
-<CODE>c:\temp\cygwin</CODE>. 
+<code>c:\temp\cygwin</code>. 
 
-<li> Run <CODE>setup.exe</CODE>
+<li> Run <code>setup.exe</code>
 
-<li> Select <CODE>Install from Local Directory</CODE> and click on <CODE>Next</CODE>.
+<li> Select <code>Install from Local Directory</code> and click on <code>gNext</code>g.
 
-<li> Keep the default for <CODE>Local Package Directory</CODE>
-and click on <CODE>Next</CODE>.
-
-
-<li> Keep the default of <CODE>c:/cygwin</CODE> for the <CODE>Select install root directory</CODE>  
-and click on <CODE>Next</CODE>.
+<li> Keep the default for <code>Local Package Directory</code>
+and click on <code>Next</code>.
 
 
-<li> In the <CODE>Select packages to install</CODE> window, click on
-<CODE>Next</CODE>, which will install all the packages.
+<li> Keep the default of <code>c:/cygwin</code> for the <code>gSelect install root directory</code>g  
+and click on <code>Next</code>.
 
 
-<li> Select <CODE>Create Desktop Icon</CODE> and <CODE>Add to Start Menu</CODE>
+<li> In the <code>Select packages to install</code> window, click on
+<code>Next</code>, which will install all the packages.
+
+
+<li> Select <code>Create Desktop Icon</code> and <code>gAdd to Start Menu</code>g
 according to your preferences.
 
 <li> Remove the temporary directory where you extracted the files.
@@ -84,16 +87,16 @@ You may want to do this to get the most up-to-date tools.
  <ol>
  <li> Create an empty directory
 
- <li> Download <a href="http://sources.redhat.com/cygwin/setup.exe"><CODE>http://sources.redhat.com/cygwin/setup.exe</CODE></a> and save it in the empty directory
+ <li> Download <a href="http://sources.redhat.com/cygwin/setup.exe"><code>http://sources.redhat.com/cygwin/setup.exe</code></a> and save it in the empty directory
 
- <li> Click on <CODE>setup</CODE>
+ <li> Click on <code>setup</code>
 
  <li> Select Install from Internet
 
  <li> Use the default Local Package Directory, which should be the
  directory you created above.
 
- <li> Select <CODE>c:\cygwin</CODE> as your install root directory.
+ <li> Select <code>c:\cygwin</code> as your install root directory.
 
  <li> Select 'Default Text File Type' of DOS.
 
@@ -108,16 +111,16 @@ You may want to do this to get the most up-to-date tools.
   3Mb download
 	that expands into an 8.7Mb installation.
 	<ul>
-	<li> ash -  For <CODE>/bin/sh</CODE>
+	<li> ash -  For <code>/bin/sh</code>
 	<li> bash
 	<li> cygwin
-	<li> diff - Configure uses <CODE>cmp</CODE>
-	<li> fileutils - For <CODE>ls</CODE>
+	<li> diff - Configure uses <code>cmp</code>
+	<li> fileutils - For <code>ls</code>
 	<li> grep - Used by configure
 	<li> make
 	<li> sed - Needed by config.status, which is created by configure
-	<li> shellutils - For <CODE>basename</CODE>
-	<li> textutils - For <CODE>cat</CODE> and <CODE>tr</CODE>
+	<li> shellutils - For <code>basename</code>
+	<li> textutils - For <code>cat</code> and <code>gtr</code>g
 	</ul>
 
 	 <p> If you are serious about development you may also want:
@@ -133,5 +136,4 @@ You may want to do this to get the most up-to-date tools.
 
 </ol>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

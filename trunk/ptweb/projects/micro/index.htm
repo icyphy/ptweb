@@ -1,21 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<title>Projects</title>
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<frameset rows="77,*,24"
-	border=0>
-  <frame name="banner" scrolling="no" noresize src="../../lib/banner.htm"
-    marginheight=2 marginwidth=2 frameborder=0>
-  <frame name="body" scrolling="no" noresize src="body.htm"
-    marginheight=2 marginwidth=2 frameborder=0>
-  <frame name="bottom" scrolling="no" noresize src="../../lib/footer.htm" frameborder=0>
-  <noframes>
-  <body>
-  <p>This page uses frames, but your browser doesn't support them.</p>
-  </body>
-  </noframes>
-</frameset>
-</html>
+<title>Micro Home</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/micro/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<h1>Timed Distributed Systems</h1>
+<table>
+<tr>
+<td>
+<img alt="Ptolemy Picture" width=165 height=200 src="../../image/ptolemySmall.gif" align=left vspace=5>
+<td>
+This project is part of <a href="http://www.ucop.edu/research/micro" target="_top">State of California MICRO Program</a>
+<p>
+<ul>
+<li><em>Principal Investigator</em>
+	<a href="http://ptolemy.eecs.berkeley.edu/~eal/">Edward A. Lee</a>
+<li>
+	<em>Organization</em>:
+	<a href="http://www.berkeley.edu/">
+	University of California at Berkeley</a>
+
+</table>
+
+<h1>Overview</h1>
+<p>
+Despite considerable progress in software and hardware techniques, when embedded computing systems absolutely must meet tight timing constraints, many of the advances in computer architecture and software have made it difficult or impossible to estimate or predict the execution time of software.  Moreover, networking techniques introduce variability and stochastic behavior, and operating systems rely on best effort techniques.  Worse, programming languages lack time in their semantics, so timing requirements are only specified indirectly.  This project seeks methods for programming ensembles of networked real-time, embedded computers where time and concurrency are first-class properties of the program. The project receives support from industry sponsors Agilent Technologies and the Hewlett-Packard Company.   
+<!--#include virtual="/ssi/bottom.htm" -->

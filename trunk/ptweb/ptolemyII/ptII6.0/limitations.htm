@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Ptolemy II 6.0.2 Limitations</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII6.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h2>Ptolemy II 6.0.2 Limitations</h2>
 
 The <a href="ptII6.0.2/doc/ptII6.0.release.htm">Ptolemy II 6.0.2 Release notes</a>
@@ -90,7 +93,7 @@ of the JRE are present
 
 <li> The Matlab interface is not very stable under Windows
 Try running the Matlab demos by compiling Ptolemy II from
-source and then running <CODE>vergil -jni</CODE>.
+source and then running <code>vergil -jni</code>.
 
 <li>See the
 <a href="ptII6.0.2/doc/ptII6.0.release.htm#limitations">Ptolemy II 6.0.2 Release notes</a>
@@ -153,7 +156,7 @@ would use the distill implementation of the above algorithm.
 Or alternatively, we could switch to using pdftex instead of 
 latex-&gt;dvips-&gt;distill which should
 embed pdf for figures directly at the expense of less robust latex support.
-<a href="http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html#in_browser" target="_top"><CODE>http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html</CODE></a>
+<a href="http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html#in_browser" target="_top"><code>http://www.geocities.com/marcoschmidt.geo/java-libraries-pdf.html</code></a>
 
  <br>Solution 2: Use the undocumented flag
 -Dsun.java2d.print.pipeline=pdl on the command line to force the
@@ -174,8 +177,8 @@ See <a href="https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=54" target
 <li> 1/8/07: GNU Make 3.81 no longer supports Windows style
 path names with colons in them.  The affects the Copernicus
 code generator because $PTII needs to be set to a pathname
-with a colon in it like <CODE>c:/Ptolemy/ptII6.0.2</CODE>.
-A path name like <CODE>/cygdrive/c/Ptolemy/ptII6.0.2</CODE>
+with a colon in it like <code>c:/Ptolemy/ptII6.0.2</code>.
+A path name like <code>/cygdrive/c/Ptolemy/ptII6.0.2</code>
 will <B>not</B> work with Java.
 
  <p>For example, if you run copernicus and copernicus runs
@@ -187,11 +190,11 @@ This is because a makefile variable uses the windows style
 pathnames with colons in them.  One solution is to
 edit the file to use pathnames with /cygdrive.
 Another solution is to download a working version from
-<a href="http://www.cmake.org/files/cygwin/make.exe"><CODE>http://www.cmake.org/files/cygwin/make.exe</CODE></a>
+<a href="http://www.cmake.org/files/cygwin/make.exe"><code>http://www.cmake.org/files/cygwin/make.exe</code></a>
 
 
  <p>For details, see
-<a href="http://www.cygwin.com/ml/cygwin-announce/2006-07/msg00008.html" target="_top"><CODE>http://www.cygwin.com/ml/cygwin-announce/2006-07/msg00008.html</CODE></a>
+<a href="http://www.cygwin.com/ml/cygwin-announce/2006-07/msg00008.html" target="_top"><code>http://www.cygwin.com/ml/cygwin-announce/2006-07/msg00008.html</code></a>
 <BLOCKQUOTE>
 
 <li> From: Christopher Faylor &lt;cgf-no-personal-reply-please at cygwin dot com&gt;
@@ -226,9 +229,9 @@ The code worked fine under Cygwin for many years.  It seems like breaking
 an important tool such as make only hurts the GNU tools.
 
  <p>For further updates, see
-<a href="https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=55" target="_top"><CODE>https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=55</CODE></a>.
+<a href="https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=55" target="_top"><code>https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=55</code></a>.
  
- <p>4/26/07: Wile compiling in <CODE>$PTII/jni/test</CODE>,
+ <p>4/26/07: Wile compiling in <code>$PTII/jni/test</code>,
 I was getting
 <pre>
 Process_begin: CreateProcess((null), /usr/bin/gcc -shared
@@ -236,7 +239,7 @@ Process_begin: CreateProcess((null), /usr/bin/gcc -shared
 </pre>
 The problem was I was running a broken version of make and updating
 to
-<a href="http://www.cmake.org/files/cygwin/make.exe"><CODE>http://www.cmake.org/files/cygwin/make.exe</CODE></a>
+<a href="http://www.cmake.org/files/cygwin/make.exe"><code>http://www.cmake.org/files/cygwin/make.exe</code></a>
 helped.
 
 <li> 2/8/07: In HyVisual, the HSIF translater is merely a prototype,
@@ -253,5 +256,4 @@ ptjacl starts up, but the files are not read?
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
 
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->

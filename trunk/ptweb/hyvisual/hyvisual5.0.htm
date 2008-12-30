@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>HyVisual 5.0.1</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/hyvisual/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>
 <a name="HyVisual">HyVisual 5.0.1 - Hybrid System Visual Modeler</a></h1>
 <table>
@@ -31,7 +34,7 @@ a standalone HyVisual-5.0.1 installer.
  <p>If you compile HyVisual from sources on a machine that does not
 have Matlab, then start up will fail with an exception.  The
 workaround is to edit
-<CODE>$PTII/ptolemy/configs/hyvisual/configuration.xml</CODE> 
+<code>$PTII/ptolemy/configs/hyvisual/configuration.xml</code> 
 and remove the
 <pre>
 &lt;input source="ptolemy/matlab/matlab.xml"/&gt;
@@ -75,7 +78,7 @@ line.
 </tr>
 
 <tr>
- <td><a href="hyvisual5.0/hyvisual5.0.1.src.tar.gz"><CODE>hyvisual5.0.1.src.tar.gz</CODE></a>
+ <td><a href="hyvisual5.0/hyvisual5.0.1.src.tar.gz"><code>hyvisual5.0.1.src.tar.gz</code></a>
  <br>(HyVisual sources for Unix platforms)
  <td>Unix platforms</td>
  <td>11.4 Mb</td>
@@ -83,7 +86,7 @@ line.
 <a href="http://java.sun.com/j2se/downloads/index.html">Sun</a>
 </td>
  <td>Contained in this download.  This download includes just the sources,
- you will need tools like <CODE>make</CODE> to build.
+ you will need tools like <code>make</code> to build.
   </td>
 </tr>
 
@@ -102,7 +105,7 @@ Technical Memorandum UCB/ERL M05/ 24, University of California, Berkeley, CA 947
 
 <li> <B>March 16, 2005</B>:
 <B>Note:</B> HyVisual has a <B>patch</B>.
- <BR> If you run the
+ <br> If you run the
 <a href="hyvisual5.0/CanNotResolveStepSize.xml">CanNotResolveStepSize</a>
 model with either
 <pre>
@@ -121,7 +124,7 @@ Fail to refine step size. The refined step size is less than the minimum
 time resolution, at time 6.9334276710
    in .Bug.ModalModel.wait.CTEmbedded Director
 </pre>
-The <a href="hyvisual5.0/HyVisual-5.0-alpha-patch.tar"><CODE>HyVisual-5.0-alpha-patch.tar</CODE></a> 
+The <a href="hyvisual5.0/HyVisual-5.0-alpha-patch.tar"><code>HyVisual-5.0-alpha-patch.tar</code></a> 
  file contains a tar file that fixes this bug. The patch file also
 contains a modified ContinuousSinewave actor that provides a more
 reasonable sinewave.
@@ -130,8 +133,8 @@ reasonable sinewave.
 <ol>
 <li> Download and install HyVisual 5.0-alpha from the installers below
 
-<li> Download <a href="hyvisual5.0/HyVisual-5.0-alpha-patch.tar"><CODE>HyVisual-5.0-alpha-patch.tar</CODE></a> and uncompress the 
-and follow the instructions in the <CODE>ctPatch.README.txt</CODE> file.
+<li> Download <a href="hyvisual5.0/HyVisual-5.0-alpha-patch.tar"><code>HyVisual-5.0-alpha-patch.tar</code></a> and uncompress the 
+and follow the instructions in the <code>ctPatch.README.txt</code> file.
 </ol>
 
 
@@ -150,7 +153,7 @@ HyVisual 5.0-alpha released
 </tr>
 
 <tr>
- <td><a href="hyvisual5.0/hyvisual5.0.alpha.src.tar.gz"><CODE>hyvisual5.0.alpha.src.tar.gz</CODE></a>
+ <td><a href="hyvisual5.0/hyvisual5.0.alpha.src.tar.gz"><code>hyvisual5.0.alpha.src.tar.gz</code></a>
  <br>(HyVisual sources for Unix platforms)
  <td>Unix platforms</td>
  <td>11.7 Mb</td>
@@ -158,7 +161,7 @@ HyVisual 5.0-alpha released
 <a href="http://java.sun.com/j2se/downloads/index.html">Sun</a>
 </td>
  <td>Contained in this download.  This download includes just the sources,
- you will need tools like <CODE>make</CODE> to build.
+ you will need tools like <code>make</code> to build.
   </td>
 </tr>
 
@@ -183,5 +186,4 @@ Proceedings of Hybrid Systems: Computation and Control (HSCC) LNCS 3414, Zurich,
 
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
-</body>
-</html>
+<!--#include virtual="/ssi/bottom.htm" -->
