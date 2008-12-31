@@ -1,0 +1,67 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>TCP Simulator with Ptolemy</title>
+</head>
+<h1><a name=TCP>A TCP Simulator with PTOLEMY</a></h1>
+<body>
+
+
+sisalem at fokus gmd de  did a
+master's thesis about ABR using Ptolemy.  Dorgham's web page at <A
+HREF="http://www.fokus.gmd.de/step/simulations/sim.html#TCP"><code>http://www.fokus.gmd.de/step/simulations/sim.html#TCP</code></A>
+describes his work.
+
+Christopher Hylands created a tar file that combines the two tar files
+below, and makes a few minor changes.
+<menu>
+<li> <a href="tcpSim.tar.gz"><code>tcpSim.tar.gz</code></A>
+
+<li> <a href="tcpSim.tar.gz-README">tcpSim.tar.gz-README</A> README
+file for <code>tcpSim.tar.gz</code>
+</menu>
+
+
+<p>Below is a lightly edited local copy 
+<hr>
+
+<h2>TCP Simulation</h2>
+
+For investigating the performance of TCP under different situations,
+e.g., high speed networks, pure ATM and rate controlled ATM, we built
+our own <a href="tcp_des.ps.gz">TCP simulator</a> with PTOLEMY.<p>
+
+The current <a href="tcp.tar.gz"> version</a> of the simulator
+includes the 4.3BSD Tahoe TCP version and implements slow start,
+congestion avoidance, silly window handling, round trip time
+estimation, the sliding window mechanisms and the fast retransmission
+algorithm. With the 4.3BSD Reno TCP the simulator also implements fast
+recovery.<p>
+
+For our tests we also implemented a TCP version using <a
+href="Sisa9510_Congestion.ps.gz"> binary congestion notification</a>
+in addition to the usual loss indication.<p>
+
+
+<h2><a name=Congestion>Congestion Control Investigations</a></h2>
+
+As a part of a master thesis with the title of <a
+href="Sisa9506_ATM.ps.gz">"Rate based congestion control and its
+effects on TCP over ATM,"</A> various <a href="abr.tar.gz"> models
+simulating </a> TCP congestion algorithms, bit marking schemes and <a
+href="Sisa9606_Switch.ps.gz"> explicit rate control</a> schemes such
+as EPRCA and bit marking schemes were implemented and tested. As a
+test network the generic fairness topology was used.
+
+For more papers on this subject visit <A
+HREF="http://www.fokus.gmd.de/step/dor">Dorgham Sisalem's home
+page</A>
+
+<hr>
+
+<p> These models were compiled with Ptolemy0.5.2, so they might need
+some work to compile under Ptolemy0.6.
+
+</html>

@@ -1,0 +1,79 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+Synthesis of Parallel Hardware Implementations from Synchronous Dataflow Graph Specifications
+</title></head>
+<body>
+<CENTER>
+
+
+
+<br>
+
+
+<h1>
+Synthesis of Parallel Hardware Implementations from
+Synchronous Dataflow Graph Specifications
+
+</h1></CENTER>
+<CENTER>
+Michael Cameron Williamson
+</b>
+<br><br>
+
+<br><BR>
+</CENTER>
+<p><CENTER>
+<a href="mwilliamsonThesis.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
+<a href="mwilliamsonThesis.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<h2>ABSTRACT</h2>
+
+This dissertation describes an approach to digital hardware design for
+embedded signal processing systems that addresses synthesis,
+simulation, and interactive design. The objective is to improve
+productivity and interactivity during design without sacrificing
+design quality. Our approach consists of automated register-transfer
+level (RTL) VHDL code generation from synchronous dataflow (SDF) graph
+specifications, with automated and interactive optimization phases,
+followed by RTL synthesis and simulation. Our approach is implemented
+within the Ptolemy simulation and prototyping environment.
+
+ <p>We present techniques for mapping applications specified in SDF to
+parallel digital hardware implementations. Two styles of architecture
+generation are described. They are a general resource sharing style
+for flexibility, and the mapping of sequenced groups for compact
+communication and interconnect. A design flow for hardware synthesis
+from SDF graphs is presented. In order to minimize cost while meeting
+performance requirements, we take advantage of opportunities for
+resource sharing at the coarse-grain task level. Since there are fewer
+task nodes than in a fine-grain or arithmetic representation of the
+task graph, determining a near-optimal partitioning is faster in our
+approach than in behavioral synthesis.
+
+ <p> Our approach supports verification through co-simulation. We have
+constructed simulation techniques for VHDL models generated from SDF
+semantics. They address partitioned simulation of VHDL models derived
+from SDF, and simulation of VHDL subsystems derived from SDF within an
+SDF code-generation subsystems framework. A design flow for simulation
+of hardware synthesized from SDF graphs is presented. Our approach
+guarantees that the partitioning does not introduce deadlock or
+corrupt synchronization, issues that many algorithm-to-implementation
+design tools do not explicitly address.
+
+ <p>An important stage in our approach is the interactive scheduling
+and partitioning phase for providing feedback to the designer as well
+as allowing feedback from the designer for finetuning optimization
+after the automated phase. We characterize useful features for an
+interactive design tool for hardware synthesis from SDF graph
+specifications. A prototype of such a tool, integrated into the
+hardware design flow, is presented. The result is the leveraging of
+the strengths of both the designer and the tool, rather than the
+replacement of one by the other.
+
+ 
+
+<ADDRESS>Send comments to Edward A. Lee at eal at eecs berkeley edu .</ADDRESS>
+</body></html>

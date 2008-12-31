@@ -1,0 +1,47 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+The Tagged Signal Model
+</title></head>
+<BODY><CENTER>
+
+<h1>
+Comparing Models of Computation
+</h1></CENTER>
+<CENTER>
+by Edward A. Lee and Alberto Sangiovanni-Vincentelli
+<br><br>
+to appear: Proc. of ICCAD, San Jose, CA, Nov. 10-14, 1996.
+<br><br>
+</CENTER>
+<p>
+<CENTER>
+<a href="iccad.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[PS]"></A>
+<a href="iccad.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<h2>ABSTRACT</h2>
+We give a denotational framework (a "meta model") 
+within which certain properties of models of computation 
+can be understood and compared. It describes concurrent 
+processes as sets of possible behaviors. Compositions of 
+processes are given as intersections of their behaviors. 
+The interaction between processes is through signals, 
+which are collections of events. Each event is a value-tag 
+pair, where the tags can come from a partially ordered or 
+totally ordered set. Timed models are where the set of tags 
+is totally ordered. Synchronous events share the same tag, 
+and synchronous signals contain events with the same set 
+of tags. Synchronous systems contain synchronous signals. 
+Strict causality (in timed systems) and continuity (in 
+untimed systems) ensure determinacy under certain technical
+conditions. The framework is used to compare certain
+essential features of various models of computation, 
+including Kahn process networks, dataflow, sequential 
+processes, concurrent sequential processes with rendezvous,
+Petri nets, and discrete-event systems.
+
+
+<ADDRESS>Send comments to Edward A. Lee at eal at eecs berkeley edu .</ADDRESS>
+</body></html>

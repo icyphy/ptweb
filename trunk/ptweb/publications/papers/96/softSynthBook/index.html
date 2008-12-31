@@ -1,0 +1,122 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Software Synthesis from Dataflow Graphs</title>
+</head>
+<body>
+<table>
+<tr>
+<td>
+<img src="TheCoverFinal.fm.gif"></a>
+<td>
+<center>
+<h1>Software Synthesis from Dataflow Graphs,</h1>
+by<br><br>
+<cite>
+S. S. Bhattacharyya, P. K. Murthy, and E. A. Lee,
+</cite>
+<br><br>
+<a href="http://www.wkap.com" target="_top">Kluwer Academic Press</a>, Norwell, MA, 1996.
+<br>
+<br>
+<a href="http://kapis.www.wkap.nl/kapis/CGI-BIN/WORLD/book.htm?0-7923-9722-3" target="_top">
+Ordering information.</a>
+</center>
+<br>
+<br>
+</table>
+<hr>
+This book tackles the problem of generating efficient 
+software implementations from applications specified
+as synchronous dataflow graphs for programmable
+digital signal processors (DSPs) used in embedded real-time systems.
+The advent of high-speed graphics workstations has made
+feasible the use of graphical block diagram programming environments by
+designers of signal processing systems.  A particular subset of dataflow,
+called Synchronous Dataflow (SDF), has proven efficient for
+representing a wide class of unirate and multirate signal
+processing algorithms, and has been used as the basis for
+numerous DSP block diagram based programming environments such as the Signal
+Processing WorkSystem from Cadence design systems, COSSAP from
+Synopsys (both commercial tools), and the Ptolemy environment from
+the University of California at Berkeley.
+<p>
+	A key property of the SDF model is that static schedules
+can be determined at compile time.  This removes the overhead of dynamic
+scheduling and is thus useful for real-time DSP programs where throughput
+requirements are often severe.  Another constraint that programmable DSPs
+for embedded systems have is the limited amount of on-chip memory.  Off-chip
+memory is not only expensive but is also slower and increases the power
+consumption of the system; hence, it is imperative that programs fit in the
+on-chip memory whenever possible.
+<p>
+	This book reviews the state-of-the-art in
+constructing static, memory-optimal schedules for programs expressed as
+SDF graphs.  Code size reduction is obtained by the careful organization
+of loops in the target code.  Data buffering is optimized by
+constructing the loop hierarchy in provably optimal ways for many classes
+of SDF graphs.  The central result is a uniprocessor scheduling framework
+that provably synthesizes the most compact looping structures, called single
+appearance schedules, for a certain class of SDF graphs.  In addition, 
+algorithms and heuristics are presented that generate single appearance
+schedules optimized for data buffering usage.  Numerous practical
+examples and extensive experimental data is provided to illustrate the
+efficacy of these techniques.
+<hr>
+<h2>Key results and contributions of the book</h2>
+
+This book studies the problem of generating software
+implementations that are both program and buffer-memory
+optimal for programmable DSPs starting from applications
+expressed as synchronous dataflow graphs.  The main results are as follows:
+<p>
+<li>We give precedence to code-size minimization in this book.  Buffering
+requirements are minimized after minimizing code-size.
+<p>
+<li>The problem of minimizing code size is approached by the careful generation
+of looping structures in the target code.  A formal theory for constructing
+and manipulating these looping structures from SDF graphs is developed.
+<p>
+<li>A class of these looping structures, called single appearance schedules,
+is shown to be the most efficient with respect to code size.
+<p>
+<li>Necessary and sufficient conditions for there to exist single
+appearance schedules for SDF graphs are presented.
+<p>
+<li>A scheduling framework that finds these single appearance
+schedules whenever they exist is developed.  When such schedules do not
+exist, it is shown that this framework guarantees optimal code size
+for all those actors that are not contained in a particular type of
+subgraph called a tightly interdependent subgraph.
+<p>
+<li>A dynamic programming algorithm that is able to take a given
+single appearance schedule and optimally reorganize its loop hierarchy
+in order to minimize the amount of buffering required on the edges
+is presented.
+<p>
+<li>Two heuristics are presented, called RPMC and APGAN, for generating single
+appearance schedules for acyclic SDF graphs that attempt to minimize buffering
+requirements over all single appearance schedules for the graph.
+<p>
+<li>It is rigorously shown that the APGAN algorithm is able to generate single
+appearance schedules that minimize buffering requirements for a certain
+subclass of SDF graphs.  This class of graphs is shown to be rich enough
+to include several practical systems such as QMF filterbank structures.
+<p>
+<li>The converse problem of minimizing buffering requirements before minimizing
+code size is shown to be NP-complete.  A heuristic is presented that achieves
+good schedules in practice.
+<p>
+<li>Extensive experimental data is provided to show the efficacy of all of
+the techniques presented in the book.
+<p>
+<li>The treatment is mathematically rigorous.
+<p>
+<li>Several results on clustering SDF graphs may be of independent interest.
+<p>
+<li>The book is self-contained.  All of the relevant background is reviewed
+when necessary.
+</body>
+</html>

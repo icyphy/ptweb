@@ -1,0 +1,47 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+Resynchronization for multiprocessor DSP implementation - part 1: Maximum-throughput
+resynchronization.
+</title></head>
+<body>
+<CENTER>
+
+
+
+<br>
+
+<h1>
+Resynchronization for multiprocessor DSP implementation - part 2: Latency-constrained
+resynchronization.
+</h1></CENTER>
+<CENTER>
+S. S. Bhattacharyya, S. Sriram, and E. A. Lee
+</b>
+<br><br>
+Tech. Rep., Digital Signal Processing Laboratory,
+University of Maryland, College Park, July 1998.  Revised from <a href="http://ptolemy.eecs.berkeley.edu/papers/96/resync1" target="_top">Technical Memorandum UCB/ERL 96/56, Electronics Research Laboratory, University of California at Berkeley, October, 1996. </A>
+<br><BR>
+</CENTER>
+<p><CENTER>
+<a href="resyncpart2.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
+<a href="resyncpart2.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<h2>ABSTRACT</h2>
+The companion paper [1] introduced the concept of resynchronization, a post-optimization for static multiprocessor schedules in which extraneous synchronization operations are introduced in such a way that the number of original synchronizations that consequently become redundant significantly exceeds the number of additional synchronizations. Redundant synchronizations are synchronization operations whose corresponding sequencing requirements are enforced completely by other synchronizations in the system. The amount of run-time overhead required for synchronization can be reduced significantly by eliminating redundant synchronizations [2, 3]. Thus, effective resynchronization reduces the net synchronization overhead in the implementation of a multiprocessor schedule, and improves the overall throughput. 
+<br>
+However, since additional serialization is imposed by the new synchronizations, resynchronization can produce significant increase in latency. The companion paper [1] develops fundamental properties of resynchronization and studies the problem of optimal resynchronization under the assumption that arbitrary increases in latency can be tolerated ("maximum-throughput resynchronization"). Such an assumption is valid, for example, in a wide variety of simulation applications. This paper addresses the problem of computing an optimal resynchronization among all resynchronizations that do not increase the latency beyond a prespecified upper bound L<sub>max</sub>. 
+
+<OL>
+<li> S. S. Bhattacharyya, S. Sriram, and E. A. Lee, <I>Resynchronization for Multiprocessor DSP Implementation Ñ Part 1: Maximum-throughput Resynchronization</I>, Digital Signal Processing Laboratory, University of Maryland at College Park, July, 1998.
+
+<li> S. S. Bhattacharyya, S. Sriram, and E. A. Lee. "Optimizing synchronization in multiprocessor DSP systems," <I>IEEE Transactions on Signal Processing</I>, vol. 45, no. 6, June 1997.
+
+<li> P. L. Shaffer, "Minimization of Interprocessor Synchronization in Multiprocessors with Shared and Private Memory,"<I>International Conference on Parallel Processing</I>, 1989.
+</OL>
+<br><br>
+
+<ADDRESS>Send comments to Edward A. Lee at eal at eecs berkeley edu .</ADDRESS>
+</body></html>

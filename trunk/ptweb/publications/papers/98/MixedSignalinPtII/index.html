@@ -1,0 +1,53 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+CONTINUOUS TIME AND MIXED-SIGNAL SIMULATION IN PTOLEMY II
+</title></head>
+<body>
+<CENTER>
+
+
+
+<br>
+
+<h1>
+CONTINUOUS TIME AND MIXED-SIGNAL SIMULATION IN PTOLEMY II
+</h1></CENTER>
+<CENTER>
+by Jie Liu
+<br><br>
+UCB/ERL Memorandum M98/74, December 15th 1998.
+<br><BR>
+</CENTER>
+<p><CENTER>
+<a href="MixedSignal.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
+<a href="MixedSignal.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<h2>ABSTRACT</h2>
+<p>
+
+This report studies the continuous time and mixed-signal simulation techniques
+in the Ptolemy II environment. Unlike the nodal analysis representation usually
+seen in circuit simulators, the continuous time systems are modeled as 
+signal-flow block diagrams in Ptolemy II. This representation is suitable for
+system-level specification, and the interaction semantics with other models of 
+computation can be easily studied and implemented. The numerical solving 
+methods for ordinary differential equations are discussed from the 
+tagged-signal point of view and implemented in the continuous time domain. 
+The breakpoint handling techniques are essential for performing correct 
+simulation and supporting the interaction with other domains. Mixed-signal 
+simulation of continuous time and discrete event models is discussed. Event 
+detection can be performed using the breakpoint handling mechanism. The 
+coordination of the execution of the two models are discussed. The result 
+shows that when a continuous subsystem is embedded in a discrete event system, 
+the inner system must run ahead of the global time and be able to roll back. 
+Based on the result, a correct and efficient simulation strategy is presented. 
+As a case study, the mixed-signal simulation techniques are applied to a 
+micro-accelerometer with sigma-delta digital feedback.
+
+
+<ADDRESS>Send comments to Jie Liu,
+liuj at eecs berkeley edu </ADDRESS>
+</body></html>

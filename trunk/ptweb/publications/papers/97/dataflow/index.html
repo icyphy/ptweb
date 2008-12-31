@@ -1,0 +1,55 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+A Denotational Semantics for Dataflow with Firing
+</title></head>
+<body>
+<CENTER>
+
+
+
+<br>
+
+
+<h1>
+A Denotational Semantics for Dataflow with Firing
+</h1></CENTER>
+<CENTER>
+by Edward A. Lee
+<br><br>
+Technical Memorandum UCB/ERL M97/3<br>
+Electronics Research Laboratory, Berkeley, CA 94720
+<br><BR>
+</CENTER>
+<p><CENTER>
+<a href="denote.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
+<a href="denote.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<h2>ABSTRACT</h2>
+Formal semantics for the dataflow model of computation
+have centered around the version of data
+flow known as Kahn process networks. These process
+networks, however, fail to capture an essential 
+principle of dataflow, proposed by Dennis and
+used in almost all practical implementations of data
+flow, that of an actor firing. An actor firing is
+an indivisible quantum of computation. A set of firing 
+rules give preconditions for a firing, and the firing
+consumes tokens from the input streams and produces
+tokens on the output streams. These notions are missing
+from Kahn's model, and therefore have not been thoroughly
+studied in a formal setting. This paper bridges the gap,
+showing that sequences of firings define a continuous Kahn
+process as the least fixed point of an appropriately constructed
+functional. The firing rules are sets of prefixes with certain
+technical conditions to ensure determinacy. 
+These conditions results in firing rules that are more
+general than the blocking reads of the Kahn-MacQueen implementation
+of Kahn process networks, and result in a compositional dataflow model.
+
+
+
+<ADDRESS>Send comments to Edward A. Lee at eal at eecs berkeley edu .</ADDRESS>
+</body></html>

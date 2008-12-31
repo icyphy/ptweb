@@ -1,0 +1,58 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>
+Compiling Dynamic Constructs
+</title>
+</head>
+<body>
+<CENTER>
+
+
+
+<br>
+
+
+<h1>
+Compile-Time Scheduling of Dynamic Constructs in
+Dataflow Program Graphs
+</h1></CENTER>
+<CENTER>
+by Soonhoi Ha and Edward A. Lee
+<br><br>
+<em>IEEE Transactions on Computers</em>, Vol. 46, No. 7, July 1997.
+<br><BR>
+</CENTER>
+<p><CENTER>
+<a href="compile.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
+<a href="compile.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+
+Scheduling dataflow graphs onto processors 
+consists of assigning actors to processors,
+ordering their execution within the processors, and specifying 
+their firing time.
+While all scheduling decisions can be made at runtime,
+the overhead is excessive for most real systems. To reduce this overhead,
+compile-time decisions can be made for assigning
+and/or ordering actors on processors. Compile-time decisions
+are based on known profiles 
+available for each actor at compile time. The profile of an actor such as
+the execution time and the communication patterns.  However, a 
+dynamic construct within a macro actor,
+such as a conditional and a data-dependent iteration, makes   
+the profile of the actor unpredictable at compile time.
+For those constructs, we propose to assume some profile at
+compile-time and define a cost to be minimized
+when deciding on the profile under the assumption that the runtime
+statistics are available at compile-time.
+Our decisions on the profiles of dynamic constructs are shown
+to be optimal under some bold assumptions, and expected to be near-optimal
+in most cases. The proposed scheduling technique has been implemented
+as one of the rapid prototyping facilities in Ptolemy. This paper presents
+the preliminary results on the performance with synthetic examples. 
+<p>
+<ADDRESS>Send comments to Soonhoi Ha at sha at iris snu ac kr .</ADDRESS>
+</body></html>

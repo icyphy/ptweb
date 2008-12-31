@@ -1,0 +1,77 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+Two Cycle Related Problems for Regular Dataflow Graphs: Complexity and
+Heuristics
+</title></head>
+<body>
+<CENTER>
+
+
+
+<br>
+
+<h1>
+Two Cycle Related Problems for Regular Dataflow Graphs: Complexity and
+Heuristics
+</h1></CENTER>
+<CENTER>
+by
+<br>
+<a href="http://ptolemy.eecs.berkeley.edu/~murthy/" target="_top">
+Praveen K. Murthy</a>, University of California at Berkeley
+<br>
+<a href="http://ptolemy.eecs.berkeley.edu/~eal/" target="_top">
+Edward A. Lee</a>, University of California at Berkeley
+<br><br>
+Technical Memorandum UCB/ERL M97/76, Electronics Research Laboratory,
+University of California, Berkeley, Ca 94720, October 1997.
+</CENTER>
+<p><CENTER>
+<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/regDataflow/rdf.pdf" target="_top">
+<img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/regDataflow/rdf.ps">
+<img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
+</CENTER>
+<h2>ABSTRACT</h2>
+
+A regular dataflow graph (RDFG) is a graph with a highly regular
+structure that enables its description to be exponentially smaller than
+the description size for an ordinary graph. Such graphs arise when certain
+regular iterative algorithms (like matrix multiplication or convolution)
+are modeled using dependence graphs. These graphs can be implemented
+either on systolic arrays, or wavefront arrays (WA). Systolic arrays have
+a global time clock; operations are scheduled statically and executed
+according to this schedule. The global clocking however, presents problems
+due to clock skewing in large circuits; hence, wavefront arrays are an
+attractive alternative. Wavefront arrays use a dataflow method of
+execution, and hence, do not require global synchronization. Array
+elements start computing whenever they have all of their inputs.
+<p>
+In a systolic implementation, the dependence graph cannot have any cycles
+since the existence of a schedule depends on the existence of a schedule
+vector that has non-negative dot product with each dependency edge.
+However, a graph implemented on a WA may have cycles provided that the
+cycles do not deadlock. There are a couple of computational problems that
+arise in this context: the first is the detection of deadlock; that is, to
+determine whether the graph to be implemented has a delay-free cycle. The
+second is to determine the maximum cycle mean; this represents the
+iteration rate with which the graph can be executed. While both of these
+problems are well known and well studied for ordinary static, homogeneous
+dataflow graphs, and can be solved with polynomial time algorithms, they
+have not been studied in the context of RDFGs. Since RDFGs have an
+exponentially more compact representation, we determine the complexity of
+these two problems in terms of this lower representation size. We show
+that the problems are NP-complete, and hence, no advantage can be
+theoretically gained from the smaller input size. We develop some
+heuristics that should work well even if not technically in polynomial
+time with respect to the specification size, especially for large RDFGs.
+
+
+
+
+<ADDRESS>Send comments to Praveen K. Murthy
+at praveen at cadence com .</ADDRESS>
+</body></html>
