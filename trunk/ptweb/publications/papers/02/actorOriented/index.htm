@@ -1,0 +1,40 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Actor-Oriented Control System Design</title>
+</head>
+<body>
+<center>
+<h1>Actor-Oriented Control System Design</h1>
+</center>
+<center>
+Jie Liu, Johan Eker, Xiaojun Liu, John Reekie, and Edward A. Lee
+</center>
+<br>
+<center>
+Submitted to <i>IEEE Transactions on Control System Technology</i>, special issue on Computer Automated Multi-Paradigm Modeling, March, 2002.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="actorOriented.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A><br>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+Complex control systems are heterogeneous, in the sense of discrete computer-based controllers
+interacting with continuous physical plants, regular data sampling interleaving with usually irregular
+communication and user interaction, and multilayer and multimode control laws. This heterogeneity
+imposes great challenges for control system design technologies in terms of end-to-end control performance
+modeling and simulation, traceable refinements from algorithms to software/hardware implementation,
+and component reuse. This paper presents an actor-oriented design methodology that tames these
+issues by separating the data-centric computational components (a.k.a. actors) and the control-flow-centric
+scheduling and activation mechanisms (a.k.a. frameworks). The underlying principle of frameworks is to use formal models of computation to manage the interactions among actors. Semantically different frameworks
+can be composed hierarchically to manage heterogeneity, improve understandability, and achieve
+actor and framework reusability. This methodology is implemented through the Ptolemy II software environment.
+As an example, the methodology and the Ptolemy II software have been applied to the design of
+a pendulum inversion and stabilization system.
+</body>
+</html>
+
