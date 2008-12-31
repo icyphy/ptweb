@@ -1,0 +1,35 @@
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>A Code Generation Framework for Ptolemy II</title>
+</center>
+</head>
+<body>
+<CENTER>
+<br>
+<h1>A Code Generation Framework for Ptolemy II</h1>
+</CENTER>
+<CENTER>
+by Jeff Tsay
+<br><br>
+Technical Memorandum UCB/ERL M00/25
+<br>
+Dept. EECS<br>
+University of California
+Berkeley, CA 94720, USA
+<br>
+May 19, 2000
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="ERL_PTII_CodeGeneration.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+A new approach to code generation for Ptolemy II systems is taken. The approach involves transformation of the existing
+code in each actor of a system. The transformation process operates on an abstract syntax tree created and decorated by a Java compiler based on the Titanium compiler (see <a href="http://www.cs.berkeley.edu/Research/Projects/titanium/">http://www.cs.berkeley.edu/Research/Projects/titanium/</a>. This paper describes domain-independent transformations as well as transformations specific to Synchronous Dataflow (SDF). The output of the code generator is Java code with calls to the Ptolemy II kernel and data replaced. This code is meant to be fed into a generic Java-to-C converter to produce code compilable on DSP platforms.
+<p>
+ 
+</body></html>

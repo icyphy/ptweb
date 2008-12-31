@@ -1,0 +1,47 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>A Code Generation Framework for Java Component-Based Designs</title>
+</head>
+<body>
+<center>
+<h1>A Code Generation Framework for Java Component-Based Designs</h1>
+</center>
+<center>
+Jeff Tsay, Christopher Hylands and Edward A. Lee
+
+
+<br><br>
+CASES '00, November 17-19, 2000, San Jose, CA
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="javacodegen.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+In this paper, we describe a software architecture supporting code
+generation from within Ptolemy II. Ptolemy II is a component-based
+design tool intended for embedded and real-time system design. The
+infrastructure described here provides a platform for experimentation
+with synthesis of embedded software or hardware designs from
+high-level, Java-based specifications. A specification consists of a
+set of interconnected actors whose functionality is defined in
+Java. The provided infrastructure parses the existing Java code for
+the actors and presents a simple API, using the Visitor pattern, for
+transforming the abstract syntax tree and writing code transformers
+and back-end code generators. A code transformer is described that
+performs generic optimizations, such as specialization of polymorphic
+data types, and domain-specific optimizations, such as static buffer
+allocation for communication between dataflow actors. The back end
+resynthesizes the transformed Java code. We describe a simple example
+where the generated Java code runs on a PalmOS handheld computer, and
+a more elaborate example where significant performance improvements
+are achieved by transformations.
+
+<p>
+</body>
+</html>
+
