@@ -178,7 +178,7 @@ text-align:center;
 margin: 0 auto;
 border:solid 1px #ccc;
 border-top:0;
-background-image:url(/img/column-bg.gif);
+background-image:url(/img/column-171-bg.gif);
 background-repeat:repeat-y;
 overflow:auto;
 }
@@ -189,7 +189,6 @@ width:150px;
 #contentcol {
 padding-left:171px;
 }
-
 /* ****** sub-banner and photostrip ************** */
 /* Change text color/background-color as desired for optional section title */
 #section {
@@ -216,6 +215,13 @@ height:95px;
 #menu {
 font-size:85%;
 text-align:left;
+}
+#menu h2 {
+color: #ba7d00;
+text-indent: 4px;
+}
+#menu h3 {
+text-indent: 8px;
 }
 #menu ul {
 list-style-type:none;
@@ -371,6 +377,7 @@ color:#666;
 /* puts all images in #content section on separate line; override for individual img's with display:inline; if required */
 #content img {
 display:block;
+margin-right:25px;
 }
 #content form {
 margin-top:1em;
