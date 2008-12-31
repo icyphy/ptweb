@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>On the Optimal Blocking Factor for Blocked, Non-Overlapped Schedules <super>1</super></title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>On the Optimal Blocking Factor for Blocked, Non-Overlapped Schedules <super>1</super></h1>
 
 <center>
@@ -18,12 +21,10 @@ June 10 1994
 </center>
 <p>
 <center>
-<a href="opt_blocking_factor.pdf" target= "_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+<a href="opt_blocking_factor.pdf" target= "_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
 </center>
 <p>
 <h2>ABSTRACT</h2>
 This paper addresses the problem of determining the optimal blocking factor for blocked, non-overlapped multiprocessor schedules for signal processing programs expressed as synchronous dataflow (SDF) graphs. One approach to determining a multiprocessor schedule for an SDF graph <I>G</I> is to determine a schedule for the <I>J</I>-unfolded graph of <I>G</I> (defined to be the precedence graph of <I>G</I> over <I>J</I> iterations), where <I>J</I> <img src="../../../../image/gtequal.gif" width=10 height=10 border=0>1, and repeat that schedule forever. This approach allows us to exploit some of the inter-iteration parallelism that is usually present in the SDF graph. A schedule for the <I>J</I>-unfolded graph is called a schedule of blocking factor . It is of interest to determine the value of <I>J</I> that will allow schedules of optimal throughput to be constructed. It will be shown that the critical path of the <I>J</I>-unfolded graph becomes cyclic as <I>J</I> is increased. It will be shown that it is possible to determine this cyclicity by analyzing the critical graph of a matrix that arises in the model that is used. The cyclicity of the critical path implies that we only have to examine a finite number of blocking factors to determine the optimal one. 
 
-</body>
-</html>
-
+<!-- #include virtual="/ssi/bottom.htm" -->

@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>RESYNCHRONIZATION FOR EMBEDDED MULTIPROCESSORS</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>RESYNCHRONIZATION FOR EMBEDDED MULTIPROCESSORS</h1>
 
 <center>
@@ -18,7 +21,7 @@ University of California, Berkeley, September, 1995
 </center>
 <p>
 <center>
-<a href="erl-95-70.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+<a href="erl-95-70.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
 </center>
 <p>
 <h2>ABSTRACT</h2>
@@ -27,6 +30,4 @@ This paper introduces a technique, called resynchronization, for reducing synchr
 First, we define the general form of our resynchronization problem; we show that it is NP hard by establishing a correspondence to the set covering problem; and based on this correspondence, we specify how an arbitrary heuristic for set covering can be applied to yield a heuristic for resynchronization. Next, we show that for a certain class of applications, optimal resynchronizations can be computed efficiently by means of pipelining. These pipelined solutions, however, can suffer from significantly increased latency, and this motivates the latency-constrained resynchronization problem, which we address for a restricted class of graphs that permit efficient computation of latency. Again using a reduction from set covering (although the construction is significantly different), we show that latency-constrained resynchronization is NP hard. However, we show that for the special case in which there are only two processors, latency-constrained resynchronization can be solved in polynomial time. We also present a heuristic for latency-constrained resynchronization, and through a practical example, we demonstrate that this heuristic gives an efficient means for systematically trading off between synchronization overhead and latency.
 <br><br>
 1. P. L. Shaffer, "Minimization of Interprocessor Synchronization in Multiprocessors with Shared and Private Memory," International Conference on Parallel Processing, 1989.
-</body>
-</html>
-
+<!-- #include virtual="/ssi/bottom.htm" -->

@@ -1,18 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<HTML>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Discrete Event Modeling in Ptolemy II</title>
-</head>
-<body>
-<CENTER>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
 <br>
  
 <h1>Discrete Event Modeling in Ptolemy II</h1>
  
-</CENTER>
-<CENTER>
+</center>
+<center>
 Lukito Muliadi
 <br><br>
 Department of Electrical Engineering and Computer Science
@@ -20,14 +23,14 @@ Department of Electrical Engineering and Computer Science
 University of California, Berkeley, CA, USA 94720
 <br>
 May 18, 1999
-<br><BR>
-</CENTER>
+<br><br>
+</center>
 <p>
-<CENTER>
-<a href="DEBook.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
-</CENTER>
+<center>
+<a href="DEBook.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
+</center>
 <p>
 <h2>ABSTRACT</h2>
 This report describes the discrete-event semantics and its implementation in the Ptolemy II software architecture. The discrete-event system representation is appropriate for time-oriented systems such as queueing systems, communication networks, and hardware systems. A key strength in our discrete-event implementation is that simultaneous events are handled systematically and deterministically. A formal and rigorous treatment of this property is given. One of the Ptolemy II major features is in the heterogenous modeling of systems. Composition of the DE domain with different domains in Ptolemy II is discussed. The performance of a discrete-event simulator depends heavily on the algorithm by which events are maintained and sorted in the event queue. In the Ptolemy II DE domain, the event queue is implemented as the calendar queue data structure. The calendar queue is an extremely fast implementation of the priority queue with time complexity equal to O(1) for both enqueue and dequeue operations. A comprehensive description of this data structure is given. Based on the tagged signal model, the formal semantics of our discrete event implementation are given in terms of the firing functions of actors.
 <p>
-</body></html>
+<!-- #include virtual="/ssi/bottom.htm" -->

@@ -141,11 +141,13 @@ doit() {
 	    -e 's@<A HREF@<a href@g' \
 	    -e 's@<A NAME@<a name@g' \
 	    -e 's@</A>@</a>@g' \
-	    -e 's@<BR>@<br>@' \
+	    -e 's@<BR>@<br>@g' \
 	    -e 's@<BODY>@<body>@' \
 	    -e 's@</BODY>@</body>@' \
-	    -e 's@<CODE>@<code>g@' \
-	    -e 's@</CODE>@</code>g@' \
+	    -e 's@<CENTER>@<center>@' \
+	    -e 's@</CENTER>@</center>@' \
+	    -e 's@<CODE>@<code>@g' \
+	    -e 's@</CODE>@</code>@g' \
 	    -e 's@<H\([1-9]\)>@<h\1>@' \
 	    -e 's@</H\([1-9]\)>@</h\1>@' \
 	    -e 's@<HEAD>@<head>@' \
@@ -329,7 +331,7 @@ $title
 <!--#include virtual="/ssi/top.htm"-->
 EoF
         awk '{ if (sawbody==1) {
-	           if ($1 == "</body>") {
+	           if ($1 ~ /<\/body>/ || $1 ~ /<\/BODY>/ ) {
 		       print "<!-- #include virtual=\"/ssi/bottom.htm\" -->"
 		       exit
                    } else {
@@ -432,7 +434,7 @@ $title
 <!--#include virtual="/ssi/top.htm"-->
 EoF
         awk '{ if (sawbody==1) {
-	           if ($1 == "</body>") {
+	           if ($1 ~ /<\/body>/ || $1 ~ /<\/BODY>/ ) {
 		       print "<!-- #include virtual=\"/ssi/bottom.htm\" -->"
 		       exit
                    } else {
