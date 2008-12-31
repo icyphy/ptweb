@@ -1,0 +1,53 @@
+<html>
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+
+<head>
+<title>J. Buck Thesis</title>
+</head>
+<h1>SCHEDULING DYNAMIC DATAFLOW GRAPHS WITH 
+BOUNDED MEMORY USING THE TOKEN FLOW MODEL</h1>
+<body>
+<center>
+J. T. Buck
+<p>
+Technical Report UCB/ERL 93/69 
+<br>
+Ph.D. Dissertation, 1993  
+<br>
+Dept. of EECS, University of California, Berkeley, CA 94720
+<p>
+<a href="thesis.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</center>
+</a>
+<h2>ABSTRACT</h2>
+<body>
+
+This thesis presents an analytical model of the behavior of dataflow
+graphs with data-dependent control flow. In this model, the number of
+tokens produced or consumed by each actor is given as a symbolic
+function of the Boolean-valued tokens in the system. Several
+definitions of consistency are discussed and compared. Neces sary and
+sufficient conditions for bounded-length schedules, as well as
+sufficient conditions for determining whether a dataflow graph can be
+scheduled in bounded memory are given. These are obtained by analyzing
+the properties of minimal cyclic schedules, defined as minimal
+sequences of actor executions that return the dataflow graph to its
+original state. Additional analysis techniques, including a clustering
+algorithm that reduces graphs to standard control structures (such as
+"if-then-else" and "do-while") and a state enumeration procedure, are
+also described. Relationships between these techniques and those used
+in Petri net analysis, as well as in the theory of certain stream
+languages, are discussed.
+
+<p> Finally, an implementation of these techniques using Ptolemy, an
+object-ori ented simulation and software prototyping platform, is
+described. Given a dynamic dataflow graph, the implementation is
+capable either of simulating the execution of the graph, or generating
+efficient code for it (in an assembly language or higher level
+language).
+
+</body>
+</html>
