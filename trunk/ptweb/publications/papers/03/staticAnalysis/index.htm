@@ -1,0 +1,45 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Static Analysis of Actor Networks</title>
+</head>
+<body>
+<center>
+  <h1>Static Analysis of Actor Networks</h1>
+</center>
+<center>
+  <p> Ernesto Wandeler</p>
+  <p><i>Technical Memorandum UCB/ERL M03/07</i>, Diploma Thesis presented to Swiss Federal Institute of Technology, March 2003</p>
+  <p> <a href="staticAnalysis.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A> 
+</CENTER>
+<p>&nbsp;
+<p>
+<h2>ABSTRACT</h2>
+<p>
+In this thesis we present a new interface theory based approach to static 
+analysis of actor systems. We first introduce a new interface theory, 
+which is based on Interface Automata [1] and which is capable of counting 
+with natural numbers. Using this new interface theory, we can capture 
+both, the temporal aspects of an actor interface as well as an actor's 
+token exchange rate. We will show, how to automatically extract this 
+information from actors written in the Cal Actor Language (CAL). We 
+further present a method to capture the interface information as well 
+as the connection information of dataflow system environments into an 
+interface automaton. In our approach, this automaton acts as glue between 
+the actor automata of the system, and by successfully composing all actor 
+automata with it, we can prove interface compatibility of all actors
+with the system environment. After successful composition, the composition 
+automaton will contain the complete token exchange information of the 
+composite actor system.  We will extract this information into a Petri 
+Net, which we then analyse to make statements on boundedness, deadlock 
+as well as on the existence of legal firing sequences for the composite 
+actor system.
+<p>
+[1] L. de Alfaro and T.A. Henzinger, Interface Theories for Component-Based
+Design in <i>Proceedings of the First International Workshop on Embedded
+Software (EMSOFT)</i>, 2001.
+</body>
+</html>
+
