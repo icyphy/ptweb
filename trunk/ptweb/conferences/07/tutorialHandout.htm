@@ -119,7 +119,7 @@ Ptolemy II install page</a>. Contents of this page:
 <ol>
 <li>
 Download the latest version of Eclipse from
-<a href="http://www.eclipse.org" target="_top">http://www.eclipse.org</a>.
+<a href="http://www.eclipse.org">http://www.eclipse.org</a>.
 <li>
 Unzip the download file into an appropriate place (such as <code>C:\Program Files</code>).
 <li>
@@ -226,7 +226,7 @@ if you are tightly managing serialization, we turn it off:
  </ol>
 
 <li> By default, Eclipse checks in <code>makefile</code>s,
-<code>*.c</code>, <code>g*.h</code>g files and <code>g*.tcl</code>g files with
+<code>*.c</code>, <code>*.h</code> files and <code>*.tcl</code> files with
 <code>-kb</code>.  This causes no end of problems when the tree is
 checked out on a platform that has a different line ending.
 
@@ -542,9 +542,9 @@ off automatic rebuild).
 <h2><a name="UsingCVS">Using CVS</a></h2>
 Resources:
 <ul>
-<li><a href="http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-vcm-home/docs/online/cvs_features2.0/cvs-faq.html#misc_3" target="_top">The Eclipse 2.0 CVS FAQ</a> 
+<li><a href="http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-vcm-home/docs/online/cvs_features2.0/cvs-faq.html#misc_3">The Eclipse 2.0 CVS FAQ</a> 
 
-<li><a href="http://www.gigascale.org/softdevel/faq/1/" target="_top">GSRC CVS FAQ</a></a>
+<li><a href="http://www.gigascale.org/softdevel/faq/1/">GSRC CVS FAQ</a></a>
 </ul>
 
 <h3>Debugging CVS</h3>
@@ -632,9 +632,9 @@ Window -&gt; Show View -&gt; Other -&gt; CVS -&gt; CVS Console.
 If, under Eclipse 2.1, you receive a message "Terminated with fatal
 signal 10", then try using a different compression level, see the
 
-<a href="http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-vcm-home/docs/online/cvs_features2.0/cvs-faq.html#misc_3" target="_top">The Eclipse CVS FAQ</a>
+<a href="http://dev.eclipse.org/viewcvs/index.cgi/~checkout~/platform-vcm-home/docs/online/cvs_features2.0/cvs-faq.html#misc_3">The Eclipse CVS FAQ</a>
 for details.
-<br><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=15724" target="_top"><code>https://bugs.eclipse.org/bugs/show_bug.cgi?id=15724</code></a> suggests using
+<br><a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=15724"><code>https://bugs.eclipse.org/bugs/show_bug.cgi?id=15724</code></a> suggests using
 a compression level of 5.
 
 <p>After the failure, the cvs log (Window -&gt; Show Views -&gt; CVS -&gt; CVS Console says:
@@ -675,7 +675,7 @@ If Eclipse takes a long time to start up, then the problem could be that
  <p>Basically, when eclipse starts up, it might try to update
 <a name="metadata"><code>H:/workspace/.metadata</code></a>
 .  The solution is covered in
-<a href="http://www.eclipse.org/documentation/html/plugins/org.eclipse.platform.doc.user/doc/tasks/running_eclipse.htm" target="_top"><code>http://www.eclipse.org/documentation/html/plugins/org.eclipse.platform.doc.user/doc/tasks/running_eclipse.htm</code></a>:
+<a href="http://www.eclipse.org/documentation/html/plugins/org.eclipse.platform.doc.user/doc/tasks/running_eclipse.htm"><code>http://www.eclipse.org/documentation/html/plugins/org.eclipse.platform.doc.user/doc/tasks/running_eclipse.htm</code></a>:
 
 
 
@@ -697,7 +697,7 @@ need to invoke java with the <code>-Dsun.java2d.d3d=false</code>
 argument.
 
 The way to do this is to do
-<code>Run</code> 0&gt; <code>gDebug ...</code>g -&gt; <code>gArguments</code>g
+<code>Run</code> 0&gt; <code>Debug ...</code> -&gt; <code>Arguments</code>
 and then add <code>-Dsun.java2d.d3d=false</code>  to the
 <code>VM arguments</code> text area.
 
