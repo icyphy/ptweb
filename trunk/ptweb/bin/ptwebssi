@@ -228,6 +228,11 @@ echo ' 5) Add <!-- $Id$ -->'
 useegrep=no
 # If the file has the string the return 1
 searchit() { 
+        basename=`basename $1`
+    # If the file is named toc.htm, then skip it
+    if [ "$basename" = "toc.htm" ]; then
+        return 1
+    fi
     awk '$0 ~ /<!-- \$Id/ { exit 1}
          $0 ~ /<!-- : ptwebssi/ { exit 1}
        ' $1
@@ -521,19 +526,13 @@ searchit() {
         return 1
     fi
     awk '$0 ~ /<div id="menu">/ { exit 1}' $1
-    return 0
 }
 doit() {
     awk 'BEGIN { print "<div id=\"menu\">"
                  print "<ul>"
          }
          $0 ~ /<a href=.*<\/[aA]>/ {
-                 if (count ==0) {
-                     count++
-                     printf("<li class=\"first\">");
-                 } else {
-                     printf("<li>");
-                 }
+                 printf("<li>");
                  if ($0 ~ /<\/li>/) {
                      print $0
                  } else {
@@ -544,7 +543,9 @@ doit() {
                print "</div><!-- /#menu -->"
          }' $file |
     sed -e 's@<br>@@' \
-        -e 's@<li class="first"><li class="first">@<li class="first">@' \
+        -e 's@<li class="first"><li class="first">@<li>@' \
+        -e 's@<li class="first"><li>@<li>@' \
+        -e 's@<li><li class="first">@<li>@' \
         -e 's@<li><li>@<li>@' \
         -e 's@<li> *<a@<li><a@' \
         -e 's@<p>@@' \
@@ -560,6 +561,131 @@ doit() {
 }
 EGREPMATCH=''
 LOGMESSAGE="Fix up toc"
+
+fixit
+useegrep=yes
+
+
+echo "###################################################"
+echo ' 13) Insert link to home in toc.htm'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    basename=`basename $1`
+    if [ "$basename" != "toc.htm" ]; then
+        echo "$1: Only operate on toc.htm"
+        return 1
+    fi
+    awk '$0 ~ /<a href="\/index.htm">Home<\/a>/ { exit 1}
+         $0 ~ /<a href="*\/index.htm">Ptolemy Home<\/a>/ { exit 1}
+         $0 ~ /<a href=".*\/index.htm">Ptolemy Home<\/a>/ { exit 1}' $1
+}
+doit() {
+    gawk '{ 
+           print $0
+           if ($0 ~ /<ul>/) {
+               print "<li><a href=\"/index.htm\">Home</a></li>"
+           }
+         }' $file |
+    sed -e 's@<br>@@' \
+        -e 's@<li class="first">@<li>@' \
+        -e 's@<li><li>@<li>@' \
+        -e 's@<li> *<a@<li><a@' \
+        -e 's@<p>@@' \
+        -e 's@body.htm" target="body"@index.htm"@' \
+        -e 's@main.htm" target="main"@index.htm"@' \
+        -e 's@ target="body"@@' \
+        -e 's@ target="main"@@' \
+        -e 's@ target="_top"@@' \
+        -e 's@body.htm"@index.htm"@' \
+        -e 's@main.htm"@main.htm"@' \
+	   > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH=''
+LOGMESSAGE="Fix up toc"
+
+fixit
+useegrep=yes
+
+
+
+echo "###################################################"
+echo ' 14) Insert the title toc.htm'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    basename=`basename $1`
+    if [ "$basename" != "toc.htm" ]; then
+        echo "$1: Only operate on toc.htm"
+        return 1
+    fi
+    awk '$0 ~ /<h2>/ { exit 1}
+         $0 ~ /<h3>/ { exit 1}' $1
+}
+doit() {
+    h2=""
+    EGREPMATCH='<h2>|<h3>'
+    egrep -s -e  "$EGREPMATCH" $file
+    retval=$? 
+    if [ $retval = 1 ]; then
+        # Get the title from the index and put it in toc.htm
+        dirname=`dirname $file`
+        h2=`egrep -i "^<title>" $dirname/main.htm |  sed -e 's@<title>@<h2>@' -e 's@</title>@</h2>@'`
+    fi    
+
+    gawk -v h2="$h2" '{ 
+           print $0
+           if ($0 ~ /<a href="\/index.htm">Home<\/a>/) {
+               if ( h2 != "") {
+                   print h2
+               }
+           }
+         }' $file |
+    sed -e 's@<br>@@' \
+        -e 's@<li class="first">@<li>@' \
+        -e 's@<li><li>@<li>@' \
+        -e 's@<li> *<a@<li><a@' \
+        -e 's@<p>@@' \
+        -e 's@body.htm" target="body"@index.htm"@' \
+        -e 's@main.htm" target="main"@index.htm"@' \
+        -e 's@ target="body"@@' \
+        -e 's@ target="main"@@' \
+        -e 's@ target="_top"@@' \
+        -e 's@body.htm"@index.htm"@' \
+        -e 's@main.htm"@main.htm"@' \
+	   > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH=''
+LOGMESSAGE="Fix up toc"
+
+fixit
+useegrep=yes
+
+
+echo "###################################################"
+echo ' 15) remove arrows from gif'
+
+useegrep=no
+# If the file has the string the return 1
+searchit() { 
+    basename=`basename $1`
+    if [ "$basename" != "toc.htm" ]; then
+        echo "$1: Only operate on toc.htm"
+        return 1
+    fi
+    egrep -s -e "leftarrow.gif|uparrow.gif" $1
+}
+doit() {
+    grep -v "leftarrow.gif" $file |
+       grep -v "uparrow.gif" > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH=''
+LOGMESSAGE="Remove arrows from to"
 
 fixit
 useegrep=yes
