@@ -1,0 +1,44 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>A Comparison of Synchronous and Cyclo-Static Dataflow</title>
+</head>
+<body>
+<h1>A Comparison of Synchronous and Cyclo-Static Dataflow</h1>
+
+<center>
+Thomas M. Parks, Jos&eacute; Luis Pino and Edward A. Lee
+<br><br>
+Proceedings of the Asilomar Conference on Signals, Systems, and Computers
+<br>
+Pacific Grove, CA, October 29-November 1, 1995
+<br><br>
+</center>
+<p>
+<center>
+<a href="csdfVSsdf.pdf" target = "_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</center>
+<p>
+<h2>ABSTRACT</h2>
+We compare synchronous dataflow (SDF) and cyclo-static dataflow
+(CSDF), which are each special cases of a model of computation we call
+dataflow process networks. In SDF, actors have static firing rules:
+they consume and produce a fixed number of data tokens in each
+firing. This model is well suited to multirate signal processing
+applications and lends itself to efficient, static scheduling,
+avoiding the run-time scheduling overhead incurred by general
+implementations of process networks. In CSDF, which is a
+generalization of SDF, actors have cyclicly changing firing rules. In
+some situations, the added generality of CSDF can unnecessarily
+complicate scheduling. We show how higher-order functions can be used
+to transform a CSDF graph into a SDF graph, simplifying the scheduling
+problem. In other situations, CSDF has a genuine advantage over SDF:
+sim-pler precedence constraints. We show how this makes it possible to
+eliminate unnecessary computations and expose additional
+parallelism. We use digital sample rate conversion as an example to
+illustrate these advantages of CSDF.
+</body>
+</html>
+

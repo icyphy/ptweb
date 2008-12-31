@@ -1,0 +1,47 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Bounded Scheduling of Process Networks</title>
+</head>
+<body>
+<h1>Bounded Scheduling of Process Networks</h1>
+
+<center>
+by Thomas M. Parks
+<br><br>
+Ph.D. dissertation, Technical Report UCB/ERL-95-105.
+<br>
+EECS Department, University of California, Berkeley CA 94720.
+<br>
+December, 1995
+<br><br>
+</center>
+<p>
+<center>
+<a href="thesis.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</center>
+<p>
+<h2>ABSTRACT</h2>
+We present a scheduling policy for complete, bounded execution of
+Kahn process network programs.  A program is a set of processes that
+communicate through a network of first-in first-out queues.  In a
+complete execution, the program terminates if and only if all
+processes block attempting to consume data from empty communication
+channels.  We are primarily interested in programs that operate on
+infinite streams of data and never terminate.  In a bounded execution,
+the number of data elements buffered in each of the communication
+channels remains bounded.
+<p>
+The Kahn process network model of computation is powerful enough that the
+questions of termination and bounded buffering are undecidable.  No
+finite-time algorithm can decide these questions for all Kahn process
+network programs.  Fortunately, because we are interested in programs
+that never terminate, our scheduler has infinite time and can
+guarantee that programs execute forever with bounded buffering
+whenever possible.  Our scheduling policy has been implemented using
+Ptolemy, an object-oriented simulation and prototyping environment.
+</body>
+</html>
+

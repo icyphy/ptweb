@@ -1,0 +1,32 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>RESYNCHRONIZATION FOR EMBEDDED MULTIPROCESSORS</title>
+</head>
+<body>
+<h1>RESYNCHRONIZATION FOR EMBEDDED MULTIPROCESSORS</h1>
+
+<center>
+Shuvra S. Bhattacharyya, Sundararajan Sriram, and Edward A. Lee
+<br><br>
+Memorandum UCB/ERL M95/70, Electronics Research Laboratory
+<br>
+University of California, Berkeley, September, 1995
+<br><br>
+</center>
+<p>
+<center>
+<a href="erl-95-70.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</center>
+<p>
+<h2>ABSTRACT</h2>
+This paper introduces a technique, called resynchronization, for reducing synchronization overhead in embedded multiprocessor implementations. The technique exploits the well-known observation [1] that in a given multiprocessor implementation, certain synchronization operations may be redundant in the sense that their associated sequencing requirements are ensured by other synchronizations in the system. The goal of resynchronization is to introduce new synchronizations in such a way that the number of additional synchronizations that become redundant exceeds the number of new synchronizations that are added, and thus the net synchronization cost is reduced.
+<p>
+First, we define the general form of our resynchronization problem; we show that it is NP hard by establishing a correspondence to the set covering problem; and based on this correspondence, we specify how an arbitrary heuristic for set covering can be applied to yield a heuristic for resynchronization. Next, we show that for a certain class of applications, optimal resynchronizations can be computed efficiently by means of pipelining. These pipelined solutions, however, can suffer from significantly increased latency, and this motivates the latency-constrained resynchronization problem, which we address for a restricted class of graphs that permit efficient computation of latency. Again using a reduction from set covering (although the construction is significantly different), we show that latency-constrained resynchronization is NP hard. However, we show that for the special case in which there are only two processors, latency-constrained resynchronization can be solved in polynomial time. We also present a heuristic for latency-constrained resynchronization, and through a practical example, we demonstrate that this heuristic gives an efficient means for systematically trading off between synchronization overhead and latency.
+<br><br>
+1. P. L. Shaffer, "Minimization of Interprocessor Synchronization in Multiprocessors with Shared and Private Memory," International Conference on Parallel Processing, 1989.
+</body>
+</html>
+
