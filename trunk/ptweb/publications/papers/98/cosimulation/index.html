@@ -1,31 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<HTML>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
-<head><title>
-Software Timing Analysis Using SW/HW Cosimulation and Instruction Set Simulator
-</title></head>
-<body>
-<CENTER>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
 <br>
 <h1>
 Software Timing Analysis Using SW/HW Cosimulation and Instruction Set Simulator
-</h1></CENTER>
-<CENTER>
+</h1></center>
+<center>
 Jie Liu, Marcello Lajolo, and Alberto Sangiovanni-Vincentelli
 </b>
 <br><br>
 <I>Proc. of 6th International Workshop on Hardware/Software Codesign </I>
 ,Seattle, Washington, USA, March 1998.
-<br><BR>
-</CENTER>
-<p><CENTER>
-<a href="Cosimulation.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
-<a href="Cosimulation.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
-</CENTER>
+<br><br>
+</center>
+<p><center>
+<a href="Cosimulation.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></a>
+<a href="Cosimulation.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
+</center>
 <h2>ABSTRACT</h2>
 Timing analysis for checking satisfaction of constraints is a crucial problem in real-time system design. In some current approaches, the delay of software modules is precalculated by a software performance estimation method, which is not accurate enough for hard real-time systems and complicated designs. In this paper, we present an approach to integrate a clock-cycle-accurate instruction set simulator (ISS) with a fast event-based system simulator. By using the ISS, the delay of events can be measured instead of estimated. An interprocess communication architecture and a simple protocol are designed to meet the requirement of robustness and flexibility. A cached refinement scheme is presented to improve the performance at the expense of accuracy. The scheme is especially effective for applications in which the delay of basic blocks is approximately data-independent. We also discuss the implementation issues by using the Ptolemy simulation environment and the ST20 simulator as an example.
 
 
 <ADDRESS>Send comments to Jie Liu at liuj at eecs berkeley edu .</ADDRESS>
-</body></html>
+<!-- #include virtual="/ssi/bottom.htm" -->

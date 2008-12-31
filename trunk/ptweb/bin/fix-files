@@ -135,6 +135,7 @@ doit() {
 EGREPMATCH='"main.htm"|/main.htm"' 
 LOGMESSAGE="link to index.htm, not main.htm" 
 
+
 doit() {
 	sed -e 's@\(<img [^>]*\)\(/*\)>@\1 hspace="25"/>@g' \
 	    $file > /tmp/fix-files.tmp
@@ -143,6 +144,19 @@ doit() {
 EGREPMATCH='<img .*>$'
 LOGMESSAGE="Added hspace=25"
 
+
+doit() {
+       awk '{ if ($0 ~ /ssi\/top.htm/) {
+                  print "<!--#include virtual=\"/ssi/toppremenu.htm\" -->"
+                  print "<!--#include virtual=\"/publications/toc.htm\" -->"
+                  print "<!--#include virtual=\"/ssi/toppostmenu.htm\" -->"
+              } else {
+                  print $0
+              }
+            }' $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='/ssi/top.htm'
+LOGMESSAGE="Use pubs specific toc"
+
 fixit
-
-

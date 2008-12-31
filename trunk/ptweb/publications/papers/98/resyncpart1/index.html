@@ -1,13 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<HTML>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
-<head><title>
-Resynchronization for multiprocessor DSP implementation - part 1: Maximum-throughput
-resynchronization.
-</title></head>
-<body>
-<CENTER>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
 
 
 
@@ -16,22 +18,22 @@ resynchronization.
 <h1>
 Resynchronization for multiprocessor DSP implementation - part 1: Maximum-throughput
 resynchronization.
-</h1></CENTER>
-<CENTER>
+</h1></center>
+<center>
 S. S. Bhattacharyya, S. Sriram, and E. A. Lee
 </b>
 <br><br>
 
 Tech. Rep., Digital Signal Processing Laboratory, University of
 Maryland, College Park, July 1998.  Revised from 
-<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/96/resync1" target="_top">Technical Memorandum UCB/ERL 96/55, Electronics Research Laboratory, University of California at Berkeley, October, 1996. </A>
+<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/96/resync1" target="_top">Technical Memorandum UCB/ERL 96/55, Electronics Research Laboratory, University of California at Berkeley, October, 1996. </a>
 
-<br><BR>
-</CENTER>
-<p><CENTER>
-<a href="resyncpart1.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
-<a href="resyncpart1.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
-</CENTER>
+<br><br>
+</center>
+<p><center>
+<a href="resyncpart1.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></a>
+<a href="resyncpart1.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
+</center>
 <h2>ABSTRACT</h2>
 This paper introduces a technique, called resynchronization, for reducing synchronization overhead in multiprocessor implementations of digital signal processing (DSP) systems. The technique applies to arbitrary collections of dedicated, programmable or configurable processors, such as combinations of programmable DSPs, ASICS, and FPGA subsystems. Thus, it is particularly well suited to the evolving trend towards heterogeneous single-chip multiprocessors in DSP systems. Resynchronization exploits the well-known observation [1] that in a given multiprocessor implementation, certain synchronization operations may be redundant in the sense that their associated sequencing requirements are ensured by other synchronizations in the system. The goal of resynchronization is to introduce new synchronizations in such a way that the number of additional synchronizations that become redundant exceeds the number of new synchronizations that are added, and thus the net synchronization cost is reduced.
 <p> Our study is based in the context of self-timed execution of iterative dataflow specifications of digital signal processing applications. An iterative dataflow specification consists of a dataflow representation of the body of a loop that is to be iterated infinitely; dataflow programming in this form has been employed extensively, particularly in the context of software and system-level design for digital signal processing applications. Self-timed execution refers to a combined compile-time/run-time scheduling strategy in which processors synchronize with one another only based on inter-processor communication requirements, and thus, synchronization of processors at the end of each loop iteration does not generally occur. 
@@ -43,4 +45,4 @@ After reviewing our model for the analysis of synchronization overhead, we defin
 </OL>
 <br><br>
 <ADDRESS>Send comments to Edward A. Lee at eal at eecs berkeley edu .</ADDRESS>
-</body></html>
+<!-- #include virtual="/ssi/bottom.htm" -->

@@ -1,98 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Praveen Murthy's Thesis
-</title>
-</head>
- <body<p>
-<a href="http://ptolemy.eecs.berkeley.edu/~murthy/" target="_top">Praveen Kumar Murthy</a>
-<p>
-Doctor of Philosophy in Electrical Engineering and Computer Science
-University of California at Berkeley
-<p>
-Professor Edward A. Lee, Chair
-<p>
-</center>
-<CENTER>
-<a href="murthy.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[PS]"></A>
-<a href="murthy.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
 
-</CENTER>
-
-<h2> Abstract </h2>
-
-
-In this thesis, we present various scheduling techniques for programs
-expressed as Synchronous Dataflow (SDF) and Multidimensional
-Synchronous dataflow graphs.  Synchronous dataflow has proven
-efficient as a specification model for block-diagram based programming
-environments for signal processing. Two key reasons for its popularity
-are that a) static schedules can be constructed at compile time, thus
-eliminating the overhead due to dynamic scheduling, and b) it models
-multirate signal processing application very naturally and
-intuitively. The first property is particularly important in
-environments where code-synthesis for embedded processors is
-desirable, since embedded signal processing applications have rigid
-throughput requirements in order to meet hard- real-time
-constraints. Multidimensional Synchronous Dataflow (MDSDF) is an
-extension of SDF to multiple dimensions; in this model, applications
-such as image and video signal processing, which operate on
-multidimensional signal spaces, are more naturally modeled and
-specified than in SDF.
-
-<p> The amount of on-chip memory available on embedded processors is
-often severely limited. Adding off-chip memory is usually not an
-option because it entails a speed penalty, it increases overall system
-cost and size, and increases power requirements. Thus, when generating
-software implementations from SDF specifications for a uniprocessor,
-the scheduling problem of minimizing code size and buffer memory size
-becomes crucial. If the scheduling is not done carefully, the blowup
-in the size of the implementation can preclude implementation on the
-processor. Previous techniques have focused on scheduling to minimize
-code size. However, this neglected the buffer memory usage of the
-schedule; in this thesis, we develop techniques that jointly minimize
-for code size and buffer-memory size of the software
-implementation. We give three polynomial-time algorithms: a dynamic
-programming algorithm that is used as a post-optimization step, and
-two heuristics that use different approaches to constructing these
-schedules. The general problem is shown to be NP-complete, thus
-justifying the use of heuristics. An extensive experimental study is
-given to show the efficacy of all these techniques.  <p>
-
-We extend these scheduling results to MDSDF specifications. We then
-tackle a problem of a different type. A multidimensional signal can be
-sampled in many different ways. A straightforward extension of
-one-dimensional sampling results in the so-called rectangular sampling
-structure, where the samples lie on a rectangular grid. However, a
-more general sampling structure is a geometrical lattice; sampling
-lattices that are not rectangular can have many advantages in certain
-applications. For example, a signal sampled on a non-rectangular
-lattice can have a lower sampling density than one sampled on an
-equivalent rectangular lattice. For real-time processing of
-multidimensional signals, a lower sampling density means fewer samples
-to process in a given time interval. The standard MDSDF model suffers
-from the inability to model multidimensional systems sampled on
-arbitrary sampling lattices; hence, we give an extension of MDSDF that
-is capable of modeling such systems. The model we give preserves the
-property of static, compile-time schedulability. However, constructing
-such schedules requires the solution to some challenging problems. In
-particular, we show that an augmented set of balance equations have to
-be solved simultaneously in the extended model. The additional
-equations are quite different from the usual balance equations in SDF
-and MDSDF; they involve computing so-called "integer volumes" of
-parallelepipeds. This computation turns out to be an interesting
-number-theoretic problem, and we present several approaches for
-solving it. Finally, we present a practical example of a video
-sampling structure conversion system to show the usefulness of the
-generalized MDSDF model.
-
-<p>Citation:
-<br>
-Memorandum No. UCB/ERL M96/79, Electronics Research Laboratory,
-College of Engineering, University of California, Berkeley, Ca 94720,
-December 10, 1996.
-
-</body>
-</html>
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->

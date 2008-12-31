@@ -1,11 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <title>Resynchronization for Multiprocessor DSP Systems</title>
-</head>
-<body>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
 <center>
 <h1>Resynchronization for Multiprocessor DSP Systems</h1>
 </center>
@@ -15,18 +18,16 @@ by Shuvra S. Bhattacharyya, Sundararajan Sriram and Edward A. Lee
 <br><br>
 <center>
 <i>IEEE Transactions on Circuit and Systems - I: Fundamental Theory and Applications</i>, Vol.47, No. 11, November, 2000.
-<BR>
-</CENTER>
+<br>
+</center>
 <p>
-<CENTER>
-<a href="resync.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
-</CENTER>
+<center>
+<a href="resync.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
+</center>
 <p>
 <h2>ABSTRACT</h2>
 
 This paper introduces a technique, called resynchronization, for reducing synchronization overhead in multiprocessor implementations of digital signal processing (DSP) systems. The technique applies to arbitrary collections of dedicated, programmable or configurable processors, such as combinations of programmable DSPs, ASICS, and FPGA subsystems. Thus, it is particularly well-suited to the evolving trend towards heterogeneous single-chip multiprocessors in DSP systems. Resynchronization exploits the well-known observation [1] that in a given multiprocessor implementation, certain synchronization operations may be redundant in the sense that their associated sequencing requirements are ensured by other synchronizations in the system. The goal of resynchronization is to introduce new synchronizations in such a way that the number of original synchronizations that become redundant exceeds the number of new synchronizations that are added, and thus, the net synchronization cost is reduced. Our study is based in the context of self-timed execution for iterative dataflow specifications of DSP applications. An iterative dataflow specification consists of a dataflow representation of the body of a loop that is to be iterated indefinitely; dataflow programming in this form has been employed extensively in the DSP domain.
 <p>
 [1] P. L. Shaffer, "Minimization of Interprocessor Synchronization in Multiprocessors with Shared and Private Memory," <i>International Conference on Parallel Processing, 1989</i>.
-</body>
-</html>
-
+<!-- #include virtual="/ssi/bottom.htm" -->
