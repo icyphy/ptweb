@@ -1,0 +1,50 @@
+<!-- $Id$ -->
+<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+Algorithm Analysis and Mapping Environment for Adaptive Computing Systems
+</title></head>
+<body>
+<CENTER>
+<br>
+<h1>
+Algorithm Analysis and Mapping Environment for Adaptive Computing Systems
+</h1></CENTER>
+<CENTER>
+<EM>Presented at the Second Annual Workshop on High Performance Embedded Computing</EM><br>
+MIT Lincoln Labs, Lexington, MA<br>
+September 1998<br><br>
+<a href="http://www.bit-net.com/~pauer" target="_top">Eric K. Pauer,</a>
+Cory S. Myers, Paul D. Fiore, John M. Smith, Christopher M. Crawford<br>
+<a href="http://www.sanders.com" target="_top">Sanders, a Lockheed Martin Company</A><br>
+
+<a href="http://ptolemy.eecs.berkeley.edu/~eal" target="_top">Edward A. Lee,</a>
+James Lundblad, <a href="http://ptolemy.eecs.berkeley.edu/~cxh" target="_top">Christopher X. Hylands</a><br> 
+University of California, Berkeley<br>
+Department of Electrical Engineering and Computer Science<br>
+</b>
+<br><br>
+</CENTER>
+<p><CENTER>
+<a href="ACSmapping.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></A>
+<a href="ACSmapping.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+<h2>ABSTRACT</h2>
+The objective of this project is to develop an integrated algorithm analysis and mapping environment particularly tailored for signal processing applications on Adaptive Computing Systems (ACS). Current development environments for ACS do not provide algorithm designers with the analysis capabilities that they need to modify their algorithms for reconfigurable hardware. Existing development environments do not take advantage of the structured computational models available for signal processing. Additionally, current ACS development environments are closed and cannot easily incorporate additional information available from previous designs. In this project, we are overcoming these limitations and developing an ACS development environment that improves the way algorithm developers map their algorithms to Adaptive Computing Systems. This environment will provide analysis capabilities to help the designer understand implementation considerations, and will take advantage of the special structure of signal processing algorithms. The environment will also be open and extensible so that its capabilities can grow. In the end, we will demonstrate that the resulting environment allows a designer to map signal processing algorithms to an Adaptive Computing System an order of magnitude faster than is currently possible.  As of September 1998, we are currently 11 months into a 30-month program, sponsored by DARPA/ITO.
+<p>
+Our approach to building a design environment for ACS has been to focus on three areas of capability critical to the success of adaptive computing and to integrate these capabilities into an open, extensible software framework. The development of the three areas, algorithm analysis, algorithm mapping, and smart generators, are taking advantage of the special characteristics of signal processing algorithms to make progress. These capabilities are being implemented on top of the Ptolemy signal processing algorithm and implementation environment from the University of California, Berkeley (see http://ptolemy.eecs.berkeley.edu).
+<p>
+Algorithm implementation on Adaptive Computing Systems requires careful consideration of the costs of operations as well as significant work to determine the appropriate signal representation. The algorithm analysis capabilities that are being developed on this program will reduce the effort required to find good algorithms for implementation on ACS. The environment will eventually provide mathematicians with information about operation counts, including adds, multiplies, and memory accesses, and with analyses of numerical issues relating to implementation in Adaptive Computing Systems. Our capabilities will include analysis of algorithms at the bit level to determine appropriate finite precision implementations, statistical analysis, symmetry detection, and error propagation. With these capabilities an algorithm designer will be able to quickly determine the appropriate number of bits for signal representation and to quantify the performance of various implementation choices.
+<p>
+Signal processing algorithm mapping for ACS involves the assignment of functions to different processing elements.  Current systems either require hand mapping or use general logic partitioning methods that do not take advantage of the structure of signal processing algorithms. On this program we are developing mapping techniques for ACS tailored to signal processing. These capabilities include performance analysis, partitioning assistance, and automatic scheduling and partitioning. The scheduling and partitioning functions will recognize the coarse-grain nature of signal processing dataflow graphs to optimize partitioning for ACS.
+<p>
+Current methods for logic generation on Adaptive Computing Systems are either built around libraries of functions or around general-purpose logic synthesis. As part of this effort, we are implementing "smart generators" that are extensions of the concept of a parameterized library. These generators will be tailored to signal processing functions and will include rules that capture specific implementation techniques and trade-offs. For example, a smart generator for a complex multiplier is able to trade between a three-multiplier implementation and a four-multiplier implementation according to area and latency constraints. Additionally, we are providing generators for both hardware and software interfaces to the Adaptive Computing System.
+<p>
+All of the algorithm analysis and mapping capabilities to be developed on this program will be captured in a set of software tools. These tools will be built on the existing Ptolemy signal representation and analysis system from UC Berkeley. Ptolemy provides an open software environment with well-defined interfaces among its functional areas. Ptolemy has been implemented in C++ using a well documented, object-oriented software architecture.  In this project, we are extending Ptolemy by developing a new ACS domain that separates the interface specification from implementation for each signal processing functional block. The algorithms of interest to this project are represented by dataflow graphs comprised of these functional block, which follow a synchronous dataflow model of computation.  We are using a Corona/Core architecture, where each block has an common interface known as the Corona, and one or more implementations, known as the Cores.  A retargeting mechanism allows the users change Cores and hence implementation, which moves the dataflow graph between various simulation models (floating point, fixed point) and implementations (C code, VHDL code, etc.).  This library of Corona/Core functional blocks is used to represent multiple implementations of signal processing operations for ACS and to share data among functions.
+<p>
+Building on Ptolemy will allow both rapid insertions of our new capabilities as well as the ability for additional researchers to build their own capabilities and libraries. This approach has been used successfully by groups outside UC Berkeley who regularly extend Ptolemy. This program will release software every six months, with the first ACS domain implementation released in June 1998. Each software release will be followed by a demonstration of implementing a significant military signal processing algorithm on ACS hardware.  We are currently planning a digital communication demonstration, a signal detection and classification demonstration, an image formation/automatic target recognition demonstration, and finally a demonstration using a government supplied test bed. 
+
+
+<ADDRESS>Send comments to Edward A. Lee at eal at eecs berkeley edu .</ADDRESS>
+</body></html>

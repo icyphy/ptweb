@@ -1,0 +1,103 @@
+<!-- $Id$ -->
+.<HTML>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head><title>
+Resynchronization
+</title></head>
+<BODY><CENTER>
+
+<h1>
+Resynchronization of Multiprocessor Schedules<br>
+Part I: Fundamental Concepts and Unbounded Latency Analysis<br>
+Part II: Latency Constrained Resynchronization
+</h1></CENTER>
+<CENTER>
+by Shuvra S. Bhattacharyya, Hitachi America,<br>
+Sundararajan Sriram, Texas Instruments, and<br>
+Edward A. Lee, U. C. Berkeley
+<br><br>
+<h1>Part I: Fundamental Concepts and Unbounded Latency Analysis</h1>
+Memorandum UCB/ERL M96/55, Electronics Research Laboratory,
+U. C. Berkeley, October, 1996.
+<br>
+</CENTER>
+<p><CENTER>
+<a href="resynch1.erl.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+
+
+This paper introduces a technique, called resynchronization, for
+reducing synchronization overhead in embedded multiprocessor
+implementations. The technique exploits the well-known observation [35]
+that in a given multiprocessor implementation, certain synchronization
+operations may be redundant in the sense that their associated
+sequencing requirements are ensured by other synchronizations in the
+system. The goal of resynchronization is to introduce new synchronizations in such a way that the number of additional synchronizations
+that become redundant exceeds the number of new synchronizations that
+are added, and thus the net synchronization cost is reduced.
+<p>
+Our study is based in the context of self-timed execution of iterative
+dataflow programs. An iterative dataflow program consists of a dataflow
+representation of the body of a loop that is to be iterated infinitely;
+dataflow programming in this form has been employed extensively,
+particularly in the context of software for digital signal processing
+applications. Self-timed execution refers to a combined
+compile-time/run-time scheduling strategy in which processors
+synchronize with one another only based on inter-processor
+communication requirements, and thus, synchronization of processors at
+the end of each loop iteration does not generally occur.
+<p>
+After reviewing our model for the analysis of synchronization overhead,
+we define the general form of our resynchronization problem; we show
+that optimal resynchronization is intractable by establishing a
+correspondence to the set covering problem; and based on this correspondence, we develop an efficient heuristic for resynchronization. Also,
+we show that for a broad class of iterative dataflow graphs, optimal
+resynchronizations can be computed by means of an efficient
+polynomial-time algorithm. We demonstrate the utility of our
+resynchronization techniques through a practical example of a music
+synthesis system. Introduction.
+
+<center>
+<h1>Part II: Latency Constrained Resynchronization</h1>
+Memorandum UCB/ERL M96/56, Electronics Research Laboratory,
+U. C. Berkeley, October, 1996.
+<br>
+</CENTER>
+<p><CENTER>
+<a href="resynch2.erl.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</CENTER>
+
+<p>
+The companion paper [7] introduced the concept of resynchronization, a
+post-optimization for static multiprocessor schedules in which
+extraneous synchronization operations are introduced in such a way that
+the number of original synchronizations that consequently become
+redundant significantly exceeds the number of additional
+synchronizations. Redundant synchronizations are synchronization
+operations whose corresponding sequencing requirements are enforced com
+pletely by other synchronizations in the system. The amount of run-time
+overhead required for synchronization can be reduced significantly by
+eliminating redundant synchronizations [5, 32].
+<p>
+Thus, effective resynchronization reduces the net synchronization
+overhead in the implementation of a multiprocessor schedule, and
+improves the overall throughput. However, since additional
+serialization is imposed by the new synchronizations, resyn
+chronization can produce significant increase in latency. The companion
+paper [7] develops fundamental properties of resynchronization and
+studies the problem of optimal resynchronization under the assumption
+that arbitrary increases in latency can be tolerated
+("unbounded-latency resynchronization"). Such an assumption is valid,
+for example, in a wide variety of simulation applications. This paper
+addresses the problem of computing an optimal resynchronization among
+all resynchronizations that do not increase the latency beyond a
+prespecified upper bound . Our study is based in the context of
+self-timed execution of iterative dataflow programs, which is an
+implementation model that has been applied extensively for digital
+signal processing systems.
+<p>
+<hr>
+<p>
+<ADDRESS>Send comments to Shuvra S. Bhattacharyya at shuvra at halsrl com .</ADDRESS>
+</body></html>
