@@ -1,0 +1,33 @@
+<!-- $Id$ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Static Scheduling of Synchronous Data Flow Programs for Digital Signal Processing</title>
+</head>
+<body>
+<center>
+<h1>Static Scheduling of Synchronous Data Flow Programs for Digital Signal Processing</h1>
+</center>
+<center>
+Edward A. Lee and David G. Messerschmitt
+</center>
+<br>
+<center>
+<i>IEEE Transactions on Computers,</i> Vol. C-36, No. 1, January, 1987.
+<BR>
+</CENTER>
+<p>
+<CENTER>
+<a href="staticscheduling.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.
+berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A><br>
+</CENTER>
+<p>
+<h2>ABSTRACT</h2>
+Large grain data flow (LGDF) programming is natural and convenient for describing digital signal processing (DSP) systems, but its runtime overhead is costly in real time or cost-sensitive applications. In some situations, designers are notwilling to squander computing resources for the sake of programmer convenience. This is particularly true when the target machine is a programmable DSP chip. However, the runtime overhead inherent in most LGDF implementations is not required for most signal processing systems because such systems are mostly <i>synchronous</i> (in the DSP sense). <i>Synchronous data flow</i> (SDF) differs from traditional data flow in that the amount of data produced and consumed by a data flow node is specified <i>a priori</i> for each input and output. This is equivalent to specifying the relative sample rates in signal processing system. This means that the scheduling of SDF nodes need not be done at runtime, but can be done at compile time (statically), so the runtime overhead evaporates. The sample rates can all be different, which is not true of most current data-driven digital signal processing programming methodologies. Synchronous data flow is closely related to <i>computation graphs</i>, a special case of <i>Petri nets</i>.
+<p>
+This self-contained paper develops the theory necessary to statically schedule SDF programs on single or multiple processors. A class of static (compile time) scheduling algorithms is proven valid, and specific algorithms are given for scheduling SDF systems onto single or multiple processors.
+
+</body>
+</html>
+
