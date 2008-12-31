@@ -1,0 +1,60 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Renesting Single Appearance Schedules to Minimize Buffer Memory</title>
+</head>
+<body>
+<h1>Renesting Single Appearance Schedules to Minimize Buffer Memory</h1>
+
+<center>
+Shuvra S. Bhattacharyya, Praveen K. Murthy and Edward A. Lee
+<br><br>
+UCB/ERL Technical Memorandum UCB/ERL M95/43, Electronics Research Lab
+<br>
+UC Berkeley, CA 94720, April, 1 1995. 
+<br><br>
+</center>
+<p>
+<center>
+<a href="erl-95-43.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border="0" alt="[PDF]"></A>
+</center>
+<p>
+<h2>ABSTRACT</h2>
+
+Minimizing memory requirements for program and data are critical
+objectives when synthesizing software for embedded DSP
+applications. In prior work, it has been demonstrated that for
+graphical DSP programs based on the widely-used synchronous dataflow
+model, an important class of minimum code size implementations can be
+viewed as parenthesizations of lexical orderings of the computational
+blocks. Such a parenthesization corresponds to the hierarchy of loops
+in the software implementation. In this paper, we present a dynamic
+programming technique for constructing a parenthesization that
+minimizes data memory cost from a given lexical ordering of a
+synchronous dataflow graph. For graphs that do not contain delays on
+the edges, this technique always constructs a parenthesization that
+has minimum data memory cost from among all parenthesizations for the
+given lexical ordering. When delays are present, the technique may
+make refinements to the lexical ordering while it is computing the
+parenthesization, and the data memory cost of the result is guaranteed
+to be less than or equal to the data memory cost of all valid
+parenthesizations for the initial (input) lexical ordering.
+
+ <p>Thus, our dynamic programming technique can be used to
+post-optimize the output for any algorithm that schedules SDF graphs
+into minimum code size loop hierarchies. On several practical
+examples, we demonstrate that significant improvement can be gained by
+such post-optimization when applied to two scheduling techniques that
+have been developed earlier. That is, the result of each scheduling
+algorithm combined with the post-optimization often requires
+significantly less data memory than the result of the scheduling
+algorithm without post-optimization. We also present an adaptation of
+our dynamic programming technique for post-optimizing an arbitrary
+(not necessarily minimum code size) schedule to optimally reduce the
+code size.
+
+</body>
+</html>
+
