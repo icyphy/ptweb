@@ -1,0 +1,54 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>Compile-Time Scheduling of Dataflow Program graphs with Dynamic Constructs</title>
+</head>
+<body>
+<h1>Compile-Time Scheduling of Dataflow Program graphs with Dynamic Constructs</h1>
+
+<center>
+S. Ha
+<br><br>
+Ph.D. dissertation, University of California at Berkeley
+<br>
+1992
+<br><br>
+</center>
+<p>
+<center>
+<a href="shaThesis.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</center>
+<p>
+<h2>ABSTRACT</h2>
+Scheduling of dataflow graphs onto parallel processors consists of
+assigning actors to processors, ordering the execution of actors
+within each processor, and firing the actors at particular times. Many
+scheduling strategies do at least one of these operations at compile
+time to reduce run-time cost of scheduling activities. In this thesis,
+we classify four scheduling strategies, (1) fully dynamic, (2)
+static-assignment, (3) self-timed, and (4) fully static. These are
+ordered in decreasing run-time cost. Optimal or near-optimal
+compile-time decisions require deterministic, data-independent program
+behavior known to the compiler. Thus, moving from strategy number (1)
+towards (4) either sacrifices optimality, decreases generality by
+excluding certain program constructs, or both. This thesis proposes
+scheduling techniques valid for strategies (2), (3), and (4) for
+dataflow graphs with dynamic constructs such as if-then-else,
+for-loop, do-while-loop, and recursion; for such graphs, although it
+is impossible to deterministically optimize the schedule at compile
+time, reasonable decisions can be made. For many applications, good
+compile-time decisions remove the need for dynamic scheduling or load
+balancing. We assume a known statistical distribution for the dynamic
+behavior of the constructs, and show how a compile-time decision about
+assignment and/or ordering as well as timing can be made. The
+criterion we use is to minimize the expected total idle time due to
+the construct; in certain cases, this will also minimize the expected
+makespan of the schedule. We will also show how to determine the
+number of processors that should be assigned to the construct. The
+method is illustrated with several programming examples, yielding very
+promising results.
+</body>
+</html>
+

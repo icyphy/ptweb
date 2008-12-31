@@ -1,0 +1,27 @@
+<!-- $Id$ -->
+<html>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../../../lib/default.css" rel="stylesheet" type="text/css">
+<head>
+<title>The Token Flow Model</title>
+</head>
+<body>
+<h1>The Token Flow Model</h1>
+
+<center>
+by J.T. Buck and Edward A. Lee
+<br><br>
+Presented at <I>Data Flow Workshop</I>, Hamilton Island, Australia
+May, 1992.  Also, in <I>Advanced Topics in Dataflow Computing and Multi-threading</I>, ed. Lubomir Bic, Guang, Gao, and Jean-Luc Gaudiot, IEEE Computer Society Press, 1993.
+<br><br>
+</center>
+<p>
+<center>
+<a href="tokenFlowAus.pdf" target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></A>
+</center>
+<p>
+<h2>ABSTRACT</h2>
+This paper reviews and extends an analytical model for the behavior of dataflow graphs with data-dependent control flow. The number of tokens produced or consumed by each actor is given as a symbolic function of the Booleans in the system. Long-term averages can be analyzed to determine consistency of token flow rates. Short-term behavior can be analyzed to construct an annotated schedule, or a static schedule that annotates each firing of an actor with the Boolean conditions under which that firing occurs. Necessary and sufficient conditions for bounded-length schedules, as well as sufficient conditions for determining that a dataflow graph can be scheduled in bounded memory are given. Annotated schedules can be used to generate efficient implementations of the algorithms described by the dataflow graphs.
+</body>
+</html>
+
