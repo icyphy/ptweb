@@ -159,4 +159,16 @@ doit() {
 EGREPMATCH='/ssi/top.htm'
 LOGMESSAGE="Use pubs specific toc"
 
+doit() {
+	sed -e 's@ target="body"@@g' \
+        -e 's@ target="main"@@g' \
+        -e 's@ target="_top"@@g' \
+        -e 's@code>g@code>@g' \
+	    $file > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='target='
+LOGMESSAGE="remove target="
+
+
 fixit
