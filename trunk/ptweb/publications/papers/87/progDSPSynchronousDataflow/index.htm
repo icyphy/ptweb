@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Static Scheduling of Synchronous Data Flow Programs for Digital Signal Processing</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
+<h1>Static Scheduling of Synchronous Data Flow Programs for Digital Signal Processing</h1>
+</center>
+<center>
+Edward A. Lee and David G. Messerschmitt
+</center>
+<br>
+<center>
+<i>IEEE Transactions on Acoustics, Speech and Signal Processing,</i> Vol. 35, No. 9, September, 1987.
+<br>
+</center>
+<p>
+<center>
+<a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?isnumber=26214&arnumber=1165275&count=22&index=3"><img hspace=0 src="http://ptolemy.eecs.
+berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a><br>
+</center>
+<p>
+<h2>ABSTRACT</h2>
+In the companion paper [l], a programmable architecture
+for digital signal processing is proposed that requires the partitioning
+of a signal processing task into multiple programs that execute concurrently.
+In this papera, synchronous dataflow programming method
+is proposed for programming this architecture, and programming examples
+are given.
+<p>
+Because of its close connection with block diagrams, data flow programming
+is natural and convenient for describing digital signal processing
+(DSP) systems. Synchronous dataflow is a special case of data
+flow (large grain or atomic) in which the number of tokens consumed
+or produced each time a node is invoked is specified for each input or
+output of each node. A node (or block) is,asynchronous if these numbers
+cannot be specified a priori. A program described as a synchronous
+data flow graph can be mapped onto parallel processors at compile
+time (statically), so the run time overhead usually associated with data
+flow implementations evaporates. Synchronous data flow is therefore
+an appropriate paradigm for programming high-performance real-time
+applications on a parallel processor like the processors in the companion
+paper. The sample rates can all be different, which is not true of
+most current data-driven digital signal processing programming methodologies.
+Synchronqus data flow is closely related to computation
+graphs, a special case of Petri nets.
+<p>
+In this paper, we outline the programming methodology by illustrating how nodes are defined, how data passed between nodes are buffered, and how a compiler can map the nodes onto parallel processors.  We give an example of a typically complicated unstructured application: a voiceband data modem. For this example, using a natural partition of the prqgram into functional blocks, the scheduler is able to use up to seven parallel processors with 100 percent utilization. Beyond seven processors, the utilization drops because the scheduler is limited by a recursive computation, the equalizer tap update loop. No attempt has been made to modify the algorithms or their description to make them better suited for parallel execution. This example, therefore, illustrates that modest amounts of concurrency can be effectively used without particular effort on the part of the programmer
+<!-- #include virtual="/ssi/bottom.htm" -->
