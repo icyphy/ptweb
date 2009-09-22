@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Architectures for statically scheduled dataflow</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
+<h1>Architectures for statically scheduled dataflow</h1>
+</center>
+<center>
+Edward A. Lee and Jeffery C. Bier
+</center>
+<br>
+<center>
+<a href="http://dx.doi.org/10.1016/0743-7315(90)90034-M"> <i>Joournal of Parallel Distributed Computing</a>,</i>  pp. 333-348, Vol. 10, Issue 4, December, 1990.
+</center>
+<br>
+<p>
+<h2>ABSTRACT</h2> 
+When dataflow program graphs can be statically scheduled, little run-time overhead (software or hardware) is necessary. This paper describes a class of parallel architectures consisting of von Neumann processors and one or more shared memories, where the order of shared-memory accesses is determined at compile time and enforced at run time. The architecture is extremely lean in hardware, yet for a set of important applications it can perform as well as any shared-memory architecture. Dataflow graphs can be mapped onto it statically. Furthermore, it supports shared data structures without the run-time overhead of I-structures. A software environment has been constructed that automatically maps signal processing applications onto a simulation of such an architecture, where the architecture is implemented using Motorola DSP96002 microcomputers. Static (compile-time) scheduling is possible for a subclass of dataflow program graphs where the firing pattern of actors is data independent. This model is suitable for digital signal processing and some other scientific computation. It supports recurrences, manifest iteration, and conditional assignment. However, it does not support true recursion, data-dependent iteration, or conditional evaluation. An effort is under way to weaken the constraints of the model to determine the implications for hardware design.
+<!-- #include virtual="/ssi/bottom.htm" -->
