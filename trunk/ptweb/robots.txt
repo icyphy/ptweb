@@ -27,7 +27,10 @@ Disallow: /java/ptplot5.1
 Disallow: /java/ptplot5.1p1
 Disallow: /java/ptplot5.2
 Disallow: /java/ptplot5.3
+Disallow: /java/ptplot5.4p1
 Disallow: /java/ptplot5.5-beta
+Disallow: /java/ptplot5.6
+Disallow: /java/ptplot5.6-devel
 Disallow: /ptolemyII/ptII0.1alpha
 Disallow: /ptolemyII/ptII0.2
 Disallow: /ptolemyII/ptII0.2/ptII0.2devel
