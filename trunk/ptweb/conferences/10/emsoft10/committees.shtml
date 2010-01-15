@@ -1,0 +1,249 @@
+ 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html> 
+ 
+<head> 
+<title>EMSOFT 2010</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ 
+<script language="JavaScript"> 
+if((navigator.appName.indexOf("Explorer") >= 0))
+document.writeln('<link rel=stylesheet href="layout/explorer.css" type="text/css">');
+if((navigator.appName.indexOf("Mozilla") >= 0) || (navigator.appName.indexOf("Netscape") >= 0))
+document.writeln('<link rel=stylesheet href="layout/netscape.css" type ="text/css">');
+</script> 
+ 
+</head> 
+ 
+<body> 
+ 
+ 
+ 
+<center> 
+<table width="900" border="0" cellspacing="0" cellpadding="0"> 
+  <tr> 
+    <!--td width="150"><a href="http://www.esweek.org"><img border="0" src="images/logo.gif" 
+    width="150" height="150"></a></td--> 
+ 
+    <td width="600"><img src="images/emsoft10.jpg" width="600" height="150"></td> 
+    <td width="300"><img src="images/grandcanyon_northrim3.jpeg" width="300" height="150"></td>
+  </tr> 
+  <tr> 
+    <td valign="top" colspan="1"><table width="100%" cellpadding="10" border="0"><tr><td valign="top"> 
+ 
+ 
+ 
+ 
+<h3> Program Chairs </h3> 
+ 
+<ul> 
+ 
+  <li> <a href="http://www.cs.columbia.edu/~luca/">Luca Carloni</a>, Columbia University
+      
+  <li> <a href="http://www-verimag.imag.fr/~tripakis">Stavros Tripakis</a>,
+      University of California, Berkeley
+</ul> 
+ 
+ 
+<h3> Program Committee</h3> 
+ 
+TBA
+
+<!--
+<ul> 
+ 
+<li> <a href="http://www.cis.upenn.edu/~alur/">Rajeev   Alur </a>, University of Pennsylvania, USA
+<li> <a href="http://domino.research.ibm.com/comm/research_people.nsf/pages/bacon.index.html">David F. Bacon </a>, IBM , USA
+<li> <a href="http://www.lsv.ens-cachan.fr/~bouyer/">Patricia Bouyer </a>, LSV, ENS-Cachan, France
+<li> <a href="http://www.ics.uci.edu/~eli/">Elaheh   Bozorgzadeh </a>, UC Irvine, USA
+<li> <a href="http://www.cs.columbia.edu/mice/persons/showPerson.php?personID=7597&base=%2Fmice%2Fpersons%2F">Luca  Carloni </a>, Columbia University, USA
+<li> <a href="http://www.ece.uci.edu/~chou/">Pai   Chou </a>, UC Irvine, USA
+<li> Vincent  David, CEA-LIST, France
+<li> <a href="http://www.inria.fr/personnel/Robert.de_Simone.fr.html"> Robert   De Simone </a>, Inria, France
+<li> <a href="http://www.ics.uci.edu/~dutt/">Nikil Dutt </a>, UC Irvine, USA
+<li> <a href="http://www.ida.liu.se/~petel/">Petru    Eles </a>, Linkoping University, Sweden
+<li> <a href="http://www.ida.ing.tu-bs.de/index.php?ernst">Rolf  Ernst </a>, TU  Braunschweig, Germany
+<li> <a href="http://esg.uwaterloo.ca/fischmeister.html">Sebastian   Fischmeister </a>, University of Waterloo, Canada
+<li> <a href="http://www.di.univaq.it/inverard/paola.html">Paola Inverardi </a>, University of L'Aquila, Italy
+<li> <a href="http://user.it.uu.se/~bengt/">Bengt Jonsson </a>, Uppsala University, Sweden
+<li> <a href="http://cs.uni-salzburg.at/~ck/">Christoph   Kirsch </a>, University of Salzburg, Austria 
+<li> <a href="http://www.csie.ntu.edu.tw/~ktw/">Tei-Wei  Kuo </a>, NTU, Taiwan
+<li> <a href="http://ptolemy.eecs.berkeley.edu/~eal/">Edward   Lee </a>, UC Berkeley, USA
+<li> <a href="http://www-verimag.imag.fr/~maraninx/">Florence Maraninchi </a>, Verimag/Grenoble-INP, France
+<li> <a href="http://ls12-www.cs.tu-dortmund.de/~marwedel/">Peter    Marwedel </a>, TU Dortmund, Germany
+<li> <a href="http://archi.snu.ac.kr/symin/">Sang Lyul   Min </a>, SNU, Korea
+<li> <a href="http://www.cs.utexas.edu/~mok/">Aloysius Mok </a>, U. Texas Austin, USA
+<li> <a href="http://www.cse.iitd.ernet.in/~panda/">Preeti Ranjan Panda </a>, IIT Dehli, India
+<li> <a href="http://www.seas.upenn.edu/~pappasg/">George   Pappas </a>, University of Pennsylvania, USA
+<li> <a href="http://ti.arc.nasa.gov/profile/pcorina/">Corina   Pasareanu</a>,  NASA Ames, USA
+<li> <a href="http://www.cse.iitb.ac.in/~ramesh/">S. Ramesh </a>, General Motors, Bangalore, India
+<li> <a href="http://www.cs.utah.edu/~regehr/">John  Regehr </a>, University of Utah, USA
+<li> <a href="http://www12.informatik.uni-erlangen.de/people/teich/">Juergen  Teich </a>, Erlangen-Nuremberg, Germany
+<li> <a href="http://www.math.unipd.it/~tullio/">Tullio   Vardanega </a>, University of Padova, Italy
+<li> Girish   Venkataramani, Mathworks, Boston, USA
+<li> <a href="http://rw4.cs.uni-sb.de/people/wilhelm.shtml">Reinhard Wilhelm </a>, Saarland University, Germany
+ 
+ </ul> 
+-->
+ 
+<h3> EMSOFT Executive Committee</h3> 
+ 
+ <ul> 
+ 
+ <li> <a href="http://www.tik.ee.ethz.ch/~thiele/">Lothar Thiele</a> (chair), ETHZ, Switzerland 
+ <li> <a href="http://www.cis.upenn.edu/~lee/">Insup Lee</a> (vice-chair), University of Pennsylvania, USA 
+  <li> <a href="http://www.rcs.ei.tum.de/persons/samarjit/">Samarjit Chakraborty</a>, TU Munich, Germany
+ <li> <a href="http://users.soe.ucsc.edu/~luca/">Luca de Alfaro</a>, UCSC, USA
+  <li> <a href="http://www-verimag.imag.fr/~halbwach">Nicolas Halbwachs</a>, Verimag/CNRS, France
+ <li> <a href="http://cs.uni-salzburg.at/~ck/">Christoph Kirsch</a>, University of Salzburg, Austria 
+ <li> <a href="http://archi.snu.ac.kr/symin/">Sang Lyul Min</a>, Seoul National University, Korea 
+ <li> <a href="http://www.cs.ucla.edu/~palsberg/">Jens Palsberg</a>, UCLA, USA
+ <li> <a href="http://rw4.cs.uni-sb.de/people/wilhelm.shtml">Reinhard Wilhelm</a>, Saarland University, Germany 
+ <li> <a href="http://user.it.uu.se/~yi/">Wang Yi</a>, Uppsala University, Sweden 
+
+
+ 
+    
+ </ul> 
+ 
+<h3> EMSOFT Advisory Board</h3> 
+ 
+<ul> 
+ 
+  <li> <a 
+  href="http://www.esterel-technologies.com/company/management-team/gerard-berry.html">G&eacute;rard 
+  Berry</a>, Esterel Technologies 
+  <li> <a href="http://mtc.epfl.ch/~tah/">Tom Henzinger</a>, EPFL, 
+  Switzerland 
+  <li> <a href="http://ptolemy.eecs.berkeley.edu/~eal/">Edward 
+  Lee</a>, University of California, Berkeley, USA 
+  <li> <a href="http://www.cs.cmu.edu/~rajkumar/">Ragunathan 
+  Rajkumar</a>, Carnegie Mellon University, USA 
+  <li> <a href="http://www.eecs.berkeley.edu/~alberto/">Alberto 
+  Sangiovanni-Vincentelli</a>, University of California, Berkeley, USA 
+  <li> <a href="http://www-verimag.imag.fr/~sifakis/">Joseph 
+  Sifakis</a>, Verimag, France 
+  <li> <a 
+  href="http://frontweb.vuse.vanderbilt.edu/vuse_web/directory/facultybio.asp?FacultyID=101.">Janos 
+  Sztipanovits</a>, Vanderbilt University, USA 
+  <li> <a href="http://research.microsoft.com/~stansley/">Stewart 
+  Tansley</a>, Microsoft 
+  <li> <a href="http://rw4.cs.uni-sb.de/people/wilhelm.shtml">Reinhard 
+  Wilhelm</a>, Saarland University, Germany 
+  <li> <a href="http://faculty.ece.gatech.edu/wayne.wolf"/>Wayne 
+  Wolf</a>, Georgia Institute of Technology, USA 
+ 
+</ul> 
+ 
+<br> 
+ 
+ 
+</tr></td></table></td> 
+                    <td valign="top" bgcolor="#FBFBFB"><table width="100%"  border="0" cellpadding="10"><tr><td><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html> 
+<head> 
+</head> 
+<body> 
+<a href="http://www.esweek.org"> 
+<h4>ESWEEK</h4> 
+</a><a href="index.shtml"> 
+<h4>EMSOFT Home</h4> 
+</a><a href="committees.shtml"> 
+<h4>Committees</h4> 
+</a>
+
+
+<h4><a href="cfp.shtml">Call for papers
+<!--  <font size="-2">(submission  deadline extended  to Apr  17, --><!-- 2008)</font> --> 
+</a> 
+</h4> 
+
+<h4>Paper Submission (TBA)</h4>
+
+<!-- <h4><a href="papers.shtml">Accepted Papers</a> </h4> -->
+ 
+<!-- <a href="program.shtml"><h4>Program</h4></a>
+<a href="http://www.public.asu.edu/~ashriva6/esweek2010/venue.shtml"> <h4>Venue</h4> </a>
+
+<a href="http://www.esweek.org/travel.shtml"> 
+<h4>Travel Information</h4> </a> 
+-->
+
+<h4>Previous EMSOFT Conferences</h4> 
+<ul> 
+  <li><a href="http://www-verimag.imag.fr/EMSOFT09">EMSOFT 2009</a> </li> 
+  <li><a href="http://thedude.cc.gt.atl.ga.us/conferences/emsoft">EMSOFT
+2008</a> </li> 
+  <li><a href="http://emsoft07.cs.uni-salzburg.at/emsoft07.html">EMSOFT
+2007</a> </li> 
+  <li><a href="http://herkules.it.uu.se:8082/">EMSOFT 2006</a> </li> 
+  <li><a href="http://www.princeton.edu/%7Ewolf/EMSOFT-2005/">EMSOFT
+2005</a> </li> 
+  <li><a href="http://www1.cs.columbia.edu/%7Esedwards/emsoft2003/">EMSOFT
+2003</a> </li> 
+  <li><a href="http://www-emsoft02.imag.fr/">EMSOFT 2002</a> 
+  </li> 
+</ul> 
+</body> 
+</html> 
+</td></tr></table></td> 
+                </tr> 
+                
+                
+                <tr bgcolor="#99CCFF"> 
+                    <td height="12" colspan="1"><div align="left"
+                    class="navbar"> 
+                &nbsp;
+                Last modified on Jan 14, 2010
+                </div></td> 
+                    <td align="righ"><div align="right" class="navbar">&nbsp;</td> 
+                </tr> 
+            </table> 
+ 
+<!--   <TABLE cellPadding=0 width=900 border=0> --> 
+<!--     <TBODY> --> 
+<!--       <TR vAlign=center>     --> 
+<!--         <TD width=150>Sponsoring Societies</TD> --> 
+<!--         <TD vAlign=center align=middle width=750> <TABLE id=Table1 width="100%" align=center> --> 
+<!--             <TBODY> --> 
+<!--               <TR>  --> 
+<!--                 <TD align=left><a href="http://www.ieee-cas.org/"><img src="images/ieee_logo.gif" border="0"></a></TD> --> 
+<!--                 <TD align=left><a href="http://www.computer.org/"><img height=84 src="images/computer_society_logo.gif" width=91 border=0></a></TD> --> 
+<!--                 <TD align=middle><a href="http://www.c-eda.org/"><img height=42 src="images/ceda_logo.gif" width=120 border=0></a></TD> --> 
+<!--                 <TD align=middle><a href="http://www.sigda.org/"><img height=84 src="images/sigda_logo.gif" width=82 border=0></a></TD> --> 
+<!--                 <TD align=middle><a href="http://www.sigbed.org"><img height=84 src="images/sigbed_logo.gif" width=91 border=0></a></TD> --> 
+<!--                 <TD align=right><a href="http://www.sigmicro.org"><img src="images/sigmicro_logo.gif" width=91 height=84 border=0></a></TD> --> 
+<!--               </TR> --> 
+<!--             </TBODY> --> 
+<!--           </TABLE></TD> --> 
+<!--       <TR vAlign=center>  --> 
+<!--         <TD rowspan="3">Industrial/Academic Contributors</TD> --> 
+<!--       <TR vAlign=center>  --> 
+<!--         <TD vAlign=center align=middle width=750> <TABLE id=Table3 width="100%" align=center> --> 
+<!--             <TBODY> --> 
+<!--               <TR>  --> 
+<!--                 <TD align=left><img src="images/2008_logos/altera_logo.gif" width="180"></TD> --> 
+<!-- 		<TD align=middle><img src="images/2008_logos/Elsevier.bmp" width="150"></td> --> 
+<!--                 <TD align=middle><div align="center"><img src="images/ibm_logo.gif" width="180"></div></TD> --> 
+<!--                 <TD align=right><img src="images/2008_logos/nxp_logo.jpg" width="180"></TD> --> 
+<!--               </TR> --> 
+<!--             </TBODY> --> 
+<!--           </TABLE></TD> --> 
+<!--       <TR vAlign=center>  --> 
+<!--         <TD vAlign=center align=middle width=750> <TABLE id=Table4 width="100%" align=center> --> 
+<!--             <TBODY> --> 
+<!--               <TR>  --> 
+<!--                 <TD align=left><div align="center"><img src="images/springer_logo.gif" width="180" border=0></div></TD> --> 
+<!--                 <TD align=middle><div align="center"><img src="images/2008_logos/Synopsys_logo_3inch.jpg" width="180"></div></TD> --> 
+<!--                 <TD align=right><div align="center"><img src="images/2008_logos/xilinx_logo_burgblack.gif" width="160"></div></TD> --> 
+<!--               </TR> --> 
+<!--             </TBODY> --> 
+<!--           </TABLE></TD> --> 
+<!--       </TR> --> 
+<!--     </TBODY> --> 
+<!--   </TABLE> --> 
+ 
+ 
+    </body> 
+</html> 
+
