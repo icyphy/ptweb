@@ -34,8 +34,41 @@ document.writeln('<link rel=stylesheet href="layout/netscape.css" type ="text/cs
  
  
 
+
+<h3>Scope</h3>
+
+<p align="justify">
+Embedded software must meet demanding criteria for correctness, performance,
+power consumption, and development cost. 
+EMSOFT aims at covering all aspects of embedded software with a focus
+on the principles of embedded software development. 
+
 <p>
-TBA
+Topics of interest include (but are not limited to):
+
+<ul>
+<li> Design and implementation of embedded software
+<li> Modeling and validation
+<li> Model- and component-based software design and analysis
+<li> Programming languages and compilers
+<li> Software engineering and programming methodologies
+<li> Scheduling and execution time analysis
+<li> Operating systems and middleware
+<li> QoS management and performance analysis
+<li> Hardware-dependent software and interfaces
+<li> Distributed, networked embedded systems and security
+<li> Software frameworks for cyber-physical systems
+<li> Embedded control and communication 
+<li> Software for multiprocessor/multicore embedded systems and systems-on-chip
+<li> Application areas, e.g., automotive, avionics, energy, health care, mobile devices, multimedia
+</ul>
+
+
+
+
+<p>
+Format information and submission instructions will be provided soon.
+
 
 <br> 
  
