@@ -156,8 +156,9 @@ document.writeln('<link rel=stylesheet href="layout/netscape.css" type ="text/cs
 </a>
 -->
 
-<h4>Venue, travel:</h4> 
-see <a href="http://www.esweek.org/">www.esweek.org</a>
+<p>
+<b>Venue, travel:</b> 
+<a href="http://www.esweek.org/">www.esweek.org</a>
 
 
 <h4>Paper Submission (TBA)</h4>
