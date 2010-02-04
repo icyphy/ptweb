@@ -161,11 +161,9 @@ document.writeln('<link rel=stylesheet href="layout/netscape.css" type ="text/cs
 </h4> 
 
 
-<h4>Committees (TBA)</h4> 
-<!--
 <a href="committees.shtml"> 
+<h4>Committees</h4> 
 </a>
--->
 
 <p>
 <b>Venue, travel:</b> 
