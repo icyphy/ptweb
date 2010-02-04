@@ -54,6 +54,7 @@ document.writeln('<link rel=stylesheet href="layout/netscape.css" type ="text/cs
 <li> <a href="http://www.ics.uci.edu/~eli/">Elaheh   Bozorgzadeh </a>, UC Irvine, USA
 <li> Ken Butts, Toyota, USA
 <li> <a href="http://www-rocq.inria.fr/~acohen/">Albert Cohen</a>, INRIA, France
+<li> <a href="http://www.inria.fr/personnel/Robert.de_Simone.fr.html">Robert De Simone</a>, INRIA, France
 <!-- <li> Vincent David, CEA-LIST, France -->
 <li> <a href="http://www.cs.columbia.edu/~sedwards/">Stephen Edwards</a>, Columbia University, USA 
 <!-- <li> <a href="http://www.ida.liu.se/~petel/">Petru Eles </a>, Linkoping University, Sweden -->
@@ -78,6 +79,7 @@ document.writeln('<link rel=stylesheet href="layout/netscape.css" type ="text/cs
 <li> <a href="http://www.cse.iitb.ac.in/~ramesh/">S. Ramesh </a>, General Motors, India
 <li> <a href="http://www-micrel.deis.unibo.it/~ruggiero/">Martino Ruggiero</a>, EPFL, Switzerland
 <li> <a href="http://www.eecs.berkeley.edu/~sseshia/">Sanjit Seshia </a>, UC Berkeley, USA
+<li> <a href="http://locust.kaist.ac.kr/">Insik Shin</a>, KAIST, Korea
 <li> <a href="http://www.microlab.ntua.gr/~dsoudris/">Dimitrios Soudris</a>, NTU Athens, Greece
 <li> <a href="http://purana.csa.iisc.ernet.in/~srikant/">Y.N. Srikant</a>, Indian Institute of Science, India
 <li> <a href="http://frontweb.vuse.vanderbilt.edu/vuse_web/directory/facultybio.asp?facultyid=101.">Janos Sztipanovits</a>, Vanderbilt University, USA
