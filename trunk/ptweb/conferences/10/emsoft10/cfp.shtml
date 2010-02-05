@@ -26,7 +26,10 @@ document.writeln('<link rel=stylesheet href="layout/netscape.css" type ="text/cs
     width="150" height="150"></a></td--> 
  
     <td width="600"><img src="images/emsoft10.jpg" width="600" height="150"></td> 
-    <td width="300"><img src="images/grandcanyon_northrim3.jpeg" width="300" height="150"></td>
+    <!--<td width="300"><img src="images/grandcanyon_northrim3.jpeg" width="300" height="150"></td>-->
+    <!--<td width="300"><img src="images/azpic05s.jpg" width="300" height="150"></td>-->
+    <td width="300"><img src="images/azpic15s.jpg" width="300" height="150"></td>
+    <!--<td width="300"><img src="images/azpic10s.jpg" width="300" height="150"></td>-->
   </tr> 
   <tr> 
     <td valign="top" colspan="1"><table width="100%" cellpadding="10" border="0"><tr><td valign="top"> 
@@ -64,11 +67,44 @@ Topics of interest include (but are not limited to):
 </ul>
 
 
+<h3>Submissions and selection</h3>
+
+<p>
+We invite submissions related to the topics outlined above.
+Submissions from the industry are welcome. Submissions of
+already published material or concurrent submissions to
+other conferences with proceedings is not allowed.
+Submissions will be evaluated according to multiple criteria,
+including originality, relevance and readability.
+The review process will include a feedback/rebuttal period where authors
+will have the option to respond to reviewer comments.
+Selected papers will be presented at the conference and will be included
+in the Proceedings published by the 
+<a href="http://www.acm.org/">Association for Computing Machinery</a>.
+An 
+<a href="http://www.sigbed.org/awards">ACM SIGBED EMSOFT Best Paper Award</a>
+will be given.
+
+
+<h3>Submission instructions</h3>
 
 
 <p>
-Format information and submission instructions will be provided soon.
+A 300-word abstract should be submitted in <b>plain text</b> no later than
+April 1, 2010.
 
+The full paper should be submitted no later than April 11, 2010.
+Full papers should be no more than <b>10 pages 2-column</b> in ACM format,
+prepared according to these
+<a href="http://www.acm.org/sigs/publications/proceedings-templates">templates</a>.
+The acceptable format for the full paper is <b>PDF only</b>.
+The paper should mention the author names and affiliations.
+
+Both abstracts and full papers should be submitted electronically via the
+submission site:
+<a href="https://www.softconf.com/a/emsoft2010/">https://www.softconf.com/a/emsoft2010/</a>.
+
+<br>
 
 <br> 
  
@@ -102,7 +138,7 @@ Format information and submission instructions will be provided soon.
 
 
 <a href="https://www.softconf.com/a/emsoft2010/">
-<h4>Paper Submission Site</h4>
+<h4>Submission Site</h4>
 </a>
 
 <!-- <h4><a href="papers.shtml">Accepted Papers</a> </h4> -->
@@ -139,7 +175,7 @@ Format information and submission instructions will be provided soon.
                     <td height="12" colspan="1"><div align="left"
                     class="navbar"> 
                 &nbsp;
-                Last modified on Feb 4, 2010
+                Last modified on Feb 5, 2010
                 </div></td> 
                     <td align="righ"><div align="right" class="navbar">&nbsp;</td> 
                 </tr> 
