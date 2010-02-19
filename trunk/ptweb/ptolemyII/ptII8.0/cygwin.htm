@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Cygwin Installation</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII8.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<h1>Cygwin Installation</h1>
+
+ <p>
+The Cygwin toolkit provides Unix tools on the Windows platform.
+You need only install the Cygwin toolkit if you are rebuilding
+from source and intend to develop your own actors using Java.
+
+ <p>Note that compile your own actors, you will also need the 
+<code>javac</code> compiler.  The <code>javac</code> compiler
+is part of the JDK, which is available at:
+
+<a href="http://java.sun.com/j2se/1.5/"><code>http://java.sun.com/j2se/1.5/</code></a>.
+The <code>javac</code> compiler is <B>not</B> present in the 
+Java Runtime Environment (JRE)
+
+
+ <p>The Cygwin home page is at
+<a href="http://sources.redhat.com/cygwin/"><code>http://sources.redhat.com/cygwin/</code></a>
+ <p>Complete installation instructions can be found at
+<a href="http://sources.redhat.com/cygwin/faq"><code>http://sources.redhat.com/cygwin/faq</code></a>.
+
+<h2>Installing Cygwin from the self-extracting executable</h2>
+
+ <p>Compiling the Ptolemy II Matlab interface and Java Native
+Interface (JNI) actor requires that the a C compiler be installed.
+The Matlab interface requires that Matlab be installed on the local machine.
+
+ <br>The gcc compiler is
+fairly large, so we provide three separate self-extracting downloads
+of the cygwin tools for Windows.
+<ol>
+<li> <a href="cygwin100706basic.exe"><code>cygwin100706basic.exe</code></a>
+(19.5 Mb) - The tools necessary to compile and configure Ptolemy II
+except for the Matlab interface.
+
+
+<li> <a href="cygwin100706devel.exe"><code>cygwin100706devel.exe</code></a>
+(65.9 Mb) - The tools necessary to compile and configure Ptolemy II
+including the Matlab interface and the JNI Actor.  This download includes
+everything in <code>cygwin100706basic.exe</code> above.
+</ol>
+
+ <p>The sources for the above downloadables can be found in
+<a href="cygwin100706develsrc.exe"><code>cygwin100706develsrc.exe</code></a> (229.6 Mb)
+
+ <p>
+ <p>
+
+
+<h2>Cygwin Installation instructions</h2>
+
+<ol>
+<li> Most Ptolemy II users will
+<br> Download and execute <a href="cygwin100706basic.exe"><code>cygwin100706basic.exe</code></a> (19.5 Mb) 
+
+
+ <br> If you are running under Windows and 
+have Matlab installed on your local machine, then 
+<br> Download and execute <a href="cygwin100706devel.exe"><code>cygwin0505devel.exe</code></a> (65.9 Mb).
+
+ <br>The files will be extracted to an seemingly arbitrary directory.
+You may find it easier to change the directory to something short, like
+<code>c:\temp\cygwin</code>. 
+
+<li> <code>setup.exe</code> should start up automatically for you.
+<li> Click on  <code>Next</code>
+<li> <code>Install from Local Directory</code> should already be selected
+for your. Click on <code>Next</code>.
+
+<li> Keep the default of <code>C:\cygwin</code> for the <code>Select Root Install Directory</code>.  
+ <br>Keep the default <code>All Users</code>,
+ <br>Change the <code>Default Text File Type</code> to <code>DOS</code>
+ <br>(If you select Unix instead of DOS, then you will likely have
+ <a href="http://www.gigascale.org/softdevel/faq/23.html">Cygwin CR/NL problems</a> with CVS)
+
+ <br> and then click on <code>Next</code>.
+
+<li> Keep the default for <code>Local Package Directory</code>
+and click on <code>Next</code>.
+
+
+<li> The <code>Select packages to install</code> window will come
+up with the default settings, we need to change from
+<code>default</code> to <code>install</code>
+click on
+the word <code>default</code> that is to the right of <code>All</code>.
+The subpages should then change from <code>default</code> to
+<code>Install</code>.  In the screen shot below, we have just
+clicked on <code>default</code>:
+<img src="../../image/cygwinSetup.gif" alt="Cygwin Setup">
+ <br>
+<li> Select <code>Next</code>, which will install all the packages.
+
+
+<li> Select <code>Create Desktop Icon</code> and <code>Add to Start Menu</code>
+according to your preferences.
+
+<li> Remove the temporary directory where you extracted the files.
+
+
+<li> <code>c:/cygwin/etc/passwd</code> is created during the 
+Cygwin installation.  If your Windows account is a domain account
+and not a local account, then you may need to add an entry
+to <code>c:/cygwin/etc/passwd</code> by hand.
+ <br>To do this, start up the Cygwin bash shell with
+Start -&gt;?Cygwin
+ <br>Then use the <code>mkpasswd</code> command to append
+a line with your login information, for example, I used:
+
+<pre>
+mkpasswd -l > /etc/passwd
+mkpasswd -d -u cxh --path-to-home=/cygdrive/c/users &gt;&gt; /etc/passwd
+
+</pre>
+<code>mkpasswd -h</code> will print out help for the <code>mkpasswd</code>
+command
+
+<li> Follow the instructions in the
+<a href="ptII8.0.beta/doc/install.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section
+</ol>
+
+<h2>Installing Cygwin from the Web</h2>
+We provide prebuilt downloads of the subset of Cygwin tools needed to
+recompile Ptolemy II.  The Cygwin tools are constantly being updated, for
+the latest versions, see the Cygwin website.
+
+ <p>Instructions for installing Cygwin from the Cygwin website
+can be found on the 
+for <a href="ptII8.0.beta/doc/install.htm#cygwin">Ptolemy II Installation Page</a>
+
+<h2>Enabling Copy in Cygwin Bash under XP</h2>
+You may need to enable copy and paste in the bash shell window.
+
+ <p>If copy and paste are working properly, then you should be able to
+highlight text by left clicking and dragging the mouse over the text
+and then hitting the Enter key to copy the highlighted text.
+ <p>
+The Cygwin faq at
+<a href="http://www.cygwin.com/faq/faq.html#SEC55"><code>http://www.cygwin.com/faq/faq.html#SEC55</code></a>
+says:
+<BLOCKQUOTE>
+How can I copy and paste into Cygwin console windows?
+
+ <p>Under Windows NT, open the properties dialog of the console
+window. The options contain a toggle button, named "Quick edit
+mode". It must be ON. Save the properties.
+
+ <p>Under Windows 9x, open the properties dialog of the console
+window. Select the Misc tab. Uncheck Fast Pasting. Check QuickEdit.
+
+ <p>You can also bind the insert key to paste from the clipboard by adding
+the following line to your .inputrc file:
+
+<pre>
+    "\e[2~": paste-from-clipboard 
+</pre>
+
+</BLOCKQUOTE>
+
+
+More precisely:
+<ol>
+<li> Start up bash by doing Start -&gt; Programs -&gt; Cygwin -&gt; Cygwin Bash Shell.
+
+<li> Right click on the icon in the upper left of the title bar and select
+properties
+
+<li> Under Options, select 'QuickEdit Mode', hit ok
+
+<li> Select 'Modify shortcut that started this window', hit ok
+</ol>
+
+<h2>Cygwin download contents</h2>
+
+<p>The download of basic cygwin tools from April, 2008 includes:
+
+<pre>
+alternatives-1.3.29a-1
+ash-20040127-3             required by cvs
+base-files-3.7-1
+base-passwd-2.2-1
+bash-3.2.33.18
+binutils-20060817-1
+bzip2-1.0.5-2
+coreutils-6.10.1
+crypt-1.1-1  		required by cvs
+cvs-1.11.12-1
+cygutils-1.34-1
+cygutils-1.3.2-1
+cygwin-1.5.25-11
+cygwin-doc-1.4.4
+diffutils-2.8.7-1
+editrights-1.01-2
+expat-1.95.8-2
+findutils-4.4.0-1
+gawk-3.1.6-1
+gdbm-1.8.3-8
+grep-2.5.1a-4
+groff-1.18.1-2
+gzip-1.3.12-2
+less-381-2
+libbz2_1-1.0.5-2	required by tar
+libcharset1-1.11-1
+ libdb4.2-4.2.52-1
+ libdb4.3-4.3.28-1
+libexpat0-1.95.8-2
+ libgdbm-1.8.0-5
+ libgdbm-devel-1.8.3-7	required by cvs 
+ libgdbm3-1.8.3-3
+libgdbm4-1.8.3-8
+libiconv-1.11.1-2
+libiconv2-1.9.2-2	required by sed
+libintl-0.10.38-3
+libintl1-0.12.1-3
+libintl2-0.14.5-1
+libintl3-0.15-1
+ libncurses5-5.2-1
+ libncurses6-5.2-8
+ libncurses7-5.3-4
+libncurses8-5.5-3
+libpcre0-7.2.1		Required by less (pcre = Perl Compatible regex)
+libpopt0-1.6.4-4
+ libreadline4-4.1-2
+ libreadline5-4.3-5
+libreadline6-5.2.12-10
+login-1.9-7		optional
+make-3.81-2
+man-1.6e1
+ minires-1.00-1	Required by openssh
+ncurses-5.5.2
+openssh-5.0p1-1		Used by cvs
+openssl-0.9.8g-1	Required by openssh
+ openssl097-0.9.7j-1
+ readline-5.0-1.tar.bz2
+run-1.1.10-1
+sed-4.1.5-2
+tar-1.19.90-1
+termcap-20050421-1
+terminfo-5.5_20060323-1
+texinfo-4.8a-1
+tzcode-2007h-2
+which-1.19-1
+zlib-1.2.3-1
+</pre>
+
+ <p>The download of devel cygwin tools from October 10, 2006, includes all
+the tools from the basic cygwin download listed above and
+
+<pre>
+autoconf-2.59-2
+autoconf-devel-2.59-2
+autoconf-stable-2.131
+binutils-20041229-1.tar.bz2
+gcc-3.4.4-2
+gcc-core-3.4.4-1 	  Matlab interface uses a C++ file
+gcc-g++-3.4.4-1
+gcc-mingw-core-20050522-1
+gcc-mingw-g++-20050522-1
+m4-1.4.7-1
+mingw-runtime-3.10-1
+mktemp-1.5-3
+perl-5.8.7-5		sadly, autoconf requires perl
+w32api-3.7.1
+
+</pre>
+
+In addition, we include select tools for 
+<a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>,
+the Ptolemy/TinyOS interface.
+<pre>
+automake-1.5 or later (1.9.6 preferred)
+bison 
+emacs 
+emacs-el 
+gperf 
+rpm 
+</pre>
+
+<!--#include virtual="/ssi/bottom.htm" -->
