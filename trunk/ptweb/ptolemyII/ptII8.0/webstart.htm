@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Ptolemy II 8.0.beta Web Edition Download</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII8.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<table>
+<tr>
+  <td>
+ <img src="ptII8.0.beta/doc/img/PtolemyIISplash.gif" alt="Ptolemy II 8.0.beta" align="left">
+  </td>
+</table>
+<h1>Ptolemy II 8.0.beta Web Edition Download</h1>
+
+
+        <p>This download of Ptolemy II uses a web launching tool
+       called Web Start that makes installation and updates particularly
+       simple.  
+
+ <h2>Quick Start</h2>
+   <ol> 
+<script language="JavaScript">
+/* Note that the logic below always launches the JNLP application
+ *if the browser is Gecko based. This is because it is not possible
+ *to detect MIME type application/x-java-jnlp-file on Gecko-based browsers. 
+ */
+if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
+    document.write("<a href=\"jnlp-8.0.beta/vergil.jnlp\">Download Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>"); 
+} else {
+    document.write("Click ");
+    document.write("<a href=\"http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII8.0.beta/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html\" target=\"_top\">here</a> ");
+    document.write("to download and install JRE 5.0 and the application.");
+}
+</SCRIPT>
+
+   </ol> 
+ <p>&nbsp;
+ <p>&nbsp;
+
+<h2>Installation Details</h2>
+
+Below are more detailed instructions.
+
+ <p><a href="http://java.sun.com/products/javawebstart/">Web Start</a> is a product from Sun that is used to
+download the Ptolemy II 8.0.beta Web Edition.  
+ <p>Sun's Java Web Start is included in version 1.5 or later of Sun's Java Runtime Environment (JRE) or Java Development Kit (JDK). 
+ <p>In other words, If you have <B>Java 1.5</B> or later installed,
+then <B>Web Start</B> is <B>already installed!</B>
+
+
+<ol>
+<li> This web page attempts to detect whether Web Start
+is already installed.  If the Quick Start list above contains
+
+<BLOCKQUOTE>
+Click 
+<a href="http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII8.0.beta/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html">here</a> 
+to download and install JRE 5.0 and the application.
+
+</BLOCKQUOTE>
+
+then download and 
+<a href="http://java.com/">Install Java from Sun (15.2Mb)</a>
+
+ <br>If the above step is not present, then Web Start is
+already installed and you can proceed with clicking on the 
+<BLOCKQUOTE>
+<a href="jnlp-8.0.beta/vergil.jnlp">Install Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>
+</BLOCKQUOTE>
+link
+
+and continue with step 3 below.
+
+<li> After installing Web Start,
+restart your browser and return to this page.
+
+<li> Hopefully, the Web Start detection will work and the
+<code>Click here to download and install JRE 5.0 and the application</code>
+step will not be present.
+
+ <br><B>Even if the Install Web Start step is present</B>, try
+downloading and/or opening the
+<a href="jnlp-8.0.beta/vergil.jnlp">Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>,
+
+it could be that the Web Start detection has failed even though
+Web Start is properly installed.
+
+ <br>For example, under Opera 6.01 under Windows 2000, click on the
+<a href="jnlp-8.0.beta/vergil.jnlp">Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>
+link and select <code>open</code>.  If Java Web Start has been installed, 
+then it should start up automatically.
+
+
+<li> The download is between 16.9Mb and 41.3Mb,
+roughly half the size of the application download is consumed
+by the HTML documentation of the Ptolemy II Java classes.
+
+<li> After the download completes, you will be prompted with a window
+that states that the certificate from <code>University of California
+Berkeley</code> is valid.  You should hit the <code>Start</code> button
+to proceed with start up.
+
+</ol>
+
+
+<h4> Places to go</h4>
+<menu>
+
+<li> For more information about installation, see the
+<a href="ptII8.0.beta/doc/webStartHelp.htm">Web Start Help</a> page.
+<li> The 
+"<a href="ptII8.0.beta/doc/design/usingVergil/index.htm">Using Vergil</a>" chapter from the
+<a href="ptII8.0.beta/doc/design/index.htm">Ptolemy II Design Document</a>
+<li><a href="limitations.htm">Limitations</a>
+</menu>
+
+ <p>This page covers installing Ptolemy II via Web Start
+ <p>Other formats include:
+
+<menu>
+<li> <a href="applet.htm">Accessing Ptolemy II demonstration applets via the web</a>
+<li> <a href="windows.htm">Installing Ptolemy II via a traditional Windows Installer</a>
+<li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a>
+</menu>
+
+
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+<!--#include virtual="/ssi/bottom.htm" -->
