@@ -11,29 +11,35 @@
 <!--#include virtual="/ssi/toppostmenu.htm" -->
 <h1>Ptolemy II 8.0.beta Notes for Mac OS X</h1>
 
-We are not including Macintosh installers, you will need to rebuild
-<a href="download.htm">download Ptolemy II sources</a>
-and then
-<a href="ptII8.0.beta/doc/install.htm">follow the command line build instructions</a>.
-
-<h2>Macintosh Specific Notes</h2>
+<h4>Downloads</h4>
 
 <menu>
-
-<li> Make sure you have Xcode Tools installed, this has the gcc, make
-environment and other tools necessary to do development on the
-Mac. Xcode is available on the Macintosh install disk that comes
-with the machine and is not installed by default.
-You can also <a href="http://developer.apple.com/tools/download/">download Xcode</a>, but it is 924Mb!
-
-
-<li> Upgrade the Java on the Mac from Apple to the latest release. Sun
-Java doesn't work on the Mac, Apple releases its own JVM and javac
-from time to time on http://developer.apple.com
-
-
-<li> See also the <a href="../ptII5.0/mac.htm">Ptolemy II 5.0 Mac Instructions</a>
+<li> 
+<a href="ptII8.0.beta_setup_mac.jar">Download the Ptolemy II 8.0.beta
+Mac OS X Installer Jar file (121Mb)</a>  
 </menu>
+
+
+<h4>Documentation</h4>
+<menu>
+<li> The 
+"<a href="ptII8.0.beta/doc/design/usingVergil/index.htm">Using Vergil</a>" chapter from the
+<a href="ptII8.0.beta/doc/design/index.htm">Ptolemy II Design Document</a>
+<li> Detailed <a href="ptII8.0.beta/doc/install.htm">Ptolemy II Installation</a>
+instructions.
+<li><a href="limitations.htm">Limitations</a>
+
+</menu>
+<h2>Mac OS X Specific Notes</h2>
+
+
+The Ptolemy installer for Mac will install a version of Ptolemy
+that does not include serial port support, or Java Media Framework support.
+In addition, Mac OS X may not have gcc installed by default.
+
+<br>To add serial port support, Java Media Framework support and/or gcc, see
+<a href="http://chess.eecs.berkeley.edu/ptexternal/wiki/Main/Mac#Ptolemy">Setting up a Mac for use with Ptolemy</a>.
+
 
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
  <p>
