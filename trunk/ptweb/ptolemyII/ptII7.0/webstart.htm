@@ -26,20 +26,22 @@
  <h2>Quick Start</h2>
    <ol> 
 <script language="JavaScript">
-/* Note that the logic below always launches the JNLP application
- *if the browser is Gecko based. This is because it is not possible
- *to detect MIME type application/x-java-jnlp-file on Gecko-based browsers. 
- */
-if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
-    document.write("<a href=\"jnlp-7.0.1/vergil.jnlp\">Download Ptolemy II 7.0.1 Web Edition (16.9Mb to 41.3Mb)</a>"); 
-} else {
-    document.write("Click ");
-    document.write("<a href="\http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII7.0.1/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html\" target=\"_top\">here</a> ");
-    document.write("to download and install JRE 5.0 and the application.");
-}
-</SCRIPT>
+<ol>
+<!-- See http://blogs.sun.com/thejavatutorials/entry/deployment_toolkit_101 -->
+<script src="deployJava.js"></script>
+<script >
+    var dir = location.href.substring(0,location.href.lastIndexOf('/')+1);
+    var url = dir + "jnlp-7.0.1/vergil.jnlp";
+    var minimumVersion = '1.5.0';
+    if (deployJava.isWebStartInstalled(minimumVersion)) {
+            document.write("Download Ptolemy II 7.0.1 Web Edition (16.9Mb to 4\
+1.3Mb)");
+    }
+    deployJava.createWebStartLaunchButton(url, minimumVersion);
+</script>
 
-   </ol> 
+   </ol>
+
  <p>&nbsp;
  <p>&nbsp;
 
