@@ -25,19 +25,17 @@
 
  <h2>Quick Start</h2>
    <ol> 
-<script language="JavaScript">
-/* Note that the logic below always launches the JNLP application
- *if the browser is Gecko based. This is because it is not possible
- *to detect MIME type application/x-java-jnlp-file on Gecko-based browsers. 
- */
-if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
-    document.write("<a href=\"jnlp-8.0.beta/vergil.jnlp\">Download Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>"); 
-} else {
-    document.write("Click ");
-    document.write("<a href=\"http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII8.0.beta/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html\" target=\"_top\">here</a> ");
-    document.write("to download and install JRE 5.0 and the application.");
-}
-</SCRIPT>
+<!-- See http://blogs.sun.com/thejavatutorials/entry/deployment_toolkit_101 -->
+<script src="deployJava.js"></script>
+<script >
+    var dir = location.href.substring(0,location.href.lastIndexOf('/')+1);
+    var url = dir + "jnlp-8.0.beta/vergil.jnlp";
+    var minimumVersion = '1.5.0';
+    if (deployJava.isWebStartInstalled(minimumVersion)) {
+	    document.write("Download Ptolemy II 8.0.beta Web Edition (83Mb)"); 
+    }
+    deployJava.createWebStartLaunchButton(url, minimumVersion);
+</script>
 
    </ol> 
  <p>&nbsp;
@@ -47,7 +45,7 @@ if (javawsInstalled || (navigator.userAgent.indexOf("Gecko") !=-1)) {
 
 Below are more detailed instructions.
 
- <p><a href="http://java.sun.com/products/javawebstart/">Web Start</a> is a product from Sun that is used to
+ <p><a href="http://java.sun.com/javase/technologies/desktop/javawebstart/index.jsp">Web Start</a> is a product from Sun that is used to
 download the Ptolemy II 8.0.beta Web Edition.  
  <p>Sun's Java Web Start is included in version 1.5 or later of Sun's Java Runtime Environment (JRE) or Java Development Kit (JDK). 
  <p>In other words, If you have <B>Java 1.5</B> or later installed,
@@ -56,49 +54,25 @@ then <B>Web Start</B> is <B>already installed!</B>
 
 <ol>
 <li> This web page attempts to detect whether Web Start
-is already installed.  If the Quick Start list above contains
-
-<BLOCKQUOTE>
-Click 
-<a href="http://java.sun.com/PluginBrowserCheck?pass=http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII8.0.beta/webstartdownload.htm&fail=http://java.sun.com/j2se/1.5.0/download.html">here</a> 
-to download and install JRE 5.0 and the application.
-
-</BLOCKQUOTE>
-
+is already installed.  If the Quick Start section above has an
+orange button that says "Launch", then click it to lauch the 
+Ptolemy II Web Start version.  If Java can't be found,
 then download and 
 <a href="http://java.com/">Install Java from Sun (15.2Mb)</a>
 
- <br>If the above step is not present, then Web Start is
-already installed and you can proceed with clicking on the 
+and then 
 <BLOCKQUOTE>
-<a href="jnlp-8.0.beta/vergil.jnlp">Install Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>
+<a href="jnlp-8.0.beta/vergil.jnlp">Install Ptolemy II 8.0.beta Web Edition (83Mb)</a>
 </BLOCKQUOTE>
-link
-
-and continue with step 3 below.
-
-<li> After installing Web Start,
-restart your browser and return to this page.
-
-<li> Hopefully, the Web Start detection will work and the
-<code>Click here to download and install JRE 5.0 and the application</code>
-step will not be present.
-
- <br><B>Even if the Install Web Start step is present</B>, try
-downloading and/or opening the
-<a href="jnlp-8.0.beta/vergil.jnlp">Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>,
-
-it could be that the Web Start detection has failed even though
-Web Start is properly installed.
 
  <br>For example, under Opera 6.01 under Windows 2000, click on the
-<a href="jnlp-8.0.beta/vergil.jnlp">Ptolemy II 8.0.beta Web Edition (16.9Mb to 41.3Mb)</a>
+<a href="jnlp-8.0.beta/vergil.jnlp">Ptolemy II 8.0.beta Web Edition (83Mb)</a>
 link and select <code>open</code>.  If Java Web Start has been installed, 
 then it should start up automatically.
 
 
-<li> The download is between 16.9Mb and 41.3Mb,
-roughly half the size of the application download is consumed
+<li> The download is roughly 83Mb
+14Mb of the application download is consumed
 by the HTML documentation of the Ptolemy II Java classes.
 
 <li> After the download completes, you will be prompted with a window
