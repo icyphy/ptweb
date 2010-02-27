@@ -32,11 +32,25 @@
     var url = dir + "jnlp-8.0.beta/vergil.jnlp";
     var minimumVersion = '1.5.0';
     if (deployJava.isWebStartInstalled(minimumVersion)) {
-	    document.write("Download Ptolemy II 8.0.beta Web Edition (83Mb)"); 
+	    document.write("Download Ptolemy II 8.0.beta Web Edition (~62Mb)"); 
     }
     deployJava.createWebStartLaunchButton(url, minimumVersion);
 </script>
 
+ </ol>
+<I>Or . . .</I>
+ <ol>
+<!-- See http://blogs.sun.com/thejavatutorials/entry/deployment_toolkit_101 -->
+<script src="deployJava.js"></script>
+<script >
+    var dir = location.href.substring(0,location.href.lastIndexOf('/')+1);
+    var url = dir + "jnlp-8.0.beta/vergilPtiny.jnlp";
+    var minimumVersion = '1.5.0';
+    if (deployJava.isWebStartInstalled(minimumVersion)) {
+	    document.write("Download Ptolemy II 8.0.beta Web Ptiny Edition (~42Mb)"); 
+    }
+    deployJava.createWebStartLaunchButton(url, minimumVersion);
+</script>
    </ol> 
 
 
@@ -63,16 +77,16 @@ then download and
 
 and then 
 <BLOCKQUOTE>
-<a href="jnlp-8.0.beta/vergil.jnlp">Install Ptolemy II 8.0.beta Web Edition (83Mb)</a>
+<a href="jnlp-8.0.beta/vergil.jnlp">Install Ptolemy II 8.0.beta Web Edition (~62Mb)</a>
 </BLOCKQUOTE>
 
  <br>For example, under Opera 6.01 under Windows 2000, click on the
-<a href="jnlp-8.0.beta/vergil.jnlp">Ptolemy II 8.0.beta Web Edition (83Mb)</a>
+<a href="jnlp-8.0.beta/vergil.jnlp">Ptolemy II 8.0.beta Web Edition (~62Mb)</a>
 link and select <code>open</code>.  If Java Web Start has been installed, 
 then it should start up automatically.
 
 
-<li> The download is roughly 83Mb
+<li> The download is roughly 62Mb
 14Mb of the application download is consumed
 by the HTML documentation of the Ptolemy II Java classes.
 
