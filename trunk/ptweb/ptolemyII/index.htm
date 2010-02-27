@@ -129,23 +129,60 @@ contributions from off site developers, see
 <a href="ptIIfaq.htm#Contributions">the Ptolemy II FAQ</a> for details.
 
 <h2>Recent Releases and News</h2>
+<p><p><a href="ptII8.0/index.htm">Ptolemy II 8.0.beta</a> 
+was made available on February 26, 2010
+<br>Ptolemy II 8.0.beta includes
 
+<menu>
+<li>Model Transformation - The model transformation facility provides a framework for the
+analysis and transformation of actor models using model transformation
+techniques. (Thomas Huining Feng)</li>
+<li>Ptera (Ptolemy Event Relationship Actor) Domain -
+  The Ptera (Ptolemy Event Relationship Actor) domain is a discrete-event model of computation. A model in Ptera is represented with a graph of nodes and edges, where nodes represent events and directed edges between events represent scheduling relation. One or more events can be selected as initial events, which are scheduled
+at model time 0.0. When an event is fired, it possibly performs certain actions, and if there are outgoing edges from that event, the events at the end points of those edges are scheduled after non-negative delays. One or more events can also be selected as final events. The firing of final events causes the event
+queue to be emptied after their actions are performed, and therefore
+no more events can be processed. (Thomas Huining Feng)</li>
+<li>Causality Analysis -
+Ptolemy II 8.0 includes an update to our Causality Analysis framework.
+We identified performance problems with our current
+non-conservative causality analysis for modal models within
+discrete-event (DE) systems. In this scheme, causality analysis is
+performed on the entire model at run time each time there is a mode
+change in the model. This mechanism is far too costly. We are
+investigating techniques for performing the causality analysis in a
+compositional way for the various modes at compile
+time. Unfortunately, brute force solutions result in exponentially
+growing memory requirements for the results of the causality analysis.
+<p>We designed, implemented and reviewed an interface that defines a
+causality interfaces for actor networks as described in the paper
+<a name="ZhouLee:08:CausalityInterfaces">Ye Zhou</a>, Edward A. Lee. <a
+href="http://chess.eecs.berkeley.edu/pubs/473.html#in_browser" target="_top">Causality
+Interfaces for Actor Networks</a>, <i>ACM
+Transactions on Embedded Computing Systems (TECS)</i>,
+7(3):1-35, April 2008. 
+<br>(Ye Zhou, Edward A. Lee)</li>
+<li>Continuous and Modal Domains</a></h3>
+<p>Ptolemy II 8.0 includes a substantial rework of modal models and
+the underlying finite state machine infrastructure to make them work
+predictably and consistently across domains. (Haiyang Zheng, Edward
+A. Lee)</p></li>
+</menu>
 
 <p><p><a href="ptII7.0/index.htm">Ptolemy II 7.0.1</a> 
 was made available on April 4, 2008.
- <br>Ptolemy II 7.0.1 includes
+<br>Ptolemy II 7.0.1 includes
 <menu>
 <li> <a href="ptII7.0/ptII7.0.1/ptolemy/codegen/README.html">Ptolemy II C Code Generation</a>
- <br>The Ptolemy C Code generator can generate code for SDF, FSM and
- HDF models.  Arbitrary C code may be embedded in a Java actor.
+<br>The Ptolemy C Code generator can generate code for SDF, FSM and
+HDF models.  Arbitrary C code may be embedded in a Java actor.
 The entire model can then be converted to C code and the C code with
 the Java actor is used.
- 
- <br>Primary Codegen Developers: Gang Zhou, Man-kit Leung.
- <br>Codegen Contributors: Christopher Brooks, Teale Fristoe, Edward A. Lee, Ye Zhou
+
+<br>Primary Codegen Developers: Gang Zhou, Man-kit Leung.
+<br>Codegen Contributors: Christopher Brooks, Teale Fristoe, Edward A. Lee, Ye Zhou
 
 <li> <a href="http://chess.eecs.berkeley.edu/ptalon">Ptalon</a>
- <br>Primary Ptalon Developer: Adam Cataldo
+<br>Primary Ptalon Developer: Adam Cataldo
  <br>Contributor: Elaine Cheong
 <br>Actor-oriented design is a common design strategy in embedded
 system design, where actors are concurrent components which
