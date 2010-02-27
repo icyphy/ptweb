@@ -158,105 +158,117 @@ properties
 <p>The download of basic cygwin tools from February, 2010 includes:
 
 <pre>
-alternatives-1.3.29a-1
-ash-20040127-3             required by cvs
-base-files-3.7-1
-base-passwd-2.2-1
-bash-3.2.33.18
-binutils-20060817-1
-bzip2-1.0.5-2
-coreutils-6.10.1
-crypt-1.1-1  		required by cvs
-cvs-1.11.12-1
-cygutils-1.34-1
-cygutils-1.3.2-1
-cygwin-1.5.25-11
-cygwin-doc-1.4.4
-diffutils-2.8.7-1
+_update-info-dir-00865-1
+alternatives-1.3.30c-10
+base-cygwin-2.1-1
+base-files-3.9-3
+base-passwd-3.1-1
+bash-3.2.49-23
+bison-2.4.1-1
+bzip2-1.0.5-10
+coreutils-7.0-2
+crypt-1.1-1             required by cvs
+csih-0.9.1-1
+cvs-1.12.13-10
+cygrunsrv-1.34-1
+cygutils-1.4.2-1
+cygwin-1.7.1-1
+cygwin-doc-1.5-1
+dash-0.5.5.1-2
+diffutils-2.8.7-2
 editrights-1.01-2
-expat-1.95.8-2
-findutils-4.4.0-1
-gawk-3.1.6-1
-gdbm-1.8.3-8
-grep-2.5.1a-4
-groff-1.18.1-2
+expat-2.0.1-1
+findutils-4.5.5-1
+gawk-3.1.7-1
+gettext-0.17-11
+grep-2.5.4-2
+groff-1.19.2-2
 gzip-1.3.12-2
-less-381-2
-libbz2_1-1.0.5-2	required by tar
-libcharset1-1.11-1
- libdb4.2-4.2.52-1
- libdb4.3-4.3.28-1
-libexpat0-1.95.8-2
- libgdbm-1.8.0-5
- libgdbm-devel-1.8.3-7	required by cvs 
- libgdbm3-1.8.3-3
-libgdbm4-1.8.3-8
-libiconv-1.11.1-2
-libiconv2-1.9.2-2	required by sed
-libintl-0.10.38-3
-libintl1-0.12.1-3
-libintl2-0.14.5-1
-libintl3-0.15-1
- libncurses5-5.2-1
- libncurses6-5.2-8
- libncurses7-5.3-4
-libncurses8-5.5-3
-libpcre0-7.2.1		Required by less (pcre = Perl Compatible regex)
+ipc-utils-1.0-1
+less-429-1
+libapr1-1.3.8-2
+libaprutil1-1.3.9-2
+libbz2_1-1.0.5-10      required by tar
+libdb4.2-4.2.52.5-2
+libdb4.5-4.5.20.2-2
+libexpat1-2.0.1-1
+libexpat1-devel-2.0.1-1
+libgcc1-4.3.4-3
+libgdbm4-1.8.3-20     required by cvs
+libgmp3-4.3.1-3
+libiconv2-1.13.1-1     required by sed
+libintl3-0.14.5-1
+libintl8-0.17-11
+liblzma1-4.999.9beta-10
+libncurses8-5.5-10
+libncurses9-5.7-16
+libneon27-0.29.0-1
+libopenldap2_3_0-2.3.43-1
+libpcre0-8.00-1    Required by less (pcre = Perl Compatible regex)
 libpopt0-1.6.4-4
- libreadline4-4.1-2
- libreadline5-4.3-5
-libreadline6-5.2.12-10
-login-1.9-7		optional
-make-3.81-2
-man-1.6e1
- minires-1.00-1	Required by openssh
-ncurses-5.5.2
-openssh-5.0p1-1		Used by cvs
-openssl-0.9.8g-1	Required by openssh
- openssl097-0.9.7j-1
- readline-5.0-1.tar.bz2
-run-1.1.10-1
+libpq5-8.2.11-1
+libreadline7-6.0.3-2
+libsasl2-2.1.19-3
+libserf0_0-0.3.0-2
+libsigsegv0-2.6-1
+libsqlite3_0-3.6.21-3
+libssp0-4.3.4-3
+libstdc++6-4.3.4-3
+libwrap0-7.6-20
+make-3.81-2-broken
+make-3.81-2-from-cmake
+man-1.6e-1
+minires-1.02-1         required by openssh
+openssh-5.3p1-1        required by cvs
+openssl-0.9.8l-2       required by openssh
+perl-5.10.1-2
+rebase-3.0.1-1
+run-1.1.12-11
 sed-4.1.5-2
-tar-1.19.90-1
-termcap-20050421-1
-terminfo-5.5_20060323-1
-texinfo-4.8a-1
-tzcode-2007h-2
-which-1.19-1
-zlib-1.2.3-1
+subversion-1.6.9-1
+tar-1.22.90-1
+terminfo-5.7_20091114-13
+terminfo0-5.5_20061104-11
+texinfo-4.13-3
+tzcode-2009k-1
+w32api-3.14-1
+which-2.20-2
+xemacs-emacs-common-21.4.22-1
+xz-4.999.9beta-10
+zlib-1.2.3-10
+zlib-devel-1.2.3-10
+zlib0-1.2.3-10
 </pre>
 
  <p>The download of devel cygwin tools from February, 2010, includes all
 the tools from the basic cygwin download listed above and
 
 <pre>
-autoconf-2.59-2
-autoconf-devel-2.59-2
-autoconf-stable-2.131
-binutils-20041229-1.tar.bz2
-gcc-3.4.4-2
-gcc-core-3.4.4-1 	  Matlab interface uses a C++ file
-gcc-g++-3.4.4-1
+autoconf-8-1
+autoconf2.1-2.13-10
+autoconf2.5-2.65-1
+binutils-2.19.51-1
+gcc-3.4.4-999
+gcc-core-3.4.4-999
+gcc-g++-3.4.4-999
 gcc-mingw-core-20050522-1
 gcc-mingw-g++-20050522-1
-m4-1.4.7-1
-mingw-runtime-3.10-1
-mktemp-1.5-3
-perl-5.8.7-5		sadly, autoconf requires perl
-w32api-3.7.1
-
+m4-1.4.13-2
+mingw-runtime-3.17-1
+perl-5.10.1-2      sadly, autoconf requires perl
+w32api-3.14-1
 </pre>
 
 In addition, we include select tools for 
 <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>,
 the Ptolemy/TinyOS interface.
 <pre>
-automake-1.5 or later (1.9.6 preferred)
-bison 
-emacs 
-emacs-el 
-gperf 
-rpm 
+automake1.10-1.10.3-1
+bison-2.4.1-1
+emacs-23.1-10
+emacs-el-23.1-10
+gperf-3.0.3-1
+rpm-4.1-2
 </pre>
 
 <!--#include virtual="/ssi/bottom.htm" -->
