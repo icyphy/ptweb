@@ -40,19 +40,21 @@ The Matlab interface requires that Matlab be installed on the local machine.
 fairly large, so we provide three separate self-extracting downloads
 of the cygwin tools for Windows.
 <ol>
-<li> <a href="cygwin100706basic.exe"><code>cygwin100706basic.exe</code></a>
-(19.5 Mb) - The tools necessary to compile and configure Ptolemy II
-except for the Matlab interface.
+<li> <a href="cygwin-basic-20100224.zip"><code>cygwin-basic-20100224.zip</code></a> (23.8 Mb)
+ - The tools necessary to compile and configure Ptolemy II
+except for the Matlab interface and C code generation.
 
 
-<li> <a href="cygwin100706devel.exe"><code>cygwin100706devel.exe</code></a>
-(65.9 Mb) - The tools necessary to compile and configure Ptolemy II
+<li> <a href="cygwin-devel-20100224.zip"><code>cygwin-devel-20100224.zip</code></a>
+(97.4 Mb) - The tools necessary to compile and configure Ptolemy II
 including the Matlab interface and the JNI Actor.  This download includes
-everything in <code>cygwin100706basic.exe</code> above.
+everything in <code>cygwin-basic-20100224.zip</code> above.
 </ol>
 
  <p>The sources for the above downloadables can be found in
-<a href="cygwin100706develsrc.exe"><code>cygwin100706develsrc.exe</code></a> (229.6 Mb)
+<a href="cygwin-devel-src-20100224.zip"><code>cygwin-devel-src-20100224.zip</code></a> (394 Mb)
+ This download includes
+everything in <code>cygwin-basic-20100224.zip</code> above.
 
  <p>
  <p>
@@ -62,52 +64,22 @@ everything in <code>cygwin100706basic.exe</code> above.
 
 <ol>
 <li> Most Ptolemy II users will
-<br> Download and execute <a href="cygwin100706basic.exe"><code>cygwin100706basic.exe</code></a> (19.5 Mb) 
+<br> Download <a href="cygwin-basic-20100224.zip"><code>cygwin-basic-20100224.zip</code></a> (23.8 Mb)
 
 
  <br> If you are running under Windows and 
 have Matlab installed on your local machine, then 
-<br> Download and execute <a href="cygwin100706devel.exe"><code>cygwin0505devel.exe</code></a> (65.9 Mb).
+<br> Download 
+<a href="cygwin-devel-20100224.zip"><code>cygwin-devel-20100224.zip</code></a> (97.4 Mb).
 
  <br>The files will be extracted to an seemingly arbitrary directory.
 You may find it easier to change the directory to something short, like
 <code>c:\temp\cygwin</code>. 
 
-<li> <code>setup.exe</code> should start up automatically for you.
-<li> Click on  <code>Next</code>
-<li> <code>Install from Local Directory</code> should already be selected
-for your. Click on <code>Next</code>.
+<li> Find the download and click on <code>INSTALL.bat</code>.
+This script will invoke <CODE>setup.exe</CODE> for you.
 
-<li> Keep the default of <code>C:\cygwin</code> for the <code>Select Root Install Directory</code>.  
- <br>Keep the default <code>All Users</code>,
- <br>Change the <code>Default Text File Type</code> to <code>DOS</code>
- <br>(If you select Unix instead of DOS, then you will likely have
- <a href="http://www.gigascale.org/softdevel/faq/23.html">Cygwin CR/NL problems</a> with CVS)
-
- <br> and then click on <code>Next</code>.
-
-<li> Keep the default for <code>Local Package Directory</code>
-and click on <code>Next</code>.
-
-
-<li> The <code>Select packages to install</code> window will come
-up with the default settings, we need to change from
-<code>default</code> to <code>install</code>
-click on
-the word <code>default</code> that is to the right of <code>All</code>.
-The subpages should then change from <code>default</code> to
-<code>Install</code>.  In the screen shot below, we have just
-clicked on <code>default</code>:
-<img src="../../image/cygwinSetup.gif" alt="Cygwin Setup">
- <br>
-<li> Select <code>Next</code>, which will install all the packages.
-
-
-<li> Select <code>Create Desktop Icon</code> and <code>Add to Start Menu</code>
-according to your preferences.
-
-<li> Remove the temporary directory where you extracted the files.
-
+<li> After installation, you may remove the temporary directory in which the zip file was unzipped.
 
 <li> <code>c:/cygwin/etc/passwd</code> is created during the 
 Cygwin installation.  If your Windows account is a domain account
@@ -183,7 +155,7 @@ properties
 
 <h2>Cygwin download contents</h2>
 
-<p>The download of basic cygwin tools from April, 2008 includes:
+<p>The download of basic cygwin tools from February, 2010 includes:
 
 <pre>
 alternatives-1.3.29a-1
@@ -254,7 +226,7 @@ which-1.19-1
 zlib-1.2.3-1
 </pre>
 
- <p>The download of devel cygwin tools from October 10, 2006, includes all
+ <p>The download of devel cygwin tools from February, 2010, includes all
 the tools from the basic cygwin download listed above and
 
 <pre>
