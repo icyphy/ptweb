@@ -98,6 +98,51 @@ mkpasswd -d -u cxh --path-to-home=/cygdrive/c/users &gt;&gt; /etc/passwd
 <code>mkpasswd -h</code> will print out help for the <code>mkpasswd</code>
 command
 
+<li> Start Cygwin and remount <code>c:</code> with <code>posix=1</code>:
+  <pre>
+mount -f -o text,posix=1 c: /cygdrive/c
+  </pre>
+  <br><b>Details:</b>
+  <br>By default, Cygwin mounts the <code>c:</code> directory with
+  <code>posix=0</code>.  If you run <code>mount</code>, you will get:
+  <pre>
+C:/cygwin/bin on /usr/bin type ntfs (binary,auto)
+C:/cygwin/lib on /usr/lib type ntfs (binary,auto)
+C:/cygwin on / type ntfs (binary,auto)
+C: on /cygdrive/c type ntfs (text,posix=0,user,noumount,auto)
+  </pre>
+  The problem is that shell scripts such as
+  <code>$PTII/bin/vergil</code> will fail:
+  <pre>
+$ $PTII/bin/vergil
+c:/tmp/cxh/foo/ptII8.0.beta/bin/vergil: line 30: $'\r': command not found
+c:/tmp/cxh/foo/ptII8.0.beta/bin/vergil: line 40: $'\r': command not found
+c:/tmp/cxh/foo/ptII8.0.beta/bin/vergil: line 43: $'\r': command not found
+c:/tmp/cxh/foo/ptII8.0.beta/bin/vergil: line 48: $'\r': command not found
+c:/tmp/cxh/foo/ptII8.0.beta/bin/vergil: line 67: syntax error near unexpected to
+ken `$'in\r''
+':/tmp/cxh/foo/ptII8.0.beta/bin/vergil: line 67: `    case "`uname -s`" in
+
+cxh@newton /etc
+  </pre>
+  The fix is to run:
+  <pre>
+mount -f -o text,posix=1 c: /cygdrive/c
+  </pre>
+  So that mount returns:
+  <pre>
+C:/cygwin/bin on /usr/bin type ntfs (binary,auto)
+C:/cygwin/lib on /usr/lib type ntfs (binary,auto)
+C:/cygwin on / type ntfs (binary,auto)
+C: on /cygdrive/c type ntfs (text,user)
+  </pre>
+  This problem is similar to the <a
+  href="http://www.gigascale.org/softdevel/faq/23.html">Cygwin CR/NL
+  problems</a>.  What has changed is that the Cygwin installer appears
+  to no longer offer the possibility of selecting DOS as the default
+  file type. 
+
+
 <li> Follow the instructions in the
 <a href="ptII8.0.beta/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section
 </ol>
