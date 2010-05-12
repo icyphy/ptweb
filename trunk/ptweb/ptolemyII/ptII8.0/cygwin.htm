@@ -22,7 +22,8 @@ is part of the JDK, which is available at:
 
 <a href="http://java.sun.com/j2se/1.5/"><code>http://java.sun.com/j2se/1.5/</code></a>.
 The <code>javac</code> compiler is <B>not</B> present in the 
-Java Runtime Environment (JRE)
+Java Runtime Environment (JRE)</p>
+
 
 
  <p>The Cygwin home page is at
@@ -36,9 +37,14 @@ Java Runtime Environment (JRE)
 Interface (JNI) actor requires that the a C compiler be installed.
 The Matlab interface requires that Matlab be installed on the local machine.
 
- <br>The gcc compiler is
-fairly large, so we provide three separate self-extracting downloads
-of the cygwin tools for Windows.
+<p>Under Windows, to build the Matlab interface, you must
+use Mingw from <a href="http://www.mingw.org">http://www.mingw.org</a>.
+
+<br>The gcc compiler is
+fairly large, so we provide four separate self-extracting downloads
+of the Cygwin tools and MinGW for Windows.
+
+
 <ol>
 <li> <a href="cygwin-basic-20100224.zip"><code>cygwin-basic-20100224.zip</code></a> (23.8 Mb)
  - The tools necessary to compile and configure Ptolemy II
@@ -49,12 +55,16 @@ except for the Matlab interface and C code generation.
 (97.4 Mb) - The tools necessary to compile and configure Ptolemy II
 including the Matlab interface and the JNI Actor.  This download includes
 everything in <code>cygwin-basic-20100224.zip</code> above.
-</ol>
 
- <p>The sources for the above downloadables can be found in
+<li>The sources for the above downloadables can be found in
 <a href="cygwin-devel-src-20100224.zip"><code>cygwin-devel-src-20100224.zip</code></a> (270 Mb)
  This download includes just the sources and should be downloaded in the same directory
 as one of the other zip files above.
+
+<li> <a
+  href="mingw20100511.tar.gz"><code>mingw20100511.tar.gz</code></a>
+  (30.8 Mb) - Mingw necessary to compile the Ptolemy/Matlab interface
+</ol>
 
  <p>
  <p>
@@ -146,6 +156,38 @@ C: on /cygdrive/c type ntfs (text,user)
 <li> Follow the instructions in the
 <a href="ptII8.0.beta/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section
 </ol>
+
+<h2>&nbsp;Installing Mingw for Windows</h2>
+
+<p>The default gcc compiler shipped with Cygwin will produce .dll files that do not work properly.&nbsp; The solution is to install <a class="external-link" href="http://www.mingw.org/">Mingw</a>.</p>
+<ol><li>Install Cygwin either from <a class="external-link" href="http://www.cygwin.com">http://www.cygwin.com</a> or from the <a class="external-link" href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/cygwin.htm">Ptolemy distribution</a>.</li><li>Start Cygwin bash, create c:\mingw</li><li>
+<pre>mkdir c:/mingw
+cd c:/mingw</pre>
+</li><li>Copy the mingwdl.sh script from <a class="external-link" href="http://www.mingw.org/wiki/HOWTO_Install_the_MinGW_GCC_Compiler_Suite">http://www.mingw.org/wiki/HOWTO_Install_the_MinGW_GCC_Compiler_Suite</a> and paste it into an editor and create c:/mingw/mingwdl.sh</li><li>Execute mingwdl.sh, which will download the binaries into c:/mingwdl.
+<pre>bash mingwdl.sh</pre>
+</li><li>Unzip the .tar.gz files
+<pre>gunzip *.gz</pre>
+</li><li>Uncompress the .tar.lzma files:
+<pre>lzma -d *.lzma</pre>
+</li><li>untar the .tar files.&nbsp; Create a script called mingwuntar.sh:
+<pre>#!/bin/sh
+tars=`ls *.tar`
+for tar in $tars
+do
+    echo $tar
+    tar -xf $tar
+done</pre>
+</li><li>Run mingwuntar.sh
+<pre>bash mingwuntar.sh</pre>
+</li><li>Add c:\mingw\bin to your Windows path <em>Based on the Mingw instructions</em>:
+<ol>
+    <li>  Right-click on "My Computer" and select "Properties".</li>
+    <li> Click Advanced | Environment Variables.</li>
+    <li>In the box entitled "System Variables" scroll down to the line that says "PATH" and double-click the entry.</li>
+    <li>You will be presented with a dialog box with two text boxes, the bottom text box allows you to edit the PATH variable. It is very important that you do not delete the existing values in the PATH string, this will cause all sorts of problems for you!</li>
+    <li> Scroll to the end of the string and at the end add ";C:\mingw\bin". Don't forget the semicolon; this separates the entries in the PATH.</li>
+    <li>press OK | OK | OK and you are done.</li></ol>
+</li></ol>
 
 <h2>Installing Cygwin from the Web</h2>
 We provide prebuilt downloads of the subset of Cygwin tools needed to
