@@ -62,7 +62,7 @@ everything in <code>cygwin-basic-20100224.zip</code> above.
 as one of the other zip files above.
 
 <li> <a
-  href="mingw20100511.tar.gz"><code>mingw20100511.tar.gz</code></a>
+ href="mingw20100511.zip"><code>mingw20100511.zip</code></a>
   (30.8 Mb) - Mingw necessary to compile the Ptolemy/Matlab interface
 </ol>
 
@@ -158,8 +158,22 @@ C: on /cygdrive/c type ntfs (text,user)
 </ol>
 
 <h2>&nbsp;Installing Mingw for Windows</h2>
-
 <p>The default gcc compiler shipped with Cygwin will produce .dll files that do not work properly.&nbsp; The solution is to install <a class="external-link" href="http://www.mingw.org/">Mingw</a>.</p>
+
+<p>You may either install from the Ptolemy Mingw zip file or install
+from the Mingw website.
+
+<h3>Installing from the Ptolemy Mingw zip file</h3>
+<ol>
+<li> Download the <a
+  href="mingw20100511.zip"><code>mingw20100511.zip</code> file.
+<li> Unzip it so that <code>c:\mingw</code> is created.
+<li> Add <code>c:\mingw\bin</code> to your PATH, see <a href="#mingwPath">below</a>.
+
+</ol>
+
+<h3>Installing from the Mingw website</h3>
+
 <ol><li>Install Cygwin either from <a class="external-link" href="http://www.cygwin.com">http://www.cygwin.com</a> or from the <a class="external-link" href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/cygwin.htm">Ptolemy distribution</a>.</li><li>Start Cygwin bash, create c:\mingw</li><li>
 <pre>mkdir c:/mingw
 cd c:/mingw</pre>
@@ -179,7 +193,8 @@ do
 done</pre>
 </li><li>Run mingwuntar.sh
 <pre>bash mingwuntar.sh</pre>
-</li><li>Add c:\mingw\bin to your Windows path <em>Based on the Mingw instructions</em>:
+</li>
+<li><a name="mingwPath">Add</a> c:\mingw\bin to your Windows path <em>Based on the Mingw instructions</em>:
 <ol>
     <li>  Right-click on "My Computer" and select "Properties".</li>
     <li> Click Advanced | Environment Variables.</li>
