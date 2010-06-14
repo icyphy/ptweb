@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Declustering:  A New Multiprocessor Scheduling Technique</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/publications/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
+<h1>Declustering:  A New Multiprocessor Scheduling Technique</h1>
+
+Gilbert C. Sih and Edward A. Lee 
+<br><br>
+<i>IEEE Transactions on Parallel and Distributed Systems</i>, vol. 4, no. 6, pp 625-637, June 1993.
+<br><a href="http://www.computer.org/portal/web/csdl/doi/10.1109/71.242160">http://www.computer.org/portal/web/csdl/doi/10.1109/71.242160 </a><br>
+</center>
+<p>
+<p>
+<h2>ABSTRACT</h2>
+The authors present a new compile-time scheduling heuristic called declustering, which schedules acyclic precedence graphs that fit the synchronous data flow (SDF) model onto multiprocessor architectures. This technique accounts for interprocessorcommunication (IPC) overheads and considers interconnection constraints in the architecture so that shared resource contention can be avoided. The algorithm initially invokes a new clustering method that uses graph-analysis techniques to isolate parallelism instances. When constructing an initial set of clusters, this procedure explicitly addresses the tradeoff between exploiting parallelism and incurring communication cost. By hierarchically combining these clusters and then systematically decomposing this hierarchy, the declustering method exposes parallelism instances in order of importance and attains a cluster granularity that fits the characteristics of the architecture. It is shown that declustering retains the clustering advantage of avoiding IPC, yet overcomes the inflexibility associated with traditional clustering approaches.
+
+<!-- #include virtual="/ssi/bottom.htm" -->
