@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Ptolemy Tutorial: Exploring Models of Computation with Ptolemy II</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/conferences/09/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+ <table>
+ <tr>
+  <td>
+   <h1>Ptolemy Tutorial: Exploring Models of Computation with Ptolemy II</h1>
+  <i>Sunday, October 24, 2010, Scottsdale, AZ</i>
+   <br>Held in conjunction with <a href="http://www.esweek.org">Embedded
+    Systems Week</a> 
+   <br>Registrants of either CASES, CODES+ISSS or EMSOFT may attend
+    this tutorial for free!<i>As of 7/20, registration was not yet open</i>.
+    <p><b>Tutorial attendees should bring their own laptops.</b></p>
+  </td>
+
+  <td>
+   <img alt="Ptolemy Picture" width="82" height="100" src="../../image/ptolemyTiny.gif"/>
+   <img alt="Codes ISS Logo " width="100" height="52" src="codes_isss_logo.gif"/>
+ </td>
+ </tr>
+</table>
+
+<h3>Abstract</h3>
+<p>The Ptolemy project studies modeling, simulation, and design of concurrent, real-time, embedded systems. The focus is on assembly of concurrent components. The key underlying principle in the project is the use of well-defined models of computation that govern the interaction between components. A major problem area being addressed is the use of heterogeneous mixtures of models of computation. </P>
+
+<p>Ptolemy II takes a component view of design, in that models are constructed as a set of interacting components. A model of computation governs the semantics of the interaction, and thus imposes an execution-time discipline. Ptolemy II has implementations of many models of computation including Synchronous Data Flow, Kahn Process Networks, Discrete Event, Continuous Time, Synchronous/Reactive and Modal Models </P>
+
+<p>This hands-on tutorial explores how these models of computation are implemented in Ptolemy II and how to create new models of computation such as a &ldquo;non-dogmatic&rdquo; Process Networks example and a left-to-right execution policy example. </P>
+
+<h3>Introduction</h3>
+<p>Ptolemy II <a href="#1">[1]</a><a href="#6">[6]</a> is an open-source software framework supporting
+experimentation with actor-oriented design. Actors are software
+components that execute concurrently and communicate through messages
+sent via interconnected ports. A model is a hierarchical
+interconnection of actors. In Ptolemy II, the semantics of a model is
+not determined by the framework, but rather by a software component in
+the model called a director, which implements a model of
+computation. The Ptolemy Project has developed directors supporting
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/pn/doc/index.htm">process networks (PN)</a>,
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/de/doc/index.htm">discrete-events (DE)</a>,
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/sdf/doc/index.htm">dataflow (SDF)</a>,
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/sr/doc/index.htm">synchronous/reactive(SR)</a>,
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/rendezvous/doc/index.htm">rendezvous-based models</a>,
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/gr/doc/index.htm">3-D visualization</a>,
+and
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/continuous/doc/index.htm">continuous-time</a>
+models.
+Each level of the hierarchy in a model can
+have its own director, and distinct directors can be composed
+hierarchically. A major emphasis of the project has been on
+understanding the heterogeneous combinations of models of computation
+realized by these directors. Directors can be combined hierarchically
+with state machines to make
+<a href="/ptolemyII/ptIIlatest/ptII/ptolemy/domains/modal/doc/index.htm">modal models</a>
+<a href="#2">[2]</a> <a href="#7">[7]</a>. A hierarchical
+combination of continuous-time models with state machines yields
+hybrid systems <a href="#3">[3]</a>; a combination of synchronous/reactive with state
+machines yields StateCharts <a href="#4">[4]</a> (the Ptolemy II variant is close to
+SyncCharts).</p>
+
+<p>Ptolemy II has been under development since 1996; it is a successor
+to
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyClassic">Ptolemy Classic</a>,
+which was developed since 1990. The core of
+Ptolemy II is a collection of Java classes and packages, layered to
+provide increasingly specific capabilities. The kernel supports an
+abstract syntax, a hierarchical structure of entities with ports and
+interconnections. A graphical editor called Vergil supports visual
+editing of this abstract syntax. An XML concrete syntax called MoML
+provides a persistent file format for the models. Various specialized
+tools have been created from this framework, including
+<a href="http://ptolemy.eecs.berkeley.edu/hyvisual">HyVisual</a>
+(for hybrid systems modeling),
+<a href="http://www.kepler-project.org">Kepler</a>
+(for scientific workflows), 
+<a href="http://ptolemy.eecs.berkeley.edu/visualsense">VisualSense</a>
+(for modeling and simulation of wireless networks),
+<a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>
+(for sensor network design), and some commercial products.  Key parts
+of the infrastructure include an actor abstract semantics, which
+enables the interoperability of distinct models of computation with a
+well-defined semantics; a model of time (specifically, super-dense
+time, which enables interaction of continuous dynamics and imperative
+logic); and a sophisticated type system supporting type checking, type
+inference, and polymorphism. The type system has recently been
+extended to support user-defined ontologies <a href="#5">[5]</a>.  Various experiments
+with synthesis of implementation code and abstractions for
+verification are included in the project.</p>
+
+<p> <img alt="Vergil screen shot " width="408" height="256" src="Vergil.png"/>
+<br>An example of a Vergil window.  Vergil is a graphical
+  editor for Ptolemy II.
+
+<h3>Speakers</h3>
+
+<table>
+  <tr>
+    <td> <img src="lee.jpg" alt="Edward A. Lee"></td>
+    <td> Edward A. Lee, (<a href="http://ptolemy.org/~eal">http://ptolemy.org/~eal</a>)
+<br/>Edward A. Lee is the Robert S. Pepper Distinguished Professor of
+  the Electrical Engineering and Computer Sciences (EECS) department
+  at U.C. Berkeley. His research interests center on design, modeling,
+  and simulation of embedded, real-time computational systems. He is
+  the director of the Ptolemy project. </li>
+  </td>
+  </tr>
+  <tr>
+    <td> <img width="150" src="Stavros-photo-small.jpg" alt="Stavros Tripakis"></td>
+<td>Stavros Tripakis (<a href="http://www-verimag.imag.fr/~tripakis">http://www-verimag.imag.fr/~tripakis</a>)
+<br/>Stavros Tripakis is Associate Research Scientist at UC
+  Berkeley. His work lies in the areas of embedded, real-time and
+  distributed systems, model-based and component-based design,
+  veri&#64257;cation, testing and synthesis.
+  </td>
+  </tr>
+  <tr>
+    <td> <img width="150" src="cxb_160_185.jpg" alt="Christopher Brooks"></td>
+    <td>Christopher Brooks (<a href="http://ptolemy.org/~cxh">http://ptolemy.org/~cxh</a>)
+<br>Christopher Brooks is the Ptolemy Project Software Manager and the
+  Executive Director of the the Center for Hybrid and Embedded
+  Software Systems (CHESS).
+    </td>
+   </tr>
+</table>
+
+<h4>Topics</h4>
+The tutorial is a hands-on tutorial of 3 to 3.5 hours on Sunday,
+October 24th, 2010.
+<p><b>Attendees should bring their own laptops.</b></p>
+<ul>
+
+  <li>(13:00-14:00) Setting up Ptolemy II 8.0 and Eclipse: installing
+  Eclipse; configuring Ptolemy; compiling Ptolemy; running a
+  model within Eclipse.
+ (We will provide USB sticks with Windows, Mac and Linux binaries) 
+  </li>
+
+  <li>(14:00-15:00) Overview of Models of Computation in Ptolemy II: abstract semantics; actors and directors; currently implemented models of computation (Synchronous Data Flow, Dynamic Data Flow, Kahn Process Networks, Discrete Event, Continuous Time, Syn-chronous/Reactive and Modal Models); combining models of computation. </li>
+
+  <li>(15:00 -15:30) Break </li>
+  <li>(15:30 -17:00) Extending Ptolemy Models of Computation: Ptolemy execution semantics object model; using Eclipse to extend Ptolemy; building a non-dogmatic 
+  Kahn Process Networks model of computation; building a left to right model of computation. </li>
+</ul>
+
+<p>The tutorial is similar to material presented at the
+<a href="http://ptolemy.org/conferences/09/tutorial.htm">February, 2009 Ptolemy Miniconference tutorial</a> 
+and at the
+<a href="http://ptolemy.org/conferences/07">February, 2007 Ptolemy Miniconference tutorial</a>.
+
+<h3>References</h3>
+
+<p><a name="1">[1]</a>
+Johan Eker, Jorn Janneck, Edward A. Lee, Jie Liu, Xiaojun
+Liu, Jozsef Ludvig, Sonia Sachs, Yuhong Xiong. <a
+href="http://chess.eecs.berkeley.edu/pubs/488.html">
+Taming heterogeneity - the Ptolemy approach</a>,
+<i>Proceedings of the IEEE</i>, 91(1):127-144,
+January 2003. 
+<br>(<i>Key citation for the Ptolemy project</i>)
+</p>
+
+<p><a name="2">[2]</a>
+Edward A. Lee. <a
+href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-151.html"><i>Finite
+State Machines and Modal Models in Ptolemy
+II</i></a>, Technical report,  EECS Department,
+University of California, Berkeley, UCB/EECS-2009-151,
+December, 2009.
+</p>
+
+<p><a name="3">[3]</a>
+	E. A. Lee and H. Zheng, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/05/OperationalSemantics/">Operational Semantics of Hybrid Systems</a>," Invited paper in Proceedings of Hybrid Systems: Computation and Control (HSCC) LNCS 3414, Zurich, Switzerland, March 9-11, 2005, pp.25-53.
+</p>
+
+<p><a name="4">[4]</a>
+	E. A. Lee, H. Zheng, "<a
+	href="http://ptolemy.eecs.berkeley.edu/publications/papers/07/unifying/index.htm">Leveraging
+	Synchronous Language Principles for Heterogeneous Modeling and
+	Design of Embedded Systems</a>," EMSOFT '07, September 30 - October 3, 2007, Salzburg, Austria.
+</p>
+
+<p><a name="5">[5]</a>
+	M.-K. Leung, T. Mandl, E. A. Lee, E. Latronico,
+C. Shelton, S. Tripakis, and B. Lickly, "<a
+	href="http://chess.eecs.berkeley.edu/pubs/611.html">Scalable
+	Semantic Annotation using Lattice-based Ontologies</a>," ACM/IEEE 12th International Conference
+on Model Driven Engineering Languages and Systems (MODELS), Denver,
+CO, USA, 4-9 October, 2009.
+</p>
+
+<p><a name="6">[6]</a>Christopher Brooks, Edward A. Lee. <a
+href="http://chess.eecs.berkeley.edu/pubs/655.html"><i>Ptolemy
+II - Heterogeneous Concurrent Modeling and Design in
+Java</i></a>, 11 February, 2010; Poster presented at the 2010 <a
+href="http://www.eecs.berkeley.edu/BEARS">Berkeley
+EECS Annual Research Symposium (BEARS)</a>.</p>
+
+<p><a name="7">[7]</a>
+Edward A. Lee. S. Tripakis. "Modal Models in Ptolemy". In EOOLT 2010
+3rd International Workshop on
+Equation-Based Object-Oriented Modeling Languages
+and Tools. Linkoping University Electronic Press, October
+2010. To appear.
+</p>
+
+
+
+
+<p>Please direct questions to 
+cxh at eecs&nbsp;berkeley edu</p>
+
+<!--#include virtual="/ssi/bottom.htm" -->
