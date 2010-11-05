@@ -63,7 +63,7 @@ Disallow: /ptolemyII/ptII6.0/ptII6.0.2
 Disallow: /ptolemyII/ptII7.0/ptII
 #Disallow: /ptolemyII/ptII7.0/ptII7.0.1
 Disallow: /ptolemyII/ptII7.0/ptII7.0.beta
-#Disallow: /ptolemyII/ptII8.0/
+Disallow: /ptolemyII/ptII8.0/ptII8.0.beta
 Disallow: /ptolemyII/ptII2.0/jnlp
 Disallow: /ptolemyII/ptII2.0/jnlp-2.0-beta
 Disallow: /ptolemyII/ptII3.0/jnlp-3.0.2
@@ -76,6 +76,7 @@ Disallow: /ptolemyII/ptII6.0/jnlp-6.0.1
 Disallow: /ptolemyII/ptII6.0/jnlp-6.0.2
 Disallow: /ptolemyII/ptII7.0/jnlp-7.0.1
 Disallow: /ptolemyII/ptII8.0/jnlp-8.0.beta
+Disallow: /ptolemyII/ptII8.0/jnlp-8.0.1
 Disallow: /ptolemyII/ptII8.0/jnlp-8.1.devel
 Disallow: /ptolemyII/ptII8.0/jnlp-books
 Disallow: /ptolemyII/ptIIlatest
