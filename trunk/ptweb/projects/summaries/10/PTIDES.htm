@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>PTIDES: Programming Temporally Integrated Distributed Embedded Systems</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/summaries/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<h2 class="top">PTIDES: Programming Temporally Integrated Distributed Embedded Systems</h2>
+
+<p>Jia Zou, Slobodan Matic, Edward A. Lee, John Eidson, Michael Zimmer and Ilge Akkaya</p>
+
+<p>Center for Hybrid and Embedded Software Systems (CHESS), National Science Foundation 0720882 (CSR-EHS: PRET), National Science Foundation 1035672 (CPS: PTIDES), National Science Foundation 0931843 (ActionWebs), Army Research Office W911NF-07-2-0019 (SCOS), Air Force Office of Scientific Research FA9550-06-0312 (HCDDES MURI), Multiscale Systems Center (MuSyC), Robert Bosch GmBH, National Instruments, Thales and Toyota</p>
+
+<p>The PTIDES project focuses on developing a programming model for real-time distributed systems and studying algorithms that can statically check whether a model meets the specified timing requirements over a network of distributed systems.
+</p><p>This programming model exploits time synchronization protocols such as IEEE 1588, which provide a global notion of physical time in distributed systems. PTIDES uses discrete-event (DE) models as programming specifications for distributed real-time systems. In the DE model of computation, software components communicate via time-stamped events. We refer to the values of the time stamps as "model time".” In [1], we use model time to define execution semantics and add constraints that bind certain model time events to physical time. We limit the relationship between model time and physical time only to those circumstances where this relationship is needed. Paper [2] studies the semantic properties important to implementation. It provides an execution model that permits out of order processing of events without sacrificing determinacy and without requiring backtracking. The PTIDES project workflow is shown in Fig. 1.
+</p><p>In [3] we describe a simulator for PTIDES built on Ptolemy II design environment. In [4,5] we review PTIDES with respect to distributed and multi-mode aspects of cyber-physical systems. By combining PTIDES with modal models, we illustrated timed mode transitions which enable time-based detection of missing signals to drive mode changes in the operation of common industrial applications.
+</p><p>Currently, we are developing a light-weight, real-time operating system (RTOS) called PtidyOS.  PtidyOS is a single stack, event-based RTOS, which combines PTIDES semantics with earliest-deadline-first scheduling in order to ensure system responsiveness to the highest priority event. A code generator integrated from the Ptolemy II environment glues together the software components with PtidyOS to produce executable programs for each of the platforms in the network. Our prototype implementation of PtidyOS will run on a set of Luminary Micro microcontrollers with hardware assisted support for IEEE 1588 protocol. The tunneling ball device (Fig. 2) is used as a target application for PtidyOS. We chose this application due to its similarity to motor control applications and the combination of different types of event sequences (periodic, quasi-periodic, and sporadic) found in it.
+</p><p>Our future activities include work on several other components of the PTIDES framework as shown in Fig. 1. One of the challenges here is to provide schedulability analysis for the PTIDES programming model, which would allow for a static analysis of the deployability of a given application on a set of resources. To validate the PTIDES design environment for applications executing in a multi-platform system, we are building an experimental hardware-in-the-loop setup for applications drawn from the control of electric power systems. The evaluation will be based on experiments on a system of distributed micro-controllers emulating typical power system control and monitoring devices and an emulation of portions of the electric power grid based on conventional instrumentation. This emulation provides pairs of signals representing the outputs of voltage and current monitors found at critical points in the power transmission system. The magnitudes and phase of each pair can be varied independently as can the frequency. All frequencies and phases are relative to a single real-time clock which is synchronized to the real-time clocks in the monitoring and control devices. This allows us to emulate several generators each with different load conditions and frequency and to permit the generation of synchrophasor data.</p>
+
+<p>
+<img src="101935-1.jpeg" alt="Figure 1" height="477" width="509">
+<br>Figure 1: PTIDES project workflow diagram</p>
+
+<p>
+<img src="01935-2.jpeg" alt="Figure 2" height="1024" width="768">
+
+<br>Figure 2: Tunneling ball device</p>
+
+<dl compact="compact">
+
+<dt> [1] </dt>
+<dd> Y. Zhao, J. Liu and E. A. Lee, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/07/RTAS/">A Programming Model for Time-Synchronized Distributed Real-Time Systems</a>," in <i>Proceedings of the 13th IEEE Real-Time and Embedded Technology and Applications Symposium (RTAS 07)</i>, Bellevue, WA, United States, April 3-6, 2007.</dd>
+
+<dt> [2] </dt>
+
+<dd> J. Zou, S. Matic, E. A. Lee, T. H. Feng, and P. Derler, "<a href="http://chess.eecs.berkeley.edu/pubs/529.html">Execution strategies
+for ptides, a programming model for distributed embedded systems</a>," in <i>Proceedings of the 15th IEEE Real-Time and Embedded Technology and Applications Symposium (RTAS 09)</i>, San Francisco, WA, United States, April 13-15, 2009.</dd>
+
+<dt> [3] </dt>
+<dd> P. Derler, E. A. Lee, and S. Matic, "<a href="http://chess.eecs.berkeley.edu/pubs/483.html">Simulation and implementation of the ptides programming model</a>," <i>In Proceedings of IEEE International Symposium on Distributed Simulation and Real Time Applications (DS-RT 09)</i>, Vancouver, Canada, October 23-25, 2008.</dd>
+
+<dt> [4] </dt>
+<dd> J. C. Eidson, E. A. Lee, S. Matic, S. A. Seshia, and J. Zou. "<a href="http://techreports.lib.berkeley.edu/accessPages/EECS-2009-135.html">Time-centric models for designing embedded cyber-physical systems</a>," Technical Report UCB/EECS-2009-135, EECS Department, University of California, Berkeley, Oct 2009.</dd>
+
+<dt> [5] </dt>
+<dd> J. C. Eidson, E. A. Lee, S. Matic, S. A. Seshia, and J. Zou. A Time-Centric Model for Cyber-Physical Applications, in <i>Proceedings of the Third International Workshop on Model-Based Architecting and Construction of Embedded Systems (ACES-MB 2010)</i>, Oslo, Norway, October, 2010.</dd>
+
+</dl>
+
+<p>
+</p>
+
+<p>
+More information: <a href="http://chess.eecs.berkeley.edu/ptides">http://chess.eecs.berkeley.edu/ptides</a>
+
+</body>
+</html>

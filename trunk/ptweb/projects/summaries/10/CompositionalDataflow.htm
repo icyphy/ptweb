@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Compositional Dataflow</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/summaries/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<h2 class="top">Compositional Dataflow</h2>
+<p>Eleftherios Matsikoudis and Edward A. Lee</p>
+
+<p>Center for Hybrid and Embedded Software Systems, National Science Foundation 0720882 (CSR-EHS: PRET), National Science Foundation 1035672 (CPS: PTIDES), National Science Foundation 0931843 (ActionWebs), Army Research Office W911NF-07-2-0019 (SCOS), Air Force Office of Scientific Research FA9550-06-0312 (HCDDES MURI), Air Force Research Lab, Multiscale Systems Center (MuSyC), Robert Bosch GmBH, National Instruments, Thales and Toyota</p>
+
+<p>Dataflow is a model of computation where a collection of actors communicate through unidirectional first-in first-out (FIFO) channels. Each dataflow actor is defined as a set of firing rules and a firing function. Firing rules specify what tokens must be available at the inputs for the actor to fire. The firing function specifies the input tokens consumed and the output tokens produced when the actor fires, and possibly a new set of firing rules along with a new firing function, thus reflecting an update to the state of the actor. Under suitable conditions, these actors define continuous functions, typically referred to as dataflow processes, over the complete partial order (CPO) of all finite and infinite sequences of tokens under the natural prefix order, and therefore provide for an 
+alternative implementation of Kahn process networks [1].
+</p><p>Despite the abundance of dataflow applications in the embedded systems community, dataflow does not qualify as a programming language. Unless an evaluation strategy is specified, it is impossible to provide a semantic interpretation that will unambiguously assign a meaning to a dataflow network. A considerable amount of research has centered around evaluation strategies that will adhere to Kahn's least fixed-point solution. However, tailoring the operational semantics of a language to fit the simplicity and mathematical convenience of a particular denotational semantics is somewhat questionable. Park's bounded scheduling policy [2] stands out for promoting bounded execution at the expense of convergence to Kahn's least fixed-point semantics. Nonetheless, it compromises compositionality and renders dataflow programming and execution intractable to formal reasoning.
+</p><p>This work focuses on a formal operational semantics for a dataflow programming language[3]. The objective is to identify a set of computation rules that can yield bounded execution, whenever possible, and at the same time remain uncoupled from the low-level machine details, and hence more amenable to formal analysis. The notion of compositionality serves as a compass in this process, offering a solid correctness criterion for the proposed formalism. Questions on optimality issues are also to be addressed.</p>
+
+<dl compact="compact">
+
+<dt> [1] </dt>
+<dd> E. A. Lee, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/dataflow/">A Denotational Semantics for Dataflow with Firing</a>," UC Berkeley Electronics Research Laboratory Memorandum No. UCB/ERL M97/3, January 1997.</dd>
+
+<dt> [2] </dt>
+<dd> T. M. Parks, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/95/parksThesis/">Bounded Scheduling of Process Networks</a>," UC Berkeley Electronics Research Laboratory Memorandum No. UCB/ERL 95/105, PhD thesis, EECS Department, December 1995.</dd>
+
+<dt> [3] </dt>
+<dd> Edward A. Lee and Eleftherios Matsikoudis, "<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/08/DataflowWithFiring/">The Semantics of Dataflow with Firing</a>," Chapter in From Semantics to Computer Science: Essays in memory of Gilles Kahn, Gérard Huet, Gordon Plotkin, Jean-Jacques Lévy, Yves Bertot, editors, Preprint Version, March 07, 2008, Copyright (c) Cambridge University Press, 2008.</dd>
+
+</dl>
+
+<!--#include virtual="/ssi/bottom.htm" -->
+
