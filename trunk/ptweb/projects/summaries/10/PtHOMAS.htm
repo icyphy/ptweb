@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Ptolemy Hierarchical Orthogonal Multi-Attribute Solver (PtHOMAS)
+</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/summaries/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<h2 class="top">Ptolemy Hierarchical Orthogonal Multi-Attribute Solver (PtHOMAS)</h2> 
+<p>Ben Lickly, Dai Bui, Elizabeth Latronico<sup>1</sup>, Charles Shelton<sup>2</sup>, Stavros Tripakis, Christopher Brooks and Edward A. Lee</p>
+
+<p>Center for Hybrid and Embedded Software Systems (CHESS), National Science Foundation 0720882 (CSR-EHS: PRET), National Science Foundation 1035672 (CPS: PTIDES), National Science Foundation 0931843 (ActionWebs), Army Research Office W911NF-07-2-0019 (SCOS), Air Force Office of Scientific Research FA9550-06-0312 (HCDDES MURI), Air Force Research Lab, Multiscale Systems Center (MuSyC), Robert Bosch GmBH, National Instruments, Thales and Toyota</p>
+
+<p>The Ptolemy Hierarchical Orthogonal Multi-Attribute Solver (PtHOMAS) is a collaborative project with CHESS partner Bosch through the Bosch Research and Technology Center with additional funding from the Army Research Office in connection with the OSD Software-Intensive Systems Producibility Initiative. This project also has applications in the NAOMI collaboration with CHESS partner Lockheed-Martin.
+
+</p><p>This project is focused on enhancing model-based design techniques with the ability to include in models semantic information about data (what the data means), to check consistency in the usage of data across models, and to optimize models based on inferences made about the meaning of the data.
+
+</p><p>The approach is to build on classical data type systems, which address this problem up to a point. It is easy to check, for example, whether two models agree that a variable represents an integer value. But additional meaning like the units and the semantic interpretation of the data is not captured in the type system. An organization of such meaning is referred to in computer science as a data ontology. 
+
+</p><p>In classical type systems, the relationship between types form a partial order, or more specifically, a mathematical lattice, as shown in figure 1, "A type lattice", for small subset of a typical type system. Type checking and type inference algorithms are based on efficient algorithms for solving systems of inequalities over such partial orders. 
+</p><p>
+</p><p>A data ontology can be similarly constructed as a lattice, as shown in figure 2 "A data ontology". In this example, each node in the ontology specifies an interpretation of a piece of data and the relations between nodes indicate "is a" relationships between these interpretations. In the PtHOMAS project, we associate such ontologies with models and apply consistency checks, inference algorithms, and model optimizations based on the results of the inference.
+
+</p><p>Figure 3, "A Const/Nonconst base model", for example, has a simple 3-element lattice associated with it (NotAProperty -&gt; Const -&gt; Nonconstant), and based on inference results, can be automatically transformed to figure 4, "A Const/Nonconst optimized model".</p>
+
+<p>
+
+<img src="106648-1.gif" alt="Figure 1" height="271" width="200">
+<br>Figure 1: A type lattice</p>
+
+<p>
+<img src="106648-2.gif" alt="Figure 2" height="273" width="308">
+<br>Figure 2: A data ontology</p>
+
+<p>
+<img src="106648-3.jpeg" alt="Figure 3" height="251" width="284">
+<br>Figure 3: A Const/Nonconst base model</p>
+
+<p>
+<img src="106648-4.png" alt="Figure 4" height="164" width="300">
+<br>Figure 4: A Const/Nonconst optimized model</p>
+
+<dl compact="compact">
+
+<dt> [1] </dt>
+<dd> Jackie Man-Kit Leung, Thomas Mandl, Edward A. Lee, Elizabeth
+Latronico, Charles Shelton, Stavros Tripakis, Ben Lickly.
+<a href="http://chess.eecs.berkeley.edu/pubs/611.html">Scalable Semantic Annotation using Lattice-based Ontologies</a>, 12th International Conference on Model Driven Engineering Languages and Systems, ACM/IEEE,
+Published, 8, October, 2009; (recipient of the MODELS 2009
+Distinguished Paper Award)</dd>
+
+</dl>
+
+<p>
+<sup>1</sup>Bosch<br>
+
+<sup>2</sup>Bosch<br>
+</p>
+
+<p>
+More information: <a href="http://chess.eecs.berkeley.edu/pthomas">http://chess.eecs.berkeley.edu/pthomas</a>
+
+<!--#include virtual="/ssi/bottom.htm" -->

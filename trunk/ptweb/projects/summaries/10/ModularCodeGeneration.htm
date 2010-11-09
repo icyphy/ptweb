@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Modular Code Generation</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/summaries/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<h2 class="top">Modular Code Generation</h2>
+
+<p>Edward A. Lee, Dai Bui, Stavros Tripakis and Christopher Brooks</p>
+
+<p>Center for Hybrid and Embedded Software Systems (CHESS), National Science Foundation 0720882 (CSR-EHS: PRET), National Science Foundation 1035672 (CPS: PTIDES), National Science Foundation 0931843 (ActionWebs), Army Research Office W911NF-07-2-0019 (SCOS), Air Force Office of Scientific Research FA9550-06-0312 (HCDDES MURI), Air Force Research Lab, Multiscale Systems Center (MuSyC), Robert Bosch GmBH, National Instruments, Thales and Toyota</p>
+
+<p>In this project we study how to generate executable code from
+different high-level models (Simulink, SDF, ...) such that the code
+preserves the semantics of these models. We focus on models that
+contain hierarchy as the primary modularity concept, and on modular
+code generation. Modular means code for a given component (e.g., a
+composite actor) is generated independently from context (e.g.,
+independently from the diagram in which this actor is embedded).
+Modular code generation is essential for many reasons, among which is
+component reuse and incremental/scalable code generation (not having
+to re-generate code for an entire model when only part of the model
+changes). Modular code generation also addresses IP (intellectual
+property) concerns, since it allows to build libraries of pre-compiled
+components and reuse them without having access to their internals,
+therefore treating them as "black boxes".
+</p><p>Our approach is based on the notion of "profiles" for each component.
+Profiles can be seen as abstractions of components, that capture the
+essential information needed during composition. Modular code
+generation with profiles is essentially a profile synthesis problem:
+how to synthesize a profile for a composite block given the profiles
+of its internal blocks. Multiple profiles may be generated for a given
+component, with different trade-offs. We have followed this approach
+to develop modular code generation techniques for synchronous models,
+such as Simulink and the Synchronous-Reactive domain of Ptolemy II. We
+are currently extending these methods to SDF (Synchronous Data Flow).</p>
+
+<dl compact="compact">
+
+<dt> [1] </dt>
+<dd> R. Lublinerman, C. Szegedy and S. Tripakis. <a href="http://doi.acm.org/10.1145/1480881.1480893">Modular Code Generation
+from Synchronous Block Diagrams: Modularity vs. Code Size</a>. In
+POPL'09.</dd>
+
+<dt> [2] </dt>
+<dd> R. Lublinerman and S. Tripakis. <a href="http://dx.doi.org/10.1109/RTAS.2008.12">Modular Code Generation from Triggered
+and Timed Block Diagrams</a>. In Real-Time and Embedded Technology and
+Applications Symposium (RTAS'08).</dd>
+
+<dt> [3] </dt>
+<dd> R. Lublinerman and S. Tripakis. <a href="http://doi.acm.org/10.1145/1403375.1403736">Modularity vs. Reusability: Code
+Generation from Synchronous Block Diagrams</a>. In Design, Automation and
+Test in Europe (DATE'08).</dd>
+
+<dt> [4] </dt>
+<dd>Stavros Tripakis, Dai Nguyen Bui, Bert Rodiers, Edward A.
+Lee. <a
+href="http://chess.eecs.berkeley.edu/pubs/662.html">Compositionality
+in Synchronous Data Flow: Modular Code Generation from
+Hierarchical SDF Graphs (Poster Abstract)</a>,
+ACM/IEEE First International Conference on Cyber-Physical
+Systems, Raj Rajkumar (ed.), April, 2010.</dd>
+
+</dl>
+
+<!--#include virtual="/ssi/bottom.htm" -->
+
