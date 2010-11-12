@@ -55,7 +55,30 @@ See the
 for known limitations.
 
 <ul>
-  <li> <i>No post-release bugs yet!</i>
+  <li>Under <b>Solaris 10</b>, the <code>$PTII/bin/vergil</code> script may
+  fail with:
+  <pre>
+ BCVTB_HOME=/export/home1/cxh/src/ptII8.0.1/lbnl: is not an identifier
+  </pre>
+The problem is that under Solaris 10 <code>/bin/sh</code>, lines like
+  <pre>
+    export BCVTB_HOME="${PTII}/lbnl"
+  </pre>
+  will fail, instead we should use:
+  <pre>
+    export BCVTB_HOME="${PTII}/lbnl"; export BCVTB_HOME 
+  </pre>
+  For details, see <a href="http://serverfault.com/questions/103999/how-should-i-export-a-shell-variable-in-bash"><code>http://serverfault.com/questions/103999/how-should-i-export-a-shell-variable-in-bash</code></a>
+  <p>The fix is to download <a
+  href="ptinvoke.in.gz"><code>ptinvoke.in.gz</code>  
+  <pre>
+  cd $PTII/bin
+  cp /tmp/ptinvoke.in.gz .
+  gunzip ptinvoke.in.gz
+  /usr/sfw/bin/gmake
+  </pre>
+  This bug affects only Solaris 10.
+  (<i>Reported by Hauke Fuhrmann</i>)
 </ul>
 
  <!-- Leave a trailing p here so that there is a little space at the bottom -->
