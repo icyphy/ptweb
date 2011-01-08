@@ -170,5 +170,45 @@ doit() {
 EGREPMATCH='target='
 LOGMESSAGE="remove target="
 
+doit() {
+    awk '{
+             if ( $0 ~ /<title>/ || $0 ~ /<TITLE>/) {
+                 title = $0
+             } 
+             if ( $0 ~ /<\/body>/ || $0 ~ /<\/BODY/) {
+                 printme = 0
+                 print "<!--#include virtual=\"/eecs20/bottom.html\" -->" 
+             }
+             if (printme == 1) {
+                 print $0
+             }
+             if ( $0 ~ /<body/ || $0 ~ /<body/) {
+                 printme = 1
+                 print "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+                 print "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-US\" lang=\"en-US\">"
+                 print "<head>"
+                 print "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\" />"
+                 print title
+                 print "<!--#include virtual=\"top.html\" -->"
+                 print "</head>"
+                 print "<body>"
+             }
+        }' $file | \
+        sed -e 's/PARAM NAME = /param name=/' \
+            -e 's/APPLET/applet/' \
+	    -e 's/TITLE>/title>/' \
+	    -e 's/HTML>/html>/' \
+	    -e 's/HEAD>/head>/' \
+	    -e 's/BODY>/body>/' \
+	    -e 's/H1>/h1>/g' \
+	    -e 's/<P>/<p>/g' \
+	    -e 's/CENTER>/center>/g' \
+	    -e 's/VALUE = /value=/' \
+	    > /tmp/fix-files.tmp
+	diff -c $file /tmp/fix-files.tmp
+}
+EGREPMATCH='<link href="default.css"'
+LOGMESSAGE="Use ssi"
+
 
 fixit
