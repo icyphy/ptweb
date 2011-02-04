@@ -17,9 +17,7 @@ in engineering design and education.  PtFilter
 was created by Bicheng William Wu as possible replacement
 for <a href="http://ptolemy.berkeley.edu/other/xpole.htm">X-pole</a>.</p>
 
- <p>PtFilter is no longer under development, and the source code
-is not available for download.  A <a href="ptfilter.tar">tar file</a>
-of the .class files is available.</p>
+<p>PtFilter is no longer under development</p>
 
 <p>The applet may or may not work.</p>
 
@@ -31,5 +29,46 @@ of the .class files is available.</p>
    Butterworth approximation in Bilinear transform, but you can design
    highpass, lowpass, bandpass, bandstop filters. </li>
 </ul>
+
+<p>The source code is not available for download as a jar
+file.  A <a href="ptfilter.tar">tar file</a>
+of the .class files is available.</p>
+
+<p>You could use a Java decompiler such as jode</p>
+
+<pre>
+wget http://ptolemy.berkeley.edu/java/ptfilter.tar
+tar -xf ptfilter.jar
+cd ptfilter
+jar -cf filter.jar `find . -name "*class"`
+jode -d . filter.jar
+</pre>
+
+<p>The ptolemy java files could be recovered from the ptII
+svn repository, see
+<a href="http://chess.eecs.berkeley.edu/ptexternal/">http://chess.eecs.berkeley.edu/ptexternal/</a></p>.
+
+
+<p>The ChangeLog at
+<a href="http://chess.eecs.berkeley.edu/ptexternal/nightly/ChangeLog.txt">http://chess.eecs.berkeley.edu/ptexternal/nightly/ChangeLog.txt</a>
+lists when changes were made.</p>
+
+<p>PtFilter was implemented using classes from ptolemy/filter</p>
+
+<p>ChangeLog says:</p>
+<pre>
+1999-11-24 00:47  cxh
+
+* [r9573] /trunk/ptolemy/filter: removed filter, it is unused and
+  dead
+</pre>
+
+<p>To check out the code, try:</p>
+<pre>
+svn co -r 9572 https://source.eecs.berkeley.edu/svn/chess/ptII/trunk ptII
+</pre>
+<p>It is unlikely that the entire 1999 version of Ptolemy will compile under a recent
+version of Java, but it could be possible to grab just the files you need from the packages that are in the ptfilter.tar
+file.</p>
 
 <!--#include virtual="/ssi/bottom.htm" -->
