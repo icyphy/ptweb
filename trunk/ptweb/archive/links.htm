@@ -25,17 +25,16 @@ internal company projects are not reported here.
 <ul>
 
 <li> <a href="#agilent">Agilent</a></li>
+<li> <a href="#bcvtb">Building Controls Virtual Test Bed</a>
 <li> <a href="#ddema">DDEMA - Data Driven Environment for Multiphysics Applications</a></li>
-<li> <a href="#giotto">Giotto</a></li>
 <li> <a href="#iSencia">iSencia</a></li>
 <li> <a href="#kepler">Kepler - Scientific Workflow Management System</a></li>
-<li> <a href="#mescal">Mescal</a></li>
+<li> <a href="#kiel">Kieler Project - University of Kiel</a></li>
 <li> <a href="#mirabilis">Mirabilis</a></li>
 <li> <a href="#mldesigner">MLDesigner</a></li>
 <li> <a href="#peace">PeaCE</a></li>
 <li> <a href="#ptplot">Ptplot</a></li>
 <li> <a href="#rsoft">RSoft Design Group</a></li>
-<li> <a href="#sp-process">SP-Process spa</a></li>
 <li> <a href="#thomson-csf">Thales (formerly Thomson CSF)</a></li>
 <li> <a href="#texas">UT Austin</a></li>
 
@@ -48,10 +47,7 @@ have not publically announced details of their use.
 <li> Boeing</li>
 <li> Bosch - <a href="http://chess.eecs.berkeley.edu">Center for Hybrid and Embedded Software Systems (CHESS) Sponsors</a> of the
 <a href="http://chess.eecs.berkeley.edu">PtHOMAS</a> project</li>
-<li> Lockheed Martin - <a href="http://chess.eecs.berkeley.edu">CHESS Sponsors</a> of the
-<a href="http://chess.eecs.berkeley.edu/naomi">New Associative Object Model of Integration (NAOMI)</a> project.</li>
 <li> National Instruments - <a href="http://chess.eecs.berkeley.edu">CHESS Sponsors</a></li>
-<li> Lawrence Livermore National Lab</li>
 <li> Toyota - <a href="http://chess.eecs.berkeley.edu">CHESS Sponsors</a></li>
 <li> Xilinx</li>
 <li> In addition, corporations that sent attendees to Biennial
@@ -70,15 +66,19 @@ Ptolemy Conferences can be found on the attendees pages of the
 <li> <a href="#cassino">Universit&#224; degli Studi di Cassino</a></li>
 <li> <a href="#dqdt">DQDT</a></li>
 <li> <a href="#dresden">Dresden University</a></li>
+<li> <a href="#giotto">Giotto</a></li>
 <li> <a href="#fokus">Fokus</a></li>
 <li> <a href="#kepler2">Kepler - Ptolemy Classic redevelopment</a></li>
+<li> <a href="#lmco">Lockheed Martin</a></li>
 <li> <a href="#lyre">Lyre Technologies</a></li>
+<li> <a href="#mescal">Mescal</a></li>
 <li> <a href="#ucberkeleyPOLIS">POLIS Project (U.C. Berkeley)</a></li>
 <li> <a href="#pitt">University of Pittsburgh and U.C. San Diego</a></li>
 <li> <a href="#radioplan">Radioplan, GmbH, Dresden</a></li>
 <li> <a href="#rim">Research in Motion</a></li>
 <li> <a href="#sandersACS">Sanders Algorithm Analysis and Mapping Project</a></li>
 <li> <a href="#sandersRASSP">Sanders RASSP Project</a></li>
+<li> <a href="#sp-process">SP-Process spa</a></li>
 <li> <a href="#sss">Structured Software Systems</a></li>
 <li> <a href="#berbex">Universidad de Vigo, Spain</a></li>
 <li> <a href="#ucberkeleyHistorical">U.C. Berkeley</a></li>
@@ -105,6 +105,26 @@ product mentions its roots in the Ptolemy project.
 <p> </p>
 </li>
 
+<li><a name="bcvtb"></a>
+"The <a href="https://gaia.lbl.gov/bcvtb">Building Controls Virtual Test Bed</a>
+
+is a software environment that allows expert users to couple different
+simulation programs for co-simulation, and to couple simulation
+programs with actual hardware. For example, the BCVTB allows to
+simulate a building in EnergyPlus and the HVAC and control system in
+Modelica, while exchanging data between the software as they
+simulate. The BCVTB is based on the Ptolemy II software
+environment. The BCVTB allows expert users of simulation to expand the
+capabilities of individual programs by linking them to other
+programs. Due to the different programs that may be involved in
+distributed simulation, familiarity with configuring programs is
+essential."
+<br>The BCVTB interface shipped in Ptolemy II 8.0.1.  The source
+code is in <code>$PTII/lbnl</code>.  For a BCVTB-specific interface,
+run <code>$PTII/bin/vergil -bcvtb</code>.  
+<p> </p>
+</li>
+
 <li><a name="ddema"></a>
 <a href="http://www.ddema.cs.purdue.edu/" target="top">DDEMA:Data Driven Environment for Multiphysics Applications</a> is a
 "research Multidisciplinary Problem Solving Environment (MPSE) with
@@ -116,11 +136,6 @@ relevant decision support."
  <br/>DDEMA uses Ptolemy II both as a "Visual Programing Desighn Editor" for 
 application-specific workflows and as and Agent/Services Management system.
      <p> </p>
-</li>
-
-<li><a name="giotto"></a>
-     <a href="http://www-cad.eecs.berkeley.edu/~fresco/giotto/">Giotto</a> is middleware that offers a principled, tool-supported design methodology for implementing embedded control systems on platforms of possibly distributed sensors, actuators, CPUs, and networks. Giotto is based on the organizing principle that time-triggered task invocations together with time-triggered mode switches can form the abstract essence of programming real-time control systems. Giotto consists of a time-triggered programming language with a formal semantics, which provides an abstract programmer's model, as well as a compiler and a runtime library which can be targeted toward various platforms. Giotto supports the automation of the control systems design process by strictly separating platform-independent functionality and timing concerns from platform-dependent scheduling and communication issues. The time-triggered predictability of Giotto makes it particularly suitable for safety-critical applications with hard real-time constraints.
-<p> </p>
 </li>
 
 <li><a name="iSencia">iSencia</a> has created
@@ -139,7 +154,10 @@ Passerelle is based on Ptolemy II and is used to prepare experiments for the
 <li>A short paper about Passerelle: Gwenaëlle Abeillé, Majid Ounsy, Alain Buteau, "<a href="http://accelconf.web.cern.ch/AccelConf/ica07/PAPERS/RPPB20.PDF">A Graphical Sequencer for SOLEIL Beamlines Acquisitions</a>", 2007 International Conference on Accelerator and Large Experimental Physics Control Systems (ICALEPCS), Knoxville (USA), 
 14th October 2007.</li>
 </ul>
+<p></p>
 </li>
+
+
 
 <li> <a name="kepler"></a>
 <a href="http://www.kepler-project.org/">Kepler: A
@@ -150,12 +168,18 @@ and design.
 <p> </p>
 </li>
 
-<li><a name="mescal"></a>
-The <a href="http://embedded.eecs.berkeley.edu/mescal">Mescal</a>
-project at UC Berkeley uses Ptolemy II as a software framework for
-their work in developing reusable architectural platforms that can be
-easily programmed to meet the requirements for a variety of
-applications.
+<li><a name="kiel"></a>
+<a href="https://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/WikiStart">Kieler Project</a>
+at the University of Kiel is "a research project about enhancing the
+graphical model-based design of complex systems. The basic idea is to
+consistently employ automatic layout to all graphical components of
+the diagrams within the modeling environment. This opens up new
+possibilities for diagram creation and editing on the one hand and
+also new methods for dynamic visualizations of e.g. simulation runs on
+the other hand. Hence the focus of this project is the pragmatics of
+model-based system design, which can improve comprehensibility of
+diagrams, shorten development and change actions, and improve the
+analysis of dynamic behaviour."
 <p> </p>
 </li>
 
@@ -175,8 +199,7 @@ about Mirabilis Design</a>.
 <li><a name="mldesigner"></a>
 <a href="http://www.mldesigner.com/">MLDesigner</a>
 "is an integrated platform for modelling and analyzing the architecture, function and performance of high level system designs - either as a standalone system or as a system operating in the context of larger systems and scenarios (i.e., missions)."
-<br/> MLDesigner can
-<a href="http://www.mldesigner.com/mldesigner_ds.html">import Ptolemy Classic models</a>.
+<br/> 
 <p> </p>
 </li>
 
@@ -188,16 +211,18 @@ at Seoul National University, Korea,</a> <a href="http://peace.snu.ac.kr/researc
 <li><a name="thomson-csf"></a>
      <a href="http://www.thalesgroup.com/">Thales (formerly Thomson-CSF)</a>,
      has had many interactions with the Ptolemy group.
-Individuals from Thales worked on 
+<br/>Thales and the Ptolemy team are working on the <a href="http://chess.eecs.berkeley.edu/thales">Pthales model of computation</a>
+which implements multidimensional dataflow, similar to what is in <a href="http://hal.inria.fr/inria-00128840/en">ArrayOL</a> and <a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/1996/3131.html">Multidimensional Synchronous Dataflow</a>.
+<br/>Individuals from Thales worked on 
 <a href="http://embedded.eecs.berkeley.edu/caltrop/">Caltrop</a>
 actor language effort.
 Thales contributed the Ptolemy II/Java Native Interface
 and the single window interface to the Ptolemy II codebase.
- <br/>In the past, Thales has developed their own Ptolemy domain and
+<br/>In the past, Thales has developed their own Ptolemy domain and
 performed a valuable evaluation of Ptolemy
 A summary of their work with Ptolemy is available.
-They have developed a multidimensional dataflow domain called
- <b>ArrayOL</b> which is based on the <a href="http://www.ilog.com">Ilog Views</a>
+Internally, they have developed a multidimensional dataflow domain called
+ ArrayOL which is based on the <a href="http://www.ilog.com">Ilog Views</a>
 C++ graphical user-interface library.
 They have also performed an in-depth evaluation of Ptolemy II 0.4.1.
 <p> </p>
@@ -219,21 +244,6 @@ and Ptolemy Classic. A Demonstration version of OptSim is
 <a href="http://www.rsoftdesign.com/support/demopage.cfm">available</a>.
 This version of OptSim is for use with the book
 "Lightwave Technology: Components and Devices" by Govind P. Agrawal.
-<p> </p>
-</li>
-
-<li> <a name="sp-process"></a>
-<a href="http://www.sp-process.it">SP-Process spa</a> has
-a product called Recito:
-
-<blockquote> Recito is a graphical modeling and process simulation
-platform. Developed in java only using Open Source technologies, it
-runs seamlessly on Windows, Linux, Mac OS and Solaris operating
-systems.  With Recito the user can model, simulate and design
-concurrent real-time systems. Recito is based on Ptolemy II from which
-it inherits motor and actor libraries. Recito adds support of data
-access and manipulation (database, XML dataflow), reports creation,
-document management and model remote execution.  </blockquote>
 <p> </p>
 </li>
 
@@ -372,6 +382,12 @@ Agile Design</a> provided support and customization of Ptolemy Software.
 <p> </p>
 </li>
 
+<li><a name="giotto"></a>
+    <a href="http://www-cad.eecs.berkeley.edu/~fresco/giotto/">Giotto</a> is middleware that offers a principled, tool-supported design methodology for implementing embedded control systems on platforms of possibly distributed sensors, actuators, CPUs, and networks. Giotto is based on the organizing principle that time-triggered task invocations together with time-triggered mode switches can form the abstract essence of programming real-time control systems. Giotto consists of a time-triggered programming language with a formal semantics, which provides an abstract programmer's model, as well as a compiler and a runtime library which can be targeted toward various platforms. Giotto supports the automation of the control systems design process by strictly separating platform-independent functionality and timing concerns from platform-dependent scheduling and communication issues. The time-triggered predictability of Giotto makes it particularly suitable for safety-critical applications with hard real-time constraints.
+<p> </p>
+</li>
+
+
 <li><a name="fokus"> FOKUS</a>, Research Institute for Open Communication Systems, in Berlin, 
 Germany,
      has developed a TCP Simulator using Ptolemy.
@@ -386,6 +402,10 @@ Germany,
 is an effort to redevelop Ptolemy Classic by simplify the class structure
 and making other changes.  
 <p> </p>
+</li>
+
+<li> <a href="#lmco">Lockheed Martin</a> sponsored CHESS via the
+<a href="http://chess.eecs.berkeley.edu/naomi">New Associative Object Model of Integration (NAOMI)</a> project.
 </li>
 
 <li><a name="lyre"></a>
@@ -413,6 +433,15 @@ See
 "Computer Aided Design and Simulation of Free Space
 Optoelectronic Information Processing Systems"</a>. 
 	Contact: steve at ee pitt edu 
+<p> </p>
+</li>
+
+<li><a name="mescal"></a>
+The <a href="http://embedded.eecs.berkeley.edu/mescal">Mescal</a>
+project at UC Berkeley uses Ptolemy II as a software framework for
+their work in developing reusable architectural platforms that can be
+easily programmed to meet the requirements for a variety of
+applications.
 <p> </p>
 </li>
 
@@ -521,6 +550,22 @@ Ptolemy 0.6.
 
 <p> </p>
 </li>
+
+<li> <a name="sp-process"></a>
+<a href="http://www.sp-process.it">SP-Process spa</a> has
+a product called Recito:
+
+<blockquote> Recito is a graphical modeling and process simulation
+platform. Developed in java only using Open Source technologies, it
+runs seamlessly on Windows, Linux, Mac OS and Solaris operating
+systems.  With Recito the user can model, simulate and design
+concurrent real-time systems. Recito is based on Ptolemy II from which
+it inherits motor and actor libraries. Recito adds support of data
+access and manipulation (database, XML dataflow), reports creation,
+document management and model remote execution.  </blockquote>
+<p> </p>
+</li>
+
 
 <li><a name="sss">SSS</a>,
 <a href="http://www.strsoft.com/">Structured Software Systems</a>,
