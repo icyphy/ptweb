@@ -22,6 +22,7 @@ Disallow: /~pino/DS
 Disallow: /~pino/Ptolemy
 Disallow: /~pino/Ptolemy/tycho
 Disallow: /~pwhitake/codeDoc
+Disallow: /java/ptolemy.plot2.0
 Disallow: /java/ptplot3.1
 Disallow: /java/ptplot5.1
 Disallow: /java/ptplot5.1p1
