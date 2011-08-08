@@ -97,6 +97,21 @@ tail -f boot.out
 
 <li> If you get messages like:
 <pre>
+mkdir /root/ptolemy/obj.linux.debug/gnu/gcc
+(cd /root/ptolemy/obj.linux.debug/gnu/gcc; \
+        /root/ptolemy/src/gnu/src/gcc/configure --srcdir=/root/ptolemy/src/gnu/src/gcc \
+                --prefix=/root/ptolemy/gnu/common --exec-prefix=/root/ptolemy/gnu/linux.debug \
+                --with-gxx-include-dir=/root/ptolemy/gnu/common/include/g++-3 \
+                --enable-shared)
+Configuring for a x86_64-unknown-linux-gnu host.
+Invalid configuration `x86_64-unknown-linux-gnu': machine `x86_64-unknown' not recognized
+Invalid configuration `x86_64-unknown-linux-gnu': machine `x86_64-unknown' not recognized
+</pre>
+then the problem is that <code>config.guess</code> could not determine your basic machine.
+One possible solution is to look in <code>config.sub</code> and find a machine close to your machine.
+
+<li> If you get messages like:
+<pre>
 mkdir /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES
  /usr/bin/install -c -m 644 de.mo /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES/make.mo
 /usr/bin/install: cannot stat `de.mo': No such file or directory
