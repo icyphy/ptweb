@@ -164,7 +164,7 @@ of computation and added a Cellular Automata model of computation.
 
 <p> </p>
 </li>
-<li><a name="iSencia">iSencia</a> has created
+<li><a name="iSencia"></a>iSencia has created
 <a href="http://isenciabelgium.belgium-products.com/en/products/2008/passerelle">Passerelle</a>
 "Passerelle is iSencia's toolkit for defining and deploying solutions based on our Model Driven Solution Assembly approach, offering a graphical IDE, an execution engine, a large collection of reusable solution building blocks and a number of essential framework services."
 
@@ -179,7 +179,18 @@ Passerelle is based on Ptolemy II and is used to prepare experiments for the
 
 <li>A short paper about Passerelle: Gwenaëlle Abeillé, Majid Ounsy, Alain Buteau, "<a href="http://accelconf.web.cern.ch/AccelConf/ica07/PAPERS/RPPB20.PDF">A Graphical Sequencer for SOLEIL Beamlines Acquisitions</a>", 2007 International Conference on Accelerator and Large Experimental Physics Control Systems (ICALEPCS), Knoxville (USA), 
 14th October 2007.</li>
-</ul>
+
+<li><a name="dawb"></a> The <a href="http://www.esrf.eu">European Synchrotron Radiation Facility</a>
+has created <a href="http://www.dawb.org">Data Analysis Workbench (DAWB)</a>.  In 
+a <a href="http://drdobbs.com/database/231400148?fmid=35818">comment on the Dr. Dobb site</a>
+Matthew Gerring said:
+<blockquote>
+"At the ESRF we have been using Ptolemy II for dataflow pipelines. We also call them 'workflows' or 'zero dead time' depending on the particular scientist using them. Typically we use the pipelines to link data collection and analysis but are still exploring the full potential of this design. The data analysis algorithms are often longer to run than the collection. Therefore a data flow design such as yours allows the analysis to be multi-threaded and parallel and therefore happen at a faster rate given the available hardware.
+"
+<p>"You can read more and download our version of dataflow for free at <a href="http://www.dawb.org">www.dawb.org</a>."
+</blockquote>
+It looks like dawb uses Passerelle libraries.
+
 <p></p>
 </li>
 
@@ -195,7 +206,7 @@ and design.
 </li>
 
 <li><a name="kiel"></a>
-<a href="https://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/WikiStart">Kieler Project</a>
+<a href="http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/Interfaces/Ptolemy">Kieler Project</a>
 at the University of Kiel is "a research project about enhancing the
 graphical model-based design of complex systems. The basic idea is to
 consistently employ automatic layout to all graphical components of
@@ -229,8 +240,8 @@ about Mirabilis Design</a>.
 <p> </p>
 </li>
 
-<li><a name="peace">Developed at the Codesign and Parallel Processing Lab
-at Seoul National University, Korea,</a> <a href="http://peace.snu.ac.kr/research/peace/">PeaCE</a> (Ptolemy extension as Codesign Environment) is a codesign environment for rapid development of heterogeneous digital systems targeting from system-on-chip (SOC) design to distributed heterogeneous system design. The 'Ptolemy' of the PeaCE acronym refers to the well-known design tool developed at the Univ. of California at Berkeley, on top of which we're building a hardware-software codesign environment. It provides the design framework common to all system level design activities: specification, cosimulation, design space exploration, interactive partitioning, synthesis of SW, HW and their interface.
+<li><a name="peace"></a>Developed at the Codesign and Parallel Processing Lab
+at Seoul National University, Korea, <a href="http://peace.snu.ac.kr/research/peace/">PeaCE</a> (Ptolemy extension as Codesign Environment) is a codesign environment for rapid development of heterogeneous digital systems targeting from system-on-chip (SOC) design to distributed heterogeneous system design. The 'Ptolemy' of the PeaCE acronym refers to the well-known design tool developed at the Univ. of California at Berkeley, on top of which we're building a hardware-software codesign environment. It provides the design framework common to all system level design activities: specification, cosimulation, design space exploration, interactive partitioning, synthesis of SW, HW and their interface.
 <p> </p>
 </li>
 
@@ -265,11 +276,12 @@ components. The tool has undergone substantial validation as part of
 its use in the designing and understanding of the Multiwavelength
 Optical Network (MONET) project in Washington DC. LambdaSIM is built
 on a new Ptolemy-based dataflow simulation framework."
- <br/>OptSim is another RSoft Design Group project that Ptolemy II
-and Ptolemy Classic. A Demonstration version of OptSim is 
-<a href="http://www.rsoftdesign.com/support/demopage.cfm">available</a>.
+ <br/><a href="http://www.rsoftdesign.com/products.php?sub=System%20and%20Network&itm=OptSim">OptSim</a> is another RSoft Design Group project that Ptolemy II
+and Ptolemy Classic. 
+A Demonstration version of OptSim is 
+<a href="http://www.rsoftdesign.com/support/democd/agraWal_telecom_Systems_rsofT_dem0.exe">available</a>.
 This version of OptSim is for use with the book
-"Lightwave Technology: Components and Devices" by Govind P. Agrawal.
+"<a href="http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471215732,descCd-description.html">Lightwave Technology: Components and Devices</a>" by Govind P. Agrawal.
 <p> </p>
 </li>
 
@@ -279,25 +291,8 @@ Ptolemy II includes <a href="/java/ptplot">Ptplot</a>, a 2D data plotter.  Ptplo
 <p> </p>
 </li>
 
-<li><a name="texas">The University of Texas at Austin</a>
+<li><a name="texas"></a>The University of Texas at Austin</a>
 	uses Ptolemy in both research and education.
-Srikanth Gummadi
-is using Ptolemy to develop, simulate, and synthesize real-time
-constant modulus arrays for smart antennas.
-The arrays can be modelled completely in the Synchronous Dataflow
-model of computation.
-Ashutosh Kulkarni is using Ptolemy in benchmarking code generation
-methodologies.
-<a href="http://anchovy.ece.utexas.edu/~blu/">Biao Lu</a>
-is using Ptolemy for modeling, simulating, and synthesizing
-heterogeneous sytems composed of neural network and signal/image
-processing subsystems by mixing dataflow models.
-Most (artificial) neural network and signal/image processing
-subsystems can be modeled using Synchronous Data.
-Some neural networks, such as Cellular Neural Networks,
-and some signal processing subsystems, such as timing recovery
-in modems, require Boolean Dataflow.
-Contact: <a href="http://anchovy.ece.utexas.edu/~blu">Biao Lu</a>.
 <a href="http://www.ece.utexas.edu/~bevans">Prof. Brian Evans</a>
 uses Ptolemy Classic as a laboratory for students in
 <a href="http://www.ece.utexas.edu/~bevans/courses/ee382c/">
@@ -675,6 +670,26 @@ tgl at sss pgh pa us .
 	</ul>
 <p> </p>
 </li>
+
+<li>University of Texas, Austin. Brian Evans' group has used Ptolemy over
+the years.  See <a href="#texas">above</a> for current Ptolemy activities.
+Below are some historical activities:
+<br/>Srikanth Gummadi
+is using Ptolemy to develop, simulate, and synthesize real-time
+constant modulus arrays for smart antennas.
+The arrays can be modelled completely in the Synchronous Dataflow
+model of computation.
+<br/>Ashutosh Kulkarni is using Ptolemy in benchmarking code generation
+methodologies.
+<br/><a href="http://anchovy.ece.utexas.edu/~blu/">Biao Lu</a>
+is using Ptolemy for modeling, simulating, and synthesizing
+heterogeneous sytems composed of neural network and signal/image
+processing subsystems by mixing dataflow models.
+Most (artificial) neural network and signal/image processing
+subsystems can be modeled using Synchronous Data.
+Some neural networks, such as Cellular Neural Networks,
+and some signal processing subsystems, such as timing recovery
+in modems, require Boolean Dataflow.
 
 <li><a name="VPI"></a><a href="http://www.VPIsystems.com">VPIsystems</a> makes enterprise-class software systems that support technical workforces across the communications industry: service providers, network operators, equipment vendors and component and system manufacturers.
 VPI's software provides all necessary tools and project management systems for photonic design automation. The platform delivers a complete range of interoperable design and simulation tools that investigate and capture component and system innovations to explore their impact on the network. Technologies include a comprehensive range of models for lasers, SOAs, Raman
