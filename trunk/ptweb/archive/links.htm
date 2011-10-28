@@ -26,6 +26,7 @@ internal company projects are not reported here.
 
 <li> <a href="#agilent">Agilent</a></li>
 <li> <a href="#bcvtb">Building Controls Virtual Test Bed</a>
+<li> <a href="#dawb">DAWB - Data Analysis Workbench</a>
 <li> <a href="#ddema">DDEMA - Data Driven Environment for Multiphysics Applications</a></li>
 <li> <a href="#ufl">University of Florida</a>
 <li> <a href="#iSencia">iSencia</a></li>
@@ -137,6 +138,22 @@ run <code>$PTII/bin/vergil -bcvtb</code>.
 <p> </p>
 </li>
 
+<li><a name="dawb"></a> The <a href="http://www.esrf.eu">European Synchrotron Radiation Facility</a>
+has created <a href="http://www.dawb.org">Data Analysis Workbench (DAWB)</a> (See also the <a href="https://sites.google.com/site/dataanalysisworkbench/">Google Site</a>).
+<br/>  In a <a href="http://drdobbs.com/database/231400148?fmid=35818">comment on the Dr. Dobb site</a>,
+Matthew Gerring said:
+<blockquote>
+"At the ESRF we have been using Ptolemy II for dataflow pipelines. We also call them 'workflows' or 'zero dead time' depending on the particular scientist using them. Typically we use the pipelines to link data collection and analysis but are still exploring the full potential of this design. The data analysis algorithms are often longer to run than the collection. Therefore a data flow design such as yours allows the analysis to be multi-threaded and parallel and therefore happen at a faster rate given the available hardware.
+"
+<p>"You can read more and download our version of dataflow for free at <a href="http://www.dawb.org">www.dawb.org</a>."
+</blockquote>
+DAWB uses Passerelle from <a href="#iSencia">iSencia</a>.
+<br/><a href="https://sites.google.com/site/dataanalysisworkbench/license">DAWB is GPL3</a>.
+</li>
+
+<p></p>
+
+
 <li><a name="ddema"></a>
 <a href="http://www.ddema.cs.purdue.edu/" target="top">DDEMA:Data Driven Environment for Multiphysics Applications</a> is a
 "research Multidisciplinary Problem Solving Environment (MPSE) with
@@ -182,20 +199,6 @@ Passerelle is based on Ptolemy II and is used to prepare experiments for the
 
 <li>A short paper about Passerelle: Gwenaëlle Abeillé, Majid Ounsy, Alain Buteau, "<a href="http://accelconf.web.cern.ch/AccelConf/ica07/PAPERS/RPPB20.PDF">A Graphical Sequencer for SOLEIL Beamlines Acquisitions</a>", 2007 International Conference on Accelerator and Large Experimental Physics Control Systems (ICALEPCS), Knoxville (USA), 
 14th October 2007.</li>
-
-<li><a name="dawb"></a> The <a href="http://www.esrf.eu">European Synchrotron Radiation Facility</a>
-has created <a href="http://www.dawb.org">Data Analysis Workbench (DAWB)</a> (See also the <a href="https://sites.google.com/site/dataanalysisworkbench/">Google Site</a>).
-<br/>  In a <a href="http://drdobbs.com/database/231400148?fmid=35818">comment on the Dr. Dobb site</a>,
-Matthew Gerring said:
-<blockquote>
-"At the ESRF we have been using Ptolemy II for dataflow pipelines. We also call them 'workflows' or 'zero dead time' depending on the particular scientist using them. Typically we use the pipelines to link data collection and analysis but are still exploring the full potential of this design. The data analysis algorithms are often longer to run than the collection. Therefore a data flow design such as yours allows the analysis to be multi-threaded and parallel and therefore happen at a faster rate given the available hardware.
-"
-<p>"You can read more and download our version of dataflow for free at <a href="http://www.dawb.org">www.dawb.org</a>."
-</blockquote>
-DAWB uses Passerelle.  <a href="https://sites.google.com/site/dataanalysisworkbench/license">DAWB is GPL3</a>.
-It looks like dawb uses Passerelle libraries.
-</ul>
-<p></p>
 
 </li>
 
