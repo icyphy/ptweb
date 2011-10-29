@@ -1,0 +1,5 @@
+$Id$
+
+Note that you should not add pdf files here,
+instead add them as publications to chess
+http://chess.eecs.berkeley.edu/pubs
