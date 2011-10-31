@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Ptolemy II--Heterogeneous Concurrent Modeling and Design in Java</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/summaries/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<h2 class="top">Ptolemy II--Heterogeneous Concurrent Modeling and Design in Java</h2>
+Edward A. Lee, Ilge Akkaya, Remi Barre<sup>1</sup>, Christopher Brooks, Dai Bui, Daniel Crawl<sup>2</sup>, Patricia Derler, Elizabeth Latronico<sup>3</sup>, Ben Lickly, Isaac Liu, Chris Motika<sup>4</sup>, Aaron Schultz<sup>5</sup>, Christopher Shaver, Charles Shelton<sup>6</sup>, Miro Spoenemann<sup>7</sup>, Stavros Tripakis and Michael Wetter<sup>8</sup></p>
+
+<p>Center for Hybrid and Embedded Software Systems (CHESS), National Science Foundation 0720882 (CSR-EHS: PRET), National Science Foundation 1035672 (CPS: PTIDES), National Science Foundation 0931843 (ActionWebs), Multiscale Systems Center (MuSyC), Army Research Office W911NF-11-2-0038 (DDoSoS), Air Force Office of Scientific Research FA9550-06-0312, Air Force Research Laboratory, Robert Bosch GmBH, National Instruments, Thales and Toyota</p>
+
+<p>Ptolemy II [1-4] is a laboratory for experimenting with design 
+techniques.  Ptolemy II is implemented as a set of Java packages supporting heterogeneous, concurrent modeling, simulation, and design of component-based systems. The emphasis is on a clean, modular software architecture, divided into a set of coherent, comprehensible packages. The kernel package supports definition and manipulation of clustered hierarchical graphs, which are collections of <i>entities</i> and <i>relations</i> between those entities. The actor package extends the kernel so that entities have functionality and can communicate via the relations. The <i>domains</i> extend the actor package by imposing <i>models of computation</i> on the interaction between entities.
+</p><p>The Ptolemy II graphical user interface is called Vergil. Vergil itself is a component assembly defined in Ptolemy II. Ptolemy II includes facilities for code generation from models.  
+
+</p><p>In addition to the complete version of Ptolemy II, the following
+sub-versions are available:
+</p><ul>
+<li>HyVisual: Hybrid System Visual Modeler [5];
+</li><li> VisualSense: Visual editor and simulator for wireless sensor network system [6]; and
+</li><li> Viptos: Visual interface between Ptolemy and TinyOS [7].
+</li></ul><p></p>
+
+<p>
+<img src="/Research/Projects/Images/101925-1.jpeg" alt="Figure 1" height="301" width="432">
+<br>Figure 1: A synchronous dataflow model shown using Vergil, the  Ptolemy visual editor</p>
+
+<dl class="project-def" compact="compact">
+
+<dt> [1] </dt>
+
+<dd> Johan Eker, Jörn W. Janneck, Edward A. Lee, Jie Liu, Xiaojun Liu, Jozsef Ludvig, Stephen Neuendorffer, Sonia Sachs, Yuhong Xiong, "<a href="http://www.ptolemy.eecs.berkeley.edu/publications/papers/03/TamingHeterogeneity">Taming Heterogeneity - the Ptolemy Approach</a>," Proceedings of the IEEE, Jan 2003, Volume: 91,  Issue: 1, p127-144.</dd>
+
+<dt> [2] </dt>
+<dd> C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, and H. Zheng (eds.),
+"<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-28.html">Heterogeneous Concurrent Modeling and Design in Java (Volume 1: Introduction to Ptolemy II</a>," UC Berkeley EECS Department Technical Report No. UCB/EECS-2008-28, April 1, 2008.</dd>
+
+<dt> [3] </dt>
+
+<dd> C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, and H. Zheng (eds.), "<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-29.html">Heterogeneous Concurrent Modeling and Design in Java (Volume 2: Ptolemy II Software Architecture)</a>," UC Berkeley EECS Department Technical Report No. UCB/EECS-2008-29, April 1, 2008.</dd>
+
+<dt> [4] </dt>
+<dd> C. Brooks, E. A. Lee, X. Liu, S. Neuendorffer, Y. Zhao, and H. Zheng (eds.), "<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-37.html">Heterogeneous Concurrent Modeling and Design in Java (Volume 3: Ptolemy II Domains)</a>," UC Berkeley EECS Department Technical Reports, UC Berkeley EECS Department Technical Report No. UCB/EECS-2008-37, April 15, 2008.</dd>
+
+<dt> [5] </dt>
+
+<dd> C. Brooks, A. Cataldo, E. A. Lee, J. Liu, X. Liu, S. Neuendorffer, and H. Zheng,
+"<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2005/9574.html">HyVisual: A Hybrid System Visual Modeler,"</a> UC Berkeley Electronics Research Laboratory, Memorandum No. UCB/ERL M05/24,  July 15, 2005.</dd>
+
+<dt> [6] </dt>
+<dd> P. Baldwin, S. Kohli, E. A. Lee, X. Liu, and Y. Zhao,
+"<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2005/9575.html">VisualSense: Visual Modeling for Wireless and Sensor Network Systems,"</a> UC Berkeley Electronics Research Laboratory, Memorandum No. UCB/ERL M05/25, July 15, 2005.</dd>
+
+<dt> [7] </dt>
+<dd> E. Cheong, E. A. Lee, and Y. Zhao. "<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-150.html">Joint Modeling and Design of Wireless Networks and Sensor Node Software</a>," UC Berkeley EECS Department Technical Report No. UCB/EECS-2006-150, November 17, 2006.</dd>
+
+</dl>
+
+<p>
+<sup>1</sup>Thales<br>
+<sup>2</sup>UC San Diego<br>
+
+<sup>3</sup>Bosch<br>
+<sup>4</sup>University of Kiel<br>
+<sup>5</sup>UC Santa Barbara<br>
+<sup>6</sup>Bosch<br>
+<sup>7</sup>University of Kiel<br>
+<sup>8</sup>LBNL<br>
+
+</p>
+
+<p>
+More information: <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII">http://ptolemy.eecs.berkeley.edu/ptolemyII</a>
+
+<!--#include virtual="/ssi/bottom.htm" -->

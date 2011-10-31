@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>A Modular Formal Semantics for Ptolemy</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/projects/summaries/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+
+<h2 class="top">A Modular Formal Semantics for Ptolemy</h2>
+
+
+<p></p>
+
+<p>Edward A. Lee, Stavros Tripakis<sup>1</sup>, Christos Stergiou and Christopher Shaver</p>
+
+<p>Center for Hybrid and Embedded Software Systems, National Science Foundation 0720882 (CSR-EHS: PRET), National Science Foundation 1035672 (CPS: PTIDES), National Science Foundation 0931843 (ActionWebs), Multiscale Systems Center (MuSyC), Army Research Office W911NF-11-2-0038 (DDoSoS), Air Force Research Lab, Robert Bosch GmBH, National Instruments, Thales and Toyota</p>
+
+<p>
+Ptolemy is an open-source and extensible modeling and simulation framework. It offers heterogeneous modeling capabilities by allowing different models of computation, both untimed and timed, to be composed hierarchically in an arbitrary fashion. This project develops a formal semantics for Ptolemy which is modular, in the sense that atomic actors and their compositions are treated in a unified way. 
+</p>
+<p>
+In particular, all actors conform to an executable interface that contains four functions: 
+</p>
+<p>
+</p><ul>
+<li> fire -
+        produce outputs given current state and inputs </li>
+<li> postfire -
+        update state instantaneously </li>
+
+<li> deadline -
+        how much time the actor is willing to let elapse </li>
+<li> time-update - 
+        update state with passage of time</li>
+</ul>
+<p></p>
+<p>
+Composite actors are obtained from composition operators that in Ptolemy are called directors. Different directors realize different models of computation. Currently, the following models of computation have been defined in the above semantical framework:
+Synchronous-Reactive,  Discrete Event,  Continuous Time,  Process Networks, Modal Models.
+</p>
+<p>
+A prototype implementation is being developed in Haskell and a journal paper is currently under submission.
+</p>
+
+<p>
+<sup>1</sup>Researcher
+
+<!--#include virtual="/ssi/bottom.htm" -->
+
