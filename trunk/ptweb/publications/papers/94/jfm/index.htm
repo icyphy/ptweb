@@ -9,25 +9,23 @@
 <!--#include virtual="/ssi/toppremenu.htm" -->
 <!--#include virtual="/publications/toc.htm" -->
 <!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
 <h1>JOINT MINIMIZATION OF CODE AND DATA FOR SYNCHRONOUS DATAFLOW PROGRAMS</h1>
 
-<center>
 Praveen K. Murthy, Shuvra S. Bhattacharyya, and Edward A. Lee
-<br><br>
-Memorandum No. UCB/ERL M94/93, Electronics Research Laboratory, University
-of California, Berkeley, CA  94720
-<br>
-<br>
-November 29, 1994
-<br>
-<br>
-<I>also appeared in Journal of Formal Methods in Systems Design, Vol. II, No. 1, pp.41-70<br>July 1997</I>
 </center>
 <br><br>
-<p>
-<center>
-<a href="jfm.pdf"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
-</center>
+<table align="center">
+<tr>
+<td><a href="jfm.pdf">Prepublished version</a></td>
+</tr>
+
+<tr>
+<td><a href="http://dx.doi.org/10.1023/A:1008633809454">Published version</a></
+td>
+</tr>
+</table>
+
 <p>
 <h2>ABSTRACT [1]</h2>
 In this paper, we formally develop techniques that minimize the memory requirements of a target program when synthesizing software from dataflow descriptions of multirate signal processing algorithms. The dataflow programming model that we consider is the synchronous dataflow (SDF) model [2], which has been used heavily in DSP design environments over the past several years. We first focus on the restricted class of well-ordered SDF graphs. We show that while extremely efficient techniques exist for constructing minimum code size schedules for well-ordered graphs, the number of distinct minimum code size schedules increases combinatorially with the number of vertices in the input SDF graph, and these different schedules can have vastly different data memory requirements. We develop a dynamic programming algorithm that computes the schedule that minimizes the data memory requirement from among the schedules that minimize code size, and we show that the time complexity of this algorithm is cubic in the num-ber of vertices in the given well-ordered SDF graph. We present several extensions to this dynamic programming technique to more general scheduling problems, and we present a heuristic that often computes near-optimal schedules with quadratic time complexity. We then show that finding optimal solutions for arbitrary acyclic graphs is NP-complete, and present heuristic tech-niques that jointly minimize code and data size requirements. We present a practical example and simulation data that demonstrate the effectiveness of these techniques.
