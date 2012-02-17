@@ -9,18 +9,26 @@
 <!--#include virtual="/ssi/toppremenu.htm" -->
 <!--#include virtual="/publications/toc.htm" -->
 <!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
 <h1>Design and Implementation of a Multidimensional Synchronous Dataflow Environment *</h1>
 
-<center>
 Michael J. Chen and Edward A. Lee
 <br><br>
 1995 Proc. IEEE Asilomar Conf. on Signals, Systems, and Computers
 <br><br>
 </center>
 <p>
-<center>
-<a href="mdsdf_asilomar.pdf"target="_top"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
-</center>
+<table align="center">
+<tr>
+<td><a href="mdsdf_asilomar.pdf">Prepublished version</a></td>
+</tr>
+
+<tr>
+<td><a href="http://dx.doi.org/10.1109/TSP.2002.800830">Published version</a></
+td>
+</tr>
+</table>
+
 <p>
 <h2>ABSTRACT</h2>
 Multidimensional Synchronous Dataflow is a model of computation where functional blocks produce and consume data on a multidimensional index space. The model can express multidimensional signal processing systems and algorithms elegantly, and is able to reveal the data parallelism of such systems in a way that raises possibilities for better multiprocessor scheduling. We have formalized definitions and specifications for a two-dimensional model and have created a single-processor simulation domain in Ptolemy[1]. Our paper discusses the design issues and methodologies we used to efficiently handle the large amounts of two-dimensional data that the systems operate upon. The primary structures used were matrices to act as buffers and submatrices to access subsets of those buffers. is intended to be a summary and not an in-depth discussion.
