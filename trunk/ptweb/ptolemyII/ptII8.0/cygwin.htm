@@ -153,8 +153,15 @@ href="http://cygwin.com/ml/cygwin-announce/2006-12/msg00026.html"><code>http://c
   - Cygwin manual for <code>/etc/fstab</code>.</li>
 </ul>
 
+<li>Another possibility is to use perl to convert the \r\n characters to \n:
+<pre>
+perl -i -pne "s/\r\n/\n/g" configure
+</pre>
+
 <li> Follow the instructions in the
 <a href="ptII8.0.1/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section
+
+
 </ol>
 
 <h2>&nbsp;Installing Mingw for Windows</h2>
