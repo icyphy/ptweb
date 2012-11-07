@@ -4,8 +4,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-
-
 <!--#include virtual="/ssi/toppremenu.htm" -->
 <!--#include virtual="/publications/toc.htm" -->
 <!--#include virtual="/ssi/toppostmenu.htm" -->
+<center>
+<h1>Latency-Constrained Resynchronization for Multiprocessor DSP Implementation</h1>
+by Shuvra S. Bhattacharyya, Sundararajan Sriram, and Edward A. Lee, U. C. Berkeley
+<p>in <i>Proceedings of Application Specific Systems, Architectures and Processor</i> (ASAP) August, 1996.
+</center>
+<p><CENTER>
+<table align="center">
+<tr>
+<td><a href="resync_asap.pdf">Prepublished version</a></td>
+</tr>
+
+<tr>
+<td><a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=542830">Published version</a></
+td>
+</tr>
+</table>
+
+<p>
+Abstract
+</CENTER>
+<p>
+Resynchronization is a post-optimization for static multiprocessor schedules in which extraneous synchronization operations are introduced in suich a way that the number of original synchronizations that consequently become redundant sign@cant exceeds the number of additional synchronizations. Redundant synchronizations are synchronization operations whose corresponding sequencing requirements are enforced completely by other synchronizations in the system. The amount of run-time overhead required for synchronization can be reduced significantly by eliminating redundant synchronizations. However, since additional serialization is imposed by the new synchronizations, resynchronization can produce signijcant increase in latency. This paper addresses the problem of computing an optimal resynchronization (one that results in the lowest average rate at which synchronization operations have to be performed) among all resynchronizations that do not increase the latency beyond a prespecified upper bound L<sub>max</sub>.  Our study is based in the context of self-timed execution of iterative dataflow programs, which is an implementation model that has been applied extensively for digital signal processing systems.
+  <!--#include virtual="/ssi/bottom.htm" -->
