@@ -22,10 +22,20 @@ Jie Liu, Marcello Lajolo, and Alberto Sangiovanni-Vincentelli
 ,Seattle, Washington, USA, March 1998.
 <br><br>
 </center>
-<p><center>
-<a href="Cosimulation.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]"></a>
-<a href="Cosimulation.pdf"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a>
+
+
+<table align="center">
+<tr>
+<td><a href="Cosimulation.pdf">Prepublished version</a></td>
+</tr>
+
+<tr>
+<td><a href="http://dx.doi.org/10.1109/HSC.1998.666239">Published version</a></
+td>
+</tr>
+</table>
 </center>
+
 <h2>ABSTRACT</h2>
 Timing analysis for checking satisfaction of constraints is a crucial problem in real-time system design. In some current approaches, the delay of software modules is precalculated by a software performance estimation method, which is not accurate enough for hard real-time systems and complicated designs. In this paper, we present an approach to integrate a clock-cycle-accurate instruction set simulator (ISS) with a fast event-based system simulator. By using the ISS, the delay of events can be measured instead of estimated. An interprocess communication architecture and a simple protocol are designed to meet the requirement of robustness and flexibility. A cached refinement scheme is presented to improve the performance at the expense of accuracy. The scheme is especially effective for applications in which the delay of basic blocks is approximately data-independent. We also discuss the implementation issues by using the Ptolemy simulation environment and the ST20 simulator as an example.
 
