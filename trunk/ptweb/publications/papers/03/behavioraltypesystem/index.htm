@@ -11,13 +11,18 @@
 <!--#include virtual="/ssi/toppostmenu.htm" -->
 <center>
   <h1>A Behavioral Type System and Its Application in Ptolemy II</h1>
-</center>
-<center>
   <p>Edward A. Lee and Yuhong Xiong </p>
-  <p> Published in <a href="http://dx.doi.org/10.1007/s00165-004-0043-8"> <i>Formal Aspects of Computing</i></a>, Volume 16, Number 3, August 2004. <p> Draft version:  November 10, 2003. 
-  <p> <a href="behavioraltypesystem.pdf"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]"></a> 
 </CENTER>
 <p>
+
+<table align="center">
+<tr>
+<td><a href="behavioraltypesystem.pdf">Prepublished version</a></td>
+</tr>
+<tr>
+<td><a href="http://dx.doi.org/10.1007/s00165-004-0043-8">Published version</a></td>
+</tr>
+</table>
 <h2>ABSTRACT</h2>
 Interface automata [deH01] have been introduced as an interface theory [deH01a] capable of functioning as a behavioral type system. Behavioral type systems describe dynamic properties of components and their compositions. Like traditional (data) type systems, behavioral type systems can be used to check compatibility of components. In this paper, we use interface automata to devise a behavioral type system for Ptolemy II, leveraging the contravariant and optimistic properties of interface automata to achieve behavioral subtyping and polymorphism. Ptolemy II is a software framework supporting concurrent component composition according to diverse models of computation. In this paper, we focus on representing the communication protocols used in component communication within the behavioral type system. In building this type system, we identify two key limitations in interface automata formalisms; we overcome these limitations with two extensions, transient states and projection automata. In addition to static type checking, we also propose to extend the use of interface automata to the on-line reflection of component states and to run-time type checking, which enable dynamic component creation, morphing application structure, and admission control. We discuss the trade-offs in the design of behavioral type systems.
 
