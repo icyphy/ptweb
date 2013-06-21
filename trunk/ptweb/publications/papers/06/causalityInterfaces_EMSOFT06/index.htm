@@ -15,11 +15,19 @@
 <center>
 <p>Ye Zhou and Edward A. Lee<p>
 <p>6th ACM & IEEE Conference on Embedded Software (EMSOFT '06), Seoul, Korea, October 22-25, 2006<p>
-<p><a href="CausalityInterfaces_EMSOFTpaper_ZHOU.pdf">(EMSOFT version)</a> 
-<p><a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-51.html">(Earlier version)</a> 
-<p>
+
+
+<table align="center">
+<tr>
+<td><a href="CausalityInterfaces_EMSOFTpaper_ZHOU.pdf">Prepublished version</a></td>
+</tr>
+
+<tr>
+<td><a href="http://dx.doi.org/10.1145/1176887.1176895">Published version</a></
+td>
+</tr>
+</table>
 </CENTER>
-<p>&nbsp;
 <p>
 <h2>ABSTRACT</h2>
 In this paper, we consider a concurrent model of computation called dataflow, where components (actors) communicate via streams of data tokens. Dataflow semantics has been adopted by experimental and production languages used to design embedded systems. The execution of a dataflow actor is enabled by the availability of its input data. One important question is whether a dataflow model will deadlock (i.e., actors cannot execute due to a data dependency loop). Deadlock in many cases can be determined, although it is generally not decidable. We develop a causality interface for dataflow actors based on the general framework we introduced in [1] and show how this causality information can be algebraically composed so that composition of components acquire causality interfaces that are inferred from their components and the interconnections. We illustrate the use of these causality interfaces to statically analyze for deadlock.
