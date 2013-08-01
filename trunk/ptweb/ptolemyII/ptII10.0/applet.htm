@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Ptolemy II 10.0.alpha Applets</title>
+
+<!--#include virtual="/ssi/toppremenu.htm" -->
+<!--#include virtual="/ptolemyII/ptII8.0/toc.htm" -->
+<!--#include virtual="/ssi/toppostmenu.htm" -->
+<h1>Ptolemy II 10.0.alpha Applets</h1>
+
+<BLOCKQUOTE>
+ <table border=1>
+   <tr>
+     <td>
+ <p> You can browse Ptolemy II and run demonstration <B>applets</B>
+without downloading the distribution by accessing the
+<a href="ptII10.0.alpha/doc/index.htm">web copy</a>.
+   </td>
+  </tr>
+ </table>
+</BLOCKQUOTE>
+
+<p>The web copy is merely a set of web pages that were created
+when we untar'd the distribution on the Ptolemy web site and
+then enabled the Web Start applications for the Ptolemy II demonstrations.
+
+Note that the web copy and the 
+<a href="webstart.htm">Web Start</a> installations are different, 
+the web copy is a set of web pages where some of the pages
+contain applets, and Web Start is a set of jar files that
+get downloaded to your machine so that you can run Ptolemy II
+at a later time, even if you are not connected to the network.
+In addition, many of the applet pages include a link to an applet
+and to a Web Start view/run-only version of the model.  The difference
+between the Web Start version of the individual demos and the Web
+Start full installation is that the full version includes the ability
+to <I>create</I> models.
+For details, see the <a href="index.htm#Summary">Installation Summary</a>
+
+<p>Note that to access the web copy applets you need a reasonably high
+speed internet connection, DSL or better, or you will wait quite a bit
+for applet downloads.
+
+<br>Note that the applet demonstrations work best with Windows, and that 
+you will need to have the Java 1.5 (or later) plug-in from
+<a href="http://www.javasoft.com/products/plugin/">JavaSoft</a>
+installed.  If you do not have the plug-in installed, you can still browse
+the distribution and look at the source code and documentation.
+
+<p>To run the applets applets in a web browser, you will need the
+Java 1.5 (or later)  plug-in.
+If you Java installed on your machine, then the plug-in may
+already be available.  To find out, try running the applets.  
+You may obtain the plug-in from
+<a href="http://www.oracle.com/technetwork/java/index-jsp-141438.html"><code>http://www.oracle.com/technetwork/java/index-jsp-141438.html</code></a>
+The plug-in is easiest to use from a Windows machine.
+
+<!--
+NOTE: Following not really equivalent to running the applets. EAL.
+If you do not
+have access to a Windows machine, you can run the applets by
+downloading Ptolemy II 1.0 and running <code>make demo</code>.
+-->
+
+<p>
+One way to determine what version of Java (if any) is installed 
+is to run our
+<a href="JavaVersionApplet.htm">Java Version Applet </a>, which
+uses the Java 1.5 (or later) plug-in.
+Another way is to run the command below to see whether
+you have Java installed, and whether it is the proper version:
+<pre>
+java -version
+</pre>
+If the command cannot be found, or the version that is printed is
+less than 1.5, you should install the plug-in, JRE 1.5, or JDK 1.5
+
+ <p> When you visit a Ptolemy II applet, the first applet that is run
+will download <code>ptsupport.jar</code>, which is 3.36Mb.  Each applet
+then will download smaller domain specific jar files of between 18k
+and 65k.  If you have a slow network connection, or if there is
+congestion in the network or on our server, you may experience
+significant delays before the first applet runs.
+Many of the applets use Diva, a visualization package. The
+<code>diva.jar</code> file is roughly 479k.
+We are interested in any feedback you might have concerning
+these demos.  You can send email to 
+ <CODE>cxh at eecs berkeley edu</CODE>
+<p>
+
+<h4> Places to go</h4>
+<menu>
+
+<li> For more information, see the
+plug-in section of the <a href="ptII10.0.alpha/doc/install_index.htm#Plugin">Ptolemy II Installation</a> page
+
+
+<li> The 
+"<a href="ptII10.0.alpha/doc/design/usingVergil/index_frames.htm">Using Vergil</a>" chapter from the
+<a href="ptII10.0.alpha/doc/design/index.htm">Ptolemy II Design Document</a>
+<li><a href="limitations.htm">Limitations</a>
+Ptolemy II is available in several formats.
+</menu>
+
+ <p>This page covers accessing Ptolemy II via applets.
+ <p>Other formats include:
+<menu>
+<li> <a href="webstart.htm">Installing Ptolemy II via the web using Web Start</a>
+<li> <a href="windows.htm">Installing Ptolemy II via a traditional Windows Installer</a>
+<li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a>
+</menu>
+
+
+ <!-- Leave a trailing p here so that there is a little space at the bottom -->
+ <p>
+<!--#include virtual="/ssi/bottom.htm" -->
