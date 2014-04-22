@@ -15,9 +15,9 @@
 	overflow: hidden;
 }
 
-/* Ptolemy specific change to override the white background in  http://ptolemy.org/ptolemyII/ptIIlatest/ptII/doc/default.css, which is used when we generate html for models for the website. */
+/* Ptolemy specific change to override the white background in  http://ptolemy.org/ptolemyII/ptIIlatest/ptII/doc/default.css, which is used when we generate html for models for the website. Note that this is not completely black. */
 .tooltipster-default table {
-         background: #000000;
+	background: #4c4c4c;
 }
 
 /* This next selector defines the color of the border on the outside of the arrow. This will automatically match the color and size of the border set on the main tooltip styles. Set display: none; if you would like a border around the tooltip but no border around the arrow */
