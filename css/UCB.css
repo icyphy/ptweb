@@ -385,7 +385,7 @@ margin-right:25px;
 /* inlineImg is a ptolemy-specific change used in the ptII10.0 pages with links to the JNLP files. */
 #inlineImg img {
 display:inline;
-margin-right:0px;
+margin-right:5px;
 }
 
 #content form {
