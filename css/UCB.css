@@ -2,6 +2,8 @@
          Recommended pathing is relative to site root: /img/filename.jpg
          Alternative pathing is relative to .css file, NOT to page file: ../img/filename.jpg  */
 
+/* Changes for Ptolemy: inlineImg img */
+
 /* ********** Defaults - gets all browser baselines in sync ************* */
 html,body,div,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input {margin:0; padding:0;}
 fieldset,img {border:none;}
@@ -379,6 +381,13 @@ color:#666;
 display:block;
 margin-right:25px;
 }
+
+/* inlineImg is a ptolemy-specific change used in the ptII10.0 pages with links to the JNLP files. */
+#inlineImg img {
+display:inline;
+margin-right:0px;
+}
+
 #content form {
 margin-top:1em;
 margin-bottom:1em;
