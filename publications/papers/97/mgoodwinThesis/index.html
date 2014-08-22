@@ -1,162 +1,160 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>
+    <title>Adaptive Signal Models: Theory, Algorithms, and Audio Applications</title>
 
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/publications/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
-<center>
-<br>
-<h1>
-Adaptive Signal Models: Theory, Algorithms, and Audio Applications
-</h1>
-</center>
+    <!--#include virtual="/ssi/toppremenu.htm" -->
+    <!--#include virtual="/publications/toc.htm" -->
+    <!--#include virtual="/ssi/toppostmenu.htm" -->
+    <center>
+      <br/>
+      <h1>Adaptive Signal Models: Theory, Algorithms, and Audio Applications</h1>
+    </center>
 
-<center>
+    <center>
 
-The Ph.D dissertation of Michael Mark Goodwin
+      The Ph.D dissertation of Michael Mark Goodwin
 
-<br>
+      <br/>
 
-December 10, 1997
+      December 10, 1997
 
-</center>
-<center>
- <a href="mgoodwinThesis.pdf"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]" BORDER=0></a>
- <a href="mgoodwinThesis.ps.gz"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]" BORDER=0></a>
-</center>
+    </center>
+    <center>
+      <a href="mgoodwinThesis.pdf"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]" BORDER=0/></a>
+      <a href="mgoodwinThesis.ps.gz"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]" BORDER=0/></a>
+    </center>
 
-<h2>Abstract</h2>
+    <h2>Abstract</h2>
 
 
-Mathematical models of natural signals have long been of interest
-in the scientific community.  A primary example is the
-Fourier model, which was introduced to explain the properties
-of blackbody radiation and has since found countless applications.
-In this thesis, a variety of parametric models that are
-tailored for representing audio signals are discussed.
-These modeling approaches provide compact representations
-that are useful for
-signal analysis, compression, enhancement, and modification;
-compaction is achieved in a given model
-by constructing the model in a signal-adaptive fashion.
+    <p>Mathematical models of natural signals have long been of interest
+      in the scientific community.  A primary example is the
+      Fourier model, which was introduced to explain the properties
+      of blackbody radiation and has since found countless applications.
+      In this thesis, a variety of parametric models that are
+      tailored for representing audio signals are discussed.
+      These modeling approaches provide compact representations
+      that are useful for
+      signal analysis, compression, enhancement, and modification;
+      compaction is achieved in a given model
+      by constructing the model in a signal-adaptive fashion.</p>
 
-<p>
+    <p>
 
-The opening chapter of this thesis provides a
-review of background material related to audio signal modeling
-as well as an overview of current trends.
-Basis expansions and their shortcomings are discussed;
-these shortcomings motivate the use of overcomplete
-expansions, which can achieve improved compaction.
-Methods based on overcompleteness, 
-{\it e.g.}~best bases, 
-adaptive wavelet packets, oversampled filter banks, 
-and generalized time-frequency decompositions,
-have been receiving increased attention
-in the literature.
+      The opening chapter of this thesis provides a
+      review of background material related to audio signal modeling
+      as well as an overview of current trends.
+      Basis expansions and their shortcomings are discussed;
+      these shortcomings motivate the use of overcomplete
+      expansions, which can achieve improved compaction.
+      Methods based on overcompleteness, 
+      <i>e.g.</i>best bases, 
+      adaptive wavelet packets, oversampled filter banks, 
+      and generalized time-frequency decompositions,
+      have been receiving increased attention
+      in the literature.</p>
 
-<p>
+    <p>
 
-The first signal representation discussed in detail in this thesis
-is the sinusoidal model, which has
-proven useful for speech coding and music analysis-synthesis.
-The model is developed as a parametric extension of
-the short-time Fourier transform (STFT); parametrization
-of the STFT in terms of sinusoidal partials
-leads to improved compaction
-for evolving signals and enables a wide range of
-meaningful modifications.  Analysis methods
-for the sinusoidal model are explored, and
-time-domain and frequency-domain synthesis techniques
-are considered.
+      The first signal representation discussed in detail in this thesis
+      is the sinusoidal model, which has
+      proven useful for speech coding and music analysis-synthesis.
+      The model is developed as a parametric extension of
+      the short-time Fourier transform (STFT); parametrization
+      of the STFT in terms of sinusoidal partials
+      leads to improved compaction
+      for evolving signals and enables a wide range of
+      meaningful modifications.  Analysis methods
+      for the sinusoidal model are explored, and
+      time-domain and frequency-domain synthesis techniques
+      are considered.
 
-<p>
+    <p>
 
-In its standard form, the sinusoidal model has some difficulties
-representing nonstationary signals.  For instance, a pre-echo 
-artifact is introduced in the reconstruction of signal onsets.
-Such difficulties can be overcome by carrying out the sinusoidal
-model in a multiresolution framework.
-Two multiresolution approaches based respectively on filter banks
-and adaptive time segmentation are presented.  A dynamic program
-for deriving pseudo-optimal signal-adaptive segmentations is discussed;
-it is shown to substantially mitigate pre-echo distortion.
+      In its standard form, the sinusoidal model has some difficulties
+      representing nonstationary signals.  For instance, a pre-echo 
+      artifact is introduced in the reconstruction of signal onsets.
+      Such difficulties can be overcome by carrying out the sinusoidal
+      model in a multiresolution framework.
+      Two multiresolution approaches based respectively on filter banks
+      and adaptive time segmentation are presented.  A dynamic program
+      for deriving pseudo-optimal signal-adaptive segmentations is discussed;
+      it is shown to substantially mitigate pre-echo distortion.
 
-<p>
+    <p>
 
-In parametric methods such as the sinusoidal model, perfect
-reconstruction is generally not achieved in the analysis-synthesis
-process; there is a nonzero difference between the original and
-the inexact reconstruction.  For high-quality synthesis, it is 
-important to model this residual and incorporate it in the signal
-reconstruction to account for salient features such as breath noise
-in a flute sound.  A method for parameterizing the sinusoidal 
-model residual based on a perceptually motivated filter bank
-is considered; analysis and synthesis techniques for this residual
-model are given.
+      In parametric methods such as the sinusoidal model, perfect
+      reconstruction is generally not achieved in the analysis-synthesis
+      process; there is a nonzero difference between the original and
+      the inexact reconstruction.  For high-quality synthesis, it is 
+      important to model this residual and incorporate it in the signal
+      reconstruction to account for salient features such as breath noise
+      in a flute sound.  A method for parameterizing the sinusoidal 
+      model residual based on a perceptually motivated filter bank
+      is considered; analysis and synthesis techniques for this residual
+      model are given.
 
-<p>
+    <p>
 
-For pseudo-periodic signals, compaction can be achieved by
-incorporating the pitch in the signal model.  It is shown that
-both the sinusoidal model and the wavelet transform can be improved
-by pitch-synchronous operation when the original signal is
-pseudo-periodic.  Furthermore, 
-approaches for representing dynamic signals having
-both periodic and aperiodic regions are discussed.
+      For pseudo-periodic signals, compaction can be achieved by
+      incorporating the pitch in the signal model.  It is shown that
+      both the sinusoidal model and the wavelet transform can be improved
+      by pitch-synchronous operation when the original signal is
+      pseudo-periodic.  Furthermore, 
+      approaches for representing dynamic signals having
+      both periodic and aperiodic regions are discussed.
 
-<p>
+    <p>
 
-Both the sinusoidal model and the various pitch-synchronous methods
-can be interpreted as signal-adaptive 
-expansions whose components are time-frequency atoms
-constructed according to parameters extracted
-from the signal by an analysis process.  An alternative approach to
-deriving a compact
-parametric atomic decomposition is to choose the atoms
-in a signal-adaptive fashion from an overcomplete
-dictionary of parametric time-frequency atoms.
-Such overcomplete expansions can be arrived at
-using the matching pursuit algorithm.  Typically, the 
-time-frequency dictionaries used in matching pursuit
-consist of Gabor atoms based on a symmetric prototype
-window.  Such symmetric atoms, however, are not well-suited for
-representing transient behavior, so alternative dictionaries
-are considered, namely dictionaries of damped sinusoids as well
-as dictionaries of general asymmetric atoms constructed using
-underlying causal and anticausal damped sinusoids.  It is shown
-that the matching pursuit computation for either type of atom
-can be carried out with low-cost recursive filter banks.
+      Both the sinusoidal model and the various pitch-synchronous methods
+      can be interpreted as signal-adaptive 
+      expansions whose components are time-frequency atoms
+      constructed according to parameters extracted
+      from the signal by an analysis process.  An alternative approach to
+      deriving a compact
+      parametric atomic decomposition is to choose the atoms
+      in a signal-adaptive fashion from an overcomplete
+      dictionary of parametric time-frequency atoms.
+      Such overcomplete expansions can be arrived at
+      using the matching pursuit algorithm.  Typically, the 
+      time-frequency dictionaries used in matching pursuit
+      consist of Gabor atoms based on a symmetric prototype
+      window.  Such symmetric atoms, however, are not well-suited for
+      representing transient behavior, so alternative dictionaries
+      are considered, namely dictionaries of damped sinusoids as well
+      as dictionaries of general asymmetric atoms constructed using
+      underlying causal and anticausal damped sinusoids.  It is shown
+      that the matching pursuit computation for either type of atom
+      can be carried out with low-cost recursive filter banks.
 
-<p>
+    <p>
 
-In the closing chapter, the key points of the thesis are summarized.
-The conclusion also discusses extensions to audio coding
-and provides suggestions for further work related to
-overcomplete representations.
+      In the closing chapter, the key points of the thesis are summarized.
+      The conclusion also discusses extensions to audio coding
+      and provides suggestions for further work related to
+      overcomplete representations.
 
-<p>
+    <p>
 
-<h2>
-Bibliographic Information
-</h2>
+      <h2>
+	Bibliographic Information
+      </h2>
 
-Michael M. Goodwin. <br>
-<i>Adaptive Signal Models: Theory, Algorithms, and Audio 
-Applications</i>. <br>
-PhD thesis, University of California, Berkeley, 1997. <br>
-Available as UCB/ERL M97/91. <br>
-<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/mgoodwinThesis/">
-<code>http://ptolemy.eecs.berkeley.edu/publications/papers/97/michaelgThesis/</code></a>
+      Michael M. Goodwin. <br/>
+      <i>Adaptive Signal Models: Theory, Algorithms, and Audio 
+	Applications</i>. <br/>
+      PhD thesis, University of California, Berkeley, 1997. <br/>
+      Available as UCB/ERL M97/91. <br/>
+      <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/mgoodwinThesis/">
+	<code>http://ptolemy.eecs.berkeley.edu/publications/papers/97/michaelgThesis/</code></a>
 
-<p>
+    <p>
 
 
-<ADDRESS>Send comments to <a href="http://ptolemy.eecs.berkeley.edu/~michaelg">Michael Goodwin</a> at michaelg at eecs berkeley edu .</ADDRESS>
+      <ADDRESS>Send comments to <a href="http://ptolemy.eecs.berkeley.edu/~michaelg">Michael Goodwin</a> at michaelg at eecs berkeley edu .</ADDRESS>
 
-<!-- #include virtual="/ssi/bottom.htm" -->
+      <!-- #include virtual="/ssi/bottom.htm" -->
