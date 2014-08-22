@@ -1,82 +1,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>
+    <title>The Specification and Execution of Heterogeneous Synchronous Reactive Systems</title>
 
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/publications/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
-<center>
-<br>
-<h1>The Specification and Execution of Heterogeneous Synchronous Reactive Systems</h1>
-</center>
-<center>
-The Ph.D dissertation of Stephen Anthony Edwards
-<br>
-May 5, 1997
-</center>
-<p><center>
-  <a href="sedwardsThesis.pdf"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]" BORDER=0></a>
+    <!--#include virtual="/ssi/toppremenu.htm" -->
+    <!--#include virtual="/publications/toc.htm" -->
+    <!--#include virtual="/ssi/toppostmenu.htm" -->
+    <center>
+      <br/>
+      <h1>The Specification and Execution of Heterogeneous Synchronous Reactive Systems</h1>
+    </center>
+    <center>
+      The Ph.D dissertation of Stephen Anthony Edwards
+      <br/>
+      May 5, 1997
+    </center>
+    <p><center>
+	<a href="sedwardsThesis.pdf"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PDF.gif" width=29 height=32 border=0 alt="[PDF]" BORDER=0/></a>
 
-  <a href="sedwardsThesis.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]" BORDER=0></a>
-</center>
+	<a href="sedwardsThesis.ps"><img hspace=0 src="http://ptolemy.eecs.berkeley.edu/image/PS.gif" width=30 height=32 border=0 alt="[Postscript]" BORDER=0/></a>
+      </center>
 
-<h2>Abstract</h2>
+      <h2>Abstract</h2>
 
-The need for new languages and paradigms for designing software for
-embedded computing systems continues to grow as general-purpose
-microcontrollers become faster and cheaper.  Many of these system need
-precise control over when things happen, yet few languages provide
-this facility.  Another major challenge is handling the growing
-complexity of these systems.
- 
-<p>
+      The need for new languages and paradigms for designing software for
+      embedded computing systems continues to grow as general-purpose
+      microcontrollers become faster and cheaper.  Many of these system need
+      precise control over when things happen, yet few languages provide
+      this facility.  Another major challenge is handling the growing
+      complexity of these systems.
+      
+    <p>
 
-In this dissertation, I present a new model of computation for
-embedded system software that is the first to fuse precise control
-over timing with the ability to build systems from heterogeneous
-pieces.  It combines the synchronous model of time (used in languages
-such as Esterel) with the hierarchical heterogeneity of the Ptolemy
-system.  Heterogeneity addresses the complexity problem by allowing
-each subsystem to be designed using the best language.
+      In this dissertation, I present a new model of computation for
+      embedded system software that is the first to fuse precise control
+      over timing with the ability to build systems from heterogeneous
+      pieces.  It combines the synchronous model of time (used in languages
+      such as Esterel) with the hierarchical heterogeneity of the Ptolemy
+      system.  Heterogeneity addresses the complexity problem by allowing
+      each subsystem to be designed using the best language.
 
-<p>
- 
-My two major contributions are the formal semantics of this model and
-an efficient, predictable execution scheme for it.  Dealing with
-zero-delay feedback loops, a side-effect of the zero-delay assumption
-needed for synchrony, is the semantic challenge, and I solve it with a
-fixed-point scheme that guarantees all systems are deterministic by
-construction.  The execution scheme I present is provably correct and
-eliminates run-time scheduling overhead by making all decisions before
-the system is run.
+    <p>
+      
+      My two major contributions are the formal semantics of this model and
+      an efficient, predictable execution scheme for it.  Dealing with
+      zero-delay feedback loops, a side-effect of the zero-delay assumption
+      needed for synchrony, is the semantic challenge, and I solve it with a
+      fixed-point scheme that guarantees all systems are deterministic by
+      construction.  The execution scheme I present is provably correct and
+      eliminates run-time scheduling overhead by making all decisions before
+      the system is run.
 
-<p>
- 
-I present results that show my model of computation is both efficient
-and can be used to implement practical systems.  It is my hope that
-these ideas will be used in the future to make designing complex
-time-critical embedded software easier and less error-prone.
+    <p>
+      
+      I present results that show my model of computation is both efficient
+      and can be used to implement practical systems.  It is my hope that
+      these ideas will be used in the future to make designing complex
+      time-critical embedded software easier and less error-prone.
 
-<p>
+    <p>
 
-<h2>
-Bibliographic Information
-</h2>
+      <h2>
+	Bibliographic Information
+      </h2>
 
-Stephen Anthony Edwards. <br>
-<i>The Specification and Execution of Heterogeneous Synchronous Reactive
-Systems</i>. <br>
-PhD thesis, University of California, Berkeley, 1997. <br>
-Avaliable as UCB/ERL M97/31. <br>
-<a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/sedwardsThesis/">
-<code>http://ptolemy.eecs.berkeley.edu/publications/papers/97/sedwardsThesis/</code></a>
+      Stephen Anthony Edwards. <br/>
+      <i>The Specification and Execution of Heterogeneous Synchronous Reactive
+	Systems</i>. <br/>
+      PhD thesis, University of California, Berkeley, 1997. <br/>
+      Avaliable as UCB/ERL M97/31. <br/>
+      <a href="http://ptolemy.eecs.berkeley.edu/publications/papers/97/sedwardsThesis/">
+	<code>http://ptolemy.eecs.berkeley.edu/publications/papers/97/sedwardsThesis/</code></a>
 
-<p>
+    <p>
 
-<ADDRESS>Send comments to <a href="http://ptolemy.eecs.berkeley.edu/~sedwards">Stephen Edwards</a> at sedwards at alumni caltech edu .</ADDRESS>
+      <ADDRESS>Send comments to <a href="http://ptolemy.eecs.berkeley.edu/~sedwards">Stephen Edwards</a> at sedwards at alumni caltech edu .</ADDRESS>
 
-<!-- #include virtual="/ssi/bottom.htm" -->
+      <!-- #include virtual="/ssi/bottom.htm" -->
