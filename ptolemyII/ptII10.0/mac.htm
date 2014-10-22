@@ -23,19 +23,24 @@ Mac OS X Installer Disk file (196Mb)</a>
 <h4>Documentation</h4>
 <menu>
 <li> The 
-"<a href="ptII10.0.devel/doc/design/usingVergil/index_frames.htm">Using Vergil</a>" chapter from the
-<a href="ptII10.0.devel/doc/design/index.htm">Ptolemy II Design Document</a>
-<li> Detailed <a href="ptII10.0.devel/doc/install_index.htm">Ptolemy II Installation</a>
+"<a href="ptII/doc/design/usingVergil/index_frames.htm">Using Vergil</a>" chapter from the
+<a href="ptII/books/systems/PtolemyII_DigitalV1_02.pdf">Ptolemy II Book</a>
+<li> Detailed <a href="ptII/doc/install_index.htm">Ptolemy II Installation</a>
 instructions.
 <li><a href="limitations.htm">Limitations</a>
 
 </menu>
 <h2>Mac OS X Specific Notes</h2>
+<p>The Ptolemy II installer is an unsigned application, so recent versions of Mac OS X may state that the application cannot be run.</p>
+<p>If this happens, go to the System Preferences application, click on "Security and Privacy" and then allow execution of the application.</p>
 
+<p>Ptolemy II requires Java, which may be downloaded from Oracle.  We suggest installing the JDK, see <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>.  Note that recent versions of Mac OS X may prompt you to install the JDK if it is not yet installed.</p>
 
 The Ptolemy installer for Mac will install a version of Ptolemy
 that does not include serial port support, or Java Media Framework support.
 In addition, Mac OS X may not have gcc installed by default.
+
+<p>The installer is targeted to support Java 1.6, so during installation you will be prompted to install a Java 1.6 JDK.
 
 <br>To add serial port support, Java Media Framework support and/or gcc, see
 <a href="http://chess.eecs.berkeley.edu/ptexternal/wiki/Main/Mac#Ptolemy">Setting up a Mac for use with Ptolemy</a>.
