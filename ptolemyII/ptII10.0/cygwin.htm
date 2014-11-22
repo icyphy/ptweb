@@ -159,7 +159,7 @@ perl -i -pne "s/\r\n/\n/g" configure
 </pre>
 
 <li> Follow the instructions in the
-<a href="ptII10.0.devel/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section
+<a href="ptII10.0.beta/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section
 
 
 </ol>
@@ -218,7 +218,7 @@ the latest versions, see the Cygwin website.
 
  <p>Instructions for installing Cygwin from the Cygwin website
 can be found on the 
-for <a href="ptII10.0.devel/doc/install.htm#cygwin">Ptolemy II Installation Page</a>
+for <a href="ptII10.0.beta/doc/install.htm#cygwin">Ptolemy II Installation Page</a>
 
 <h2>Enabling Copy in Cygwin Bash under XP</h2>
 You may need to enable copy and paste in the bash shell window.
@@ -307,7 +307,7 @@ libgdbm4-1.8.3-20     required by cvs
 libgmp3-4.3.1-3
 libiconv2-1.13.1-1     required by sed
 libintl3-0.14.5-1
-libintl10.0.devel7-11
+libintl10.0.beta7-11
 liblzma1-4.999.9beta-10
 libncurses8-5.5-10
 libncurses9-5.7-16
@@ -354,31 +354,31 @@ zlib0-1.2.3-10
 the tools from the basic cygwin download listed above and
 
 <pre>
-autoconf-8-1
-autoconf2.1-2.13-10
-autoconf2.5-2.65-1
-binutils-2.19.51-1
-gcc-3.4.4-999
-gcc-core-3.4.4-999
-gcc-g++-3.4.4-999
-gcc-mingw-core-20050522-1
-gcc-mingw-g++-20050522-1
+autoconf-13-1
+binutils-2.24.51-5
+gcc-core-4.8.3-3
+gcc-g++-4.8.3-3
+mingw64-x86_64-gcc-core-4.8.3.1
+mingw64-x86-gcc-g++-4.8.3.1
+mingw64x86_64-runtime 3.1.0-1
 m4-1.4.13-2
-mingw-runtime-3.17-1
 perl-5.10.1-2      sadly, autoconf requires perl
 w32api-3.14-1
 </pre>
+
 
 In addition, we include select tools for 
 <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>,
 the Ptolemy/TinyOS interface.
 <pre>
-automake1.10-1.10.3-1
-bison-2.4.1-1
-emacs-23.1-10
-emacs-el-23.1-10
-gperf-3.0.3-1
-rpm-4.1-2
+automake1.10-1.10.3-2
+bison-2.7.1-1
+emacs-24-3.7
+emacs-el-24.3.7
+gperf-3.0.4-1
+rpm-4.11.1-1
 </pre>
+
+The above packages have a number of dependencies, which are also included.
 
 <!--#include virtual="/ssi/bottom.htm" -->
