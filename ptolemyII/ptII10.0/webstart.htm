@@ -1,128 +1,124 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>Ptolemy II 10.0.beta Web Edition Download</title>
+    <title>Ptolemy II 10.0.beta Web Edition Download</title>
 
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/ptolemyII/ptII8.0/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
+    <!--#include virtual="/ssi/toppremenu.htm" -->
+    <!--#include virtual="/ptolemyII/ptII10.0/toc.htm" -->
+    <!--#include virtual="/ssi/toppostmenu.htm" -->
 
-<table>
-<tr>
-  <td>
- <img src="ptII10.0.beta/doc/img/PtolemyIISplash.gif" alt="Ptolemy II 10.0.beta" align="left">
-  </td>
-</table>
-<h1>Ptolemy II 10.0.beta Web Edition Download</h1>
+    <table>
+      <tr>
+	<td>
+	  <img src="ptII10.0.beta/doc/img/PtolemyIISplash.gif" alt="Ptolemy II 10.0.beta" align="left"/>
+	</td>
+      </tr>
+    </table>
 
-
-        <p>This download of Ptolemy II uses a web launching tool
-       called Web Start that makes installation and updates particularly
-       simple.  
-
- <h2>Quick Start</h2>
-   <ol> 
-<!-- See http://blogs.sun.com/thejavatutorials/entry/deployment_toolkit_101 -->
-<script src="deployJava.js"></script>
-<script >
-    var dir = location.href.substring(0,location.href.lastIndexOf('/')+1);
-    var url = dir + "jnlp-10.0.beta/vergil.jnlp";
-    var minimumVersion = '1.5.0';
-    if (deployJava.isWebStartInstalled(minimumVersion)) {
-	    document.write("Download Ptolemy II 10.0.beta Web Edition (~62Mb)"); 
-    }
-    deployJava.createWebStartLaunchButton(url, minimumVersion);
-</script>
-
- </ol>
-<I>Or . . .</I>
- <ol>
-<!-- See http://blogs.sun.com/thejavatutorials/entry/deployment_toolkit_101 -->
-<script src="deployJava.js"></script>
-<script >
-    var dir = location.href.substring(0,location.href.lastIndexOf('/')+1);
-    var url = dir + "jnlp-10.0.beta/vergilPtiny.jnlp";
-    var minimumVersion = '1.5.0';
-    if (deployJava.isWebStartInstalled(minimumVersion)) {
-	    document.write("Download Ptolemy II 10.0.beta Web Ptiny Edition (~42Mb)"); 
-    }
-    deployJava.createWebStartLaunchButton(url, minimumVersion);
-</script>
-   </ol> 
+    <h1>Ptolemy II 10.0.beta Web Edition Download</h1>
 
 
+    <p>This download of Ptolemy II uses a web launching tool
+      called Web Start that makes installation and updates particularly
+      simple.</p>
+
+    <h2>Quick Start</h2>
+    <ol> 
+      <!-- See http://blogs.sun.com/thejavatutorials/entry/deployment_toolkit_101 -->
+      <script src="deployJava.js"></script>
+      <script >
+	var dir = location.href.substring(0,location.href.lastIndexOf('/')+1);
+	var url = dir + "jnlp-10.0.beta/vergil.jnlp";
+	var minimumVersion = '1.6.0';
+	if (deployJava.isWebStartInstalled(minimumVersion)) {
+	document.write("Download Ptolemy II 10.0.beta Web Edition (~62Mb)"); 
+	}
+	deployJava.createWebStartLaunchButton(url, minimumVersion);
+      </script>
+
+    </ol>
+    <I>Or . . .</I>
+    <ol>
+      <!-- See http://blogs.sun.com/thejavatutorials/entry/deployment_toolkit_101 -->
+      <script src="deployJava.js"></script>
+      <script >
+	var dir = location.href.substring(0,location.href.lastIndexOf('/')+1);
+	var url = dir + "jnlp-10.0.beta/vergilPtiny.jnlp";
+	var minimumVersion = '1.6.0';
+	if (deployJava.isWebStartInstalled(minimumVersion)) {
+	document.write("Download Ptolemy II 10.0.beta Web Ptiny Edition (~42Mb)"); 
+	}
+	deployJava.createWebStartLaunchButton(url, minimumVersion);
+      </script>
+    </ol> 
+
+    <h2>Installation Details</h2>
+
+    <p>Below are more detailed instructions.</p>
+
+    <p><a href="http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136112.html">Web Start</a> is a product from Sun that is used to
+      download the Ptolemy II 10.0.beta Web Edition.  </p>
+    <p>Sun's Java Web Start is included in version 1.6 or later of Sun's Java Runtime Environment (JRE) or Java Development Kit (JDK). </p>
+    <p>In other words, If you have <b>Java 1.6</b> or later installed,
+      then <b>Web Start</b> is <b>already installed!</b></p>
+
+    <ol>
+      <li> This web page attempts to detect whether Web Start
+	is already installed.  If the Quick Start section above has an
+	orange button that says "Launch", then click it to lauch the 
+	Ptolemy II Web Start version.  If Java can't be found,
+	then download and 
+	<a href="http://java.com/">Install Java from Oracle (15.2Mb)</a>
+	and then 
+	<blockquote>
+	  <a href="jnlp-10.0.beta/vergil.jnlp">Install Ptolemy II 10.0.beta Web Edition (~62Mb)</a>
+	</blockquote>
+
+	<br/>For example, under Opera 6.01 under Windows 2000, click on the
+	<a href="jnlp-10.0.beta/vergil.jnlp">Ptolemy II 10.0.beta Web Edition (~62Mb)</a>
+	link and select <code>open</code>.  If Java Web Start has been installed, 
+	then it should start up automatically.</li>
 
 
-<h2>Installation Details</h2>
+      <li> The download is roughly 62Mb
+	14Mb of the application download is consumed
+	by the HTML documentation of the Ptolemy II Java classes.</li>
 
-Below are more detailed instructions.
+      <li> After the download completes, you will be prompted with a window
+	that states that the certificate from <code>University of California
+	  Berkeley</code> is valid.  You should hit the <code>Start</code> button
+	to proceed with start up.</li>
 
- <p><a href="http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136112.html">Web Start</a> is a product from Sun that is used to
-download the Ptolemy II 10.0.beta Web Edition.  
- <p>Sun's Java Web Start is included in version 1.5 or later of Sun's Java Runtime Environment (JRE) or Java Development Kit (JDK). 
- <p>In other words, If you have <B>Java 1.5</B> or later installed,
-then <B>Web Start</B> is <B>already installed!</B>
+    </ol>
 
+    <p>Note that individual demos are available as Web Start applications,
+      see the <a href="ptII10.0.beta/doc/index.htm">web copy</a>.
+      However, the individual Web Start demos are primarily for viewing
+      the models, they do not include the full editor.</p>
 
-<ol>
-<li> This web page attempts to detect whether Web Start
-is already installed.  If the Quick Start section above has an
-orange button that says "Launch", then click it to lauch the 
-Ptolemy II Web Start version.  If Java can't be found,
-then download and 
-<a href="http://java.com/">Install Java from Oracle (15.2Mb)</a>
+    <h4> Places to go</h4>
+    <ul>
+      <li> For more information about installation, see the
+	<a href="ptII10.0.beta/doc/webStartHelp_index.htm">Web Start Help</a> page.</li>
+      <li> The 
+	"<a href="ptII10.0.beta/doc/design/usingVergil/index_frames.htm">Using Vergil</a>" chapter from the
+	<a href="ptII10.0.beta/doc/design/index.htm">Ptolemy II Design Document</a></li>
+      <li><a href="limitations.htm">Limitations</a></li>
+    </ul>
 
-and then 
-<BLOCKQUOTE>
-<a href="jnlp-10.0.beta/vergil.jnlp">Install Ptolemy II 10.0.beta Web Edition (~62Mb)</a>
-</BLOCKQUOTE>
+    <p>This page covers installing Ptolemy II via Web Start</p>
 
- <br>For example, under Opera 6.01 under Windows 2000, click on the
-<a href="jnlp-10.0.beta/vergil.jnlp">Ptolemy II 10.0.beta Web Edition (~62Mb)</a>
-link and select <code>open</code>.  If Java Web Start has been installed, 
-then it should start up automatically.
+    <p>Other formats include:
+      <ul>
+	<li> <a href="applet.htm">Accessing Ptolemy II demonstration applets via the web</a></li>
+	<li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a></li>
+	<li> <a href="mac.htm">Installing Ptolemy II under Mac OS X with an installer</a></li>
+	<li> <a href="windows.htm">Installing Ptolemy II via a traditional Windows Installer</a></li>
+      </ul>
 
-
-<li> The download is roughly 62Mb
-14Mb of the application download is consumed
-by the HTML documentation of the Ptolemy II Java classes.
-
-<li> After the download completes, you will be prompted with a window
-that states that the certificate from <code>University of California
-Berkeley</code> is valid.  You should hit the <code>Start</code> button
-to proceed with start up.
-
-</ol>
-
-   Note that individual demos are available as Web Start applications,
-  see the <a href="ptII10.0.beta/doc/index.htm">web copy</a>.
-  However, the individual Web Start demos are primarily for viewing
-  the models, they do not include the full editor.
-
-<h4> Places to go</h4>
-<menu>
-
-<li> For more information about installation, see the
-<a href="ptII10.0.beta/doc/webStartHelp_index.htm">Web Start Help</a> page.
-<li> The 
-"<a href="ptII10.0.beta/doc/design/usingVergil/index_frames.htm">Using Vergil</a>" chapter from the
-<a href="ptII10.0.beta/doc/design/index.htm">Ptolemy II Design Document</a>
-<li><a href="limitations.htm">Limitations</a>
-</menu>
-
- <p>This page covers installing Ptolemy II via Web Start
- <p>Other formats include:
-
-<menu>
-<li> <a href="applet.htm">Accessing Ptolemy II demonstration applets via the web</a>
-<li> <a href="windows.htm">Installing Ptolemy II via a traditional Windows Installer</a>
-<li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a>
-</menu>
-
-
- <!-- Leave a trailing p here so that there is a little space at the bottom -->
- <p>
-<!--#include virtual="/ssi/bottom.htm" -->
+      <!-- Leave a trailing p here so that there is a little space at the bottom -->
+    <p>
+      <!--#include virtual="/ssi/bottom.htm" -->

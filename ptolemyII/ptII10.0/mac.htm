@@ -1,51 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>Ptolemy II 10.0.beta Notes for Mac OS X</title>
+    <title>Ptolemy II 10.0.beta Notes for Mac OS X</title>
 
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/ptolemyII/ptII8.0/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
-<h1>Ptolemy II 10.0.beta Notes for Mac OS X</h1>
+    <!--#include virtual="/ssi/toppremenu.htm" -->
+    <!--#include virtual="/ptolemyII/ptII10.0/toc.htm" -->
+    <!--#include virtual="/ssi/toppostmenu.htm" -->
+    <h1>Ptolemy II 10.0.beta Notes for Mac OS X</h1>
 
-<h4>Downloads</h4>
+    <h4>Downloads</h4>
 
-<menu>
-<li> 
-<a href="ptII10.0.beta.setup.mac.jar">Download the Ptolemy II 10.0.beta
-Mac OS X Installer Disk file (196Mb)</a>  
-</menu>
-
-
-<h4>Documentation</h4>
-<menu>
-<li> The 
-"<a href="ptII/doc/design/usingVergil/index_frames.htm">Using Vergil</a>" chapter from the
-<a href="ptII/books/systems/PtolemyII_DigitalV1_02.pdf">Ptolemy II Book</a>
-<li> Detailed <a href="ptII/doc/install_index.htm">Ptolemy II Installation</a>
-instructions.
-<li><a href="limitations.htm">Limitations</a>
-
-</menu>
-<h2>Mac OS X Specific Notes</h2>
-<p>The Ptolemy II installer is an unsigned application, so recent versions of Mac OS X may state that the application cannot be run.</p>
-<p>If this happens, go to the System Preferences application, click on "Security and Privacy" and then allow execution of the application.</p>
-
-<p>Ptolemy II requires Java, which may be downloaded from Oracle.  We suggest installing the JDK, see <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>.  Note that recent versions of Mac OS X may prompt you to install the JDK if it is not yet installed.</p>
-
-The Ptolemy installer for Mac will install a version of Ptolemy
-that does not include serial port support, or Java Media Framework support.
-In addition, Mac OS X may not have gcc installed by default.
-
-<p>The installer is targeted to support Java 1.6, so during installation you will be prompted to install a Java 1.6 JDK.
-
-<br>To add serial port support, Java Media Framework support and/or gcc, see
-<a href="http://chess.eecs.berkeley.edu/ptexternal/wiki/Main/Mac#Ptolemy">Setting up a Mac for use with Ptolemy</a>.
+    <ul>
+      <li> <a href="ptII10.0.beta.setup.mac.jar">Download the Ptolemy II 10.0.beta
+	  Mac OS X Installer Disk file (196Mb)</a></li>  
+    </ul>
 
 
- <!-- Leave a trailing p here so that there is a little space at the bottom -->
- <p>
-<!--#include virtual="/ssi/bottom.htm" -->
+    <h4>Documentation</h4>
+    <ul>
+      <li>The most comprehensive documentation is the book, 
+	<br/>Claudius Ptolemaeus, Editor, <i><a href="/systems">System Design, Modeling, and Simulation Using Ptolemy II</a></i>, Ptolemy.org, 2014, available as a free PDF download and low-cost paperback.</li>
+      <li>"<a href="ptII/doc/design/usingVergil/index.htm">Building Graphical Models</a>" chapter from the
+	the book is a good starting point</li>
+      <li> Detailed <a href="ptII/doc/install_index.htm">Ptolemy II Installation</a>
+	instructions.</li>
+      <li><a href="limitations.htm">Limitations</a></li>
+    </ul>
+
+    <h2>Mac OS X Specific Notes</h2>
+    <p>The Ptolemy II installer is an unsigned application, so recent versions of Mac OS X may state that the application cannot be run.</p>
+    <p>If this happens, go to the System Preferences application, click on "Security and Privacy" and then allow execution of the application.</p>
+
+    <p>Ptolemy II requires Java, which may be downloaded from Oracle.  We suggest installing the JDK, see <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>.  Note that recent versions of Mac OS X may prompt you to install the JDK if it is not yet installed.</p>
+
+    <p>The Ptolemy installer for Mac will install a version of Ptolemy with a JRE that includes:</p>
+    <ul>
+      <li> Java 3D, which is required to run the Graphical (GR) domain demos.</li>
+      <li> The Java Advanced Imaging Interface.</li>
+      <li> The Java Serial port communication interface.</li>
+      <li> The Java Media Framework.</li>
+    </ul>
+
+    <p>This page covers installing Ptolemy II via a traditional Windows Installer</p>
+    <p>Other formats include:</p>
+    <ul>
+      <li> <a href="applet.htm">Accessing Ptolemy II demonstration applets via the web</a></li>
+      <li> <a href="webstart.htm">Installing Ptolemy II via the web using Web Start</a></li>
+      <li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a></li>
+      <li> <a href="windows.htm">Installing Ptolemy II under Windows with an installer</a></li>
+    </ul>
+
+
+    <!-- Leave a trailing p here so that there is a little space at the bottom -->
+    <p>
+      <!--#include virtual="/ssi/bottom.htm" -->

@@ -1,199 +1,186 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>Ptolemy II 10.0.beta Windows Installer</title>
+    <title>Ptolemy II 10.0.beta Windows Installer</title>
 
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/ptolemyII/ptII8.0/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
-<h1><a name="Ptolemy II 10.0.beta Windows Installer">Ptolemy II 10.0.beta Windows Installer</a></h1>
+    <!--#include virtual="/ssi/toppremenu.htm" -->
+    <!--#include virtual="/ptolemyII/ptII10.0/toc.htm" -->
+    <!--#include virtual="/ssi/toppostmenu.htm" -->
+    <h1><a name="Ptolemy II 10.0.beta Windows Installer">Ptolemy II 10.0.beta Windows Installer</a></h1>
 
-<h4>Downloads</h4>
+    <h4>Downloads</h4>
 
-<menu>
-<li> 
-<a href="ptII10_0_beta_setup_windows.exe">Download the Ptolemy II 359 Mb
-Windows <b>32-bit</b> executable file (JRE not included)</a> 
-</li>
+    <ul>
+      <li> <a href="ptII10_0_beta_setup_windows.exe">Download the Ptolemy II 359 Mb
+	  Windows <b>32-bit</b> executable file (JRE not included)</a> 
+      </li>
 
-<li> 
-<a href="ptII10_0_beta_setup_windows_64.exe">Download the Ptolemy II 359 Mb
-Windows <b>64-bit</b> executable file that includes a private copy of the Java
-Runtime Environment 1.5.0_22 and some of the support packages such as Java 3D</a>  
-<B>Most Windows users will select this installer</B>
-<br/>To determine if you are running a 64-bit version of Windows, see the
-Microsoft
-<a href="http://windows.microsoft.com/en-US/windows7/32-bit-and-64-bit-Windows-frequently-asked-questions">32-bit and 64-bit Windows: frequently asked questions</a> page.</li>
+      <li> <a href="ptII10_0_beta_setup_windows_64.exe">Download the Ptolemy II 359 Mb
+	  Windows <b>64-bit</b> executable file that includes a private copy of the Java
+	  Runtime Environment 1.5.0_22 and some of the support packages such as Java 3D</a>  
+	<B>Most Windows users will select this installer</B>
+	<br/>To determine if you are running a 64-bit version of Windows, see the
+	Microsoft
+	<a href="http://windows.microsoft.com/en-US/windows7/32-bit-and-64-bit-Windows-frequently-asked-questions">32-bit and 64-bit Windows: frequently asked questions</a> page.
+      </li>
+    </ul>
 
-</menu>
+    <h4>Download Problems</h4>
+    <p>Problems have been reported with downloading the installers.</p>
 
-<h4>Download Problems</h4>
-Problems have been reported with downloading the installers.
+    <h5>Not Commonly Downloaded Message</h5>
+    <p>When downloading, you may get a message like:
+      <br/><img src="NotCommonlyDownloadedMessage.png" alt="Screenshot of IE with Not Commonly Downloaded Message"/></p>
+    <p>The issues is that the download is not common, the workaround is to click on the "Actions" button and then "Run Anyway".</p>
 
-<h5>Not Commonly Downloaded Message</h5>
-When downloading, you may get a message like:
-<br/>
-<img src="NotCommonlyDownloadedMessage.png" alt="Screenshot of IE with Not Commonly Downloaded Message"/>
-<p>The issues is that the download is not common, the workaround is to click on the "Actions" button and then "Run Anyway".
+    <h5>Invalid or Corrupt Jar File</h5>
+    <p>A Windows user reported this error window:
+      <br/><img src="JVMLauncherInvalidOrCorrupt.png" alt="Screenshot of Java Virtual Machine Launcher Window with Invalid or Corrupt jarfile message"/></p>
 
-<h5>Invalid or Corrupt Jar File</h5>
-A Windows user reported this error window:
-<br/><img src="JVMLauncherInvalidOrCorrupt.png" alt="Screenshot of Java Virtual Machine Launcher Window with Invalid or Corrupt jarfile message">
-
-<p>One possible work around is to download the <code>.exe</code> file and invoke the <code>java</code> command on the <code>.exe</code>
-file:
-<pre>
-java -jar ptII10_0_beta_setup_windows_64.exe
-</pre>
-It looks like this error message is caused by a problem with the the .exe file that is produced by Launch4J.
-See <a href="http://stackoverflow.com/questions/5913120/java-embedding-jar-inside-exe">http://stackoverflow.com/questions/5913120/java-embedding-jar-inside-exe</a>
-for details.
+    <p>One possible work around is to download the <code>.exe</code> file and invoke the <code>java</code> command on the <code>.exe</code> file:</p>
+    <pre>
+      java -jar ptII10_0_beta_setup_windows_64.exe
+    </pre>
+    <p>It looks like this error message is caused by a problem with the the .exe file that is produced by Launch4J.
+      See <a href="http://stackoverflow.com/questions/5913120/java-embedding-jar-inside-exe">http://stackoverflow.com/questions/5913120/java-embedding-jar-inside-exe</a>
+      for details.</p>
 
 
-<h5>Nightly Build</h5>
-<p>See the <a href="http://chess.eecs.berkeley.edu/ptexternal/nightly">Ptolemy II Nightly Build</a>
-for snapshots and development releases.
+    <h5>Nightly Build</h5>
+    <p>See the <a href="http://chess.eecs.berkeley.edu/ptexternal/nightly">Ptolemy II Nightly Build</a>
+      for snapshots and development releases.</p>
 
-<h4>Documentation</h4>
-<menu>
-<li> The 
-"<a href="ptII10.0.beta/doc/design/usingVergil/index_frames.htm">Using Vergil</a>" chapter from the
-<a href="ptII10.0.beta/doc/design/index.htm">Ptolemy II Design Document</a>
-<li> Detailed <a href="ptII10.0.beta/doc/install_index.htm">Ptolemy II Installation</a>
-instructions.
-<li><a href="limitations.htm">Limitations</a>
+    <h4>Documentation</h4>
+    <ul>
+      <li>The most comprehensive documentation is the book, 
+	<br/>Claudius Ptolemaeus, Editor, <i><a href="/systems">System Design, Modeling, and Simulation Using Ptolemy II</a></i>, Ptolemy.org, 2014, available as a free PDF download and low-cost paperback.</li>
+      <li>"<a href="ptII/doc/design/usingVergil/index.htm">Building Graphical Models</a>" chapter from the
+	the book is a good starting point</li>
+      <li> Detailed <a href="ptII/doc/install_index.htm">Ptolemy II Installation</a>
+	instructions.</li>
+      <li><a href="limitations.htm">Limitations</a></li>
+    </ul>
 
-</menu>
+    <h2>Installation Instructions</h2>
+    <h3>1. Install Java, if necessary</h3>
 
-<h2>Installation Instructions</h2>
+    <p>To run the Windows Ptolemy II installer requires that Java be installed on your machine.</p>
 
-<h3>1. Install Java, if necessary</h3>
+    <p>If Java is not installed when you run the Windows Ptolemy II installer, then you will be directed
+      to install a Java Runtime Environment (JRE).   This JRE is separate from the 
+      JRE that is included in the Windows Ptolemy II installer.  
+    <p>
 
-To run the Windows Ptolemy II installer requires that Java be installed on your machine.
+      <h4>Which Installer?</h4>
 
-<p>If Java is not installed when you run the Windows Ptolemy II installer, then you will be directed
-to install a Java Runtime Environment (JRE).   This JRE is separate from the 
-JRE that is included in the Windows Ptolemy II installer.  
-<p>
+    <p>Under Windows, the Ptolemy II installer includes 
+      a private copy of the Java Runtime Environment (JRE).
+      The private copy of the JRE includes Java packages
+      that are used by various domains and actors.</p>
+    <ul>
+      <li> Java 3D, which is required to run the Graphical (GR) domain demos.
+	<br/>The version of Java 3D included in the JRE
+	requires that DirectX is installed on your machine.
+	<br/>If, when you run the GR domain demos, you get a message
+	about <code>d3d8.dll</code> missing, then you probably need to install
+	DirectX.
+	<br/>DirectX can be downloaded from
+	<a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><code>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</code></a></li>
 
-<h4>Which Installer?</h4>
-
- <p>Under Windows, the Ptolemy II installer includes 
-a private copy of the Java Runtime Environment (JRE).
-The private copy of the JRE includes Java packages
-that are used by various domains and actors.
-<menu>
-<li> Java 3D, which is required to run the Graphical (GR) domain demos.
- <br>The version of Java 3D included in the JRE
-requires that DirectX is installed on your machine.
- <br>If, when you run the GR domain demos, you get a message
-about <code>d3d8.dll</code> missing, then you probably need to install
-DirectX.
- <br>DirectX can be downloaded from
-<a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><code>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</code></a>
-
-<li> The Java Advanced Imaging Interface.
-<li> The Java Serial port communication interface.
-<li> The Java Media Framework.
-<li> The Joystick Interface.
-<li> The X10 Interface.
-</menu>
+      <li> The Java Advanced Imaging Interface.</li>
+      <li> The Java Serial port communication interface.</li>
+      <li> The Java Media Framework.</li>
+    </ul>
 
 
-<h4>JRE vs. JDK</h4>
+    <h4>JRE vs. JDK</h4>
 
- <p>To run Ptolemy II, the Java runtime environment (JRE) is sufficient.
- <br>To run the applets in a browser, the Java plug-in is required.
-The JRE is bundled with the plug-in, so downloading the plug-in
-also installs the JRE.
- <br>To extend Ptolemy II with your own
-Java code, the Java development kit (JDK)
-or an equivalent Java development environment is required.
-The JDK includes a Java compiler.
+    <p>To run Ptolemy II, the Java runtime environment (JRE) is sufficient.
+      <br/>To run the applets in a browser, the Java plug-in is required.
+      The JRE is bundled with the plug-in, so downloading the plug-in
+      also installs the JRE.
+      <br/>To extend Ptolemy II with your own
+      Java code, the Java development kit (JDK)
+      or an equivalent Java development environment is required.
+      The JDK includes a Java compiler.</p>
 
-<h4>Which Version of Java?</h4>
+    <h4>Which Version of Java?</h4>
+    <p>Ptolemy II 10.0.beta requires Java 1.6 or later.  Java 1.8 will also work.</p>
 
-Ptolemy II requires Java 1.5 or later, Java 1.5.0_22 is preferred,
-Java 1.6 will also work.
+    <p>One way to determine what version of Java (if any) is installed 
+      is to run our
+      <a href="JavaVersionApplet.htm">Java Version Applet </a>, which
+      uses the Java 1.6 plug-in.
+      Another way is to run the command below to see whether
+      you have Java installed, and whether it is the proper version:</p>
+    <pre>
+      java -version
+    </pre>
+    <p>If the command cannot be found, or the version that is printed is
+      less than 1.6, you should install the plug-in, JRE 1.6, or JDK 1.6 or later
+      or use download the installer that includes a private copy of the JRE.</p>
 
-<p>
-One way to determine what version of Java (if any) is installed 
-is to run our
-<a href="JavaVersionApplet.htm">Java Version Applet </a>, which
-uses the Java 1.5 plug-in.
-Another way is to run the command below to see whether
-you have Java installed, and whether it is the proper version:
-<pre>
-java -version
-</pre>
-If the command cannot be found, or the version that is printed is
-less than 1.5, you should install the plug-in, JRE 1.5, or JDK 1.5
-or use download the installer that includes a private copy of the JRE.
-
-
-<h4>Java Installers</h4>
-
-<menu>
-<li>  Java Runtime Environment (JRE) or Java Development Kit (JDK):
-<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html"><code>http://www.oracle.com/technetwork/java/javase/downloads/index.html</code></a>
-<i>Choose the JDK if you want to compile actors</i>
+    <h4>Java Installers</h4>
+    <ul>
+      <li>  Java Runtime Environment (JRE) or Java Development Kit (JDK):
+	<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html"><code>http://www.oracle.com/technetwork/java/javase/downloads/index.html</code></a>
+	<i>Choose the JDK if you want to compile actors</i></li>n
 
 
-<li> The Java 3D runtime is necessary to run the GR domain.
-Java 3D can be found at
-<a href="http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html"><code>http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html</code></a>
- <br>The Windows DirectX Java 3D installer requires that DirectX is installed on your machine.
- <br>If, when you run the GR domain demos, you get a message
-about <code>d3d8.dll</code> missing, then you probably need to install
-DirectX.
- <br>DirectX can be downloaded from
-<a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><code>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</code></a>
+      <li> The Java 3D runtime is necessary to run the GR domain.
+	Java 3D can be found at
+	<a href="http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html"><code>http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html</code></a>
+	<br/>The Windows DirectX Java 3D installer requires that DirectX is installed on your machine.
+	<br/>If, when you run the GR domain demos, you get a message
+	about <code>d3d8.dll</code> missing, then you probably need to install
+	DirectX.
+	<br/>DirectX can be downloaded from
+	<a href="http://www.microsoft.com/downloads/search.aspx?displaylang=en&categoryid=2"><code>http://www.microsoft.com/downloads/search.aspx?displaylang=en&amp;categoryid=2</code></a>
+      </li>
+    </ul>
+
+    <h3>2. Install Ptolemy II</h3>
+
+    <h4>Where to install?</h4>
+
+    <p>Note that under Java 1.8.0, viewing local applets that have
+      spaces in the path name may fail if the applet tries to download a
+      data file.  The workaround is to place the Ptolemy II installation in a
+      directory that does not have space in the pathname.  For details, see
+      the <a href="ptII10.0.beta/doc/troubleshooting.htm#spaces">Troubleshooting Guide</a>.</p>
+    <p>In addition, the Copernicus code generator has a hard time with
+      spaces in the path name because of limitations in parameter 
+      passing in Soot, a package that Copernicus uses.</p>
+
+    <h4>Ptolemy II Installers</h4>
+
+    <ul>
+      <li> <a href="ptII10_0_beta_setup_windows.exe">Download the Ptolemy II 359 Mb
+	  Windows <b>32-bit</b> executable file (JRE not included)</a> 
+      </li>
+      <li> <a href="ptII10_0_beta_setup_windows_64.exe">Download the Ptolemy II 359 Mb
+	  Windows <b>64-bit</b> executable file that includes a private copy of the Java
+	  Runtime Environment 1.5.0_22 and some of the support packages such as Java 3D</a>  
+	<B>Most Windows users will select this installer</B>
+	<br/>To determine if you are running a 64-bit version of Windows, see the
+	Microsoft
+	<a href="http://windows.microsoft.com/en-US/windows7/32-bit-and-64-bit-Windows-frequently-asked-questions">32-bit and 64-bit Windows: frequently asked questions</a> page.
+      </li>
+    </ul>
 
 
-</menu
+    <p>This page covers installing Ptolemy II via a traditional Windows Installer</p>
+    <p>Other formats include:</p>
+    <ul>
+      <li> <a href="applet.htm">Accessing Ptolemy II demonstration applets via the web</a></li>
+      <li> <a href="mac.htm">Installing Ptolemy II under Mac OS X with an installer</a></li>
+      <li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a></li>
+      <li> <a href="webstart.htm">Installing Ptolemy II via the web using Web Start</a></li>
+    </ul>
 
-<h3>2. Install Ptolemy II</h3>
-
-<h4>Where to install?</h4>
-
-Note that under Java 1.5.0, viewing local applets that have
-spaces in the path name may fail if the applet tries to download a
-data file.  The workaround is to place the Ptolemy II installation in a
-directory that does not have space in the pathname.  For details, see
-the <a href="ptII10.0.beta/doc/troubleshooting.htm#spaces">Troubleshooting Guide</a>.
- <p>In addition, the Copernicus code generator has a hard time with
-spaces in the path name because of limitations in parameter 
-passing in Soot, a package that Copernicus uses.
-
-<h4>Ptolemy II Installers</h4>
-
-<menu>
-<li> 
-<a href="ptII10_0_beta_setup_windows.exe">Download the Ptolemy II 247 Mb
-Windows <b>32-bit</b> executable file that includes a private copy of the Java
-Runtime Environment 1.5.0_22 and some of the support packages such as Java 3D</a>  
-<B>Most Windows users will select this installer</B>
-<li> 
-<a href="ptII10_0_beta_setup_windows_64.exe">Download the Ptolemy II 234 Mb
-Windows <b>64-bit</b> executable file that includes a private copy of the Java
-Runtime Environment 1.5.0_22 and some of the support packages such as Java 3D</a>  
-<br>To determine if you are running a 64-bit version of Windows, see the
-Microsoft
-<a href="http://windows.microsoft.com/en-US/windows7/32-bit-and-64-bit-Windows-frequently-asked-questions">32-bit and 64-bit Windows: frequently asked questions</a> page.
-</menu>
-
-
- <p>This page covers installing Ptolemy II via a traditional Windows Installer
- <p>Other formats include:
-<menu>
-<li> <a href="applet.htm">Accessing Ptolemy II demonstration applets via the web</a>
-<li> <a href="webstart.htm">Installing Ptolemy II via the web using Web Start</a>
-<li> <a href="download.htm">Installing Ptolemy II by downloading source and recompiling</a>
-</menu>
-
- <!-- Leave a trailing p here so that there is a little space at the bottom -->
- <p>
-<!--#include virtual="/ssi/bottom.htm" -->
+    <!-- Leave a trailing p here so that there is a little space at the bottom -->
+    <p>
+      <!--#include virtual="/ssi/bottom.htm" -->
