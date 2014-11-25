@@ -52,56 +52,82 @@
     <p>Under Windows, to build the Matlab interface, you must
       use Mingw from <a href="http://www.mingw.org">http://www.mingw.org</a>.</p>
 
-    <br/>The gcc compiler is
-    fairly large, so we provide four separate self-extracting downloads
-    of the Cygwin tools and MinGW for Windows.</p>
-
-    <ol>
-      <li> <a href="cygwin-basic-20100224.zip"><code>cygwin-basic-20100224.zip</code></a> (23.8 Mb)
-	- The tools necessary to compile and configure Ptolemy II
-	except for the Matlab interface and C code generation.</li>
-
-
-      <li> <a href="cygwin-devel-20100224.zip"><code>cygwin-devel-20100224.zip</code></a>
-	(97.4 Mb) - The tools necessary to compile and configure Ptolemy II
-	including the Matlab interface and the JNI Actor.  This download includes
-	everything in <code>cygwin-basic-20100224.zip</code> above.</li>
-
-      <li>The sources for the above downloadables can be found in
-	<a href="cygwin-devel-src-20100224.zip"><code>cygwin-devel-src-20100224.zip</code></a> (270 Mb)
-	This download includes just the sources and should be downloaded in the same directory
-	as one of the other zip files above.</li>
-
-      <li> <a href="mingw20100511.zip"><code>mingw20100511.zip</code></a>
-	(30.8 Mb) - Mingw necessary to compile the Ptolemy/Matlab interface</li>
-    </ol>
-
     <h2>Cygwin Installation instructions</h2>
 
     <ol>
-      <li> Most Ptolemy II users will
-	<br/> Download <a href="cygwin-basic-20100224.zip"><code>cygwin-basic-20100224.zip</code></a> (23.8 Mb)
+      <li> Download the Cygwin setup from <a href="https://cygwin.com/install.html">https://cygwin.com/install.html</a>.  Note that there are two versions, one for 32-bit, the other for 64-bit.  Most versions of Windows are 64-bit.
+	See <a href="ptII10.0.beta/doc/eclipse/windows/32bitVs64bit.htm">32-bit or 64-bit</a> for details.
+	<br/>The instructions below assume 64-bit.</li>
 
-	<br/> If you are running under Windows and 
-	have Matlab installed on your local machine, then 
+      <li> Double click on the setup executable that was downloaded.</li>
 
-	<br/> Download 
-	<a href="cygwin-devel-20100224.zip"><code>cygwin-devel-20100224.zip</code></a> (97.4 Mb).
+      <li> In the "Open File - Security Warning" window, click Run.
+	<br/><img src="img/CygwinSetupOpenFileSecurityWarning.png" alt="Open File - Security Warning"/></li>
 
-	<br/>The files will be extracted to an seemingly arbitrary directory.
-	You may find it easier to change the directory to something short, like
-	<code>c:\temp\cygwin</code>. 
+      <li> In the "Cygwin Net Release Setup Program" wimdow, click Next.
+	<br/><img src="img/CygwinSetupCygwinNetReleaseSetupProgram.png" alt="Cygwin Net Release Setup Program"/></li>
+
+      <li> In the "Cygwin Setup - Choose Installation Type" window, keep the default of Install from Internet. and click Next.
+	<br/><img src="img/CygwinSetupChooseInstallationType.png" alt="Cygwin Setup - Choose Installation Type"/></li> 
+
+      <li> In the "Cygwin Setup - Choose Installation Directory" window, keep the default Root Directory 
+	<code>C:\cygwin64</code> and Install for All Users, click Next.
+	<br/><img src="img/CygwinSetupChooseInstallationDirectory.png" alt="Cygwin Setup - Choose Installation Directory"/></li>
+
+      <li> In the "Cygwin Setup - Choose Local Package Directory" window, keep the default and click Next.
+	<br/><img src="img/CygwinSetupSelectLocalPackageDirectory.png" alt="Cygwin Setup - Choose Local Package Directory"/></li>
+
+      <li> In the "Cygwin Setup - Select Connection Type" window, keep the defaults and click Next.
+	<br/><img src="img/CygwinSetupSelectConnectionType.png" alt="Cygwin Setup - Select Connection Type"/></li>
+
+      <li> In the "Cygwin Setup - Choose Download Site(s)" window, select a nearby download site and click Next.
+	<br/><img src="img/CygwinSetupChooseDownloadSite.png" alt="Cygwin Setup - Choose Download Site(s)"/></li>
+
+      <li>Finally, the "Cygwin Setup - Select Packages" window comes up!  This window is populated with a default set of packages to download.  The "View" button on the upper right toggles through different views.
+	<br/><img src="img/CygwinSetupSelectPackages.png" alt="Cygwin Setup - Select Packages"/></li>
+
+      <li> The next steps are to add a number of packages by typing
+      the name of each of the packages below into the Search window fo
+      the "Cygwin Setup - Select Packages" Window and then click on
+      the "Skip" icon until the version number is displayed.
+	<br/>In the window below, <code>gcc-core</code> has been entered in to the Search window and two packages have been selected.
+	<br/><img src="img/CygwinSetupSelectPackagesSearch.png" alt="Cygwin Setup - Select Packages Search"/>
+	<br/>For each of the packages listed below, enter the package name into the Search window, and then click on the Skip icon until a version number is displayed (<i>The version numbers that were present in November, 2014 are shown, more recent runs of setup will have later versions</i>):
+	<ul>
+	  <li>diffutils 3.3-2</li>
+	  <li>make 4.0-2</li>
+	  <li>subversion 1.8.10-2</li>
+	</ul>
+
+	If you plan on using the Matlab interface or doing significant development, add these packages.
+	<ul>
+	  <li>autoconf 13-1 (Used to update $PTII/configure)</li>
+	  <li>automake 1.14.1-1 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
+	  <li>binutils 2.24-51.6</li>
+	  <li>bison 3.0.2-1 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
+	  <li>emacs 24.4-2 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
+	  <li>emacs-el 24.4-2 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
+	  <li>gcc-core 4.8.3-5.  Select gcc-core and mingw64-x86_64-gcc-core 4.8.3-5 (Used by Matlab)</li>
+	  <li>gcc-g++ 4.8.3-5.  Also select mingw64-x86_64-gcc-g++ 4.8.2-1 (Used by Matlab)</li>
+	  <li>gperf 3.0.4-2 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
+	  <li>rpm 4.11.1-1 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
+	</ul>
       </li>
 
-      <li> Find the download and click on <code>INSTALL.bat</code>.
-	This script will invoke <CODE>setup.exe</CODE> for you.</li>
+      <li> In the "Cygwin Setup - Select Packages" window, click Next.</li>
 
-      <li> After installation, you may remove the temporary directory in which the zip file was unzipped.</li>
+      <li> In the "Cygwin Setup - Resolving Dependencies" window, click Next.
+	<br/><img="img/CygwinSetupResolvingDependencies.png" alt="Cygwin Setup - Resolving Dependencies"/> </li>
 
-      <li> <code>c:/cygwin/etc/passwd</code> is created during the 
+      <li> The download and installation will proceed</li>
+
+      <li> In the "Cygwin Setup - Installation Status and Create Icons" window, select Create icons on the Desktop and Add icon to Start Menu, then hit Finish.
+	<br/><img="img/CygwinSetupInstallationStatusAndCreateIcons.png" alt="Cygwin Setup - Installation Status and Create Icons"/></li>
+
+      <li> <code>c:/cygwin64/etc/passwd</code> is created during the 
 	Cygwin installation.  If your Windows account is a domain account
 	and not a local account, then you may need to add an entry
-	to <code>c:/cygwin/etc/passwd</code> by hand.
+	to <code>c:/cygwin64/etc/passwd</code> by hand.
 	<br/>To do this, start up the Cygwin bash shell with
 	Start -&gt;?Cygwin
 	<br/>Then use the <code>mkpasswd</code> command to append
