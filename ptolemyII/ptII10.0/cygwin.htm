@@ -142,9 +142,16 @@
 	<code>mkpasswd -h</code> will print out help for the <code>mkpasswd</code>
 	command</li>
 
-      <li> Set bash to ignore carriage returns '\r'
-	The problem is that shell scripts such as
-	<code>$PTII/bin/vergil</code> may fail:
+      <li> Follow the instructions in the
+	<a href="ptII10.0.beta/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section</li>
+      </ol>
+
+
+      <h2>Problems and solutions</h2>
+      <h3>$'\r': command not found</h3>
+      
+      <p>The problem is that shell scripts such as
+	<code>$PTII/bin/vergil</code> may fail:</p>
 	<pre>
 	  $ export PTII=c:/user/ptII
 	  $ $PTII/bin/vergil
@@ -155,6 +162,8 @@
 	  c:/user/ptII/bin/vergil: line 67: syntax error near unexpected token `$'in\r''
 	  ':/user/ptII/bin/vergil: line 67: `    case "`uname -s`" in
 	</pre>
+
+	<p>The solution is to set bash to ignore carriage returns '\r',</p>
 
 	<p>Another possible solution is to create a <code>~/.bash_profile</code> that contains
 	  <pre>
@@ -187,11 +196,25 @@
 	<pre>
 	  perl -i -pne "s/\r\n/\n/g" configure
 	</pre>
-      </li>
 
-      <li> Follow the instructions in the
-	<a href="ptII10.0.beta/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section</li>
-      </ol>
+	<h4>makefile:2670: *** target pattern contains no '%'.  Stop.</h4>
+	<p>The problem is that if <code>$PTII</code> contains a colon, such as </p>
+	<pre>
+	  export PTII=c:/Users/Administrator/ptII
+	</pre>
+	<p>Then newer versions of GNU make will fail.</p>
+
+	<p>Under Windows, <code>$PTII</code> must be set using <code>c:</code> syntax because tools like
+	  <code>java</code> do not understand <code>/cygdrive/c</code></p>
+
+	<p>A workaround is to download <a href="cygwin-make-3.80.tar.gz">cygwin-make-3.80.tar.gz</a>:
+	  <pre>
+	    cd /usr/bin
+            wget http://ptolemy.eecs.berkeley.edu/ptolemyII/ptII10.0/cygwin-make-3.80.tar.gz
+	    mv make.exe make.old.exe
+	    tar -zxf cygwin-make-3.80.tar.gz
+	    rm cygwin-make-3.80.tar.gz
+	  </pre>
 
       <h2>&nbsp;Installing MinGW for Windows</h2>
       <p>The default gcc compiler shipped with Cygwin will produce .dll files that do not work properly.&nbsp; The solution is to install <a class="external-link" href="http://www.mingw.org/">Mingw</a>.</p>
