@@ -85,12 +85,12 @@
 
       <li>Finally, the "Cygwin Setup - Select Packages" window comes up!  This window is populated with a default set of packages to download.  The "View" button on the upper right toggles through different views.
 	<br>Click on the "View" button until Full is displayed.  (<i>The window below was resized so as to better fit the screen.  Your view may vary.</i>)
-	<br/><img src="img/CygwinSetupSelectPackages.png" alt="Cygwin Setup - Select Packages"/></li>
+	  <br/><img src="img/CygwinSetupSelectPackages.png" alt="Cygwin Setup - Select Packages"/></li>
 
       <li> The next steps are to add a number of packages by typing
-      the name of each of the packages below into the Search window fo
-      the "Cygwin Setup - Select Packages" Window and then click on
-      the "Skip" icon until the version number is displayed.
+	the name of each of the packages below into the Search window fo
+	the "Cygwin Setup - Select Packages" Window and then click on
+	the "Skip" icon until the version number is displayed.
 	<br/>In the window below, <code>gcc-core</code> has been entered in to the Search window and two packages have been selected.
 	<br/><img src="img/CygwinSetupSelectPackagesSearch.png" alt="Cygwin Setup - Select Packages Search"/>
 	<br/>For each of the packages listed below, enter the package name into the Search window, and then click on the Skip icon until a version number is displayed (<i>The version numbers that were present in November, 2014 are shown, more recent runs of setup will have later versions</i>):
@@ -129,10 +129,10 @@
 	Cygwin installation.  If your Windows account is a domain account
 	and not a local account, then you may need to add an entry
 	to <code>c:/cygwin64/etc/passwd</code> by hand.
-	<br/>To do this, start up the Cygwin bash shell with
-	Start -&gt;?Cygwin
+	<br/>To do this, start up the Cygwin bash shell by clicking on the Bash icon.
+
 	<br/>Then use the <code>mkpasswd</code> command to append
-	a line with your login information, for example, I used:
+	a line with your login information, for example, user "cxh" used:
 
 	<pre>
 	  mkpasswd -l > /etc/passwd
@@ -144,7 +144,7 @@
 
       <li> Set bash to ignore carriage returns '\r'
 	The problem is that shell scripts such as
-	<code>$PTII/bin/vergil</code> will fail:
+	<code>$PTII/bin/vergil</code> may fail:
 	<pre>
 	  $ export PTII=c:/user/ptII
 	  $ $PTII/bin/vergil
@@ -191,230 +191,79 @@
 
       <li> Follow the instructions in the
 	<a href="ptII10.0.beta/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section</li>
-    </ol>
+      </ol>
 
-    <h2>&nbsp;Installing Mingw for Windows</h2>
-    <p>The default gcc compiler shipped with Cygwin will produce .dll files that do not work properly.&nbsp; The solution is to install <a class="external-link" href="http://www.mingw.org/">Mingw</a>.</p>
+      <h2>&nbsp;Installing Mingw for Windows</h2>
+      <p>The default gcc compiler shipped with Cygwin will produce .dll files that do not work properly.&nbsp; The solution is to install <a class="external-link" href="http://www.mingw.org/">Mingw</a>.</p>
 
-    <p>You may either install from the Ptolemy Mingw zip file or install
-      from the Mingw website.</p>
+      <h3>Installing from the Mingw website</h3>
 
-    <h3>Installing from the Ptolemy Mingw zip file</h3>
-    <ol>
-      <li> Download the <a href="mingw20100511.zip"><code>mingw20100511.zip</code></a> file.</li>
-      <li> Unzip it so that <code>c:\mingw</code> is created.</li>
-      <li> Add <code>c:\mingw\bin</code> to your PATH, see <a href="#mingwPath">below</a>.</li>
-    </ol>
+      <ol>
+	<li>Install Cygwin either from <a class="external-link" href="http://www.cygwin.com">http://www.cygwin.com</a> or from the <a class="external-link" href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/cygwin.htm">Ptolemy distribution</a>.</li><li>Start Cygwin bash, create c:\mingw</li>
 
-    <h3>Installing from the Mingw website</h3>
+	<li>
+	  <pre>mkdir c:/mingw
+	    cd c:/mingw</pre>
+	</li><li>Copy the mingwdl.sh script from <a class="external-link" href="http://www.mingw.org/wiki/HOWTO_Install_the_MinGW_GCC_Compiler_Suite">http://www.mingw.org/wiki/HOWTO_Install_the_MinGW_GCC_Compiler_Suite</a> and paste it into an editor and create c:/mingw/mingwdl.sh</li><li>Execute mingwdl.sh, which will download the binaries into c:/mingwdl.
+	  <pre>bash mingwdl.sh</pre>
+	</li>
+	<li>Unzip the .tar.gz files
+	  <pre>gunzip *.gz</pre>
+	</li>
+	<li>Uncompress the .tar.lzma files:
+	  <pre>lzma -d *.lzma</pre>
+	</li>
+	<li>untar the .tar files.&nbsp; Create a script called mingwuntar.sh:
+	  <pre>#!/bin/sh
+	    tars=`ls *.tar`
+	    for tar in $tars
+	    do
+	    echo $tar
+	    tar -xf $tar
+	    done</pre>
+	</li>
+	<li>Run mingwuntar.sh
+	  <pre>bash mingwuntar.sh</pre>
+	</li>
+	<li><a name="mingwPath">Add</a> c:\mingw\bin to your Windows path <em>Based on the Mingw instructions</em>:
+	  <ol>
+	    <li>  Right-click on "My Computer" and select "Properties".</li>
+	    <li> Click Advanced | Environment Variables.</li>
+	    <li>In the box entitled "System Variables" scroll down to the line that says "PATH" and double-click the entry.</li>
+	    <li>You will be presented with a dialog box with two text boxes, the bottom text box allows you to edit the PATH variable. It is very important that you do not delete the existing values in the PATH string, this will cause all sorts of problems for you!</li>
+	    <li> Scroll to the end of the string and at the end add ";C:\mingw\bin". Don't forget the semicolon; this separates the entries in the PATH.</li>
+	    <li>press OK | OK | OK and you are done.</li>
+	  </ol>
+	</li>
+      </ol>
 
-    <ol>
-      <li>Install Cygwin either from <a class="external-link" href="http://www.cygwin.com">http://www.cygwin.com</a> or from the <a class="external-link" href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/cygwin.htm">Ptolemy distribution</a>.</li><li>Start Cygwin bash, create c:\mingw</li>
+      <h2>Enabling Copy in Cygwin Bash under XP</h2>
+      <p>You may need to enable copy and paste in the bash shell window.</p>
 
-      <li>
-	<pre>mkdir c:/mingw
-	  cd c:/mingw</pre>
-      </li><li>Copy the mingwdl.sh script from <a class="external-link" href="http://www.mingw.org/wiki/HOWTO_Install_the_MinGW_GCC_Compiler_Suite">http://www.mingw.org/wiki/HOWTO_Install_the_MinGW_GCC_Compiler_Suite</a> and paste it into an editor and create c:/mingw/mingwdl.sh</li><li>Execute mingwdl.sh, which will download the binaries into c:/mingwdl.
-	<pre>bash mingwdl.sh</pre>
-      </li>
-      <li>Unzip the .tar.gz files
-	<pre>gunzip *.gz</pre>
-      </li>
-      <li>Uncompress the .tar.lzma files:
-	<pre>lzma -d *.lzma</pre>
-      </li>
-      <li>untar the .tar files.&nbsp; Create a script called mingwuntar.sh:
-	<pre>#!/bin/sh
-	  tars=`ls *.tar`
-	  for tar in $tars
-	  do
-	  echo $tar
-	  tar -xf $tar
-	  done</pre>
-      </li>
-      <li>Run mingwuntar.sh
-	<pre>bash mingwuntar.sh</pre>
-      </li>
-      <li><a name="mingwPath">Add</a> c:\mingw\bin to your Windows path <em>Based on the Mingw instructions</em>:
-	<ol>
-	  <li>  Right-click on "My Computer" and select "Properties".</li>
-	  <li> Click Advanced | Environment Variables.</li>
-	  <li>In the box entitled "System Variables" scroll down to the line that says "PATH" and double-click the entry.</li>
-	  <li>You will be presented with a dialog box with two text boxes, the bottom text box allows you to edit the PATH variable. It is very important that you do not delete the existing values in the PATH string, this will cause all sorts of problems for you!</li>
-	  <li> Scroll to the end of the string and at the end add ";C:\mingw\bin". Don't forget the semicolon; this separates the entries in the PATH.</li>
-	  <li>press OK | OK | OK and you are done.</li>
-	</ol>
-      </li>
-    </ol>
-
-    <h2>Installing Cygwin from the Web</h2>
-    <p>We provide prebuilt downloads of the subset of Cygwin tools needed to
-      recompile Ptolemy II.  The Cygwin tools are constantly being updated, for
-      the latest versions, see the Cygwin website.</p>
-
-    <p>Instructions for installing Cygwin from the Cygwin website
-      can be found on the 
-      for <a href="ptII10.0.beta/doc/install.htm#cygwin">Ptolemy II Installation Page</a>.</p>
-
-    <h2>Enabling Copy in Cygwin Bash under XP</h2>
-    <p>You may need to enable copy and paste in the bash shell window.</p>
-
-    <p>If copy and paste are working properly, then you should be able to
-      highlight text by left clicking and dragging the mouse over the text
-      and then hitting the Enter key to copy the highlighted text.</p>
-    <p>
-      The Cygwin faq at
-      <a href="http://www.cygwin.com/faq/faq.html#SEC55"><code>http://www.cygwin.com/faq/faq.html#SEC55</code></a>
-      says:
+      <p>If copy and paste are working properly, then you should be able to
+	highlight text by left clicking and dragging the mouse over the text
+	and then hitting the Enter key to copy the highlighted text.</p>
+      <p>
+	The Cygwin faq at
+	<a href="https://www.cygwin.com/faq/faq.html#faq.using.copy-and-paste"><code>https://www.cygwin.com/faq/faq.html#faq.using.copy-and-paste</code></a>
+	says:</p>
       <blockquote>
 	<p>How can I copy and paste into Cygwin console windows?</p>
 
-	<p>Under Windows NT, open the properties dialog of the console
-	  window. The options contain a toggle button, named "Quick edit
+	<p>First, consider using mintty instead of the standard
+	  console window. In mintty, selecting with the left-mouse also
+	  copies, and middle-mouse pastes. It couldn't be easier!</p>
+
+	<p>In Windows's console window, open the properties
+	  dialog. The options contain a toggle button, named "Quick edit
 	  mode". It must be ON. Save the properties.</p>
 
-	<p>Under Windows 9x, open the properties dialog of the console
-	  window. Select the Misc tab. Uncheck Fast Pasting. Check QuickEdit.</p>
-
-	<p>You can also bind the insert key to paste from the clipboard by adding
-	  the following line to your .inputrc file:</p>
+	<p>You can also bind the insert key to paste from the
+	  clipboard by adding the following line to your .inputrc
+	  file: </p>
 
 	<pre>
 	  "\e[2~": paste-from-clipboard 
 	</pre>
 
-      </blockquote>
-
-
-    <p>More precisely:</p>
-    <ol>
-      <li> Start up bash by doing Start -&gt; Programs -&gt; Cygwin -&gt; Cygwin Bash Shell.</li>
-
-      <li> Right click on the icon in the upper left of the title bar and select
-	properties</li>
-
-      <li> Under Options, select 'QuickEdit Mode', hit ok</li>
-
-      <li> Select 'Modify shortcut that started this window', hit ok</li>
-    </ol>
-
-    <h2>Cygwin download contents</h2>
-
-    <p>The download of basic cygwin tools from February, 2010 includes:</p>
-
-    <pre>
-      _update-info-dir-00865-1
-      alternatives-1.3.30c-10
-      base-cygwin-2.1-1
-      base-files-3.9-3
-      base-passwd-3.1-1
-      bash-3.2.49-23
-      bison-2.4.1-1
-      bzip2-1.0.5-10
-      coreutils-7.0-2
-      crypt-1.1-1             required by cvs
-      csih-0.9.1-1
-      cvs-1.12.13-10
-      cygrunsrv-1.34-1
-      cygutils-1.4.2-1
-      cygwin-1.7.1-1
-      cygwin-doc-1.5-1
-      dash-0.5.5.1-2
-      diffutils-2.8.7-2
-      editrights-1.01-2
-      expat-2.0.1-1
-      findutils-4.5.5-1
-      gawk-3.1.7-1
-      gettext-0.17-11
-      grep-2.5.4-2
-      groff-1.19.2-2
-      gzip-1.3.12-2
-      ipc-utils-1.0-1
-      less-429-1
-      libapr1-1.3.8-2
-      libaprutil1-1.3.9-2
-      libbz2_1-1.0.5-10      required by tar
-      libdb4.2-4.2.52.5-2
-      libdb4.5-4.5.20.2-2
-      libexpat1-2.0.1-1
-      libexpat1-devel-2.0.1-1
-      libgcc1-4.3.4-3
-      libgdbm4-1.8.3-20     required by cvs
-      libgmp3-4.3.1-3
-      libiconv2-1.13.1-1     required by sed
-      libintl3-0.14.5-1
-      libintl10.0.beta7-11
-      liblzma1-4.999.9beta-10
-      libncurses8-5.5-10
-      libncurses9-5.7-16
-      libneon27-0.29.0-1
-      libopenldap2_3_0-2.3.43-1
-      libpcre0-8.00-1    Required by less (pcre = Perl Compatible regex)
-      libpopt0-1.6.4-4
-      libpq5-8.2.11-1
-      libreadline7-6.0.3-2
-      libsasl2-2.1.19-3
-      libserf0_0-0.3.0-2
-      libsigsegv0-2.6-1
-      libsqlite3_0-3.6.21-3
-      libssp0-4.3.4-3
-      libstdc++6-4.3.4-3
-      libwrap0-7.6-20
-      make-3.81-2-broken
-      make-3.81-2-from-cmake
-      man-1.6e-1
-      minires-1.02-1         required by openssh
-      openssh-5.3p1-1        required by cvs
-      openssl-0.9.8l-2       required by openssh
-      perl-5.10.1-2
-      rebase-3.0.1-1
-      run-1.1.12-11
-      sed-4.1.5-2
-      subversion-1.6.9-1
-      tar-1.22.90-1
-      terminfo-5.7_20091114-13
-      terminfo0-5.5_20061104-11
-      texinfo-4.13-3
-      tzcode-2009k-1
-      w32api-3.14-1
-      wget-1.11.4-4
-      which-2.20-2
-      xemacs-emacs-common-21.4.22-1
-      xz-4.999.9beta-10
-      zlib-1.2.3-10
-      zlib-devel-1.2.3-10
-      zlib0-1.2.3-10
-    </pre>
-
-    <p>The download of devel cygwin tools from February, 2010, includes all
-      the tools from the basic cygwin download listed above and</p>
-
-    <pre>
-      autoconf-13-1
-      binutils-2.24.51-5
-      gcc-core-4.8.3-3
-      gcc-g++-4.8.3-3
-      mingw64-x86_64-gcc-core-4.8.3.1
-      mingw64-x86-gcc-g++-4.8.3.1
-      mingw64x86_64-runtime 3.1.0-1
-      m4-1.4.13-2
-      perl-5.10.1-2      sadly, autoconf requires perl
-      w32api-3.14-1
-    </pre>
-
-
-    <p>In addition, we include select tools for 
-      <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>,
-      the Ptolemy/TinyOS interface.</p>
-    <pre>
-      automake1.10-1.10.3-2
-      bison-2.7.1-1
-      emacs-24-3.7
-      emacs-el-24.3.7
-      gperf-3.0.4-1
-      rpm-4.11.1-1
-    </pre>
-
-    <p>The above packages have a number of dependencies, which are also included.</p>
-
-    <!--#include virtual="/ssi/bottom.htm" -->
+	<!--#include virtual="/ssi/bottom.htm" -->
