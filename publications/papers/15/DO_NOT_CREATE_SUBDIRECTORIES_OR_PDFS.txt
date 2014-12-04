@@ -1,0 +1,5 @@
+$Id: DO_NOT_CREATE_SUBDIRECTORIES_OR_PDFS.txt 7090 2013-10-05 23:33:48Z eal $
+
+Note that you should not add pdf files here,
+instead add them as publications to chess
+http://chess.eecs.berkeley.edu/pubs
