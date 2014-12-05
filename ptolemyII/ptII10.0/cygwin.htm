@@ -21,6 +21,12 @@
       instructions and use the
       <code>$PTII/.classpath.default</code>. </p>
 
+    <p>An alternative way to rebuild from sources on all platforms is
+      to use Apache ant, which requires neither Cygwin nor Apache.
+      See
+      ant <a href="ptII10.0.beta/doc/coding/index.htm">$PTII/doc/coding/</a>
+      and <code>$PTII/build.default.xml</code>.</p>
+
     <p>Under Windows, the reason to install the Cygwin toolkit is so
       that <code>./configure</code> may be run and packages like Java
       3D found in your environment.
@@ -43,16 +49,28 @@
     <p>Complete installation instructions can be found at
       <a href="http://sources.redhat.com/cygwin/faq"><code>http://sources.redhat.com/cygwin/faq</code></a>.</p>
 
-    <h2>Installing Cygwin from the self-extracting executable</h2>
-
     <p>Compiling the Ptolemy II Matlab interface and Java Native
       Interface (JNI) actor requires that the a C compiler be installed.
       The Matlab interface requires that Matlab be installed on the local machine.</p>
 
-    <p>Under Windows, to build the Matlab interface, you must
-      use MinGW from <a href="http://www.mingw.org">http://www.mingw.org</a>.</p>
+    <p>Under Windows, to build the Matlab interface, it may be necessary to 
+      use MinGW from <a href="http://www.mingw.org">http://www.mingw.org</a>.
+      Recent versions of Cygwin seem to include what is necessary, so if you are building
+      the Matlab interface, try Cygwin first and if that does not work, 
+      try installing MinGW separately.</p>
 
-    <h2>Cygwin Installation instructions</h2>
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#CygwinInstallationInstructions">Cygwin Installation instructions</a></li>
+      <li>Problems and solutions
+	<ul>
+	  <li><a href="#BackslashRNotFound">$'\r': command not found</a></li>
+	  <li><a href="#TargetPatterContainsNoPercent">*** target pattern contains no '%'.  Stop.</a></li>
+	</ul>
+      </li>
+</ul>
+
+    <h2><a name="CygwinInstallationInstructions">Cygwin Installation instructions</a></h2>
 
     <ol>
       <li> Download the Cygwin setup from <a href="https://cygwin.com/install.html">https://cygwin.com/install.html</a>.  Note that there are two versions, one for 32-bit, the other for 64-bit.  Most versions of Windows are 64-bit.
@@ -111,6 +129,7 @@
 	  <li>gcc-core 4.8.3-5.  Select gcc-core and mingw64-x86_64-gcc-core 4.8.3-5 (Used by Matlab)</li>
 	  <li>gcc-g++ 4.8.3-5.  Also select mingw64-x86_64-gcc-g++ 4.8.2-1 (Used by Matlab)</li>
 	  <li>gperf 3.0.4-2 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
+	  <li>libexpat-devel 2.1.0-3 (Used by BCVTB in $PTII/lbnl)</li>
 	  <li>rpm 4.11.1-1 (Used by <a href="http://ptolemy.eecs.berkeley.edu/viptos">Viptos</a>)</li>
 	</ul>
       </li>
@@ -148,7 +167,7 @@
 
 
       <h2>Problems and solutions</h2>
-      <h3>$'\r': command not found</h3>
+      <h3><a name="BackslashRNotFound">$'\r': command not found</a></h3>
       
       <p>The problem is that shell scripts such as
 	<code>$PTII/bin/vergil</code> may fail:</p>
@@ -197,7 +216,7 @@
 	  perl -i -pne "s/\r\n/\n/g" configure
 	</pre>
 
-	<h4>makefile:2670: *** target pattern contains no '%'.  Stop.</h4>
+	<h4><a name="TargetPatterContainsNoPercent">*** target pattern contains no '%'.  Stop.</a></h4>
 	<p>The problem is that if <code>$PTII</code> contains a colon, such as </p>
 	<pre>
 	  export PTII=c:/Users/Administrator/ptII
@@ -218,8 +237,10 @@
 
 	<p>See <a href="https://chess.eecs.berkeley.edu/bugzilla/show_bug.cgi?id=55">Bug 55 - GNU Make 3.81 is broken under Windows</a></p>
 
-      <h2>&nbsp;Installing MinGW for Windows</h2>
-      <p>The default gcc compiler shipped with Cygwin will produce .dll files that do not work properly.&nbsp; The solution is to install <a class="external-link" href="http://www.mingw.org/">Mingw</a>.</p>
+      <h2>Installing MinGW for Windows</h2>
+      <p>In the past, the default gcc compiler shipped with Cygwin produced .dll files that did not work properly.&nbsp; The solution is to install <a class="external-link" href="http://www.mingw.org/">Mingw</a>.</p>
+
+      <p>MinGW may only be necessary if you are building the Matlab interface.</p>
 
       <h3>Installing from the MinGW website</h3>
 
