@@ -164,9 +164,13 @@ contributions from off site developers, see
 </blockquote>
 
 <p><p><a href="ptII10.0/index.htm">Ptolemy II 10.0.beta</a> 
-was made available on December 5, 2014
-<br/>Ptolemy II 10.0 includes the following major new work since the
-previous release:
+was made available on December 5, 2014.</p>
+
+  <p>Ptolemy II 10.0 is the first complete release since Ptolemy II 8.0 and thus includes many changes.</p>
+  <p>The key driving force for the release is to be a companion to the Ptolemy Book:<br/>
+    Claudius Ptolemaeus, Editor, "<a href="http://ptolemy.eecs.berkeley.edu/books/Systems/index.htm#in_browser" target="_top">System Design, Modeling, and Simulation Using Ptolemy II</a>", Ptolemy.org, 2014. (included in the release as <a href="ptII10.0/ptII/doc/books/systems/PtolemyII_DigitalV1_02.pdf#in_browser" target="_top"><code>$PTII/doc/books/systems/PtolemyII_DigitalV1_02.pdf</code></a>, but not present in the SVN developer tree.)</p>
+
+  <p>Below are the highlights of this release.</p>
 
     <h3><a name="Ontologies" id="Ontologies">Ontologies</a></h3>
     <p>The Ptolemy II Ontologies package extends the Ptolemy II type inference engine to provide an efficient and scalable framework for general static analysis of arbitrary properties on a Ptolemy model. The framework supports properties that are specified as concepts in an ontology graph that must be structured as a lattice. The usefulness of this framework is demonstrated with an example of a physical dimensions ontology. This ontology labels different signals as representing acceleration, velocity, position, and time. In a Ptolemy model of physical dynamics, the dimensional properties of input and output signals can be automatically inferred using the ontology analysis. Ptolemy model developers can use the ontologies package to define their own ontologies for structural and semantic property analysis. This can prevent interface connection problems during model construction by identifying when incompatible signals are erroneously connected. This work draws on concepts from compiler optimization static analysis techniques and applies them to Ptolemy actor-oriented models.</p>
@@ -176,6 +180,8 @@ previous release:
     <h3><a name="CGCodeGeneration" id="CGCodeGeneration">CG Code Generator</a></h3>
     <p>Ptolemy II 10.0 includes the "cg" code generator at <code>$PTII/ptolemy/cg</code>.</p>
     <p>We took the lessons learned from <code>$PTII/ptolemy/codegen</code> and applied them to cg. In particular, cg more easily supports multiple backends with less code duplication. The cg code generator is under active development, we are working on code generation for large systems. For details about cg, see <a href="ptII10.0.beta/ptolemy/cg/README.html"><code>$PTII/ptolemy/cg/README.html</code></a>.</p>
+
+    <h3><a name="ModalModelUpdates" id="ModalModelUpdates">FSM/Modal Model updates</a></h3>
 
 <p>See <a href="ptII10.0/index.htm">Ptolemy II 10.0</a> for a complete list of features.</p>
 
