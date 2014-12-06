@@ -13,7 +13,7 @@
 function convertQuote(form)
 {
 	var str = form.q.value;
-	form.q.value = (str.replace(/’/g,"'"));
+	form.q.value = (str.replace(/\u0092/g,"'"));
 }
 document.write('<form action="http://www.berkeley.edu/search/" id="cse-search-box">');
 document.write('<div style="display:inline;">');
