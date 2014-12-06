@@ -15,7 +15,7 @@
 <h2>Downloads</h2>
 <ol>
   <li> <a href="http://chess.eecs.berkeley.edu/ptexternal">Development Version</a> - Source code and installers, updated nightly</li>
-  <li> <a href="ptII8.0/index.htm">Ptolemy II 8.0</a> - Source code and installers, updated on October 28, 2010</li>
+  <li> <a href="ptII10.0/index.htm">Ptolemy II 10.0</a> - Source code and installers, updated on December 5, 2014</li>
 </ol>
 
 <p>Ptolemy II <a href="#1">[1]</a><a href="#6">[6]</a> is an open-source software framework supporting
@@ -162,6 +162,22 @@ contributions from off site developers, see
      <a href="http://chess.eecs.berkeley.edu/ptexternal">available via Subversion</a>.</b></p>
      <p>The nightly build includes links to installers, though we encourage people to build from the svn repository.</p>
 </blockquote>
+
+<p><p><a href="ptII10.0/index.htm">Ptolemy II 10.0.beta</a> 
+was made available on December 5, 2014
+<br/>Ptolemy II 10.0 includes the following major new work since the
+previous release:
+
+    <h3><a name="Ontologies" id="Ontologies">Ontologies</a></h3>
+    <p>The Ptolemy II Ontologies package extends the Ptolemy II type inference engine to provide an efficient and scalable framework for general static analysis of arbitrary properties on a Ptolemy model. The framework supports properties that are specified as concepts in an ontology graph that must be structured as a lattice. The usefulness of this framework is demonstrated with an example of a physical dimensions ontology. This ontology labels different signals as representing acceleration, velocity, position, and time. In a Ptolemy model of physical dynamics, the dimensional properties of input and output signals can be automatically inferred using the ontology analysis. Ptolemy model developers can use the ontologies package to define their own ontologies for structural and semantic property analysis. This can prevent interface connection problems during model construction by identifying when incompatible signals are erroneously connected. This work draws on concepts from compiler optimization static analysis techniques and applies them to Ptolemy actor-oriented models.</p>
+    <h3><a name="ExportToWeb" id="ExportToWeb">Export to Web</a></h3>
+    <p>Ptolemy II includes a flexible mechanism for creating web pages from models and for building web services. The more basic mechanism is the export to web , which simply makes a model available as a web page for browsing using a web browser. Such a web page provides easy access and documentation for models that archives both the structure of the models and the results of executing the models. It can be used to share information about models or their execution without requiring installation of any software, since an ordinary web browser is sufficient. More interestingly, the mechanism is extensible and customizable, allowing for creation of fairly sophisticated web pages. You can associate hyperlinks or actions defined in JavaScript with icons in a model. The customization can be done for individual icons in a model or for sets of icons in a model.</p>
+
+    <h3><a name="CGCodeGeneration" id="CGCodeGeneration">CG Code Generator</a></h3>
+    <p>Ptolemy II 10.0 includes the "cg" code generator at <code>$PTII/ptolemy/cg</code>.</p>
+    <p>We took the lessons learned from <code>$PTII/ptolemy/codegen</code> and applied them to cg. In particular, cg more easily supports multiple backends with less code duplication. The cg code generator is under active development, we are working on code generation for large systems. For details about cg, see <a href="ptII10.0.beta/ptolemy/cg/README.html"><code>$PTII/ptolemy/cg/README.html</code></a>.</p>
+
+<p>See <a href="ptII10.0/index.htm">Ptolemy II 10.0</a> for a complete list of features.</p>
 
 <p><p><a href="ptII8.0/index.htm">Ptolemy II 8.0.1</a> 
 was made available on October 28, 2010
