@@ -20,20 +20,35 @@
 </li>  
     </ul>
 
-    <h4>Mac Issues</h4>
-    <h5>Help!  I clicked on the Mac Setup file and got a strange dialog</h5>
+    <h2>Mac OS X Specific Notes</h2>
+    <h3>Help!  I clicked on the Mac Setup file and got a strange dialog</h3>
 
     <p>If you get a dialog like:</p>
     <center>
       <img src="img/macDmgDamaged.png" width="419" alt="setup is damaged and can't be opened. You should eject the disk image."/>
     </center>
     <p>Then the problem is that your version of Mac OS X has a bug and needs to be reconfigured.</p>
-    <p>The bug is that the dialog should state that the dmg file is unsigned and ask you if
-      you would like to change your settings.  <b>The file is not damaged</b>.</p>
+    <p>The bug is that the dialog should state that the dmg file is
+      unsigned and ask you if you would like to change your
+      settings.  <b>The file is not damaged</b>.  The bug is that the
+      Mac operating system is incorrectly labeling the dmg as damaged
+      because of settings in the Gatekeeper control panel.</p>
     
     <p><a href="http://support.apple.com/en-us/HT202491" target="top">OS X: About Gatekeeper</a>
 describes how to fix Gatekeeper to allow applications downloaded from anywhere.</p>
 
+
+    <h3>Java</h3>
+
+    <p>Ptolemy II requires Java, which may be downloaded from Oracle.  We suggest installing the JDK, see <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>.  Note that recent versions of Mac OS X may prompt you to install the JDK if it is not yet installed.</p>
+
+    <p>The Ptolemy installer for Mac will install a version of Ptolemy with a JRE that includes:</p>
+    <ul>
+      <li> Java 3D, which is required to run the Graphical (GR) domain demos.</li>
+      <li> The Java Advanced Imaging Interface.</li>
+      <li> The Java Serial port communication interface.</li>
+      <li> The Java Media Framework.</li>
+    </ul>
 
     <h4>Documentation</h4>
     <ul>
@@ -46,19 +61,6 @@ describes how to fix Gatekeeper to allow applications downloaded from anywhere.<
       <li><a href="limitations.htm">Limitations</a></li>
     </ul>
 
-    <h2>Mac OS X Specific Notes</h2>
-    <p>The Ptolemy II installer is an unsigned application, so recent versions of Mac OS X may state that the application cannot be run.</p>
-    <p>If this happens, go to the System Preferences application, click on "Security and Privacy" and then allow execution of the application.</p>
-
-    <p>Ptolemy II requires Java, which may be downloaded from Oracle.  We suggest installing the JDK, see <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>.  Note that recent versions of Mac OS X may prompt you to install the JDK if it is not yet installed.</p>
-
-    <p>The Ptolemy installer for Mac will install a version of Ptolemy with a JRE that includes:</p>
-    <ul>
-      <li> Java 3D, which is required to run the Graphical (GR) domain demos.</li>
-      <li> The Java Advanced Imaging Interface.</li>
-      <li> The Java Serial port communication interface.</li>
-      <li> The Java Media Framework.</li>
-    </ul>
 
     <p>This page covers installing Ptolemy II via a traditional Windows Installer</p>
     <p>Other formats include:</p>
