@@ -15,8 +15,21 @@
 
     <ul>
       <li> <a href="ptII10.0.beta.setup.mac.dmg">Download the Ptolemy II 10.0.beta
-	  Mac OS X Installer Application (454Mb)</a></li>  
+	  Mac OS X Installer Application (454Mb)</a>
+	<b>If you get a dialog about the setup being damaged, see below</b>
+</li>  
     </ul>
+
+    <h4>Setup is damaged and can't be opened.  You should eject the disk image.</h4>
+
+    <p>If you get a dialog like:</p>
+    <img src="img/macDmgDamaged.png" alt="setup is damaged and can't be opened. You should eject the disk image."/>
+    <p>Then the problem is that your version of Mac OS X has a bug and needs to be reconfigured.</p>
+    <p>The bug is that the dialog should state that the dmg file is unsigned and ask you if
+      you would like to change your settings.  <b>The file is not damaged</b>.  Read on to see how to work around this bug.</p>
+    
+    <p><a href="http://support.apple.com/en-us/HT202491" target="top">OS X: About Gatekeeper</a>
+describes how to fix Gatekeeper to allow applications downloaded from anywhere.</p>
 
 
     <h4>Documentation</h4>
