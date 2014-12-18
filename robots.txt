@@ -76,7 +76,8 @@ Disallow: /ptolemyII/ptII7.0/ptII7.0.beta
 Disallow: /ptolemyII/ptII8.0/ptII
 Disallow: /ptolemyII/ptII8.0/ptII8.0.beta
 Disallow: /ptolemyII/ptII8.0/ptII8.0.1
-Disallow: /ptolemyII/ptII10.0/ptII
+Disallow: /ptolemyII/ptII10.0/ptII/
+Disallow: /ptolemyII/ptII10.0/ptII10.0.beta
 Disallow: /ptolemyII/ptII10.0/ptII10.0.devel
 Disallow: /ptolemyII/ptII10.0/ptII10.0.beta_20141121
 Disallow: /ptolemyII/ptII10.0/ptII10.0.beta_20141205
