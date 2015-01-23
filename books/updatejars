@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# See http://chess.eecs.berkeley.edu/ptexternal/wiki/Main/JavaCodeSigningCertificatesForBerkeley
+if [ ! -d unjar ]; then
+  mkdir unjar
+fi	
+
+cd unjar
+echo "In `pwd`"
+
+jarsigner=/usr/lib/jvm/latest/bin/jarsigner
+
+files=`find .. -name "*.jar"`
+for file in $files
+do
+	rm -rf tmp
+	mkdir tmp
+	cd tmp
+        echo "  In `pwd`"
+	jar -xf ../$file
+	rm -rf META-INF
+	newjar=`basename $file`
+	echo $newjar
+	rm -f /tmp/$newjar
+	jar -cf /tmp/$newjar .
+
+	# Index it and avoid "This jar contains unsigned entries which have not been integrity-checked."
+	jar -i /tmp/$newjar
+
+	# /usr/bin/jarsigner will report: jarsigner error: gnu.javax.crypto.keyring.MalformedKeyringException: incorrect magic
+	$jarsigner -storepass `cat ~/.certpw` -keystore /users/ptII/adm/certs/ptKeystore -keypass `cat ~/.certpw` /tmp/$newjar ptolemy
+
+	# /usr/bin/jarsigner will report "jarsigner: Signature Block missing for PTOLEMY".  Use Oracle JDK1.7 jarsigner
+	$jarsigner -verify /tmp/$newjar
+	cd ..
+
+	echo "Copying /tmp/$newjar to $file"
+	cp /tmp/$newjar $file
+done
