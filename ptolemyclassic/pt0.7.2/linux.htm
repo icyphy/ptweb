@@ -1,384 +1,427 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- $Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-
-<title>Installing Ptolemy 0.7.2 Under Linux</title>
-
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/ptolemyclassic/pt0.7.2/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
-<h1>Installing Ptolemy 0.7.2 Under Linux</h1>
-Below are notes about installing under Red Hat 8 in July, 2003 [and
-also Red Hat 9.0] from source files.  You are probably better off
-using the <a href="download.htm">subversion version</a>
-and referring to the text below if you have problems.
-
-<p>Note that Ptolemy 0.7.2 <b>requires</b> gcc-2.95.3.  You should
-download the <code>pt0.7.2devel.gnu.tar.gz</code> file and build
-gcc-2.95.3 from that tar file.  Later versions of gcc will <b>not</b>
-work. 
-
-<ol>
-
-<li>Check out the sources
-<pre>
-svn co https://repo.eecs.berkeley.edu/svn-anon/projects/chess/ptclassic/trunk/ptclassic
-</pre>
-This will create a directory called <code>ptclassic</code>.
-
-<li>Download <code>http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz</code> 
-and <code>pt0.7.2devel.other.src.tar.gz</code>
-<pre>
-user:   ptdevel
-password: ptrules
-</pre>
-For example, to get it, use wget:
-<pre>
-wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz
-wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.other.src.tar.gz
-</pre>
-<li>Then untar and move the gnu and tcltk sources into the
-<code>ptclassic/</code>
-directory
-<pre>
-tar -zxf pt0.7.2devel.gnu.tar.gz 
-mv ptolemy/src/gnu/* ptclassic/src/gnu/
-tar -zxf pt0.7.2devel.other.src.tar.gz 
-mv ptolemy/src/tcltk/itcl3.0.1pt ptclassic/src/tcltk/itcl3.0.1
-mv ptolemy/src/tcltk/tcl8.0.5pt ptclassic/src/tcltk/tcl8.0.5
-mv ptolemy/src/tcltk/tk8.0.5pt ptclassic/src/tcltk/tk8.0.5
-</pre>
-
-
-<ul>
-<li>
-[Red Hat 9.0]: I am logged in as celaine.  I have untarred the .tar.gz files in ~/ptclassic.  Modify the instructions below accordingly.
-</ul>
-
-<li> Edit <code>$PTOLEMY/.bashrc</code> and change the setting
-for <code>PTOLEMY</code> to point to your directory, which will
-be something like <code>/root/ptclassic</code>.
-
- <br>[Debug version]: To compile the debug version, create <code>$PTOLEMY/.bashrc</code> and add the following instead:
-<pre>
-PTOLEMY=/root/ptolemy
-export PTOLEMY
-
-PTARCH=linux.debug
-export PTARCH
-
-PT_DEBUG=ptgdb
-export PT_DEBUG
-
-PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
-
-# To use the X11 pxgraph, follow the instructions
-# in $PTOLEMY/src/pxgraph/README.txt and uncomment the next line.
-PT_USE_X11_PXGRAPH=yes
-export PT_USE_X11_PXGRAPH
-</pre>
-
-<li> 
-<pre>
-source /root/ptolemy/.bashrc
-</pre>
-
-
-<li> Start the compile:
-<pre>
-cd $PTOLEMY
-make bootstrap &gt;&amp; boot.out &amp;
-tail -f boot.out
-</pre>
-
-<li> If you get messages like:
-<pre>
-mkdir /root/ptolemy/obj.linux.debug/gnu/gcc
-(cd /root/ptolemy/obj.linux.debug/gnu/gcc; \
-        /root/ptolemy/src/gnu/src/gcc/configure --srcdir=/root/ptolemy/src/gnu/src/gcc \
-                --prefix=/root/ptolemy/gnu/common --exec-prefix=/root/ptolemy/gnu/linux.debug \
-                --with-gxx-include-dir=/root/ptolemy/gnu/common/include/g++-3 \
-                --enable-shared)
-Configuring for a x86_64-unknown-linux-gnu host.
-Invalid configuration `x86_64-unknown-linux-gnu': machine `x86_64-unknown' not recognized
-Invalid configuration `x86_64-unknown-linux-gnu': machine `x86_64-unknown' not recognized
-</pre>
-then the problem is that <code>config.guess</code> could not determine your basic machine.
-One possible solution is to look in <code>config.sub</code> and find a machine close to your machine.
-
-<li> If you get messages like:
-<pre>
-mkdir /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES
- /usr/bin/install -c -m 644 de.mo /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES/make.mo
-/usr/bin/install: cannot stat `de.mo': No such file or directory
-
-</pre>
-Do
-<pre>
-cd $PTOLEMY/obj.linux/gnu/make/i18n
-ln -s  ../../../../src/gnu/src/make/i18n/* .
-</pre>
-and restart:
-<pre>
-cd $PTOLEMY
-make bootstrap &gt;&amp; boot2.out &amp;
-</pre>
-
-[Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
-
-<li> While installing tcltk, I got:
-<pre>
-/root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c: In function `
-Tcl_ErrnoId':
-/root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c:340: duplicate
- case value
-/root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c:328: this is t
-he first entry for that value
-
-</pre>
-
-The fix is to edit
-<code> ~/ptolemy/src/tcltk/tcl8.0.5pt/generic/tclPosixStr.c
-</code>
-and comment out the EOPNOTSUPP in two locations
-<I>This change is in the Subversion tree, so it should not be necessary.</I>
-<pre>
-               /*#ifdef EOPNOTSUPP
-        case EOPNOTSUPP: return "EOPNOTSUPP";
-#endif
-                */
-
-</pre>
-and
-<pre>
-              /*#ifdef EOPNOTSUPP
-        case EOPNOTSUPP: return "operation not supported on socket";
-        #endif*/
-
-</pre>
-I then restarted with
-<pre>
-make install_tcltk
-</pre>
-
-<ul>
-<li>
-[Red Hat 9.0]: After making the above fix, I get:
-<pre>
-In file included from
-/home/celaine/ptclassic/ptolemy/src/tcltk/tk8.0.5pt/unix/tkAppInit.c:16:
-/home/celaine/ptclassic/ptolemy/src/tcltk/tk8.0.5pt/unix/../generic/tk.h:78:
-X11/Xlib.h: No such file or directory
-</pre>
-
-The fix is to install <a href="http://www.redhat.com/swr/i386/XFree86-devel-4.3.0-2.i386.html"><code>XFree86-devel-4.3.0-2.i386.rpm</code></a> from <a href="http://www.redhat.com">redhat.com</a>, which will give you the necessary header files.  You may also need to install other rpms in the dependency list, including <a href="http://www.redhat.com/swr/i386/fontconfig-devel-2.1-9.i386.html"><code>gfontconfig-devel-2.1-9.i386.rpm</code>g</a> and <a href="http://www.redhat.com/swr/i386/freetype-devel-2.1.3-6.i386.html"><code>gfreetype-devel-2.1.3-6.i386.rpm</code>g</a>.
-
-To reconfigure the build to detect <code>/usr/X11R6/lib/libX11.a</code>, do:
-<pre>
-rm -rf obj.linux/tcltk/
-</pre>
-
-[Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
-
-Rerun:
-<pre>
-make install_tcltk
-</pre>
-</ul>
-
-<li> Proceed with installing octtools:
-<pre>
-make install_octtools &gt;&amp; oct.out &amp;
-</pre>
-
-
-<li> Proceed with the build
-<pre>
-make install &gt;&amp; install.out &amp;
-</pre>
-
-
-<li> CGTarget fails to compile
-<pre>
-../../../../src/domains/cg/kernel/CGTarget.cc:703: implicit declaration of func
-tion `int cuserid(...)'
-</pre>
-<I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
->The change is to comment
-
-<pre>
-      //msg   &lt;&lt; "User:      " &lt;&lt; cuserid(NULL) &lt;&lt; "\n"
-</pre>
-and use
-<pre>
-      msg     &lt;&lt; "User:      " &lt;&lt; getlogin() &lt;&lt; "\n"
-</pre>
-
-
-<li> <code>vhdl/targets/SynthTarget.cc</code> needs a similar change
- <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
-<pre>
-        //      comCode &lt;&lt; "designer = \"" &lt;&lt; cuserid(NULL) &lt;&lt; "\"" &lt;&lt; "\n";
-</pre>
-<pre>
-        comCode &lt;&lt; "designer = \"" &lt;&lt; getlogin() &lt;&lt; "\"" &lt;&lt; "\n";
-
-</pre>
-As does <code>SynthArchTarget.cc</code>
- <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
-
-<li> acs/targets/StringArray.cc fails with
-<pre>
-../../../../src/domains/acs/targets/StringArray.cc:90: implicit declaration of function `int strcat(...)'
-</pre>
-The fix is to add
-<pre>
-#include &lt;string.h&gt;
-</pre>
- <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
-
-<li> acs/stars fails to link with
-<pre>
-ACSRamDelayFixSim.o(.data+0x0): multiple definition of `star_nm_ACSRamDelayFixSim'
-ACSRamDelayFixSim.o(.data+0x0): first defined here
-</pre>
-
-The fix is to edit <code>acs/stars/make.template</code> and
-find the second instance of ACSRamDelayFixSim.pl and 
-remove it and the remaining .pl files.  
- <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
-<pre>
-[root@dhcp-43-60 stars]# diff -c make.template.old make.template 
-*** make.template.old   2003-07-15 18:05:10.000000000 -0700
---- make.template       2003-07-15 18:01:06.000000000 -0700
-***************
-*** 89,105 ****
-    ACSUnPackBits.pl ACSUnPackBitsCGFPGA.pl ACSUnPackBitsFixSim.pl \
-    ACSXMGraph.pl ACSXMGraphCGFPGA.pl ACSXMGraphFPCGC.pl ACSXMGraphFPSim.pl ACS\
-XMGraphFixSim.pl \
-    ACSXYgraph.pl ACSXYgraphCGFPGA.pl ACSXYgraphFPCGC.pl ACSXYgraphFPSim.pl ACS\
-XYgraphFixSim.pl \
--   ACSRamDelayFixSim.pl \
--   ACSRamp.pl ACSRampCGFPGA.pl ACSRampFPCGC.pl ACSRampFPSim.pl ACSRampFixSim.p\
-l \
--   ACSShift.pl ACSShiftCGFPGA.pl ACSShiftFPSim.pl ACSShiftFixSim.pl \
--   ACSSin.pl ACSSinCGFPGA.pl ACSSinFPCGC.pl ACSSinFPSim.pl ACSSinFixSim.pl \
--   ACSSink.pl ACSSinkCGFPGA.pl ACSSinkFPCGC.pl ACSSinkFPSim.pl ACSSinkFixSim.p\
-l \
--   ACSSource.pl ACSSourceCGFPGA.pl ACSSourceFPCGC.pl ACSSourceFPSim.pl ACSSour\
-ceFixSim.pl \
--   ACSSqrt.pl ACSSqrtCGFPGA.pl ACSSqrtFPCGC.pl ACSSqrtFPSim.pl ACSSqrtFixSim.p\
-l \
--   ACSSub.pl ACSSubCGFPGA.pl ACSSubFPCGC.pl ACSSubFPSim.pl ACSSubFixSim.pl \
--   ACSUniSeq.pl ACSUniSeqCGFPGA.pl \
--   ACSXMGraph.pl ACSXMGraphCGFPGA.pl ACSXMGraphFPCGC.pl ACSXMGraphFPSim.pl ACS\
-XMGraphFixSim.pl \
--   ACSXYgraph.pl ACSXYgraphCGFPGA.pl ACSXYgraphFPCGC.pl ACSXYgraphFPSim.pl ACS\
-XYgraphFixSim.pl
-
-  # The .cc files
-  SRCS=$(PL_SRCS:.pl=.cc)
---- 89,94 ----
-
-</pre>
-
-
-<li> pxgraph fails to compile
-<pre>
-../../../src/pxgraph/pxgraph/xgraph.h:77:21: macro "strchr" requires 2 arguments, but only 1 given
-</pre>
-The fix is to edit <code>ptolemy/src/pxgraph/pxgraph/xgraph.h</code>
-and comment out the declaration of strchr
- <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
- <br>Then run <code>make install</code>
-
-<li>Run a sample demo by doing
-<pre>
-cd $PTOLEMY
-ptiny src/domains/sdf/demo/butterfly
-</pre>
-After the Ptolemy Welcome Window comes up, move the mouse over the 
-model and type a capital <code>R</code> to run it.
-
-<li>When running a model that uses the Java version of pxgraph,
-the output is screwy.  For example, the butterfly model results in
-in the 10^38 range.  The problem here is with the binary data
-format of the Java version of pxgraph.  The solution is to use
-the X11 version of pxgraph by doing:
-<pre>
-PT_USE_X11_PXGRAPH=yes
-export PT_USE_X11_PXGRAPH
-</pre>
-(The sample .bashrc above has been adjusted accordingly)
-
-<ul>
-<li>
-[Red Hat 9.0]: If it complains that it cannot find ptiny, run
-<code>make install</code> in <code>gobj.linux/pigiRpc</code>g 
-and then run
-<pre>
-cd $PTOLEMY
-make bin/pigi
-</pre>
-<code>$PTOLEMY/bin/pigi</code> is merely a symbolic link that
-from <code>$PTOLEMY/bin/pigiEnv.sh</code>.
-
-<li>
-[Red Hat 9.0]: I get the following message in the terminal window after clicking on "Go":
-<pre>
-/home/celaine/ptclassic/ptolemy/bin/pxgraph: Could not find /home/celaine/ptclassic/ptolemy/bin.linux/pxgraph.x11
-    $PT_USE_X11_PXGRAPH was set, so Ptolemy is attempting to
-    use the X11 pxgraph instead of the Java pxgraph.
-    See /home/celaine/ptclassic/ptolemy/src/pxgraph/README.txt for more information
-</pre>
-<code>cd</code> to <code>gobj.linux/pxgraph</code>g and run <code>gmake install</code>g.  I got the following errors:
-
-<pre>
-In file included from ../../../src/pxgraph/pxgraph/xgout.h:37,
-                 from ../../../src/pxgraph/pxgraph/xgraph.c:47:
-../../../src/pxgraph/pxgraph/xgraph.h:74: macro `strcpy' used without args
-</pre>
-
-and
-
-<pre>
-gcc -c -O3 -fomit-frame-pointer  -Wall -Wcast-align -Wsynth -Dlinux -D_REENTRANT -DI_UNISTD  -I../../../src/pxgraph/pxgraph -I/usr/X11R6/include -DNEED_STRICMP=1   ../../../src/pxgraph/pxgraph/xtb.c
-../../../src/pxgraph/pxgraph/xtb.c:77: macro `strcpy' used without args
-</pre>
-
-Comment out the lines in <code>src/pxgraph/pxgraph/xgraph.h</code> and <code>gsrc/pxgraph/pxgraph/xtb.c</code>g that say:
-
-<pre>
-extern char *strcpy();
-</pre>
-
-Rerun <code>make install</code>
-
-</ul>
-[Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
-
-<li>[Debug version]: Try to run <code>pigi</code>.  If you get this error message, it is not running the correct binary:
-
-<pre>
-pigi: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.debug does not exist or is not
-       executable. Using /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc instead.
-</pre>
-
-<li>[Debug version]: In <code>obj.linux.debug/pigiRpc</code>:
-
-<pre>
-make pigiRpc.ptrim.debug
-</pre>
-
-Try to run <code>ptrim -debug</code>.  The following error message is ok:
-
-<pre>
-ptrim: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.ptrim.debug does not exist or is not
-       executable. Using /home/celaine/ptclassic/ptolemy/obj.linux.debug/pigiRpc/pigiRpc.ptrim.debug instead.
-</pre>
-
-</ol>
-
-<!--#include virtual="/ssi/bottom.htm" -->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+    <title>Installing Ptolemy 0.7.2 Under Linux</title>
+
+    <!--#include virtual="/ssi/toppremenu.htm" -->
+    <!--#include virtual="/ptolemyclassic/pt0.7.2/toc.htm" -->
+    <!--#include virtual="/ssi/toppostmenu.htm" -->
+    <h1>Installing Ptolemy 0.7.2 Under Linux</h1>
+    <p>Below are notes about installing under Red Hat 8 in July, 2003 [and
+      also Red Hat 9.0] from source files.  You are probably better off
+      using the <a href="download.htm">subversion version</a>
+      and referring to the text below if you have problems.</p>
+
+    <p>Note that Ptolemy 0.7.2 <b>requires</b> gcc-2.95.3.  You should
+      download the <code>pt0.7.2devel.gnu.tar.gz</code> file and build
+      gcc-2.95.3 from that tar file.  Later versions of gcc will <b>not</b>
+      work. </p>
+
+    <ol>
+
+      <li>Check out the sources
+        <pre>
+          svn co https://repo.eecs.berkeley.edu/svn-anon/projects/chess/ptclassic/trunk/ptclassic
+        </pre>
+        This will create a directory called <code>ptclassic</code>.</li>
+
+      <li>Download <code>http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz</code> 
+        and <code>pt0.7.2devel.other.src.tar.gz</code>
+        <pre>
+          user:   ptdevel
+          password: ptrules
+        </pre>
+        For example, to get it, use wget:
+        <pre>
+          wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.gnu.tar.gz
+          wget --http-user=ptdevel --http-password=ptrules http://ptolemy.eecs.berkeley.edu/~cxh/ptdevel/pt0.7.2devel.other.src.tar.gz
+        </pre>
+      </li>
+      <li>Then untar and move the gnu and tcltk sources into the
+        <code>ptclassic/</code>
+        directory
+        <pre>
+          tar -zxf pt0.7.2devel.gnu.tar.gz 
+          mv ptolemy/src/gnu/* ptclassic/src/gnu/
+          tar -zxf pt0.7.2devel.other.src.tar.gz 
+          mv ptolemy/src/tcltk/itcl3.0.1pt ptclassic/src/tcltk/itcl3.0.1
+          mv ptolemy/src/tcltk/tcl8.0.5pt ptclassic/src/tcltk/tcl8.0.5
+          mv ptolemy/src/tcltk/tk8.0.5pt ptclassic/src/tcltk/tk8.0.5
+        </pre>
+
+
+        <ul>
+          <li>
+            [Red Hat 9.0]: I am logged in as celaine.  I have untarred the .tar.gz files in ~/ptclassic.  Modify the instructions below accordingly.</li>
+
+        </ul>
+
+      <li> Edit <code>$PTOLEMY/.bashrc</code> and change the setting
+        for <code>PTOLEMY</code> to point to your directory, which will
+        be something like <code>/root/ptclassic</code>.
+
+        <br>[Debug version]: To compile the debug version, create <code>$PTOLEMY/.bashrc</code> and add the following instead:
+          <pre>
+            PTOLEMY=/root/ptolemy
+            export PTOLEMY
+
+            PTARCH=linux.debug
+            export PTARCH
+
+            PT_DEBUG=ptgdb
+            export PT_DEBUG
+
+            PATH=$PTOLEMY/bin:$PTOLEMY/bin.$PTARCH:$PTOLEMY/vendors/bin:$PATH
+
+            # To use the X11 pxgraph, follow the instructions
+            # in $PTOLEMY/src/pxgraph/README.txt and uncomment the next line.
+            PT_USE_X11_PXGRAPH=yes
+            export PT_USE_X11_PXGRAPH
+          </pre>
+        </li>
+
+      <li> 
+        <pre>
+          source /root/ptolemy/.bashrc
+        </pre>
+      </li>
+
+      <li> Start the compile:
+        <pre>
+          cd $PTOLEMY
+          make bootstrap &gt;&amp; boot.out &amp;
+          tail -f boot.out
+        </pre>
+      <li>
+      <li> If you get messages like:
+        <pre>
+          mkdir /root/ptolemy/obj.linux.debug/gnu/gcc
+          (cd /root/ptolemy/obj.linux.debug/gnu/gcc; \
+          /root/ptolemy/src/gnu/src/gcc/configure --srcdir=/root/ptolemy/src/gnu/src/gcc \
+          --prefix=/root/ptolemy/gnu/common --exec-prefix=/root/ptolemy/gnu/linux.debug \
+          --with-gxx-include-dir=/root/ptolemy/gnu/common/include/g++-3 \
+          --enable-shared)
+          Configuring for a x86_64-unknown-linux-gnu host.
+          Invalid configuration `x86_64-unknown-linux-gnu': machine `x86_64-unknown' not recognized
+          Invalid configuration `x86_64-unknown-linux-gnu': machine `x86_64-unknown' not recognized
+        </pre>
+        then the problem is that <code>config.guess</code> could not determine your basic machine.
+        One possible solution is to look in <code>config.sub</code> and find a machine close to your machine.
+        <br/>Another solution is to edit <code>ptclassic/src/gnu/src/gcc/config.guess</code>:
+
+        <pre>
+          echo "i386-pc-linux-gnu"
+          exit
+        </pre>
+      </li>
+
+      <li> If you get
+        <pre>
+          ` if [ -f /home/cxh/src/ptclassic/obj.linux/gnu/gcc/gcc/../binutils/ar ] ; then echo /home/cxh/src/ptclassic/obj.linux/gnu/g\
+          cc/gcc/../binutils/ar ; else if [ "i386-pc-linux-gnu" = "i386-pc-linux-gnu" ] ; then echo ar; else t='s,x,x,'; echo ar | sed -\
+          e $t ; fi; fi` rc tmplibgcc2.a ${name}.o; \
+          rm -f ${name}.o; \
+          done
+          _muldi3
+          In file included from /usr/include/sys/types.h:271,
+          from /usr/include/stdlib.h:320,
+          from /home/cxh/src/ptclassic/src/gnu/src/gcc/gcc/libgcc2.c:41:
+          /usr/include/bits/pthreadtypes.h:99: warning: unnamed struct/union that defines no instances
+          /tmp/ccSDZ1Kk.s: Assembler messages:
+          /tmp/ccSDZ1Kk.s:299: Error: suffix or operands invalid for `push'
+          /tmp/ccSDZ1Kk.s:302: Error: suffix or operands invalid for `push'
+          /tmp/ccSDZ1Kk.s:303: Error: suffix or operands invalid for `push'
+          /tmp/ccSDZ1Kk.s:322: Error: suffix or operands invalid for `pop'
+          /tmp/ccSDZ1Kk.s:323: Error: suffix or operands invalid for `pop'
+          make[5]: *** [libgcc2.a] Error 1
+          make[5]: Leaving directory `/home/cxh/src/ptclassic/obj.linux/gnu/gcc/gcc'
+          make[4]: *** [bootstrap] Error 2
+          make[4]: Leaving directory `/home/cxh/src/ptclassic/obj.linux/gnu/gcc/gcc'
+          make[3]: *** [bootstrap] Error 2
+          </pre>
+        <ul>
+          <li><a href="http://stackoverflow.com/questions/8176798/installing-gcc-2-95-3-in-ubuntu-10-04-3">http://stackoverflow.com/questions/8176798/installing-gcc-2-95-3-in-ubuntu-10-04-3</a> states that it probably is not possible with
+            a modern glibc</li>
+          <li><a href="http://www.trevorpounds.com/blog/?p=111">http://www.trevorpounds.com/blog/?p=111</a> Building Older GCC Versions on x86-64 Debian/Ubuntu 
+          <li><a href="http://www.linuxquestions.org/questions/linux-software-2/install-gcc-2-95-3-in-ubuntu-10-04-a-879827/">http://www.linuxquestions.org/questions/linux-software-2/install-gcc-2-95-3-in-ubuntu-10-04-a-879827/</a> </li>
+          <li><a href="http://www.linuxfromscratch.org/blfs/view/5.1/general/gcc2.html">http://www.linuxfromscratch.org/blfs/view/5.1/general/gcc2.html</a> - some patches</li>
+
+          </ul>
+      </li>
+      <li> If you get messages like:
+        <pre>
+          mkdir /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES
+          /usr/bin/install -c -m 644 de.mo /root/ptolemy/gnu/common/share/locale/de/LC_MESSAGES/make.mo
+          /usr/bin/install: cannot stat `de.mo': No such file or directory
+
+        </pre>
+        Do
+        <pre>
+          cd $PTOLEMY/obj.linux/gnu/make/i18n
+          ln -s  ../../../../src/gnu/src/make/i18n/* .
+        </pre>
+        and restart:
+        <pre>
+          cd $PTOLEMY
+          make bootstrap &gt;&amp; boot2.out &amp;
+        </pre>
+
+        [Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
+
+      <li> While installing tcltk, I got:
+        <pre>
+          /root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c: In function `
+          Tcl_ErrnoId':
+          /root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c:340: duplicate
+          case value
+          /root/ptolemy/src/tcltk/tcl8.0.5pt/unix/../generic/tclPosixStr.c:328: this is t
+          he first entry for that value
+
+        </pre>
+
+        The fix is to edit
+        <code> ~/ptolemy/src/tcltk/tcl8.0.5pt/generic/tclPosixStr.c
+        </code>
+        and comment out the EOPNOTSUPP in two locations
+        <I>This change is in the Subversion tree, so it should not be necessary.</I>
+        <pre>
+          /*#ifdef EOPNOTSUPP
+          case EOPNOTSUPP: return "EOPNOTSUPP";
+          #endif
+          */
+
+        </pre>
+        and
+        <pre>
+          /*#ifdef EOPNOTSUPP
+          case EOPNOTSUPP: return "operation not supported on socket";
+          #endif*/
+
+        </pre>
+        I then restarted with
+        <pre>
+          make install_tcltk
+        </pre>
+
+        <ul>
+          <li>
+            [Red Hat 9.0]: After making the above fix, I get:
+            <pre>
+              In file included from
+              /home/celaine/ptclassic/ptolemy/src/tcltk/tk8.0.5pt/unix/tkAppInit.c:16:
+              /home/celaine/ptclassic/ptolemy/src/tcltk/tk8.0.5pt/unix/../generic/tk.h:78:
+              X11/Xlib.h: No such file or directory
+            </pre>
+
+            The fix is to install <a href="http://www.redhat.com/swr/i386/XFree86-devel-4.3.0-2.i386.html"><code>XFree86-devel-4.3.0-2.i386.rpm</code></a> from <a href="http://www.redhat.com">redhat.com</a>, which will give you the necessary header files.  You may also need to install other rpms in the dependency list, including <a href="http://www.redhat.com/swr/i386/fontconfig-devel-2.1-9.i386.html"><code>gfontconfig-devel-2.1-9.i386.rpm</code>g</a> and <a href="http://www.redhat.com/swr/i386/freetype-devel-2.1.3-6.i386.html"><code>gfreetype-devel-2.1.3-6.i386.rpm</code>g</a>.
+
+            To reconfigure the build to detect <code>/usr/X11R6/lib/libX11.a</code>, do:
+            <pre>
+              rm -rf obj.linux/tcltk/
+            </pre>
+
+            [Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
+
+            Rerun:
+            <pre>
+              make install_tcltk
+            </pre>
+          </ul>
+
+          <li> Proceed with installing octtools:
+            <pre>
+              make install_octtools &gt;&amp; oct.out &amp;
+            </pre>
+
+
+          <li> Proceed with the build
+            <pre>
+              make install &gt;&amp; install.out &amp;
+            </pre>
+
+
+          <li> CGTarget fails to compile
+            <pre>
+              ../../../../src/domains/cg/kernel/CGTarget.cc:703: implicit declaration of func
+              tion `int cuserid(...)'
+            </pre>
+            <I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
+              >The change is to comment
+
+              <pre>
+                //msg   &lt;&lt; "User:      " &lt;&lt; cuserid(NULL) &lt;&lt; "\n"
+              </pre>
+              and use
+              <pre>
+                msg     &lt;&lt; "User:      " &lt;&lt; getlogin() &lt;&lt; "\n"
+              </pre>
+
+
+              <li> <code>vhdl/targets/SynthTarget.cc</code> needs a similar change
+                <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
+                    <pre>
+                      //      comCode &lt;&lt; "designer = \"" &lt;&lt; cuserid(NULL) &lt;&lt; "\"" &lt;&lt; "\n";
+                    </pre>
+                    <pre>
+                      comCode &lt;&lt; "designer = \"" &lt;&lt; getlogin() &lt;&lt; "\"" &lt;&lt; "\n";
+
+                    </pre>
+                    As does <code>SynthArchTarget.cc</code>
+                    <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
+
+                        <li> acs/targets/StringArray.cc fails with
+                          <pre>
+                            ../../../../src/domains/acs/targets/StringArray.cc:90: implicit declaration of function `int strcat(...)'
+                          </pre>
+                          The fix is to add
+                          <pre>
+                            #include &lt;string.h&gt;
+                          </pre>
+                          <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
+
+                              <li> acs/stars fails to link with
+                                <pre>
+                                  ACSRamDelayFixSim.o(.data+0x0): multiple definition of `star_nm_ACSRamDelayFixSim'
+                                  ACSRamDelayFixSim.o(.data+0x0): first defined here
+                                </pre>
+
+                                The fix is to edit <code>acs/stars/make.template</code> and
+                                find the second instance of ACSRamDelayFixSim.pl and 
+                                remove it and the remaining .pl files.  
+                                <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
+                                    <pre>
+                                      [root@dhcp-43-60 stars]# diff -c make.template.old make.template 
+                                      *** make.template.old   2003-07-15 18:05:10.000000000 -0700
+                                      --- make.template       2003-07-15 18:01:06.000000000 -0700
+                                      ***************
+                                      *** 89,105 ****
+                                      ACSUnPackBits.pl ACSUnPackBitsCGFPGA.pl ACSUnPackBitsFixSim.pl \
+                                      ACSXMGraph.pl ACSXMGraphCGFPGA.pl ACSXMGraphFPCGC.pl ACSXMGraphFPSim.pl ACS\
+                                      XMGraphFixSim.pl \
+                                      ACSXYgraph.pl ACSXYgraphCGFPGA.pl ACSXYgraphFPCGC.pl ACSXYgraphFPSim.pl ACS\
+                                      XYgraphFixSim.pl \
+                                      -   ACSRamDelayFixSim.pl \
+                                      -   ACSRamp.pl ACSRampCGFPGA.pl ACSRampFPCGC.pl ACSRampFPSim.pl ACSRampFixSim.p\
+                                      l \
+                                      -   ACSShift.pl ACSShiftCGFPGA.pl ACSShiftFPSim.pl ACSShiftFixSim.pl \
+                                      -   ACSSin.pl ACSSinCGFPGA.pl ACSSinFPCGC.pl ACSSinFPSim.pl ACSSinFixSim.pl \
+                                      -   ACSSink.pl ACSSinkCGFPGA.pl ACSSinkFPCGC.pl ACSSinkFPSim.pl ACSSinkFixSim.p\
+                                      l \
+                                      -   ACSSource.pl ACSSourceCGFPGA.pl ACSSourceFPCGC.pl ACSSourceFPSim.pl ACSSour\
+                                      ceFixSim.pl \
+                                      -   ACSSqrt.pl ACSSqrtCGFPGA.pl ACSSqrtFPCGC.pl ACSSqrtFPSim.pl ACSSqrtFixSim.p\
+                                      l \
+                                      -   ACSSub.pl ACSSubCGFPGA.pl ACSSubFPCGC.pl ACSSubFPSim.pl ACSSubFixSim.pl \
+                                      -   ACSUniSeq.pl ACSUniSeqCGFPGA.pl \
+                                      -   ACSXMGraph.pl ACSXMGraphCGFPGA.pl ACSXMGraphFPCGC.pl ACSXMGraphFPSim.pl ACS\
+                                      XMGraphFixSim.pl \
+                                      -   ACSXYgraph.pl ACSXYgraphCGFPGA.pl ACSXYgraphFPCGC.pl ACSXYgraphFPSim.pl ACS\
+                                      XYgraphFixSim.pl
+
+                                      # The .cc files
+                                      SRCS=$(PL_SRCS:.pl=.cc)
+                                      --- 89,94 ----
+
+                                    </pre>
+
+
+                                    <li> pxgraph fails to compile
+                                      <pre>
+                                        ../../../src/pxgraph/pxgraph/xgraph.h:77:21: macro "strchr" requires 2 arguments, but only 1 given
+                                      </pre>
+                                      The fix is to edit <code>ptolemy/src/pxgraph/pxgraph/xgraph.h</code>
+                                      and comment out the declaration of strchr
+                                      <br><I>This change is in the Subversion tree, so it should not be necessary.</I> <br>
+                                          <br>Then run <code>make install</code>
+
+                                            <li>Run a sample demo by doing
+                                              <pre>
+                                                cd $PTOLEMY
+                                                ptiny src/domains/sdf/demo/butterfly
+                                              </pre>
+                                              After the Ptolemy Welcome Window comes up, move the mouse over the 
+                                              model and type a capital <code>R</code> to run it.
+
+                                            <li>When running a model that uses the Java version of pxgraph,
+                                              the output is screwy.  For example, the butterfly model results in
+                                              in the 10^38 range.  The problem here is with the binary data
+                                              format of the Java version of pxgraph.  The solution is to use
+                                              the X11 version of pxgraph by doing:
+                                              <pre>
+                                                PT_USE_X11_PXGRAPH=yes
+                                                export PT_USE_X11_PXGRAPH
+                                              </pre>
+                                              (The sample .bashrc above has been adjusted accordingly)
+
+                                              <ul>
+                                                <li>
+                                                  [Red Hat 9.0]: If it complains that it cannot find ptiny, run
+                                                  <code>make install</code> in <code>gobj.linux/pigiRpc</code>g 
+                                                  and then run
+                                                  <pre>
+                                                    cd $PTOLEMY
+                                                    make bin/pigi
+                                                  </pre>
+                                                  <code>$PTOLEMY/bin/pigi</code> is merely a symbolic link that
+                                                  from <code>$PTOLEMY/bin/pigiEnv.sh</code>.
+
+                                                <li>
+                                                  [Red Hat 9.0]: I get the following message in the terminal window after clicking on "Go":
+                                                  <pre>
+                                                    /home/celaine/ptclassic/ptolemy/bin/pxgraph: Could not find /home/celaine/ptclassic/ptolemy/bin.linux/pxgraph.x11
+                                                    $PT_USE_X11_PXGRAPH was set, so Ptolemy is attempting to
+                                                    use the X11 pxgraph instead of the Java pxgraph.
+                                                    See /home/celaine/ptclassic/ptolemy/src/pxgraph/README.txt for more information
+                                                  </pre>
+                                                  <code>cd</code> to <code>gobj.linux/pxgraph</code>g and run <code>gmake install</code>g.  I got the following errors:
+
+                                                  <pre>
+                                                    In file included from ../../../src/pxgraph/pxgraph/xgout.h:37,
+                                                    from ../../../src/pxgraph/pxgraph/xgraph.c:47:
+                                                    ../../../src/pxgraph/pxgraph/xgraph.h:74: macro `strcpy' used without args
+                                                  </pre>
+
+                                                  and
+
+                                                  <pre>
+                                                    gcc -c -O3 -fomit-frame-pointer  -Wall -Wcast-align -Wsynth -Dlinux -D_REENTRANT -DI_UNISTD  -I../../../src/pxgraph/pxgraph -I/usr/X11R6/include -DNEED_STRICMP=1   ../../../src/pxgraph/pxgraph/xtb.c
+                                                    ../../../src/pxgraph/pxgraph/xtb.c:77: macro `strcpy' used without args
+                                                  </pre>
+
+                                                  Comment out the lines in <code>src/pxgraph/pxgraph/xgraph.h</code> and <code>gsrc/pxgraph/pxgraph/xtb.c</code>g that say:
+
+                                                  <pre>
+                                                    extern char *strcpy();
+                                                  </pre>
+
+                                                  Rerun <code>make install</code>
+
+                                                </ul>
+                                                [Debug version]: The directory name should be <code>obj.linux.debug</code> instead of <code>gobj.linux</code>g.
+
+                                                <li>[Debug version]: Try to run <code>pigi</code>.  If you get this error message, it is not running the correct binary:
+
+                                                  <pre>
+                                                    pigi: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.debug does not exist or is not
+                                                    executable. Using /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc instead.
+                                                  </pre>
+
+                                                <li>[Debug version]: In <code>obj.linux.debug/pigiRpc</code>:
+
+                                                  <pre>
+                                                    make pigiRpc.ptrim.debug
+                                                  </pre>
+
+                                                  Try to run <code>ptrim -debug</code>.  The following error message is ok:
+
+                                                  <pre>
+                                                    ptrim: /home/celaine/ptclassic/ptolemy/bin.linux.debug/pigiRpc.ptrim.debug does not exist or is not
+                                                    executable. Using /home/celaine/ptclassic/ptolemy/obj.linux.debug/pigiRpc/pigiRpc.ptrim.debug instead.
+                                                  </pre>
+
+                                                </ol>
+
+                                                <!--#include virtual="/ssi/bottom.htm" -->
