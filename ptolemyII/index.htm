@@ -57,7 +57,7 @@ provide increasingly specific capabilities. The kernel supports an
 abstract syntax, a hierarchical structure of entities with ports and
 interconnections. A graphical editor called Vergil supports visual
 editing of this abstract syntax. An XML concrete syntax called MoML
-provides a persistent file format for the models. Various specialized
+provides a persistent file format for the models<a href="#5">[5]</a>. Various specialized
 tools have been created from this framework, including
 <a href="http://ptolemy.eecs.berkeley.edu/hyvisual">HyVisual</a>
 (for hybrid systems modeling),
@@ -73,9 +73,14 @@ well-defined semantics; a model of time (specifically, super-dense
 time, which enables interaction of continuous dynamics and imperative
 logic); and a sophisticated type system supporting type checking, type
 inference, and polymorphism. The type system has recently been
-extended to support user-defined ontologies <a href="#5">[5]</a>.  Various experiments
+extended to support user-defined ontologies <a href="#6">[6]</a>.  Various experiments
 with synthesis of implementation code and abstractions for
-verification are included in the project.</p>
+verification are included in the project.
+</p>
+
+<p>Current work in Ptolemy II is focusing on <a href="http://accessors.org">Accessors</a>, which are a technology for making the Internet of Things accessible to a broader community of citizens, inventors, and service providers through open interfaces, an open community of developers, and an open repository of technology.  Ptolemy II includes the <a href="http://capecode.org">Cape Code Accessor Host<a href="#7">[7]</a>.
+
+<p>Ptolemy is being used as the execution engine in <a href="https://wiki.eclipse.org/Triquetrum">Eclipse Triquetrum</a><href="#7">[8]</a>.
 
 <h3>References</h3>
 
@@ -109,7 +114,12 @@ December, 2009.
 	Design of Embedded Systems</a>," EMSOFT '07, September 30 - October 3, 2007, Salzburg, Austria.
 </p>
 
-<p><a name="5">[5]</a>
+<p><a name="6">[6]</a>Christopher Brooks, Edward A. Lee. <a
+href="https://chess.eecs.berkeley.edu/pubs/1166.html"><i>Ptolemy II: An open-source platform for experimenting with actor-oriented design</i></a>, 11 February, 2016; Poster presented at the 2016 <a
+href="http://www.eecs.berkeley.edu/BEARS">Berkeley
+    EECS Annual Research Symposium (BEARS)</a>.</p>
+
+<p><a name="6">[6]</a>
 	M.-K. Leung, T. Mandl, E. A. Lee, E. Latronico,
 C. Shelton, S. Tripakis, and B. Lickly, "<a
 	href="http://chess.eecs.berkeley.edu/pubs/611.html">Scalable
@@ -118,12 +128,17 @@ on Model Driven Engineering Languages and Systems (MODELS), Denver,
 CO, USA, 4-9 October, 2009.
 </p>
 
-<p><a name="6">[6]</a>Christopher Brooks, Edward A. Lee. <a
-href="https://chess.eecs.berkeley.edu/pubs/1166.html"><i>Ptolemy II: An open-source platform for experimenting with actor-oriented design</i></a>, 11 February, 2016; Poster presented at the 2016 <a
-href="http://www.eecs.berkeley.edu/BEARS">Berkeley
-EECS Annual Research Symposium (BEARS)</a>.</p>
+<p><a name="7">[7]</a>
+  Elizabeth Latronico, Edward A. Lee, Marten Lohstroh, Chris Shaver, Armin Wasicek, Matt Weber.
+  <a href="http://www.terraswarm.org/pubs/332.html">A Vision of Swarmlets</a>, <i>IEEE Internet
+  Computing, Special Issue on Building Internet of Things Software</i>, 19(2):20-29, March 2015.  See also <a href="https://www.terraswarm.org/accessors/wiki/Main/PublicationsAndPresentations">Accessors Publications</a>.</p>
 
-<h3>Recent activity</h3>
+<p><a name="8">[8]</a>
+  Christopher Brooks, Erwin De Ley.
+<a href="http://chess.eecs.berkeley.edu/pubs/1169.html"><i>Triquetrum: Models of Computation for Workflows</i></a>,
+Talk or presentation,  8, March, 2016; Presented at <a href="https://www.eclipsecon.org/na2016/session/triquetrum-models-computation-workflows">EclipseCon NA 2016</a>, Reston, VA.</p>
+
+
 
 <h3>Overview<h3>
     
@@ -163,13 +178,6 @@ contributions from off site developers, see
      <a href="http://chess.eecs.berkeley.edu/ptexternal">available via Subversion</a>.</b></p>
      <p>The nightly build includes links to installers, though we encourage people to build from the svn repository.</p>
 </blockquote>
-
-<p>Current work in Ptolemy II is focusing on <a href="http://accessors.org">Accessors</a>, which are a technology for making the Internet of Things accessible to a broader community of citizens, inventors, and service providers through open interfaces, an open community of developers, and an open repository of technology.  Ptolemy II includes the <a href="http://capecode.org">Cape Code Accessor Host.</p>
-
-<p>Ptolemy is being used as the execution engine in <a href="https://wiki.eclipse.org/Triquetrum">Eclipse Triquetrum</a>.  For details, see:
-<br/>Christopher Brooks, Erwin De Key.
-<a href="http://chess.eecs.berkeley.edu/pubs/1169.html"><i>Triquetrum: Models of Computation for Workflows</i></a>,
-Talk or presentation,  8, March, 2016; Presented at <a href="https://www.eclipsecon.org/na2016/session/triquetrum-models-computation-workflows">EclipseCon NA 2016</a>, Reston, VA.
 
 <p>The devel version of Ptolemy II includes <a href="https://people.eecs.berkeley.edu/~ilgea/#research">PILOT</a>: An Actor-Oriented Learning and Optimization Toolkit for Building Swarm Applications.
 <blockquote>
