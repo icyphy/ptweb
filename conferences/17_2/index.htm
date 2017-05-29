@@ -9,12 +9,12 @@
 <!--#include virtual="/conferences/17_2/toc.htm" -->
 <!--#include virtual="/ssi/toppostmenu.htm" -->
 <script type="text/javascript">
-  window.addEventListener("resize", resize());
-  function resize () { 
+  function resize() { 
     if (document.getElementById("banner")) {
       document.getElementById("banner").width = document.getElementById("content").clientWidth-10;
     }
   };
+  window.addEventListener("resize", resize);
 </script>
 <img id="banner" onload="resize()" src="../../image/Festschrift.jpg"/>
 <h3>Symposium</h3>
