@@ -7,11 +7,23 @@
 <title>Registration</title>
 
 <!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/conferences/17/toc.htm" -->
+<!--#include virtual="/conferences/17_2/toc.htm" -->
 <!--#include virtual="/ssi/toppostmenu.htm" -->
-<h1>Registration</h1>
+<script type="text/javascript">
+  function resize() { 
+    if (document.getElementById("banner")) {
+      document.getElementById("banner").width = document.getElementById("content").clientWidth-10;
+    }
+  };
+  window.addEventListener("resize", resize);
+</script>
+<img id="banner" width="968" onload="resize()" src="../../image/Festschrift.jpg"/>
 
-<p>Registration is not yet open</p>
+<h3>Registration</h3>
+
+In order to register for the conference you will need a <a href=" https://chess.eecs.berkeley.edu/login/">CHESS</a> account. If your don't have one, request one <a href="https://chess.eecs.berkeley.edu/login/?subpage=Request">here</a>.</p>
+
+<p>To register for the conference, go <a href="https://chess.eecs.berkeley.edu/chessj/servlet/WorkshopRegistration?workshopID=27">here</a>, log in with your CHESS credentials, and complete the form.
 
 <!--<p>We may have a few seats left, email <a href="http://ptolemy.org/~cxh">Christopher Brooks</a>.</p>-->
 
