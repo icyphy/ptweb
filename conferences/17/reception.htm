@@ -19,6 +19,12 @@
       }
       };
       window.addEventListener("resize", resize);
+      function resizeGroup() { 
+      if (document.getElementById("group")) {
+      document.getElementById("group").width = document.getElementById("content").clientWidth-10;
+      }
+      };
+      window.addEventListener("resizeGroup", resizeGroup);
     </script>
     <img id="banner" width="968" onload="resize()" src="../../image/reception.jpg"/>
     <h3>Reception</h3>
@@ -27,7 +33,7 @@
     <h3>Photos!</h3>
 
     <p>Group Photo</p>
-    <img src="Cropped600x537FestschriftGrp.jpg" alt="Group Photo" width="968" onload="resize()"/>
+    <img id="group" src="Cropped600x537FestschriftGrp.jpg" alt="Group Photo" width="968" onload="resizeGroup()"/>
 
     <p>Other Photos</p>
     <ul>
