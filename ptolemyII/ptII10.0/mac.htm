@@ -21,7 +21,7 @@
     </ul>
 
     <h2>Mac OS X Specific Notes</h2>
-    <h3>Help!  I clicked on the Mac Setup file and got a strange dialog</h3>
+    <h3><a name="strangeDialog">Help!  I clicked on the Mac Setup file and got a strange dialog</a></h3>
 
     <p>If you get a dialog like:</p>
     <center>
@@ -38,6 +38,37 @@
 describes how to fix Gatekeeper to allow applications downloaded from anywhere.</p>
 
 
+    <h3><a name="Java18Required">You are running a 1.6.0_65 version of the Java Platform</a></h3>
+    If you click on the installer and get a message that says
+    <pre>
+      The application that you are trying to install requires a 1.8 version or later of the Java platform. You are
+      running a 1.6.0_65 version of the Java platform.  Please upgrade to a new version.
+    </pre>
+    <p>that looks like:</p>
+    <center>
+      <img src="MacInstallerUpgradeJava.png" alt="Java upgrade needed" width="500"/>
+    </center>
+
+    <p>then the problem is that you don't have a Java 1.8 JDK or JRE installed.  See below for information about which Java to install.</p>
+
+    <p>If you do have Java 1.8 installed, then the problem could be that Java 1.6 was previously installed.
+      See <a href="https://izpack.atlassian.net/browse/IZPACK-1562">Mac: app requires Java 1.8, which is not found even though it is installed</a>.</p>
+
+    <p>The workaround is to execute the installer by hand:</p>
+    <pre>
+bash-3.2$ cd ~/Downloads/capecode0.1.devel.setup.mac.app/Contents/Resources/Java
+bash-3.2$ ls
+capecode0.1.devel.setup.mac.jar
+bash-3.2$ java -version
+java version "1.8.0_152"
+Java(TM) SE Runtime Environment (build 1.8.0_152-b16)
+Java HotSpot(TM) 64-Bit Server VM (build 25.152-b16, mixed mode)
+bash-3.2$ java -jar capecode0.1.devel.setup.mac.jar 
+Command line arguments: 
+...
+</pre>
+
+    
     <h3>Java</h3>
 
     <p>Ptolemy II requires Java, which may be downloaded from Oracle.  We suggest installing the JDK, see <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>.  Note that recent versions of Mac OS X may prompt you to install the JDK if it is not yet installed.</p>
