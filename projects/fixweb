@@ -1,0 +1,16 @@
+#!/bin/sh
+
+files=`find icyphy -name "*.htm*" | xargs grep 'href="/' | awk -F: '{print $1}' | sort | uniq`
+
+tmp=/tmp/fixweb.$$
+
+for file in $files
+do
+	echo $file
+	sed     -e 's@<a href="/@<a href="/projects/icyphy/@g' \
+		-e 's@link href="/@link href="/projects/icyphy/@g' \
+		-e 's@img src="/@img src="/projects/icyphy/@g' \
+		   $file > $tmp
+	diff $file $tmp
+	cp $tmp $file
+done
