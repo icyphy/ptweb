@@ -1,54 +1,204 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- $Id: index.htm 7998 2018-04-03 21:39:38Z cxh $ -->
+<!-- $Id: index.htm 7520 2015-09-11 15:22:34Z cxh $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
 <title>Ptolemy Projects</title>
 
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/projects/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
+<!--Script inserts current year in copyright section of footer -->
+<script type="text/javascript" src="/js/getyear.js"></script>
+<link href="/css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-flex.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+<!-- Conditional comment addds IE6-specific CSS deviations -->
+<!--[if lte IE 6]>
+<link href="/css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+<![endif]-->
+</head>
+
+<body>
+  <!-- Google Analytics, see http://embedded.eecs.berkeley.edu/dopsysadmin/faq/24.html-->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-65990221-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+<div id="sizer"><div id="expander"><div id="innerwrapper">
+<div id="outside">
+  <div id="banr">
+    <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+    <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+    <div id="ucb"><a href="http://www.eecs.berkeley.edu">UC Berkeley EECS Dept.</a></div>
+    <div id="tools">
+  <div id="searchform">
+    <form action="https://www.google.com/cse" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="002441970488456085056:qdpgv0y2dja" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="text" name="q" size="15" />
+        <input type="submit" name="sa" value="Search" />
+      </div>
+    </form>
+    <script type="text/javascript" src="https://www.google.com/cse.js"></script>
+  </div> <!-- /searchform -->
+</div> <!-- /tools -->
+
+
+<!-- Website logo -->
+<div id="logo"><a href="/"><img src="/image/banner.gif" alt="Ptolemy Project"/></a></div>
+    <!-- OPTIONAL Customizable Quick Links dropdown -->
+    <div id="links"><select name="current" onchange="window.open(this.options[this.selectedIndex].value,'_top')" title="No mouse? Use Alt-Down Arrow to open list">
+<option>Quick Links</option>
+<option value="/people/index.htm">People</option>
+<option value="/download/index.htm">Download</option>
+<option value="/publications/index.htm">Publications</option>
+</select> 
+</div><!-- /#links -->
+
+    <!-- OPTIONAL horizontal top navigation -->
+    <div id="topnav"><ul>
+<li class="first"><a href="/index.htm">Home</a></li>
+<li><a href="/objectives.htm">Objectives</a></li>
+<li><a href="/ptolemyII/index.htm">Ptolemy II</a></li>
+<li><a href="/other/index.htm">Other&nbsp;software</a></li>
+<li><a href="/people/index.htm">People</a></li>
+<li><a href="/sponsors.htm">Sponsors</a></li>
+<li><a href="/publications/index.htm">Publications</a></li>
+<li><a href="/conferences/index.htm">Conferences</a></li>
+<li><a href="/presentations/index.htm">Presentations</a></li>
+<li><a href="/ptolemyII/ptIIfaq.htm">FAQ</a></li>
+<li><a href="/download/index.htm">Download</a></li>
+</ul>
+</div><!-- /#topnav -->
+
+  </div>
+  <!-- /#banr -->
+  <div id="pagebody">
+    <div id="navcol">
+      <!-- Main site navigation -->
+
+
+<div id="menu">
+<ul>
+<li><a href="/index.htm">Home</a></li>
+<h3>Current</h3>
+<li><a href="http://www.kepler-project.org">Kepler</a></li>
+<li><a href="/projects/icyphy">iCyPhy</a></li>
+<li><a href="http://swarmlab.eecs.berkeley.edu">SwarmLab</a></li>
+<h3>Historical</h3>
+<li><a href="/projects/chess/actionwebs">ActionWebs</a></li>
+<li><a href="acs/index.htm">ACS</a></li>
+<li><a href="http://www.truststc.org/aftrust/">AF-TRUST</a></li>
+<li><a href="/projects/chess/projects/ITR/index.htm">CHESS ITR</a></li>
+<li><a href="/projects/chess">CHESS</a></li>
+<li><a href="/projects/chess/cosmoi">COSMOI</a></li>
+<li><a href="gsrc/index.htm">GSRC</a></li>
+<li><a href="/projects/chess/escher">Escher</a></li>
+<li><a href="/projects/chess/hcddes">HCDDES</a></li>
+<li><a href="hmad/index.htm">HMAD</a></li>
+<li><a href="/projects/chess/hsbc">HSBC</a></li>
+<li><a href="micro/index.htm">MICRO</a></li>
+<li><a href="mobies/index.htm">MoBIES</a></li>
+<li><a href="/projects/chess/naomi">NAOMI</a></li>
+<li><a href="/projects/chess/pret">PRET</a></li>
+<li><a href="/projects/chess/ptesdf">PTESDF</a></li>
+<li><a href="/projects/chess/ptemaf">PTEMAF</a></li>
+<li><a href="/projects/chess/ptides">PTIDES</a></li>
+<li><a href="rassp/index.htm">RASSP</a></li>
+<li><a href="http://sec.eecs.berkeley.edu">SEC</a></li>
+<li><a href="http://softwalls.eecs.berkeley.edu">Soft Walls</a></li>
+<li><a href="/projects/chess/scos">SCOS</a></li>
+<li><a href="/projects/chess/spfsos">SPFSoS</a></li>
+<li><a href="summaries/index.htm">Summaries</a></li>
+<li><a href="/projects/terraswarm">TerraSwarm</a></li>
+
+</ul>
+</div><!-- /#menu -->
+
+      <!-- OPTIONAL Additional text or links in left column -->
+      <div id="addon">
+      </div>
+      <!-- /#addon -->
+    </div>
+    <!-- /#navcol -->
+    <div id="contentcol">
+      <!-- OPTIONAL section title; can be used w or w/o photo strip below -->
+      <!-- xxx#xxx include virtual="/ssi/section.htm" -->
+      <div id="content">
+          <!-- Begin main page content -->
+      <!-- Link target for accessibility Skip Nav -->
+      <a name="maincontent" id="maincontent"></a>
+		<div id="skip2"><a href="#sidebar" title="Skip to sidebar">Skip to sidebar</a></div> 
+
+
 <h1>The Ptolemy Projects</h1>
  <!-- If you change this, please update ptolemy/web/index.html -->
-
-<p>Below are active projects:</p>
- <ul>
-   <li><a href="https://www.icyphy.org">Industrial Cyber-Physical Systems Center (iCyPhy)</a></li>
- </ul>
-
-   <hr/>
-<p>Below are inactive projects:</p>
 <ul>
 <li> <a href="http://www.eecs.berkeley.edu/Research/Projects/Faculty/lee.html">Research Projects</a> - listed by student, which includes many of the
 projects below.</li>
- <li> <a href="http://chess.eecs.berkeley.edu/actionwebs">ActionWebs</a>,
- <a href="http://chess.eecs.berkeley.edu/cps">Cyber-Physical
+ <li> <a href="/projects/chess/actionwebs">ActionWebs</a>,
+ <a href="/projects/chess/cps">Cyber-Physical
 Systems</a>, funded by <a href="http://www.nsf.gov">The NSF</a>.</li> 
 
- <li> <a href="http://chess.eecs.berkeley.edu/research.htm"> Center
+ <li> <a href="/projects/chess/research.htm"> Center
 for Hybrid and Embedded Software Systems (CHESS)</a> industrial
 interactions (Denso, National Instruments, Toyota).</li>
 
-<li> <a href="http://chess.eecs.berkeley.edu/cosmoi">COSMOI</a> - Compositional System Modeling with Interfaces, funded by the NSF.</li>
+<li> <a href="/projects/chess/cosmoi">COSMOI</a> - Compositional System Modeling with Interfaces, funded by the NSF.</li>
 
 <li> <a href="https://www.collectiveip.com/grants/NSF:1446619">Mathematical Theory of CPS</a>, funded by the NFS.</li>
 
 <li> <a href="http://www.kepler-project.org">Kepler</a> - Scientific workflows.</li>
 
-<li> <a href="http://chess.eecs.berkeley.edu/pret">PRET</a> - Precision timed machines, funded by the NSF.</li>
+<li> <a href="http://www.icyphy.org">iCyPhy</a> Industrial Cyber-Physical Systems, funded by IBM and United Technologies.</li>
 
-<li> <a href="http://chess.eecs.berkeley.edu/ptides">PTIDES</a> - Programming Temporally Integrated Distributed Embedded Systems.</li>
+<li> <a href="/projects/chess/pret">PRET</a> - Precision timed machines, funded by the NSF.</li>
 
-<li> <a href="http://chess.eecs.berkeley.edu/spfsos">SPFSoS</a> - Software Producibility for Systems of Systems, funded by the
+<li> <a href="/projects/chess/ptides">PTIDES</a> - Programming Temporally Integrated Distributed Embedded Systems.</li>
+
+<li> <a href="/projects/chess/spfsos">SPFSoS</a> - Software Producibility for Systems of Systems, funded by the
 <a href="http://www.nrl.navy.mil/">Naval Research Laboratory</a>.</li>
 
 <li> <a href="http://swarmlab.eecs.berkeley.edu">SwarmLab</a> - Industrial interactions with Ericsson, IHI, NEC, Qualcomm, Sony, Toshiba and Visa.</a>
 
-<li> <a href="http://www.terraswarm.org">TerrSwarm Research Center</a>, funded by MARCO and DARPA, administered by SRC.</li>
+<li> <a href="/projects/terraswarm">TerrSwarm Research Center</a>, funded by MARCO and DARPA, administered by SRC.</li>
 
 </ul>
 
 See also our list of <a href="/sponsors.htm">sponsors</a>.
 
-<!--#include virtual="/ssi/bottom.htm" -->
+      </div>
+      <!-- /#content -->
+    </div>
+    <!-- /#contentcol -->
+  </div>
+  <!-- /#pagebody -->
+</div>
+<!-- /#outside -->
+<div id="footer">
+<ul>
+<li class="first"><a href="/people/index.htm">Contact</a></li> 
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/group/public.htm">Update Help</a></li>
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/?Action=vcupdateptweb">Update</a></li>
+</ul>
+<!-- Script inserts current year in copyright string -->
+<a href="/copyright.htm">Copyright &copy;</a> 1999 - <script type="text/javascript">
+<!--
+displayDate();
+//-->
+</script> 
+UC Regents; all rights reserved.
+</div><!-- /#footer -->
+
+</div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+<!-- OPTIONAL Insert tracking code here -->
+</body>
+</html>
+
