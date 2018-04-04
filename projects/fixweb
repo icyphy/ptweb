@@ -1,15 +1,28 @@
-#!/bin/sh
+#!/bin/bash -x
 
-files=`find icyphy -name "*.htm*" | xargs grep 'href="/' | awk -F: '{print $1}' | sort | uniq`
+if [ $# -ne 1 ]; then
+   echo "$0: Usage: $0 directoryName"
+   exit 2
+fi
+
+directory=$1
+
+if [ ! -d $directory ]; then
+   echo "$0: $directory does not exist or is not a directory?"
+fi
+
+files=`find $directory -name "*.htm*" | xargs egrep '(href="/|img src="/)' | awk -F: '{print $1}' | sort | uniq`
+
+echo "Found `echo $files | wc -w` files that may need fixing"
 
 tmp=/tmp/fixweb.$$
 
 for file in $files
 do
 	echo $file
-	sed     -e 's@<a href="/@<a href="/projects/icyphy/@g' \
-		-e 's@link href="/@link href="/projects/icyphy/@g' \
-		-e 's@img src="/@img src="/projects/icyphy/@g' \
+	sed     -e "s@<a href=\"/@<a href=\"/projects/$directory/@g" \
+		-e "s@link href=\"/@link href=\"/projects/$directory/@g" \
+		-e "s@img src=\"/@img src=\"/projects/directory/@g" \
 		   $file > $tmp
 	diff $file $tmp
 	cp $tmp $file
