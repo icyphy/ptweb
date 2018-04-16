@@ -1,0 +1,90 @@
+<!-- $Id: main.htm 118 2004-01-17 00:55:14Z cxh $ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../../lib/default.css" rel="stylesheet" type="text/css">
+<title>Soft Walls Demonstration</title>
+</head>
+<body>
+<h1>Soft Walls Demonstration</h1>
+<p>
+
+
+A simple demonstration of a Soft Wall is available in the following
+formats
+<menu>
+<li> <a href="softwalls.htm">Applet Demo</a> - requires Java and Java 3d (4.5Mb)
+<li> <a href="webstart.htm">WebStart Demo</a> - requires Java, includes Java3d (10.1Mb)
+<li> <a href="softwallsVergil.htm">Model Applet</a> - requires Java  and Java 3d, shows the top level of the model. (6.6Mb)
+</menu>
+<I>All three run the same model</I>
+
+<p>When the demonstration is running, use the left and right arrow
+keystrokes to steer the plane.  Note that you cannot steer the plane
+into the red no-fly zone.
+
+<p>The demonstration requires that
+<a href="http://java.sun.com/products/java-media/3D/" target="_top">Java 3D</a>
+be installed from Sun.
+
+<p>The demonstration itself requires a download of roughly 4.5Mb. 
+
+<p>When the demonstration starts up, a small Java window will appear
+outside your browser.
+<br>This window <b>must have the focus</b> (be on the top
+and have the title bar highlighted) so that it can accept your left
+and right arrow key strokes that will steer the plane.
+<br>For example, if you scroll down the main applet window, then the
+small Java window will be obscured and you won't be able to
+steer the plane.
+
+<p>If you do not steer the plane, then as it approaches the red
+no-fly zone, it will steer away from it.
+
+<p>If you try to steer the plane into the red no-fly zone, then as it
+approaches the no-fly zone, the blending controller will provide
+more and more input, preventing the plane entering the no-fly zone.
+
+<h2>Details about the implementation</h2>
+The simulation uses
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/index.htm" target="_top">Ptolemy II</a> 
+to simulate the dynamics of the airplane using 
+<a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/ptolemy/domains/ct/demo/" target="_top">Continuous Time</a> semantics.
+
+<p>The <a href="softwallsVergil.htm">block diagram</a>
+for the model was constructed using the Ptolemy II schematic editor
+called <a href="http://ptolemy.eecs.berkeley.edu/ptolemyII/ptIIlatest/ptII/ptolemy/vergil/doc/" target="_top">vergil</a>.
+
+<p>The plane itself is rendered using Java 3D.
+
+<!-- FIXME: Description of the Algorithm -->
+<!-- FIXME: Discuss how the files are created  -->
+
+<h2>Limitations</h2>
+<ul>
+
+<li> When the demonstration starts up, there will be a short
+delay while the model is reading in the data files.
+
+<li>Note that when running the model, the small Java window in that pops
+up outside this window <b>must have the focus</b> so that it can get the left
+arrow and right arrow keystrokes.
+<br>For example, if you scroll down the main applet window, then the
+small Java Applet Window will be obscured and you won't be able to
+steer the plane.
+
+<li>The dynamics of the plane are not simulated - real commercial jetliners
+cannot turn on a dime.  The point here is that we are blending the
+control - as the plane gets closer to the no-fly zone, it ignores
+the pilot's commands more and more until it eventually turns away.
+<br>Control can be regained by steering away from the no-fly zone.
+
+<li>The wingtip of the plane might end up in the no-fly zone.
+The point here is that the center of the plane stays out of the no-fly zone.
+
+<li>You might experience out of memory errors.  There are four data sets
+of roughly 1,000,000 doubles each that consume quite a bit of memory.
+If the model appears to hang, try restarting your browser.
+
+</body>
+</html>

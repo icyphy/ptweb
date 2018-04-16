@@ -1,0 +1,242 @@
+# Makefile for Ptolemy II demonstration
+#
+# @Author:
+# @Version: $Id: makefile 109 2004-01-15 02:19:49Z cxh $
+#
+
+# Root of the Java directory
+ROOT =		c:/cxh/ptII
+
+CLASSPATH =	$(ROOT)
+
+# Get configuration info
+CONFIG =	$(ROOT)/mk/ptII.mk
+include $(CONFIG)
+
+# Used to build jar files
+PTPACKAGE = 	softwalls
+PTCLASSJAR = 	$(PTPACKAGE).jar
+
+JSRCS =
+
+OTHER_FILES_TO_BE_JARED = \
+	$(JSRCS) \
+	softwalls.xml \
+	softwalls.htm \
+	softwallsVergil.htm
+
+EXTRA_SRCS = \
+	$(OTHER_FILES_TO_BE_JARED)
+
+# Sources that may or may not be present, but if they are present, we don't
+# want make checkjunk to barf on them.
+MISC_FILES = $(DIRS)
+
+# make checkjunk will not report OPTIONAL_FILES as trash
+# make realclean removes OPTIONAL_FILES
+OPTIONAL_FILES = \
+	doc
+
+JCLASS = $(JSRCS:%.java=%.class)
+
+# Don't include all or install rules here, we want the user
+# to run 'make demos' to run the tests.
+all: jclass
+	@echo "To run all the demos, run 'make demo'"
+
+install: all $(PTCLASSJAR)
+
+demo: demo_applet demo_vergil_applet demo_ptolemy demo_vergil
+demo_applet:
+	CLASSPATH="$(CLASSPATH)" appletviewer softwalls.htm
+
+demo_vergil_applet:
+	CLASSPATH="$(CLASSPATH)" appletviewer softwallsVergil.htm
+
+demo_ptolemy:
+	"$(PTII)/bin/ptolemy" softwalls.xml
+
+demo_vergil:
+	"$(PTII)/bin/vergil" softwalls.xml
+
+######################################################################
+#
+# Rules for building Java Network Launch Protocol aka Web Start files
+# 
+######################################################################
+# Makefile variables used to set up keys for jar signing.
+# To use Web Start, we have to sign the jars.
+KEYDNAME = "CN=Claudius Ptolemaus, OU=Your Project, O=Your University, L=Your Town, S=Your State, C=US "
+KEYSTORE = ptKeystore
+KEYALIAS = claudius
+
+# The password should not be stored in a makefile, for production
+# purposes, run something like:
+#
+# make KEYSTORE=/users/ptII/adm/certs/ptkeystore KEYALIAS=ptolemy STOREPASSWORD="-storepass xxx" KEYPASSWORD= jnlp_all
+#
+STOREPASSWORD = -storepass this.is.not.secure,it.is.for.testing.only
+KEYPASSWORD = -keypass this.is.not.secure,it.is.for.testing.only
+KEYTOOL = $(PTJAVA_DIR)/bin/keytool
+
+# Script to update a *.jnlp file with the proper jar files
+MKJNLP =		$(PTII)/bin/mkjnlp
+
+
+# We put the signed jar files in a separate subdirectory
+# for two reasons
+# 1) If a jar file is checked in to cvs, and we sign it, then
+# cvs update will think that we need to update it.
+# So, we copy the jar files to a different directory and then sign
+# them.
+#
+# 2) If we run applets with jar files that have been signed, then the
+# user gets a confusing message asking if they want to run the signed
+# applets.  Since the Ptolemy II applets do not require signed jar
+# files, this is unnecessary
+SIGNED_DIR =		signed
+
+# Web Start can load jars either eagerly or lazily.
+# This makefile variable gets passed to $PTII/bin/mkjnlp and determines
+# the number of jars that are loaded eagerly.  Of course, for this to
+# work, the jars you want to load eagerly need to be at the front of the
+# list.  In general, large jars such as diva.jar and ptsupport.jar
+# should be loaded eagerly.
+NUMBER_OF_JARS_TO_LOAD_EAGERLY = 1
+
+# Jar file that contains the Main.main() method that runs the application
+JNLP_MAIN_JAR = jnlp_main.jar
+
+$(JNLP_MAIN_JAR): JNLPApplication.class
+	"$(JAR)" -cf $@ JNLPApplication.class 'JNLPApplication$$1.class' \
+		softwalls.xml
+	"$(JAR)" -i $@ 
+
+# Jar files to include.  $(JNLP_MAIN_JAR) must be first.
+JNLP_JARS = \
+	$(JNLP_MAIN_JAR) \
+	lib/diva.jar \
+	ptolemy/apps/softwalls/softwalls.jar \
+	ptolemy/domains/ct/ct.jar \
+	ptolemy/domains/fsm/fsm.jar \
+	ptolemy/domains/gr/gr.jar \
+	ptolemy/ptsupport.jar \
+	ptolemy/vergil/vergilApplet.jar \
+	surfacesCompressed.jar
+
+JAVA3D_JARS = \
+	j3d/j3dDLL.jar \
+	j3d/j3daudio.jar \
+	j3d/j3dcore.jar \
+	j3d/j3dutils.jar \
+	j3d/vecmath.jar
+
+ALL_JNLP_JARS = $(JNLP_JARS) $(JAVA3D_JARS)
+
+PTII_LOCALURL = file:///C:/cxh/src/softwallsweb/demo/softwalls
+
+
+# Copy the jar files into the SIGNED_DIR and sign them
+jnlp_sign: $(SIGNED_DIR)
+	set $(ALL_JNLP_JARS); \
+	for x do \
+		if [ ! -f $(SIGNED_DIR)/$$x ]; then \
+			echo "#  Copying $$x to $(SIGNED_DIR)/"; \
+			mkdir -p $(SIGNED_DIR)/`dirname $$x`; \
+			cp -p $$x `dirname $(SIGNED_DIR)/$$x`; \
+		fi; \
+		echo "# Signing $(SIGNED_DIR)/$$x"; \
+		"$(PTJAVA_DIR)/bin/jarsigner" \
+			-keystore $(KEYSTORE) \
+			$(STOREPASSWORD) \
+			$(SIGNED_DIR)/$$x $(KEYALIAS); \
+	done;
+
+$(SIGNED_DIR):
+	if [ ! -d $(SIGNED_DIR) ]; then \
+		mkdir -p $(SIGNED_DIR); \
+	fi
+
+$(KEYSTORE): 
+	"$(KEYTOOL)" -genkey \
+		-dname $(KEYDNAME) \
+		-keystore $(KEYSTORE) \
+		-alias $(KEYALIAS) \
+		$(STOREPASSWORD) \
+		$(KEYPASSWORD)
+	"$(KEYTOOL)" -selfcert \
+		-keystore $(KEYSTORE) \
+		-alias $(KEYALIAS) \
+		$(STOREPASSWORD)
+	"$(KEYTOOL)" -list \
+		-keystore $(KEYSTORE) \
+		$(STOREPASSWORD)
+
+
+
+sign_jar: 
+	"$(PTJAVA_DIR)/bin/jarsigner" \
+		-keystore $(KEYSTORE) \
+		$(STOREPASSWORD) \
+		$(JARFILE) $(KEYALIAS)
+
+
+jnlp_all: $(JNLP_MAIN_JAR) $(KEYSTORE) jnlp_sign softwalls.jnlp
+softwalls.jnlp: $(JNLP_MAIN_JAR) softwalls.jnlp.in $(KEYSTORE)
+	sed 	-e 's#@PTII_LOCALURL@#$(PTII_LOCALURL)#' \
+		-e 's#@PTVERSION@#$(PTVERSION)#' \
+			softwalls.jnlp.in > $@
+	@echo "# Adding jar files to $@"
+	-chmod a+x "$(MKJNLP)"
+	"$(MKJNLP)" $@ \
+		$(NUMBER_OF_JARS_TO_LOAD_EAGERLY) \
+		$(SIGNED_DIR) \
+		$(JNLP_MAIN_JAR) \
+		$(JNLP_JARS)
+	@echo "# Updating JNLP-INF/APPLICATION.JNLP with $@"
+	rm -rf JNLP-INF
+	mkdir JNLP-INF
+	cp $@ JNLP-INF/APPLICATION.JNLP
+	@echo "# $(JNLP_MAIN_JAR) contains the main class"
+	"$(JAR)" -uf $(JNLP_MAIN_JAR) JNLP-INF/APPLICATION.JNLP
+	rm -rf JNLP-INF
+	mkdir -p $(SIGNED_DIR)/`dirname $(JNLP_MAIN_JAR)`; \
+	cp -p $(JNLP_MAIN_JAR) `dirname $(SIGNED_DIR)/$(JNLP_MAIN_JAR)`; \
+	"$(PTJAVA_DIR)/bin/jarsigner" \
+		-keystore $(KEYSTORE) \
+		$(STOREPASSWORD) \
+		$(SIGNED_DIR)/$(JNLP_MAIN_JAR) $(KEYALIAS)
+
+
+###################
+# Commands to update the website
+DIST_DIR = /vol/ptolemy/pt0/softwallsweb	
+DIST_URL = http://softwalls.eecs.berkeley.edu/demo/softwalls
+KEYSTORE2=ptkeystore
+KEYALIAS2=ptolemy
+
+# make jnlp_dist STOREPASSWORD="-storepass xxx"
+jnlp_dist: jnlp_dist_1 # jnlp_dist_update
+jnlp_dist_1:
+	rm -rf $(SIGNED_DIR) softwalls.jnlp
+	$(MAKE) KEYSTORE=$(KEYSTORE2) \
+		KEYALIAS=$(KEYALIAS2) KEYPASSWORD= \
+		PTII_LOCALURL=$(DIST_URL) jnlp_all
+
+jnlp_dist_update:
+	tar -cf - $(SIGNED_DIR) $(JNLPS) \
+		$(OTHER_FILES_TO_BE_DISTED) | \
+		(cd $(DIST_DIR); tar -xpf -)
+	cp doc/webStartHelp.htm $(DIST_DIR)
+
+sign_jar_dist: 
+	"$(PTJAVA_DIR)/bin/jarsigner" \
+		-keystore $(KEYSTORE2) \
+		$(JARFILE) $(KEYALIAS2)
+###############
+
+# Include rules to build Web Start JNLP files
+#include $(ROOT)/mk/jnlp.mk
+
+# Get the rest of the rules
+include $(ROOT)/mk/ptcommon.mk

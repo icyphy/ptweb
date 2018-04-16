@@ -1,0 +1,27 @@
+<!-- $Id: search.htm 60 2003-09-16 15:16:52Z cxh $ -->
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<link href="../lib/default.css" rel="stylesheet" type="text/css">
+<title>Search Engine</title>
+</head>
+<body>
+<h1>Search Engine</h1>
+
+Currently, we use <A HREF="http://htdig.sdsu.edu/" target="_top">Htdig</A>
+
+
+<h2>htdig installation notes</h2>
+See <a href="http://www.gigascale.org/infrax/sysadmin/htdig.htm" target="_top"><CODE>http://www.gigascale.org/infrax/sysadmin/htdig.htm</CODE></a>
+
+ <p>Note that <CODE>/usr/local/apache/htdig/conf/htdigsoftwalls.conf</CODE>
+has been configured so that it only looks in papers and pubs from 2001 to 2010
+<code>
+limit_urls_to:		${start_url} http://ptolemy.eecs.berkeley.edu/publications/papers/01/ http://ptolemy.eecs.berkeley.edu/publications/papers/02/ http://ptolemy.eecs.berkeley.edu/publications/papers/03/ http://ptolemy.eecs.berkeley.edu/publications/papers/04/ http://ptolemy.eecs.berkeley.edu/publications/papers/05/ http://ptolemy.eecs.berkeley.edu/publications/papers/06/ http://ptolemy.eecs.berkeley.edu/publications/papers/07/ http://ptolemy.eecs.berkeley.edu/publications/papers/08/ http://ptolemy.eecs.berkeley.edu/publications/papers/09/ http://ptolemy.eecs.berkeley.edu/publications/papers/10/ http://ptolemy.eecs.berkeley.edu/presentations/00/ http://ptolemy.eecs.berkeley.edu/presentations/01/ http://ptolemy.eecs.berkeley.edu/presentations/02/ http://ptolemy.eecs.berkeley.edu/presentations/03/ http://ptolemy.eecs.berkeley.edu/presentations/04/ http://ptolemy.eecs.berkeley.edu/presentations/05/ http://ptolemy.eecs.berkeley.edu/presentations/06/ http://ptolemy.eecs.berkeley.edu/presentations/07/ http://ptolemy.eecs.berkeley.edu/presentations/08/ http://ptolemy.eecs.berkeley.edu/presentations/09/ http://ptolemy.eecs.berkeley.edu/presentations/10/ 
+</code>
+
+ <p>This is necessary because the papers and presentations are on ptolemy.eecs
+so we want to search over there, but we do not want the entire website.
+
+</body>
+</html>

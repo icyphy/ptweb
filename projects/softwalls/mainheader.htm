@@ -1,11 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- $Id$ -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!-- $Id: mainheader.htm 185 2013-12-17 01:26:23Z cxh $ -->
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <title>Ptolemy Project Banner</title>
+</head>
+<body bgcolor=#faf0e6>
+<!-- Mozilla/Netscape 6 has a bug with align=right, see
+     http://bugzilla.mozilla.org/show_bug.cgi?id=78820 -->
 
-<!--#include virtual="/ssi/toppremenu.htm" -->
-<!--#include virtual="/projects/softwalls/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
+<SCRIPT LANGUAGE="JavaScript"><!--
+    var _ns6 = (navigator.userAgent.indexOf("Mozilla/5") >= 0);
+    if (_ns6 == true) document.writeln('\
+        <img src="image/banner.gif" alt="Soft Walls Project" border=0 \
+	  vspace=0 hspace=0 >');
+    else  document.writeln('\
+        <img src="image/banner.gif" alt="Soft Walls Project" border=0 \
+             vspace=0 hspace=0 align=right>');
+//--></SCRIPT>
+
+
+</body>
+</html>
