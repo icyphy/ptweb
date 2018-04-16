@@ -224,32 +224,32 @@ EGREPMATCH='<!-- @\(#\).*>'
 LOGMESSAGE="Converted @(#) into $Id"
 fixit
 
-echo "###################################################"
-echo ' 5) Add <!-- $Id$ -->'
+# echo "###################################################"
+# echo ' 5) Add <!-- $Id$ -->'
 
-useegrep=no
-# If the file has the string the return 1
-searchit() { 
-        basename=`basename $1`
-    # If the file is named toc.htm, then skip it
-    if [ "$basename" = "toc.htm" ]; then
-        return 1
-    fi
-    awk '$0 ~ /<!-- \$Id/ { exit 1}
-         $0 ~ /<!-- : ptwebssi/ { exit 1}
-       ' $1
-}
+# useegrep=no
+# # If the file has the string the return 1
+# searchit() { 
+#         basename=`basename $1`
+#     # If the file is named toc.htm, then skip it
+#     if [ "$basename" = "toc.htm" ]; then
+#         return 1
+#     fi
+#     awk '$0 ~ /<!-- \$Id/ { exit 1}
+#          $0 ~ /<!-- : ptwebssi/ { exit 1}
+#        ' $1
+# }
 
-doit() {
-    awk 'NR == 2  { print "<!-- $Id$ -->"}
-    	{print $0}' \
-	    $file > /tmp/fix-files.tmp
-	diff -c $file /tmp/fix-files.tmp
-}
-LOGMESSAGE="Added $Id"
+# doit() {
+#     awk 'NR == 2  { print "<!-- $Id$ -->"}
+#     	{print $0}' \
+# 	    $file > /tmp/fix-files.tmp
+# 	diff -c $file /tmp/fix-files.tmp
+# }
+# LOGMESSAGE="Added $Id"
 
-fixit
-useegrep=yes
+# fixit
+# useegrep=yes
 
 
 #echo "###################################################"
@@ -318,7 +318,7 @@ doit() {
         cp $file /tmp/fix-files.tmp
 	return
     fi	
-    title=`egrep -i "^<title>" $dirname/main.htm`    
+    title=`egrep -i "[ 	]*<title>" $dirname/main.htm`    
     cat <<EoF >/tmp/fix-files.tmp 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- \$Id$ -->
@@ -328,11 +328,11 @@ doit() {
 
 $title
 
-<!--#include virtual="/ssi/top.htm"-->
+<!--#include virtual="/accessors/ssi/top.htm"-->
 EoF
         awk '{ if (sawbody==1) {
 	           if ($1 ~ /<\/body>/ || $1 ~ /<\/BODY>/ ) {
-		       print "<!-- #include virtual=\"/ssi/bottom.htm\" -->"
+		       print "<!-- #include virtual=\"/accessors/ssi/bottom.htm\" -->"
 		       exit
                    } else {
                        print $0
@@ -387,14 +387,14 @@ doit() {
 <head>
 $title
 <meta http-equiv="REFRESH" content="5;url=/$targeturl"></HEAD>
-<!--#include virtual="/ssi/top.htm"-->
+<!--#include virtual="/accessors/ssi/top.htm"-->
 $h1
 The page 
 <code>http://ptolemy.eecs.berkeley.edu/$url</code>
 has moved to <a href="http://ptolemy.eecs.berkeley.edu/$targeturl"><code>http://ptolemy.eecs.berkeley.edu/$targeturl</code></a>.
 <p>You will be redirected to the new page in 5 seconds, or you may
 click on the above link.
-<!-- #include virtual="/ssi/bottom.htm" -->
+<!-- #include virtual="/accessors/ssi/bottom.htm" -->
 EoF2
 	diff -c $file /tmp/fix-files.tmp
 }
@@ -421,7 +421,7 @@ searchit() {
         ' $1
 }
 doit() {
-    title=`egrep -i "^<title>" $file`
+    title=`egrep -i "[ 	]*<title>" $file`
     cat <<EoF >/tmp/fix-files.tmp 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- \$Id$ -->
@@ -431,11 +431,11 @@ doit() {
 
 $title
 
-<!--#include virtual="/ssi/top.htm"-->
+<!--#include virtual="/accessors/ssi/top.htm"-->
 EoF
         awk '{ if (sawbody==1) {
 	           if ($1 ~ /<\/body>/ || $1 ~ /<\/BODY>/ ) {
-		       print "<!-- #include virtual=\"/ssi/bottom.htm\" -->"
+		       print "<!-- #include virtual=\"/accessors/ssi/bottom.htm\" -->"
 		       exit
                    } else {
                        print $0
@@ -485,7 +485,7 @@ searchit() {
         echo "$1: $dirname/toc.htm not present, so not including.htm into $1"
         return 1
     fi
-    EGREPMATCH='<!--#include virtual="/ssi/top.htm"-->'
+    EGREPMATCH='<!--#include virtual="/accessors/ssi/top.htm"-->'
     egrep -s -e  "$EGREPMATCH" $1
     retval=$?
     return $retval
@@ -500,9 +500,9 @@ doit() {
     fi
     dirname=`dirname $fullfile |  sed 's@^\./@/@'`
     gawk -v dirname="$dirname" '{ if ($0 ~ /<!--#include virtual="\/ssi\/top.htm"-->/) {
-               print "<!--#include virtual=\"/ssi/toppremenu.htm\" -->"
-               print "<!--#include virtual=\"/" dirname "/toc.htm\" -->"
-               print "<!--#include virtual=\"/ssi/toppostmenu.htm\" -->"
+               print "<!--#include virtual=\"/accessors/ssi/toppremenu.htm\" -->"
+               print "<!--#include virtual=\"/accessors/" dirname "/toc.htm\" -->"
+               print "<!--#include virtual=\"/accessors/ssi/toppostmenu.htm\" -->"
          } else {
                print $0
          }
