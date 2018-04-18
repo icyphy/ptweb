@@ -113,6 +113,8 @@ top: 2px;
 right: 7px;
 vertical-align: top;
 text-align: right;
+/* Safari wants this, otherwise we get an input field all the way across the top */
+width: 280px;
 }
 #tools form {
 display:inline;
