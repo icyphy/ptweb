@@ -77,6 +77,7 @@ conferences/index.html
 dgm/
 eecs20.1
 eecs20/
+googlee99cf5babda06454.html
 hyvisual.1
 hyvisual.2
 hyvisual/hyvisual4.0/
@@ -281,12 +282,15 @@ projects.1
 projects/Binary
 projects/acs/reports/
 projects/chess/
+projects/cps-forces/
+projects/cps/
 projects/embedded/
 projects/file
 projects/hmad/presentation.pdf
 projects/hmad/quad.pdf
 projects/hmad/reports/00/design.pdf
-projects/icyphy/
+projects/icyphy/accessors.svn
+projects/icyphy/pubs/*
 projects/index.html
 projects/index2.htm
 projects/matches
