@@ -11,7 +11,9 @@ if [ ! -d $directory ]; then
    echo "$0: $directory does not exist or is not a directory?"
 fi
 
-files=`find $directory -type f | xargs egrep '(icyphywww|background="/|calendar|FAQ|href="/|input|Login|src="/|pubs/search/)' | awk -F: '{print $1}' | sort | uniq`
+#files=`find $directory -type f | xargs egrep '(|background="/|calendar|FAQ|href="/|input|Login|src="/|pubs/search/)' | awk -F: '{print $1}' | sort | uniq`
+
+files=`find $directory -type f | xargs egrep 'Quick search by ...' | awk -F: '{print $1}' | sort | uniq`
 
 echo "Found `echo $files | wc -w` files that may need fixing"
 
@@ -20,12 +22,12 @@ tmp=/tmp/fixweb.$$
 for file in $files
 do
 	echo $file
+
 	    # -e "s@link rel=\"stylesheet\" href=\"/@link rel=\"stylesheet\" href=\"/projects/$directory/@g" \
             # -e "s@<a href=\"/@<a href=\"/projects/$directory/@g" \
 	    # -e "s@link href=\"/@link href=\"/projects/$directory/@g" \
 	    # -e "s@src=\"/@<a src=\"/projects/$directory/@g" \
             # -e "s@background=\"/@background=\"/projects/$directory/@g" \
-
  	    # -e "s@link href=\"/styles@link href=\"/projects/$directory/styles@g" \
  	    # -e "s@src=\"/img@src=\"/projects/$directory/img@g" \
 	    # -e 's@pubs/search/?year=\([0-9]*\)&amp;Action=Search@pubs/search/\1.html@' \
@@ -35,9 +37,9 @@ do
 	    # -e 's@<li class="first"><a href="/[^"]*login/">Login</a></li>@@' \
 	    # -e 's@<input type="hidden" name="cx" value="[^"]*" />@<input type="hidden" name="cx" value="007295758319438328285:skvr4laywa4" />@' \
 	    # -e 's@<li><a href="[^"]*">FAQ</a></li>@@' \
-
+	    # -e "s@/projects/$directory/projects/$directory@/projects/$directory@g" \
 	sed     \
-	    -e "s@icyphywww@icyphy@" \
+	    -e 's@Quick search by ...@Publications by ...@' \
 	    $file > $tmp
 	diff $file $tmp
 	cp $tmp $file
