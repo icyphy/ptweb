@@ -394,7 +394,7 @@ The page
 has moved to <a href="http://ptolemy.eecs.berkeley.edu/$targeturl"><code>http://ptolemy.eecs.berkeley.edu/$targeturl</code></a>.
 <p>You will be redirected to the new page in 5 seconds, or you may
 click on the above link.
-<!-- #include virtual="/projects/icyphywww/ssi/bottom.htm" -->
+<!--#include virtual="/projects/icyphywww/ssi/bottom.htm" -->
 EoF2
 	diff -c $file /tmp/fix-files.tmp
 }
@@ -435,7 +435,7 @@ $title
 EoF
         awk '{ if (sawbody==1) {
 	           if ($1 ~ /<\/body>/ || $1 ~ /<\/BODY>/ ) {
-		       print "<!-- #include virtual=\"/projects/icyphywww/ssi/bottom.htm\" -->"
+		       print "<!--#include virtual=\"/projects/icyphywww/ssi/bottom.htm\" -->"
 		       exit
                    } else {
                        print $0
