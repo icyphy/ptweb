@@ -11,7 +11,7 @@ if [ ! -d $directory ]; then
    echo "$0: $directory does not exist or is not a directory?"
 fi
 
-files=`find $directory -name "*.htm*" | xargs egrep '(|background="/|calendar|FAQ|href="|input|Login|src="/|pubs/search/|wiki)' | awk -F: '{print $1}' | sort | uniq`
+files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$' | grep -v ' ' | xargs egrep '(|background="/|calendar|FAQ|href="/|input|Login|src="/|pubs/search/|virtual|wiki)' | awk -F: '{print $1}' | sort | uniq`
 
 #files=`find $directory -type f | xargs egrep 'Quick search by ...' | awk -F: '{print $1}' | sort | uniq`
 
@@ -27,18 +27,6 @@ for file in $files
 do
 	echo $file
 
-	# sed \
-	#     -e "s@link rel=\"stylesheet\" href=\"/@link rel=\"stylesheet\" href=\"/projects/$directory/@g" \
-        #     -e "s@<a href=\"/@<a href=\"/projects/$directory/@g" \
-	#     -e "s@link href=\"/@link href=\"/projects/$directory/@g" \
-	#     -e "s@src=\"/@<a src=\"/projects/$directory/@g" \
-        #     -e "s@background=\"/@background=\"/projects/$directory/@g" \
- 	#     -e "s@link href=\"/styles@link href=\"/projects/$directory/styles@g" \
- 	#     -e "s@src=\"/img@src=\"/projects/$directory/img@g" \
-	#     -e 's@<li class="first"><a href="/[^"]*login/">Login</a></li>@@' \
-	#     $file > $tmp
-
-
 	    # -e 's@pubs/search/?groupname=\([^&]*\)&amp;Action=Search@pubs/search/\1.html@' \
 	    # -e 's@<li><a href="/[^"]*/calendar">Calendar</a> </li>@@' \
 
@@ -46,10 +34,9 @@ do
 	    # -e 's@<li><a href="[^"]*">FAQ</a></li>@@' \
 	    # -e "s@/projects/$directory/projects/$directory@/projects/$directory@g" \
 	    # -e 's@/projects/terraswarm/login/?denied=1&amp;referer=%2Fpubs%2F\([0-9]*\).html@https://wiki.eecs.berkeley.edu/terraswarm-urbanheartbeat/Main/Publications#Publication_\1@' \
-	    # -e 's@<a href="/[^"]*/login/">Login</a>@@' \
 
 	# grep -ve '  <h2 class="sectionhead">Quick search by ...</h2>    <h3 class="sectionhead">Year</h3>' \
-	#    -ve '<li><a href="/projects/cps-forces/pubs/search/.*</li>' \
+	#    -ve '<li><a href="/projects/$directory/pubs/search/.*</li>' \
 	#    -ve '<h3 class="sectionhead">Group</h3>' \
 
 	#grep -ve '<h2 class="sectionhead">FAQ sections</h2>' \
@@ -57,8 +44,31 @@ do
 	#    $file > $tmp
 
 	# -e 's@pubs/search/?year=\([0-9]*\)&amp;Action=Search@pubs/search/\1.html@' \
-	sed 's@href="http[s]*://robotics.eecs.berkeley.edu@href="/projects/robotics@g' \
-		$file > $tmp
+	# sed 's@href="http[s]*://robotics.eecs.berkeley.edu@href="/projects/robotics@g' \
+	#	$file > $tmp
+
+	# -e 's@virtual="/@virtual="/projects/human-cps/@g' \
+
+   	sed \
+	    -e "s@href=\"/@href=\"/projects/$directory/@g" \
+	  -e "s@src=\"/@<a src=\"/projects/$directory/@g" \
+          -e "s@background=\"/@background=\"/projects/$directory/@g" \
+	  -e "s@<option value=\"/@<option value=\"/projects/$directory/@g" \
+	  -e 's@<li class="first"><a href="/[^"]*login/">Login</a></li>@@' \
+	  -e 's@<a href="/[^"]*/login/">Login</a>@@' \
+	  -e 's@<li><a href="/[^"]*/calendar">Calendar</a> </li>@@' \
+	  -e 's@<li><a href="[^"]*">FAQ</a></li>@@' \
+	  -e 's@<h2 class="sectionhead">Quick search by ...</h2>    <h3 class="sectionhead">Year</h3>@@' \
+	  -e 's@<li><a href="/projects/$directory/pubs/search/.*</li>@@' \
+	  -e 's@<h3 class="sectionhead">Group</h3>@@' \
+	  -e 's@<h2 class="sectionhead">FAQ sections</h2>@@' \
+          -e 's@<li><a href=".*/faq.*</li>@@' \
+	  -e 's@<li> <a href="/.*/search/">Search</a>@@' \
+	  -e 's@<li> <a href="/.*/listinfo/">Mailing lists</a>@@' \
+	  -e 's@<font size="-1"><i>You are not <a href="/login">logged in</a></i>&nbsp;</font>@@' \
+	  -e "s@src=\"https://.*.eecs.berkeley.edu:443/@src=\"/projects/$directory/@g" \
+	   $file > $tmp
+
 	diff $file $tmp
 	cp $tmp $file
 done
