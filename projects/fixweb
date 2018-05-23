@@ -11,13 +11,23 @@ if [ ! -d $directory ]; then
    echo "$0: $directory does not exist or is not a directory?"
 fi
 
-files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$' | grep -v ' ' | xargs egrep '(|background="/|calendar|FAQ|href="/|input|Login|src="/|pubs/search/|virtual|wiki)' | awk -F: '{print $1}' | sort | uniq`
+#files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$' | grep -v ' ' | xargs egrep '(|background="/|calendar|FAQ|href="/|input|Login|src="/|pubs/search/|virtual|wiki)' | awk -F: '{print $1}' | sort | uniq`
 
 #files=`find $directory -type f | xargs egrep 'Quick search by ...' | awk -F: '{print $1}' | sort | uniq`
 
 #files=`find $directory -type f | xargs egrep 'FAQ sections' | awk -F: '{print $1}' | sort | uniq`
 
-#files=`find . -type f | xargs egrep 'referer=%2Fpubs%2F' | awk -F: '{print $1}' | sort | uniq`
+#files=`find $directory -type f | xargs egrep 'referer=%2Fpubs%2F' | awk -F: '{print $1}' | sort | uniq`
+
+#files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$'`
+
+#files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$' | xargs grep '<tr><td colspan="2"><i>(To view user contact information, please <a href="[^"]*">log in</a>.)</i></td></tr>' | awk -F : '{print $1}' | sort | uniq`
+
+#files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$' | xargs grep 'downloads are not available without' | awk -F : '{print $1}' | sort | uniq`
+
+#files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$' | xargs grep 'To view user contact info' | awk -F : '{print $1}' | sort | uniq`
+
+files=`find $directory -type f | egrep -v '(avi|dll|pdf|png|pot|ppt|pps|pptx|mp4|doc|docx|jpg|gif|tar|tar.gz|tgz|wav|WAV|xls|zip)$' | xargs grep '<li><a href="/projects/icyphy/news/index.html">News</a> </li>' | awk -F : '{print $1}' | sort | uniq`
 
 echo "Found `echo $files | wc -w` files that may need fixing"
 
@@ -27,7 +37,6 @@ for file in $files
 do
 	echo $file
 
-	    # -e 's@pubs/search/?groupname=\([^&]*\)&amp;Action=Search@pubs/search/\1.html@' \
 	    # -e 's@<li><a href="/[^"]*/calendar">Calendar</a> </li>@@' \
 
 	    # -e 's@<input type="hidden" name="cx" value="[^"]*" />@<input type="hidden" name="cx" value="007295758319438328285:skvr4laywa4" />@' \
@@ -43,32 +52,45 @@ do
         #     -ve '<li><a href="/projects/cps-forces/forces/faq.*</li>' \
 	#    $file > $tmp
 
-	# -e 's@pubs/search/?year=\([0-9]*\)&amp;Action=Search@pubs/search/\1.html@' \
 	# sed 's@href="http[s]*://robotics.eecs.berkeley.edu@href="/projects/robotics@g' \
 	#	$file > $tmp
 
 	# -e 's@virtual="/@virtual="/projects/human-cps/@g' \
 
+	# -e 's@<font size="-1"><i>You are not <a href="/projects/embedded/login">logged in</a></i>&nbsp;</font>@@' \
+	# -e 's@pubs/search/?groupname=\([^&]*\)&amp;Action=Search@pubs/search/\1.html@' \
+	#   -e 's@pubs/search/?year=\([0-9]*\)&amp;Action=Search@pubs/search/\1.html@' \
+	# -e 's@<li><a href="/projects/chess/pubs/search/337staff.html">337staff</a></li>@@' \
+
+	  #   -e "s@href=\"/@href=\"/projects/$directory/@g" \
+	  # -e "s@src=\"/@<a src=\"/projects/$directory/@g" \
+          # -e "s@background=\"/@background=\"/projects/$directory/@g" \
+	  # -e "s@<option value=\"/@<option value=\"/projects/$directory/@g" \
+
+	  # -e 's@<li class="first"><a href="/[^"]*login/">Login</a></li>@@' \
+	  # -e 's@<a href="/[^"]*/login/">Login</a>@@' \
+	  # -e 's@<li><a href="/[^"]*/calendar">Calendar</a> </li>@@' \
+	  # -e 's@<li><a href="[^"]*">FAQ</a></li>@@' \
+	  # -e 's@<h2 class="sectionhead">Quick search by ...</h2>    <h3 class="sectionhead">Year</h3>@@' \
+	  # -e 's@<li><a href="/projects/$directory/pubs/search/.*</li>@@' \
+	  # -e 's@<h3 class="sectionhead">Group</h3>@@' \
+	  # -e 's@<h2 class="sectionhead">FAQ sections</h2>@@' \
+          # -e 's@<li><a href=".*/faq.*</li>@@' \
+	  # -e 's@<li> <a href="/.*/search/">Search</a>@@' \
+	  # -e 's@<li> <a href="/.*/listinfo/">Mailing lists</a>@@' \
+	  # -e 's@<font size="-1"><i>You are not <a href="[^"]*">logged in</a></i>&nbsp;</font>@@' \
+	  # -e "s@src=\"https://$directory.eecs.berkeley.edu:443/@src=\"/projects/$directory/@g" \
+	  # -e "s@src=\"https://$directory.eecs.berkeley.edu/@src=\"/projects/$directory/@g" \
+	  # -e "s@src=\"http://$directory..eecs.berkeley.edu/@src=\"/projects/$directory/@g" \
+	  # -e "s@src=\"https://chess.eecs.berkeley.edu:443/@src=\"/projects/chess/@g" \
+	  # -e "s@src=\"https://chess.eecs.berkeley.edu/@src=\"/projects/chess/@g" \
+	  # -e "s@src=\"http://chess..eecs.berkeley.edu/@src=\"/projects/chess/@g" \
+	  #  -e 's@<tr><td colspan="2"><i>(To view user contact information, please <a href="[^"]*">log in</a>.)</i></td></tr>@@' \
+
    	sed \
-	    -e "s@href=\"/@href=\"/projects/$directory/@g" \
-	  -e "s@src=\"/@<a src=\"/projects/$directory/@g" \
-          -e "s@background=\"/@background=\"/projects/$directory/@g" \
-	  -e "s@<option value=\"/@<option value=\"/projects/$directory/@g" \
-	  -e 's@<li class="first"><a href="/[^"]*login/">Login</a></li>@@' \
-	  -e 's@<a href="/[^"]*/login/">Login</a>@@' \
-	  -e 's@<li><a href="/[^"]*/calendar">Calendar</a> </li>@@' \
-	  -e 's@<li><a href="[^"]*">FAQ</a></li>@@' \
-	  -e 's@<h2 class="sectionhead">Quick search by ...</h2>    <h3 class="sectionhead">Year</h3>@@' \
-	  -e 's@<li><a href="/projects/$directory/pubs/search/.*</li>@@' \
-	  -e 's@<h3 class="sectionhead">Group</h3>@@' \
-	  -e 's@<h2 class="sectionhead">FAQ sections</h2>@@' \
-          -e 's@<li><a href=".*/faq.*</li>@@' \
-	  -e 's@<li> <a href="/.*/search/">Search</a>@@' \
-	  -e 's@<li> <a href="/.*/listinfo/">Mailing lists</a>@@' \
-	  -e 's@<font size="-1"><i>You are not <a href="/login">logged in</a></i>&nbsp;</font>@@' \
-	  -e "s@src=\"https://.*.eecs.berkeley.edu:443/@src=\"/projects/$directory/@g" \
+	    -e 's@<li><a href="/projects/icyphy/news/index.html">News</a> </li>@@' \
 	   $file > $tmp
 
 	diff $file $tmp
-	cp $tmp $file
+	#cp $tmp $file
 done
