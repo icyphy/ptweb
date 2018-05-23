@@ -179,7 +179,10 @@ text-align:center;
 margin: 0 auto;
 border:solid 1px #ccc;
 border-top:0;
-background-image:url(/img/column-bg.gif);
+/** This controls the background of the left menu.  Make sure you are not using the top level
+ *  /img/column-bg.gif
+ */
+background-image:url(/projects/icyphy/img/column-bg.gif);
 background-repeat:repeat-y;
 overflow:auto;
 }
