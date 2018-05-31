@@ -1,0 +1,5 @@
+This is a test file used by REST accessor tests.
+
+It is in the ptolemyII directory so that it can be accessed using http.  It is possible to access the ptolemyII directory using http or https.
+
+See ~/apache2/conf/httpd.conf for the 
