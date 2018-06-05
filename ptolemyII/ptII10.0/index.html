@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id: index.htm 7996 2018-02-28 18:06:02Z cxh $ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+    <title>Ptolemy II 10.0.1</title>
+
+    <!--Script inserts current year in copyright section of footer -->
+<script type="text/javascript" src="/js/getyear.js"></script>
+<link href="/css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-flex.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+<!-- Conditional comment addds IE6-specific CSS deviations -->
+<!--[if lte IE 6]>
+<link href="/css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+<![endif]-->
+</head>
+
+<body>
+  <!-- Google Analytics, see http://embedded.eecs.berkeley.edu/dopsysadmin/faq/24.html-->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-65990221-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+<div id="sizer"><div id="expander"><div id="innerwrapper">
+<div id="outside">
+  <div id="banr">
+    <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+    <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+    <div id="ucb"><a href="http://www.eecs.berkeley.edu">UC Berkeley EECS Dept.</a></div>
+    <div id="tools">
+
+</div> <!-- /tools -->
+
+
+<!-- Website logo -->
+<div id="logo"><a href="/"><img src="/image/banner.gif" alt="Ptolemy Project"/></a></div>
+    <!-- OPTIONAL Customizable Quick Links dropdown -->
+    <div id="links"><select name="current" onchange="window.open(this.options[this.selectedIndex].value,'_top')" title="No mouse? Use Alt-Down Arrow to open list">
+<option>Quick Links</option>
+<option value="/people/index.htm">People</option>
+<option value="/download/index.htm">Download</option>
+<option value="/publications/index.htm">Publications</option>
+</select> 
+</div><!-- /#links -->
+
+    <!-- OPTIONAL horizontal top navigation -->
+    <div id="topnav"><ul>
+<li class="first"><a href="/index.htm">Home</a></li>
+<li><a href="/objectives.htm">Objectives</a></li>
+<li><a href="/ptolemyII/index.htm">Ptolemy II</a></li>
+<li><a href="/other/index.htm">Other&nbsp;software</a></li>
+<li><a href="/people/index.htm">People</a></li>
+<li><a href="/sponsors.htm">Sponsors</a></li>
+<li><a href="/publications/index.htm">Publications</a></li>
+<li><a href="/conferences/index.htm">Conferences</a></li>
+<li><a href="/presentations/index.htm">Presentations</a></li>
+<li><a href="/ptolemyII/ptIIfaq.htm">FAQ</a></li>
+<li><a href="/download/index.htm">Download</a></li>
+</ul>
+</div><!-- /#topnav -->
+
+  </div>
+  <!-- /#banr -->
+  <div id="pagebody">
+    <div id="navcol">
+      <!-- Main site navigation -->
+
+
+    <div id="menu">
+  <ul>
+    <li><a href="/index.htm">Home</a></li>
+    <li><h3><a href="index.htm">Ptolemy II 10.0</a></h3></li>
+    <li><a href="ptII/doc/index.htm">&nbsp;&nbsp;Browse&nbsp;Release</a></li>
+    <li><a href="browse.htm">&nbsp;&nbsp;Browse &nbsp;Notes</a></li>
+    <li><a href="/systems">Book</a></li>
+    <li><a href="ptII/doc/design/usingVergil/index_frames.htm">&nbsp;&nbsp;Building...Models</a></li>
+    <li><a href="cygwin.htm">Cygwin</a></li>
+    <li><a href="copyright.htm">License</a></li>
+    <li><a href="../ptIIfaq.htm">FAQ</a></li>
+    <li><a href="limitations.htm">Limitations</a></li>
+    <li><a href="mac.htm">Mac&nbsp;Installer</a></li>
+    <li><a href="download.htm">Source&nbsp;Download</a></li>
+    <li><a href="webstart.htm">Web&nbsp;Start</a></li>
+    <li><a href="windows.htm">Windows&nbsp;Installer</a></li>
+    <li><a href="https://icyphy.github.io/ptII/">Devel. Tree</a></li>
+    <li><a href="ptII/doc/coding/style_index.htm">Style&nbsp;Guide</a></li>
+    <li><a href="ptII/doc/codeDoc/index.html">Java&nbsp;Classes</a></li>
+    <li><a href="../index.htm">Ptolemy II Home</a></li>
+    <li><a href="../../index.htm">Ptolemy Home</a></li>
+  </ul>
+</div><!-- /#menu -->
+
+          <!-- OPTIONAL Additional text or links in left column -->
+      <div id="addon">
+      </div>
+      <!-- /#addon -->
+    </div>
+    <!-- /#navcol -->
+    <div id="contentcol">
+      <!-- OPTIONAL section title; can be used w or w/o photo strip below -->
+      <!-- xxx#xxx include virtual="/ssi/section.htm" -->
+      <div id="content">
+          <!-- Begin main page content -->
+      <!-- Link target for accessibility Skip Nav -->
+      <a name="maincontent" id="maincontent"></a>
+		<div id="skip2"><a href="#sidebar" title="Skip to sidebar">Skip to sidebar</a></div> 
+
+
+    <table>
+      <tr>
+	<td>
+	  <img src="ptII10.0.1/doc/img/PtolemyIISplash.gif" alt="Ptolemy II 10.0.1" align="left"/>
+	</td>
+      </tr>
+    </table>
+
+    <blockquote>
+      <table border="1">
+	<tr>
+	  <td>
+	    <p>This is the Ptolemy II 10.0 release, which was released in December, 2014.
+	      <br/>We have a continuous integration system where we create installers each night.
+	      <br/>For more recent installers and source code, see 
+	      the <a href="https://icyphy.github.io/ptII/downloads/index.html">Development Version</a></p>
+	  </td>
+	</tr>
+
+	<tr>
+	  <td>
+	    <p><B>December 17, 2014</B> - Ptolemy II 10.0.1 is available for download</p>
+	  </td>
+	</tr>
+
+	<tr>
+	  <td>
+	    <h3>Ptolemy II 10.0.1 Common Downloads</h3>
+
+	    <ul>
+	      <li> <a href="ptII10_0_1_setup_windows.exe">Windows 32-bit
+		  Installer</a> Includes sources, binaries, jars and JRE</li>
+
+	      <li> <a href="ptII10_0_1_setup_windows_64.exe">Windows 64-bit Installer</a> Includes sources, binaries, jars and JRE
+		<br/> See the <a href="windows.htm">Windows page</a>
+		for problems and solutions, along with a link to the devel versions</a></li>
+
+	    <li> <a href="ptII10.0.devel.setup.mac.jar">Mac OS X Installer</a> Includes sources, binaries and jars
+	      <br/> To invoke the installer, install Java 1.8 from Oracle and run
+              <pre>
+                java -jar ptII10.0.devel.setup.mac.jar
+              </pre>
+              Java 1.8 from Oracle is preferred because it has Nashorn, which is used by the JavaScript code.
+              </br/><i>If you get a dialog about the setup file being damaged, then
+		see <a href="mac.htm">Help!  I clicked on the Mac Setup file and got a strange dialog</a></i>
+	    </li>
+
+	    <li> Sources Only:
+	      <a href="ptII10.0.1.src.tar.gz">Unix Line Endings</a> -
+	      <a href="ptII10_0_1_src.zip">Windows Line Endings</a></li>
+
+	    <li> <a href="ptII10.0.1/doc/index.htm">Web
+		copy</a>, browse the contents of the demonstrations using a standard browser or run individual applets using Web Start (<a href="browse.htm">details</a>).</li>
+
+	    <li> <a href="jnlp-10.0.1/vergil.jnlp">Web Start</a>, run the full version of Ptolemy as an alternative to downloading and installing</li>
+
+	    <li>The Ptolemy II development sources are always 
+              <a href="https://github.com/icyphy/ptII">available via GitHub</a>
+	      These sources are experimental and contain changes since Ptolemy II 10.0.1.</li>
+	  </ul>
+	</td>
+      </tr>
+    </table>
+  </blockquote>
+
+  <p>For an overview of Ptolemy II, see the Ptolemy II FAQ
+    <a href="https://ptolemy.berkeley.edu/ptolemyII/ptIIfaq.htm#ptolemy%20II%20description">What is Ptolemy II?</a> or see the <a href="https://ptolemy.berkeley.edu/ptolemyII/ptII8.0/ptII/doc/tour/index.htm">Ptolemy II Tour</a>.</p>
+
+
+  <p>Ptolemy II 10.0 is the first complete release since Ptolemy II 8.0 and thus includes many changes.</p>
+  <p>The key driving force for the release is to be a companion to the Ptolemy Book:<br/>
+    Claudius Ptolemaeus, Editor, "<a href="https://ptolemy.berkeley.edu/books/Systems/index.htm#in_browser" target="_top">System Design, Modeling, and Simulation Using Ptolemy II</a>", Ptolemy.org, 2014. (included in the release as <a href="ptII10.0.1/doc/books/systems/PtolemyII_DigitalV1_02.pdf#in_browser" target="_top"><code>$PTII/doc/books/systems/PtolemyII_DigitalV1_02.pdf</code></a>, but not present in the SVN developer tree.)</p>
+
+  <p>Below are the highlights of this release.</p>
+
+  <ul>
+    <h3><a name="Ontologies" id="Ontologies">Ontologies</a></h3>
+    The Ptolemy II Ontologies package extends the Ptolemy II type inference engine to provide an efficient and scalable framework for general static analysis of arbitrary properties on a Ptolemy model. The framework supports properties that are specified as concepts in an ontology graph that must be structured as a lattice. The usefulness of this framework is demonstrated with an example of a physical dimensions ontology. This ontology labels different signals as representing acceleration, velocity, position, and time. In a Ptolemy model of physical dynamics, the dimensional properties of input and output signals can be automatically inferred using the ontology analysis. Ptolemy model developers can use the ontologies package to define their own ontologies for structural and semantic property analysis. This can prevent interface connection problems during model construction by identifying when incompatible signals are erroneously connected. This work draws on concepts from compiler optimization static analysis techniques and applies them to Ptolemy actor-oriented models.
+    <h4>References</h4>
+    <ul>
+      <li>Patricia Derler, Elizabeth A. Latronico, Edward A. Lee, Man-Kit Leung, Ben Lickly, Charles Shelton, "<a href="https://ptolemy.berkeley.edu/books/Systems/chapters/Ontologies.pdf#in_browser" target="_top">Ontologies</a>," a chapter from<br/>
+	Claudius Ptolemaeus, Editor, "<a href="https://ptolemy.berkeley.edu/books/Systems/index.htm#in_browser" target="_top">System Design, Modeling, and Simulation Using Ptolemy II</a>", Ptolemy.org, 2014. (included in the release as <a href="ptII10.0.1/doc/books/systems/PtolemyII_DigitalV1_02.pdf#in_browser" target="_top"><code>$PTII/doc/books/systems/PtolemyII_DigitalV1_02.pdf</code></a>)</li>
+    </ul>
+
+
+    <h4><a name="OntologiesDemonstrations">Ontologies Demonstrations</a></h4>
+    <ul><!-- Please keep the demos alphabetical -->
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/data/ontologies/demo/CarTracking/CarTracking/#in_browser" target="_top">CarTracking</a> (Dimensional analysis)</li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/data/ontologies/demo/ConstAbstractInterpretation/ConstAbstractInterpretation/#in_browser" target="_top">Abstract Interpretation Analysis</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/data/ontologies/demo/ConstNonconst/ConstNonconst/#in_browser" target="_top">Simple Constant/Nonconstant Analysis</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/data/ontologies/demo/ConstNonconst/Const/#in_browser" target="_top">Simple Constant Analysis</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/data/ontologies/demo/MonotonicityAnalysis/MonotonicityAnalysis/#in_browser" target="_top">Expression Monotonicity Analysis</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/demo/FuelSystem/FuelSystemOntology/#in_browser" target="_top">2 Tank Model with Ontological Information</a></li>
+    </ul>
+
+    <h3><a name="ExportToWeb" id="ExportToWeb">Export to Web</a></h3>
+    <p>Ptolemy II includes a flexible mechanism for creating web pages from models and for building web services. The more basic mechanism is the export to web , which simply makes a model available as a web page for browsing using a web browser. Such a web page provides easy access and documentation for models that archives both the structure of the models and the results of executing the models. It can be used to share information about models or their execution without requiring installation of any software, since an ordinary web browser is sufficient. More interestingly, the mechanism is extensible and customizable, allowing for creation of fairly sophisticated web pages. You can associate hyperlinks or actions defined in JavaScript with icons in a model. The customization can be done for individual icons in a model or for sets of icons in a model.</p>
+    <h4>References</h4>
+    <ul>
+      <li>Christopher Brooks, Edward A. Lee, Elizabeth A. Latronico, Baobing Wang, and Roxana Gheorghui, "<a href="https://ptolemy.berkeley.edu/books/Systems/chapters/WebInterfaces.pdf#in_browser" target="_top">Web Interfaces</a>," a chapter from<br/>
+	Claudius Ptolemaeus, Editor, "<a href="https://ptolemy.berkeley.edu/books/Systems/index.htm#in_browser" target="_top">System Design, Modeling, and Simulation Using Ptolemy II</a>", Ptolemy.org, 2014. (included in the release as <a href="ptII10.0.1/doc/books/systems/PtolemyII_DigitalV1_02.pdf#in_browser" target="_top"><code>$PTII/doc/books/systems/PtolemyII_DigitalV1_02.pdf</code></a>)</li>
+    </ul>
+
+
+    <h3><a name="CGCodeGeneration" id="CGCodeGeneration">CG Code Generator</a></h3>
+    <p>Ptolemy II 10.0 includes the "cg" code generator at <code>$PTII/ptolemy/cg</code>.</p>
+    <p>We took the lessons learned from <code>$PTII/ptolemy/codegen</code> and applied them to cg. In particular, cg more easily supports multiple backends with less code duplication. The cg code generator is under active development, we are working on code generation for large systems. For details about cg, see <a href="ptII10.0.1/ptolemy/cg/README.html"><code>$PTII/ptolemy/cg/README.html</code></a>.</p>
+    <p>Developers: Christopher Brooks, Dai Bui, Bert Rodiers, Stavros Tripakis</p>
+
+    <h4>Resources</h4>
+    <ul>
+      <li><a href="ptII10.0.1/ptolemy/cg/README.html"><code>$PTII/ptolemy/cg/README.html</code></a></li>
+    </ul>
+
+    <h4><a name="cgDemonstrations">Code Generation (CG) Demonstrations</a><!-- cg--></h4>
+    <ul><!-- Please keep the demos alphabetical -->
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/CompiledCompositeActor/CompiledCompositeActor/#in_browser" target="_top">CompiledCompositeActor</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECGClockRamp/#in_browser" target="_top">Clock and Ramp</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECGDelay/#in_browser" target="_top">Time Delay</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECGHelloWorld/#in_browser" target="_top">Hello World!</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECGMath/#in_browser" target="_top">Maths</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECGPiSquare/#in_browser" target="_top">Pi Square Calculus</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECGPi/#in_browser" target="_top">Pi Calculus</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECGPoisson/#in_browser" target="_top">Poisson Clock</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/DECG/DECG/#in_browser" target="_top">Discrete Event Code Generation</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/ModularCG/ModularCG/#in_browser" target="_top">ModularCG</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/ModularCGPubSub/ModularCGPubSub/#in_browser" target="_top">ModularCGPubSub</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/Scale/ScaleC/#in_browser" target="_top">Scale C</a></li>
+      <li><a href="https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/ptII10.0.1/ptolemy/cg/lib/demo/Scale/ScaleJava/#in_browser" target="_top">Scale Java</a></li>
+    </ul>
+
+    <h3><a name="ModalModelUpdates" id="ModalModelUpdates">FSM/Modal Model updates</a></h3>
+
+    <h4>References</h4>
+    <ul>
+      <li>
+	Thomas Huining Feng, Edward A. Lee, Xiaojun Liu, Christian Motika, Reinhard von Hanxleden, and Haiyang Zheng, "<a href="https://ptolemy.berkeley.edu/books/Systems/chapters/FiniteStateMachines.pdf#in_browser" target="_top">Finite State Machines</a>," and<br/>
+	Thomas Huining Feng, Edward A. Lee, Xiaojun Liu, Stavros Tripakis, Haiyang Zheng, and Ye Zhou, "<a href="https://ptolemy.berkeley.edu/books/Systems/chapters/ModalModels.pdf#in_browser" target="_top">Modal Models</a>,"<br/>
+	chapters from<br/>
+	Claudius Ptolemaeus, Editor, "<a href="https://ptolemy.berkeley.edu/books/Systems/index.htm#in_browser" target="_top">System Design, Modeling, and Simulation Using Ptolemy II</a>", Ptolemy.org, 2014. (included in the release as <a href="ptII10.0.1/doc/books/systems/PtolemyII_DigitalV1_02.pdf#in_browser" target="_top"><code>$PTII/doc/books/systems/PtolemyII_DigitalV1_02.pdf</code></a>)</li>
+    </ul>
+
+    <p>The <a href="ptII10.0.1/doc/release.htm">Ptolemy II 10.0.1 Release Notes</a> include a list of new features and actors.</P>
+
+    <h2>Quick Start Instructions</h2>
+    <p>
+      Ptolemy II is available in several formats:</p>
+    <dl>
+      <dt> Browse</dt>
+      <dd>
+	<p> You can browse Ptolemy II, view the contents of demonstrations using a standard browser (no Web Start required)
+	  and optionally run those demonstration using <b>Web Start</b>
+	  without downloading the distribution by accessing the
+	  <a href="ptII10.0.1/doc/index.htm">web copy</a>.</p>
+
+	<p>The web copy is merely a set of web pages that were created
+	  when we untar'd the distribution on the Ptolemy web site and
+	  then exported the models to the web and enabled the Web Start
+	  applications for the Ptolemy II demonstrations.</p>
+
+
+	<p>To browse Ptolemy II using a standard web browser, you can either
+	  go directly to the
+	  <a href="ptII10.0.1/doc/index.htm">web copy</a>,
+	  or go to the <a href="applet.htm">browse Ptolemy II page</a>
+	  or more information.</p>
+      </dd>
+
+      <dt>Mac OS X</dt>
+      <dd> To download a Mac OS X Installer, see the 
+	<a href="mac.htm">Ptolemy II 10.0.1 Windows Installer</a> page.
+      </dd>
+
+      <dt> Web Start</dt>
+      <dd> 
+	Web Start is a tool from Sun that
+	makes installation and updates particularly simple.  
+	<br/>The Web Start installation works best with Windows, but
+	has also been tried under Linux and Mac OS X.
+	<br/>The Web Start installation does not include source,
+	but behaves almost exactly like a standalone installation:
+	you can save models locally, and you need not be connected
+	to the net after the initial installation.
+
+	<p>Note that the individual demonstrations that use Web Start are
+	  also accessible in the <a href="webstart.htm">full Web Start
+	    installation</a>.  The individual Web Start demonstrations 
+	  and the full Web Start installation differ in the following ways:</p>
+	<ul>
+	  <li>The individual demonstration that use Web Start are
+	    smaller and are shown using a viewer that is not suitable for
+	    editing, though you may save the model to your local
+	    disk.</li>
+
+	  <li>The full Web Start installation is intended as an
+	    alternative to the Mac, source and Windows downloads.  The
+	    Full Web Start installation includes the ability
+	    to <I>create</I> models.  For details, see
+	    the <a href="index.htm#Summary">Installation
+	      Summary</a></li>
+	</ul>
+
+	<p>To download using Web Start, see the 
+	  <a href="webstart.htm">Ptolemy II 10.0.1 Web Start</a> page.</p>
+      </dd>
+
+      <dt> Windows Installer</dt>
+      <dd> To download a Windows Installer, see the 
+	<a href="windows.htm">Ptolemy II 10.0.1 Windows Installer</a> page.</dd>
+
+      <dt> Source</dt>
+      <dd> The source distribution requires either the
+	<a href="ptII10.0.1/doc/coding/eclipse_index.htm">Eclipse</a>,
+	the <a href="cygwin.htm">Cygwin tools</a> (Windows only), or
+	other way of running commands like <code>make</code>.
+	<br/>After building Ptolemy II from source, start
+	<code>vergil</code> from the command line and follow the 
+	tour. 
+	<br/>The source distribution has been compiled and run under
+	Windows, Solaris and Linux.
+
+	<br/>If you intend to develop your own actors in Java, then
+	you should download the source distribution.
+	<br/>To download source, see the
+	<a href="download.htm">Ptolemy II 10.0.1 Source Download</a> page and then
+	follow the <a href="ptII10.0.1/doc/install_index.htm">installation instructions</a>.
+      </dd>
+    </dl>
+
+    <h2><a name="Summary">Summary</a></h2>
+    <p>The table below is a summary that compares and contrasts the
+      various installers.</p>
+
+    <table border=1>
+      <tr>
+	<th>Download Format</th>
+	<th>Requirement</th>
+	<th>Platform</th>
+	<th>Size</th>
+	<th>Create your own models?</th>
+	<th>Require net connection at runtime?</th>
+	<th>Custom Actor creation? (download includes sources)</th>
+	<th>Code generator?</th>
+      </tr>
+
+      <tr>
+	<td><a href="browse.htm">Browse</a></td>
+	<td>
+	  Browsing the Ptolemy II tree should work with any reasonably modern web browser.
+	  <br/>Optionally browsing the demonstrations requires JavaScript.
+	  <br/>Optionally running the demonstrations requires Web Start.  The web page should
+	  detect if Web Start is present and prompt the user to install Web Start if necessary.
+	  Java 1.6 or later is required to run the Web Start demonstrations.
+	</td>
+	<td>Windows, Linux, MacOS X</td>
+	<td>Initially ~5 Mb</td>
+	<td>No</td>
+	<td>Yes</td>
+	<td>No</td>
+	<td>No</td>
+      </tr>
+
+      <tr>
+	<td><a href="webstart.htm">Web Start</a></td>
+	<td><a href="http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136112.html">Java Web Start</a>
+	</td>
+	<td>Windows, Linux, MacOS X</td>
+	<td>~61Mb or ~110 Mb</td>
+	<td>Yes</td>
+	<td>Not required, but can get updates if connected</td>
+	<td>No</td>
+	<td>No</td>
+      </tr>
+
+      <tr>
+	<td><a href="windows.htm">Windows Installer</a></td>
+	<td>Windows only.
+	  1.8 Java Runtime Environment with support packages like Java 3D</td>
+	<td>Windows only</td>
+	<td>488 Mb</td>
+	<td>Yes</td>
+	<td>No</td>
+	<td>Yes</td>
+	<td>No</td>
+      </tr>
+
+      <tr>
+	<td><a href="mac.htm">Mac OS X Installer</a></td>
+	<td>Mac OS X, <i>Might work for Linux?</i>
+	  1.8 Java Runtime Environment with support packages like Java 3D</td>
+	<td>Mac OS X, maybe Linux</td>
+	<td>454 Mb</td>
+	<td>Yes</td>
+	<td>No</td>
+	<td>Yes</td>
+	<td>No</td>
+      </tr>
+
+      <tr>
+	<td><a href="download.htm">Source Download</a></td>
+	<td>
+	  <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK 1.6.0 or later</a>,
+	  <a href="cygwin.htm">Devel. tools like make</a>
+	</td>
+	<td>Windows, Linux, Mac OS X, Solaris</td>
+	<td>120 Mb - 135 Mb</td>
+	<td>Yes</td>
+	<td>No</td>
+	<td>Yes</td>
+	<td>Yes</td>
+      </tr>
+
+    </table>
+
+    <h4> Places to go</h4>
+    <h4>Documentation</h4>
+    <ul>
+      <li>The most comprehensive documentation is the book, 
+	<br/>Claudius Ptolemaeus, Editor, <i><a href="/systems">System Design, Modeling, and Simulation Using Ptolemy II</a></i>, Ptolemy.org, 2014, available as a free PDF download and low-cost paperback.</li>
+      <li>"<a href="ptII/doc/design/usingVergil/index.htm">Building Graphical Models</a>" chapter from the
+	the book is a good starting point</li>
+      <li> Detailed <a href="ptII/doc/install_index.htm">Ptolemy II Installation</a>
+	instructions.</li>
+      <li><a href="limitations.htm">Limitations</a></li>
+    </ul>
+
+    <!-- Leave a trailing p here so that there is a little space at the bottom -->
+    <p>
+            </div>
+      <!-- /#content -->
+    </div>
+    <!-- /#contentcol -->
+  </div>
+  <!-- /#pagebody -->
+</div>
+<!-- /#outside -->
+<div id="footer">
+<ul>
+<li class="first"><a href="/people/index.htm">Contact</a></li> 
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/group/public.htm">Update Help</a></li>
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/?Action=vcupdateptweb">Update</a></li>
+</ul>
+<!-- Script inserts current year in copyright string -->
+<a href="/copyright.htm">Copyright &copy;</a> 1999 - <script type="text/javascript">
+<!--
+displayDate();
+//-->
+</script> 
+UC Regents; all rights reserved.
+</div><!-- /#footer -->
+
+</div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+<!-- OPTIONAL Insert tracking code here -->
+</body>
+</html>
+
