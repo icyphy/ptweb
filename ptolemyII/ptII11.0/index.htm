@@ -1,33 +1,222 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- $Id: index.htm 7045 2013-08-01 21:19:52Z cxh $ -->
+<!-- $Id: index.htm 7996 2018-02-28 18:06:02Z cxh $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-<title>Ptolemy II 11.0.devel</title>
+    <title>Ptolemy II 11.0.1</title>
 
-<!--#include virtual="/ssi/toppremenu_nosearch.htm" -->
-<!--#include virtual="/ptolemyII/ptII10.0/toc.htm" -->
-<!--#include virtual="/ssi/toppostmenu.htm" -->
-<table>
-<tr><td>
- <! -- img src="ptII11.0.devel/doc/img/PtolemyIISplash.gif" alt="Ptolemy II 11.0.alpha" align="left" -->
-</td>
- </tr>
-</table>
+    <!--Script inserts current year in copyright section of footer -->
+    <script type="text/javascript" src="/js/getyear.js"></script>
+    <link href="/css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+    <link href="/css/UCB-flex.css" rel="stylesheet" type="text/css" media="screen,print" />
+    <link href="/css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+    <!-- Conditional comment addds IE6-specific CSS deviations -->
+    <!--[if lte IE 6]>
+        <link href="/css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+        <![endif]-->
+  </head>
 
-<BLOCKQUOTE>
- <table border=1>
-   <tr>
-     <td>
-       See <a href="http://chess.eecs.berkeley.edu/ptexternal">http://chess.eecs.berkeley.edu/ptexternal</a> for the latest development version of Ptolemy II.
+  <body>
+    <!-- Google Analytics, see http://embedded.eecs.berkeley.edu/dopsysadmin/faq/24.html-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-   </td>
-  </tr>
+      ga('create', 'UA-65990221-1', 'auto');
+      ga('send', 'pageview');
 
- </table>
-</BLOCKQUOTE>
+    </script>
 
- <!-- Leave a trailing p here so that there is a little space at the bottom -->
-<p>
-<!--#include virtual="/ssi/bottom.htm" -->
+    <div id="sizer"><div id="expander"><div id="innerwrapper">
+          <div id="outside">
+            <div id="banr">
+              <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+              <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+              <div id="ucb"><a href="http://www.eecs.berkeley.edu">UC Berkeley EECS Dept.</a></div>
+              <div id="tools">
+
+              </div> <!-- /tools -->
+
+
+              <!-- Website logo -->
+              <div id="logo"><a href="/"><img src="/image/banner.gif" alt="Ptolemy Project"/></a></div>
+              <!-- OPTIONAL Customizable Quick Links dropdown -->
+              <div id="links"><select name="current" onchange="window.open(this.options[this.selectedIndex].value,'_top')" title="No mouse? Use Alt-Down Arrow to open list">
+                  <option>Quick Links</option>
+                  <option value="/people/index.htm">People</option>
+                  <option value="/download/index.htm">Download</option>
+                  <option value="/publications/index.htm">Publications</option>
+                </select> 
+              </div><!-- /#links -->
+
+              <!-- OPTIONAL horizontal top navigation -->
+              <div id="topnav"><ul>
+                  <li class="first"><a href="/index.htm">Home</a></li>
+                  <li><a href="/objectives.htm">Objectives</a></li>
+                  <li><a href="/ptolemyII/index.htm">Ptolemy II</a></li>
+                  <li><a href="/other/index.htm">Other&nbsp;software</a></li>
+                  <li><a href="/people/index.htm">People</a></li>
+                  <li><a href="/sponsors.htm">Sponsors</a></li>
+                  <li><a href="/publications/index.htm">Publications</a></li>
+                  <li><a href="/conferences/index.htm">Conferences</a></li>
+                  <li><a href="/presentations/index.htm">Presentations</a></li>
+                  <li><a href="/ptolemyII/ptIIfaq.htm">FAQ</a></li>
+                  <li><a href="/download/index.htm">Download</a></li>
+                </ul>
+              </div><!-- /#topnav -->
+
+            </div>
+            <!-- /#banr -->
+            <div id="pagebody">
+              <div id="navcol">
+                <!-- Main site navigation -->
+
+
+                <div id="menu">
+                  <ul>
+                    <li><a href="/index.htm">Home</a></li>
+                    <li><h3><a href="index.htm">Ptolemy II 11.0</a></h3></li>
+                    <li><a href="/systems">Book</a></li>
+                    <li><a href="ptII/doc/design/usingVergil/index_frames.htm">&nbsp;&nbsp;Building...Models</a></li>
+                    <li><a href="cygwin.htm">Cygwin</a></li>
+                    <li><a href="copyright.htm">License</a></li>
+                    <li><a href="../ptIIfaq.htm">FAQ</a></li>
+                    <li><a href="limitations.htm">Limitations</a></li>
+                    <li><a href="mac.htm">Mac&nbsp;Installer</a></li>
+                    <li><a href="download.htm">Source&nbsp;Download</a></li>
+                    <li><a href="windows.htm">Windows&nbsp;Installer</a></li>
+                    <li><a href="https://icyphy.github.io/ptII/">Devel. Tree</a></li>
+                    <li><a href="ptII/doc/coding/style_index.htm">Style&nbsp;Guide</a></li>
+                    <li><a href="ptII/doc/codeDoc/index.html">Java&nbsp;Classes</a></li>
+                    <li><a href="../index.htm">Ptolemy II Home</a></li>
+                    <li><a href="../../index.htm">Ptolemy Home</a></li>
+                  </ul>
+                </div><!-- /#menu -->
+
+                <!-- OPTIONAL Additional text or links in left column -->
+                <div id="addon">
+                </div>
+                <!-- /#addon -->
+              </div>
+              <!-- /#navcol -->
+              <div id="contentcol">
+                <!-- OPTIONAL section title; can be used w or w/o photo strip below -->
+                <!-- xxx#xxx include virtual="/ssi/section.htm" -->
+                <div id="content">
+                  <!-- Begin main page content -->
+                  <!-- Link target for accessibility Skip Nav -->
+                  <a name="maincontent" id="maincontent"></a>
+		  <div id="skip2"><a href="#sidebar" title="Skip to sidebar">Skip to sidebar</a></div> 
+
+
+                  <table>
+                    <tr>
+	              <td>
+	                <img src="ptII11.0.beta/doc/img/PtolemyIISplash.gif" alt="Ptolemy II 11.0.beta" align="left"/>
+	              </td>
+                    </tr>
+                  </table>
+
+                  <blockquote>
+                    <table border="1">
+	              <tr>
+	                <td>
+	                  <p>This is the Ptolemy II 10.0 release, which was released in December, 2014.
+	                    <br/>We have a continuous integration system where we create installers each night.
+	                    <br/>For more recent installers and source code, see 
+	                    the <a href="https://icyphy.github.io/ptII/downloads/index.html">Development Version</a></p>
+	                </td>
+	              </tr>
+
+	              <tr>
+	                <td>
+	                  <p><B>June 11, 2018</B> - Ptolemy II 11.0.beta is available for download</p>
+	                </td>
+	              </tr>
+
+	              <tr>
+	                <td>
+	                  <h3>Ptolemy II 11.0.beta Common Downloads</h3>
+
+	                  <ul>
+	                    <li> <a href="ptII11_0_beta_setup_windows_64.exe">Windows 64-bit Installer</a> Includes sources, binaries, jars and JRE
+		              <br/> See the <a href="windows.htm">Windows page</a>
+		              for problems and solutions, along with a link to the devel versions</a></li>
+
+	                  <li> <a href="ptII11.0.beta.setup.mac.jar">Mac OS X Installer</a> Includes sources, binaries and jars
+	                    <br/> To invoke the installer, install Java 1.8 or later from Oracle and run
+                            <pre>
+                              java -jar ptII11.0.beta.setup.mac.jar
+                            </pre>
+                            Java 1.8 from Oracle is preferred because it has Nashorn, which is used by the JavaScript code.
+                          </br/><i>If you get a dialog about the setup file being damaged, then
+		            see <a href="mac.htm">Help!  I clicked on the Mac Setup file and got a strange dialog</a></i>
+	                </li>
+
+	                <li> Sources Only:
+	                  <a href="ptII11.0.beta.src.tar.gz">Unix Line Endings</a> -
+	                  <a href="ptII11_0_beta_src.zip">Windows Line Endings</a></li>
+
+	                <li>The Ptolemy II development sources are always 
+                          <a href="https://github.com/icyphy/ptII">available via GitHub</a>
+	                  These sources are experimental and contain changes since Ptolemy II 11.0.beta.</li>
+	              </ul>
+	            </td>
+                  </tr>
+                </table>
+              </blockquote>
+
+              <p>For an overview of Ptolemy II, see the Ptolemy II FAQ
+                <a href="https://ptolemy.berkeley.edu/ptolemyII/ptIIfaq.htm#ptolemy%20II%20description">What is Ptolemy II?</a>.</p>
+
+
+              <p>The key driving force for the release is support for <a href="https://accessors.org">Accessors</a>,
+                which are a technology for making the Internet of Things
+                accessible to a broader community of citizens, inventors, and
+                service providers through open interfaces, an open community of
+                developers, and an open repository of technology. Accessors enable
+                composing heterogeneous devices and services in the Internet of
+                Things (IoT).</p>
+
+              <p>This release of Ptolemy includes
+                the <a href="https://ptolemy.berkeley.edu/projects/chess/capecode/">CapeCode</a>
+                configuraton, which is a development environment and host for
+                applications that use accessors, described at
+                accessors.org. CapeCode provides a block diagram editor for
+                prototyping IoT applications and code generators for deploying
+                those applications on other accessor hosts.
+
+
+
+                <!-- Leave a trailing p here so that there is a little space at the bottom -->
+              <p>
+              </div>
+              <!-- /#content -->
+              </div>
+              <!-- /#contentcol -->
+            </div>
+            <!-- /#pagebody -->
+          </div>
+          <!-- /#outside -->
+          <div id="footer">
+            <ul>
+              <li class="first"><a href="/people/index.htm">Contact</a></li> 
+              <li><a href="https://wiki.eecs.berkeley.edu/ptolemy/Ptolemy/PtolemyWebsite">Update Help</a> (EECS LDAP Login Required)</li>
+            </ul>
+            <!-- Script inserts current year in copyright string -->
+            <a href="/copyright.htm">Copyright &copy;</a> 1999 - <script type="text/javascript">
+              <!--
+                  displayDate();
+                  //-->
+            </script> 
+            UC Regents; all rights reserved.
+          </div><!-- /#footer -->
+
+        </div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+    <!-- OPTIONAL Insert tracking code here -->
+  </body>
+</html>
+
