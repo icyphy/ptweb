@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id$ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+    <title>Ptolemy II 11.0.beta Source Downloads</title>
+
+    <!--#include virtual="/ssi/toppremenu_nosearch.htm" -->
+    <!--#include virtual="/ptolemyII/ptII10.0/toc.htm" -->
+    <!--#include virtual="/ssi/toppostmenu.htm" -->
+    <h1>Ptolemy II 11.0.beta Source Downloads</h1>
+
+    <h2>Downloads</h2>
+
+    <h3>Quick Instructions</h3>
+
+    <blockquote>
+      <table border=1>
+	<tr>
+	  <td>
+	    The Ptolemy II development sources are always 
+	    <a href="https://github.org/icyphy/ptII">available via Git</a>
+	    These sources are experimental and contain changes since Ptolemy II 11.0.beta.
+
+	    <p>If you want to rebuild Ptolemy II 8.0 from source, download:</p>
+	    <p>
+	      <a href="ptII11.0.beta.src.tar.gz"><B>Ptolemy II 11.0.beta source only</B></a> (120 Mb, Unix line endings, use GNU tar to avoid long link messages) 
+	      <br/><B>OR</B>
+	      <br/><a href="ptII11_0_beta_src.zip"><B>Ptolemy II 11.0.beta source only</B></a> (135 Mb, Windows line endings)</p>
+
+	    <p>Under Windows, either follow the 
+	      <a href="ptII11.0.beta/doc/coding/eclipse_index.htm">Eclipse</a> instructions
+	      or install
+	      <a href="cygwin.htm">Cygwin</a> and then 
+	      <a href="ptII11.0.beta/doc/install_index.htm">follow the command line build instructions</a>.</p>
+
+	    <p>Under Mac OS X, please see the <a href="mac.htm">Mac OS X instructions</a>.</p>
+
+	    <p>Users on platforms other than Windows and Mac OS X should
+	      <a href="ptII11.0.beta/doc/install_index.htm">follow the command line build instructions</a>.</p>
+
+	  </td>
+	</tr>
+      </table>
+    </blockquote>
+
+
+    <h2>All downloads and resources</h2>
+
+    <p>Below are the downloads and resources available from this page</p>
+    <ul>
+      <! -- See the ../ptII1.0/download.htm file for files we need to eventually
+	    provide
+	 -->
+
+    <li> Windows Java Runtime Environment (JRE):
+      <br/><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html"><code>http://www.oracle.com/technetwork/java/javase/downloads/index.html</code></a>.
+
+      <br/>The JRE is needed to run Ptolemy II, but is not sufficient to recompile
+      Ptolemy II from sources.
+    </li>
+
+    <li> Windows and other platforms Java Development Kit (JDK): 
+      <br/><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html"><code>http://www.oracle.com/technetwork/java/javase/downloads/index.html</code></a>.
+      <br/>The JDK is needed to recompile Ptolemy II.  The JDK includes the JRE.
+      <br/>If you are recompiling Ptolemy II from source, then download the JDK.
+    </li>
+    
+    <li> (<i>Optional</i>):Java 3D for other platforms and for recompiling:
+      <br/><a href="http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html"><code>http://www.oracle.com/technetwork/java/javase/tech/index-jsp-138252.html</code></a>
+      <br/>The Java 3D SDK is necessary for recompiling the GR domain.
+      The Java 3D SDK includes the Java 3D runtime.
+      <br/>The domains other than GR II will recompile without the Java 3D SDK.
+    </li>
+
+    <li> Information about installing the <a href="cygwin.htm">Cygwin toolkit</a>
+      - Under Windows Cygwin or Eclipse is needed to recompile Ptolemy II.</li>
+
+    <li> Windows users may also want to follow the
+      <a href="ptII11.0.beta/doc/coding/eclipse_index.htm">Eclipse</a> instructions.</li>
+
+    <li> <a href="ptII11.0.beta.src.tar.gz"><B>Ptolemy II 11.0.beta source only</B></a> (45.1 Mb, Unix line endings, use GNU tar to avoid long link messages) </li>
+    
+    <li> <a href="ptII11.0.beta_src.zip"><B>Ptolemy II 11.0.beta source only</B></a> (55.1 Mb, Windows line endings)</li>
+
+    <li><a href="http://chess.eecs.berkeley.edu/ptexternal">Subversion Access to the development tree</a></li>
+    <li><a href="http://chess.eecs.berkeley.edu/ptexternal/nightly/index.htm">Nightly&nbsp;Build</a></li>
+    </ul>
+
+    
+    <h2>Instructions</h2>
+
+    <h2>1. Install Java, if necessary</h2>
+    <p>
+    <p>Ptolemy II 11.0.beta requires Java 1.6 or later.  Java 1.8 will also work.
+
+      <br/>To run Ptolemy II, the Java runtime environment (JRE) is sufficient.
+
+      <br/>To recompile Ptolemy II from source or extend Ptolemy II with
+      your own Java code, the Java development kit (JDK) or an equivalent
+      Java development environment is required.  The JDK includes a Java
+      compiler.</p>
+
+    <p>To determine which version of Java you have, run the command below to see whether
+      you have Java installed, and whether it is the proper version:</p>
+    <pre>
+      java -version
+    </pre>
+    <p>If the command cannot be found, or the version that is printed is
+      less than 1.6, you should install the plug-in, JRE 1.6, or JDK 1.6 or later
+      or use download the installer that includes a private copy of the JRE.</p>
+    
+    <p>You can determine if the <code>javac</code> compiler is in your path
+      with</p>
+    <pre>
+      java -help
+    </pre>
+    <p>If the command is not found, and you want to rebuild from sources, then you
+      would need to install the JDK.</p>
+
+    <h3>Java Downloads</h3>
+
+    <ul>
+      <li> Windows Java Runtime Environment (JRE):
+	<br/><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html"><code>http://www.oracle.com/technetwork/java/javase/downloads/index.html</code></a>.
+
+	<br/>The JRE is needed to run Ptolemy II, but is not sufficient to recompile
+	Ptolemy II from sources</li>
+
+      <li> Windows and other platforms Java Development Kit (JDK): 
+	<br/><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html"><code>http://www.oracle.com/technetwork/java/javase/downloads/index.html</code></a>.
+	<br/>The JDK is needed to recompile Ptolemy II.  The JDK includes the JRE.
+	<br/>If you are recompiling Ptolemy II from source, then download the JDK.</li>
+
+    </ul>
+
+    <p>&nbsp;</p>
+
+    <h2>2. Install Cygwin, if necessary (Windows Only)</h2>
+    <p>To build from source under Windows, either follow the 
+      <a href="ptII11.0.beta/doc/coding/eclipse_index.htm">Eclipse</a> instructions
+      or install
+      <a href="cygwin.htm">Cygwin</a> and then 
+      <a href="ptII11.0.beta/doc/install_index.htm">follow the command line build instructions</a>.</p>
+    
+    <h2>3. Download and install Ptolemy II</h2>
+    <p>Now that the Java Development Kit and (and, under Windows, Cygwin) are installed:
+      <ol>
+	<li> Download 
+	  <br/><a href="ptII11.0.beta.src.tar.gz"><code>ptII11.0.beta.src.tar.gz</code></a> (120 Mb Unix line endings, use GNU tar to avoid long link messages) 
+	  <br/><B>OR</B>
+	  <br/><a href="ptII11.0.beta_src.zip"><code>ptII11_0_beta_src.zip</code></a> (135 Mb Windows line endings) 
+	</li>
+	<li> Follow the <a href="ptII11.0.beta/doc/install_index.htm">Installation Instructions</a>
+	  or the
+	  <a href="ptII11.0.beta/doc/coding/eclipse_index.htm">Eclipse</a> instructions.</li>
+      </ol>
+
+      <h4>Documentation</h4>
+      <ul>
+	<li>The most comprehensive documentation is the book, 
+	  <br/>Claudius Ptolemaeus, Editor, <i><a href="/systems">System Design, Modeling, and Simulation Using Ptolemy II</a></i>, Ptolemy.org, 2014, available as a free PDF download and low-cost paperback.</li>
+	<li>"<a href="ptII/doc/design/usingVergil/index_frames.htm">Building Graphical Models</a>" chapter from the
+	  the book is a good starting point</li>
+	<li> Detailed <a href="ptII/doc/install_index.htm">Ptolemy II Installation</a>
+	  instructions.</li>
+	<li><a href="limitations.htm">Limitations</a></li>
+      </ul>
+      
+    <p>This page covers installing Ptolemy II via a by downloading source files,
+      running configure and recompiling.</p>
+
+    <p>Other formats include:</p>
+    <ul>
+      <li> <a href="mac.htm">Installing Ptolemy II under Mac OS X with an installer</a></li>
+      <li> <a href="windows.htm">Installing Ptolemy II under Windows with an installer</a></li>
+    </ul>
+    
+    <!-- Leave a trailing p here so that there is a little space at the bottom -->
+    <p>
+      <!--#include virtual="/ssi/bottom.htm" -->
