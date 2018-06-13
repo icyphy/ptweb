@@ -7,7 +7,7 @@
     <title>Cygwin Installation</title>
 
     <!--#include virtual="/ssi/toppremenu_nosearch.htm" -->
-    <!--#include virtual="/ptolemyII/ptII10.0/toc.htm" -->
+    <!--#include virtual="/ptolemyII/ptII11.0/toc.htm" -->
     <!--#include virtual="/ssi/toppostmenu.htm" -->
     <h1>Cygwin Installation</h1>
 
@@ -17,14 +17,14 @@
       using Java using third party Java packages.</p>
 
     <p>Rather than installing Cygwin, it may be easier to follow the 
-      <a href="ptII11.0.beta/doc/eclipse/index.htm">Eclipse</a>
+      <a href="ptII11.0.1/doc/eclipse/index.htm">Eclipse</a>
       instructions and use the
       <code>$PTII/.classpath.default</code>. </p>
 
     <p>An alternative way to rebuild from sources on all platforms is
       to use Apache ant, which requires neither Cygwin nor Apache.
       See
-      ant <a href="ptII11.0.beta/doc/coding/index.htm">$PTII/doc/coding/</a>
+      ant <a href="ptII11.0.1/doc/coding/index.htm">$PTII/doc/coding/</a>
       and <code>$PTII/build.default.xml</code>.</p>
 
     <p>Under Windows, the reason to install the Cygwin toolkit is so
@@ -74,7 +74,7 @@
 
     <ol>
       <li> Download the Cygwin setup from <a href="https://cygwin.com/install.html">https://cygwin.com/install.html</a>.  Note that there are two versions, one for 32-bit, the other for 64-bit.  Most versions of Windows are 64-bit.
-	See <a href="ptII11.0.beta/doc/eclipse/windows/32bitVs64bit.htm">32-bit or 64-bit</a> for details.
+	See <a href="ptII11.0.1/doc/eclipse/windows/32bitVs64bit.htm">32-bit or 64-bit</a> for details.
 	<br/>The instructions below assume 64-bit.</li>
 
       <li> Double click on the setup executable that was downloaded.</li>
@@ -164,7 +164,7 @@
 	command</li>
 
       <li> Follow the instructions in the
-	<a href="ptII11.0.beta/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section</li>
+	<a href="ptII11.0.1/doc/install_index.htm#settingptII">Set the value of the <code>PTII</code> environment variable</a> section</li>
       </ol>
 
 
@@ -231,7 +231,7 @@
 	<p>A workaround is to download <a href="cygwin-make-3.80.tar.gz">cygwin-make-3.80.tar.gz</a>:
 	  <pre>
 	    cd /usr/bin
-            wget https://ptolemy.berkeley.edu/ptolemyII/ptII10.0/cygwin-make-3.80.tar.gz
+            wget https://ptolemy.berkeley.edu/ptolemyII/ptII11.0/cygwin-make-3.80.tar.gz
 	    mv make.exe make.old.exe
 	    tar -zxf cygwin-make-3.80.tar.gz
 	    rm cygwin-make-3.80.tar.gz
