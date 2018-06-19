@@ -70,22 +70,47 @@
     <a href="https://ptolemy.berkeley.edu/ptolemyII/ptIIfaq.htm#ptolemy%20II%20description">What is Ptolemy II?</a>.</p>
 
 
-  <p>The key driving force for the release is support for <a href="https://accessors.org">Accessors</a>,
-    which are a technology for making the Internet of Things
-    accessible to a broader community of citizens, inventors, and
-    service providers through open interfaces, an open community of
-    developers, and an open repository of technology. Accessors enable
-    composing heterogeneous devices and services in the Internet of
-    Things (IoT).</p>
+  <p>Ptolemy II 11.0.1 includes the following features:</p>
+    <h3><a name="scripting" id="scripting">Scripting, Accessors, and CapeCode</a></h3>
 
-  <p>This release of Ptolemy includes
-    the <a href="https://ptolemy.berkeley.edu/projects/chess/capecode/">CapeCode</a>
-    configuration, which is a development environment and host for
-    applications that use accessors, described at
-    accessors.org. CapeCode provides a block diagram editor for
-    prototyping IoT applications and code generators for deploying
-    those applications on other accessor hosts.
+    Ptolemy II now includes a major new way to define actors using the JavaScript actor.
+    This can be used to put specialized functionality into a model easily, without having to create custom Java actors.
+    A library of such scripted actors is provided that supports inclusion into models of significant networking
+    capabilities, including web servers, web clients, sockets, and MQTT, for example, and interfaces to various devices
+    including cameras, audio, and IoT devices.
+    Models built exclusively with such actors, which are also called accessors, and using the DE director,
+    can be code generated and executed independently of Ptolemy II in host based on Node.js.
+    A subset of Ptolemy II known as CapeCode provides a convenient environment for developing such applications.
 
+    <h4>References</h4>
+    <ul>
+      <li>Christopher Brooks, Chadlia Jerad, Hokeun Kim, Edward A. Lee, Marten Lohstroh, Victor Nouvellet, Beth Osyk, Matt Weber. "<a href="http://www.icyphy.org/pubs/75.html#in_browser">A Component Architecture for the Internet of Things</a>," To Appear in Proceedings of the IEEE, 2018.</li>
+      <li>Elizabeth Latronico, Edward A. Lee, Marten Lohstroh, Chris Shaver, Armin Wasicek, and Matthew Weber, "<a href="http://dx.doi.org/10.1109/MIC.2015.17#in_browser">A Vision of Swarmlets</a>," IEEE Internet Computing, 19(2), pp. 20-28, March-April 2015.</li>
+    </ul>
+
+    <h3><a name="learning" id="learning">Learning, Estimation, and Optimization</a></h3>
+    <p>Ptolemy II now includes a library of machine learning, estimation, and optimization actors developed by Ilge Akkaya.
+      This includes support for particle filtering, model-predictive control, hidden Markov models,
+      and various statistical analysis tools.</p>
+
+    <h4>References</h4>
+    <ul>
+      <li>Ilge Akkaya, "<a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-159.html#in_browser">Data-Driven Cyber-Physical Systems via Real-Time Stream Analytics and Machine Learning</a>," PhD Thesis, EECS Department, University of California, Berkeley, Technical Report No. UCB/EECS-2016-159, October 25, 2016.</li>
+      <li>Ilge Akkaya, Shuhei Emoto, Edward A. Lee, "<a href="http://chess.eecs.berkeley.edu/pubs/1078.html">PILOT: An Actor-oriented Learning and Optimization Toolkit</a>," in Proceedings of Second International Workshop on Robotic Sensor Networks (RSN'15), part of Cyber-Physical Systems Week, Seattle, WA, USA, April 13, 2015.</li>
+    </ul>
+
+
+    <h3><a name="aspects" id="learning">Aspects</a></h3>
+
+    <p>Using aspect-oriented modeling, Ptolemy II models can be decorated with other Ptolemy II models that alter the behavior of the original model in
+well-defined ways. This can be used, for example, to using a model of a network (the aspect model) to model communication delays in some application model.
+Aspect models can also model computation times, security attacks, and failures.</p>
+
+    <h4>References</h4>
+    <ul>
+      <li>Ilge Akkaya, Patricia Derler, Shuhei Emoto, and Edward A. Lee, "<a href="http://chess.eecs.berkeley.edu/pubs/1161.html#in_browser">Systems engineering for Industrial Cyber-Physical Systems using Aspects</a>," IEEE Proceedings, Vol. 104, Issue 5, pp 997-1012, April 20, 2016.</li>
+      <li>Ilge Akkaya, Yan Liu, and Edward A. Lee. "<a href="https://dx.doi.org/10.1007/978-3-662-45928-7_1#in_browser">Modeling and Simulation of Network Aspects for Distributed Cyber-Physical Energy Systems</a>," In Cyber Physical Systems Approach to Smart Electric Power Grid, pp. 1-23. Springer Berlin Heidelberg, 2015.</li>
+    </ul>
 
 
     <!-- Leave a trailing p here so that there is a little space at the bottom -->
