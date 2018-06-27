@@ -454,14 +454,23 @@ Technologies, Inc. (* Smyth is now with Altio).
      a graphical block-diagram language, originally developed for
      control system design.  Simulink has a rich and expressive
      model of computation with continuous-time semantics and support
-     for periodic discrete-time signals.  Some of its principles have
-     been incorporated in the CT (continuous-time) domain of Ptolemy II,
-     but not all.  The CT domain, for example, does not have the
-     notion of "sample time" (which in Simulink provides the periodic
-     discrete-time support) nor the support for algebraic loops.
-     There is also currently no code generation support in CT
+     for periodic discrete-time signals. Among the many models of
+     computation supported in Ptolemy II, the closest to Simulink is
+     realized by the Continuous director, which models continuous-time
+     signals and integrates solvers for ordinary differential equations.
+     Whereas Simulink signals are all continuous time (they are defined
+     at all points in time), the signals in the Continuous domain may be
+     discrete (present only at discrete points in time), continuous (present
+     at all points in time), or some mix of the two. The Continuous director
+     is based on a rigorous synchronous/reactive fixed-point semantics.
+     Unlike Simulink, the Continuous domain can be mixed hierarchical with
+     other models of computation, including discrete events, dataflow, and
+     FSM.  The approach to modeling hybrid systems in Ptolemy II is also more
+     rigorous and hierarchical than in Simulink, although Simulink has been
+     improving with successive generations in this regard. 
+     There is currently no code generation support in the Continuous domain
      (in Simulink, this is provided through the associated product
-     Real-Time Workshop).  Also, the CT domain has implemented
+     Real-Time Workshop).  Also, the Continuous domain has implemented
      fewer ODE solvers than those provided by Simulink and has a
      smaller actor library.
 
@@ -473,8 +482,9 @@ Technologies, Inc. (* Smyth is now with Altio).
      and the interfaces to the core mechanisms in the software
      are published and documented.  The persistent file format
      (MoML) is XML in Ptolemy II, which makes it both more verbose
-     and more portable than the Simulink syntax (MDL files).
-     Simulink supports one model of computation, whereas Ptolemy II
+     but more portable than the Simulink syntax (MDL files).
+     Simulink supports one model of computation (two, if you consider the
+     integration of Stateflow), whereas Ptolemy II
      supports several, and can be extended with new models of
      computation.  Simulink can also be extended, as for example
      it has been with the associated product Stateflow, which
@@ -484,6 +494,11 @@ Technologies, Inc. (* Smyth is now with Altio).
      second class. For example, they cannot define the model of
      computation at the top level of the hierarchy, and cannot
      contain Simulink models within their own components.
+     
+  <p>   Simulink natively allows (with a warning) algebraic loops, which
+     can result in nondeterminstic models.  In Ptolemy II, algebraic loops
+     are supported by a separate director, so users are not likely to
+     accidentally end up with nondeterministic models.
  <dd> 
 
 
