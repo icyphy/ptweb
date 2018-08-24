@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+    <title>Jensen, Lee, & Seshia: An Introductory Lab in Embedded and Cyber-Physical Systems</title>
+    <meta name="Description" content="Lee &amp; Seshia: About the Authors" />
+
+    <!--Script inserts current year in copyright section of footer -->
+<script type="text/javascript" src="js/getyear.js"></script>
+<link href="css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="css/UCB-flex.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+<!-- Conditional comment addds IE6-specific CSS deviations -->
+<!--[if lte IE 6]>
+<link href="css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+<![endif]-->
+</head>
+
+<body>
+<div id="sizer"><div id="expander"><div id="innerwrapper">
+<div id="outside">
+  <div id="banr">
+    <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+    <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+    <!-- Link to UC Berkeley home page; do not remove -->
+<div id="ucb"><a href="http://www.berkeley.edu"><img src="/img/berkeleytext.gif" alt="UC Berkeley"/></a></div>
+    <!-- OPTIONAL most-used toolset. Search is entire UC Berkeley web; can be customized to site  -->
+
+    <div id="tools">
+<!--
+<a href="http://chess.eecs.berkeley.edu/visitorinfo.htm#CampusMap">MAP</a> |
+-->
+<!--Google Custom Search Engine code w/ and w/o Javascript; searches full berkeley.edu domain -->
+<!-- To switch to different local CSE, change cx value="" in both noscript and script sections -->
+<noscript>
+<form action="http://www.google.com/cse" id="cse-search-box">
+  <div style="display:inline">
+    <input type="hidden" name="cx" value="004973557008419276308:6lyt-1wwtsq" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <label for="search">SEARCH UC Berkeley</label>&nbsp;<input type="text" name="q" size="15" id="search" />&nbsp;<input class="go" name="Submit" type="image" src="/img/bearpaw.gif" alt="Go" align="bottom"/>&nbsp;
+  </div>
+</form>
+</noscript>
+<script type="text/javascript">
+<!--
+function convertQuote(form)
+{
+	var str = form.q.value;
+	form.q.value = (str.replace(/’/g,"'"));
+}
+document.write('<form action="http://www.berkeley.edu/search/" id="cse-search-box">');
+document.write('<div style="display:inline;">');
+document.write('<input type="hidden" name="cx" value="004973557008419276308:6lyt-1wwtsq" />');
+document.write('<input type="hidden" name="cof" value="FORID:11" />');
+document.write('<input type="hidden" name="ie" value="UTF-8" />');
+document.write('<label for="search">SEARCH UC Berkeley</label>&nbsp;<input type="text" name="q" size="15" id="search" />&nbsp;');
+document.write('<input type="image" src="/img/bearpaw.gif" alt="Go" class="go" name="Submit" align="bottom" onClick="convertQuote(this.form);" />&nbsp;');
+document.write('</div></form>');
+//-->
+</script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en;"></script>
+</div><!-- /#tools -->
+
+
+<!-- Website logo -->
+
+    <!-- OPTIONAL Customizable Quick Links dropdown -->
+    <!-- OPTIONAL horizontal top navigation -->
+  </div>
+  <!-- /#banr -->
+  <div id="pagebody">
+    <div id="section">
+      <div id="section-txt">Jensen, Lee, &amp; Seshia: An Introductory Lab in Embedded and Cyber-Physical Systems</div>
+    </div>
+    <div id="navcol">
+      <!-- Main site navigation -->
+      <!-- leeseshiaweb/lab/ssi/menu.htm start. -->
+<div id="menu">
+<ul>
+<li><a href="http://LeeSeshia.org">Lee &amp; Seshia</a></li>
+<li><a href="index.html">Lab Manual Home</a></li>
+<li><a href="/lab/authors.html">Lab Manual Authors</a></li>
+</ul>
+</div><!-- /#menu -->
+<!-- leeseshiaweb/lab/ssi/menu.htm end. -->
+
+      <div id="addon">
+        <p>This book provides a suite of hands-on laboratory exercises in embedded and cyber-physical systems.</p>
+      </div>
+    </div>  <!-- /#navcol -->
+    <div id="contentcol">
+
+      <div id="content">
+
+<!-- Comment out sidebar
+	<div id="sidebar">
+	  <div id="pagelinks"><strong>Page links</strong>
+	    <ul>
+	      <li><a href="http://ptolemy.berkeley.edu/~eal/">Lee</a></li>
+	      <li><a href="http://www.eecs.berkeley.edu/Faculty/Homepages/seshia.html">Seshia</a> </li>
+	      <li><a href="http://chess.eecs.berkeley.edu/eecs149/">EECS 149</a> </li>
+	    </ul>
+	  </div>
+       </div>
+-->
+
+          <!-- Begin main page content -->
+      <!-- Link target for accessibility Skip Nav -->
+      <a name="maincontent" id="maincontent"></a>
+
+    <h1> About the Authors </h1>
+
+    <table border="0" cellspacing="2" cellpadding="2" valign=top>
+      <tr>
+	<td valign=top>
+	  <a href="/img/JeffJensen.jpg"><img alt="Picture of Jeff Jensen" src="/img/JeffJensen.jpg"/></a>
+	</td>
+
+	<td valign=top>
+	  <a href="/img/eal.jpg"><img alt="Picture of E. A. Lee" src="/img/ealSmaller.jpg"/></a>
+	</td>
+	<td valign=top>
+	  <a href="/img/sas.jpg"><img alt="Picture of S. A. Seshia" src="/img/sasSmaller.jpg"/></a>
+	</td>
+      </tr>
+      <tr>
+	<td valign=top>
+	  <h2> Jeff C. Jensen </h2>
+	</td>
+	<td valign=top>
+	  <h2> Edward Ashford Lee </h2>
+	</td>
+	<td valign=top>
+	  <h2> Sanjit A. Seshia </h2>
+	</td>
+      </tr>
+      <tr>
+	<td valign=top>
+	  <a href="http://www.linkedin.com/in/elgeeko">Jeff C. Jensen</a> is Director of Software at the robotics startup <a href="http://momentummachines.com">Momentum Machines</a> where he leads the development of software, electronics and embedded systems. He is former Senior Product Manager for Real-Time Systems at <a href="http://ni.com">National Instruments</a>, responsible for driving innovation of software products used to design, prototype and deploy cyber-physical systems. Jeff is an instructional adviser to the EECS department at UC Berkeley and a contributing author to UC Berkeley EECS 149 and UC BerkeleyX 149.1x on the topics of embedded and cyber-physical systems. He received B.S. and M.S. degrees in Electrical Engineering & Computer Science from the University of California, Berkeley as a researcher at the Center for Hybrid and Embedded Software Systems.
+	</td>
+
+	<td valign=top>
+	  <a href="http://ptolemy.berkeley.edu/~eal/">Edward A. Lee</a> is the Robert S. Pepper Distinguished Professor and former chair of the <a href="http://www.eecs.berkeley.edu/">Electrical Engineering and Computer Sciences</a> (EECS) department at <a href="http://www.berkeley.edu/">UC Berkeley</a>. His research interests center on design, modeling, and simulation of embedded, real-time computational systems. He is a director of Chess, the Berkeley Center for Hybrid and Embedded Software Systems, and is the director of the Berkeley Ptolemy project. He received a B.S. from Yale University (1979), an S.M. from MIT (1981), and a Ph.D. from UC Berkeley (1986). From 1979 to 1982 he was a member of technical staff at Bell Labs. He is a co-founder of BDTI, Inc., where he is currently a Senior Technical Advisor. He is a Fellow of the IEEE, was an NSF Presidential Young Investigator, and won the 1997 Frederick Emmons Terman Award for Engineering Education.
+	</td>
+
+	<td valign=top>
+	  <a href="http://www.eecs.berkeley.edu/Faculty/Homepages/seshia.html">Sanjit A. Seshia</a> is an Associate Professor in the
+	  <a href="http://www.eecs.berkeley.edu/">Department of Electrical Engineering
+	    and Computer Sciences</a> at <a href="http://www.berkeley.edu/">UC Berkeley</a>.
+	  His research interests are in dependable computing and computational logic, with a current focus on applying automated formal methods to problems in embedded/cyber-physical systems, computer security, electronic design automation and synthetic biology.
+	  He received his B.Tech. in Computer Science and Engineering from the Indian Institute of Technology, Bombay and a M.S. and a Ph.D. in Computer Science from Carnegie Mellon University. He has received a Presidential Early Career Award for Scientists and Engineers (PECASE), an Alfred P. Sloan Research Fellowship, and the School of Computer Science Distinguished Dissertation Award at Carnegie Mellon University.
+	</td>
+
+      </tr>
+    </table>
+
+          </div>
+      <!-- /#content -->
+    </div>
+    <!-- /#contentcol -->
+  </div>
+  <!-- /#pagebody -->
+</div>
+<!-- /#outside -->
+<div id="footer">
+<!-- Script inserts current year in copyright string -->
+Copyright &copy; <script type="text/javascript">
+<!--
+displayDate();
+//-->
+</script> 
+Jeff C. Jensen, Edward A. Lee and Sanjit Seshia; all rights reserved.
+</div><!-- /#footer -->
+
+</div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+<!-- OPTIONAL Insert tracking code here -->
+</body>
+</html>
+
