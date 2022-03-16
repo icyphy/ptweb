@@ -22,6 +22,25 @@
 
     <h2>Mac OS X Specific Notes</h2>
 
+    <h3><a name="blurry">Under macOS 11.6.3 (Big Sur), the contents of
+        the windows might be blurry.</a></h3>
+      The fix is to
+    edit <code>$PTII/bin/Vergil.app/Contents/Info.plist</code> and
+    change
+
+     <pre>
+      &lt;key&gt;VMOptions&lt;/key&gt;
+      &lt;string&gt;-Xmx4096m&lt;/string&gt;
+     </pre>
+     to
+     <pre>
+      &lt;key&gt;VMOptions&lt;/key&gt;
+      &lt;array&gt;
+        &lt;string&gt;-Xmx4096m&lt;/string&gt;
+        &lt;string&gt;-Dsun.java2d.uiScale=2.5&lt;/string&gt;
+      &lt;/array&gt;
+     </pre>
+     See <a href="https://github.com/icyphy/ptII/issues/342">#342 Blurry Fonts on Mac</a>.
 
     <h3><a name="Java18Required">You are running a 1.6.0_65 version of the Java Platform</a></h3>
     If you click on the installer and get a message that says
