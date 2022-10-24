@@ -1,0 +1,5 @@
+# Avoid publishing https://ptolemy.berkeley.edu/.git/
+# See https://serverfault.com/questions/128069/how-do-i-prevent-apache-from-serving-the-git-directory
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\.svn
+
