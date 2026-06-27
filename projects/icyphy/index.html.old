@@ -162,7 +162,7 @@
     <ul>
       <li><a href="/projects/icyphy/accessors">Accessors</a>, a framework for programming the Internet of Things
         <ul>
-          <li><a href="http://capecode.org">Cape Code</a>, a development environment and host for applications that use accessors.  CapeCode is a configuration of Ptolemy II</a>
+          <li><a href="https://ptolemy.berkeley.edu/accessors/node_modules/@accessors-hosts/ptolemy/index.html">Cape Code</a>, a development environment and host for applications that use accessors.  CapeCode is a configuration of Ptolemy II</a>
         </li>
       </ul>
       <li><a href="http://cyphysim.org">CyPhSim</a>, a Cyber-Physical Simulator based on Ptolemy II</li>
