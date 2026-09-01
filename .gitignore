@@ -4,11 +4,6 @@ accessors.git/
 acs/
 archive/index.html
 books/MoCs/ConcurrentMoC_Digital_0_02.pdf
-books/Systems/PtolemyII_DigitalV1_02.pdf
-books/Systems/chapters.1
-books/Systems/chapters/
-books/Systems/index.html
-books/Systems/models/
 conferences/01/index.html
 conferences/01/src/miniconf/
 conferences/03/presentations/
@@ -929,7 +924,6 @@ publications/papers/99/vision/index.html
 publications/papers/99/vision/ponte.pdf
 search.1
 search/index.html
-systems
 tmp/
 tycho.1
 tycho.2
