@@ -68,6 +68,11 @@ VIRTUAL_PATH_ALIASES = {
     "adm": "admin",
 }
 
+# Short URL paths served by Apache Alias on Berkeley; map to repo directories.
+URL_PATH_ALIASES = {
+    "systems": "books/Systems",
+}
+
 
 def repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
@@ -95,6 +100,38 @@ def is_remote_virtual_path(virtual_path: str) -> bool:
 def substitute_urls(text: str) -> str:
     for old, new in URL_SUBSTITUTIONS:
         text = text.replace(old, new)
+    return text
+
+
+def apply_path_aliases(text: str) -> str:
+    """Rewrite short URL paths (e.g. /systems) to their repo locations."""
+    for alias, target in URL_PATH_ALIASES.items():
+        text = re.sub(
+            rf'(\b(?:href|src|action)\s*=\s*["\'])/{alias}(?=["\']|/)',
+            rf"\1/{target}",
+            text,
+            flags=re.IGNORECASE,
+        )
+        text = re.sub(
+            rf"(\burl=)/{alias}(?=['\"]|/)",
+            rf"\1/{target}",
+            text,
+            flags=re.IGNORECASE,
+        )
+        text = re.sub(
+            rf"(https?://ptolemy\.org)/{alias}(?=/|['\"]|>|<|\s|$)",
+            rf"\1/{target}",
+            text,
+            flags=re.IGNORECASE,
+        )
+    return text
+
+
+def transform_text(text: str, base_path: str) -> str:
+    """Hostname, path-alias, and base-path rewrites for built output only."""
+    text = substitute_urls(text)
+    text = apply_path_aliases(text)
+    text = apply_base_path(text, base_path)
     return text
 
 
@@ -200,6 +237,30 @@ def copy_site(source: Path, destination: Path) -> None:
             shutil.copy2(entry, target, follow_symlinks=False)
 
 
+def create_path_alias_stubs(site_root: Path, base_path: str) -> int:
+    """Add redirect stubs so bookmarked short URLs (e.g. /systems) still work."""
+    prefix = normalize_base_path(base_path)
+    url_prefix = f"{prefix}/" if prefix else "/"
+    count = 0
+
+    for alias, target in URL_PATH_ALIASES.items():
+        alias_dir = site_root / alias
+        if alias_dir.exists():
+            continue
+
+        target_url = f"{url_prefix}{target}/index.htm"
+        alias_dir.mkdir(parents=True)
+        (alias_dir / "index.htm").write_text(
+            "<!DOCTYPE html>\n"
+            f'<meta http-equiv="refresh" content="0;url={target_url}">\n'
+            f'<p>Redirecting to <a href="{target_url}">{target}</a>.</p>\n',
+            encoding="utf-8",
+        )
+        count += 1
+
+    return count
+
+
 def process_html_files(site_root: Path, base_path: str) -> int:
     count = 0
     for path in site_root.rglob("*"):
@@ -209,7 +270,7 @@ def process_html_files(site_root: Path, base_path: str) -> int:
         if "<!--#include" not in content.lower():
             continue
         expanded = expand_ssi(content, site_root, ())
-        updated = apply_base_path(substitute_urls(expanded), base_path)
+        updated = transform_text(expanded, base_path)
         path.write_text(updated, encoding="utf-8")
         count += 1
     return count
@@ -222,8 +283,7 @@ def apply_url_substitutions(site_root: Path, base_path: str) -> int:
             continue
         if path.name == "robots.txt" or path.suffix.lower() in TEXT_SUFFIXES:
             original = path.read_text(encoding="utf-8", errors="replace")
-            updated = substitute_urls(original)
-            updated = apply_base_path(updated, base_path)
+            updated = transform_text(original, base_path)
             if updated != original:
                 path.write_text(updated, encoding="utf-8")
                 count += 1
@@ -255,6 +315,10 @@ def main() -> int:
     print("Applying build-time URL substitutions...")
     text_count = apply_url_substitutions(output, base_path)
     print(f"  updated {text_count} text files")
+
+    print("Creating path alias redirect stubs...")
+    stub_count = create_path_alias_stubs(output, base_path)
+    print(f"  created {stub_count} redirect stub(s)")
 
     print(f"Build complete: {output}")
     return 0
