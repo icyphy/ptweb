@@ -1,3 +1,4 @@
+.DS_Store
 accessors
 accessors.git/
 acs/
@@ -960,3 +961,4 @@ wais.html
 ~murthy/
 ~neuendor
 ~sedwards
+_site/
