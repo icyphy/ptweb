@@ -24,6 +24,17 @@ jobs:
       - name: Build static site
         run: ./bin/build-for-pages
 
+      - name: Checkout EAL homepage
+        uses: actions/checkout@v4
+        with:
+          repository: edwardalee/homepage
+          path: homepage-src
+
+      - name: Build EAL homepage into ~eal/
+        run: homepage-src/bin/build-for-pages "_site/~eal"
+        env:
+          SITE_BASE_PATH: /~eal
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
