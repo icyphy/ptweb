@@ -23,11 +23,6 @@ jobs:
 
       - name: Build static site
         run: ./bin/build-for-pages
-        env:
-          # Required while the site is served from .../ptweb/ (GitHub project URL
-          # or www.icyphy.org/ptweb/). Remove or set to "" when using a custom
-          # domain at the site root (e.g. ptolemy.org).
-          PTWEB_BASE_PATH: /ptweb
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
