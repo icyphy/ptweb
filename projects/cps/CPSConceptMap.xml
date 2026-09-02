@@ -1,0 +1,1570 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE class PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<class name="CPSConceptMap" extends="ptolemy.data.ontologies.Ontology">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="11.1.devel">
+    </property>
+    <property name="_library" class="ptolemy.moml.LibraryAttribute">
+        <configure>
+		<entity name="library" class="ptolemy.kernel.CompositeEntity"><input source="ptolemy/data/ontologies/ontologyLibrary.xml"></input></entity>
+	      </configure>
+    </property>
+    <property name="Title" class="ptolemy.vergil.basic.export.web.Title" value="Cyber-Physical Systems - a Concept Map">
+        <property name="italic" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, -90.0]">
+        </property>
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={292, 41, 1093, 969}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[859, 859]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="0.9009572515588805">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{510.16552895879266, 385.16552895879266}">
+    </property>
+    <property name="_defaultWebExportParameters" class="ptolemy.vergil.basic.export.web.WebExportParameters">
+        <property name="directoryToExportTo" class="ptolemy.data.expr.FileParameter" value="/Users/eal/SVNimages/cpswww">
+            <property name="allowFiles" class="ptolemy.data.expr.Parameter" value="false">
+            </property>
+            <property name="allowDirectories" class="ptolemy.data.expr.Parameter" value="true">
+            </property>
+        </property>
+        <property name="backgroundColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,1.0,1.0}">
+        </property>
+        <property name="openCompositesBeforeExport" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="runBeforeExport" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="showInBrowser" class="ptolemy.data.expr.Parameter" value="true">
+        </property>
+        <property name="copyJavaScriptFiles" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="usePtWebsite" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_expertMode" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+    </property>
+    <property name="Annotation" class="ptolemy.vergil.kernel.attributes.TextAttribute">
+        <property name="textColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.9882353,1.0}">
+        </property>
+        <property name="text" class="ptolemy.kernel.util.StringAttribute" value="http://CyberPhysicalSystems.org">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[35.0, -55.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="http://CyberPhysicalSystems.org">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_blank">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{65, 110}">
+            </property>
+        </property>
+    </property>
+    <property name="DefaultIconScript" class="ptolemy.vergil.basic.export.web.DefaultIconScript" value="">
+        <property name="script" class="ptolemy.data.expr.StringParameter" value="function writeText(text) {&#10;    document.getElementById(&quot;afterImage&quot;).innerHTML = text;&#10;};">
+        </property>
+        <property name="endText" class="ptolemy.data.expr.StringParameter" value="&lt;p id=&quot;afterImage&quot;&gt;&lt;/p&gt;">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[50.0, 905.0]">
+        </property>
+    </property>
+    <property name="LocalPreferences" class="ptolemy.actor.gui.PtolemyPreferences">
+        <property name="backgroundColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,1.0,1.0}">
+            <display name="Background Color"/>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[265.0, 880.0]">
+        </property>
+    </property>
+    <property name="Annotation2" class="ptolemy.vergil.kernel.attributes.TextAttribute">
+        <property name="textColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,1.0,1.0}">
+        </property>
+        <property name="text" class="ptolemy.kernel.util.StringAttribute" value="See authors and contributors.">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[540.0, -80.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Authors_and_Contributors.html">
+            <property name="displayText" class="ptolemy.data.expr.StringParameter" value="Authors_and_Contributors.html">
+            </property>
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{120, 80}">
+            </property>
+        </property>
+    </property>
+    <property name="HTMLText" class="ptolemy.vergil.basic.export.web.HTMLText" value="&lt;h1&gt;Cyber-Physical Systems&lt;/h1&gt;&#10;&lt;p&gt;Cyber-Physical Systems (CPS) are integrations of computation, networking, and physical processes.&#10;Embedded computers and networks monitor and control the physical processes, with feedback loops&#10;where physical processes affect computations and vice versa.&#10;The economic and societal potential of such systems is vastly greater&#10;than what has been realized, and major investments are being made worldwide&#10;to develop the technology.&#10;The technology builds on the older (but still very young) discipline of embedded systems,&#10;computers and software embedded in devices whose principle mission is not computation,&#10;such as cars, toys, medical devices, and scientifi c instruments.&#10;CPS integrates the dynamics of the physical processes with those of the software and networking,&#10;providing abstractions and modeling, design, and analysis techniques for the integrated whole.  &#10;&lt;/p&gt;">
+        <property name="displayText" class="ptolemy.data.expr.StringParameter" value="Text before the figure">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[50.0, 870.0]">
+        </property>
+    </property>
+    <property name="HTMLText2" class="ptolemy.vergil.basic.export.web.HTMLText" value="&lt;p&gt;&#10;Click on icons above for details. Please send comments, suggestions, and links to&#10;&lt;a href=&quot;mailto:eal@berkeley.edu&quot;&gt;eal@berkeley.edu&lt;/a&gt;.&#10;Alternatively, you can download the above model from&#10;&lt;a href=&quot;http://CyberPhysicalSystems.org/CPSConceptMap.xml&quot;&gt;http://CyberPhysicalSystems.org/CPSConceptMap.xml&lt;/a&gt;&#10;and edit it in &#10;&lt;a href=&quot;http://ptolemy.org/ptolemyII&quot;&gt;Ptolemy II&lt;/a&gt;.&#10;See also the &lt;a href=&quot;CPSConceptMap.pdf&quot;&gt;PDF version&lt;/a&gt;.&#10;&lt;/p&gt;&lt;p&gt;&#10;As a discipline, CPS is an engineering discipline, focused on technology, with a strong foundation&#10;in mathematical abstractions. The key technical challenge is to conjoin abstractions that have&#10;evolved over centuries for modeling physical processes (differential equations, stochastic&#10;processes, etc.) with abstractions that have evolved over decades in computer science (algorithms and&#10;programs, which provide a&#10;&quot;procedural epistemology&quot; [Abelson and Sussman]).&#10;The former abstractions focus on dynamics (evolution of system state over time),&#10;whereas the latter focus on processes of transforming data.&#10;Computer science, as rooted in the Turing-Church notion of computability,&#10;abstracts away core physical properties, particularly the passage of time, &#10;that are required to include the dynamics of the physical world in the domain of discourse.&#10;&lt;/p&gt;&#10;&lt;a name=&quot;talks&quot;&gt;&lt;/a&gt;&lt;h2&gt;Online talks about CPS&lt;/h2&gt;&#10;&lt;ul&gt;&#10;&lt;li&gt; &lt;a href=&quot;https://play.mdh.se/media/t/0_tvle844g&quot;&gt;Models of Timed Systems&lt;/a&gt;, M&amp;auml;lardalens University, V&amp;auml;ster&amp;acirc;s, Sweden, Sep. 26, 2018.&lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;https://www.youtube.com/watch?v=jGQKj-USUOc&amp;feature=youtu.be&quot;&gt; Resurrecting Laplace's Demon: The Case for Deterministic Models&lt;/a&gt;, CS Distinguished Speaker Series, Univ. of Houston, Nov. 8, 2017.&lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;https://www.youtube.com/watch?v=G8aofqZxVZY&amp;feature=youtu.be&quot;&gt; What Does 'Real Time' Mean?&lt;/a&gt; Simons Institute, UC Berkeley, June 28, 2016.&lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;https://www.youtube.com/watch?v=V2CvSsvDXb4&amp;feature=youtu.be&quot;&gt; The Internet of Important Things&lt;/a&gt;, Reykjavik University, June 16, 2016.&lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;http://www.college-de-france.fr/site/gerard-berry/guestlecturer-2013-12-11-17h00.htm&quot;&gt; Cyber-Physical Systems: A Fundamental Intellectual Challenge&lt;/a&gt;, College de France, Paris, France, Dec. 11, 2013..&lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;http://youtu.be/pdhyniSDhZk&quot;&gt;Cyber-Physical Systems:A Rehash or A New Intellectual Challenge?&lt;/a&gt;, Invited Talk, CEDA, DAC, June 4, 2013, Austin, Texas.&#10;&lt;/ul&gt;&#10;&lt;a name=&quot;activities&quot;&gt;&lt;/a&gt;&lt;h2&gt;Berkeley CPS Activities&lt;/h2&gt;&#10;&lt;p&gt;&#10;At Berkeley,&#10;&lt;a href=&quot;http://icyphy.org&quot;&gt;iCyPhy, the Industrial Cyber-Physical Systems consortium&lt;/a&gt;,&#10;is pursuing foundational research in the abstractions and analytical techniques of CPS.&#10;Some of the projects addressing this problem:&#10;&lt;li&gt; &lt;a href=&quot;https://github.com/icyphy/lingua-franca/wiki&quot;&gt;Lingua Franca&lt;/a&gt;&lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;http://ptolemy.org&quot;&gt;The Ptolemy Project&lt;/a&gt; &lt;/li&gt;&#10;&lt;/ul&gt;&#10;&lt;/p&gt;&lt;p&gt;&#10;Some specific research products relevant to CPS:&#10;&lt;ul&gt;&#10;&lt;li&gt; &lt;a href=&quot;https://github.com/icyphy/lingua-franca&quot;&gt;Lingua Franca&lt;/a&gt;&lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;http://ptolemy.org/ptolemyII&quot;&gt;Ptolemy II Software Framework&lt;/a&gt; &lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;http://chess.eecs.berkeley.edu/ptides&quot;&gt;PTIDES programming model&lt;/a&gt; for distributed real-time systems &lt;/li&gt;&#10;&lt;li&gt; &lt;a href=&quot;http://chess.eecs.berkeley.edu/pret&quot;&gt;Precision Timed (PRET) machines&lt;/a&gt; &lt;/li&gt;&#10;&lt;/ul&gt;&#10;&lt;a name=&quot;publications&quot;&gt;&lt;/a&gt;&lt;h2&gt;Berkeley CPS Publications&lt;/h2&gt;&#10;&lt;p&gt;See &lt;a href=&quot;http://ptolemy.eecs.berkeley.edu/publications/cps.htm&quot;&gt;Berkeley CPS publications&lt;/a&gt;.">
+        <property name="displayText" class="ptolemy.data.expr.StringParameter" value="Text after the figure">
+        </property>
+        <property name="textPosition" class="ptolemy.vergil.basic.export.web.HTMLTextPosition" value="end">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[50.0, 885.0]">
+        </property>
+    </property>
+    <property name="RequireVersion" class="ptolemy.kernel.attributes.RequireVersion" value="9.0.devel">
+        <property name="_hideName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+      <svg>
+        <text x="20" style="font-size:14; font-family:SansSerif; fill:blue" y="20">-V-</text>
+      </svg>
+    </configure>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[400.0, 895.0]">
+        </property>
+    </property>
+    <entity name="Cyber-Physical Systems" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name=" Cyber-Physical&#10;     Systems"/>
+        <property name="isAcceptable" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.4,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[105.0, 350.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Cyber-Physical_Systems.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{450, 275}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Hybrid Models" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="   Hybrid and&#10;Heterogeneous&#10;      Models"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.73333335,0.20392157,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[802.4678615424396, 391.7742962672741]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Hybrid_Models.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{295, 315}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Feedback Systems" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="Feedback&#10; Systems"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{215.0, 80.0}">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Feedback_Systems.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{295, 315}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Transportation" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[332.23228525192496, 842.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Transportation.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Manufacturing" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[332.23228525192496, 692.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Manufacturing.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Health Care" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[327.23228525192496, 662.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Health_Care.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Adaptive and Predictive" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[460.0, 80.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Adaptive_and_Predictive.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Clock Synchronization" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.73333335,0.20392157,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[820.4678615424396, 480.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Time_Synchronization.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Cyber Security" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name=" Cyber&#10;Security"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.8,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[300.0, 240.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Cyber_Security.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{295, 315}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Energy" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[312.23228525192496, 602.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Energy.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Scalability and Complexity Management" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="  Scalability&#10;       and&#10; Complexity&#10;Management"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,0.2,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[592.232285251925, 542.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Scalability_and_Complexity_Management.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{275, 200}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Legacy Systems" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="Interfacing with&#10;Legacy Systems"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,0.2,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[840.4678615424396, 590.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Legacy_Systems.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Wireless Sensing and Actuation" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name=" Wireless&#10; Sensing&#10;    and &#10;Actuation"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.7,0.7,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[690.0, 40.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Wireless_Sensing_and_Actuation.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{295, 315}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Validation and Verification" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name=" Validation&#10;      and&#10;Verification"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.5803922,0.8,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[592.232285251925, 667.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Validation_and_Verification.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{295, 315}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Assurance" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.5803922,0.8,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[760.4678615424396, 635.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Assurance.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Certification" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.5803922,0.8,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[765.4678615424396, 670.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Certification.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Military" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[312.23228525192496, 722.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Military.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Resilience" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.8,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[415.0, 195.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Resilience.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Intrusion Detection" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.8,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[445.0, 300.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Intrusion_Detection.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Privacy" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.8,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[410.0, 230.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Privacy.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Robotics" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[317.23228525192496, 782.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Robotics.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Consumer" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[322.23228525192496, 572.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Consumer.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Communication" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[337.23228525192496, 542.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Communication.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Design Methodology" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,0.2,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[352.23228525192496, 507.97525887774515]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Design_Methodology.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Malicious Attacks" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.8,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[440.0, 265.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Malicious_Attacks.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Continuous and Discrete" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="Continuous&#10;and Discrete"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.73333335,0.20392157,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[932.4678615424396, 411.7742962672741]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Continuous_and_Discrete.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Infrastructure" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[327.23228525192496, 632.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Infrastructure.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Stochastic Models" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.5803922,0.8,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[780.4678615424396, 740.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Stochastic_Models.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Modularity and Composability" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,0.2,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[880.4678615424396, 515.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Modularity_and_Composability.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Tools" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="Improved Design Tools"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,0.2,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[352.23228525192496, 442.97525887774515]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Tools.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Specification, Modeling, and Analysis" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="Specification,&#10;Modeling, and&#10;    Analysis"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.73333335,0.20392157,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[597.232285251925, 447.97525887774515]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Specification_Modeling_Analysis.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{295, 315}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Models of Computation" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="  Models of&#10;Computation"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.73333335,0.20392157,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[932.4678615424396, 356.7742962672741]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Models_of_Computation.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Networked and/or Distributed" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[475.0, 40.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Networked_Control.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Simulation" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.5803922,0.8,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[760.4678615424396, 705.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Simulation.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Networking" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.73333335,0.20392157,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[790.4678615424396, 445.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Networking.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Intelligent" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[415.0, 120.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Intelligent_Systems.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Concept" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.2,1.0,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[325.0, 80.0]">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.EditorIcon">
+            <property name="ellipse" class="ptolemy.vergil.kernel.attributes.EllipseAttribute">
+                <property name="_location" class="ptolemy.kernel.util.Location" value="-5.5, 9.5">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="height" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="centered" class="ptolemy.data.expr.Parameter" value="true">
+                </property>
+                <property name="fillColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.0,1.0}">
+                </property>
+            </property>
+        </property>
+    </entity>
+    <entity name="Concept2" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.2,1.0,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{225.0, 350.0}">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.EditorIcon">
+            <property name="ellipse" class="ptolemy.vergil.kernel.attributes.EllipseAttribute">
+                <property name="_location" class="ptolemy.kernel.util.Location" value="-5.5, 9.5">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="height" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="centered" class="ptolemy.data.expr.Parameter" value="true">
+                </property>
+                <property name="fillColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.0,1.0}">
+                </property>
+            </property>
+        </property>
+    </entity>
+    <entity name="Humans in the Loop" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[445.0, 0.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Human_in_the_Loop.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Real Time" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[420.0, 160.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Real-Time_Systems.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Concept3" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.2,1.0,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[507.23228525192496, 507.97525887774515]">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.EditorIcon">
+            <property name="ellipse" class="ptolemy.vergil.kernel.attributes.EllipseAttribute">
+                <property name="_location" class="ptolemy.kernel.util.Location" value="-5.5, 9.5">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="height" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="centered" class="ptolemy.data.expr.Parameter" value="true">
+                </property>
+                <property name="fillColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.0,1.0}">
+                </property>
+            </property>
+        </property>
+    </entity>
+    <entity name="Concept4" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.2,1.0,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[187.23228525192496, 647.9752588777451]">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.EditorIcon">
+            <property name="ellipse" class="ptolemy.vergil.kernel.attributes.EllipseAttribute">
+                <property name="_location" class="ptolemy.kernel.util.Location" value="-5.5, 9.5">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="height" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="centered" class="ptolemy.data.expr.Parameter" value="true">
+                </property>
+                <property name="fillColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.0,1.0}">
+                </property>
+            </property>
+        </property>
+    </entity>
+    <entity name="Concept5" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.2,1.0,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[735.4678615424396, 545.8331363508464]">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.EditorIcon">
+            <property name="ellipse" class="ptolemy.vergil.kernel.attributes.EllipseAttribute">
+                <property name="_location" class="ptolemy.kernel.util.Location" value="-5.5, 9.5">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="height" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="centered" class="ptolemy.data.expr.Parameter" value="true">
+                </property>
+                <property name="fillColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.0,1.0}">
+                </property>
+            </property>
+        </property>
+    </entity>
+    <entity name="Synthesis" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,1.0,0.2,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[820.4678615424396, 550.8331363508464]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Synthesis.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Concept6" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.2,1.0,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[687.232285251925, 447.97525887774515]">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.EditorIcon">
+            <property name="ellipse" class="ptolemy.vergil.kernel.attributes.EllipseAttribute">
+                <property name="_location" class="ptolemy.kernel.util.Location" value="-5.5, 9.5">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="height" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="centered" class="ptolemy.data.expr.Parameter" value="true">
+                </property>
+                <property name="fillColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.0,1.0}">
+                </property>
+            </property>
+        </property>
+    </entity>
+    <entity name="Interoperability" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.73333335,0.20392157,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[802.4678615424396, 341.7742962672741]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Interoperability.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Economics in the Loop" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[455.0, -40.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Economics.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Concept7" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.2,1.0,0.4,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[315.0, -20.0]">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.EditorIcon">
+            <property name="ellipse" class="ptolemy.vergil.kernel.attributes.EllipseAttribute">
+                <property name="_location" class="ptolemy.kernel.util.Location" value="-5.5, 9.5">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="height" class="ptolemy.data.expr.Parameter" value="11.000000000000002">
+                </property>
+                <property name="centered" class="ptolemy.data.expr.Parameter" value="true">
+                </property>
+                <property name="fillColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.0,0.0,0.0,1.0}">
+                </property>
+            </property>
+        </property>
+    </entity>
+    <entity name="Environmentals in the Loop" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{1.0,0.8,0.8,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[625.0, -20.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Environmentals.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="PhysicalSecurity" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="Physical Security"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[337.23228525192496, 752.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Physical_Security.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="SmartBuildings" class="ptolemy.data.ontologies.FiniteConcept">
+        <display name="Smart Buildings"/>
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.4,1.0,1.0,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[337.23228525192496, 812.9752588777451]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Smart_Buildings.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Safety" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.7,1.0,0.7,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{300.0, 385.0}">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Safety.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{295, 315}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Losses" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.7,1.0,0.7,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{410.0, 405.0}">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Losses.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Unsafe Control Actions" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.7,1.0,0.7,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[645.0, 335.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Unsafe_Control_Actions.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Hazard Analysis" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.7,1.0,0.7,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[435.0, 335.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Hazard_Analysis.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <entity name="Safety Constraints" class="ptolemy.data.ontologies.FiniteConcept">
+        <property name="solutionColor" class="ptolemy.actor.gui.ColorAttribute" value="{0.7,1.0,0.7,1.0}">
+        </property>
+        <property name="LatticeElementIcon" class="ptolemy.vergil.ontologies.ConceptIcon">
+        </property>
+        <property name="_hideName" class="ptolemy.data.expr.SingletonParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[440.0, 370.0]">
+        </property>
+        <property name="IconLink" class="ptolemy.vergil.basic.export.web.IconLink" value="Safety_Constraints.html">
+            <property name="linkTarget" class="ptolemy.vergil.basic.export.web.LinkTarget" value="_lightbox">
+            </property>
+            <property name="_location" class="ptolemy.kernel.util.Location" value="{710, 150}">
+            </property>
+        </property>
+    </entity>
+    <relation name="relation" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="ARE">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.656514263752368">
+        </property>
+    </relation>
+    <relation name="relation8" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.3794346041623191">
+        </property>
+    </relation>
+    <relation name="relation9" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.15895728505578063">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.4879275243237714">
+        </property>
+    </relation>
+    <relation name="relation10" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.36405588959517493">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-1.1131412207423639">
+        </property>
+    </relation>
+    <relation name="relation13" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.2422742495298358">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.6009877433722296">
+        </property>
+    </relation>
+    <relation name="relation15" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.35926423891833764">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.201559489972182">
+        </property>
+    </relation>
+    <relation name="relation16" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.12718225031249875">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.21782319839064157">
+        </property>
+    </relation>
+    <relation name="relation17" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.3553418173700051">
+        </property>
+    </relation>
+    <relation name="relation19" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.3368909862651793">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.43478784107153534">
+        </property>
+    </relation>
+    <relation name="relation20" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.34609901301635376">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.6231495091939884">
+        </property>
+    </relation>
+    <relation name="relation21" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.612595569348547">
+        </property>
+    </relation>
+    <relation name="relation25" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value=" THAT&#10;ENABLE">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.5719398632249137">
+        </property>
+    </relation>
+    <relation name="relation26" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.16735756255349826">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.314781544659329">
+        </property>
+    </relation>
+    <relation name="relation27" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.14095537482929746">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.4686896620000788">
+        </property>
+    </relation>
+    <relation name="relation30" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.258123232765578">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.4311730192556363">
+        </property>
+    </relation>
+    <relation name="relation2" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.09388959889696727">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.4400053660791421">
+        </property>
+    </relation>
+    <relation name="relation32" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.7258322183834451">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.2203650850162453">
+        </property>
+    </relation>
+    <relation name="relation33" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.14116170435106426">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.4276630430687265">
+        </property>
+    </relation>
+    <relation name="relation37" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="THAT&#10; ARE">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-9.74038887677705E-4">
+        </property>
+    </relation>
+    <relation name="relation38" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.21397201759421813">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.21262129390749956">
+        </property>
+    </relation>
+    <relation name="relation39" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.04042577689363915">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.08692144478968386">
+        </property>
+    </relation>
+    <relation name="relation40" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.33595854716468926">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.7676481684568319">
+        </property>
+    </relation>
+    <relation name="relation41" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.24014320814000595">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.9161728827024191">
+        </property>
+    </relation>
+    <relation name="relation42" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="REQUIRE">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.08398879331781019">
+        </property>
+    </relation>
+    <relation name="relation43" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="POSSIBLY&#10;   WITH">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.33099588833420246">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.5833616923302898">
+        </property>
+    </relation>
+    <relation name="relation44" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.5923643819794101">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.0181714534275415">
+        </property>
+    </relation>
+    <relation name="relation14" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="POSSIBLY&#10;   WITH">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.0019352280774828244">
+        </property>
+    </relation>
+    <relation name="relation28" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.8917291521561145">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.2947382169708117">
+        </property>
+    </relation>
+    <relation name="relation45" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="   THAT&#10;SUPPORTS">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.0031447373909799826">
+        </property>
+    </relation>
+    <relation name="relation35" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.27629856961649746">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.9134813874768338">
+        </property>
+    </relation>
+    <relation name="relation12" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.513736901693544">
+        </property>
+    </relation>
+    <relation name="relation46" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="       HAVE&#10;APPLICATIONS&#10;          IN">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.0852105420936278">
+        </property>
+    </relation>
+    <relation name="relation3" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.4657944702560837">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.8300479764792262">
+        </property>
+    </relation>
+    <relation name="relation5" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.2585765894871967">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.4921084246769634">
+        </property>
+    </relation>
+    <relation name="relation6" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.12807568825275104">
+        </property>
+    </relation>
+    <relation name="relation7" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.11723307561036347">
+        </property>
+    </relation>
+    <relation name="relation11" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.030535095854240392">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.12646489532829533">
+        </property>
+    </relation>
+    <relation name="relation18" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.3545343470547265">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.6546909894029646">
+        </property>
+    </relation>
+    <relation name="relation22" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.502877401893465">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.835645286956031">
+        </property>
+    </relation>
+    <relation name="relation23" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.7630454975836645">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.1244280060126313">
+        </property>
+    </relation>
+    <relation name="relation24" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.18757997784748703">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.42145180148333417">
+        </property>
+    </relation>
+    <relation name="relation29" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="THROUGH">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.0019845482871048274">
+        </property>
+    </relation>
+    <relation name="relation47" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.0628533254535033">
+        </property>
+    </relation>
+    <relation name="relation48" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="OF">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.0922594481752456">
+        </property>
+    </relation>
+    <relation name="relation31" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.6768549256567683">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-1.0989306627080404">
+        </property>
+    </relation>
+    <relation name="relation34" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.1949915616464854">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.5680423579770854">
+        </property>
+    </relation>
+    <relation name="relation36" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.10426896019029726">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.2694597993082607">
+        </property>
+    </relation>
+    <relation name="relation49" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.012105839900115262">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.004140893855292084">
+        </property>
+    </relation>
+    <relation name="relation50" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.4536393808325618">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.8308701874243362">
+        </property>
+    </relation>
+    <relation name="relation51" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.6559284408305442">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.0522106600513217">
+        </property>
+    </relation>
+    <relation name="relation52" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0463862212303037">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.19738049573356362">
+        </property>
+    </relation>
+    <relation name="relation54" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.35333502157918534">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.6164764256823777">
+        </property>
+    </relation>
+    <relation name="relation55" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.07911426135748019">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.19089127907422596">
+        </property>
+    </relation>
+    <relation name="relation4" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="-0.385020138447857">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="-0.8129492473657034">
+        </property>
+    </relation>
+    <relation name="relation56" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.32878426651172316">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.6575847967411311">
+        </property>
+    </relation>
+    <relation name="relation53" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="IDENTIFIES">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="0.003593967682749589">
+        </property>
+    </relation>
+    <relation name="relation57" class="ptolemy.data.ontologies.ConceptRelation">
+        <property name="annotation" class="ptolemy.data.expr.StringParameter" value="IMPERILS">
+        </property>
+        <property name="exitAngle" class="ptolemy.data.expr.Parameter" value="0.0031447373909807737">
+        </property>
+        <property name="gamma" class="ptolemy.data.expr.Parameter" value="1.5709304611102297">
+        </property>
+    </relation>
+    <link port="Cyber-Physical Systems.abovePort" relation="relation"/>
+    <link port="Cyber-Physical Systems.abovePort" relation="relation42"/>
+    <link port="Cyber-Physical Systems.abovePort" relation="relation46"/>
+    <link port="Hybrid Models.belowPort" relation="relation4"/>
+    <link port="Hybrid Models.abovePort" relation="relation27"/>
+    <link port="Hybrid Models.abovePort" relation="relation33"/>
+    <link port="Feedback Systems.belowPort" relation="relation"/>
+    <link port="Feedback Systems.abovePort" relation="relation37"/>
+    <link port="Feedback Systems.abovePort" relation="relation43"/>
+    <link port="Transportation.belowPort" relation="relation23"/>
+    <link port="Manufacturing.belowPort" relation="relation24"/>
+    <link port="Health Care.belowPort" relation="relation11"/>
+    <link port="Adaptive and Predictive.belowPort" relation="relation8"/>
+    <link port="Clock Synchronization.belowPort" relation="relation9"/>
+    <link port="Cyber Security.belowPort" relation="relation10"/>
+    <link port="Cyber Security.abovePort" relation="relation19"/>
+    <link port="Cyber Security.abovePort" relation="relation20"/>
+    <link port="Cyber Security.abovePort" relation="relation21"/>
+    <link port="Cyber Security.abovePort" relation="relation26"/>
+    <link port="Cyber Security.abovePort" relation="relation57"/>
+    <link port="Energy.belowPort" relation="relation6"/>
+    <link port="Scalability and Complexity Management.belowPort" relation="relation12"/>
+    <link port="Scalability and Complexity Management.abovePort" relation="relation29"/>
+    <link port="Legacy Systems.belowPort" relation="relation13"/>
+    <link port="Wireless Sensing and Actuation.belowPort" relation="relation14"/>
+    <link port="Validation and Verification.belowPort" relation="relation15"/>
+    <link port="Validation and Verification.abovePort" relation="relation16"/>
+    <link port="Validation and Verification.abovePort" relation="relation17"/>
+    <link port="Validation and Verification.abovePort" relation="relation30"/>
+    <link port="Validation and Verification.abovePort" relation="relation38"/>
+    <link port="Assurance.belowPort" relation="relation16"/>
+    <link port="Certification.belowPort" relation="relation17"/>
+    <link port="Military.belowPort" relation="relation18"/>
+    <link port="Resilience.belowPort" relation="relation19"/>
+    <link port="Intrusion Detection.belowPort" relation="relation20"/>
+    <link port="Privacy.belowPort" relation="relation21"/>
+    <link port="Robotics.belowPort" relation="relation22"/>
+    <link port="Consumer.belowPort" relation="relation5"/>
+    <link port="Communication.belowPort" relation="relation3"/>
+    <link port="Design Methodology.belowPort" relation="relation25"/>
+    <link port="Design Methodology.belowPort" relation="relation28"/>
+    <link port="Design Methodology.abovePort" relation="relation45"/>
+    <link port="Malicious Attacks.belowPort" relation="relation26"/>
+    <link port="Continuous and Discrete.belowPort" relation="relation27"/>
+    <link port="Infrastructure.belowPort" relation="relation7"/>
+    <link port="Stochastic Models.belowPort" relation="relation30"/>
+    <link port="Modularity and Composability.belowPort" relation="relation2"/>
+    <link port="Tools.belowPort" relation="relation32"/>
+    <link port="Tools.abovePort" relation="relation25"/>
+    <link port="Specification, Modeling, and Analysis.belowPort" relation="relation35"/>
+    <link port="Specification, Modeling, and Analysis.abovePort" relation="relation48"/>
+    <link port="Models of Computation.belowPort" relation="relation33"/>
+    <link port="Networked and/or Distributed.belowPort" relation="relation41"/>
+    <link port="Networked and/or Distributed.abovePort" relation="relation14"/>
+    <link port="Simulation.belowPort" relation="relation38"/>
+    <link port="Networking.belowPort" relation="relation39"/>
+    <link port="Intelligent.belowPort" relation="relation40"/>
+    <link port="Concept.belowPort" relation="relation37"/>
+    <link port="Concept.abovePort" relation="relation8"/>
+    <link port="Concept.abovePort" relation="relation41"/>
+    <link port="Concept.abovePort" relation="relation40"/>
+    <link port="Concept.abovePort" relation="relation44"/>
+    <link port="Concept2.belowPort" relation="relation42"/>
+    <link port="Concept2.abovePort" relation="relation10"/>
+    <link port="Concept2.abovePort" relation="relation32"/>
+    <link port="Concept2.abovePort" relation="relation28"/>
+    <link port="Concept2.abovePort" relation="relation56"/>
+    <link port="Humans in the Loop.belowPort" relation="relation36"/>
+    <link port="Real Time.belowPort" relation="relation44"/>
+    <link port="Concept3.belowPort" relation="relation45"/>
+    <link port="Concept3.abovePort" relation="relation35"/>
+    <link port="Concept3.abovePort" relation="relation12"/>
+    <link port="Concept3.abovePort" relation="relation15"/>
+    <link port="Concept4.belowPort" relation="relation46"/>
+    <link port="Concept4.abovePort" relation="relation3"/>
+    <link port="Concept4.abovePort" relation="relation5"/>
+    <link port="Concept4.abovePort" relation="relation6"/>
+    <link port="Concept4.abovePort" relation="relation7"/>
+    <link port="Concept4.abovePort" relation="relation11"/>
+    <link port="Concept4.abovePort" relation="relation18"/>
+    <link port="Concept4.abovePort" relation="relation22"/>
+    <link port="Concept4.abovePort" relation="relation23"/>
+    <link port="Concept4.abovePort" relation="relation24"/>
+    <link port="Concept4.abovePort" relation="relation50"/>
+    <link port="Concept4.abovePort" relation="relation51"/>
+    <link port="Concept5.belowPort" relation="relation29"/>
+    <link port="Concept5.abovePort" relation="relation2"/>
+    <link port="Concept5.abovePort" relation="relation13"/>
+    <link port="Concept5.abovePort" relation="relation47"/>
+    <link port="Synthesis.belowPort" relation="relation47"/>
+    <link port="Concept6.belowPort" relation="relation48"/>
+    <link port="Concept6.abovePort" relation="relation39"/>
+    <link port="Concept6.abovePort" relation="relation9"/>
+    <link port="Concept6.abovePort" relation="relation31"/>
+    <link port="Concept6.abovePort" relation="relation4"/>
+    <link port="Interoperability.belowPort" relation="relation31"/>
+    <link port="Economics in the Loop.belowPort" relation="relation34"/>
+    <link port="Concept7.belowPort" relation="relation43"/>
+    <link port="Concept7.abovePort" relation="relation34"/>
+    <link port="Concept7.abovePort" relation="relation36"/>
+    <link port="Concept7.abovePort" relation="relation49"/>
+    <link port="Environmentals in the Loop.belowPort" relation="relation49"/>
+    <link port="PhysicalSecurity.belowPort" relation="relation50"/>
+    <link port="SmartBuildings.belowPort" relation="relation51"/>
+    <link port="Safety.belowPort" relation="relation56"/>
+    <link port="Safety.belowPort" relation="relation57"/>
+    <link port="Safety.abovePort" relation="relation52"/>
+    <link port="Safety.abovePort" relation="relation54"/>
+    <link port="Safety.abovePort" relation="relation55"/>
+    <link port="Losses.belowPort" relation="relation52"/>
+    <link port="Unsafe Control Actions.belowPort" relation="relation53"/>
+    <link port="Hazard Analysis.belowPort" relation="relation54"/>
+    <link port="Hazard Analysis.abovePort" relation="relation53"/>
+    <link port="Safety Constraints.belowPort" relation="relation55"/>
+</class>

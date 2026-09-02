@@ -1,0 +1,4 @@
+# robots.txt for http://ptolemy.eecs.berkeley.edu
+# See http://info.webcrawler.com/mak/projects/robots/norobots.html
+User-agent: *
+Disallow: CVS

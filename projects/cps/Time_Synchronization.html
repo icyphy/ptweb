@@ -1,0 +1,23 @@
+<h1>Clock Synchronization</h1>
+
+Synchronizing digital clocks across a distributed system
+brings a number of potential benefits, including:
+<ul>
+<li> early detection of remote failures; </li>
+<li> orchestrated use of shared resources such as network bandwidth; </li>
+<li> time-stamping of sensor data with globally meaningful time stamps; and </li>
+<li> coordinated sleep mode in communicating wireless devices for conservation of battery power. </li> 
+</ul>
+
+Clock synchronization technologies include:
+<ul>
+<li> IEEE 1588 Precision-Time Protocol (PTP) for IP on ethernet; </li>
+<li> time-triggered buses (TTA, ARINC, FlexRay, time-triggered ethernet); and </li>
+<li> wireless time synchronization protocols. </li>
+</ul>
+
+Clock synchronization is distinguished from <b>frequency locking</b>.
+The former bounds the difference between clock <i>values</i>, whereas the latter
+bounds the difference between clock <i>rates</i>. An example of a technology
+that provides frequency locking but not time synchronization is synchronous
+ethernet.
