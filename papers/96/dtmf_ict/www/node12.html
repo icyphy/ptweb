@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> Summary</TITLE>
+<meta name="description" value=" Summary">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html144 HREF="node13.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html142 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html136 HREF="node11.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html145 HREF="node13.html">References</A>
+<B>Up:</B> <A NAME=tex2html143 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<B> Previous:</B> <A NAME=tex2html137 HREF="node11.html"> Motorola 56001 Implementation</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00090000000000000000> Summary</A></H1>
+<P>
+ We implemented three real-time DTMF detection schemes, and analyzed
+their performance.
+ We chose an observation time (block size) to optimize the performance
+subject to real-time constraints.
+ The MUSIC DTMF decoder complies with CCITT Q.24 standards, but is
+the most expensive to implement on an embedded DSP processor.
+ Although easier to implement, neither the Goertzel nor the NDFET DTMF
+decoders can satisfy the standards, due to poor frequency resolution
+and high SNR requirements (50 dB), respectively.
+ The hand-coded implementations are faster and require less memory, but
+the Ptolemy designs can be reused and retargeted to a variety of
+implementations.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>

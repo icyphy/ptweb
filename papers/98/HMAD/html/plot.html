@@ -1,0 +1,321 @@
+
+<html><head>
+<script language="JavaScript">
+
+image1 = new Image();
+image2 = new Image();
+image1.src = "support/top.gif";
+image2.src = "support/top.glow.gif";
+
+image3 = new Image();
+image4 = new Image();
+image3.src = "support/prevpage.gif";
+image4.src = "support/prevpage.glow.gif";
+
+image5 = new Image();
+image6 = new Image();
+image5.src = "support/nextpage.gif";
+image6.src = "support/nextpage.glow.gif";
+
+image7 = new Image();
+image8 = new Image();
+image7.src = "support/bottom.gif";
+image8.src = "support/bottom.glow.gif";
+
+image9 = new Image();
+image10 = new Image();
+image9.src = "support/toc.gif";
+image10.src = "support/toc.glow.gif";
+
+image11 = new Image();
+image12 = new Image();
+image11.src = "support/index.gif";
+image12.src = "support/index.glow.gif";
+</script>
+<STYLE>
+
+BODY {
+  background:  #FFFFFF ;
+  
+  color: #000000;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: left;
+}
+
+H1,H2,H3 {
+  font-family: helvetical, arial, sans-serif;
+  text-align: left;}
+
+A:link {color: #0000FF;}
+A:active {color: #FF0000;}
+A:visited {color: #800080;}
+</STYLE>
+<title>Plot</title></head>
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+ 
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate1.src=image2.src; return true" onMouseOut="document.images.animate1.src=image1.src">
+     <img src="support/top.gif" name ="animate1" border="0"></a>
+     <a href="type.html" onMouseOver="document.images.animate2.src=image4.src; return true" onMouseOut="document.images.animate2.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate2"></a>
+     <a href="references.html" onMouseOver="document.images.animate3.src=image6.src; return true" onMouseOut="document.images.animate3.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate3" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate4.src=image8.src; return true" onMouseOut="document.images.animate4.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate4"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate4a.src=image10.src; return true" onMouseOut="document.images.animate4a.src=image9.src">
+     <img src="support/toc.gif"    border="0" name="animate4a"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate4b.src=image12.src; return true" onMouseOut="document.images.animate4b.src=image11.src">
+     <img src="support/index.gif"  border="0" name="animate4b"></a>     
+<br>
+     <small><em>Page 9 out of 12 total pages
+     </small></em>
+     </div>
+
+<hr><br>
+
+ 
+<a name="147768"> </a>
+<h1><center>7  Plot</center></h1>
+<dl>
+<a name="160480"> </a>
+<dd> <i>Edward A. Lee</i>
+<a name="160484"> </a>
+<dd> <i>Christopher Hylands</i>
+</dl>
+<a name="158619"> </a>
+<h2>7.1   Overview</h2>
+<p><a name="153736"> </a>
+The plot package in Ptolemy II is one of several utility packages that provide support functionality for simulations and applets. It is available in a stand-alone distribution, or as part of the Ptolemy II system. The class diagram is shown in figure <img src="images/plota.gif" height="1046" width="781">
+
+
+<a href="plot.html#153736">7.1</a>. The key classes are:
+</p><ul><a name="158604"> </a>
+<li>PlotBox: A panel that draws a box with axes along the edges, tick marks along the axes, axis labels, a title, and a legend.
+<a name="158608"> </a>
+<li>Plot: An extension of PlotBox that supports a suite of two-dimensional plots of sets of data, including x-y plots, scatter plots, and bar graphs.
+<a name="158609"> </a>
+<li>PlotLive: An extension of Plot designed to run continuously in its own thread, continually updating an on-screen plot.
+<a name="158610"> </a>
+<li>PlotApplet: An applet that contains a single instance of Plot and that can read the data to be plotted from a URL.
+<a name="158615"> </a>
+<li>PlotLiveApplet: An extension of PlotApplet that contains an instance of PlotLive instead of Plot. This is used for applets with animated plots that are continually updated.
+<a name="158611"> </a>
+<li>PlotFrame: A window containing a single plot and a menu bar with commands for opening and displaying new data files.
+<a name="158612"> </a>
+<li>PlotApplication: An extension of PlotFrame that is an application (a standalone Java program).
+</ul><a name="158620"> </a>
+<h2>7.2   User Interface</h2>
+<p><a name="159923"> </a>
+The user interface supported by these classes is very rudimentary. Zooming in and out is supported. To zoom in, drag the mouse downwards to draw a box. To zoom out, drag the mouse upward. In addition, several of these classes permit the placement of buttons that exercise certain simple controls. The fill button fills the available space with the available data. The start and stop buttons, used by the PlotLive class, start and stop an animated plot.
+</p><p><a name="158647"> </a>
+The PlotFrame class adds a menu that contains a richer set of commands, including opening files, saving the plotted data to a file, printing, etc. Currently, the set of commands is far from complete. In the future, we hope that on-line formatting of the plots and exporting to popular graphics formats will be supported.
+</p><a name="158625"> </a>
+<h2>7.3   File Format</h2>
+<p><a name="159122"> </a>
+Instances of the PlotBox and Plot classes can read a simple file format that specifies the data to be plotted. These files can be accessed via URLs. Each file contains a set of commands, one per line, that essentially duplicate the methods of these classes. There are two sets of commands currently, those understood by the base class PlotBox, and those understood by the derived class Plot. Both classes ignore commands that they do not understand. In addition, both classes ignore lines that begin with "#", the comment character. The commands are not case sensitive. In addition, for backward compatibility, these classes can read the binary file format of a prior plotting program called pxgraph.
+</p><p><a name="160587"> </a>
+<strong>NOTE: </strong>We are likely to change the preferred file format to one based on XML. We hope to maintain backward compatibility with this format, but do not plan to extend this format.
+</p><a name="158655"> </a>
+<h3>7.3.1   Commands Configuring the Axes</h3>
+
+<p><a name="158663"> </a>
+The following commands are understood by the base class PlotBox. These commands can be placed in a file and then read via the read() method, or via a URL using the PlotApplet class. The recognized commands include:
+</p><ul><a name="158665"> </a>
+<li><strong>TitleText</strong>: <em>string</em>
+<a name="158666"> </a>
+<li><strong>XLabel</strong>: <em>string</em>
+<a name="158667"> </a>
+<li><strong>YLabel</strong>: <em>string</em>
+<p><a name="158669"> </a>
+These commands provide a title and labels for the X (horizontal) and Y (vertical) axes. A <em>string</em> is simply a sequence of characters, possibly including spaces. There is no need here to surround them with quotation marks, and in fact, if you do, the quotation marks will be included in the labels.
+</p><p><a name="158676"> </a>
+The ranges of the X and Y axes can be optionally given by commands like:
+</p><a name="158678"> </a>
+<li><strong>XRange</strong>: <em>min</em>, <em>max</em>
+<a name="158679"> </a>
+<li><strong>YRange</strong>: <em>min</em>, <em>max</em>
+<p><a name="158681"> </a>
+The arguments <em>min</em> and <em>max</em> are numbers, possibly including a sign and a decimal point. If they are not specified, then the ranges are computed automatically from the data and padded slightly so that datapoints are not plotted on the axes.
+</p><p><a name="158686"> </a>
+The tick marks for the axes are usually computed automatically from the ranges. Every attempt is made to choose reasonable positions for the tick marks regardless of the data ranges (powers of ten multiplied by 1, 2, or 5 are used). However, they can also be specified explicitly using commands like:
+</p><a name="158692"> </a>
+<li><strong>XTicks</strong>: <em>label position</em>, <em>label position</em>, ...
+<a name="158693"> </a>
+<li><strong>YTicks</strong>: <em>label position</em>, <em>label position</em>, ...
+<p><a name="158861"> </a>
+A <em>label</em> is a string that must be surrounded by quotation marks if it contains any spaces. A position is a number giving the location of the tick mark along the axis. For example, a horizontal axis for a frequency domain plot might have tick marks as follows:
+</p></ul><pre>	 
+</pre>
+<pre>	 XTicks: -PI -3.14159, -PI/2 -1.570795, 0 0, PI/2 1.570795, PI 3.14159
+</pre>
+<pre>
+</pre>
+<p><a name="158703"> </a>
+Tick marks could also denote years, months, days of the week, etc.
+</p><p><a name="158705"> </a>
+The X and Y axes can use a logarithmic scale with the following commands:
+</p><ul><a name="158707"> </a>
+<li><strong>XLog</strong>: on
+<a name="158708"> </a>
+<li><strong>YLog</strong>: on
+<p><a name="158710"> </a>
+The tick labels, if computed automatically, represent powers of 10. Note that if a logarithmic scale is used, then the values must be positive. <strong>Non-positive values will be silently dropped</strong>.
+</p><p><a name="158714"> </a>
+By default, tick marks are connected by a light grey background grid. This grid can be turned off with the following command:
+</p><a name="158717"> </a>
+<li><strong>Grid</strong>: off
+<p><a name="158719"> </a>
+It can be turned back on with
+</p><a name="158721"> </a>
+<li><strong>Grid</strong>: on
+<p><a name="158723"> </a>
+Also, by default, the first ten data sets are shown each in a unique color. The use of color can be turned off with the command:
+</p><a name="158726"> </a>
+<li><strong>Color</strong>: off
+<p><a name="158728"> </a>
+It can be turned back on with
+</p><a name="158730"> </a>
+<li><strong>Color</strong>: on
+<p><a name="158732"> </a>
+All of the above commands can also be invoked directly by calling the corresponding public methods from some Java code.
+</p></ul><a name="159116"> </a>
+<h3>7.3.2   Commands for Plotting Data</h3>
+
+<p><a name="159136"> </a>
+The set of commands understood by the Plot class support specification of data to be plotted and control over how the data is shown.
+</p><p><a name="159598"> </a>
+The style of marks used to denote a data point is defined by one of the following commands:
+</p><ul><a name="159140"> </a>
+<li><strong>Marks</strong>: none
+<a name="159141"> </a>
+<li><strong>Marks</strong>: points
+<a name="159142"> </a>
+<li><strong>Marks</strong>: dots
+<a name="159143"> </a>
+<li><strong>Marks</strong>: various
+<p><a name="160070"> </a>
+Here, "points" are small dots, while "dots" are larger. If "various" is specified, then unique marks are used for the first ten data sets, and then recycled. Using no marks is useful when lines connect the points in a plot, which is done by default. If the above directive appears before any DataSet directive, then it specifies the default for all data sets.  If it appears after a DataSet directive, then it applies only to that data set.
+</p><p><a name="159462"> </a>
+To disable connecting lines, use:
+</p><a name="159151"> </a>
+<li><strong>Lines</strong>: off
+<p><a name="159153"> </a>
+To re-enable them, use
+</p><a name="159155"> </a>
+<li><strong>Lines</strong>: on
+<p><a name="159157"> </a>
+You can also specify "impulses", which are lines drawn from a plotted point down to the x axis. Plots with impulses are often called "stem plots." These are off by default, but can be turned on with the command:
+</p><a name="159162"> </a>
+<li><strong>Impulses</strong>: on
+<p><a name="159164"> </a>
+or back off with the command
+</p><a name="159166"> </a>
+<li><strong>Impulses</strong>: off
+<p><a name="160054"> </a>
+If that command appears before any DataSet directive, then the command applies to all data sets.  Otherwise, it applies only to the current data set.
+</p><p><a name="159168"> </a>
+To create a bar graph, turn off lines and use any of the following commands:
+</p><a name="159170"> </a>
+<li><strong>Bars</strong>: on
+<a name="159171"> </a>
+<li><strong>Bars</strong>: <em>width</em>
+<a name="159172"> </a>
+<li><strong>Bars</strong>: <em>width</em>, <em>offset</em>
+<p><a name="159174"> </a>
+The <em>width</em> is a real number specifying the width of the bars in the units of the x axis. The <em>offset</em> is a real number specifying how much the bar of the i-th data set is offset from the previous one. This allows bars to "peek out" from behind the ones in front. Note that the frontmost data set will be the first one. To turn off bars, use
+</p><a name="159181"> </a>
+<li><strong>Bars</strong>: off
+<p><a name="159183"> </a>
+To specify data to be plotted, start a data set with the following command:
+</p><a name="159185"> </a>
+<li><strong>DataSet</strong>: <em>string</em>
+<p><a name="159187"> </a>
+Here, <em>string</em> is a label that will appear in the legend. It is not necessary to enclose the string in quotation marks.
+</p><p><a name="159189"> </a>
+To start a new dataset without giving it a name, use:
+</p><a name="159191"> </a>
+<li><strong>DataSet</strong>:
+<p><a name="159193"> </a>
+In this case, no item will appear in the legend.
+</p><p><a name="159194"> </a>
+If the following directive occurs:
+</p><a name="159196"> </a>
+<li><strong>ReuseDataSets</strong>: on
+<p><a name="159198"> </a>
+then datasets with the same name will be merged. This makes it easier to combine multiple data files that contain the same datasets into one file. By default, this capability is turned off, so datasets with the same name are not merged.
+</p><p><a name="159202"> </a>
+ The data itself is given by a sequence of commands with one of the following forms:
+</p><a name="159205"> </a>
+<li><em>x</em>, <em>y</em>
+<a name="159206"> </a>
+<li><strong>draw</strong>: <em>x</em>, <em>y</em>
+<a name="159701"> </a>
+<li><strong>move</strong>: <em>x</em>, <em>y</em>
+<a name="159702"> </a>
+<li><em>x</em>, <em>y</em>, <em>yLowErrorBar</em>, <em>yHighErrorBar</em>
+<a name="159717"> </a>
+<li><strong>draw</strong>: <em>x</em>, <em>y</em>, <em>yLowErrorBar</em>, <em>yHighErrorBar</em>
+<a name="159210"> </a>
+<li><strong>move</strong>: <em>x</em>, <em>y</em>, <em>yLowErrorBar</em>, <em>yHighErrorBar</em>
+<p><a name="159212"> </a>
+The "draw" command is optional, so the first two forms are equivalent. The "move" command causes a break in connected points, if lines are being drawn between points. The numbers <em>x</em> and <em>y</em> are arbitrary numbers as supported by the Double parser in Java (e.g. "1.2", "6.39e-15", etc.). If there are four numbers, then the last two numbers are assumed to be the lower and upper values for error bars. The numbers can be separated by commas, spaces or tabs.
+</p><p><a name="159898"> </a>
+The number of data sets to be plotted does not need to be specified.
+</p></ul><a name="159222"> </a>
+<h2>7.4   Limitations</h2>
+<p><a name="159787"> </a>
+The plot package is a starting point, with a number of significant limitations.
+</p><ul><a name="159788"> </a>
+<li>The PlotFrame and PlotApplication classes should be greatly extended to allow on-line changes in the format of the plots.
+<a name="159978"> </a>
+<li>A binary file format that includes plot format information is needed.
+<a name="159822"> </a>
+<li>If you zoom in far enough, the plot becomes unreliable. In particular, if the total extent of the plot is more than 2<sup>32</sup> times extent of the visible area, quantization errors can result in displaying points or lines. Note that 2<sup>32</sup> is over 4 billion.
+<a name="159871"> </a>
+<li>The log axis facility has a number of limitations listed in the documentation of the _gridInit() method in the PlotBox class.
+<a name="160601"> </a>
+<li>Graphs cannot be currently copied via the clipboard.
+<a name="160602"> </a>
+<li>There is no EPS export for graphs.
+<a name="160603"> </a>
+<li>There is no mechanism for customizing the colors used in a plot.
+</ul>
+
+
+<hr><br>
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate5.src=image2.src; return true" onMouseOut="document.images.animate5.src=image1.src">
+     <img src="support/top.gif" name ="animate5" border="0"></a>
+     <a href="type.html" onMouseOver="document.images.animate6.src=image4.src; return true" onMouseOut="document.images.animate6.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate6"></a>
+     <a href="references.html" onMouseOver="document.images.animate7.src=image6.src; return true" onMouseOut="document.images.animate7.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate7" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate8.src=image8.src; return true" onMouseOut="document.images.animate8.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate8"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate10.src=image10.src; return true" onMouseOut="document.images.animate10.src=image9.src">
+     <img src="support/toc.gif"  border="0" name="animate10"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate12.src=image12.src; return true" onMouseOut="document.images.animate12.src=image11.src">
+     <img src="support/index.gif" border="0" name="animate12"></a>
+    <br>
+     <small><em>Page 9 out of 12 total pages
+     </small></em>
+     </div>
+ 
+
+<hr><br>
+ 
+
+
+
+ptII at eecs berkeley edu
+
+
+<i>Copyright &#169; 1998, The Regents of the University of California.   All rights
+reserved.</i>
+
+<!-- This file was created with Quadralay WebWorks Publisher 4.0.11 -->
+<!-- Last updated: Thu Nov 26 00:12:08 1998 -->
+
+</body>
+</html>

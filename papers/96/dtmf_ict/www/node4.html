@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> NDFE Algorithm</TITLE>
+<meta name="description" value=" NDFE Algorithm">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html63 HREF="node5.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html61 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html55 HREF="node3.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html64 HREF="node5.html"> MUSIC Algorithm</A>
+<B>Up:</B> <A NAME=tex2html62 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<B> Previous:</B> <A NAME=tex2html56 HREF="node3.html"> Goertzel Algorithm</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00040000000000000000> NDFE Algorithm</A></H1>
+<P>
+ The Direct adaptive Frequency Estimation Technique <A HREF="node13.html#DFET">[4]</A> is based 
+on the Least Mean Squares (LMS) algorithm <A HREF="node13.html#widrow">[2]</A>.
+ We introduce an adaptive step size to normalize the result and called
+the algorithm NDFET <A HREF="node13.html#SIU95">[5]</A>.
+<P>
+ Using trigonometric identities, we can rewrite a sinusoidal signal
+of frequency <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap713.gif"> as<P><IMG ALIGN=BOTTOM SRC="_2636_displaymath647.gif"><P>
+ Letting <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap651.gif"> and <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap653.gif"> yields
+<P><A NAME=eq6>&#160;</A><IMG ALIGN=BOTTOM SRC="_2636_equation109.gif"><P>
+where <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap655.gif"> is the estimation error or additive noise. 
+When <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap657.gif"> consists of multiple sinusoids, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap655.gif"> includes the sum of the 
+additional sinusoidal terms.
+ We apply LMS with step size <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap739.gif"> to minimize <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap655.gif"> and estimate <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap665.gif">:
+<P><A NAME=eq7>&#160;</A><IMG ALIGN=BOTTOM SRC="_2636_equation112.gif"><P>
+ From equations (<A HREF="node4.html#eq6">3</A>) and (<A HREF="node4.html#eq7">4</A>), the LMS filter output is
+<P><A NAME=eq8>&#160;</A><IMG ALIGN=BOTTOM SRC="_2636_equation119.gif"><P>
+ For a fixed step size of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap667.gif">, the NDFET algorithm in
+equation (<A HREF="node4.html#eq8">5</A>) converged within 20 samples (2.5 ms) for each of
+the eight single tones used in DTMF signals.
+<P>
+ This algorithm can be expanded for signals including more than one sinusoid
+<A HREF="node13.html#SIU95">[5]</A><A HREF="node13.html#DFET">[4]</A>:
+<P><IMG ALIGN=BOTTOM SRC="_2636_eqnarray125.gif"><P>
+ We use a periodic adaptive step size
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap669.gif"> where <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> is the period
+and <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap765.gif">.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>

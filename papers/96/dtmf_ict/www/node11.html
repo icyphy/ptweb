@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> Motorola 56001 Implementation</TITLE>
+<meta name="description" value=" Motorola 56001 Implementation">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html134 HREF="node12.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html132 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html126 HREF="node10.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html135 HREF="node12.html"> Summary</A>
+<B>Up:</B> <A NAME=tex2html133 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<B> Previous:</B> <A NAME=tex2html127 HREF="node10.html"> MUSIC Algorithm</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00080000000000000000> Motorola 56001 Implementation</A></H1>
+<P>
+ We add decision logic to detect valid DTMF signals and generate
+DTMF decoders for the Motorola 56001 processor (24-bit, 40 MHz) using
+the Ptolemy software environment <A HREF="node13.html#pino">[6]</A>.
+ Ptolemy is a freely distributable, extensible, graphical block diagram
+environment that interfaces with compilers, assemblers, hardware synthesis
+tools, and other external programs.
+ Goertzel and NDFET decoders are included in Ptolemy 0.6, due for release
+on April 15, 1996, via the ftp site <tt>ptolemy.eecs.berkeley.edu</tt>.
+ A MUSIC decoder has not yet been implemented.
+<P>
+ The DTMF decoders have the following structure:
+<P><IMG ALIGN=BOTTOM SRC="_2636_picture228.gif"><P>
+<P>
+The decoder bank, after some observation time, outputs the index
+of the low and high frequency components and whether a DTMF signal
+might be present.
+ Decision logic decodes the touch tone key and decides whether or not
+the detection is valid.
+ Like the ADSP implementation, processing is performed on blocks of
+205 samples for Goertzel and 300 for the NDFET.
+<P>
+ We match the intensive signal processing computations and the
+accompanying decision logic to the Synchronous Dataflow (SDF) model of
+computation <A HREF="node13.html#SDF">[13]</A> in Ptolemy.
+ A valid SDF subsystem <em>always</em> has a static implementation, i.e.,
+one that does not require any run-time scheduling.
+ This holds true whether we ultimately generate an implementation for
+a DSP processor, for multiple processors, as C code, or as a VLSI chip.
+ Using knowledge of the target implementation, we can compute whether or
+not the system meets the real-time constraints.
+ We specified the DTMF decoders as SDF block diagrams and verified them
+through simulation, and converted them to a Motorola 56001 implementation.
+ Extra memory and instructions are generated to handle the I/O for each block.
+<P>
+ On the 56001, a word is 3 bytes. 
+ Samples arrive every 125 <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap739.gif">s.
+ Input data buffers take up 205 and 300 words, respectively, and are not 
+included in data memory usage. 
+<UL><LI> Goertzel DTMF decoder (detector + logic):<BR>PM = 805, DM = 218, ET = 19.4 <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap739.gif">s/sample
+<LI> NDFET DTMF decoder (detector + logic):<BR>PM = 329, DM = 273, ET = 20.9 <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap739.gif">s/sample
+<P>
+                </UL>
+<P>
+<BR> <HR><A NAME=tex2html134 HREF="node12.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html132 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html126 HREF="node10.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html135 HREF="node12.html"> Summary</A>
+<B>Up:</B> <A NAME=tex2html133 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<B> Previous:</B> <A NAME=tex2html127 HREF="node10.html"> MUSIC Algorithm</A>
+<BR> <HR> <P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>

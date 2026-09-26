@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> MUSIC Algorithm</TITLE>
+<meta name="description" value=" MUSIC Algorithm">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html124 HREF="node11.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html122 HREF="node7.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html118 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html125 HREF="node11.html"> Motorola 56001 Implementation</A>
+<B>Up:</B> <A NAME=tex2html123 HREF="node7.html"> ADSP-2101 Implementation</A>
+<B> Previous:</B> <A NAME=tex2html119 HREF="node9.html"> Normalized Direct Frequency </A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00073000000000000000> MUSIC Algorithm</A></H2>
+<P>
+ We implemented MUSIC in C and then cross-compiled it to assembly.
+ We run 20 iterations of the QR algorithm <A HREF="node13.html#matrix">[12]</A> to compute
+the eigenvalue decomposition of the covariance matrix <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap705.gif">.
+ <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap705.gif"> is estimated by
+<P>
+<P><IMG ALIGN=BOTTOM SRC="_2636_equation213.gif"><P>
+where 
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap771.gif"> denotes the backward vector operation, with <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap577.gif"> and <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap799.gif">.
+ The implementation meets the frequency resolution standards, and
+we expect to develop a MUSIC algorithm by hand that can keep up with
+the incoming samples.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>

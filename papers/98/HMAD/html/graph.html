@@ -1,0 +1,515 @@
+
+<html><head>
+<script language="JavaScript">
+
+image1 = new Image();
+image2 = new Image();
+image1.src = "support/top.gif";
+image2.src = "support/top.glow.gif";
+
+image3 = new Image();
+image4 = new Image();
+image3.src = "support/prevpage.gif";
+image4.src = "support/prevpage.glow.gif";
+
+image5 = new Image();
+image6 = new Image();
+image5.src = "support/nextpage.gif";
+image6.src = "support/nextpage.glow.gif";
+
+image7 = new Image();
+image8 = new Image();
+image7.src = "support/bottom.gif";
+image8.src = "support/bottom.glow.gif";
+
+image9 = new Image();
+image10 = new Image();
+image9.src = "support/toc.gif";
+image10.src = "support/toc.glow.gif";
+
+image11 = new Image();
+image12 = new Image();
+image11.src = "support/index.gif";
+image12.src = "support/index.glow.gif";
+</script>
+<STYLE>
+
+BODY {
+  background:  #FFFFFF ;
+  
+  color: #000000;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: left;
+}
+
+H1,H2,H3 {
+  font-family: helvetical, arial, sans-serif;
+  text-align: left;}
+
+A:link {color: #0000FF;}
+A:active {color: #FF0000;}
+A:visited {color: #800080;}
+</STYLE>
+<title>Graph</title></head>
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+ 
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate1.src=image2.src; return true" onMouseOut="document.images.animate1.src=image1.src">
+     <img src="support/top.gif" name ="animate1" border="0"></a>
+     <a href="data.html" onMouseOver="document.images.animate2.src=image4.src; return true" onMouseOut="document.images.animate2.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate2"></a>
+     <a href="type.html" onMouseOver="document.images.animate3.src=image6.src; return true" onMouseOut="document.images.animate3.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate3" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate4.src=image8.src; return true" onMouseOut="document.images.animate4.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate4"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate4a.src=image10.src; return true" onMouseOut="document.images.animate4a.src=image9.src">
+     <img src="support/toc.gif"    border="0" name="animate4a"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate4b.src=image12.src; return true" onMouseOut="document.images.animate4b.src=image11.src">
+     <img src="support/index.gif"  border="0" name="animate4b"></a>     
+<br>
+     <small><em>Page 7 out of 12 total pages
+     </small></em>
+     </div>
+
+<hr><br>
+
+ 
+<a name="160483"> </a>
+<h1><center>5  Graph</center></h1>
+<dl>
+<a name="159878"> </a>
+<dd> <i>Jie Liu</i>
+<a name="159877"> </a>
+<dd> <i>Yuhong Xiong</i>
+</dl>
+<a name="158551"> </a>
+<h2>5.1   Introduction</h2>
+<p><a name="159832"> </a>
+The Ptolemy II kernel provides extensive infrastructure for creating and manipulating clustered graphs of a particular flavor. Mathematical graphs, however, are simpler structures that consist of nodes and edges, without hierarchy. Edges link only two nodes, and therefore are much simpler than the relations of the Ptolemy II kernel. Moreover, in mathematical graphs, no distinction is made between multiple edges that may be adjacent to a node, so the ports of the Ptolemy II kernel are not needed. A large number of algorithms have been developed that operate on mathematical graphs, and many of these prove extremely useful in support of scheduling, type resolution, and other operations in Ptolemy II. Thus, we have created the <em>graph</em> package, which provides efficient data structures for mathematical graphs, and collects algorithms for operating on them. At this time, the collection of algorithms is nowhere near as complete as in some widely used packages, such as LEDA. But this package will serve as a repository for a growing suite of algorithms.
+</p><p><a name="158552"> </a>
+The graph package provides basic infrastructure for both undirected and directed graphs. Acyclic directed graphs, which can be used to model complete partial orders (CPOs) and lattices, are also supported with more specialized algorithms. 
+</p><p><a name="159856"> </a>
+The graphs constructed using this package are lightweight, designed for fast implementation of complex algorithms more than for generality. This makes them maximally complementary to the clustered graphs of the Ptolemy II kernel, which emphasize generality. A typical use of this package is to construct a graph that represents the topology of a CompositeEntity, run a graph algorithm, and extract useful information from the result. For example, a graph might be constructed that represents data precedences, and a topological sort might be used to generate a schedule. In this kind of application, the heirarchy of the original clustered graph is flattened, so nodes in the graph represent only opaque entities.
+</p><p><a name="158556"> </a>
+The architecture of this package is somewhat different from LEDA, in part because of the existence of the complementary kernel package. Unlike LEDA, there are no dedicated classes representing nodes and edges in the graph. The nodes in this package are represented by arbitrary instances of the Java Object class, and the graph topology is stored in a structure similar to an adjacency list.
+</p><p><a name="158557"> </a>
+The facilities that currently exist in this package are those that we have had most immediate need for. Since the type system of Ptolemy II requires extensive operations on lattices and CPOs, support for these is better developed than for other types of graphs.
+</p><a name="158561"> </a>
+<h2>5.2   Classes and Interfaces in the Graph Package</h2>
+<p><a name="158566"> </a>
+Figure <a href="graph.html#158566">5.1</a> shows the class diagram of the graph package.<img src="images/graph1.gif" height="689" width="782">
+
+
+ The classes Graph, DirectedGraph and DirectedAcyclicGraph support graph construction and provide graph algorithms. Currently, only topological sort and transitive closure are implemented; other algorithms will be added as needed. The CPO interface defines the basic CPO operations, and the class DirectedAcyclicGraph implements this interface. An instance of DirectedAcyclicGraph is also a finite CPO where all the elements and order relations are explicitly specified. Defining the CPO operations in an interface allows future expansion to support infinite CPOs and finite CPOs where the elements are not explicitly enumerated. The InequalityTerm interface and the Inequality class model inequality constraints over the CPO. The details of the constraints will be discussed later. The InequalitySolver class provides an algorithm to solve a set of constraints. This is used by the Ptolemy II type system, but other uses may arise.
+</p><p><a name="158568"> </a>
+The implementation of the above classes is not synchronized. If multiple threads access a graph or a set of constraints concurrently, external synchronization will be needed.
+</p><a name="158571"> </a>
+<h3>5.2.1   Graph</h3>
+
+<p><a name="158572"> </a>
+This class models a simple undirected graph. Each node in the graph is represented by an arbitrary Java object. The method add() is used to add a node to the graph, and addEdge() is used to connect two nodes in the graph. The arguments of addEdge() are two Objects representing two nodes already added to the graph. To mirror a topology constructed in the kernel package, multiple edges between two nodes are allowed. Each node is assigned a node ID based on the order the nodes are added. The translation from the node ID to the node Object is done by the _getNodeObject() method, and the translation in the other direction is done by _getNodeId(). Both methods are protected. The node ID is only used by this class and the derived classes, it is not exposed in any of the public interfaces. The topology is stored in the Vector _graph. The indexes of this Vector correspond to node IDs. Each entry of _graph is also a Vector, in which a list of node IDs are stored. When an edge is added by calling addEdge() with the first argument having node ID <em>i</em> and the second having node ID <em>j</em>, an Integer containing <em>j</em> is added to the Vector at the <em>i-</em>th entry of _graph. For example, if the graph in figure <a href="graph.html#158572">5.2</a><img src="images/graph0.gif" height="270" width="782">
+
+
+(a) is connected using the sequence of calls: addEdge(n0, n1); addEdge(n0, n2); addEdge(n2, n1), where n0, n1, n2 are Objects representing the nodes with IDs 0, 1, 2, respectively, then the data structure will be in the form of <a href="graph.html#158572">5.2</a>(b). 
+</p><p><a name="160058"> </a>
+Note that in this undirected graph, the data format is dependent on the order of the two arguments in the addEdge() calls. Since each edge is stored only once, this data structure is not exactly the same as the adjacency list for undirected graphs, but it is quite similar. This structure is designed to be used by subclasses that model directed graphs, as well as by this base class. If it appears awkward when adding algorithms for undirected graph, a new class that derives from Graph may be added in the future to model undirected graph exclusively, in which case, Graph will provide the basic support for both undirected and directed graphs.
+</p><a name="158609"> </a>
+<h3>5.2.2   Directed Graphs</h3>
+
+<p><a name="158610"> </a>
+The DirectedGraph class is derived from Graph. The addEdge() method in DirectedGraph adds a directed edge to the graph. In this package, the direction of the edge is said to go from a <em>lower</em> node to a <em>higher</em> node, as opposed to from <em>source</em> to <em>sink</em>, <em>head</em> to <em>tail</em>, etc. The terms lower and higher conforms with the convention of the graphical representation of CPOs and lattices (the Hasse diagram), so they can be consistently used on both directed graphs and CPOs.
+</p><p><a name="158612"> </a>
+The computation of transitive closure is implemented in this class. The transitive closure is internally stored as a 2-D boolean matrix, whose indexes correspond to node IDs. The entry (<em>i</em>, <em>j</em>) is <em>true</em> if and only if there exists a path from the node with ID <em>i</em> to the node with ID <em>j</em>. This matrix is not exposed at the public interface; instead, it is used by this class and its subclass to do other operations. Once the transitive closure matrix is computed, graph operations like <em>reachableNodes</em> can be easily accomplished.
+</p><a name="158613"> </a>
+<h3>5.2.3   Directed Acyclic Graphs and CPO</h3>
+
+<p><a name="158614"> </a>
+The DirectedAcyclicGraph class further restricts DirectedGraph by not allowing cycles. For performance reasons, this requirement is not checked when edges are added to the graph, but is checked when any of the graph operations is invoked. An exception is thrown if the graph is found to be cyclic.
+</p><p><a name="158616"> </a>
+The CPO interface defines the common operations on CPOs. The mathematical definition of these operations can be found in <a href="references.html#158387">[10]</a>. Informal definitions are given in the class documentation. This interface is implemented by the class DirectedAcyclicGraph.
+</p><p><a name="158618"> </a>
+Since most of the CPO operations involve the comparison of two elements, and comparison can be done in constant time once the transitive closure is available, DirectedAcyclicGraph makes heavy use of the transitive closure. Also, since most of the operations on a CPO have a dual operation, such as least upper bound and greatest lower bound, least element and greatest element, etc., the code for the dual operations can be shared if the order relation on the CPO is reversed. This is done by transposing the transitive closure matrix.
+</p><a name="158619"> </a>
+<h3>5.2.4   Inequality Terms, Inequalities, and the Inequality Solver</h3>
+
+<p><a name="158620"> </a>
+The InequalityTerm interface and Inequality and InequalitySolver classes supports the construction of a set of inequality constraints over a CPO and the identification of a member of the CPO that satisfies the constraints. A constraint is an inequality defined over a CPO, which can involve constants, variables, and functions. As an example, the following is a set of constraints over the 4-point CPO in figure <a href="graph.html#158620">5.3</a>:<img src="images/graph2.gif" height="191" width="784">
+
+
+
+</p><p><a name="158636"> </a>
+<em>	 </em><img src="chars/alpha.gif"> <img src="chars/lt_equal.gif"> <em>w</em>
+</p><p><a name="158637"> </a>
+	 <img src="chars/beta.gif"> <img src="chars/lt_equal.gif"> <em>x</em><img src="chars/logicand.gif"><img src="chars/alpha.gif">
+</p><p><a name="158638"> </a>
+	 <img src="chars/alpha.gif"> <img src="chars/lt_equal.gif"> <img src="chars/beta.gif">
+</p><p><a name="158639"> </a>
+where <img src="chars/alpha.gif"> and <img src="chars/beta.gif"> are variables, and <img src="chars/logicand.gif"> denotes greatest lower bound. One solution to this set of constraints is <img src="chars/alpha.gif"> = <img src="chars/beta.gif"> = <em>x</em>.
+</p><p><a name="158641"> </a>
+An inequality term is either a constant, a variable, or a function over a CPO. The InequalityTerm interface defines the operations on a term. If a term consists of a single variable, the value of the variable can be set to a specific element of the underlying CPO. The isSettable() method queries whether the value of a term can be set. It returns <em>true</em> if the term is a variable, and <em>false</em> if it is a constant or a function. The setValue() method is used to set the value for variable terms. The getValue() method returns the current value of the term, which is a constant if the term consists of a single constant, the current value of a variable if the term consists of a single variable, or the evaluation of a function based on the current value of the variables if the term is a function. The getVariables() method returns all the variables contained in a term. This method is used by the inequality solver.
+</p><p><a name="160226"> </a>
+The Inequality class contains two InequalityTerms, a lesser term and the greater term. The isSatisfied() method tests whether the inequality is satisfied over the specified CPO based on the current value of the variables. It returns <em>true</em> if the inequality is satisfied, and <em>false</em> otherwise.
+</p><p><a name="158644"> </a>
+The InequalitySolver class implements an algorithm to determine satisfiability of a set of inequality constraints and to find the solution to the constraints if they are satisfiable. This algorithm is described in <a href="references.html#158398">[34]</a>. It is basically an iterative procedure to update the value of variables until all the constraints are satisfied, or until conflicts among the constraints are found. Some limitations on the type of constraints apply for the algorithm to work. The method addInequality() adds an inequality to the set of constraints. Two methods solveLeast() and solveGreatest() can be used to solve the constraints. The former tries to find the least solution, while the latter attempts to find the greatest solution.  If a solution is found, these methods return <em>true</em> and the current value of the variables is the solution. The method unsatisfiedInequalities() returns an enumeration of the inequalities that are not satisfied based on the current value of the variables. It can be used after solveLeast() or solveGreatest() return <em>false</em> to find out which inequalities cannot be satisfied after the algorithm runs. The bottomVariables() and topVariables() methods return enumerations of the variables whose current values are the bottom or the top element of the CPO.
+</p><a name="158645"> </a>
+<h2>5.3   Example Use</h2>
+<a name="158646"> </a>
+<h3>5.3.1   Generating A Schedule for A Composite Actor</h3>
+
+<p><a name="158647"> </a>
+The following is an example of using topological sort to generate a firing schedule for a CompositeActor of the actor package. The connectivity information among the Actors within the composite is translated into a directed acyclic graph, with each node of the graph represented by an Actor. The schedule is stored in an array, where each element of the array is a reference to an Actor.
+</p><p><a name="158648"> </a>
+
+</p><pre>Object[] generateSchedule(CompositeActor composite) {
+</pre>
+<pre>	 DirectedAcyclicGraph g = new DirectedAcyclicGraph();
+</pre>
+<pre>	 // add all the actors contained in the composite to the graph.
+</pre>
+<pre>	 Enumeration allactors = composite.deepGetEntities();
+</pre>
+<pre>	 while (allactors.hasMoreElements()) {
+</pre>
+<pre>	 	 Actor actor = (Actor)allactors.nextElement();
+</pre>
+<pre>	 	 g.add(actor);
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // add all the connection in the composite as graph edges.
+</pre>
+<pre>	 allactors = composite.deepGetEntities();
+</pre>
+<pre>	 while (allactors.hasMoreElements()) {
+</pre>
+<pre>	 	 Actor loweractor = (Actor)allactors.nextElement();
+</pre>
+<pre>
+</pre>
+<pre>	 	 // find all the actors "higher" than the current one.
+</pre>
+<pre>	 	 Enumeration alloutports = loweractor.outputPorts();
+</pre>
+<pre>	 	 while (alloutports.hasMoreElements()) {
+</pre>
+<pre>	 	 	 IOPort outport = (IOPort)alloutports.nextElement();
+</pre>
+<pre>	 	 	 Enumeration allinports = outport.deepConnectedInPorts();
+</pre>
+<pre>	 	 	 while (allinports.hasMoreElements()) {
+</pre>
+<pre>	 	 	 	 IOPort inport = (IOPort)allinports.nextElement();
+</pre>
+<pre>	 	 	 	 Actor higheractor = (Actor)inport.getContainer();
+</pre>
+<pre>	 	 	 	 if (g.contains(higheractor)) {
+</pre>
+<pre>	 	 	 	 	 g.addEdge(loweractor, higheractor);
+</pre>
+<pre>	 	 	 	 }
+</pre>
+<pre>	 	 	 }
+</pre>
+<pre>	 	 }
+</pre>
+<pre>	 }
+</pre>
+<pre>	 return g.topologicalSort();
+</pre>
+<pre>}
+</pre>
+<a name="158680"> </a>
+<h3>5.3.2   Forming and Solving Constraints over a CPO</h3>
+
+<p><a name="158681"> </a>
+The code below uses two classes implementing the InequalityTerm interface. They model constant and variable terms, respectively. The values of these terms are Strings. Inequalities can be formed using these two classes.
+</p><p><a name="158682"> </a>
+
+</p><pre>// A constant InequalityTerm with a String Value.
+</pre>
+<pre>class Constant implements InequalityTerm {
+</pre>
+<pre>
+</pre>
+<pre>	 // construct a constant term with the specified String value.
+</pre>
+<pre>	 public Constant(String value) {
+</pre>
+<pre>	 	 _value = value;
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // Return the constant String value of this term.
+</pre>
+<pre>	 public Object getValue() {
+</pre>
+<pre>	 	 return _value;
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // Constant terms do not contain any variable, so return an array of size zero.
+</pre>
+<pre>	 public InequalityTerm[] getVariables() {
+</pre>
+<pre>	 	 return new InequalityTerm[0];
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // Constant terms are not settable.
+</pre>
+<pre>	 public boolean isSettable() {
+</pre>
+<pre>	 	 return false;
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // Throw an Exception on an attempt to change this constant.
+</pre>
+<pre>	 public void setValue(Object e) throws IllegalActionException {
+</pre>
+<pre>	 	 throw new IllegalActionException("Constant.setValue: This term is a constant.");
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // the String value of this term.
+</pre>
+<pre>	 private String _value = null;
+</pre>
+<pre>}
+</pre>
+<pre>
+</pre>
+<pre>// A variable InequalityTerm with a String value.
+</pre>
+<pre>class Variable implements InequalityTerm {
+</pre>
+<pre>
+</pre>
+<pre>	 // Construct a variable InequalityTerm with a null initial value.
+</pre>
+<pre>	 	 public Variable() {
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // Return the String value of this term.
+</pre>
+<pre>	 public Object getValue() {
+</pre>
+<pre>	 	 return _value;
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // Return an array containing this variable term.
+</pre>
+<pre>	 public InequalityTerm[] getVariables() {
+</pre>
+<pre>	 	 InequalityTerm[] variable = new InequalityTerm[1];
+</pre>
+<pre>	 	 variable[0] = this;
+</pre>
+<pre>	 	 return variable;
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 // Variable terms are settable.
+</pre>
+<pre>	 public boolean isSettable() {
+</pre>
+<pre>	 	 return true;
+</pre>
+<pre>	 }
+</pre>
+<pre> 
+</pre>
+<pre>	 // Set the value of this variable to the specified String.
+</pre>
+<pre>	 // Not checking the type of the specified Object before casting for simplicity.
+</pre>
+<pre>	 public void setValue(Object e) throws IllegalActionException {
+</pre>
+<pre>	 	 _value = (String)e;
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 private String _value = null;
+</pre>
+<pre>}
+</pre>
+<pre>
+</pre>
+<p><a name="158753"> </a>
+As a simple example, the following Java class constructs the 4-point CPO of figure <a href="graph.html#158620">5.3</a>, forms a set of constraints with three inequalities, and solves for both the least and greatest solutions. The inequalities are <em>a </em><img src="chars/lt_equal.gif"><em> w</em>; <em>b </em><img src="chars/lt_equal.gif"><em> a</em>; <em>b </em><img src="chars/lt_equal.gif"><em> z</em>, where <em>w</em> and <em>z</em> are constants in figure 2.3, and <em>a</em> and <em>b</em> are variables.
+</p><pre>// An example of forming and solving inequality constraints.
+</pre>
+<pre>public class TestSolver {
+</pre>
+<pre>	 public static void main(String[] arv) {
+</pre>
+<pre>	 	 // construct the 4-point CPO in figure 2.3.
+</pre>
+<pre>	 	 CPO cpo = constructCPO();
+</pre>
+<pre>
+</pre>
+<pre>	 	 // create inequality terms for constants w, z and
+</pre>
+<pre>	 	 // variables a, b.
+</pre>
+<pre>	 	 InequalityTerm tw = new Constant("w");
+</pre>
+<pre>	 	 InequalityTerm tz = new Constant("z");
+</pre>
+<pre>	 	 InequalityTerm ta = new Variable();
+</pre>
+<pre>	 	 InequalityTerm tb = new Variable();
+</pre>
+<pre>
+</pre>
+<pre>	 	 // form inequalities: a&lt;=w; b&lt;=a; b&lt;=z.
+</pre>
+<pre>	 	 Inequality iaw = new Inequality(ta, tw);
+</pre>
+<pre>	 	 Inequality iba = new Inequality(tb, ta);
+</pre>
+<pre>	 	 Inequality ibz = new Inequality(tb, tz);
+</pre>
+<pre>
+</pre>
+<pre>	 	 // create the solver and add the inequalities.
+</pre>
+<pre>	 	 InequalitySolver solver = new InequalitySolver(cpo);
+</pre>
+<pre>	 	 solver.addInequality(iaw);
+</pre>
+<pre>	 	 solver.addInequality(iba);
+</pre>
+<pre>	 	 solver.addInequality(ibz);
+</pre>
+<pre>
+</pre>
+<pre>	 	 // solve for the least solution
+</pre>
+<pre>	 	 boolean satisfied = solver.solveLeast();
+</pre>
+<pre>
+</pre>
+<pre>	 	 // The output should be: 
+</pre>
+<pre>	 	 // satisfied=true, least solution: a=z b=z
+</pre>
+<pre>	 	 System.out.println("satisfied=" + satisfied + ", least solution:"
+</pre>
+<pre>	 	 	  + " a=" + ta.getValue() + " b=" + tb.getValue());
+</pre>
+<pre>
+</pre>
+<pre>	 	 // solve for the greatest solution
+</pre>
+<pre>	 	 satisfied = solver.solveGreatest();
+</pre>
+<pre>
+</pre>
+<pre>	 	 // The output should be: 
+</pre>
+<pre>	 	 // satisfied=true, greatest solution: a=w b=z
+</pre>
+<pre>	 	 System.out.println("satisfied=" + satisfied + ", greatest solution:"
+</pre>
+<pre>	 	 	  + " a=" + ta.getValue() + " b=" + tb.getValue());
+</pre>
+<pre>	 }
+</pre>
+<pre>
+</pre>
+<pre>	 public static CPO constructCPO() {
+</pre>
+<pre>    	 	 DirectedAcyclicGraph cpo = new DirectedAcyclicGraph();
+</pre>
+<pre>
+</pre>
+<pre>	     	 cpo.add("w");
+</pre>
+<pre>	 	 cpo.add("x");
+</pre>
+<pre>	  	 cpo.add("y");
+</pre>
+<pre>	  	 cpo.add("z");
+</pre>
+<pre>
+</pre>
+<pre>	 	 cpo.addEdge("x", "w"); 
+</pre>
+<pre>	 	 cpo.addEdge("y", "w"); 
+</pre>
+<pre>	 	 cpo.addEdge("z", "x"); 
+</pre>
+<pre>	 	 cpo.addEdge("z", "y"); 
+</pre>
+<pre>
+</pre>
+<pre>	 	 return cpo;
+</pre>
+<pre>	 }
+</pre>
+<pre>}
+</pre>
+
+
+
+<hr><br>
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate5.src=image2.src; return true" onMouseOut="document.images.animate5.src=image1.src">
+     <img src="support/top.gif" name ="animate5" border="0"></a>
+     <a href="data.html" onMouseOver="document.images.animate6.src=image4.src; return true" onMouseOut="document.images.animate6.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate6"></a>
+     <a href="type.html" onMouseOver="document.images.animate7.src=image6.src; return true" onMouseOut="document.images.animate7.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate7" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate8.src=image8.src; return true" onMouseOut="document.images.animate8.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate8"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate10.src=image10.src; return true" onMouseOut="document.images.animate10.src=image9.src">
+     <img src="support/toc.gif"  border="0" name="animate10"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate12.src=image12.src; return true" onMouseOut="document.images.animate12.src=image11.src">
+     <img src="support/index.gif" border="0" name="animate12"></a>
+    <br>
+     <small><em>Page 7 out of 12 total pages
+     </small></em>
+     </div>
+ 
+
+<hr><br>
+ 
+
+
+
+ptII at eecs berkeley edu
+
+
+<i>Copyright &#169; 1998, The Regents of the University of California.   All rights
+reserved.</i>
+
+<!-- This file was created with Quadralay WebWorks Publisher 4.0.11 -->
+<!-- Last updated: Thu Nov 26 00:12:04 1998 -->
+
+</body>
+</html>

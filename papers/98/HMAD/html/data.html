@@ -1,0 +1,555 @@
+
+<html><head>
+<script language="JavaScript">
+
+image1 = new Image();
+image2 = new Image();
+image1.src = "support/top.gif";
+image2.src = "support/top.glow.gif";
+
+image3 = new Image();
+image4 = new Image();
+image3.src = "support/prevpage.gif";
+image4.src = "support/prevpage.glow.gif";
+
+image5 = new Image();
+image6 = new Image();
+image5.src = "support/nextpage.gif";
+image6.src = "support/nextpage.glow.gif";
+
+image7 = new Image();
+image8 = new Image();
+image7.src = "support/bottom.gif";
+image8.src = "support/bottom.glow.gif";
+
+image9 = new Image();
+image10 = new Image();
+image9.src = "support/toc.gif";
+image10.src = "support/toc.glow.gif";
+
+image11 = new Image();
+image12 = new Image();
+image11.src = "support/index.gif";
+image12.src = "support/index.glow.gif";
+</script>
+<STYLE>
+
+BODY {
+  background:  #FFFFFF ;
+  
+  color: #000000;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: left;
+}
+
+H1,H2,H3 {
+  font-family: helvetical, arial, sans-serif;
+  text-align: left;}
+
+A:link {color: #0000FF;}
+A:active {color: #FF0000;}
+A:visited {color: #800080;}
+</STYLE>
+<title>Data</title></head>
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+ 
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate1.src=image2.src; return true" onMouseOut="document.images.animate1.src=image1.src">
+     <img src="support/top.gif" name ="animate1" border="0"></a>
+     <a href="actor.html" onMouseOver="document.images.animate2.src=image4.src; return true" onMouseOut="document.images.animate2.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate2"></a>
+     <a href="graph.html" onMouseOver="document.images.animate3.src=image6.src; return true" onMouseOut="document.images.animate3.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate3" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate4.src=image8.src; return true" onMouseOut="document.images.animate4.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate4"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate4a.src=image10.src; return true" onMouseOut="document.images.animate4a.src=image9.src">
+     <img src="support/toc.gif"    border="0" name="animate4a"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate4b.src=image12.src; return true" onMouseOut="document.images.animate4b.src=image11.src">
+     <img src="support/index.gif"  border="0" name="animate4b"></a>     
+<br>
+     <small><em>Page 6 out of 12 total pages
+     </small></em>
+     </div>
+
+<hr><br>
+
+ 
+<a name="149600"> </a>
+<h1><center>4  Data</center></h1>
+<dl>
+<a name="161048"> </a>
+<dd> <i>Neil Smyth<br>Yuhong Xiong</i>
+</dl>
+<a name="161042"> </a>
+<h2>4.1   Introduction</h2>
+<p><a name="149843"> </a>
+The data package provides data encapsulation, polymorphism, parameter handling, an expression language, and a type system. Figure <img src="images/data6.gif" height="1061" width="781">
+
+
+<a href="data.html#149843">4.1</a> shows the key classes in the main package (subpackages will be discussed later). 
+</p><a name="158553"> </a>
+<h2>4.2   Data Encapsulation</h2>
+<p><a name="159409"> </a>
+The Token class and its derived classes encapsulate application data. The encapsulated data can be transported via message passing between Ptolemy II objects. Alternatively, it can be used to parameterize Ptolemy II objects. Encapsulating the data in such a way provides a standard interface so that such data can be handled uniformly regardless of its detailed structure. Such encapsulation allows for a great degree of extensibility, permitting developers to extend the library of data types that Ptolemy II can handle. It also permits a user interface to interact with application data without detailed prior knowledge of the structure of the data.
+</p><p><a name="159052"> </a>
+Tokens in Ptolemy II, except ObjectToken, are immutable. This means that their value cannot be changed after the instance of Token is constructed. The value of a token must therefore be specified as a constructor argument, and there must be no other mechanism for setting the value. If the value must be changed, then a new instance of Token must be constructed.
+</p><p><a name="159471"> </a>
+There are several reasons for making tokens immutable.
+</p><ul><a name="159449"> </a>
+<li>First, when a token is to be sent to several receivers, we want to be sure that all receivers get the same data. Each receiver is sent a reference to the same token. If the Token were not immutable, then it would be necessary to clone the token for all receivers after the first one.
+<a name="159453"> </a>
+<li>Second, we use tokens to parameterize objects, and parameters have mutual dependencies. That is, the value of a parameter may depend on the value of other parameters. The value of a parameter is represented by an instance of Token. If that token were allowed to change value without notifying the parameter, then the parameter would not be able to notify other parameters that depend on its value. Thus, a mutable token would have to implement a publish-and-subscribe mechanism so that parameters could subscribe and thus be notified of any changes. By making tokens immutable, we greatly simplify the design.
+<a name="159469"> </a>
+<li>Finally, having our Tokens immutable makes them similar in concept to the data wrappers in Java, like Double, Integer, etc., which are also immutable.
+<p><a name="161127"> </a>
+An ObjectToken contains a reference to an arbitrary Object created by the user. Since the user may modify the Object after the token is constructed, ObjectToken is an exception to immutability. Moreover, the <code>getValue()</code> method returns a reference to the token. That reference can be used to modify the object. Although ObjectToken could clone the object in the constructor and return another clone in <code>getValue()</code>, this would require the object to be cloneable, which severely limits the use of the ObjectToken. In addition, even if the object is cloneable, since the default implementation of <code>clone()</code> only makes a shallow copy, it is still not enough to enforce immutability. In addition, cloning a large object could be expensive. For these reasons, the ObjectToken does not enforce immutability, but rather relies on the cooperation of the user. Violating this convention could lead to unintended non-determinism.
+</p><p><a name="163892"> </a>
+For matrix tokens, immutability requires the contained matrix (Java array) to be copied when the token is constructed, and when the matrix is returned in response to the queries such as <code>intMatrix()</code>, <code>doubleMatrix()</code>, etc. This is because arrays are objects in Java. Since the cost of copying large matrix is non-trivial, the user should not make more queries then necessary. The <code>getElementAt()</code> method should be used to read the contents of the matrix.
+</p></ul><a name="158793"> </a>
+<h2>4.3   Polymorphism</h2>
+<a name="161500"> </a>
+<h3>4.3.1   Polymorphic Arithmetic Operators</h3>
+
+<p><a name="158834"> </a>
+One of the goals of the data package is to support polymorphic operations between tokens. For this, the base Token class defines methods to overload the primitive arithmetic operations, which are <code>add()</code>, <code>multiply()</code>, <code>subtract()</code>, <code>divide()</code>, <code>modulo()</code> and <code>equals()</code>. Derived classes overload these methods to provide class specific operation where appropriate. The objective here is to be able to say, for example,
+</p><pre>
+</pre>
+<pre>a.add(b) 
+</pre>
+<pre>
+</pre>
+<p><a name="158836"> </a>
+where <code>a</code> and <code>b</code> are arbitrary tokens. If the operation a + b makes sense for the particular tokens, then the operation is carried out and a token of the appropriate type is returned. If the operation does not make sense, then an exception is thrown. Consider the following example
+</p><pre>
+</pre>
+<pre>IntToken a = new IntToken(5);
+</pre>
+<pre>DoubleToken b = new DoubleToken(2.2);
+</pre>
+<pre>StringToken c = new StringToken("hello");
+</pre>
+<pre>
+</pre>
+<p><a name="158840"> </a>
+then 
+</p><pre>a.add(b)
+</pre>
+<p><a name="160300"> </a>
+gives a new DoubleToken with value 7.2,
+</p><pre>a.add(c) 
+</pre>
+<p><a name="160463"> </a>
+gives a new StringToken with value "5Hello", and
+</p><pre>a.modulo(c)
+</pre>
+<p><a name="160465"> </a>
+throws an exception. Thus in effect we have overloaded the operators +, -, *, /, % and <code>==</code>.
+</p><p><a name="160639"> </a>
+It is not always immediately obvious what is the correct implementation of an operation and what the return type should be. For example, the result of adding an integer token to a double-precision floating-point token should probably be a double, not an integer. The mechanism for making such decisions depends on a <em>type hierarchy</em> that is defined separately from the class hierarchy. This type hierarchy is explained in detail below.
+</p><p><a name="161390"> </a>
+The token classes also implement the methods <code>zero()</code> and <code>one()</code> which return the additive and multiplicative identities respectively. These methods are overridden so that each token type returns a token of its type with the appropriate value. For numerical matrix tokens, <code>zero()</code> returns a zero matrix whose dimension is the same as the matrix of the token where this method is called; and <code>one() </code>returns the left identity, i.e., it returns an identity matrix whose dimension is the same as the number of rows of the matrix of the token. Another method <code>oneRight()</code> is also provided in numerical matrix tokens, which return the right identity, i.e., the dimension is the same as the number of columns of the matrix in the token.
+</p><p><a name="159066"> </a>
+Since data is transferred between entities using Tokens, it is straightforward to write polymorphic actors that receive tokens on their inputs, perform one or more of the overloaded operations and output the result. For example an <code>add</code> actor that looks like<img src="images/data1.gif" height="121" width="785">
+
+
+ this:
+</p><p><a name="159076"> </a>
+might contain some code like:
+</p><p><a name="160625"> </a>
+
+</p><pre>Token input1, input2, output;
+</pre>
+<pre>// read Tokens from the input channels into input1 and input2 variables
+</pre>
+<pre>output = input1.add(input2);
+</pre>
+<pre>// send the output Token to the output channel.
+</pre>
+<pre>
+</pre>
+<p><a name="163094"> </a>
+We call such actors <strong>data polymorphic</strong> to contrast them from <strong>domain polymorphic</strong> actors, which are actors that can operate in multiple domains. Of course, an actor may be both data and domain polymorphic.
+</p><a name="161509"> </a>
+<h3>4.3.2   Lossless Type Conversion</h3>
+
+<p><a name="161515"> </a>
+For the above arithmetic operations, if the two tokens being operated on have different types, type conversion is needed. In Ptolemy II, only conversions that do not lose information are implicitly performed. Lossy conversions must be explicitly done by the user, either through casting or by other means. The lossless type conversion relation among different token types is modeled as a partially ordered set called the <strong>type lattice</strong>, shown in figure <img src="images/data0.gif" height="762" width="781">
+
+
+<a href="data.html#161515">4.2</a>. In that diagram, type <em>A</em> is <strong>greater than</strong> type <em>B</em> if there is a path upwards from <em>B</em> to <em>A</em>. Thus, ComplexMatrix is greater than Int. Type <em>A</em> is <strong>less than</strong> type <em>B</em> if there is a path downwards from <em>B</em> to <em>A</em>. Thus, Int is less than ComplexMatrix. Otherwise, types <em>A</em> and <em>B</em> are <strong>incomparable</strong>. Complex and Long, for example, are incomparable.
+</p><p><a name="161633"> </a>
+In the type lattice, a type can be losslessly converted to any type greater than it. This hierarchy is related to the inheritance hierarchy of the token classes in that a subclass is always less than its super class in the type lattice. However, some adjacent types in the lattice are not related by inheritance.<em> </em>
+</p><p><a name="161653"> </a>
+This hierarchy is realized by the TypeLattice class. Each element in the lattice is an instance of the Java class Class corresponding to a token type. The top element, <em>General</em>, which is "the most general type", is represented by the base class Token; the bottom element, <em>NaT</em> (Not a Type), is represented by java.lang.Void.TYPE. The TypeLattice class provides methods to compare two token types.
+</p><p><a name="161659"> </a>
+Two of the types, <em>Numerical</em> and <em>Scalar</em>, are abstract. They cannot be instantiated. This is indicated in the type lattice by italics.
+</p><p><a name="161519"> </a>
+Type conversion is done by the static method <code>convert()</code> in the token classes. This method converts the argument into an instance of the class implementing this method. For example, <code>DoubleToken.convert(Token token)</code> converts the specified token into an instance of DoubleToken. The <code>convert()</code> method can convert any token immediately below it in the type hierarchy into an instance of its own class. If the argument is higher in the type hierarchy, or is incomparable with its own class, <code>convert()</code> throws an exception. If the argument to <code>convert() </code>is already an instance of its own class, it is returned without any change.
+</p><p><a name="161520"> </a>
+The implementation of the <code>add()</code>, <code>subtract()</code>, <code>multiply()</code>, <code>divide()</code>, <code>modulo()</code>, and <code>equals()</code> methods requires that the type of the argument and the implementing class be comparable in the type hierarchy. If this condition is not met, these methods will throw an exception. If the type of the argument is lower than the type of the implementing class, then the argument is converted to the type of the implementing class before the operation is carried out. 
+</p><p><a name="161707"> </a>
+The implementation is more involved if the type of the argument is higher than the implementing class, in which case, the conversion must be done in the other direction. Since the <code>convert()</code> method only knows how to convert types lower in the type hierarchy up, the operation must take place in the class of the argument. Furthermore, since many of the supported operations are not commutative, for example, <code>"Hello" + "world"</code> is not the same as <code>"world" + "Hello"</code>, and 3-2 is not the same as 2-3, the implementation of the arithmetic operations cannot simply call the same method on the class of the argument. Instead, a separate set of methods must be used. These methods are <code>addReverse()</code>, <code>subtractReverse()</code>, <code>multiplyReverse()</code>, <code>divideReverse()</code>, and <code>moduloReverse()</code>. The equality check is always commutative so no <code>equalsReverse()</code> is needed. Under this setup, <code>a.add(b)</code> means <em>a+b</em>, and <code>a.addReverse(b)</code> means <em>b+a</em>, where <em>a</em> and <em>b</em> are both tokens. If, for example, when <code>a.add(b)</code> is invoked and the type of <em>b</em> is higher than <em>a</em>, the <code>add()</code> method of <em>a</em> will automatically call <code>b.addReverse(a)</code> to carry out the addition.
+</p><p><a name="161786"> </a>
+For scalar and matrix tokens, methods are also provided to convert the content of the token into another numeric type. In ScalarToken, these methods are <code>intValue()</code>, <code>longValue()</code>, <code>doubleValue()</code>, and <code>ComplexValue()</code> (<code>fixValue()</code> will be added later). In MatrixToken, the methods are <code>intMatrix()</code>, <code>longMatrix()</code>, <code>doubleMatrix()</code>, and <code>ComplexMatrix()</code> (<code>fixMatrix()</code> will be added later). The default implementation in these two base classes just throw an exception. Derived classes override the methods if the corresponding conversion is lossless, returning a new instance of the appropriate class. For example, IntToken overrides all the methods defined in ScalarToken, but DoubleToken does not override <code>intValue()</code>. A double cannot, in general, be losslessly converted to an integer.
+</p><a name="162455"> </a>
+<h3>4.3.3   Limitations</h3>
+
+<p><a name="162456"> </a>
+As of this writing, the following issues remain open:
+</p><ul><a name="162457"> </a>
+<li>FixToken and FixMatrixToken classes are planned for supporting fixed-point computation, but they do not exist yet.
+<a name="162458"> </a>
+<li>For numerical matrix tokens, only the <code>add()</code> and <code>addReverse()</code> methods are supported; other arithmetic operations are not implemented yet.
+</ul><a name="158797"> </a>
+<h2>4.4   Parameters</h2>
+<p><a name="163116"> </a>
+A Parameter in Ptolemy II is a container for a Token. Ptolemy II has only a single Parameter class, shown in figure <img src="images/data2.gif" height="1061" width="781">
+
+
+<a href="data.html#163116">4.3</a>, in contrast to Ptolemy 0.x, which had a plethora of type-specific parameter classes. The Parameter class is derived from ptolemy.kernel.util.Attribute and so that instances can be attached to any instance of NamedObj. Since most interesting classes in Ptolemy II are derived from NamedObj, most classes can have parameters attached to them.
+</p><a name="163128"> </a>
+<h3>4.4.1   Values</h3>
+
+<p><a name="159110"> </a>
+The token stored in a parameter can be set in two ways, either by simply placing an instance of Token in the parameter, or by giving the parameter an expression (represented as a string) which is evaluated to produce a token. If the parameter is given a string expression, the expression must be evaluated via a call to <code>evaluate()</code>. The expression language recognized by parameters is explained below. If there is an expression waiting to be evaluated and <code>getToken()</code> is invoked, then the expression will be automatically evaluated before returning the token. As an example, consider the following code segment:
+</p><pre>
+</pre>
+<pre>Parameter p = new Parameter();
+</pre>
+<pre>p.setExpression("1.6 + 8.3");
+</pre>
+<pre>p.evaluate();
+</pre>
+<pre>System.out.println(p.getToken().stringValue());
+</pre>
+<pre>
+</pre>
+<pre>// Now put a new token into the Parameter
+</pre>
+<pre>DoubleToken t = new DoubleToken(7.7);
+</pre>
+<pre>p.setToken(t);
+</pre>
+<pre>System.out.println(p.getToken().stringValue());
+</pre>
+<pre>
+</pre>
+<pre>// Now set the value from a String expression
+</pre>
+<pre>p.setExpression("(true) ? 5.5 : \"hello\"");
+</pre>
+<pre>System.out.println(p.getToken().stringValue());
+</pre>
+<pre>
+</pre>
+<p><a name="159134"> </a>
+The result of running this code segment will be:
+</p><pre>
+</pre>
+<pre>9.9
+</pre>
+<pre>7.7
+</pre>
+<pre>5.5
+</pre>
+<pre>
+</pre>
+<p><a name="162015"> </a>
+The syntax of expressions is described below in <a href="data.html#158808">section 4.5</a>.
+</p><a name="162016"> </a>
+<h3>4.4.2   Variables</h3>
+
+<p><a name="159138"> </a>
+An expression given to a parameter can refer by name to other parameters within the <strong>scope</strong> of this parameter. The scope of a parameter is the set of parameters contained by the same NamedObj and those contained by the NamedObj one level up in the hierarchy (i.e. contained by the container of the container of this Parameter, if it has one). In the above example, no container was specified, so there are no other parameters within the scope of the parameter. The following code segment illustrates expressions that use other parameters:
+</p><pre>
+</pre>
+<pre>Entity e = new Entity();
+</pre>
+<pre>Parameter p1 = new Parameter(e,"p1", new DoubleToken(1.1));
+</pre>
+<pre>Parameter p2 = new Parameter(e,"p2", new DoubleToken(2.2));
+</pre>
+<pre>Parameter p3 = new Parameter(e,"p3");
+</pre>
+<pre>p3.setExpression("p1 + p2");
+</pre>
+<pre>System.out.println(p3.getToken().stringValue());
+</pre>
+<pre>
+</pre>
+<p><a name="160832"> </a>
+This results in
+</p><pre>
+</pre>
+<pre>3.3
+</pre>
+<pre>
+</pre>
+<p><a name="160882"> </a>
+Note therefore that parameters can be used as variables. If two parameters have complicated expressions with a common factor, this common factor could be placed in a separate parameter to be referenced by the other parameters. The syntax of expressions is described below in <a href="data.html#158808">section 4.5</a>.
+</p><a name="160899"> </a>
+<h3>4.4.3   Type</h3>
+
+<p><a name="159140"> </a>
+The <strong>type</strong> of a parameter is defined to be the type of the first token placed in it (which may be the result of evaluating an expression, or may be given directly). For example if the first Token placed in a Parameter is of type DoubleToken, then the parameter is of type double. Any Token that can be converted in a lossless fashion to a token matching the type of the parameter can be placed in the parameter. Thus, for example, an IntToken could be placed in a parameter of type double, but a ComplexToken could not. An attempt to do so will trigger an exception. Lossless type conversion will be covered below.
+</p><p><a name="159141"> </a>
+The type of a parameter can be modified via a call to <code>setType()</code>. The new type of the parameter must be compatible with the token already in the Parameter. This can be used to relax the type of a parameter. For example you may want to have a parameter constrained to tokens of type double, even though the first token placed in it was an IntToken. The parameter could not contain a DoubleToken until <code>setType()</code> is called with the appropriate argument. 
+</p><p><a name="160862"> </a>
+The <code>setType()</code> method can also be used to constrain the type of a Parameter. For example if the first token placed in a parameter was a DoubleToken, but it now contains an IntToken, then you could constrain the parameter to only contain IntTokens from now on by calling <code>setType()</code> with an IntToken class argument.
+</p><a name="159143"> </a>
+<h3>4.4.4   Dependencies</h3>
+
+<p><a name="160930"> </a>
+If an object (generally another parameter) wants to be kept notified of changes in a particular parameter, it must implement the <code>ParameterListener</code> interface and register itself as a listener of that parameter. When the parameter evaluates an expression which refers to another parameter within its scope, it is registered as a listener with that parameter. When a parameter changes it creates a <code>ParameterEvent</code> which contains information about how it changed, and passes it to all registered listeners by calling their <code>parameterChanged()</code> method. In this way a parameter gets updated whenever the value of a parameter it references changes. For example, if <em>param1</em> and <em>param2</em> are two parameters attached to the same <code>NamedObj</code>, both with the same names as the variables used to reference them, then after the following code
+</p><pre>
+</pre>
+<pre>param1.setToken(new DoubleToken(5.5));
+</pre>
+<pre>param2.setExpression(param1 + 2);
+</pre>
+<pre>param2.evaluate();
+</pre>
+<pre>
+</pre>
+<p><a name="159149"> </a>
+<em>param2</em> will be registered as a ParameterListener of <em>param1. </em>Then if the Token in <em>param1</em> changes, it will create a <code>ParameterEvent</code> and pass it to <em>param2</em> by invoking <code>parameterChanged()</code> on <em>param2</em>. In this way <em>param2</em> gets notified of any changes in <em>param1</em> and updated. This mechanism, of course, is the classic publish-and-subscribe design pattern.
+</p><a name="158808"> </a>
+<h2>4.5   Expressions</h2>
+<p><a name="161818"> </a>
+Ptolemy II includes a simple but extensible expression language. This language permits operations on tokens to be specified in a scripting fashion, without requiring compilation of Java code. The expression language can be used to define parameters in terms of other parameters, for example. It can also be used to provide end-users with actors that compute a user-specified expression that refers to inputs and parameters of the actor.
+</p><a name="159168"> </a>
+<h3>4.5.1   The Ptolemy II Expression Language</h3>
+
+<p><a name="159169"> </a>
+The Ptolemy II expression language uses elements of the syntax of Java. Unlike Java, however, it uses operator overloading. Although we fully agree that the designers of Java made a good decision in omitting operator overloading, our expression language is used in situations where compactness of expressions is extremely important. Expressions often appear in crowded dialog boxes in the user interface, so we cannot afford the luxury of replacing operators with method calls.
+</p><p><a name="161011"> </a>
+The Token classes from the data package form the primitives of the language. For example the number 10 becomes an IntToken with the value 10 when evaluating an expression. Normally this is invisible to the user. The expression language is object-oriented, of course, so methods can be invoked on these primitives. A sophisticated user, therefore, can make use of the fact that "10" is in fact an object to invoke methods of that object. 
+</p><p><a name="161033"> </a>
+The expression language is extensible. The basic mechanism for extension is object-oriented. The reflection package in Java is used to recognize method invocations and user-defined constants. We also expect the language to grow over time, so this description should be viewed as a snapshot of its capabilities.
+</p><a name="161844"> </a>
+<h4> Types</h4>
+<p><a name="162221"> </a>
+The types currently supported in the language are boolean, complex, double, int, long and string. We expect the language to eventually support all the matrix types as well. Note that there is no float or byte. Use double or int instead. A long is defined by appending an integer with "l" or "L", as in Java. A complex is defined by appending an "i" or a "j" to a double. This gives a purely imaginary complex number which can then leverage the polymorphic operations in the Token classes to create a general omplex number. Thus <code>2 + 3i</code> will result in the expected complex number. The expression language supports the same lossless type conversion provided by the Token classes (see <a href="data.html#161509">section 4.3.2</a>). Lossy conversion has to be done explicitly via a method call. 
+</p><a name="162231"> </a>
+<h4> Arithmetic operators</h4>
+<p><a name="162188"> </a>
+The arithmetic operators are +, -, *, / and %. These operators, along with <code>==</code>, are overloaded, so their implementation depends on the types being operated on. Operator overloading is achieved using the methods in the Token classes. These methods are <code>add()</code>, <code>subtract()</code>, <code>multiply()</code>, <code>divide()</code>, <code>modulo()</code> and <code>equals()</code>.
+</p><a name="161870"> </a>
+<h4> Bit manipulation</h4>
+<p><a name="161867"> </a>
+The bitwise operators are &amp;, |, ^ and ~. They operated on integers.
+</p><a name="161865"> </a>
+<h4> Relational operators</h4>
+<p><a name="159174"> </a>
+The relational operators are &lt;, &lt;=, &gt;, &gt;=, <code>==</code> and !=. They return booleans.
+</p><a name="161885"> </a>
+<h4> Logical operators</h4>
+<p><a name="161909"> </a>
+The logical boolean operators are &amp;&amp;, ||, !, &amp; and |. They operate on booleans and return booleans. Note that the difference between logical &amp;&amp; and logical &amp; is that &amp; evaluates all the operands regardless of whether their value is now irrelevant. Similarly for logical || and |. This approach is borrowed from Java.
+</p><a name="161910"> </a>
+<h4> Conditionals</h4>
+<p><a name="163150"> </a>
+The language is an expression language, not an imperative language with sequentially executed statements. Thus, it makes no sense to have the usual <code>if...then...else...</code> construct. Such a construct in Java (and most imperative languages) depends on side effects. However, Java does have a functional version of this construct (one that returns a value). The syntax for this is 
+</p><pre>boolean ? value1 : value2
+</pre>
+<p><a name="159179"> </a>
+If the boolean is true, <code>value1</code> is returned, else <code>value2</code> is returned. The Ptolemy II expression language uses this same syntax.
+</p><a name="159180"> </a>
+<h4> Comments</h4>
+<p><a name="161959"> </a>
+Anything inside<strong> /*...*/</strong> is ignored, as is the rest of a line following <strong>//. </strong>(Expressions can be split over multiple lines).
+</p><a name="163161"> </a>
+<h4> Variables</h4>
+<p><a name="163163"> </a>
+Expressions can contain references by name to parameters within the <strong>scope</strong> of the expression. An example is given above in <a href="data.html#162016">section 4.4.2</a>. Consider a parameter <em>P </em>with container <em>X</em> which is in turn contained by <em>Y</em>. The scope of an expression for <em>P </em>includes all the parameters contained by <em>X</em> and <em>Y</em>. The scope is implemented as an instance of NamedList, which provides a symbol table. Note that a class derived from Parameter may define scope differently.
+</p><a name="162042"> </a>
+<h4> Constants</h4>
+<p><a name="159183"> </a>
+If an identifier is encountered in an expression that does not match a parameter in the scope, then it might be a constant which has been registered as part of the language. By default only the constants PI and E are registered, but as we will see later, this can easily be extended by a user. In addition, literal constants are supported. Anything between quotes, "...", is interpreted as a string constant. Numerical values without decimal points, such as "10" or "-3" are integers. Numerical values with decimal points, such as "10.0" or "3.14159" are doubles.
+</p><a name="162057"> </a>
+<h4> Functions</h4>
+<p><a name="159184"> </a>
+The language includes an extensible set of functions, such as <code>sin()</code>, <code>cos()</code>, etc. The functions that are built in include all static methods of the java.lang.Math class and the ptolemy.data.expr.UtilityFunctions class. As we will see below in <a href="data.html#159205">section 4.5.2</a>, this can easily be extended by a user by registering another class that includes static methods.
+</p><a name="162074"> </a>
+<h4> Methods</h4>
+<p><a name="159185"> </a>
+Every element and subexpression in an expression represents an instance of Token (or more likely, a class derived from Token). The expression language supports invocation of any method of a given token, as long as the arguments of the method are of type Token and the return type is Token (or a class derived from Token). The syntax for this is <code>(</code><code><i>token</i></code><code>).</code><code><i>name</i></code><code>(</code><code><i>args</i></code><code>)</code>, where <code><i>name</i></code> is the name of the method and <code><i>args</i></code> is a comma-separated set of arguments. Each argument can itself be an expression. Note that the parentheses around the <code><i>token</i></code> are required. As an example, this could be used to convert a number to a string as follows
+</p><pre>
+</pre>
+<pre>(2*4-6.5).stringValue()
+</pre>
+<pre>
+</pre>
+<p><a name="159187"> </a>
+This returns the string "1.5". The expression (2*4-6.5) evaluates to a double token, and stringValue() is a method of DoubleToken.
+</p><p><a name="162267"> </a>
+Note that methods, unlike functions, must take arguments that are of type Token. This is logical because the methods belong to instances of class Token. Functions, however, are implemented as static methods of some other class, such as java.lang.Math. Those classes cannot be expected to define interfaces with Token. Thus, Tokens are converted, if this can be done losslessly, to the type expected by the function.
+</p><a name="159205"> </a>
+<h3>4.5.2   Functions</h3>
+
+<p><a name="159206"> </a>
+By default all of the static methods in java.lang.Math and ptolemy.data.expr.UtilityFunctions are available. The functions currently supported in ptolemy.data.util.UtilityFunctions are:
+</p><ul><a name="159207"> </a>
+<li>reading the string from a file via a <code>readFile("filename") </code>function, and
+<a name="159208"> </a>
+<li>calling the parser again to process a String via <code>eval("...")</code><em>. </em>For example one use of <code>eval()</code> might be <code>eval(readFile("foo.bar"))</code><em>.</em>
+<p><a name="162287"> </a>
+Eventually we hope to support calls to external packages such as matlab or tcl via <code>tcl("...")</code> or<code> matlab("...")</code>. Note this only requires that whatever is inside the parenthesis <strong>resolve</strong> to a StringToken, so we could have for example <code>tcl("puts " + </code><code><i>xx</i></code><code>)</code> where <code><i>xx</i></code> is a Parameter in the scope. We also plan to support access to system environment variables via <code>env("name")</code>.
+</p></ul><a name="159213"> </a>
+<h3>4.5.3   Limitations</h3>
+
+<p><a name="159214"> </a>
+The expression language has a rich potential, and only some of this potential has been realized. Here are some of the current limitations:
+</p><ul><a name="159215"> </a>
+<li>The class ptolemy.data.util.UtilityFunctions containing the utility functions has not yet been fully written. Currently the functions available are <code>eval()</code> and <code>readFile()</code><em>. </em>
+<a name="162358"> </a>
+<li>Functions in the math package need to be supported in much the same way that java.lang.Math is supported.
+<a name="162799"> </a>
+<li>Method calls are currently only allowed on tokens in the ptolemy.data package.
+<a name="162367"> </a>
+<li>The language does not yet handle matrices or vectors.
+<a name="162340"> </a>
+<li>Statements are not supported. It is not clear that they ever will be, since currently the expression language is strictly functional, and converting it to imperative semantics could drastically change its flavor.
+</ul><a name="159219"> </a>
+<h1><center>Appendix A:  Expression Evaluation</center></h1>
+<p><a name="162576"> </a>
+The evaluation of an expression is done in two steps. First the expression is parsed to create an <strong>abstract syntax tree</strong> (AST) for the expression. Then the AST is evaluated to obtain the token to be placed in the parameter. In this appendix, "token" refers to instances of the Ptolemy II token classes, as opposed to lexical tokens generated when an expression is parsed.
+</p><a name="162484"> </a>
+<h2>A.1   Generating the parse tree</h2>
+<p><a name="162487"> </a>
+In PtolemyII the expression parser, called <em>PtParser</em>, is generated using JavaCC and JJTree. JavaCC is a compiler-compiler that takes as input a file containing both the definitions of the lexical tokens that the parser matches and the production rules used for generating the parse tree for an expression. The production rules are specified in <strong>Backus normal form </strong>(BNF). JJTree is a preprocessor for JavaCC that enables it to create an AST. The parser definition is stored in the file PtParser.jjt, and the generated file is PtParser.java. Thus the procedure is <img src="images/data3.gif" height="118" width="781">
+
+
+
+</p><p><a name="159238"> </a>
+Note that JavaCC generates top-down parsers, or LL(k) in parser terminology. This is different from yacc (or bison) which generate bottom-up parsers, or more formally LALR(1). The JavaCC file also differs from yacc in that it contains both the lexical analyzer and the grammar rules in the same file.
+</p><p><a name="159239"> </a>
+The input expression string is first converted into lexical tokens, which the parser then tries to match using the production rules for the grammar. Each time the parser matches a production rule it creates a node object and places it in the abstract syntax tree. The type of node object created depends on the production rule used to match that part of the expression. For example, when the parser comes upon a multiplication in the expression, it creates an ASTPtProductNode.
+</p><p><a name="159240"> </a>
+The parser takes as input a string, and optionally a NamedList of parameters to which the input expression can refer. That NamedList is the symbol table. If the parse is successful, it returns the root node of the abstract syntax tree (AST) for the given string. Each node object can contain a token, which represents both the type and value information for that node. The type of the token stored in a node, e.g. DoubleToken, IntToken etc., represents the type of the node. The data value contained by the token is the value information for the node. In the AST as it is returned from PtParser, the token types and values are only resolved for the leaf nodes of the tree. 
+</p><p><a name="162534"> </a>
+One of the key properties of the expression language is the ability to refer to other tokens by name. Since an expression that refers to other parameters may need to be evaluated several times (when the referred parameter changes), it is important that the parse tree does not need to be recreated every time. When an identifier is parsed, the parser first checks whether it refers to a parameter within the current scope. If it does it creates a ASTPtLeafNode with a reference to that parameter. Note that a leaf node can have a parameter or a token. If it has a parameter then when the token to be stored in this node is evaluated, it is set to the token contained by the parameter. Thus the AST tree does not need to be recreated when a referenced parameter changes as upon evaluation it will just get the new token stored in the referenced parameter. If the parser was created by a parameter, the parameter passes in a reference to itself in the constructor. Then upon parsing a reference to another parameter, the parser takes care of registering the parameter that created it as a listener with the referred parameter. This is how dependencies between parameters get registered. There is also a mechanism built into parameters to detect dependency loops.
+</p><p><a name="159242"> </a>
+If the identifier does not refer to a parameter, the parser then checks if it refers to a constant registered with the parser. If it does it creates a node with the token associated with the identifier. If the identifier is neither a reference to a parameter or a constant, an exception is thrown.
+</p><a name="159244"> </a>
+<h2>A.2   Evaluating the parse tree</h2>
+<p><a name="159246"> </a>
+The AST can be evaluated by invoking the method <code>evaluateParseTree()</code> on the root node. The AST is evaluated in a bottom up manner as each node can only determine its type after the types of all its children have been resolved. When the type of the token stored in the root node has been resolved, this token is returned as the result of evaluating the parse tree.
+</p><p><a name="159247"> </a>
+As an example consider the input string 2 + 3.5. The parse tree returned from the parser will look like this:<img src="images/data4.gif" height="204" width="781">
+
+
+
+</p><p><a name="159296"> </a>
+which will then get evaluated to this:<img src="images/data5.gif" height="196" width="781">
+
+
+
+</p><p><a name="159297"> </a>
+and DoubleToken(5.5) will be returned as the result.
+</p><p><a name="159298"> </a>
+As seen in the above example, when <code>evaluateParseTree()</code> is invoked on the root node, the type and value of the tokens stored at each node in the tree is resolved, and finally the token stored in the root node is returned. If an error occurs during either the creation of the parse tree or the evaluation of the parse tree, an <code>IllegalArgumentException</code><em> </em>is thrown with a error message about where the error occurred.
+</p><p><a name="159299"> </a>
+If a node has more than two children, type resolution is done pairwise from the left. Thus "2 + 3 + "hello"" resolves to 5hello. This is the same approach that Java follows.
+</p><p><a name="159300"> </a>
+Each time the parser encounters a function call, it creates an ASTPtFunctionNode object. When this node is being evaluated, it uses reflection to look for that function in the list of classes registered with the parser for that purpose. The classes automatically searched are java.lang.Math and ptolemy.data.expr.UntilityFunctions. To register another class to be searched when a function call is parsed, call <code>registerFunctionClass()</code> on the parser with the full name of the class to be added to the function search path.
+</p><p><a name="159301"> </a>
+When a parameter is informed that another parameter it references has changed, the parameter re-evaluates the parse tree for the expression to obtain the new value. It is not necessary to parse the expression again as the relevant leaf node stores a reference to the parameter, not the token contained in the parameter. Thus at any time, the value of a parameter is up to date.
+</p><a name="159303"> </a>
+<h3>A.2.1  Node types</h3>
+
+<p><a name="159304"> </a>
+There are currently eleven node classes used in creating the syntax tree. For some of these nodes the types of their children are fairly restricted and so type and value resolution is done in the node. For others, the operators that they represent are overloaded, in which case methods in the token classes are called to resolve the nodes type and value (i.e. the contained token!). By type resolution we are referring to the type of the token to be stored in the node. 
+</p><a name="159306"> </a>
+<h4> ASTPtBitwiseNode</h4>
+<p><a name="162706"> </a>
+This is created when a bitwise operation(&amp;, |, ^) happens. Type resolution occurs in the node. The &amp; and | operators are only valid between two booleans, or two integer types. The ^ operator is only valid between two integer types. 
+</p><a name="162568"> </a>
+<h4> ASTPtLeafNode</h4>
+<p><a name="162717"> </a>
+This represents the leaf nodes in the AST. The parser will always place either a token of the appropriate type (e.g. IntToken if "2" is what is parsed) or a parameter in a leaf node. A parameter is placed so that the parse tree can be reevaluated without reparsing whenever the value of the parameter changes. No type resolution is necessary in this node.
+</p><a name="159313"> </a>
+<h4> ASTPtRootNode</h4>
+<p><a name="162747"> </a>
+Parent class of all the other nodes. As its name suggests, it is the root node of the AST. It always has only one child, and its type and value is that of its child.
+</p><a name="159315"> </a>
+<h4> ASTPtFunctionNode</h4>
+<p><a name="162760"> </a>
+This is created when a function is called. Type resolution occurs in the node. It uses reflection to call the appropriate function with the arguments supplied. It searches the classes registered with the parser for the function. By default it only looks in java.lang.Math and ptolemy.data.expr.UtilityFunctions. 
+</p><a name="162776"> </a>
+<h4> ASTPtFunctionalIfNode</h4>
+<p><a name="162780"> </a>
+This is created when a functional if is parsed. Type resolution occurs in the node. For a functional if, the first child node must contain a BooleanToken, which is used to chose which of the other two tokens of the child nodes to store at this node.
+</p><a name="159323"> </a>
+<h4> ASTPtMethodCallNode.</h4>
+<p><a name="162792"> </a>
+This is created when a method call is parsed. Method calls are currently only allowed on tokens in the ptolemy.data package. All of the arguments to the method, and the return type, must be of type Token (or a subclass).
+</p><a name="159327"> </a>
+<h4> ASTPtProductNode</h4>
+<p><a name="162810"> </a>
+This is created when a *, / or % is parsed. Type resolution does not occur in the node. It uses the <code>multiply()</code>, <code>divide()</code> and <code>modulo()</code> methods in the token classes to resolve the nodes type.
+</p><a name="159330"> </a>
+<h4> ASTPtSumNode</h4>
+<p><a name="162829"> </a>
+This is created when a + or - is parsed. Type resolution does not occur in the node. It uses the <code>add() </code>and <code>subtract()</code> methods in the token classes to resolve the nodes type.
+</p><a name="159333"> </a>
+<h4> ASTPtLogicalNode</h4>
+<p><a name="162845"> </a>
+This is created when a &amp;&amp; or || is parsed. Type resolution occurs in the node. All children nodes must have tokens of type BooleanToken. The resolved type of the node is also BooleanToken.
+</p><a name="159337"> </a>
+<h4> ASTPtRelationalNode</h4>
+<p><a name="162857"> </a>
+This is created when one of the relational operators(!=, <code>==</code>, &gt;, &gt;=, &lt;, &lt;=) is parsed. The resolved type of the token of this node is BooleanToken. The "<code>==</code>" and "!=" operators are overloaded via the <code>equals()</code> method in the token classes. The other operators are only valid on ScalarTokens. Currently the numbers are converted to doubles and compared, this needs to be adjusted to take account of Longs.
+</p><a name="159340"> </a>
+<h4> ASTPtUnaryNode</h4>
+<p><a name="162882"> </a>
+This is created when a unary negation operator(!, ~, -) is parsed. Type resolution occurs in the node, with the resulting type being the same as the token in the only child of the node.
+</p><a name="159343"> </a>
+<h3>A.2.2  Extensibility</h3>
+
+<p><a name="159344"> </a>
+The Ptolemy II expression language has been designed to be extensible. The main mechanisms for extending the functionality of the parser is the ability to register new constants with it and new classes containing functions that can be called. However it is also possible to add and invoke methods on tokens, or to even add new rules to the grammar, although both of these options should only be considered in rare situations.
+</p><p><a name="159345"> </a>
+To add a new constant that the parser will recognize, invoke the method <code>registerConstant(String name, Object value)</code> on the parser. This is a static method so whatever constant you add will be visible to all instances of PtParser in the Java virtual machine. The method works by converting, if possible, whatever data the object has to a token and storing it in a hashtable indexed by name. By default, only the constants in java.lang.Math are registered.
+</p><p><a name="159346"> </a>
+To add a new Class to the classes searched for a a function call, invoke the method <code>registerClass(String name)</code> on the parser. This is also a static method so whatever class you add will be searched by all instances of PtParser in the JVM. The name given must be the fully qualified name of the class to be added, for example "java.lang.Math". The method works by creating and storing the Class object corresponding to the given string. If the class does not exist an exception is thrown. When a function call is parsed, an ASTPtFunctionNode is created. Then when the parse tree is being evaluated, the node obtains a list of the classes it should search for the function and, using reflection, searches the classes until it either finds the desired function or there are no more classes to search. The classes are searched in the same order as they were registered with the parser, so it is better to register those classes that are used frequently first. By default, only the classes java.Lang.Math and ptolemy.data.expr.UtilityFunctions are searched.
+</p>
+
+
+<hr><br>
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate5.src=image2.src; return true" onMouseOut="document.images.animate5.src=image1.src">
+     <img src="support/top.gif" name ="animate5" border="0"></a>
+     <a href="actor.html" onMouseOver="document.images.animate6.src=image4.src; return true" onMouseOut="document.images.animate6.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate6"></a>
+     <a href="graph.html" onMouseOver="document.images.animate7.src=image6.src; return true" onMouseOut="document.images.animate7.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate7" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate8.src=image8.src; return true" onMouseOut="document.images.animate8.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate8"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate10.src=image10.src; return true" onMouseOut="document.images.animate10.src=image9.src">
+     <img src="support/toc.gif"  border="0" name="animate10"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate12.src=image12.src; return true" onMouseOut="document.images.animate12.src=image11.src">
+     <img src="support/index.gif" border="0" name="animate12"></a>
+    <br>
+     <small><em>Page 6 out of 12 total pages
+     </small></em>
+     </div>
+ 
+
+<hr><br>
+ 
+
+
+
+ptII at eecs berkeley edu
+
+
+<i>Copyright &#169; 1998, The Regents of the University of California.   All rights
+reserved.</i>
+
+<!-- This file was created with Quadralay WebWorks Publisher 4.0.11 -->
+<!-- Last updated: Thu Nov 26 00:12:02 1998 -->
+
+</body>
+</html>

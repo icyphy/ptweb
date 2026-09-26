@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> INTRODUCTION</TITLE>
+<meta name="description" value=" INTRODUCTION">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html33 HREF="node2.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html31 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html25 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html34 HREF="node2.html"> Dual-Tone Multiple Frequencies</A>
+<B>Up:</B> <A NAME=tex2html32 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<B> Previous:</B> <A NAME=tex2html26 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00010000000000000000> INTRODUCTION</A></H1>
+<P>
+ Estimating the frequencies of multiple signals in noise is an important
+problem in signal processing.
+ We can estimate these frequencies, using subspace techniques such as
+Multiple Signal Classification (MUSIC) <A HREF="node13.html#music">[1]</A>, adaptive techniques
+such as Least Mean-Square (LMS) estimation <A HREF="node13.html#widrow">[2]</A>, or fast
+implementations of discrete Fourier transform (DFT) such as the Goertzel
+algorithm <A HREF="node13.html#Mock">[3]</A>.
+ The choice of the technique is based on a trade-off between the observation
+time and the available computational resources.
+<P>
+ We apply MUSIC, LMS-based normalized Direct adaptive Frequency Estimation
+Technique (DFET) <A HREF="node13.html#DFET">[4]</A> (NDFET) <A HREF="node13.html#SIU95">[5]</A>, and the Goertzel algorithm to the
+detection of dual-tone multiple frequencies (DTMF).
+ We evaluate their performance and compliance with standards through
+MATLAB simulations and real-time embedded digital signal processor
+implementations.
+ We coded the ADSP-2101 implementations manually, but we used the
+Ptolemy 0.6 rapid prototyping environment <A HREF="node13.html#pino">[6]</A> to generate
+the Motorola 56001 implementations.
+ A key benefit of using a tool like Ptolemy is that the DTMF decoders can be
+reused in other designs and retargeted to VHDL, C, and other implementations.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>

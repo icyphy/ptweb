@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id: index.html 6827 2013-01-31 23:42:37Z marys $ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Joint Code and Data Minimization</title>
+
+<!--Script inserts current year in copyright section of footer -->
+<script type="text/javascript" src="/js/getyear.js"></script>
+<link href="/css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-flex.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+<!-- Conditional comment addds IE6-specific CSS deviations -->
+<!--[if lte IE 6]>
+<link href="/css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+<![endif]-->
+</head>
+
+<body>
+  <!-- Google Analytics, see http://embedded.eecs.berkeley.edu/dopsysadmin/faq/24.html-->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-65990221-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+<div id="sizer"><div id="expander"><div id="innerwrapper">
+<div id="outside">
+  <div id="banr">
+    <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+    <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+    <div id="ucb"><a href="http://www.eecs.berkeley.edu">UC Berkeley EECS Dept.</a></div>
+    <div id="tools">
+  <div id="searchform">
+    <form action="https://www.google.com/cse" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="002441970488456085056:qdpgv0y2dja" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="text" name="q" size="15" />
+        <input type="submit" name="sa" value="Search" />
+      </div>
+    </form>
+    <script type="text/javascript" src="https://www.google.com/cse.js"></script>
+  </div> <!-- /searchform -->
+</div> <!-- /tools -->
+
+
+<!-- Website logo -->
+<div id="logo"><a href="/"><img src="/image/banner.gif" alt="Ptolemy Project"/></a></div>
+    <!-- OPTIONAL Customizable Quick Links dropdown -->
+    <div id="links"><select name="current" onchange="window.open(this.options[this.selectedIndex].value,'_top')" title="No mouse? Use Alt-Down Arrow to open list">
+<option>Quick Links</option>
+<option value="/people/index.htm">People</option>
+<option value="/download/index.htm">Download</option>
+<option value="/publications/index.htm">Publications</option>
+</select> 
+</div><!-- /#links -->
+
+    <!-- OPTIONAL horizontal top navigation -->
+    <div id="topnav"><ul>
+<li class="first"><a href="/index.htm">Home</a></li>
+<li><a href="/objectives.htm">Objectives</a></li>
+<li><a href="/ptolemyII/index.htm">Ptolemy II</a></li>
+<li><a href="/other/index.htm">Other&nbsp;software</a></li>
+<li><a href="/people/index.htm">People</a></li>
+<li><a href="/sponsors.htm">Sponsors</a></li>
+<li><a href="/publications/index.htm">Publications</a></li>
+<li><a href="/conferences/index.htm">Conferences</a></li>
+<li><a href="/presentations/index.htm">Presentations</a></li>
+<li><a href="/ptolemyII/ptIIfaq.htm">FAQ</a></li>
+<li><a href="/download/index.htm">Download</a></li>
+</ul>
+</div><!-- /#topnav -->
+
+  </div>
+  <!-- /#banr -->
+  <div id="pagebody">
+    <div id="navcol">
+      <!-- Main site navigation -->
+
+
+<div id="menu">
+<ul>
+<li><a href="/index.htm">Home</a></li>
+</ul>
+<ul>
+<!-- Key papers are out of date
+<li><a href="/publications/classics.htm"><i>Key Papers</i></a></li>
+-->
+<li><a href="/presentations/index.htm">Presentations</a></li>
+<li><a href="/publications/copyright.htm">Copyright</a></li>
+<li><a href="/publications/help.htm">Help</a></li>
+<li> &nbsp;
+
+<form action="https://www.google.com/cse" id="cse-search-box">
+ <div>
+   <input type="hidden" name="cx" value="002441970488456085056:x-pqjymewzc" />
+   <input type="hidden" name="ie" value="UTF-8" />
+   <input type="text" name="q" size="20" />
+   <input type="submit" name="sa" value="Search Pubs" />
+ </div>
+</form>
+
+<script type="text/javascript" src="https://cse.google.com/cse.js"></script>
+</li>
+</ul>
+<h2>Papers</h2>
+<ul>
+<li><a href="/publications/index.htm"><i>Featured Papers</i></a></li>
+<li><a href="http://www.eecs.berkeley.edu/Pubs/Dissertations/Faculty/lee.html"><i>Dissertations</i></a></li>
+<li><a href="/publications/papers/18/index.htm">2018</a></li>
+<li><a href="/publications/papers/17/index.htm">2017</a></li>
+<li><a href="/publications/papers/16/index.htm">2016</a></li>
+<li><a href="/publications/papers/15/index.htm">2015</a></li>
+<li><a href="/publications/papers/14/index.htm">2014</a></li>
+<li><a href="/publications/papers/13/index.htm">2013</a></li>
+<li><a href="/publications/papers/12/index.htm">2012</a></li>
+<li><a href="/publications/papers/11/index.htm">2011</a></li>
+<li><a href="/publications/papers/10/index.htm">2010</a></li>
+<li><a href="/publications/papers/09/index.htm">2009</a></li>
+<li><a href="/publications/papers/08/index.htm">2008</a></li>
+<li><a href="/publications/papers/07/index.htm">2007</a></li>
+<li><a href="/publications/papers/06/index.htm">2006</a></li>
+<li><a href="/publications/papers/05/index.htm">2005</a></li>
+<li><a href="/publications/papers/04/index.htm">2004</a></li>
+<li><a href="/publications/papers/03/index.htm">2003</a></li>
+<li><a href="/publications/papers/02/index.htm">2002</a></li>
+<li><a href="/publications/papers/01/index.htm">2001</a></li>
+<li><a href="/publications/papers/00/index.htm">2000</a></li>
+<li><a href="/publications/papers/99/index.htm">1999</a></li>
+<li><a href="/publications/papers/98/index.htm">1998</a></li>
+<li><a href="/publications/papers/97/index.htm">1997</a></li>
+<li><a href="/publications/papers/96/index.htm">1996</a></li>
+<li><a href="/publications/papers/95/index.htm">1995</a></li>
+<li><a href="/publications/papers/94/index.htm">1994</a></li>
+<li><a href="/publications/papers/93/index.htm">1993</a></li>
+<li><a href="/publications/papers/92/index.htm">1992</a></li>
+<li><a href="/publications/papers/91/index.htm">1991</a></li>
+<li><a href="/publications/papers/90/index.htm">1990</a></li>
+<li><a href="/publications/papers/89/index.htm">1989</a></li>
+<li><a href="/publications/papers/88/index.htm">1988</a></li>
+<li><a href="/publications/papers/87/index.htm">1987</a></li>
+<li><a href="/publications/papers/86/index.htm">1986</a></li>
+<li><a href="/publications/papers/85/index.htm">1985</a></li>
+<li><a href="/publications/papers/84/index.htm">1984</a></li>
+<li> &nbsp; </li>
+</ul>
+</div><!-- /#menu -->
+
+      <!-- OPTIONAL Additional text or links in left column -->
+      <div id="addon">
+      </div>
+      <!-- /#addon -->
+    </div>
+    <!-- /#navcol -->
+    <div id="contentcol">
+      <!-- OPTIONAL section title; can be used w or w/o photo strip below -->
+      <!-- xxx#xxx include virtual="/ssi/section.htm" -->
+      <div id="content">
+          <!-- Begin main page content -->
+      <!-- Link target for accessibility Skip Nav -->
+      <a name="maincontent" id="maincontent"></a>
+		<div id="skip2"><a href="#sidebar" title="Skip to sidebar">Skip to sidebar</a></div> 
+
+
+
+
+<center>
+<h1>Joint Minimization of Code and Data for Synchronous Dataflow Programs</h1>
+
+
+<p>
+in the Journal of Formal Methods in Systems Design, Vol. 11, No. 1, pp41-70,
+July 1997.>/p>
+<p>
+by Praveen K. Murthy,
+Shuvra S. Bhattacharyya, and 
+<a href="http://ptolemy.eecs.berkeley.edu/~eal/">Edward A. Lee</a></p>
+</center>
+
+<table align="center">
+<tr>
+<td><a href="jfm.pdf">Prepublished version</a></td>
+</tr>
+
+<tr>
+<td><a href="http://link.springer.com/article/10.1023%2FA%3A1008633809454">Published version</a></td>
+</tr>
+</table>
+
+<h3>ABSTRACT</h3>
+
+This paper develops a dynamic programming algorithm for finding minimum
+buffer size single appearance schedules for well-ordered graphs.  The class
+of R-schedules is defined and shown to always contain buffer-optimal
+single appearance schedules.  It is proven that the dynamic programming
+algorithm can find an R-schedule that is buffer-optimal.  Several extensions
+are given to the basic algorithm to enable it to handle delays, a simple
+form of buffer sharing, and to obtain optimal lexical orderings for
+a given single appearance schedule for an acyclic graph.  A practical
+example of a well-ordered graph is presented to demonstrate the efficacy
+of the approach.  It is then shown that the problem of determining buffer-
+optimal single appearnce schedules appears to be considerably more difficult
+for acyclic graphs.  A heuristic approach called recursive partitioning
+by minimum cuts is developed and is tested on a large number of random
+graphs.  A practical example is also given to demonstrate its efficacy.
+[42 pages]
+<hr>
+The following is an earlier technical report from which the above journal
+publication resulted.
+<p>
+<a href="jointCodeDataMinimize.ps.Z">
+Combined Code and Data Minimization for Synchronous Dataflow Programs,
+</a>
+UCB Tech.  Memorandum UCB/ERL M94/93, November 29, 1994.
+<p>
+by Praveen K. Murthy
+Shuvra S. Bhattacharyya, and 
+<a href="http://ptolemy.eecs.berkeley.edu/~eal/">Edward A. Lee</a>
+
+      </div>
+      <!-- /#content -->
+    </div>
+    <!-- /#contentcol -->
+  </div>
+  <!-- /#pagebody -->
+</div>
+<!-- /#outside -->
+<div id="footer">
+<ul>
+<li class="first"><a href="/people/index.htm">Contact</a></li> 
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/group/public.htm">Update Help</a></li>
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/?Action=vcupdateptweb">Update</a></li>
+</ul>
+<!-- Script inserts current year in copyright string -->
+<a href="/copyright.htm">Copyright &copy;</a> 1999 - <script type="text/javascript">
+<!--
+displayDate();
+//-->
+</script> 
+UC Regents; all rights reserved.
+</div><!-- /#footer -->
+
+</div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+<!-- OPTIONAL Insert tracking code here -->
+</body>
+</html>
+

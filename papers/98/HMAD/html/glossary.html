@@ -1,0 +1,338 @@
+
+<html><head>
+<script language="JavaScript">
+
+image1 = new Image();
+image2 = new Image();
+image1.src = "support/top.gif";
+image2.src = "support/top.glow.gif";
+
+image3 = new Image();
+image4 = new Image();
+image3.src = "support/prevpage.gif";
+image4.src = "support/prevpage.glow.gif";
+
+image5 = new Image();
+image6 = new Image();
+image5.src = "support/nextpage.gif";
+image6.src = "support/nextpage.glow.gif";
+
+image7 = new Image();
+image8 = new Image();
+image7.src = "support/bottom.gif";
+image8.src = "support/bottom.glow.gif";
+
+image9 = new Image();
+image10 = new Image();
+image9.src = "support/toc.gif";
+image10.src = "support/toc.glow.gif";
+
+image11 = new Image();
+image12 = new Image();
+image11.src = "support/index.gif";
+image12.src = "support/index.glow.gif";
+</script>
+<STYLE>
+
+BODY {
+  background:  #FFFFFF ;
+  
+  color: #000000;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: left;
+}
+
+H1,H2,H3 {
+  font-family: helvetical, arial, sans-serif;
+  text-align: left;}
+
+A:link {color: #0000FF;}
+A:active {color: #FF0000;}
+A:visited {color: #800080;}
+</STYLE>
+<title>Glossary</title></head>
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+ 
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate1.src=image2.src; return true" onMouseOut="document.images.animate1.src=image1.src">
+     <img src="support/top.gif" name ="animate1" border="0"></a>
+     <a href="references.html" onMouseOver="document.images.animate2.src=image4.src; return true" onMouseOut="document.images.animate2.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate2"></a>
+     <a href="designix.html" onMouseOver="document.images.animate3.src=image6.src; return true" onMouseOut="document.images.animate3.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate3" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate4.src=image8.src; return true" onMouseOut="document.images.animate4.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate4"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate4a.src=image10.src; return true" onMouseOut="document.images.animate4a.src=image9.src">
+     <img src="support/toc.gif"    border="0" name="animate4a"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate4b.src=image12.src; return true" onMouseOut="document.images.animate4b.src=image11.src">
+     <img src="support/index.gif"  border="0" name="animate4b"></a>     
+<br>
+     <small><em>Page 11 out of 12 total pages
+     </small></em>
+     </div>
+
+<hr><br>
+
+ 
+<a name="158501"> </a>
+<h1><center> Glossary</center></h1>
+<p><a name="158692"> </a>
+ <b>abstract syntax</b>	 A conceptual data organization. cf. <em>concrete syntax.</em>
+</p>
+
+<p><a name="159460"> </a>
+ <b>action methods</b>	 The methods initialize(), prefire(), fire(), postfire(), and wrapup() in the Executable interface.
+</p>
+
+<p><a name="159309"> </a>
+ <strong>actor</strong>	 An executable entity. This was called a <em>block</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="158857"> </a>
+ <strong>anytype</strong>	 The Ptolemy 0.x name for <em>undeclared type</em>.
+</p>
+
+<p><a name="158762"> </a>
+ <strong>atomic actor</strong>	 A primitive actor. That is, one that is not a composite actor. This was called a <em>star</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="159307"> </a>
+ <strong>attribute	 </strong>A named property associated with a named object in Ptolemy II.
+</p>
+
+<p><a name="158761"> </a>
+ <strong>block</strong>	 The Ptolemy 0.x name for an <em>actor</em>.
+</p>
+
+<p><a name="159395"> </a>
+ <strong>channel	 </strong>A path from an output port to an input port (via relations) that can transport a single stream of tokens.
+</p>
+
+<p><a name="158770"> </a>
+ <strong>clustered graph</strong>	 A graph with hierarchy. Ptolemy II topologies are clustered graphs.
+</p>
+
+<p><a name="158768"> </a>
+ <strong>composite actor</strong>	 An actor that is internally composed of other actors and relations. This was called a <em>galaxy</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="159315"> </a>
+ <b>concrete syntax</b>	 A persistent representation of a data organization. cf. <em>abstract syntax.</em>
+</p>
+
+<p><a name="158787"> </a>
+ <strong>connection</strong>	 A path from one port to another via relations and possibly transparent ports. A connection consists of one or more <em>relations</em> and two or more <em>links</em>.
+</p>
+
+<p><a name="159326"> </a>
+ <strong>container	 </strong>An object that logically owns another. A Ptolemy II object can have at most one container.
+</p>
+
+<p><a name="159384"> </a>
+ <strong>dangling relation	 </strong>A relation with only input ports or only output ports linked to it.
+</p>
+
+<p><a name="159197"> </a>
+ <strong>data polymorphic	 </strong>Capable of operating with more than one token type.
+</p>
+
+<p><a name="159270"> </a>
+ <strong>deep traversals</strong>	 Traversals of a clustered graph that see through transparent cluster boundaries (transparent composite entities and ports).
+</p>
+
+<p><a name="159383"> </a>
+ <strong>disconnected port	 </strong>A port with no relation linked to it.
+</p>
+
+<p><a name="159336"> </a>
+ <strong>director	 </strong>An object that controls the execution of a model or an opaque composite entity according to some <em>model of computation</em>.
+</p>
+
+<p><a name="159382"> </a>
+ <strong>domain</strong>	 An implementation of a model of computation in Ptolemy II and Ptolemy 0.x.
+</p>
+
+<p><a name="159196"> </a>
+ <strong>domain polymorphic	 </strong>Capable of operating under more than one model of computation.
+</p>
+
+<p><a name="158769"> </a>
+ <strong>entity</strong>	 A node in a Ptolemy II clustered graph.
+</p>
+
+<p><a name="159414"> </a>
+ <strong>execution	 </strong>One invocation of initialize(), followed by any number of <em>iterations</em>, followed by one invocation of wrapup().
+</p>
+
+<p><a name="159351"> </a>
+ <strong>executive director	 </strong>From the perspective of an actor inside an opaque composite actor, the director of the container of the opaque composite actor.
+</p>
+
+<p><a name="158810"> </a>
+ <strong>galaxy</strong>	 The Ptolemy 0.x name for a <em>composite actor</em>.
+</p>
+
+<p><a name="159325"> </a>
+ <strong>immutable property	 </strong>A property of an object that is set up when the object is constructed and that cannot be changed during the lifetime of the object.
+</p>
+
+<p><a name="159413"> </a>
+ <strong>iteration	 </strong>One invocation of prefire(), followed by any number of invocations of fire(), followed by one invocation of postfire().
+</p>
+
+<p><a name="159329"> </a>
+ <strong>link	 </strong>An association between a port and a relation.
+</p>
+
+<p><a name="159352"> </a>
+ <strong>manager	 </strong>The top-level controller for the execution of a model.
+</p>
+
+<p><a name="158757"> </a>
+ <strong>model</strong>	 A complete Ptolemy II application. This was called a <em>universe</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="159340"> </a>
+ <b>model of computation</b>	 The rules that govern the interaction, communication, and control flow of a set of components.
+</p>
+
+<p><a name="159412"> </a>
+ <b>multiport</b>	 A port that can send or receive tokens over more than one channel.
+</p>
+
+<p><a name="159286"> </a>
+ <strong>opaque</strong>	 For a composite entity or a port, an attribute that indicates that the inside should not be visible from the outside. That is, deep traversals of the topology do not see through an opaque boundary.
+</p>
+
+<p><a name="158706"> </a>
+ <strong>opaque composite actor</strong>	 A composite actor with a local director. Such an actor appears to the outside domain to be atomic, but internally is composed of an interconnection of other actors. This was called a <em>wormhole</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="158821"> </a>
+ <strong>package</strong>	 A collection of classes that forms a logical unit and occupies one directory in the source code tree.
+</p>
+
+<p><a name="159303"> </a>
+ <strong>parameter</strong>	 An <em>attribute</em> with a value. This was called a <em>state</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="158856"> </a>
+ <strong>particle</strong>	 The Ptolemy 0.x name for a <em>token</em>.
+</p>
+
+<p><a name="159375"> </a>
+ <strong>port	 </strong>A named interface of an entity to which connections be made.
+</p>
+
+<p><a name="158780"> </a>
+ <strong>relation</strong>	 An object representing an interconnection between entities.
+</p>
+
+<p><a name="159173"> </a>
+ <strong>resolved type</strong>	 A type for a port that is consistent with the type constraints of the actor and any port it is connected to. It is the result of type resolution.
+</p>
+
+<p><a name="158812"> </a>
+ <strong>star</strong>	 The Ptolemy 0.x name for an <em>atomic actor</em>.
+</p>
+
+<p><a name="159308"> </a>
+ <strong>state	 </strong>The Ptolemy 0.x name for a <em>parameter</em>.
+</p>
+
+<p><a name="158826"> </a>
+ <strong>subpackage</strong>	 A package that is logically related to a parent package and occupies a subdirectory within the parent package in the source code tree.
+</p>
+
+<p><a name="158852"> </a>
+ <strong>token</strong>	 A unit of data that is communicated by actors. This was called a <em>particle</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="158804"> </a>
+ <strong>topology</strong>	 The structure of interconnections between entities (via relations) in a Ptolemy II model. See <em>clustered graph</em>.
+</p>
+
+<p><a name="159362"> </a>
+ <strong>transparent	 </strong>	 For an entity or port, not opaque. That is, deep traversals of the topology pass right through its boundaries.
+</p>
+
+<p><a name="159272"> </a>
+ <strong>transparent composite actor<br></strong>	 A composite actor with no local director.
+</p>
+
+<p><a name="158788"> </a>
+ <strong>transparent port</strong>	 The port of a transparent composite entity. Deep traversals of the topology see right through such a port.
+</p>
+
+<p><a name="158858"> </a>
+ <strong>type constraints</strong>	 The declared constraints on the token types that an actor can work with.
+</p>
+
+<p><a name="159161"> </a>
+ <strong>type resolution</strong>	 The process of reconciling type constraints prior to running a model.
+</p>
+
+<p><a name="158841"> </a>
+ <strong>undeclared type</strong>	 Capable of working with any type of token. This was called <em>anytype</em> in Ptolemy 0.x.
+</p>
+
+<p><a name="158756"> </a>
+ <strong>universe</strong>	 The Ptolemy 0.x name for a <em>model</em>.
+</p>
+
+<p><a name="159387"> </a>
+ <strong>width of a port	 </strong>The sum of the widths of the relations linked to it, or zero if there are none.
+</p>
+
+<p><a name="159392"> </a>
+ <strong>width of a relation	 </strong>The number of channels supported by the relation.
+</p>
+
+<p><a name="158700"> </a>
+ <strong>wormhole</strong>	 The Ptolemy 0.x name for an <em>opaque composite actor</em>.
+</p>
+
+<p><a name="158699"> </a>
+ 
+</p>
+
+
+
+
+<hr><br>
+<div align="center">
+     <a href="title.html" onMouseOver="document.images.animate5.src=image2.src; return true" onMouseOut="document.images.animate5.src=image1.src">
+     <img src="support/top.gif" name ="animate5" border="0"></a>
+     <a href="references.html" onMouseOver="document.images.animate6.src=image4.src; return true" onMouseOut="document.images.animate6.src=image3.src">
+     <img src="support/prevpage.gif" border="0" name="animate6"></a>
+     <a href="designix.html" onMouseOver="document.images.animate7.src=image6.src; return true" onMouseOut="document.images.animate7.src=image5.src">
+     <img src="support/nextpage.gif" name ="animate7" border="0"></a>
+     <a href="designix.html" onMouseOver="document.images.animate8.src=image8.src; return true" onMouseOut="document.images.animate8.src=image7.src">
+     <img src="support/bottom.gif" border="0" name="animate8"></a>
+     <a href="designtoc.html"               onMouseOver="document.images.animate10.src=image10.src; return true" onMouseOut="document.images.animate10.src=image9.src">
+     <img src="support/toc.gif"  border="0" name="animate10"></a>
+     <a href="designix.html"             onMouseOver="document.images.animate12.src=image12.src; return true" onMouseOut="document.images.animate12.src=image11.src">
+     <img src="support/index.gif" border="0" name="animate12"></a>
+    <br>
+     <small><em>Page 11 out of 12 total pages
+     </small></em>
+     </div>
+ 
+
+<hr><br>
+ 
+
+
+
+ptII at eecs berkeley edu
+
+
+<i>Copyright &#169; 1998, The Regents of the University of California.   All rights
+reserved.</i>
+
+<!-- This file was created with Quadralay WebWorks Publisher 4.0.11 -->
+<!-- Last updated: Thu Nov 26 00:12:10 1998 -->
+
+</body>
+</html>

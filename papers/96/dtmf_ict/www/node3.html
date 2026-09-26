@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> Goertzel Algorithm</TITLE>
+<meta name="description" value=" Goertzel Algorithm">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html53 HREF="node4.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html51 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html45 HREF="node2.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html54 HREF="node4.html"> NDFE Algorithm</A>
+<B>Up:</B> <A NAME=tex2html52 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<B> Previous:</B> <A NAME=tex2html46 HREF="node2.html"> Dual-Tone Multiple Frequencies</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00030000000000000000> Goertzel Algorithm</A></H1>
+<P>
+ The Goertzel algorithm is more efficient than the Fast Fourier Transform
+in computing an <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif">-point DFT if less than <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap603.gif"> DFT coefficients
+are required <A HREF="node13.html#Oppenheim">[9]</A>.
+ In DTMF detection, we only need 8 of, for example, 205 DFT coefficients
+to detect the first harmonics of the 8 possible tones, and then
+apply decision logic to choose the strongest touch tone.
+ Since DTMF signals do not have second harmonics, we could compute
+another 8 DFT coefficients to compute the second harmonics to detect
+the presence of speech <A HREF="node13.html#Mock">[3]</A>.
+<P>
+ The Goertzel algorithm computes the <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap627.gif">th DFT coefficient of the
+input signal <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap657.gif"> using a second-order filter
+<P><IMG ALIGN=BOTTOM SRC="_2636_equation81.gif"><P>
+<P><IMG ALIGN=BOTTOM SRC="_2636_equation87.gif"><P>
+where <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap609.gif">.
+ The <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap627.gif">th DFT coefficient is produced after the filter has processed 
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> samples: <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap615.gif">.
+ The key in an implementation is to run <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap623.gif"> for <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> samples
+and then evaluate <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap621.gif">.
+ The computation for <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap623.gif"> takes one add (<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap625.gif">) and
+one multiply-accumulate per sample.
+ In DTMF detection, we are only concerned with the power of the
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap627.gif">th coefficient, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap629.gif">:<P><IMG ALIGN=BOTTOM SRC="_2636_displaymath599.gif"><P>
+<P>
+ The value of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> must be shorter than the samples in half of a DTMF
+signaling interval (<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap633.gif">), be large enough for good frequency resolution
+(<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap635.gif">), and meet the relative error specification 2(a).
+ We used a conventional value of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> = 205 <A HREF="node13.html#ADSP">[10]</A><A HREF="node13.html#Mock">[3]</A> because
+it is roughly half of 400 samples.
+ Decision logic can be added to give a valid DTMF signal if the same two
+DTMF tones are detected in a row to add robustness against noise.
+<P>
+Table 1: Chosen <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap627.gif"> values to minimize the error in <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap627.gif">.
+<P>
+	<P><IMG ALIGN=BOTTOM SRC="_2636_tabular101.gif"><P>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>

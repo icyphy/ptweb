@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> The Goertzel Algorithm</TITLE>
+<meta name="description" value=" The Goertzel Algorithm">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html106 HREF="node9.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html104 HREF="node7.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html98 HREF="node7.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html107 HREF="node9.html"> Normalized Direct Frequency </A>
+<B>Up:</B> <A NAME=tex2html105 HREF="node7.html"> ADSP-2101 Implementation</A>
+<B> Previous:</B> <A NAME=tex2html99 HREF="node7.html"> ADSP-2101 Implementation</A>
+<BR> <HR> <P>
+<H2><A NAME=SECTION00071000000000000000> The Goertzel Algorithm</A></H2>
+<P>
+ Table 2 shows the error percentage in detecting DTMF tones for
+the Goertzel algorithm on the ADSP-2101.
+ Unfortunately, its resolution was not high enough.
+ For example, for <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap741.gif"> with <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap743.gif"> KHz sampling rate, resolution in frequency
+domain is <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap745.gif"> Hz.
+ This resolution causes an error in meeting standard 2(b).
+ The DTMF receiver must eliminate the tones outside the specified ranges.
+ To be more specific, consider a <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap747.gif"> Hz tone.
+ Standard 2(b) enforces the elimination of frequencies outside
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap749.gif"> Hz for <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap747.gif"> Hz.
+ However, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap753.gif"> Hz resolution enforces the detection of signals in
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap755.gif"> Hz to yield <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap757.gif"> Hz,
+which is impossible with 39 Hz resolution in frequency domain.
+Table 2: Goertzel algorithm tests on the ADSP-2101
+<P>
+	<P><IMG ALIGN=BOTTOM SRC="_2636_tabular196.gif"><P>
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>

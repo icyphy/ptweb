@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3O//DTD W3 HTML 2.0//EN">
+<!- Converted with LaTeX2HTML 0.6.4 (Tues Aug 30 1994) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds ->
+<P>
+<HEAD>
+<TITLE> MUSIC Algorithm</TITLE>
+<meta name="description" value=" MUSIC Algorithm">
+<meta name="keywords" value="paper">
+<meta name="resource-type" value="document">
+<meta name="distribution" value="global">
+</HEAD>
+<BODY><P>
+ <BR> <HR><A NAME=tex2html73 HREF="node6.html"><IMG ALIGN=BOTTOM ALT="next" SRC="http://http.cs.berkeley.edu/icons/latex2html/next_motif.gif"></A> <A NAME=tex2html71 HREF="paper.html"><IMG ALIGN=BOTTOM ALT="up" SRC="http://http.cs.berkeley.edu/icons/latex2html/up_motif.gif"></A> <A NAME=tex2html65 HREF="node4.html"><IMG ALIGN=BOTTOM ALT="previous" SRC="http://http.cs.berkeley.edu/icons/latex2html/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME=tex2html74 HREF="node6.html"> MATLAB Simulations</A>
+<B>Up:</B> <A NAME=tex2html72 HREF="paper.html">Performance Evaluation and Real-Time </A>
+<B> Previous:</B> <A NAME=tex2html66 HREF="node4.html"> NDFE Algorithm</A>
+<BR> <HR> <P>
+<H1><A NAME=SECTION00050000000000000000> MUSIC Algorithm</A></H1>
+<P>
+ MUSIC detects frequencies in a signal by performing an eigen decomposition
+on the covariance matrix of a data vector <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap675.gif"> of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap579.gif"> samples obtained from 
+the samples of the received signal.
+ The key to MUSIC is its data model
+<P><IMG ALIGN=BOTTOM SRC="_2636_equation141.gif"><P>
+where <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap679.gif"> is a vector of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap579.gif"> noise samples, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap683.gif"> is a vector
+of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> signal amplitudes (<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap687.gif"> for DTMF tones), and  
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap689.gif"> is the <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap691.gif"> Vandermonde matrix of samples of the signal 
+frequencies. 
+ If we assume a zero-mean signal and white noise, then
+the covariance of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap675.gif"> has the form
+<P><IMG ALIGN=BOTTOM SRC="_2636_equation151.gif"><P>
+ Here, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap695.gif"> is the <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap697.gif">
+signal autocorrelation matrix, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap699.gif"> is the <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap701.gif">
+identity matrix, and <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap703.gif"> is the noise variance.
+ From the eigen decomposition of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap705.gif">, we use the eigenvectors
+associated with the <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> maximum eigenvalues to define the signal subspace  
+(the column space of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap689.gif">), and use the other eigenvectors to define 
+the noise subspace, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap711.gif">. 
+ From the orthogonality of the signal and noise subspaces, finding the
+peaks in the estimator function 
+<P><IMG ALIGN=BOTTOM SRC="_2636_equation163.gif"><P>
+for various <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap713.gif"> values yields the strongest frequencies <A HREF="node13.html#music">[1]</A>,
+where <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap715.gif"> refers to the columns of <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap689.gif">.
+<P>
+ MUSIC assumes that the number of samples <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap579.gif"> and the number of frequencies 
+<IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap619.gif"> are known. 
+ The efficiency of MUSIC is the ratio of the theoretical smallest
+variance, given by the Cramer-Rao Lower Bound (CRLB) <A HREF="node13.html#CRB">[11]</A>,
+to the variance of the MUSIC estimator:
+<P><IMG ALIGN=BOTTOM SRC="_2636_equation176.gif"><P>
+ The efficiency does not depend on the total number of samples, <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap575.gif">, 
+(Figure <A HREF="node13.html#figure1">1</A>) but does depend on <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap579.gif"> (Figure <A HREF="node13.html#figure2">2</A>). 
+ As <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap579.gif"> increases, efficiency and computation time increase.
+ We pick <IMG ALIGN=BOTTOM SRC="_2636_tex2html_wrap577.gif">, because larger values do not significantly improve
+the efficiency.
+<P>
+<BR> <HR>
+<P><ADDRESS>
+Brian L. Evans, 211-105 Cory Hall, Berkeley, CA 94720-1772
+</ADDRESS>
+</BODY>
