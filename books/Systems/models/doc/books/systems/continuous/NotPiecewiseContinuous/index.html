@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet"  href="http://ptolemy.org/javascript/jquery.fancybox-1.3.4.css" media="screen"/>
+<link href="http://ptolemy.org/ptolemyII/ptIIlatest/ptII/doc/default.css" rel="stylesheet" type="text/css"/>
+<title>NotPiecewiseContinuous</title>
+<script src="http://ptolemy.org/javascript/jquery-1.4.3.min.js"></script>
+<script src="http://ptolemy.org/javascript/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="http://ptolemy.org/javascript/pt-1.0.0.js"></script>
+<script type="text/javascript">
+function writeText(text) {
+   document.getElementById("afterImage").innerHTML = text;
+};
+</script>
+<!--Script inserts current year in copyright section of footer -->
+<script type="text/javascript" src="/js/getyear.js"></script>
+<link href="/css/UCB.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-flex.css" rel="stylesheet" type="text/css" media="screen,print" />
+<link href="/css/UCB-print.css" rel="stylesheet" type="text/css" media="print" />
+<!-- Conditional comment addds IE6-specific CSS deviations -->
+<!--[if lte IE 6]>
+<link href="/css/IE6.css" rel="stylesheet" type="text/css" media="screen,print" />
+<![endif]-->
+</head>
+
+<body>
+  <!-- Google Analytics, see http://embedded.eecs.berkeley.edu/dopsysadmin/faq/24.html-->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-65990221-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+<div id="sizer"><div id="expander"><div id="innerwrapper">
+<div id="outside">
+  <div id="banr">
+    <!-- Link to beginning of content section, for screen reader/keyboard accessibility -->
+    <div id="skip"><a href="#maincontent" title="Skip to main content">Skip to main content</a></div>
+    <div id="ucb"><a href="http://www.eecs.berkeley.edu">UC Berkeley EECS Dept.</a></div>
+    <div id="tools">
+  <div id="searchform">
+    <form action="https://www.google.com/cse" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="002441970488456085056:qdpgv0y2dja" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="text" name="q" size="15" />
+        <input type="submit" name="sa" value="Search" />
+      </div>
+    </form>
+    <script type="text/javascript" src="https://www.google.com/cse.js"></script>
+  </div> <!-- /searchform -->
+</div> <!-- /tools -->
+
+
+<!-- Website logo -->
+<div id="logo"><a href="/"><img src="/image/banner.gif" alt="Ptolemy Project"/></a></div>
+    <!-- OPTIONAL Customizable Quick Links dropdown -->
+    <div id="links"><select name="current" onchange="window.open(this.options[this.selectedIndex].value,'_top')" title="No mouse? Use Alt-Down Arrow to open list">
+<option>Quick Links</option>
+<option value="/people/index.htm">People</option>
+<option value="/download/index.htm">Download</option>
+<option value="/publications/index.htm">Publications</option>
+</select> 
+</div><!-- /#links -->
+
+    <!-- OPTIONAL horizontal top navigation -->
+    <div id="topnav"><ul>
+<li class="first"><a href="/index.htm">Home</a></li>
+<li><a href="/objectives.htm">Objectives</a></li>
+<li><a href="/ptolemyII/index.htm">Ptolemy II</a></li>
+<li><a href="/other/index.htm">Other&nbsp;software</a></li>
+<li><a href="/people/index.htm">People</a></li>
+<li><a href="/sponsors.htm">Sponsors</a></li>
+<li><a href="/publications/index.htm">Publications</a></li>
+<li><a href="/conferences/index.htm">Conferences</a></li>
+<li><a href="/presentations/index.htm">Presentations</a></li>
+<li><a href="/ptolemyII/ptIIfaq.htm">FAQ</a></li>
+<li><a href="/download/index.htm">Download</a></li>
+</ul>
+</div><!-- /#topnav -->
+
+  </div>
+  <!-- /#banr -->
+  <div id="pagebody">
+    <div id="navcol">
+      <!-- Main site navigation -->
+
+
+<div id="menu">
+<ul>
+<li><a href="/index.htm">Ptolemy Home</a></li>
+</ul>
+
+<ul>
+ <li><a href="../index.html">Up</a></li>
+</ul>
+<ul>
+</ul>
+</div><!-- /#menu -->
+
+      <!-- OPTIONAL Additional text or links in left column -->
+      <div id="addon">
+      </div>
+      <!-- /#addon -->
+    </div>
+    <!-- /#navcol -->
+    <div id="contentcol">
+      <!-- OPTIONAL section title; can be used w or w/o photo strip below -->
+      <!-- xxx#xxx include virtual="/ssi/section.htm" -->
+      <div id="content">
+          <!-- Begin main page content -->
+      <!-- Link target for accessibility Skip Nav -->
+      <a name="maincontent" id="maincontent"></a>
+		<div id="skip2"><a href="#sidebar" title="Skip to sidebar">Skip to sidebar</a></div> 
+
+
+<h1>
+NotPiecewiseContinuous
+</h1>
+
+<p>Below is a browsable image of the model.</p> <ul>
+
+<li>To view or save the MoML file for this model, <a href="../NotPiecewiseContinuous.xml">click here</a>.</li>
+<li>For a chapter overview, <a href="../index.html">click here</a>.</li>
+</ul>
+<img src="NotPiecewiseContinuous.gif" usemap="#iconmap" alt="NotPiecewiseContinuousmodel"/>
+<map name="iconmap" id="iconmap">
+<area shape="rect" coords="358,151,410,206"
+ title="Integrator2" onmouseout="writeText('Mouse over the icons to see their parameters.  Click on composites and plotters to reveal their contents (if provided).')" onmouseover="writeText('&lt;h2&gt;Integrator2&lt;/h2&gt;&lt;table border=&quot;1&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;Parameter&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Expression&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Value&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;initialState&lt;/td&gt;&lt;td&gt;0.0&lt;/td&gt;&lt;td&gt;0.0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;')" alt="Integrator2"/>
+<area shape="rect" coords="168,124,319,152"
+ title="Expression" onmouseout="writeText('Mouse over the icons to see their parameters.  Click on composites and plotters to reveal their contents (if provided).')" onmouseover="writeText('&lt;h2&gt;Expression&lt;/h2&gt;&lt;table border=&quot;1&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;Parameter&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Expression&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Value&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;expression&lt;/td&gt;&lt;td&gt;(in &amp;gt; 1.0) ? in + 1 : 0&lt;/td&gt;&lt;td&gt;(in &amp;gt; 1.0) ? in + 1 : 0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;')" alt="Expression"/>
+<area shape="rect" coords="458,76,512,130"
+ title="TimedPlotter" onmouseout="writeText('Mouse over the icons to see their parameters.  Click on composites and plotters to reveal their contents (if provided).')" class="iframe" href="TimedPlotter.gif" onmouseover="writeText('&lt;h2&gt;TimedPlotter&lt;/h2&gt;&lt;table border=&quot;1&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;Parameter&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Expression&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Value&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;fillOnWrapup&lt;/td&gt;&lt;td&gt;true&lt;/td&gt;&lt;td&gt;true&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;automaticRescale&lt;/td&gt;&lt;td&gt;false&lt;/td&gt;&lt;td&gt;false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;legend&lt;/td&gt;&lt;td&gt;first, second, third&lt;/td&gt;&lt;td&gt;first, second, third&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;startingDataset&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;disconnectGraphOnAbsentValue&lt;/td&gt;&lt;td&gt;false&lt;/td&gt;&lt;td&gt;false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;useLocalTime&lt;/td&gt;&lt;td&gt;false&lt;/td&gt;&lt;td&gt;false&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;')" alt="TimedPlotter"/>
+<area shape="rect" coords="23,79,72,107"
+ title="Const" onmouseout="writeText('Mouse over the icons to see their parameters.  Click on composites and plotters to reveal their contents (if provided).')" onmouseover="writeText('&lt;h2&gt;Const&lt;/h2&gt;&lt;table border=&quot;1&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;Parameter&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Expression&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Value&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;value&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;firingCountLimit&lt;/td&gt;&lt;td&gt;NONE&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;')" alt="Const"/>
+<area shape="rect" coords="92,66,144,120"
+ title="Integrator" onmouseout="writeText('Mouse over the icons to see their parameters.  Click on composites and plotters to reveal their contents (if provided).')" onmouseover="writeText('&lt;h2&gt;Integrator&lt;/h2&gt;&lt;table border=&quot;1&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;b&gt;Parameter&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Expression&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;b&gt;Value&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;initialState&lt;/td&gt;&lt;td&gt;0.0&lt;/td&gt;&lt;td&gt;0.0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;')" alt="Integrator"/>
+</map>
+
+<div id="afterImage">
+  <script type="text/javascript">
+     writeText('Mouse over the icons to see their parameters. Click on composites and plotters to reveal their contents (if provided).');
+  </script>
+  <noscript>
+     Your browser does not support JavaScript so moving the mouse
+     over the actors will not display their parameters. To enable
+     JavaScript, consult the security preferences of your browser.
+     <br/>See <a href="http://support.microsoft.com/gp/howtoscript"><code>http://support.microsoft.com/gp/howtoscript</code></a> for details.
+  </noscript>
+</div>
+<!-- /body -->
+<!-- /html -->
+      </div>
+      <!-- /#content -->
+    </div>
+    <!-- /#contentcol -->
+  </div>
+  <!-- /#pagebody -->
+</div>
+<!-- /#outside -->
+<div id="footer">
+<ul>
+<li class="first"><a href="/people/index.htm">Contact</a></li> 
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/group/public.htm">Update Help</a></li>
+<li><a href="https://chess.eecs.berkeley.edu/ptolemy/?Action=vcupdateptweb">Update</a></li>
+</ul>
+<!-- Script inserts current year in copyright string -->
+<a href="/copyright.htm">Copyright &copy;</a> 1999 - <script type="text/javascript">
+<!--
+displayDate();
+//-->
+</script> 
+UC Regents; all rights reserved.
+</div><!-- /#footer -->
+
+</div><!-- /#innerwrapper --></div><!-- /#expander --></div><!-- /#sizer -->
+<!-- OPTIONAL Insert tracking code here -->
+</body>
+</html>
+
